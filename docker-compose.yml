@@ -1,0 +1,96 @@
+version: '3.7'
+
+networks:
+  set-network:
+    name: set-network
+
+services:
+  set-db:
+    image: postgres
+    container_name: set-db
+    hostname: set-db
+    environment:
+      POSTGRES_DB: set
+      POSTGRES_USER: set
+      POSTGRES_PASSWORD: vi=^982d6aE23-Df
+    networks:
+      - set-network
+    volumes:
+      - .database:/var/lib/postgresql/data
+    restart: unless-stopped
+    tty: true
+
+  db-adminer:
+    image: adminer
+    container_name: set-adminer
+    hostname: set-adminer
+    networks:
+      - set-network
+    ports:
+      - 8080:8080
+    depends_on:
+      - set-db
+    restart: unless-stopped
+    tty: true
+
+  set-node:
+    image: node:14.19-alpine
+    container_name: set-node
+    hostname: set-node
+    working_dir: /usr/src/app
+    user: node
+    networks:
+      - set-network
+    ports:
+      - 3000:3000
+      - 4200:4200
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - PATH=$PATH:/usr/src/app/node_modules/.bin
+    depends_on:
+      - set-db
+    stdin_open: true
+    restart: unless-stopped
+    tty: true
+    # command: yarn run start:dev
+
+  # set-api:
+  #   image: node:14.19-alpine
+  #   container_name: set-api
+  #   hostname: set-api
+  #   working_dir: /usr/src/app
+  #   user: node
+  #   networks:
+  #     - set-network
+  #   ports:
+  #     - 3000:3000
+  #   volumes:
+  #     - ./apps/api:/usr/src/app
+  #   environment:
+  #     - PATH=$PATH:/usr/src/app/node_modules/.bin
+  #   depends_on:
+  #     - set-db
+  #   stdin_open: true
+  #   restart: unless-stopped
+  #   tty: true
+    # command: yarn run start:dev
+
+  # set-app:
+  #   image: node:14.19-alpine
+  #   container_name: set-app
+  #   hostname: set-app
+  #   working_dir: /usr/src/app
+  #   user: node
+  #   networks:
+  #     - set-network
+  #   ports:
+  #     - 4200:4200
+  #   volumes:
+  #     - ./apps/app:/usr/src/app
+  #   environment:
+  #     - PATH=$PATH:/usr/src/app/node_modules/.bin
+  #   stdin_open: true
+  #   restart: unless-stopped
+  #   tty: true
+    # command: yarn run start:dev
