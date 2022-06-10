@@ -6,17 +6,23 @@
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
-import { AppModule } from './app/app.module';
+import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  const globalPrefix = '';
-  app.setGlobalPrefix(globalPrefix);
-  const port = process.env.PORT || 3333;
-  await app.listen(port);
-  Logger.log(
-    `🚀 Application is running on: http://localhost:${port}${globalPrefix}`
-  );
+	const port = process.env['API_PORT'] || 3333;
+	const globalPrefix = '';
+
+	const app = await NestFactory.create(AppModule);
+	app.setGlobalPrefix(globalPrefix);
+	await app.listen(port);
+
+	return { port, globalPrefix };
 }
 
-bootstrap();
+bootstrap()
+	.then(({ port, globalPrefix }) =>
+		Logger.log(
+			`🚀 GraphQL Playground ready at http://localhost:${port}${globalPrefix}/graphql, started in ${process.uptime()}s`,
+		),
+	)
+	.catch((e) => Logger.error(e.message, e));

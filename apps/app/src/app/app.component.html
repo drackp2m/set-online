@@ -1,9 +1,32 @@
-<div style="text-align: center">
-  <h1>Welcome to app!</h1>
-  <img
-    width="450"
-    src="/assets/nx-logo-dark.svg"
-    alt="Nx - Smart, Fast and Extensible Build System"
-  />
-</div>
-<div>Message: {{ hello$ | async | json }}</div>
+<section>
+	<h1>Welcome to app!</h1>
+
+	<div class="logos">
+		<img
+			src="/assets/nx-logo.svg"
+			alt="Nx - Smart, Fast and Extensible Build System"
+		/>
+		<img
+			src="/assets/nestjs-logo.svg"
+			alt="A progressive Node.js framework for building efficient, reliable and scalable server-side applications"
+		/>
+		<img
+			src="/assets/mikro-orm-logo.svg"
+			alt="TypeScript ORM for Node.js based on Data Mapper, Unit of Work and Identity Map patterns"
+		/>
+		<img
+			src="/assets/graphql-logo.svg"
+			alt="A query language for your API"
+		/>
+		<img
+			src="/assets/angular-logo.svg"
+			alt="The modern web developer's platform"
+		/>
+		<img
+			src="/assets/elf-logo.svg"
+			alt="A Reactive Store with Magical Powers"
+		/>
+	</div>
+
+  <p>Message: {{ hello$ | async | json }}</p>
+</section>

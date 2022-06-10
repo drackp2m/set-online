@@ -7,7 +7,10 @@
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main",
     "start": "nx serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "migration:create": "mikro-orm migration:create",
+    "migration:list": "mikro-orm migration:pending",
+    "migration:sync": "mikro-orm migration:up"
   },
   "private": true,
   "dependencies": {
@@ -19,11 +22,23 @@
     "@angular/platform-browser": "~14.0.0",
     "@angular/platform-browser-dynamic": "~14.0.0",
     "@angular/router": "~14.0.0",
+    "@mikro-orm/cli": "^5.1.5",
+    "@mikro-orm/core": "^5.1.5",
+    "@mikro-orm/migrations": "^5.1.5",
+    "@mikro-orm/nestjs": "^5.0.1",
+    "@mikro-orm/postgresql": "^5.1.5",
+    "@nestjs/apollo": "^10.0.14",
     "@nestjs/common": "^8.0.0",
+    "@nestjs/config": "^2.1.0",
     "@nestjs/core": "^8.0.0",
-    "@nestjs/platform-express": "^8.0.0",
+    "@nestjs/graphql": "^10.0.15",
+    "@nestjs/platform-express": "^8.4.6",
     "@nrwl/angular": "14.2.2",
-    "reflect-metadata": "^0.1.13",
+    "@types/uuid": "^8.3.4",
+    "apollo-server-express": "^3.8.2",
+    "graphql": "^16.5.0",
+    "graphql-subscriptions": "^2.0.0",
+    "joi": "^17.6.0",
     "rxjs": "~7.4.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
@@ -48,6 +63,7 @@
     "@nrwl/workspace": "14.2.2",
     "@types/jest": "27.4.1",
     "@types/node": "16.11.7",
+    "@types/webpack-env": "^1.17.0",
     "@typescript-eslint/eslint-plugin": "~5.24.0",
     "@typescript-eslint/parser": "~5.24.0",
     "cypress": "^9.1.0",
@@ -61,5 +77,12 @@
     "ts-jest": "27.1.4",
     "ts-node": "~10.8.0",
     "typescript": "~4.7.2"
+  },
+  "mikro-orm": {
+    "useTsNode": true,
+    "tsConfigPath": "./apps/api/tsconfig.app.json",
+    "configPaths": [
+      "./apps/api/src/config/mikro-orm.config.ts"
+    ]
   }
 }
