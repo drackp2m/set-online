@@ -1,4 +1,5 @@
 import { registerAs } from '@nestjs/config';
+import { processEnv } from '../utils/env-schema';
 
 export interface DatabaseConfig {
 	host: string;
@@ -11,10 +12,10 @@ export interface DatabaseConfig {
 export const databaseConfig = registerAs(
 	'database',
 	(): DatabaseConfig => ({
-		host: process.env['DB_HOST'] || '',
-		port: parseInt(process.env['DB_PORT'] || ''),
-		dbName: process.env['DB_NAME'] || '',
-		user: process.env['DB_USER'] || '',
-		password: process.env['DB_PASS'] || '',
+		host: processEnv.DB_HOST,
+		port: processEnv.DB_PORT,
+		dbName: processEnv.DB_NAME,
+		user: processEnv.DB_USER,
+		password: processEnv.DB_PASS,
 	}),
 );

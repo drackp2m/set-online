@@ -1,34 +1,33 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { configs } from './config/index';
+import { allConfigs } from './config/index';
 import { GraphQLModule } from '@nestjs/graphql';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { Module } from '@nestjs/common';
 import { UserModule } from './modules/user/user.module';
 import { mikroOrmConfig } from './config/mikro-orm.config';
 import { envSchema } from './utils/env-schema';
+import { GraphQLConfig } from './config/grapql-module.config';
 
 @Module({
 	imports: [
 		ConfigModule.forRoot({
 			isGlobal: true,
-			envFilePath: ['./.env.development', './.env'],
-			load: configs,
+			load: allConfigs,
 			validationSchema: envSchema,
+      validationOptions: {
+        allowUnknown: false,
+      },
 		}),
 		MikroOrmModule.forRootAsync({
 			useFactory: mikroOrmConfig,
 		}),
-		GraphQLModule.forRoot<ApolloDriverConfig>({
+		GraphQLModule.forRootAsync<ApolloDriverConfig>({
 			driver: ApolloDriver,
-			autoSchemaFile: 'apps/api/src/schema.gql',
-			playground: {
-				title: 'Set',
-			},
-			debug: true,
+      useClass: GraphQLConfig
 		}),
 		UserModule,
 	],

@@ -10,7 +10,7 @@ import { v4 } from 'uuid';
 @Entity({ abstract: true })
 @ObjectType()
 export abstract class BaseEntity<
-	T extends { uuid: string },
+	T extends BaseEntity<T>,
 	PK extends keyof T = 'uuid',
 	P extends string = never,
 > extends MikroBaseEntity<T, PK, P> {
@@ -28,6 +28,6 @@ export abstract class BaseEntity<
 
 	constructor(entity: Partial<T>) {
 		super();
-		Object.assign(this, entity);
+    Object.assign(this, entity);
 	}
 }
