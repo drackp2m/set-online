@@ -1,9 +1,7 @@
 import { AnyEntity } from '@mikro-orm/core';
-import { configs } from '.';
-import { ConfigModule } from '@nestjs/config';
 import { MikroOrmModuleSyncOptions } from '@mikro-orm/nestjs';
 import { readdirSync } from 'fs';
-import { envSchema } from '../utils/env-schema';
+import { databaseConfig } from './database.config';
 
 async function getEntities(): Promise<AnyEntity[]> {
 	if (process.env.WEBPACK) {
@@ -25,16 +23,9 @@ async function getEntities(): Promise<AnyEntity[]> {
 	);
 }
 
-ConfigModule.forRoot({
-	isGlobal: true,
-	envFilePath: ['apps/api/.env.development', 'apps/api/.env'],
-	load: configs,
-	validationSchema: envSchema,
-});
-
 export const mikroOrmConfig = async () =>
 	({
-		...configs[0](),
+		...databaseConfig(),
 		type: 'postgresql',
 		autoLoadEntities: true,
 		entities: await getEntities(),
