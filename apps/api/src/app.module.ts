@@ -18,16 +18,16 @@ import { GraphQLConfig } from './config/grapql-module.config';
 			isGlobal: true,
 			load: allConfigs,
 			validationSchema: envSchema,
-      validationOptions: {
-        allowUnknown: false,
-      },
+			validationOptions: {
+				allowUnknown: false,
+			},
 		}),
 		MikroOrmModule.forRootAsync({
 			useFactory: mikroOrmConfig,
 		}),
 		GraphQLModule.forRootAsync<ApolloDriverConfig>({
 			driver: ApolloDriver,
-      useClass: GraphQLConfig
+			useClass: GraphQLConfig,
 		}),
 		UserModule,
 	],

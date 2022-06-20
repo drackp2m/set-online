@@ -28,6 +28,6 @@ export abstract class BaseEntity<
 
 	constructor(entity: Partial<T>) {
 		super();
-    Object.assign(this, entity);
+		Object.assign(this, entity);
 	}
 }

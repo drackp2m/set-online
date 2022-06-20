@@ -8,15 +8,15 @@ export class UserService {
 	constructor(private readonly entityManager: EntityManager) {}
 
 	async findAll(): Promise<User[]> {
-    // this.create();
+		// this.create();
 		return this.entityManager.find(User, {});
 	}
 
 	async create(): Promise<User> {
 		const entity = new User({
 			username: 'drackp2m',
-      email: 'marc@bit2me.com',
-      password: '1234'
+			email: 'marc@bit2me.com',
+			password: '1234',
 		});
 
 		return await this.entityManager.persistAndFlush(entity).then(() => entity);
