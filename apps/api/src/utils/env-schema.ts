@@ -2,7 +2,7 @@ import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
 
 ConfigModule.forRoot({
-	envFilePath: ['apps/api/.env.development', 'apps/api/.env.production'],
+	envFilePath: ['apps/api/.env.dev', 'apps/api/.env.prod'],
 });
 
 const [string, number] = [Joi.string(), Joi.number()];

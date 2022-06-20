@@ -11,7 +11,7 @@ import { AppModule } from './app.module';
 import { AppConfig } from './config/app.config';
 
 async function bootstrap(): Promise<{
-  protocol: string;
+	protocol: string;
 	domain: string;
 	port: number;
 	globalPrefix: string;
@@ -26,7 +26,7 @@ async function bootstrap(): Promise<{
 	await app.listen(config.port);
 
 	return {
-    protocol: config.protocol,
+		protocol: config.protocol,
 		domain: config.domain,
 		port: config.port,
 		globalPrefix: config.prefix,
