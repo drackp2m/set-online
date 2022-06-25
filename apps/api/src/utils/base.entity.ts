@@ -26,8 +26,11 @@ export abstract class BaseEntity<
 	@Field()
 	updatedAt: Date = new Date();
 
-	constructor(entity: Partial<T>) {
+	constructor(entity?: Partial<T>) {
 		super();
-		Object.assign(this, entity);
+
+		if (entity) {
+			Object.assign(this, entity);
+		}
 	}
 }

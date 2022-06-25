@@ -25,9 +25,9 @@ async function getEntities(): Promise<AnyEntity[]> {
 
 export const mikroOrmConfig = async () =>
 	({
-		...databaseConfig(),
 		type: 'postgresql',
-		autoLoadEntities: true,
+		...databaseConfig(),
+		allowGlobalContext: true,
 		entities: await getEntities(),
 		migrations: {
 			tableName: 'migrations',

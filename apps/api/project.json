@@ -28,6 +28,13 @@
 		},
 		"serve": {
 			"executor": "@nrwl/node:node",
+			"configurations": {
+				"development": {
+					"host": "0.0.0.0",
+					"port": 9229
+				}
+			},
+			"defaultConfiguration": "development",
 			"options": {
 				"buildTarget": "api:build"
 			}

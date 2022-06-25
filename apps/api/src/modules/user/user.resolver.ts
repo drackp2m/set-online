@@ -12,6 +12,7 @@ export class UserResolver {
 	@Query(() => [User])
 	async getAllUsers(): Promise<User[]> {
 		const users = await this.userService.findAll();
+
 		pubSub.publish('getAllUsers', { list: users });
 
 		return users;
