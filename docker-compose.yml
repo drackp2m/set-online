@@ -11,6 +11,8 @@ services:
     hostname: set-db
     networks:
       - set-network
+    ports:
+      - 5432:5432
     volumes:
       - .database:/var/lib/postgresql/data
     environment:
@@ -53,4 +55,4 @@ services:
       - set-db
     restart: unless-stopped
     tty: true
-    # command: nx run-many --target=serve --projects=api,app
+    command: nx run-many --target=serve --projects=api,app

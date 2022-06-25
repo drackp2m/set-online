@@ -6,6 +6,10 @@ import { AppConfig } from './app.config';
 
 @Injectable()
 export class GraphQLConfig implements GqlOptionsFactory {
+	private readonly config: AppConfig = this.configService.get<AppConfig>('app', {
+		infer: true,
+	});
+
 	private readonly playground: ApolloDriverConfig['playground'] = {
 		tabs: [
 			{
@@ -30,20 +34,14 @@ query GetAllUsers {
 	constructor(private configService: ConfigService) {}
 
 	createGqlOptions(): ApolloDriverConfig {
-		const config: AppConfig = this.configService.get<AppConfig>('app', {
-			infer: true,
-		});
-
 		return {
 			autoSchemaFile: 'apps/api/src/schema.gql',
-			introspection: true,
-			debug: true,
 			definitions: {
 				path: 'libs/api-interfaces/src/lib/schema.ts',
 				outputAs: 'class',
 			},
 			playground:
-				config.environment === 'development' ? this.playground : false,
+				this.config.environment === 'development' ? this.playground : false,
 		};
 	}
 }
