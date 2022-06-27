@@ -6,7 +6,8 @@
 		"types": ["node", "webpack-env"],
 		"outDir": "../../dist/out-tsc",
 		"emitDecoratorMetadata": true,
-		"allowSyntheticDefaultImports": true
+		"allowSyntheticDefaultImports": true,
+		"strictPropertyInitialization": false,
 	},
 	"exclude": ["jest.config.ts", "**/*.spec.ts", "**/*.test.ts"],
 	"include": ["**/*.ts"]

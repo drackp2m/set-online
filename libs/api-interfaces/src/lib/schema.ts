@@ -7,6 +7,11 @@
 
 /* tslint:disable */
 /* eslint-disable */
+export class LoginInput {
+    username: string;
+    password: string;
+}
+
 export class User {
     uuid: string;
     createdAt: DateTime;
@@ -16,8 +21,17 @@ export class User {
     password: string;
 }
 
+export class TokenModel {
+    token: string;
+    expiresIn: string;
+}
+
 export abstract class IQuery {
     abstract getAllUsers(): User[] | Promise<User[]>;
+}
+
+export abstract class IMutation {
+    abstract login(input: LoginInput): TokenModel | Promise<TokenModel>;
 }
 
 export type DateTime = any;
