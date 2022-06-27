@@ -1,9 +1,9 @@
 import { registerAs } from '@nestjs/config';
-import { processEnv } from '../utils/env-schema';
+import { EnvEnvironment, EnvProtocol, processEnv } from '../utils/env-schema';
 
 export interface AppConfig {
-	environment: 'production' | 'development' | 'test';
-	protocol: 'http' | 'https';
+	environment: EnvEnvironment;
+	protocol: EnvProtocol;
 	domain: string;
 	prefix: string;
 	port: number;

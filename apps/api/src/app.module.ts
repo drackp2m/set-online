@@ -11,6 +11,7 @@ import { UserModule } from './modules/user/user.module';
 import { mikroOrmConfig } from './config/mikro-orm.config';
 import { envSchema } from './utils/env-schema';
 import { GraphQLConfig } from './config/grapql-module.config';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
 	imports: [
@@ -22,13 +23,14 @@ import { GraphQLConfig } from './config/grapql-module.config';
 				allowUnknown: false,
 			},
 		}),
-		MikroOrmModule.forRootAsync({
-			useFactory: mikroOrmConfig,
-		}),
 		GraphQLModule.forRootAsync<ApolloDriverConfig>({
 			driver: ApolloDriver,
 			useClass: GraphQLConfig,
 		}),
+		MikroOrmModule.forRootAsync({
+			useFactory: mikroOrmConfig,
+		}),
+		AuthModule,
 		UserModule,
 	],
 	controllers: [AppController],
