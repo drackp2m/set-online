@@ -18,7 +18,7 @@ services:
     environment:
       POSTGRES_DB: set
       POSTGRES_USER: set
-      POSTGRES_PASSWORD: vi=^982d6aE23-Df
+      POSTGRES_PASSWORD: 7K6P,P3Q%5UC-hup
     restart: unless-stopped
     tty: true
 
