@@ -8,8 +8,7 @@ type User {
   createdAt: DateTime!
   updatedAt: DateTime!
   username: String!
-  email: String!
-  password: String!
+  email: String
 }
 
 """
@@ -23,14 +22,21 @@ type TokenModel {
 }
 
 type Query {
-  getAllUsers: [User!]!
+  getUsers: [User!]!
 }
 
 type Mutation {
   login(input: LoginInput!): TokenModel!
+  createUser(input: CreateUserInput!): User!
 }
 
 input LoginInput {
   username: String!
   password: String!
+}
+
+input CreateUserInput {
+  username: String!
+  password: String!
+  email: String
 }

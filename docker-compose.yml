@@ -9,12 +9,14 @@ services:
     image: postgres:14-alpine
     container_name: set-db
     hostname: set-db
+    user: 1000:1000
     networks:
       - set-network
     ports:
       - 5432:5432
     volumes:
-      - .database:/var/lib/postgresql/data
+      - /etc/passwd:/etc/passwd:ro
+      - .pgdata:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: set
       POSTGRES_USER: set

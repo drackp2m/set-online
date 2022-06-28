@@ -9,11 +9,10 @@ export class User extends BaseEntity<User> {
 	@Field()
 	username!: string;
 
-	@Property({ unique: true })
-	@Field()
-	email!: string;
-
 	@Property()
-	@Field()
 	password!: string;
+
+	@Property({ unique: true, nullable: true })
+	@Field({ nullable: true })
+	email: string;
 }

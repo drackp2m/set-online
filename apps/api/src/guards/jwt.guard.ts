@@ -15,12 +15,11 @@ export class JwtGuard extends AuthGuard('jwt') {
     return gqlContext.getContext<{ req: Request }>().req
   }
 
-  public handleRequest<User>(error: Error, user: User): User {
-    // if (error || !user) {
-    //   throw new UnauthorizedException({ key: 'exceptions.UNAUTHORIZED' })
-    // }
+  public handleRequest<JWT>(error: Error, jwt: JWT): JWT {
+    if (error || !jwt) {
+      throw new UnauthorizedException()
+    }
 
-    // return user
-		return user;
+		return jwt;
   }
 }
