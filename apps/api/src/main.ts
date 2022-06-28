@@ -3,7 +3,7 @@
  * This is only a minimal backend to get started.
  */
 
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 
@@ -17,12 +17,18 @@ async function bootstrap(): Promise<{
 	globalPrefix: string;
 }> {
 	const app = await NestFactory.create(AppModule);
+
 	const configService = app.get(ConfigService);
 	const config: AppConfig = configService.get<AppConfig>('app', {
 		infer: true,
 	});
 
+  app.useGlobalPipes(new ValidationPipe({
+		whitelist: true,
+		transform: true,
+	}));
 	app.setGlobalPrefix(config.prefix);
+
 	await app.listen(config.port);
 
 	return {

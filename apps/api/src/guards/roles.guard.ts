@@ -25,7 +25,7 @@ export class RolesGuard implements CanActivate {
 		const userUuid = (GqlExecutionContext.create(context).getContext<{ req: Request & { user: User } }>().req.user.uuid);
 
 		try {
-			const user = await this.userService.findOneBy('uuid', userUuid);
+			const user = await this.userService.getOneBy('uuid', userUuid);
 
 			// const hasRole = user.roles.split('|').some((role) => roles.includes(role))
 

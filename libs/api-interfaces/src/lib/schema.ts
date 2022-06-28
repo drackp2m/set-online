@@ -12,13 +12,18 @@ export class LoginInput {
     password: string;
 }
 
+export class CreateUserInput {
+    username: string;
+    password: string;
+    email?: Nullable<string>;
+}
+
 export class User {
     uuid: string;
     createdAt: DateTime;
     updatedAt: DateTime;
     username: string;
-    email: string;
-    password: string;
+    email?: Nullable<string>;
 }
 
 export class TokenModel {
@@ -27,11 +32,13 @@ export class TokenModel {
 }
 
 export abstract class IQuery {
-    abstract getAllUsers(): User[] | Promise<User[]>;
+    abstract getUsers(): User[] | Promise<User[]>;
 }
 
 export abstract class IMutation {
     abstract login(input: LoginInput): TokenModel | Promise<TokenModel>;
+
+    abstract createUser(input: CreateUserInput): User | Promise<User>;
 }
 
 export type DateTime = any;

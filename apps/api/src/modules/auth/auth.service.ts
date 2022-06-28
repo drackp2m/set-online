@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { forwardRef, Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../user/user.service';
 import { LoginInput } from './dtos/login.input';
@@ -14,13 +14,14 @@ export class AuthService {
 	});
 
 	constructor(
+		@Inject(forwardRef(() => UserService))
 		private readonly userService: UserService,
 		private readonly jwtService: JwtService,
 		private readonly configService: ConfigService,
 	) {}
 
 	async login(input: LoginInput): Promise<TokenModel> {
-		const user = await this.userService.findOneBy('username', input.username);
+		const user = await this.userService.getOneBy('username', input.username);
 
 		if (!(await this.comparePassword(input.password, user.password))) {
 			throw new UnauthorizedException({ password: 'not match' });
