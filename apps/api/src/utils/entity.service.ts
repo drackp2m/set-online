@@ -7,7 +7,9 @@ import { BaseEntity } from './base.entity';
 export abstract class EntityService<T extends BaseEntity<T>> {
 	protected entityRepository: EntityRepository<AnyEntity>;
 
-	constructor(protected readonly entityManager: EntityManager) {}
+	constructor(protected readonly entityManager: EntityManager) {
+		this.entityRepository = entityManager.getRepository('');
+	}
 
 	async fuck(
 		prop: keyof EntityData<T>,

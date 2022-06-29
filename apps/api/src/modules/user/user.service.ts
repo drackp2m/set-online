@@ -49,6 +49,6 @@ export class UserService {
 			throw new NotFoundException({ [prop]: 'not found' });
 		}
 
-		return entity;
+		return entity as User;
 	}
 }

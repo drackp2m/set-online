@@ -10,7 +10,9 @@
     "test": "nx test",
     "migration:create": "mikro-orm migration:create",
     "migration:list": "mikro-orm migration:pending",
-    "migration:sync": "mikro-orm migration:up"
+    "migration:sync": "mikro-orm migration:up",
+    "lint": "eslint -f tools/eslint-formatter apps/** libs/**",
+    "lint:fix": "yarn lint --fix"
   },
   "private": true,
   "dependencies": {

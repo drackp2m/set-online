@@ -13,18 +13,35 @@ export class GraphQLConfig implements GqlOptionsFactory {
 		},
 	);
 
+	private readonly endpoint = 'http://localhost:3000/graphql';
+
 	private readonly playground: ApolloDriverConfig['playground'] = {
 		tabs: [
 			{
-				endpoint: 'http://localhost:3000/graphql',
-				name: 'GetAllUsers',
+				endpoint: this.endpoint,
+				name: 'Login',
+				query: `mutation Login($input: LoginInput!) {
+	login(input: $input) {
+		token
+		expiresOn
+	}
+}`,
+				variables: `{
+	"input": {
+		"username": "drackp2m",
+		"password": "password"
+	}
+}`,
+			},
+			{
+				endpoint: this.endpoint,
+				name: 'GetUsers',
 				query: `# Write your query or mutation here
-query GetAllUsers {
-  getAllUsers {
+query GetUsers {
+  getUsers {
     uuid
     username
     email
-    password
     createdAt
     updatedAt
   }
@@ -44,7 +61,7 @@ query GetAllUsers {
 				outputAs: 'class',
 			},
 			playground:
-				this.config.environment === 'development' ? this.playground : false,
+				this.config.environment === 'development' ? true : false,
 		};
 	}
 }

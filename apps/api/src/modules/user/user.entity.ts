@@ -14,5 +14,5 @@ export class User extends BaseEntity<User> {
 
 	@Property({ unique: true, nullable: true })
 	@Field({ nullable: true })
-	email: string;
+	email?: string;
 }
