@@ -6,6 +6,7 @@
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
+import { useContainer, length } from 'class-validator';
 
 import { AppModule } from './app.module';
 import { AppConfig } from './config/app.config';
