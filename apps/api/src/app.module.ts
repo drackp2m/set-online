@@ -10,7 +10,7 @@ import { Module } from '@nestjs/common';
 import { UserModule } from './modules/user/user.module';
 import { mikroOrmConfig } from './config/mikro-orm.config';
 import { envSchema } from './utils/env-schema';
-import { GraphQLConfig } from './config/grapql-module.config';
+import { GraphQLConfig } from './config/grapql.config';
 import { AuthModule } from './modules/auth/auth.module';
 
 @Module({

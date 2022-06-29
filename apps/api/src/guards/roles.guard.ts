@@ -31,6 +31,8 @@ export class RolesGuard implements CanActivate {
 
 			// const hasRole = user.roles.split('|').some((role) => roles.includes(role))
 
+			// FixMe => implement role on UserEntity
+
 			const hasRole = user.username === 'drackp2m';
 
 			if (hasRole) {

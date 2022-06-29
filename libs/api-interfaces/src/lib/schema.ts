@@ -7,18 +7,23 @@
 
 /* tslint:disable */
 /* eslint-disable */
-export class LoginInput {
+export interface LoginInput {
     username: string;
     password: string;
 }
 
-export class CreateUserInput {
+export interface CreateUserInput {
     username: string;
     password: string;
     email?: Nullable<string>;
 }
 
-export class User {
+export interface ValidateUserConstraintsInput {
+    username?: Nullable<string>;
+    email?: Nullable<string>;
+}
+
+export interface User {
     uuid: string;
     createdAt: DateTime;
     updatedAt: DateTime;
@@ -26,19 +31,19 @@ export class User {
     email?: Nullable<string>;
 }
 
-export class TokenModel {
+export interface TokenModel {
     token: string;
     expiresOn: DateTime;
 }
 
-export abstract class IQuery {
-    abstract getUsers(): User[] | Promise<User[]>;
+export interface IQuery {
+    getUsers(): User[] | Promise<User[]>;
 }
 
-export abstract class IMutation {
-    abstract login(input: LoginInput): TokenModel | Promise<TokenModel>;
-
-    abstract createUser(input: CreateUserInput): User | Promise<User>;
+export interface IMutation {
+    login(input: LoginInput): TokenModel | Promise<TokenModel>;
+    createUser(input: CreateUserInput): User | Promise<User>;
+    validateUserConstraints(input: ValidateUserConstraintsInput): boolean | Promise<boolean>;
 }
 
 export type DateTime = any;
