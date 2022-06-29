@@ -23,10 +23,12 @@ async function bootstrap(): Promise<{
 		infer: true,
 	});
 
-  app.useGlobalPipes(new ValidationPipe({
-		whitelist: true,
-		transform: true,
-	}));
+	app.useGlobalPipes(
+		new ValidationPipe({
+			whitelist: true,
+			transform: true,
+		}),
+	);
 	app.setGlobalPrefix(config.prefix);
 
 	await app.listen(config.port);

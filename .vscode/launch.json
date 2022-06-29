@@ -10,6 +10,7 @@
 			"request": "attach",
 			"restart": true,
 			"remoteRoot": "/usr/src/app",
+			"internalConsoleOptions": "neverOpen",
 		},
 		{
 			"name": "Angular on Firefox",

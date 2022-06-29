@@ -7,7 +7,7 @@
 		"outDir": "../../dist/out-tsc",
 		"emitDecoratorMetadata": true,
 		"allowSyntheticDefaultImports": true,
-		"strictPropertyInitialization": false,
+		"strictPropertyInitialization": false
 	},
 	"exclude": ["jest.config.ts", "**/*.spec.ts", "**/*.test.ts"],
 	"include": ["**/*.ts"]

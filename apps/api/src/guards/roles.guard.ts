@@ -22,7 +22,9 @@ export class RolesGuard implements CanActivate {
 			return true;
 		}
 
-		const userUuid = (GqlExecutionContext.create(context).getContext<{ req: Request & { user: User } }>().req.user.uuid);
+		const userUuid = GqlExecutionContext.create(context).getContext<{
+			req: Request & { user: User };
+		}>().req.user.uuid;
 
 		try {
 			const user = await this.userService.getOneBy('uuid', userUuid);
