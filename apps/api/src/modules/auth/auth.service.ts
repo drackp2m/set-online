@@ -1,4 +1,9 @@
-import { forwardRef, Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+	forwardRef,
+	Inject,
+	Injectable,
+	UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../user/user.service';
 import { LoginInput } from './dtos/login.input';
@@ -6,12 +11,16 @@ import { TokenModel } from './dtos/token.model';
 import * as bcryptjs from 'bcryptjs';
 import { ConfigService } from '@nestjs/config';
 import { JwtConfig } from '../../config/jwt.config';
+import ms from 'ms';
 
 @Injectable()
 export class AuthService {
-	private readonly jtwConfig: JwtConfig = this.configService.get<JwtConfig>('jwt', {
-		infer: true,
-	});
+	private readonly jtwConfig: JwtConfig = this.configService.get<JwtConfig>(
+		'jwt',
+		{
+			infer: true,
+		},
+	);
 
 	constructor(
 		@Inject(forwardRef(() => UserService))
@@ -28,8 +37,9 @@ export class AuthService {
 		}
 
 		const token = this.jwtService.sign({ uuid: user.uuid });
+		const expiresOn = new Date(Date.now() + ms(this.jtwConfig.expiresIn));
 
-		return new TokenModel({ token, expiresIn: this.jtwConfig.expiresIn });
+		return new TokenModel({ token, expiresOn });
 	}
 
 	async encryptPassword(password: string): Promise<string> {

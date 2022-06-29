@@ -28,7 +28,7 @@ export class User {
 
 export class TokenModel {
     token: string;
-    expiresIn: string;
+    expiresOn: DateTime;
 }
 
 export abstract class IQuery {

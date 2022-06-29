@@ -6,9 +6,12 @@ import { AppConfig } from './app.config';
 
 @Injectable()
 export class GraphQLConfig implements GqlOptionsFactory {
-	private readonly config: AppConfig = this.configService.get<AppConfig>('app', {
-		infer: true,
-	});
+	private readonly config: AppConfig = this.configService.get<AppConfig>(
+		'app',
+		{
+			infer: true,
+		},
+	);
 
 	private readonly playground: ApolloDriverConfig['playground'] = {
 		tabs: [

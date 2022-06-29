@@ -13,11 +13,13 @@ async function getEntities(): Promise<AnyEntity[]> {
 			.flatMap((mod) => Object.keys(mod).map((className) => mod[className]));
 	}
 
-	const promises = readdirSync('apps/api/src/modules').map((file) => {
-		if (existsSync(`apps/api/src/modules/${file}/${file}.entity.ts`)) {
-			return import(`../modules/${file}/${file}.entity.ts`);
-		}
-	}).filter(promise => promise !== undefined);
+	const promises = readdirSync('apps/api/src/modules')
+		.map((file) => {
+			if (existsSync(`apps/api/src/modules/${file}/${file}.entity.ts`)) {
+				return import(`../modules/${file}/${file}.entity.ts`);
+			}
+		})
+		.filter((promise) => promise !== undefined);
 
 	const modules = await Promise.all(promises);
 

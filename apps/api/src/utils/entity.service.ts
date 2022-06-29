@@ -1,8 +1,4 @@
-import {
-	AnyEntity,
-	EntityData,
-	EntityRepository,
-} from '@mikro-orm/core';
+import { AnyEntity, EntityData, EntityRepository } from '@mikro-orm/core';
 import { EntityManager } from '@mikro-orm/postgresql';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { BaseEntity } from './base.entity';
