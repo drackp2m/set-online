@@ -15,15 +15,15 @@ export abstract class BaseEntity<
 	P extends string = never,
 > extends MikroBaseEntity<T, PK, P> {
 	@PrimaryKey()
-	@Field(() => ID)
+	@Field(_type => ID)
 	uuid: string = v4();
 
 	@Property()
-	@Field()
+	@Field(_type => Date)
 	createdAt: Date = new Date();
 
 	@Property({ onUpdate: () => new Date() })
-	@Field()
+	@Field(_type => Date)
 	updatedAt: Date = new Date();
 
 	constructor(entity?: Partial<T>) {

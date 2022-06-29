@@ -1,12 +1,12 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { IsDefined, IsEmail, IsOptional, IsString } from 'class-validator';
-import { IsUniqueUsername } from '../../../decorators/is-unique-username.decorator';
+import { IsUniqueUserProp } from '../../../decorators/is-unique-user-prop.decorator';
 
 @InputType()
 export class CreateUserInput {
 	@IsDefined()
 	@IsString()
-	@IsUniqueUsername()
+	@IsUniqueUserProp('username')
 	@Field()
 	public username!: string;
 
@@ -17,6 +17,7 @@ export class CreateUserInput {
 
 	@IsOptional()
 	@IsEmail()
+	@IsUniqueUserProp('email')
 	@Field({ nullable: true })
 	public email?: string;
 }

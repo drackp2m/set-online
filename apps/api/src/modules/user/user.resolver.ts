@@ -3,6 +3,7 @@ import { PubSub } from 'graphql-subscriptions';
 import { ProtectTo } from '../../decorators/protect-to.decorator';
 import { RolesEnum } from '../../models/enums/roles.enum';
 import { CreateUserInput } from './dtos/create-user.input';
+import { ValidateUserConstraintsInput } from './dtos/validate-user-constraints.input';
 import { User } from './user.entity';
 import { UserService } from './user.service';
 
@@ -15,21 +16,33 @@ export class UserResolver {
 	@Mutation(() => User, {
 		name: 'createUser',
 	})
-	public async insertOne(
+	insertOne(
 		@Args('input', {
 			type: () => CreateUserInput,
 		})
-		createUserInput: CreateUserInput,
+		input: CreateUserInput,
 	): Promise<User> {
-		return await this.userService.insertOne(createUserInput);
+		return this.userService.insertOne(input);
+	}
+
+	@Mutation(() => Boolean, {
+		name: 'validateUserConstraints',
+	})
+	validateUserConstraints(
+		@Args('input', {
+			type: () => ValidateUserConstraintsInput,
+		})
+		_input: ValidateUserConstraintsInput,
+	): boolean {
+		return true;
 	}
 
 	@ProtectTo(RolesEnum.Registered)
 	@Query(() => [User], {
 		name: 'getUsers',
 	})
-	async getMany(): Promise<User[]> {
-		const users = await this.userService.getMany();
+	getMany(): Promise<User[]> {
+		const users = this.userService.getMany();
 
 		pubSub.publish('getAllUsers', { list: users });
 

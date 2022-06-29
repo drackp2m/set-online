@@ -6,7 +6,7 @@
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
-import { useContainer, length } from 'class-validator';
+import { useContainer } from 'class-validator';
 
 import { AppModule } from './app.module';
 import { AppConfig } from './config/app.config';
@@ -33,6 +33,8 @@ async function bootstrap(): Promise<{
 	app.setGlobalPrefix(config.prefix);
 
 	await app.listen(config.port);
+
+	useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
 	return {
 		protocol: config.protocol,

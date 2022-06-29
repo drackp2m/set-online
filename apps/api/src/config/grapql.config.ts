@@ -56,12 +56,15 @@ query GetUsers {
 	createGqlOptions(): ApolloDriverConfig {
 		return {
 			autoSchemaFile: 'apps/api/src/schema.gql',
+			buildSchemaOptions: {
+				dateScalarMode: 'isoDate',
+				numberScalarMode: 'float',
+			},
 			definitions: {
 				path: 'libs/api-interfaces/src/lib/schema.ts',
-				outputAs: 'class',
+				// outputAs: 'class',
 			},
-			playground:
-				this.config.environment === 'development' ? true : false,
+			playground: this.config.environment === 'development' ? true : false,
 		};
 	}
 }

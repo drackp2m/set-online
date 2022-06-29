@@ -28,6 +28,7 @@ type Query {
 type Mutation {
   login(input: LoginInput!): TokenModel!
   createUser(input: CreateUserInput!): User!
+  validateUserConstraints(input: ValidateUserConstraintsInput!): Boolean!
 }
 
 input LoginInput {
@@ -38,5 +39,10 @@ input LoginInput {
 input CreateUserInput {
   username: String!
   password: String!
+  email: String
+}
+
+input ValidateUserConstraintsInput {
+  username: String
   email: String
 }
