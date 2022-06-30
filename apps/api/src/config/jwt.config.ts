@@ -3,6 +3,7 @@ import { EnvJwtAlgorithm, processEnv } from '../utils/env-schema';
 
 export interface JwtConfig {
 	id: string;
+	issuer: string;
 	algorithm: EnvJwtAlgorithm;
 	secret: string;
 	expiresIn: string;
@@ -12,6 +13,7 @@ export const jwtConfig = registerAs(
 	'jwt',
 	(): JwtConfig => ({
 		id: processEnv.JWT_ID,
+		issuer: processEnv.JWT_ISSUER,
 		algorithm: processEnv.JWT_ALGORITHM,
 		secret: processEnv.JWT_SECRET,
 		expiresIn: processEnv.JWT_EXPIRES_IN,

@@ -5,7 +5,7 @@ import { TokenModel } from './dtos/token.model';
 
 @Resolver()
 export class AuthResolver {
-	public constructor(private readonly authService: AuthService) {}
+	public constructor(private readonly authService: AuthService) { }
 
 	@Mutation(() => TokenModel)
 	public async login(

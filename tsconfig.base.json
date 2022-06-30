@@ -14,7 +14,7 @@
 		"importHelpers": true,
 		"skipLibCheck": true,
 		"skipDefaultLibCheck": true,
-		"incremental": true,
+		// "incremental": true,
 		"strict": true,
 		"paths": {
 			"@set-online/api-interfaces": ["libs/api-interfaces/src/index.ts"]

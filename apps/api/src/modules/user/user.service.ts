@@ -3,14 +3,14 @@ import {
 	forwardRef,
 	Inject,
 	Injectable,
-	NotFoundException,
+	NotFoundException
 } from '@nestjs/common';
 
 import { EntityData } from '@mikro-orm/core/typings';
 import { EntityManager } from '@mikro-orm/postgresql';
+import { AuthService } from '../auth/auth.service';
 import { CreateUserInput } from './dtos/create-user.input';
 import { User } from './user.entity';
-import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class UserService {
