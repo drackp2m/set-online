@@ -35,6 +35,7 @@ export const mikroOrmConfig = async () =>
 		allowGlobalContext: true,
 		loadStrategy: LoadStrategy.JOINED,
 		entities: await getEntities(),
+		// forceUtcTimezone: false,
 		migrations: {
 			tableName: 'migrations',
 			path: 'apps/api/src/migrations',

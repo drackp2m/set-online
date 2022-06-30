@@ -21,6 +21,8 @@ services:
       POSTGRES_DB: set
       POSTGRES_USER: set
       POSTGRES_PASSWORD: 7K6P,P3Q%5UC-hup
+      TZ: Europe/Madrid
+      PGTZ: Europe/Madrid
     restart: unless-stopped
     tty: true
 
@@ -52,9 +54,10 @@ services:
     volumes:
       - .:/usr/src/app
     environment:
-      - PATH=$PATH:/usr/src/app/node_modules/.bin
+      PATH: $PATH:/usr/src/app/node_modules/.bin
+      TZ: Europe/Madrid
     depends_on:
       - set-db
     restart: unless-stopped
     tty: true
-    command: nx run-many --target=serve --projects=api,app
+    command: nx run-many --target=serve --projects=api

@@ -41,6 +41,7 @@ export interface IEnvSchema {
 	DB_USER: string;
 	DB_PASS: string;
 	JWT_ID: string;
+	JWT_ISSUER: string;
 	JWT_ALGORITHM: EnvJwtAlgorithm;
 	JWT_SECRET: string;
 	JWT_EXPIRES_IN: string;
@@ -58,6 +59,7 @@ export const envSchema = Joi.object({
 	DB_USER: string,
 	DB_PASS: string,
 	JWT_ID: string,
+	JWT_ISSUER: string,
 	JWT_ALGORITHM: string.valid(...JWT_ALGORITHMS),
 	JWT_SECRET: string,
 	JWT_EXPIRES_IN: string,

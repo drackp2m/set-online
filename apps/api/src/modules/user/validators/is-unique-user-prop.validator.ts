@@ -18,7 +18,7 @@ export class IsUniqueUserPropRule implements ValidatorConstraintInterface {
 
 		try {
 			await this.userService.getOneBy(prop, value);
-		} catch (error) {
+		} catch {
 			return true;
 		}
 

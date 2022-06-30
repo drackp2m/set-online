@@ -8,6 +8,7 @@ import { Reflector } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
 
 import { Request } from 'express';
+import { UserRoleEnum } from '../models/enums/user-role.enum';
 import { User } from '../modules/user/user.entity';
 import { UserService } from '../modules/user/user.service';
 
@@ -16,7 +17,7 @@ export class RolesGuard implements CanActivate {
 	constructor(private readonly userService: UserService) {}
 
 	public async canActivate(context: ExecutionContext): Promise<boolean> {
-		const roles = new Reflector().get<string[]>('roles', context.getHandler());
+		const roles = new Reflector().get<UserRoleEnum[]>('roles', context.getHandler());
 
 		if (!roles) {
 			return true;
@@ -38,7 +39,7 @@ export class RolesGuard implements CanActivate {
 			if (hasRole) {
 				return true;
 			}
-		} catch (error) {
+		} catch {
 			throw new ForbiddenException();
 		}
 
