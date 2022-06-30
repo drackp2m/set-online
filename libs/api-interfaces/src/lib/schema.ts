@@ -7,6 +7,12 @@
 
 /* tslint:disable */
 /* eslint-disable */
+export enum UserRoleEnum {
+    Admin = "Admin",
+    Registered = "Registered",
+    Guest = "Guest"
+}
+
 export interface LoginInput {
     username: string;
     password: string;
@@ -29,6 +35,7 @@ export interface User {
     updatedAt: DateTime;
     username: string;
     email?: Nullable<string>;
+    role: UserRoleEnum;
 }
 
 export interface TokenModel {
