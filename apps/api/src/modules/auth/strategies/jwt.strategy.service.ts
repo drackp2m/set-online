@@ -4,10 +4,9 @@ import { PassportStrategy } from '@nestjs/passport';
 
 import { ExtractJwt, Strategy, StrategyOptions } from 'passport-jwt';
 import { JwtConfig } from '../../../config/jwt.config';
-import { JwtInterface } from '../../../models/interfaces/jwt.interface';
+import { JwtPayloadInterface } from '../../../models/interfaces/jwt-payload.interface';
 import { User } from '../../user/user.entity';
 import { UserService } from '../../user/user.service';
-import Algorithm from 'jsonwebtoken';
 
 @Injectable()
 export class JwtStrategyService extends PassportStrategy(Strategy) {
@@ -20,20 +19,20 @@ export class JwtStrategyService extends PassportStrategy(Strategy) {
 		});
 
 		super({
-			algorithms: [jwtConfig.algorithm],
+			algorithm: 'HS256',
 			jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 			secretOrKey: jwtConfig.secret,
-			jsonWebTokenOptions: {
-				jwtid: jwtConfig.id,
-				issuer: jwtConfig.issuer,
-				algorithms: jwtConfig.algorithm as Algorithm,
-			},
+			// jsonWebTokenOptions: {
+			// 	jwtid: jwtConfig.id,
+			// 	algorithms: ['HS256']
+			// },
 		} as StrategyOptions);
 	}
 
-	public async validate(jwt: JwtInterface): Promise<User> {
+	public async validate(jwt: JwtPayloadInterface): Promise<User> {
+		console.log(jwt);
 		try {
-			return await this.userService.getOneBy('uuid', jwt.sub.uuid);
+			return await this.userService.getOneBy('uuid', jwt.sub);
 		} catch {
 			throw new UnauthorizedException();
 		}

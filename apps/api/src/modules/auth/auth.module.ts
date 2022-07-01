@@ -20,9 +20,12 @@ import { JwtStrategyService } from './strategies/jwt.strategy.service';
 				return {
 					secret: jwtConfig.secret,
 					signOptions: {
-						jwtid: jwtConfig.id,
 						algorithm: jwtConfig.algorithm,
+						issuer: jwtConfig.issuer,
+						audience: jwtConfig.issuer,
+						jwtid: jwtConfig.id,
 						expiresIn: jwtConfig.expiresIn,
+						notBefore: 0,
 					},
 				};
 			},

@@ -40,4 +40,4 @@ Thumbs.db
 
 .angular
 .pgdata
-.env*
+.env.prod

@@ -4,14 +4,14 @@ import {
 	Injectable,
 	UnauthorizedException,
 } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+import * as bcryptjs from 'bcryptjs';
+import { JwtConfig } from '../../config/jwt.config';
+import { JwtPayloadInterface } from '../../models/interfaces/jwt-payload.interface';
 import { UserService } from '../user/user.service';
 import { LoginInput } from './dtos/login.input';
 import { TokenModel } from './dtos/token.model';
-import * as bcryptjs from 'bcryptjs';
-import { ConfigService } from '@nestjs/config';
-import { JwtConfig } from '../../config/jwt.config';
-import ms from 'ms';
 
 @Injectable()
 export class AuthService {
@@ -36,10 +36,9 @@ export class AuthService {
 			throw new UnauthorizedException({ password: 'not match' });
 		}
 
-		const token = this.jwtService.sign({ uuid: user.uuid });
-		const expiresOn = new Date(Date.now() + ms(this.jtwConfig.expiresIn));
+		const token = this.jwtService.sign({}, { subject: user.uuid });
 
-		return new TokenModel({ token, expiresOn });
+		return new TokenModel({ token });
 	}
 
 	async encryptPassword(password: string): Promise<string> {
@@ -52,5 +51,11 @@ export class AuthService {
 		hashedPassword: string,
 	): Promise<boolean> {
 		return await bcryptjs.compare(password, hashedPassword);
+	}
+
+	private decodeHeaderAndPayload(token: string): JwtPayloadInterface {
+		const [, payload] = token.split('.');
+
+		return JSON.parse(Buffer.from(payload, 'base64url').toString());
 	}
 }
