@@ -40,7 +40,6 @@ export interface User {
 
 export interface TokenModel {
     token: string;
-    expiresOn: DateTime;
 }
 
 export interface IQuery {

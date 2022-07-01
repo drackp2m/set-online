@@ -60,4 +60,4 @@ services:
       - set-db
     restart: unless-stopped
     tty: true
-    command: nx run-many --target=serve --projects=api
+    command: yarn start:all
