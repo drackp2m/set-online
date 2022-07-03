@@ -2,12 +2,10 @@ import {
 	forwardRef,
 	Inject,
 	Injectable,
-	UnauthorizedException,
 } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import * as bcryptjs from 'bcryptjs';
-import { JwtConfig } from '../../config/jwt.config';
+import { UnauthorizedException } from '../../exceptions/unauthorized-exception.exception';
 import { JwtPayloadInterface } from '../../models/interfaces/jwt-payload.interface';
 import { UserService } from '../user/user.service';
 import { LoginInput } from './dtos/login.input';
@@ -15,25 +13,17 @@ import { TokenModel } from './dtos/token.model';
 
 @Injectable()
 export class AuthService {
-	private readonly jtwConfig: JwtConfig = this.configService.get<JwtConfig>(
-		'jwt',
-		{
-			infer: true,
-		},
-	);
-
 	constructor(
 		@Inject(forwardRef(() => UserService))
 		private readonly userService: UserService,
 		private readonly jwtService: JwtService,
-		private readonly configService: ConfigService,
 	) {}
 
 	async login(input: LoginInput): Promise<TokenModel> {
 		const user = await this.userService.getOneBy('username', input.username);
 
 		if (!(await this.comparePassword(input.password, user.password))) {
-			throw new UnauthorizedException({ password: 'not match' });
+			throw new UnauthorizedException('not match', 'password');
 		}
 
 		const token = this.jwtService.sign({}, { subject: user.uuid });

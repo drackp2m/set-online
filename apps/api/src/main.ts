@@ -1,8 +1,3 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
-
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
@@ -10,6 +5,12 @@ import { useContainer } from 'class-validator';
 
 import { AppModule } from './app.module';
 import { AppConfig } from './config/app.config';
+import {
+	FastifyAdapter,
+	NestFastifyApplication,
+} from '@nestjs/platform-fastify';
+import { ThrottlerGuard } from '@nestjs/throttler';
+import { GqlThrottlerGuard } from './guards/gql-throttler.guard';
 
 async function bootstrap(): Promise<{
 	protocol: string;
@@ -17,7 +18,10 @@ async function bootstrap(): Promise<{
 	port: number;
 	globalPrefix: string;
 }> {
-	const app = await NestFactory.create(AppModule);
+	const app = await NestFactory.create<NestFastifyApplication>(
+		AppModule,
+		new FastifyAdapter(),
+	);
 
 	const configService = app.get(ConfigService);
 	const config: AppConfig = configService.get<AppConfig>('app', {
@@ -32,7 +36,7 @@ async function bootstrap(): Promise<{
 	);
 	app.setGlobalPrefix(config.prefix);
 
-	await app.listen(config.port);
+	await app.listen(config.port, '0.0.0.0');
 
 	useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
