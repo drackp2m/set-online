@@ -1,8 +1,9 @@
 export interface JwtPayloadInterface {
+	iss: string;
+	aud: string;
+	jti: string;
+	iat: number;
 	nbf: number;
 	exp: number;
-	aud: string;
-	iss: string;
 	sub: string;
-	jti: string;
 }

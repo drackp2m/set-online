@@ -2,6 +2,10 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type TokenModel {
+  token: String!
+}
+
 """user """
 type User {
   uuid: ID!
@@ -21,10 +25,6 @@ enum UserRoleEnum {
   Admin
   Registered
   Guest
-}
-
-type TokenModel {
-  token: String!
 }
 
 type Query {

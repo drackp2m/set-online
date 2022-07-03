@@ -1,12 +1,12 @@
 import {
 	ExecutionContext,
 	Injectable,
-	UnauthorizedException,
 } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
 
 import { Request } from 'express';
+import { UnauthorizedException } from '../exceptions/unauthorized-exception.exception';
 
 @Injectable()
 export class JwtGuard extends AuthGuard('jwt') {
@@ -17,7 +17,7 @@ export class JwtGuard extends AuthGuard('jwt') {
 
 	public handleRequest<JWT>(error: Error, jwt: JWT): JWT {
 		if (error || !jwt) {
-			throw new UnauthorizedException();
+			throw new UnauthorizedException('invalid bearer', 'authorization');
 		}
 
 		return jwt;

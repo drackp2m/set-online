@@ -1,16 +1,12 @@
-import {
-	BadRequestException,
-	forwardRef,
-	Inject,
-	Injectable,
-	NotFoundException
-} from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 
 import { EntityData } from '@mikro-orm/core/typings';
 import { EntityManager } from '@mikro-orm/postgresql';
 import { AuthService } from '../auth/auth.service';
 import { CreateUserInput } from './dtos/create-user.input';
 import { User } from './user.entity';
+import { NotFoundException } from '../../exceptions/not-found.exception';
+import { BadRequestException } from '../../exceptions/bad-request.exception';
 
 @Injectable()
 export class UserService {
@@ -46,7 +42,7 @@ export class UserService {
 		});
 
 		if (!entity) {
-			throw new NotFoundException({ [prop]: 'not found' });
+			throw new NotFoundException('not found', prop);
 		}
 
 		return entity as User;
