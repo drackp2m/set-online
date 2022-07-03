@@ -1,17 +1,18 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ConfigModule } from '@nestjs/config';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { allConfigs } from './config/index';
-import { GraphQLModule } from '@nestjs/graphql';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { Module } from '@nestjs/common';
-import { UserModule } from './modules/user/user.module';
+import { GraphQLModule } from '@nestjs/graphql';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { GqlFactory } from './config/factories/gql.factory';
+import { allConfigs } from './config/index';
 import { mikroOrmConfig } from './config/mikro-orm.config';
-import { envSchema } from './utils/env-schema';
-import { GraphQLConfig } from './config/grapql.config';
 import { AuthModule } from './modules/auth/auth.module';
+import { UserModule } from './modules/user/user.module';
+import { envSchema } from './utils/env-schema';
+import { GqlThrottlerModule } from './modules/gql-throttler/gql-throttler.module';
 
 @Module({
 	imports: [
@@ -25,11 +26,12 @@ import { AuthModule } from './modules/auth/auth.module';
 		}),
 		GraphQLModule.forRootAsync<ApolloDriverConfig>({
 			driver: ApolloDriver,
-			useClass: GraphQLConfig,
+			useClass: GqlFactory,
 		}),
 		MikroOrmModule.forRootAsync({
 			useFactory: mikroOrmConfig,
 		}),
+		GqlThrottlerModule,
 		AuthModule,
 		UserModule,
 	],

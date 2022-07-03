@@ -1,7 +1,7 @@
 import { forwardRef, Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
-import { JwtConfig } from '../../config/jwt.config';
+import { JwtFactory } from '../../config/factories/jwt.factory';
 import { UserModule } from '../user/user.module';
 import { AuthResolver } from './auth.resolver';
 import { AuthService } from './auth.service';
@@ -12,23 +12,7 @@ import { JwtStrategyService } from './strategies/jwt.strategy.service';
 		forwardRef(() => UserModule),
 		JwtModule.registerAsync({
 			inject: [ConfigService],
-			useFactory: (configService: ConfigService) => {
-				const jwtConfig: JwtConfig = configService.get<JwtConfig>('jwt', {
-					infer: true,
-				});
-
-				return {
-					secret: jwtConfig.secret,
-					signOptions: {
-						algorithm: jwtConfig.algorithm,
-						issuer: jwtConfig.issuer,
-						audience: jwtConfig.issuer,
-						jwtid: jwtConfig.id,
-						expiresIn: jwtConfig.expiresIn,
-						notBefore: 0,
-					},
-				};
-			},
+			useClass: JwtFactory,
 		}),
 	],
 	providers: [AuthResolver, AuthService, JwtStrategyService],

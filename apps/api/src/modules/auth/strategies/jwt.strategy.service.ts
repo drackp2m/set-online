@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 
@@ -19,22 +19,13 @@ export class JwtStrategyService extends PassportStrategy(Strategy) {
 		});
 
 		super({
-			algorithm: 'HS256',
 			jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 			secretOrKey: jwtConfig.secret,
-			// jsonWebTokenOptions: {
-			// 	jwtid: jwtConfig.id,
-			// 	algorithms: ['HS256']
-			// },
+			ignoreExpiration: false,
 		} as StrategyOptions);
 	}
 
 	public async validate(jwt: JwtPayloadInterface): Promise<User> {
-		console.log(jwt);
-		try {
-			return await this.userService.getOneBy('uuid', jwt.sub);
-		} catch {
-			throw new UnauthorizedException();
-		}
+		return await this.userService.getOneBy('uuid', jwt.sub);
 	}
 }

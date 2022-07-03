@@ -37,7 +37,7 @@ export class UserResolver {
 		return true;
 	}
 
-	@ProtectTo(UserRoleEnum.Registered)
+	@ProtectTo(UserRoleEnum.Admin)
 	@Query(() => [User], {
 		name: 'getUsers',
 	})
