@@ -30,14 +30,11 @@ export class UserResolver {
 		name: 'validateUserConstraints',
 	})
 	validateUserConstraints(
-		@CurrentUser()
-		user: User,
 		@Args('input', {
 			type: () => ValidateUserConstraintsInput,
 		})
 		_input: ValidateUserConstraintsInput,
 	): boolean {
-		console.log({user});
 		return true;
 	}
 
