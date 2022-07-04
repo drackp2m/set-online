@@ -3,14 +3,12 @@ import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { useContainer } from 'class-validator';
 
-import { AppModule } from './app.module';
-import { AppConfig } from './config/app.config';
 import {
 	FastifyAdapter,
 	NestFastifyApplication,
 } from '@nestjs/platform-fastify';
-import { ThrottlerGuard } from '@nestjs/throttler';
-import { GqlThrottlerGuard } from './guards/gql-throttler.guard';
+import { AppModule } from './app.module';
+import { AppConfig } from './config/app.config';
 
 async function bootstrap(): Promise<{
 	protocol: string;

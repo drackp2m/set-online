@@ -1,11 +1,11 @@
 import { registerEnumType } from '@nestjs/graphql';
 
-export enum UserRoleEnum {
+export enum EUserRole {
 	Admin = 'admin',
 	Registered = 'registered',
 	Guest = 'guest',
 }
 
-registerEnumType(UserRoleEnum, {
-	name: 'UserRoleEnum'
+registerEnumType(EUserRole, {
+	name: 'EUserRole'
 })
