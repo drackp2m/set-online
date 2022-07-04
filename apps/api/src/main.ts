@@ -9,7 +9,6 @@ import {
 } from '@nestjs/platform-fastify';
 import { AppModule } from './app.module';
 import { AppConfig } from './config/app.config';
-import { ProtectTo } from './decorators/protect-to.decorator';
 
 async function bootstrap(): Promise<{
 	protocol: string;

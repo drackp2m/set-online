@@ -1,6 +1,5 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
-import { CurrentUser } from '../../decorators/current-user.decorator';
 import { ProtectTo } from '../../decorators/protect-to.decorator';
 import { EUserRole } from '../../models/enums/user-role.enum';
 import { CreateUserInput } from './dtos/create-user.input';
