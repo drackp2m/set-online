@@ -16,6 +16,8 @@ export class JwtGuard extends AuthGuard('jwt') {
 	}
 
 	public handleRequest<JWT>(error: Error, jwt: JWT): JWT {
+		console.log({ error, jwt});
+
 		if (error || !jwt) {
 			throw new UnauthorizedException('invalid bearer', 'authorization');
 		}

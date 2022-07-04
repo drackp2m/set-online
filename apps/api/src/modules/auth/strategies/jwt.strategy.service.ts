@@ -4,7 +4,7 @@ import { PassportStrategy } from '@nestjs/passport';
 
 import { ExtractJwt, Strategy, StrategyOptions } from 'passport-jwt';
 import { JwtConfig } from '../../../config/jwt.config';
-import { JwtPayloadInterface } from '../../../models/interfaces/jwt-payload.interface';
+import { IJwtPayload } from '../../../models/interfaces/jwt-payload.interface';
 import { User } from '../../user/user.entity';
 import { UserService } from '../../user/user.service';
 
@@ -25,7 +25,7 @@ export class JwtStrategyService extends PassportStrategy(Strategy) {
 		} as StrategyOptions);
 	}
 
-	public async validate(jwt: JwtPayloadInterface): Promise<User> {
+	public async validate(jwt: IJwtPayload): Promise<User> {
 		return await this.userService.getOneBy('uuid', jwt.sub);
 	}
 }

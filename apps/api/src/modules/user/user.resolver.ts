@@ -1,7 +1,8 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
+import { CurrentUser } from '../../decorators/current-user.decorator';
 import { ProtectTo } from '../../decorators/protect-to.decorator';
-import { UserRoleEnum } from '../../models/enums/user-role.enum';
+import { EUserRole } from '../../models/enums/user-role.enum';
 import { CreateUserInput } from './dtos/create-user.input';
 import { ValidateUserConstraintsInput } from './dtos/validate-user-constraints.input';
 import { User } from './user.entity';
@@ -29,15 +30,18 @@ export class UserResolver {
 		name: 'validateUserConstraints',
 	})
 	validateUserConstraints(
+		@CurrentUser()
+		user: User,
 		@Args('input', {
 			type: () => ValidateUserConstraintsInput,
 		})
 		_input: ValidateUserConstraintsInput,
 	): boolean {
+		console.log({user});
 		return true;
 	}
 
-	@ProtectTo(UserRoleEnum.Admin)
+	@ProtectTo(EUserRole.Admin)
 	@Query(() => [User], {
 		name: 'getUsers',
 	})
