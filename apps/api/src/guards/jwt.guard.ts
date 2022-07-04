@@ -12,16 +12,15 @@ import { UnauthorizedException } from '../exceptions/unauthorized-exception.exce
 export class JwtGuard extends AuthGuard('jwt') {
 	public getRequest(context: ExecutionContext): Request {
 		const gqlContext = GqlExecutionContext.create(context);
+
 		return gqlContext.getContext<{ req: Request }>().req;
 	}
 
-	public handleRequest<JWT>(error: Error, jwt: JWT): JWT {
-		console.log({ error, jwt});
-
-		if (error || !jwt) {
+	public handleRequest<JWT>(error: Error, user: JWT): JWT | undefined {
+		if (error) {
 			throw new UnauthorizedException('invalid bearer', 'authorization');
 		}
 
-		return jwt;
+		return user ? user : undefined;
 	}
 }

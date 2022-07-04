@@ -4,6 +4,7 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 
 import { Request } from 'express';
 import { ForbiddenException } from '../exceptions/forbiden.exception';
+import { UnauthorizedException } from '../exceptions/unauthorized-exception.exception';
 import { EUserRole } from '../models/enums/user-role.enum';
 import { User } from '../modules/user/user.entity';
 
@@ -15,8 +16,6 @@ export class RolesGuard implements CanActivate {
 			context.getHandler(),
 		);
 
-		console.log(roles);
-
 		if (!roles) {
 			return true;
 		}
@@ -25,8 +24,11 @@ export class RolesGuard implements CanActivate {
 			req: Request & { user: User };
 		}>().req.user;
 
-		const hasRole =
-			user.role === EUserRole.Admin || roles.includes(user.role);
+		if (!user) {
+			throw new UnauthorizedException('invalid bearer', 'authorization');
+		}
+
+		const hasRole = user.role === EUserRole.Admin || roles.includes(user.role);
 
 		if (hasRole) {
 			return true;
