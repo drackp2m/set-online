@@ -60,4 +60,4 @@ services:
       - set-db
     restart: unless-stopped
     tty: true
-    command: yarn start:all
+    # command: yarn start:all
