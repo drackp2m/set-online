@@ -3,10 +3,10 @@ import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { useContainer } from 'class-validator';
 
-import {
-	FastifyAdapter,
-	NestFastifyApplication,
-} from '@nestjs/platform-fastify';
+// import {
+// 	FastifyAdapter,
+// 	NestFastifyApplication,
+// } from '@nestjs/platform-fastify';
 import { AppModule } from './app.module';
 import { AppConfig } from './config/app.config';
 
@@ -16,10 +16,12 @@ async function bootstrap(): Promise<{
 	port: number;
 	globalPrefix: string;
 }> {
-	const app = await NestFactory.create<NestFastifyApplication>(
-		AppModule,
-		new FastifyAdapter(),
-	);
+	const app = await NestFactory.create(AppModule);
+
+	// const app = await NestFactory.create<NestFastifyApplication>(
+	// 	AppModule,
+	// 	new FastifyAdapter(),
+	// );
 
 	const configService = app.get(ConfigService);
 	const config: AppConfig = configService.get<AppConfig>('app', {

@@ -7,6 +7,7 @@
 
 /* tslint:disable */
 /* eslint-disable */
+
 export enum EUserRole {
     Admin = "Admin",
     Registered = "Registered",
