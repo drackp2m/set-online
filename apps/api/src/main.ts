@@ -3,10 +3,6 @@ import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { useContainer } from 'class-validator';
 
-// import {
-// 	FastifyAdapter,
-// 	NestFastifyApplication,
-// } from '@nestjs/platform-fastify';
 import { AppModule } from './app.module';
 import { AppConfig } from './config/app.config';
 
@@ -17,11 +13,6 @@ async function bootstrap(): Promise<{
 	globalPrefix: string;
 }> {
 	const app = await NestFactory.create(AppModule);
-
-	// const app = await NestFactory.create<NestFastifyApplication>(
-	// 	AppModule,
-	// 	new FastifyAdapter(),
-	// );
 
 	const configService = app.get(ConfigService);
 	const config: AppConfig = configService.get<AppConfig>('app', {
@@ -51,7 +42,9 @@ async function bootstrap(): Promise<{
 bootstrap()
 	.then(({ protocol, domain, port, globalPrefix }) =>
 		Logger.log(
-			`🚀 GraphQL Playground ready at ${protocol}://${domain}:${port}${globalPrefix}/graphql, started in ${process.uptime()}s`,
+			`🚀 GraphQL Playground ready at ${protocol}://${domain}:${port}${globalPrefix}/graphql, started in ${process
+				.uptime()
+				.toFixed(2)}s`,
 		),
 	)
 	.catch((e) => Logger.error(e.message, e));
