@@ -61,7 +61,7 @@ query GetUsers {
 				numberScalarMode: 'float',
 			},
 			definitions: {
-				path: 'livbs/api-interfaces/src/lib/schema.ts',
+				path: 'libs/api-interfaces/src/lib/schema.ts',
 				// outputAs: 'class',
 			},
 			playground: this.config.environment === 'development' ? true : false,

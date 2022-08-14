@@ -1,24 +1,22 @@
 {
-	"compileOnSave": false,
-	"compilerOptions": {
-		"rootDir": ".",
-		"baseUrl": ".",
-		"target": "ES2021",
-		"module": "ESNext",
-		"moduleResolution": "Node",
-		"lib": ["ES2021", "DOM"],
-		"sourceMap": true,
-		"declaration": false,
-		"emitDecoratorMetadata": true,
-		"experimentalDecorators": true,
-		"importHelpers": true,
-		"skipLibCheck": true,
-		"skipDefaultLibCheck": true,
-		// "incremental": true,
-		"strict": true,
-		"paths": {
-			"@set-online/api-interfaces": ["libs/api-interfaces/src/index.ts"]
-		}
-	},
-	"exclude": ["node_modules", "tmp"]
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@set-online/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
 }

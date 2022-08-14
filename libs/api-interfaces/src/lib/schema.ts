@@ -7,7 +7,8 @@
 
 /* tslint:disable */
 /* eslint-disable */
-export enum UserRoleEnum {
+
+export enum EUserRole {
     Admin = "Admin",
     Registered = "Registered",
     Guest = "Guest"
@@ -29,18 +30,17 @@ export interface ValidateUserConstraintsInput {
     email?: Nullable<string>;
 }
 
+export interface TokenModel {
+    token: string;
+}
+
 export interface User {
     uuid: string;
     createdAt: DateTime;
     updatedAt: DateTime;
     username: string;
     email?: Nullable<string>;
-    role: UserRoleEnum;
-}
-
-export interface TokenModel {
-    token: string;
-    expiresOn: DateTime;
+    role: EUserRole;
 }
 
 export interface IQuery {
