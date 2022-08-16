@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Message } from '@set-online/api-interfaces';
 import { map } from 'rxjs';
+import { Message } from '@set-online/api-interfaces';
 
 @Component({
 	selector: 'set-online-root',
