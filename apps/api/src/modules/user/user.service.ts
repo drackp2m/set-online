@@ -21,11 +21,11 @@ export class UserService {
 
 		const entity = new User(input);
 
-		return await this.entityManager.persistAndFlush(entity).then(
-			() => entity,
-			async (reason) => {
-				throw new BadRequestException(reason.detail);
-			},
+  return await this.entityManager.persistAndFlush(entity).then(
+			(   ) =>  entity,
+        async (reason) => {
+          throw new BadRequestException(reason.detail);
+        },
 		);
 	}
 
