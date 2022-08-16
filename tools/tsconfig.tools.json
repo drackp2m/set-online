@@ -3,9 +3,9 @@
   "compilerOptions": {
     "outDir": "../dist/out-tsc/tools",
     "rootDir": ".",
-    "module": "CommonJS",
-    "target": "ES6",
-    "types": ["Node"],
+    "module": "commonjs",
+    "target": "es5",
+    "types": ["node"],
     "importHelpers": false
   },
   "include": ["**/*.ts"]
