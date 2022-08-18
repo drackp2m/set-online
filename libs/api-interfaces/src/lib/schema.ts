@@ -30,10 +30,6 @@ export interface ValidateUserConstraintsInput {
     email?: Nullable<string>;
 }
 
-export interface TokenModel {
-    token: string;
-}
-
 export interface User {
     uuid: string;
     createdAt: DateTime;
@@ -41,6 +37,10 @@ export interface User {
     username: string;
     email?: Nullable<string>;
     role: EUserRole;
+}
+
+export interface TokenModel {
+    token: string;
 }
 
 export interface IQuery {
