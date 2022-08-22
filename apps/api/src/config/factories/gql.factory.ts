@@ -51,11 +51,11 @@ query GetUsers {
 		],
 	};
 
-	constructor(private configService: ConfigService) {}
+	constructor(private readonly configService: ConfigService) {}
 
 	createGqlOptions(): ApolloDriverConfig {
 		return {
-			autoSchemaFile: 'apps/api/src/schema.gql',
+			autoSchemaFile: 'apps/api/schema.gql',
 			buildSchemaOptions: {
 				dateScalarMode: 'isoDate',
 				numberScalarMode: 'float',

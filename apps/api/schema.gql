@@ -2,6 +2,10 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type TokenModel {
+  token: String!
+}
+
 """user """
 type User {
   uuid: ID!
@@ -23,23 +27,19 @@ enum EUserRole {
   Guest
 }
 
-type TokenModel {
-  token: String!
-}
-
 type Query {
-  getUsers: [User!]!
-}
-
-type Mutation {
   login(input: LoginInput!): TokenModel!
-  createUser(input: CreateUserInput!): User!
-  validateUserConstraints(input: ValidateUserConstraintsInput!): Boolean!
+  getUsers: [User!]!
 }
 
 input LoginInput {
   username: String!
   password: String!
+}
+
+type Mutation {
+  createUser(input: CreateUserInput!): User!
+  validateUserConstraints(input: ValidateUserConstraintsInput!): Boolean!
 }
 
 input CreateUserInput {

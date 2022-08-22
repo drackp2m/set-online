@@ -4,39 +4,39 @@
 	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
 	"version": "0.2.0",
 	"configurations": [
-    {
-      "name": "NestJS on WS Attach",
-      "type": "node",
-      "request": "attach",
-      "restart": true,
-      "remoteRoot": "/usr/src/app",
-      "internalConsoleOptions": "neverOpen"
-    },
-    {
-      "name": "Angular on Firefox",
-      "type": "firefox",
-      "request": "launch",
-      "url": "http://localhost:4200",
-      "pathMappings": [
-        {
-          "url": "webpack:///apps",
-          "path": "${workspaceFolder}/apps"
-        },
-        {
-          "url": "webpack:///apps",
-          "path": "${workspaceFolder}/apps"
-        },
-        {
-          "url": "webpack:///apps/app",
-          "path": "${workspaceFolder}/apps/app"
-        }
-      ]
-    },
-    {
-      "name": "Angular on Edge",
-      "type": "msedge",
-      "request": "launch",
-      "url": "http://localhost:4200"
-    }
-  ]
+		{
+			"name": "NestJS on WS Attach",
+			"type": "node",
+			"request": "attach",
+			"restart": true,
+			"remoteRoot": "/usr/src/app",
+			"internalConsoleOptions": "neverOpen"
+		},
+		{
+			"name": "Angular on Firefox",
+			"type": "firefox",
+			"request": "launch",
+			"url": "http://localhost:4200",
+			"pathMappings": [
+				{
+					"url": "webpack:///apps",
+					"path": "${workspaceFolder}/apps"
+				},
+				{
+					"url": "webpack:///apps",
+					"path": "${workspaceFolder}/apps"
+				},
+				{
+					"url": "webpack:///apps/app",
+					"path": "${workspaceFolder}/apps/app"
+				}
+			]
+		},
+		{
+			"name": "Angular on Edge",
+			"type": "msedge",
+			"request": "launch",
+			"url": "http://localhost:4200"
+		}
+	]
 }

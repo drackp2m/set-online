@@ -30,6 +30,10 @@ export interface ValidateUserConstraintsInput {
     email?: Nullable<string>;
 }
 
+export interface TokenModel {
+    token: string;
+}
+
 export interface User {
     uuid: string;
     createdAt: DateTime;
@@ -39,16 +43,12 @@ export interface User {
     role: EUserRole;
 }
 
-export interface TokenModel {
-    token: string;
-}
-
 export interface IQuery {
+    login(input: LoginInput): TokenModel | Promise<TokenModel>;
     getUsers(): User[] | Promise<User[]>;
 }
 
 export interface IMutation {
-    login(input: LoginInput): TokenModel | Promise<TokenModel>;
     createUser(input: CreateUserInput): User | Promise<User>;
     validateUserConstraints(input: ValidateUserConstraintsInput): boolean | Promise<boolean>;
 }

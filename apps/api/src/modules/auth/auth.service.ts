@@ -1,13 +1,9 @@
-import {
-	forwardRef,
-	Inject,
-	Injectable,
-} from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcryptjs from 'bcryptjs';
 import { UnauthorizedException } from '../../exceptions/unauthorized-exception.exception';
 import { IJwtPayload } from '../../models/interfaces/jwt-payload.interface';
-import { UserService } from '../user/user.service';
+import { UserService } from '../../user/user.service';
 import { LoginInput } from './dtos/login.input';
 import { TokenModel } from './dtos/token.model';
 
@@ -33,6 +29,7 @@ export class AuthService {
 
 	async encryptPassword(password: string): Promise<string> {
 		const salt = await bcryptjs.genSalt();
+
 		return await bcryptjs.hash(password, salt);
 	}
 

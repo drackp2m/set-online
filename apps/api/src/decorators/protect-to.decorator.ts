@@ -6,8 +6,8 @@ import { Roles } from './roles.decorator';
 
 export const ProtectTo = (
 	...roles: EUserRole[]
-): <TFunction extends () => void, Y>(
+): (<TFunction extends () => void, Y>(
 	target: object | TFunction,
 	propertyKey?: string | symbol,
 	descriptor?: TypedPropertyDescriptor<Y>,
-) => void => applyDecorators(Roles(...roles), UseGuards(RolesGuard))
+) => void) => applyDecorators(Roles(...roles), UseGuards(RolesGuard));

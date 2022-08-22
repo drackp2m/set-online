@@ -7,5 +7,5 @@ export enum EUserRole {
 }
 
 registerEnumType(EUserRole, {
-	name: 'EUserRole'
-})
+	name: 'EUserRole',
+});

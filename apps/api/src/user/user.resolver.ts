@@ -1,7 +1,7 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
-import { ProtectTo } from '../../decorators/protect-to.decorator';
-import { EUserRole } from '../../models/enums/user-role.enum';
+import { ProtectTo } from '../decorators/protect-to.decorator';
+import { EUserRole } from '../models/enums/user-role.enum';
 import { CreateUserInput } from './dtos/create-user.input';
 import { ValidateUserConstraintsInput } from './dtos/validate-user-constraints.input';
 import { User } from './user.entity';

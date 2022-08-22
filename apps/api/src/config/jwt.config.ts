@@ -5,7 +5,7 @@ export interface JwtConfig {
 	algorithm: EnvJwtAlgorithm;
 	secret: string;
 	issuer: string;
-	audience: string,
+	audience: string;
 	id: string;
 	expiresIn: string;
 }
