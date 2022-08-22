@@ -2,11 +2,11 @@ import { forwardRef, Inject, Injectable } from '@nestjs/common';
 
 import { EntityData } from '@mikro-orm/core/typings';
 import { EntityManager } from '@mikro-orm/postgresql';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../modules/auth/auth.service';
 import { CreateUserInput } from './dtos/create-user.input';
 import { User } from './user.entity';
-import { NotFoundException } from '../../exceptions/not-found.exception';
-import { BadRequestException } from '../../exceptions/bad-request.exception';
+import { NotFoundException } from '../exceptions/not-found.exception';
+import { BadRequestException } from '../exceptions/bad-request.exception';
 
 @Injectable()
 export class UserService {
@@ -18,14 +18,13 @@ export class UserService {
 
 	async insertOne(input: CreateUserInput): Promise<User> {
 		input.password = await this.authService.encryptPassword(input.password);
-
 		const entity = new User(input);
 
-  return await this.entityManager.persistAndFlush(entity).then(
-			(   ) =>  entity,
-        async (reason) => {
-          throw new BadRequestException(reason.detail);
-        },
+		return await this.entityManager.persistAndFlush(entity).then(
+			() => entity,
+			async (reason) => {
+				throw new BadRequestException(reason.detail);
+			},
 		);
 	}
 

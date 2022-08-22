@@ -13,7 +13,7 @@ export default {
 	},
 	moduleFileExtensions: ['ts', 'js', 'html'],
 	moduleNameMapper: {
-		"uuid": require.resolve('uuid'),
+		uuid: require.resolve('uuid'),
 	},
 	coverageDirectory: '../../coverage/apps/api',
 };

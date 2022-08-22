@@ -10,7 +10,7 @@ import { GqlFactory } from './config/factories/gql.factory';
 import { allConfigs } from './config/index';
 import { mikroOrmConfig } from './config/mikro-orm.config';
 import { AuthModule } from './modules/auth/auth.module';
-import { UserModule } from './modules/user/user.module';
+import { UserModule } from './user/user.module';
 import { envSchema } from './utils/env-schema';
 import { GqlThrottlerModule } from './modules/gql-throttler/gql-throttler.module';
 
