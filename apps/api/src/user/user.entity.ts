@@ -1,7 +1,7 @@
 import { Entity, Enum, Property } from '@mikro-orm/core';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { EUserRole } from '../../models/enums/user-role.enum';
-import { BaseEntity } from '../../utils/base.entity';
+import { EUserRole } from '../models/enums/user-role.enum';
+import { BaseEntity } from '../utils/base.entity';
 
 @Entity({ tableName: 'users' })
 @ObjectType({ description: 'user ' })
@@ -18,6 +18,6 @@ export class User extends BaseEntity<User> {
 	email?: string;
 
 	@Enum({ items: () => EUserRole, default: EUserRole.Registered })
-	@Field(_type => EUserRole)
+	@Field((_type) => EUserRole)
 	role!: EUserRole;
 }

@@ -16,7 +16,9 @@ describe('AppController', () => {
 	describe('getData', () => {
 		it('should return "Welcome to set-online!"', () => {
 			const appController = app.get<AppController>(AppController);
-			expect(appController.getData()).toEqual({ message: 'Welcome to set-online!' });
+			expect(appController.getData()).toEqual({
+				message: 'Welcome to set-online!',
+			});
 		});
 	});
 });
