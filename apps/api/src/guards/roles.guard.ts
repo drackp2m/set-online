@@ -6,7 +6,7 @@ import { Request } from 'express';
 import { ForbiddenException } from '../exceptions/forbiden.exception';
 import { UnauthorizedException } from '../exceptions/unauthorized-exception.exception';
 import { EUserRole } from '../models/enums/user-role.enum';
-import { User } from '../modules/user/user.entity';
+import { User } from '../user/user.entity';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
