@@ -16,7 +16,8 @@
 		"migration:pending": "mikro-orm migration:pending",
 		"migration:up": "mikro-orm migration:up",
 		"lint": "eslint -f tools/eslint-formatter apps/** libs/**",
-		"lint:fix": "yarn lint --fix"
+		"lint:fix": "yarn lint --fix",
+		"prepare": "husky install"
 	},
 	"private": true,
 	"dependencies": {
