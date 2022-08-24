@@ -1,3 +1,4 @@
 {
-	"*.{js,ts,md,html,css,scss,json,yml,yaml}": "prettier --write"
+	"*.{js,ts,md,html,css,scss,json,yml,yaml}": "yarn prettier:fix",
+	"*.{js,ts}": "yarn lint:fix"
 }
