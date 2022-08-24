@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-yarn test
-yarn lint-staged
+export FORCE_COLOR=1
+
+docker exec -t set-node yarn test
+docker exec -t set-node yarn lint-staged --concurrent false
