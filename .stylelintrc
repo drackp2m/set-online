@@ -1,6 +1,14 @@
 {
-	"extends": [
-		"stylelint-config-standard-scss",
-		"stylelint-config-prettier-scss"
-	]
+	"files": ["*.css", "*.scss"],
+	"extends": ["stylelint-config-standard-scss"],
+	"plugins": ["stylelint-scss"],
+	"customSyntax": "postcss-scss",
+	"defaultSeverity": "warning",
+	"rules": {
+		"indentation": ["tab", {
+			"severity": "warning"
+		}],
+		"string-quotes": "single",
+		"color-hex-length": "long"
+	}
 }
