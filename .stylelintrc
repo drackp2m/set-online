@@ -5,9 +5,7 @@
 	"customSyntax": "postcss-scss",
 	"defaultSeverity": "warning",
 	"rules": {
-		"indentation": ["tab", {
-			"severity": "warning"
-		}],
+		"indentation": "tab",
 		"string-quotes": "single",
 		"color-hex-length": "long"
 	}
