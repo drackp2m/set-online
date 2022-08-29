@@ -2,11 +2,11 @@ import { forwardRef, Inject, Injectable } from '@nestjs/common';
 
 import { EntityData } from '@mikro-orm/core/typings';
 import { EntityManager } from '@mikro-orm/postgresql';
-import { AuthService } from '../modules/auth/auth.service';
+import { AuthService } from '../auth/auth.service';
 import { CreateUserInput } from './dtos/create-user.input';
 import { User } from './user.entity';
-import { NotFoundException } from '../exceptions/not-found.exception';
-import { BadRequestException } from '../exceptions/bad-request.exception';
+import { NotFoundException } from '../common/exceptions/not-found.exception';
+import { BadRequestException } from '../common/exceptions/bad-request.exception';
 
 @Injectable()
 export class UserService {

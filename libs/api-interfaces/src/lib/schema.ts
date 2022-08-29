@@ -8,7 +8,7 @@
 /* tslint:disable */
 /* eslint-disable */
 
-export enum EUserRole {
+export enum UserRole {
     Admin = "Admin",
     Registered = "Registered",
     Guest = "Guest"
@@ -40,7 +40,7 @@ export interface User {
     updatedAt: DateTime;
     username: string;
     email?: Nullable<string>;
-    role: EUserRole;
+    role: UserRole;
 }
 
 export interface IQuery {

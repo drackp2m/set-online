@@ -3,10 +3,10 @@ import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 
 import { ExtractJwt, Strategy, StrategyOptions } from 'passport-jwt';
-import { JwtConfig } from '../../../config/jwt.config';
-import { IJwtPayload } from '../../../models/interfaces/jwt-payload.interface';
-import { User } from '../../../user/user.entity';
-import { UserService } from '../../../user/user.service';
+import { JwtConfig } from '../../common/config/jwt.config';
+import { JwtPayload } from '../interfaces/jwt-payload.interface';
+import { User } from '../../user/user.entity';
+import { UserService } from '../../user/user.service';
 
 @Injectable()
 export class JwtStrategyService extends PassportStrategy(Strategy) {
@@ -25,7 +25,7 @@ export class JwtStrategyService extends PassportStrategy(Strategy) {
 		} as StrategyOptions);
 	}
 
-	public async validate(jwt: IJwtPayload): Promise<User> {
+	public async validate(jwt: JwtPayload): Promise<User> {
 		return await this.userService.getOneBy('uuid', jwt.sub);
 	}
 }

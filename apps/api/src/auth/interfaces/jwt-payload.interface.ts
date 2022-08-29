@@ -1,4 +1,4 @@
-export interface IJwtPayload {
+export interface JwtPayload {
 	iss: string;
 	aud: string;
 	jti: string;

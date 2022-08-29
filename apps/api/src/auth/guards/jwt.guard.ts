@@ -3,7 +3,7 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
 
 import { Request } from 'express';
-import { UnauthorizedException } from '../exceptions/unauthorized-exception.exception';
+import { UnauthorizedException } from '../../common/exceptions/unauthorized-exception.exception';
 
 @Injectable()
 export class JwtGuard extends AuthGuard('jwt') {

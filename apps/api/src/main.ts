@@ -4,7 +4,7 @@ import { NestFactory } from '@nestjs/core';
 import { useContainer } from 'class-validator';
 
 import { AppModule } from './app.module';
-import { AppConfig } from './config/app.config';
+import { AppConfig } from './common/config/app.config';
 
 async function bootstrap(): Promise<{
 	protocol: string;

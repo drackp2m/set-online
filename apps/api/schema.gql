@@ -13,7 +13,7 @@ type User {
   updatedAt: DateTime!
   username: String!
   email: String
-  role: EUserRole!
+  role: UserRole!
 }
 
 """
@@ -21,7 +21,7 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-enum EUserRole {
+enum UserRole {
   Admin
   Registered
   Guest
