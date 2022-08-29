@@ -6,13 +6,13 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { GqlFactory } from './config/factories/gql.factory';
-import { allConfigs } from './config/index';
-import { mikroOrmConfig } from './config/mikro-orm.config';
-import { AuthModule } from './modules/auth/auth.module';
+import { GqlFactory } from './common/config/factories/gql.factory';
+import { allConfigs } from './common/config/index';
+import { mikroOrmConfig } from './common/config/mikro-orm.config';
+import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
-import { envSchema } from './utils/env-schema';
-import { GqlThrottlerModule } from './modules/gql-throttler/gql-throttler.module';
+import { envSchema } from './common/utils/env-schema';
+import { GqlThrottlerModule } from './gql-throttler/gql-throttler.module';
 
 @Module({
 	imports: [

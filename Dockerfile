@@ -1,19 +1,30 @@
 FROM node:18-alpine AS deps
 
-RUN apk add --no-cache git && git config --global --add safe.directory /usr/src/app
-# openssh
-RUN apk add --no-cache --virtual .build-deps libc6-compat binutils-gold g++ gcc gnupg libgcc linux-headers make python3
+USER root
+
+RUN addgroup -g 501 user && adduser -u 501 -G user -s /bin/sh -D user
+RUN apk add --no-cache git
+RUN apk add --no-cache --virtual .build-deps g++ gcc make python3
 
 WORKDIR /usr/src/app
+
+RUN chown -R user.user /usr/src/app
+
+USER user
+
 COPY package.json yarn.lock decorate-angular-cli.js ./
 
-RUN yarn
+RUN git config --global --add safe.directory /usr/src/app
+# RUN yarn
 
-RUN apk del .build-deps
+USER root
+
+# RUN apk del .build-deps
 
 
 FROM deps AS dev
 
+USER user
 
 # FROM node:18-alpine AS runner
 

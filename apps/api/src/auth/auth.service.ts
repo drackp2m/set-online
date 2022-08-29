@@ -1,9 +1,9 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcryptjs from 'bcryptjs';
-import { UnauthorizedException } from '../../exceptions/unauthorized-exception.exception';
-import { IJwtPayload } from '../../models/interfaces/jwt-payload.interface';
-import { UserService } from '../../user/user.service';
+import { UnauthorizedException } from '../common/exceptions/unauthorized-exception.exception';
+// import { JwtPayload } from './interfaces/jwt-payload.interface';
+import { UserService } from '../user/user.service';
 import { LoginInput } from './dtos/login.input';
 import { TokenModel } from './dtos/token.model';
 
@@ -40,9 +40,9 @@ export class AuthService {
 		return await bcryptjs.compare(password, hashedPassword);
 	}
 
-	private decodeHeaderAndPayload(token: string): IJwtPayload {
-		const [, payload] = token.split('.');
+	// private decodeHeaderAndPayload(token: string): JwtPayload {
+	// 	const [, payload] = token.split('.');
 
-		return JSON.parse(Buffer.from(payload, 'base64url').toString());
-	}
+	// 	return JSON.parse(Buffer.from(payload, 'base64url').toString());
+	// }
 }

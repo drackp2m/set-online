@@ -1,11 +1,11 @@
 import { applyDecorators, UseGuards } from '@nestjs/common';
 
 import { RolesGuard } from '../guards/roles.guard';
-import { EUserRole } from '../models/enums/user-role.enum';
+import { UserRole } from '../../user/interfaces/user-role.enum';
 import { Roles } from './roles.decorator';
 
 export const ProtectTo = (
-	...roles: EUserRole[]
+	...roles: UserRole[]
 ): (<TFunction extends () => void, Y>(
 	target: object | TFunction,
 	propertyKey?: string | symbol,

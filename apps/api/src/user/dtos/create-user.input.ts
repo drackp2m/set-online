@@ -1,6 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { IsEmail, IsOptional, IsString } from 'class-validator';
-import { IsUniqueUserProp } from '../../decorators/validators/is-unique-user-prop.decorator';
+import { IsUniqueUserProp } from '../decorators/is-unique-user-prop.decorator';
 
 @InputType()
 export class CreateUserInput {
