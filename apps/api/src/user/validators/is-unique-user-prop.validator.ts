@@ -5,6 +5,7 @@ import {
 	ValidatorConstraint,
 	ValidatorConstraintInterface,
 } from 'class-validator';
+
 import { User } from '../user.entity';
 import { UserService } from '../user.service';
 

@@ -1,4 +1,5 @@
 import { registerAs } from '@nestjs/config';
+
 import { EnvJwtAlgorithm, processEnv } from '../utils/env-schema';
 
 export interface JwtConfig {

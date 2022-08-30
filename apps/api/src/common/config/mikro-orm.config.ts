@@ -1,7 +1,8 @@
 import { AnyEntity, EntityClass } from '@mikro-orm/core';
 import { MikroOrmModuleSyncOptions } from '@mikro-orm/nestjs';
-import { existsSync, readdirSync } from 'fs';
+
 import { databaseConfig } from './database.config';
+import { existsSync, readdirSync } from 'fs';
 
 async function getEntities(): Promise<EntityClass<AnyEntity>[]> {
 	const promises = readdirSync('apps/api/src/')

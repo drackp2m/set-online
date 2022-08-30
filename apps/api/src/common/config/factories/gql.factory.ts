@@ -2,6 +2,7 @@ import { ApolloDriverConfig } from '@nestjs/apollo';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { GqlOptionsFactory } from '@nestjs/graphql';
+
 import { AppConfig } from '../app.config';
 
 @Injectable()

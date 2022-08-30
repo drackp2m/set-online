@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { ThrottlerModule } from '@nestjs/throttler';
+
 import { GqlThrottlerGuard } from './guards/gql-throttler.guard';
 
 @Module({
