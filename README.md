@@ -1,11 +1,33 @@
 # SetNode
 
+## Steps to run the project
+
+1. 🐳 Create Docker containers
+
+> docker-compose --env-file apps/api/.env.dev up -d --build
+
+2. 📦 Install dependencies
+
+> docker exec -it set-node yarn
+
+3. 🐘 Execute database migrations
+
+> docker exec -it set-node yarn migration:execute
+
+4. 🚦 Start the application
+
+> docker exec -it set-node yarn start
+
+5. 🙂 Enjoy [GraphQL Playground](http://localhost:3000/graphql) and [Angular App](http://localhost:4200)
+
+---
+
 This project was generated using [Nx](https://nx.dev).
 
 <p style="text-align: center;">
 <picture>
-  <source srcset="https://raw.githubusercontent.com/drackp2m/set-online/dev/apps/app/src/assets/nx-logo-light.svg" media="(prefers-color-scheme: dark)">
   <source srcset="https://raw.githubusercontent.com/drackp2m/set-online/dev/apps/app/src/assets/nx-logo-dark.svg" media="(prefers-color-scheme: light)">
+  <source srcset="https://raw.githubusercontent.com/drackp2m/set-online/dev/apps/app/src/assets/nx-logo-light.svg" media="(prefers-color-scheme: dark)">
   <img width="450">
 </picture>
 </p>
@@ -91,7 +113,7 @@ Run `nx graph` to see a diagram of the dependencies of your projects.
 
 Visit the [Nx Documentation](https://nx.dev/angular) to learn more.
 
-## ☁ Nx Cloud
+## ☁️ Nx Cloud
 
 ### Distributed Computation Caching & Distributed Task Execution
 
