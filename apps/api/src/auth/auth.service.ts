@@ -1,11 +1,12 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcryptjs from 'bcryptjs';
+
 import { UnauthorizedException } from '../common/exceptions/unauthorized-exception.exception';
-// import { JwtPayload } from './interfaces/jwt-payload.interface';
 import { UserService } from '../user/user.service';
 import { LoginInput } from './dtos/login.input';
 import { TokenModel } from './dtos/token.model';
+import { JwtPayload } from './interfaces/jwt-payload.interface';
 
 @Injectable()
 export class AuthService {
@@ -28,7 +29,7 @@ export class AuthService {
 	}
 
 	async encryptPassword(password: string): Promise<string> {
-		const salt = await bcryptjs.genSalt();
+		const salt = await bcryptjs.genSalt(12);
 
 		return await bcryptjs.hash(password, salt);
 	}
@@ -40,9 +41,9 @@ export class AuthService {
 		return await bcryptjs.compare(password, hashedPassword);
 	}
 
-	// private decodeHeaderAndPayload(token: string): JwtPayload {
-	// 	const [, payload] = token.split('.');
+	private decodeHeaderAndPayload(token: string): JwtPayload {
+		const [, payload] = token.split('.');
 
-	// 	return JSON.parse(Buffer.from(payload, 'base64url').toString());
-	// }
+		return JSON.parse(Buffer.from(payload, 'base64url').toString());
+	}
 }

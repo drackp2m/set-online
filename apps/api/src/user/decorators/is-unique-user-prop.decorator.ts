@@ -1,5 +1,6 @@
 import { EntityData } from '@mikro-orm/core';
 import { registerDecorator, ValidationOptions } from 'class-validator';
+
 import { User } from '../user.entity';
 import { IsUniqueUserPropRule } from '../validators/is-unique-user-prop.validator';
 

@@ -1,8 +1,8 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
-
 import { Request } from 'express';
+
 import { ForbiddenException } from '../../common/exceptions/forbiden.exception';
 import { UnauthorizedException } from '../../common/exceptions/unauthorized-exception.exception';
 import { UserRole } from '../../user/interfaces/user-role.enum';
