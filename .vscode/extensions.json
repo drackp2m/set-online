@@ -1,9 +1,15 @@
 {
 	"recommendations": [
-		"angular.ng-template",
-		"nrwl.angular-console",
+		"editorconfig.editorconfig",
 		"esbenp.prettier-vscode",
+		"dbaeumer.vscode-eslint",
+		"stylelint.vscode-stylelint",
+		"nrwl.angular-console",
+		"angular.ng-template",
 		"firsttris.vscode-jest-runner",
-		"dbaeumer.vscode-eslint"
+		"kumar-harsh.graphql-for-vscode",
+		"usernamehw.errorlens",
+		"azemoh.one-monokai",
+		"file-icons.file-icons"
 	]
 }

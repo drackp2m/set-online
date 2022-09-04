@@ -25,11 +25,9 @@
 			"files": ["*.ts", "*.tsx"],
 			"extends": [
 				"plugin:@nrwl/nx/typescript",
-				"plugin:prettier/recommended",
-				"plugin:import/recommended",
-				"plugin:import/typescript"
+				"plugin:prettier/recommended"
 			],
-			"plugins": ["import"],
+			"plugins": ["import", "unused-imports"],
 			"parserOptions": {
 				"ecmaVersion": 2020,
 				"sourceType": "module"
@@ -45,6 +43,15 @@
 			},
 			"rules": {
 				"prettier/prettier": "warn",
+				"unused-imports/no-unused-imports": "error",
+				"@typescript-eslint/no-unused-vars": [
+					"error",
+					{
+						"argsIgnorePattern": "^_",
+						"varsIgnorePattern": "^_",
+						"caughtErrorsIgnorePattern": "^_"
+					}
+				],
 				"import/order": [
 					"warn",
 					{
@@ -61,14 +68,6 @@
 					}
 				],
 				"no-multiple-empty-lines": ["warn", { "max": 1 }],
-				"@typescript-eslint/no-unused-vars": [
-					"warn",
-					{
-						"argsIgnorePattern": "^_",
-						"varsIgnorePattern": "^_",
-						"caughtErrorsIgnorePattern": "^_"
-					}
-				],
 				"space-before-blocks": ["warn", "always"],
 				"newline-before-return": ["warn"]
 			}

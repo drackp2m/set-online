@@ -1,23 +1,22 @@
 import { EntityData } from '@mikro-orm/core/typings';
 import { EntityManager } from '@mikro-orm/postgresql';
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
-import { AuthService } from '../auth/auth.service';
 import { BadRequestException } from '../common/exceptions/bad-request.exception';
 import { NotFoundException } from '../common/exceptions/not-found.exception';
+import { BcryptService } from '../common/wrappers/bcript.service';
 import { CreateUserInput } from './dtos/create-user.input';
 import { User } from './user.entity';
 
 @Injectable()
 export class UserService {
 	constructor(
-		@Inject(forwardRef(() => AuthService))
-		private readonly authService: AuthService,
-		protected readonly entityManager: EntityManager,
+		private readonly entityManager: EntityManager,
+		private readonly bcryptService: BcryptService,
 	) {}
 
 	async insertOne(input: CreateUserInput): Promise<User> {
-		input.password = await this.authService.encryptPassword(input.password);
+		input.password = await this.encryptPassword(input.password);
 		const entity = new User(input);
 
 		return await this.entityManager.persistAndFlush(entity).then(
@@ -45,5 +44,11 @@ export class UserService {
 		}
 
 		return entity as User;
+	}
+
+	private async encryptPassword(password: string): Promise<string> {
+		const salt = await this.bcryptService.genSalt(12);
+
+		return await this.bcryptService.hash(password, salt);
 	}
 }
