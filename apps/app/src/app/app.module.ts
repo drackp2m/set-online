@@ -9,7 +9,6 @@ import { NxWelcomeComponent } from './nx-welcome.component';
 @NgModule({
 	declarations: [AppComponent, NxWelcomeComponent],
 	imports: [BrowserModule, HttpClientModule, DirectivesModule],
-	providers: [],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}

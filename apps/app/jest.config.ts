@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
 	displayName: 'app',
 	preset: '../../jest.preset.js',
@@ -9,7 +8,6 @@ export default {
 			stringifyContentPathRegex: '\\.(html|svg)$',
 		},
 	},
-	coverageDirectory: '../../coverage/apps/app',
 	transform: {
 		'^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
 	},
@@ -19,4 +17,6 @@ export default {
 		'jest-preset-angular/build/serializers/ng-snapshot',
 		'jest-preset-angular/build/serializers/html-comment',
 	],
+	coverageDirectory: '../../coverage/apps/app',
+	coverageReporters: ['html', ['text', { skipFull: true }]],
 };
