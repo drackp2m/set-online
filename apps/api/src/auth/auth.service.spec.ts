@@ -1,39 +1,31 @@
 import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { TokenModel } from '@set-online/api-interfaces';
-
+import { NotFoundException } from '../common/exceptions/not-found.exception';
+import { UnauthorizedException } from '../common/exceptions/unauthorized-exception.exception';
 import { BcryptService } from '../common/wrappers/bcript.service';
-import { UserRole } from '../user/interfaces/user-role.enum';
 import { User } from '../user/user.entity';
+import { UserFaker } from '../user/user.faker';
 import { UserService } from '../user/user.service';
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
-	const user = new User({
-		uuid: 'ad88163b-c853-49cb-971b-45fd525a2074',
-		username: 'user',
-		email: 'user@email.com',
-		password: '$2a$10$EJdQoWXnQ7U6roghEJvED.moURIQatf6wBdfDtqS9CTf0p3xo1Pm.',
-		role: UserRole.Registered,
-		createdAt: new Date('2022-08-28T21:16:33.000Z'),
-		updatedAt: new Date('2022-08-28T21:16:33.000Z'),
-	});
-
-	const jwt: TokenModel = {
-		token:
-			'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjIzMTQ3MzYsIm5iZiI6MTY2MjMxNDczNiwiZXhwIjoxNjYyNDAxMTM2LCJhdWQiOiJzZXQtb25saW5lIiwiaXNzIjoic2V0LW9ubGluZSIsInN1YiI6ImFkODgxNjNiLWM4NTMtNDljYi05NzFiLTQ1ZmQ1MjVhMjA3NCIsImp0aSI6ImM4NWU4Zjk0LTg3NzctNGUzYS1iZWJmLWY4Yjg4NmVhNmQ5ZSJ9.RBfxbFsqFVqUhK1QgtSuF8MiAR3BIfo0HJ8IQVJRWmAIE4aVeHpRNfhWKyeLQg-h0Yd4G-33TDWKo5jrJvRHdw',
-	};
+	const userFaker = new UserFaker();
+	const fakeUser: User = userFaker.make({ createdFrom: '2010' }) as User;
+	const jwtToken =
+		'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjIzMTQ3MzYsIm5iZiI6MTY2.pRNfhWKyeLQg-h0Yd4G-33TDWKo5jrJvRHdw';
 
 	let service: AuthService;
-	const userService: Partial<UserService> = {
-		getOneBy: jest.fn().mockReturnValue(user),
+
+	const userService: jest.Mocked<Partial<UserService>> = {
+		getOneBy: jest.fn(),
 	};
-	const jwtService: Partial<JwtService> = {
-		sign: jest.fn().mockReturnValue(jwt),
+
+	const jwtService: jest.Mocked<Partial<JwtService>> = {
+		sign: jest.fn(),
 	};
-	const bcryptService: Partial<BcryptService> = {
-		hash: jest.fn().mockReturnValue(user.password),
+
+	const bcryptService: jest.Mocked<Partial<BcryptService>> = {
 		compare: jest.fn().mockReturnValue(true),
 	};
 
@@ -50,18 +42,52 @@ describe('AuthService', () => {
 		service = module.get<AuthService>(AuthService);
 	});
 
+	beforeEach(async () => {
+		jest.clearAllMocks();
+	});
+
 	it('should be defined', () => {
 		expect(service).toBeDefined();
 	});
 
 	describe('login', () => {
-		test('should return TokenModel', async () => {
+		it('should return NotFoundException when UserService.getOneBy throw exception', async () => {
+			userService.getOneBy.mockImplementation(() => {
+				throw new NotFoundException();
+			});
+
+			const tokenModel = service.login({ username: 'user', password: 'pass' });
+
+			await expect(tokenModel).rejects.toThrow(NotFoundException);
+			expect(userService.getOneBy).toBeCalledTimes(1);
+			expect(userService.getOneBy).toBeCalledWith('username', 'user');
+		});
+
+		it('should return UnauthorizedException when BcryptService.compare return False', async () => {
+			userService.getOneBy.mockReturnValue(Promise.resolve(fakeUser));
+			bcryptService.compare.mockReturnValue(Promise.resolve(false));
+
+			const tokenModel = service.login({
+				username: 'user',
+				password: 'pass',
+			});
+
+			await expect(tokenModel).rejects.toThrow(UnauthorizedException);
+			expect(bcryptService.compare).toBeCalledTimes(1);
+			expect(bcryptService.compare).toBeCalledWith('pass', fakeUser.password);
+		});
+
+		it('should return TokenModel when JwtService.sign return a token', async () => {
+			userService.getOneBy.mockReturnValue(Promise.resolve(fakeUser));
+			bcryptService.compare.mockReturnValue(Promise.resolve(true));
+			jwtService.sign.mockReturnValue(jwtToken);
+
 			const tokenModel = await service.login({
 				username: 'user',
 				password: 'pass',
 			});
 
-			expect(tokenModel).toBe(tokenModel);
+			expect(tokenModel).toEqual({ token: jwtToken });
 		});
 	});
 });
