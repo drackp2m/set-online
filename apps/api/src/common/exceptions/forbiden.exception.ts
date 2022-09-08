@@ -1,7 +1,9 @@
+import { HttpStatus } from '@nestjs/common';
+
 import { BaseException } from './base.exception';
 
 export class ForbiddenException extends BaseException {
 	constructor(response?: string, dtoKey?: string) {
-		super('Forbidden', 403, response, dtoKey);
+		super('Forbidden', HttpStatus.FORBIDDEN, response, dtoKey);
 	}
 }
