@@ -1,6 +1,7 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import { forwardRef, HttpStatus, Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
+import { BaseException } from '../common/exceptions/base.exception';
 import { UnauthorizedException } from '../common/exceptions/unauthorized-exception.exception';
 import { BcryptService } from '../common/wrappers/bcript.service';
 import { UserService } from '../user/user.service';
@@ -38,6 +39,10 @@ export class AuthService {
 
 	private decodeHeaderAndPayload(token: string): JwtPayload {
 		const [, payload] = token.split('.');
+
+		if (!payload) {
+			throw new BaseException('payload missing', HttpStatus.BAD_REQUEST);
+		}
 
 		return JSON.parse(Buffer.from(payload, 'base64url').toString());
 	}
