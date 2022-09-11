@@ -19,7 +19,7 @@ export class UserService {
 		input.password = await this.encryptPassword(input.password);
 		const entity = new User(input);
 
-		return await this.entityManager.persistAndFlush(entity).then(
+		return this.entityManager.persistAndFlush(entity).then(
 			() => entity,
 			async (reason) => {
 				throw new BadRequestException(reason.detail);
@@ -46,9 +46,7 @@ export class UserService {
 		return entity as User;
 	}
 
-	private async encryptPassword(password: string): Promise<string> {
-		const salt = await this.bcryptService.genSalt(12);
-
-		return await this.bcryptService.hash(password, salt);
+	private encryptPassword(password: string): Promise<string> {
+		return this.bcryptService.generatePassword(password);
 	}
 }

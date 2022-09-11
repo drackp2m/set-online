@@ -14,7 +14,10 @@ export class UserFaker {
 	private readonly basicFaker = new BasicFaker();
 	private readonly dateFaker = new DateFaker();
 
-	make(options?: UserFakerOptions): EntityData<User> {
+	make(
+		staticData: Partial<User>,
+		options?: UserFakerOptions,
+	): EntityData<User> {
 		const firstName = faker.name.firstName();
 		const lastName = faker.name.lastName();
 
@@ -28,6 +31,7 @@ export class UserFaker {
 			role: this.basicFaker.randomEnum(UserRole),
 			createdAt: this.dateFaker.createdAt(options?.createdFrom),
 			updatedAt: this.dateFaker.modifiedAt(),
+			...staticData,
 		};
 	}
 }
