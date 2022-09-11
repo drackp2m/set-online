@@ -1,6 +1,7 @@
 import {
 	BaseEntity as MikroBaseEntity,
 	Entity,
+	EntityData,
 	PrimaryKey,
 	Property,
 } from '@mikro-orm/core';
@@ -26,7 +27,7 @@ export abstract class BaseEntity<
 	@Field((_type) => Date)
 	updatedAt: Date = new Date();
 
-	constructor(entity?: Partial<T>) {
+	constructor(entity?: EntityData<T>) {
 		super();
 
 		if (entity) {

@@ -14,14 +14,11 @@ export class UserFaker {
 	private readonly basicFaker = new BasicFaker();
 	private readonly dateFaker = new DateFaker();
 
-	make(
-		staticData: Partial<User>,
-		options?: UserFakerOptions,
-	): EntityData<User> {
+	make(staticData?: EntityData<User>, options?: UserFakerOptions): User {
 		const firstName = faker.name.firstName();
 		const lastName = faker.name.lastName();
 
-		return {
+		return new User({
 			uuid: faker.datatype.uuid(),
 			username: faker.internet.userName(firstName, lastName),
 			password: faker.internet.password(32, false, /[A-Z0-9_\-*?.]/),
@@ -32,6 +29,6 @@ export class UserFaker {
 			createdAt: this.dateFaker.createdAt(options?.createdFrom),
 			updatedAt: this.dateFaker.modifiedAt(),
 			...staticData,
-		};
+		});
 	}
 }

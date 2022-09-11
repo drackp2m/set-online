@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 
 import { BaseException } from '../common/exceptions/base.exception';
 import { UnauthorizedException } from '../common/exceptions/unauthorized-exception.exception';
-import { BcryptService } from '../common/wrappers/bcript.service';
+import { BcryptService } from '../common/wrappers/bcrypt.service';
 import { UserService } from '../user/user.service';
 import { LoginInput } from './dtos/login.input';
 import { TokenModel } from './dtos/token.model';

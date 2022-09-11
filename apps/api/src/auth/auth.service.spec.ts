@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { BaseException } from '../common/exceptions/base.exception';
 import { NotFoundException } from '../common/exceptions/not-found.exception';
 import { UnauthorizedException } from '../common/exceptions/unauthorized-exception.exception';
-import { BcryptService } from '../common/wrappers/bcript.service';
+import { BcryptService } from '../common/wrappers/bcrypt.service';
 import { User } from '../user/user.entity';
 import { UserFaker } from '../user/user.faker';
 import { UserService } from '../user/user.service';
@@ -156,14 +156,14 @@ describe('AuthService', () => {
 		it('should return JwtPayload when pass valid jwt', () => {
 			const jwtPayload = service.getPayloadFromJwt(jwtToken);
 
-			const expected = {
+			const expectedPayload = {
 				aud: 'Jest',
 				iss: 'Universe',
 				sub: '42',
 				exp: 648600120,
 			};
 
-			expect(jwtPayload).toEqual(expected);
+			expect(jwtPayload).toEqual(expectedPayload);
 		});
 	});
 });
