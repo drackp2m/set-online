@@ -4,7 +4,7 @@ import { Injectable } from '@nestjs/common';
 
 import { BadRequestException } from '../common/exceptions/bad-request.exception';
 import { NotFoundException } from '../common/exceptions/not-found.exception';
-import { BcryptService } from '../common/wrappers/bcript.service';
+import { BcryptService } from '../common/wrappers/bcrypt.service';
 import { CreateUserInput } from './dtos/create-user.input';
 import { User } from './user.entity';
 
@@ -43,7 +43,7 @@ export class UserService {
 			throw new NotFoundException('not found', prop);
 		}
 
-		return entity as User;
+		return entity;
 	}
 
 	private encryptPassword(password: string): Promise<string> {
