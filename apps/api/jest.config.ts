@@ -5,6 +5,7 @@ export default {
 	globals: {
 		'ts-jest': {
 			tsconfig: '<rootDir>/tsconfig.spec.json',
+			// isolatedModules: true,
 		},
 	},
 	transform: {
@@ -18,7 +19,8 @@ export default {
 			},
 		],
 	},
+	maxWorkers: 1,
 	moduleFileExtensions: ['ts', 'js', 'html'],
 	coverageDirectory: '../../coverage/apps/api',
-	coverageReporters: ['html', ['text', { skipFull: true }]],
+	coverageReporters: ['html', ['text-summary', { skipFull: true }]],
 };

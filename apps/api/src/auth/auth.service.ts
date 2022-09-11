@@ -37,7 +37,7 @@ export class AuthService {
 		return await this.bcryptService.compare(password, hashedPassword);
 	}
 
-	private decodeHeaderAndPayload(token: string): JwtPayload {
+	getPayloadFromJwt(token: string): JwtPayload {
 		const [, payload] = token.split('.');
 
 		if (!payload) {
