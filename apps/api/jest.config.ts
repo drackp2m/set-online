@@ -8,11 +8,10 @@ export default {
 			'ts-jest',
 			{
 				tsconfig: '<rootDir>/tsconfig.spec.json',
-				diagnostics: false,
-				// isolatedModules: true,
-				// diagnostics: {
-				// 	ignoreCodes: [151001],
-				// },
+				isolatedModules: true,
+				diagnostics: {
+					ignoreCodes: ['TS151001'],
+				},
 			},
 		],
 	},
