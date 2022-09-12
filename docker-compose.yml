@@ -41,7 +41,6 @@ services:
     container_name: set-node
     hostname: set-node
     working_dir: /usr/src/app
-    user: node
     build:
       context: .
       target: dev
