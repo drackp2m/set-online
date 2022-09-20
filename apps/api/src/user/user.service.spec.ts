@@ -4,28 +4,31 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 import { BadRequestException } from '../common/exceptions/bad-request.exception';
 import { NotFoundException } from '../common/exceptions/not-found.exception';
-import { BcryptService } from '../common/wrappers/bcrypt.service';
 import { User } from './user.entity';
 import { UserFaker } from './user.faker';
 import { UserService } from './user.service';
 
 const uuid = '433b2725-c483-46b2-8b80-1b944158e04c';
+const passwordHashed = 'fJnUG@9?a8&a}YO/';
 
 jest.mock('uuid', () => ({
 	v4: () => uuid,
 }));
 
+jest.mock('bcryptjs', () => ({
+	genSalt: () => 'randomSalt',
+	hash: () => passwordHashed,
+}));
+
 describe('UserService', () => {
 	let service: UserService;
 	let entityManager: jest.Mocked<Partial<EntityManager>>;
-	let bcryptService: jest.Mocked<Partial<BcryptService>>;
 
-	const password = 'fJnUG@9?a8&a}YO/';
 	const date = new Date(Date.UTC(1955, 2, 24));
 	const expectedUser: EntityData<User> = {
 		uuid,
 		username: 'user',
-		password,
+		password: passwordHashed,
 		createdAt: date,
 		updatedAt: date,
 	};
@@ -46,15 +49,10 @@ describe('UserService', () => {
 			findOne: jest.fn(),
 		};
 
-		bcryptService = {
-			generatePassword: jest.fn(),
-		};
-
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
 				UserService,
 				{ provide: EntityManager, useValue: entityManager },
-				{ provide: BcryptService, useValue: bcryptService },
 			],
 		}).compile();
 
@@ -71,8 +69,6 @@ describe('UserService', () => {
 
 	describe('insertOne', () => {
 		it('should throw Error when EntityManager.persistAndFlush throw BadRequestException', async () => {
-			bcryptService.generatePassword.mockResolvedValueOnce(password);
-
 			entityManager.persistAndFlush.mockRejectedValueOnce(() => {
 				throw new Error('duplicated key');
 			});
@@ -84,15 +80,11 @@ describe('UserService', () => {
 
 			await expect(user).rejects.toThrow(BadRequestException);
 
-			expect(bcryptService.generatePassword).toBeCalledTimes(1);
-			expect(bcryptService.generatePassword).toBeCalledWith('pass');
-
 			expect(entityManager.persistAndFlush).toBeCalledTimes(1);
 			expect(entityManager.persistAndFlush).toBeCalledWith(expectedUser);
 		});
 
 		it('should return User when EntityManager.persistAndFlush not throw Exception', async () => {
-			bcryptService.generatePassword.mockResolvedValueOnce(password);
 			entityManager.persistAndFlush.mockResolvedValueOnce();
 
 			const user = await service.insertOne({
@@ -101,9 +93,6 @@ describe('UserService', () => {
 			});
 
 			expect(user).toEqual(expectedUser);
-
-			expect(bcryptService.generatePassword).toBeCalledTimes(1);
-			expect(bcryptService.generatePassword).toBeCalledWith('pass');
 
 			expect(entityManager.persistAndFlush).toBeCalledTimes(1);
 			expect(entityManager.persistAndFlush).toBeCalledWith(expectedUser);
