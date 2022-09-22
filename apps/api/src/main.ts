@@ -44,7 +44,7 @@ bootstrap()
 		Logger.log(
 			`🚀 GraphQL Playground ready at ${protocol}://${domain}:${port}${globalPrefix}/graphql, started in ${process
 				.uptime()
-				.toFixed(2)}s`,
+				.toFixed(3)}s`,
 		),
 	)
 	.catch((e) => Logger.error(e.message, e));
