@@ -1,5 +1,6 @@
 import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
+import * as bcrypt from 'bcryptjs';
 
 import { BaseException } from '../common/exceptions/base.exception';
 import { NotFoundException } from '../common/exceptions/not-found.exception';
@@ -16,15 +17,7 @@ jest.mock('uuid', () => ({
 	v4: () => uuid,
 }));
 
-const bcrypt = jest.createMockFromModule('bcryptjs');
-
-// bcrypt =
-
-// jest.mock('bcryptjs', () => ({
-// 	compare: () => jest.fn(),
-// }));
-
-xdescribe('AuthService', () => {
+describe('AuthService', () => {
 	let service: AuthService;
 	let userService: jest.Mocked<Partial<UserService>>;
 	let jwtService: jest.Mocked<Partial<JwtService>>;
@@ -81,7 +74,7 @@ xdescribe('AuthService', () => {
 
 		it('should throw UnauthorizedException when BcryptService.compare return False', async () => {
 			userService.getOneBy.mockResolvedValueOnce(fakeUser);
-			// bcryptCompare.mockResolvedValueOnce(false);
+			jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(false as never);
 
 			const tokenModel = service.login({ username: 'user', password: 'pass' });
 
@@ -93,7 +86,7 @@ xdescribe('AuthService', () => {
 
 		it('should return TokenModel when JwtService.sign return a token', async () => {
 			userService.getOneBy.mockResolvedValueOnce(fakeUser);
-			// bcryptCompare.mockResolvedValueOnce(true);
+			jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(true as never);
 			jwtService.sign.mockReturnValueOnce(jwtToken);
 
 			const tokenModel = await service.login({
@@ -113,11 +106,7 @@ xdescribe('AuthService', () => {
 
 	describe('passwordMatch', () => {
 		it('should return False when BcryptService.compare return False', async () => {
-			// (compare as any).mockResolvedValueOnce(false);
-			// jest
-			// 	.spyOn('bcryptjs', 'compare')
-			// 	.mockImplementation((pass, salt, cb) => cb(null, ''));
-			bcrypt['compare'] = () => false;
+			jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(false as never);
 
 			const passwordMatch = await service.passwordMatch('pass', 'hash');
 
@@ -125,8 +114,7 @@ xdescribe('AuthService', () => {
 		});
 
 		it('should return True when BcryptService.compare return True', async () => {
-			// bcryptCompare.mockResolvedValueOnce(true);
-			bcrypt['compare'] = () => true;
+			jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(true as never);
 
 			const passwordMatch = await service.passwordMatch('pass', 'hash');
 
