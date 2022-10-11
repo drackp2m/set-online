@@ -23,7 +23,7 @@ describe('AuthService', () => {
 	let jwtService: jest.Mocked<Partial<JwtService>>;
 
 	const userFaker = new UserFaker();
-	const fakeUser: User = userFaker.make(
+	const fakeUser: User = userFaker.makeOne(
 		{ uuid },
 		{ createdFrom: '2010' },
 	) as User;
@@ -50,17 +50,13 @@ describe('AuthService', () => {
 		service = module.get<AuthService>(AuthService);
 	});
 
-	beforeEach(async () => {
-		jest.clearAllMocks();
-	});
-
 	it('should be defined', () => {
 		expect(service).toBeDefined();
 	});
 
 	describe('login', () => {
 		it('should throw NotFoundException when UserService.getOneBy throw exception', async () => {
-			userService.getOneBy.mockImplementationOnce(() => {
+			userService.getOneBy.mockRejectedValueOnce(() => {
 				throw new NotFoundException();
 			});
 
