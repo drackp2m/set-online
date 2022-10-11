@@ -9,6 +9,6 @@ export class UserFactory extends Factory<User> {
 	faker: UserFaker = new UserFaker();
 
 	protected definition(): EntityData<User> {
-		return this.faker.make();
+		return this.faker.makeOne();
 	}
 }

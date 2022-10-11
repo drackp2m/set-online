@@ -35,8 +35,8 @@ describe('UserService', () => {
 
 	const userFaker = new UserFaker();
 	const expectedUsers: EntityData<User>[] = [
-		userFaker.make(),
-		userFaker.make(),
+		userFaker.makeOne(),
+		userFaker.makeOne(),
 	];
 
 	beforeAll(async () => {
@@ -57,10 +57,6 @@ describe('UserService', () => {
 		}).compile();
 
 		service = module.get<UserService>(UserService);
-	});
-
-	beforeEach(async () => {
-		jest.clearAllMocks();
 	});
 
 	it('should be defined', () => {

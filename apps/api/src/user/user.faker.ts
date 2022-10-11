@@ -14,7 +14,22 @@ export class UserFaker {
 	private readonly basicFaker = new BasicFaker();
 	private readonly dateFaker = new DateFaker();
 
-	make(staticData?: EntityData<User>, options?: UserFakerOptions): User {
+	makeOne = this.makeEntity;
+
+	make(
+		amount: number,
+		overrideParameters?: EntityData<User>,
+		options?: UserFakerOptions,
+	): User[] {
+		return [...Array(amount)].map(() =>
+			this.makeEntity(overrideParameters, options),
+		);
+	}
+
+	private makeEntity(
+		overrideParameters?: EntityData<User>,
+		options?: UserFakerOptions,
+	): User {
 		const firstName = faker.name.firstName();
 		const lastName = faker.name.lastName();
 
@@ -28,7 +43,7 @@ export class UserFaker {
 			role: this.basicFaker.randomEnum(UserRole),
 			createdAt: this.dateFaker.createdAt(options?.createdFrom),
 			updatedAt: this.dateFaker.modifiedAt(),
-			...staticData,
+			...overrideParameters,
 		});
 	}
 }
