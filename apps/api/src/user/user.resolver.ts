@@ -26,7 +26,7 @@ export class UserResolver {
 		return this.userService.insertOne(input);
 	}
 
-	@Mutation(() => Boolean, {
+	@Query(() => Boolean, {
 		name: 'validateUserConstraints',
 	})
 	validateUserConstraints(

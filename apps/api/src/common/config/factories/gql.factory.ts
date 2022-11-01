@@ -2,6 +2,7 @@ import { ApolloDriverConfig } from '@nestjs/apollo';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { GqlOptionsFactory } from '@nestjs/graphql';
+import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 
 import { AppConfig } from '../app.config';
 
@@ -14,43 +15,7 @@ export class GqlFactory implements GqlOptionsFactory {
 		},
 	);
 
-	private readonly endpoint = 'http://localhost:3000/graphql';
-
-	private readonly playground: ApolloDriverConfig['playground'] = {
-		tabs: [
-			{
-				endpoint: this.endpoint,
-				name: 'Login',
-				query: `mutation Login($input: LoginInput!) {
-	login(input: $input) {
-		token
-		expiresOn
-	}
-}`,
-				variables: `{
-	"input": {
-		"username": "drackp2m",
-		"password": "password"
-	}
-}`,
-			},
-			{
-				endpoint: this.endpoint,
-				name: 'GetUsers',
-				query: `# Write your query or mutation here
-query GetUsers {
-  getUsers {
-    uuid
-    username
-    email
-    createdAt
-    updatedAt
-  }
-}
-`,
-			},
-		],
-	};
+	private readonly endpoint = `${this.config.protocol}://${this.config.domain}:${this.config.port}${this.config.prefix}/graphql`;
 
 	constructor(private readonly configService: ConfigService) {}
 
@@ -65,7 +30,12 @@ query GetUsers {
 				path: 'libs/api-interfaces/src/lib/schema.ts',
 				// outputAs: 'class',
 			},
-			playground: this.config.environment === 'development' ? true : false,
+			playground: false,
+			plugins: [
+				...(this.config.environment === 'development'
+					? [ApolloServerPluginLandingPageLocalDefault]
+					: []),
+			],
 		};
 	}
 }
