@@ -40,4 +40,5 @@ Thumbs.db
 
 .angular
 .pgdata
+.dccache
 .env.prod

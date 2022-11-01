@@ -29,6 +29,7 @@ type TokenModel {
 
 type Query {
   login(input: LoginInput!): TokenModel!
+  validateUserConstraints(input: ValidateUserConstraintsInput!): Boolean!
   getUsers: [User!]!
 }
 
@@ -37,18 +38,17 @@ input LoginInput {
   password: String!
 }
 
+input ValidateUserConstraintsInput {
+  username: String
+  email: String
+}
+
 type Mutation {
   createUser(input: CreateUserInput!): User!
-  validateUserConstraints(input: ValidateUserConstraintsInput!): Boolean!
 }
 
 input CreateUserInput {
   username: String!
   password: String!
-  email: String
-}
-
-input ValidateUserConstraintsInput {
-  username: String
   email: String
 }

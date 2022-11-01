@@ -83,7 +83,7 @@
 		},
 		"test": {
 			"executor": "@nrwl/jest:jest",
-			"outputs": ["coverage/apps/app"],
+			"outputs": ["{workspaceRoot}/coverage/apps/app"],
 			"options": {
 				"jestConfig": "apps/app/jest.config.ts",
 				"passWithNoTests": true

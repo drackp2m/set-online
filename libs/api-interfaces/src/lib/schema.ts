@@ -19,14 +19,14 @@ export interface LoginInput {
     password: string;
 }
 
-export interface CreateUserInput {
-    username: string;
-    password: string;
+export interface ValidateUserConstraintsInput {
+    username?: Nullable<string>;
     email?: Nullable<string>;
 }
 
-export interface ValidateUserConstraintsInput {
-    username?: Nullable<string>;
+export interface CreateUserInput {
+    username: string;
+    password: string;
     email?: Nullable<string>;
 }
 
@@ -45,12 +45,12 @@ export interface TokenModel {
 
 export interface IQuery {
     login(input: LoginInput): TokenModel | Promise<TokenModel>;
+    validateUserConstraints(input: ValidateUserConstraintsInput): boolean | Promise<boolean>;
     getUsers(): User[] | Promise<User[]>;
 }
 
 export interface IMutation {
     createUser(input: CreateUserInput): User | Promise<User>;
-    validateUserConstraints(input: ValidateUserConstraintsInput): boolean | Promise<boolean>;
 }
 
 export type DateTime = any;
