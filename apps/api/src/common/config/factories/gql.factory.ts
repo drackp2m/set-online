@@ -2,7 +2,6 @@ import { ApolloDriverConfig } from '@nestjs/apollo';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { GqlOptionsFactory } from '@nestjs/graphql';
-import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 
 import { AppConfig } from '../app.config';
 
@@ -30,12 +29,7 @@ export class GqlFactory implements GqlOptionsFactory {
 				path: 'libs/api-interfaces/src/lib/schema.ts',
 				// outputAs: 'class',
 			},
-			playground: false,
-			plugins: [
-				...(this.config.environment === 'development'
-					? [ApolloServerPluginLandingPageLocalDefault]
-					: []),
-			],
+			playground: this.config.environment === 'development',
 		};
 	}
 }
