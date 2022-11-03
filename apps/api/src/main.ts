@@ -40,11 +40,18 @@ async function bootstrap(): Promise<{
 }
 
 bootstrap()
-	.then(({ protocol, domain, port, globalPrefix }) =>
+	.then(({ protocol, domain, port, globalPrefix }) => {
+		const playgroundUrl = `${protocol}://${domain}:${port}${globalPrefix}/graphql`;
+
 		Logger.log(
-			`🚀 GraphQL Playground ready at ${protocol}://${domain}:${port}${globalPrefix}/graphql, started in ${process
+			`🚀 GraphQL Playground ready at ${playgroundUrl}, started in ${process
 				.uptime()
 				.toFixed(3)}s`,
+			'Bootstrap',
 		),
-	)
+			Logger.log(
+				`🦑 Or if you prefer: https://studio.apollographql.com/sandbox?endpoint=${playgroundUrl}`,
+				'Bootstrap',
+			);
+	})
 	.catch((e) => Logger.error(e.message, e));
