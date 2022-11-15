@@ -1,4 +1,5 @@
 {
+	"name": "app",
 	"projectType": "application",
 	"sourceRoot": "apps/app/src",
 	"prefix": "set-online",
