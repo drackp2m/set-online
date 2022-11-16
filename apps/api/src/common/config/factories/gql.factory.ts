@@ -30,6 +30,9 @@ export class GqlFactory implements GqlOptionsFactory {
 				// outputAs: 'class',
 			},
 			playground: this.config.environment === 'development',
+			subscriptions: {
+				'graphql-ws': true,
+			},
 		};
 	}
 }
