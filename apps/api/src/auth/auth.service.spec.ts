@@ -23,10 +23,7 @@ describe('AuthService', () => {
 	let jwtService: jest.Mocked<Partial<JwtService>>;
 
 	const userFaker = new UserFaker();
-	const fakeUser: User = userFaker.makeOne(
-		{ uuid },
-		{ createdFrom: '2010' },
-	) as User;
+	const fakeUser: User = userFaker.makeOne({ uuid }, { createdFrom: '2010' });
 	const jwtToken =
 		'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJKZXN0IiwiaXNzIjoiVW5pdmVyc2UiLCJzdWIiOiI0MiIsImV4cCI6NjQ4NjAwMTIwfQ.VJK798GWnHeEm3dETnrlKemINGqaZ286tDZg9aUhAh8';
 
