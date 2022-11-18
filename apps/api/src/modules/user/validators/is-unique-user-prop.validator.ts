@@ -6,8 +6,7 @@ import {
 	ValidatorConstraintInterface,
 } from 'class-validator';
 
-import { UserEntity } from '../user.entity';
-import { UserService } from '../user.service';
+import { UserEntity, UserService } from '..';
 
 @ValidatorConstraint({ name: 'IsUniqueUserProp', async: true })
 @Injectable()

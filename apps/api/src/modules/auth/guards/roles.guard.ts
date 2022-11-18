@@ -7,8 +7,8 @@ import {
 	ForbiddenException,
 	UnauthorizedException,
 } from '../../../common/exceptions';
+import { UserEntity } from '../../user';
 import { UserRole } from '../../user/interfaces';
-import { UserEntity } from '../../user/user.entity';
 
 @Injectable()
 export class RolesGuard implements CanActivate {

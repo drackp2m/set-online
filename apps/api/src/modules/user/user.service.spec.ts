@@ -2,19 +2,20 @@ import { EntityData } from '@mikro-orm/core';
 import { EntityManager } from '@mikro-orm/postgresql';
 import { Test, TestingModule } from '@nestjs/testing';
 
+import { UserEntity, UserService } from '.';
+
 import {
 	BadRequestException,
 	NotFoundException,
 } from '../../common/exceptions';
 import { UserFaker } from './factories';
-import { UserEntity } from './user.entity';
-import { UserService } from './user.service';
 
-const uuid = '433b2725-c483-46b2-8b80-1b944158e04c';
+const uuid = '00000000-0000-4000-0000-000000000000';
 const passwordHashed = 'fJnUG@9?a8&a}YO/';
 
 jest.mock('uuid', () => ({
-	v4: () => uuid,
+	// FixMe => Why can't use uuid const
+	v4: () => '00000000-0000-4000-0000-000000000000',
 }));
 
 jest.mock('bcryptjs', () => ({
