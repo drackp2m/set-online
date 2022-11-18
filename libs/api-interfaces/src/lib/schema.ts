@@ -30,7 +30,7 @@ export interface CreateUserInput {
     email?: Nullable<string>;
 }
 
-export interface User {
+export interface UserEntity {
     uuid: string;
     createdAt: DateTime;
     updatedAt: DateTime;
@@ -46,11 +46,11 @@ export interface TokenModel {
 export interface IQuery {
     login(input: LoginInput): TokenModel | Promise<TokenModel>;
     validateUserConstraints(input: ValidateUserConstraintsInput): boolean | Promise<boolean>;
-    getUsers(): User[] | Promise<User[]>;
+    getUsers(): UserEntity[] | Promise<UserEntity[]>;
 }
 
 export interface IMutation {
-    createUser(input: CreateUserInput): User | Promise<User>;
+    createUser(input: CreateUserInput): UserEntity | Promise<UserEntity>;
 }
 
 export type DateTime = any;

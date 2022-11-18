@@ -5,10 +5,12 @@ import { databaseConfig } from './database.config';
 import { existsSync, readdirSync } from 'fs';
 
 async function getEntities(): Promise<EntityClass<AnyEntity>[]> {
-	const promises = readdirSync('apps/api/src/')
+	const promises = readdirSync('apps/api/src/modules')
 		.map((directory) => {
-			if (existsSync(`apps/api/src/${directory}/${directory}.entity.ts`)) {
-				return import(`../../${directory}/${directory}.entity.ts`);
+			if (
+				existsSync(`apps/api/src/modules/${directory}/${directory}.entity.ts`)
+			) {
+				return import(`../../modules/${directory}/${directory}.entity.ts`);
 			}
 		})
 		.filter((promise) => promise !== undefined);

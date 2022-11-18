@@ -6,19 +6,23 @@ import { GraphQLModule } from '@nestjs/graphql';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
-import { GqlFactory } from './common/config/factories/gql.factory';
-import { allConfigs } from './common/config/index';
-import { mikroOrmConfig } from './common/config/mikro-orm.config';
-import { envSchema } from './common/utils/env-schema';
+import {
+	appConfig,
+	databaseConfig,
+	jwtConfig,
+	mikroOrmConfig,
+} from './common/config';
+import { GqlFactory } from './common/config/factories';
+import { envSchema } from './common/utils';
 import { GqlThrottlerModule } from './gql-throttler/gql-throttler.module';
-import { UserModule } from './user/user.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
 	imports: [
 		ConfigModule.forRoot({
 			isGlobal: true,
-			load: allConfigs,
+			load: [appConfig, databaseConfig, jwtConfig],
 			validationSchema: envSchema,
 			validationOptions: {
 				allowUnknown: false,

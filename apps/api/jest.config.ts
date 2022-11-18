@@ -3,6 +3,13 @@ export default {
 	preset: '../../jest.preset.js',
 	testEnvironment: 'node',
 	maxWorkers: 2,
+	globals: {
+		'ts-jest': {
+			diagnostics: {
+				ignoreCodes: [151001],
+			},
+		},
+	},
 	transform: {
 		'^.+\\.[tj]s$': [
 			'ts-jest',
@@ -10,7 +17,7 @@ export default {
 				tsconfig: '<rootDir>/tsconfig.spec.json',
 				// isolatedModules: true,
 				diagnostics: {
-					ignoreCodes: ['TS151001'],
+					ignoreCodes: [151001, '151001', 'TS151001'],
 				},
 			},
 		],

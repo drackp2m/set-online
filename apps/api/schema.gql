@@ -3,7 +3,7 @@
 # ------------------------------------------------------
 
 """user """
-type User {
+type UserEntity {
   uuid: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -30,7 +30,7 @@ type TokenModel {
 type Query {
   login(input: LoginInput!): TokenModel!
   validateUserConstraints(input: ValidateUserConstraintsInput!): Boolean!
-  getUsers: [User!]!
+  getUsers: [UserEntity!]!
 }
 
 input LoginInput {
@@ -44,7 +44,7 @@ input ValidateUserConstraintsInput {
 }
 
 type Mutation {
-  createUser(input: CreateUserInput!): User!
+  createUser(input: CreateUserInput!): UserEntity!
 }
 
 input CreateUserInput {
