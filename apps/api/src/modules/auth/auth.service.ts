@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcryptjs';
 
 import { BaseException, UnauthorizedException } from '../../common/exceptions';
-import { UserService } from '../user';
+import { UserService } from '../user/user.service';
 import { LoginInput, TokenModel } from './dtos';
 import { JwtPayload } from './interfaces';
 

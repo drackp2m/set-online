@@ -3,7 +3,7 @@ import { Factory } from '@mikro-orm/seeder';
 
 import { UserFaker } from '.';
 
-import { UserEntity } from '..';
+import { UserEntity } from '../user.entity';
 
 export class UserFactory extends Factory<UserEntity> {
 	model: Constructor<UserEntity>;

@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker';
 import { EntityData } from '@mikro-orm/core';
 
-import { UserEntity } from '..';
 import { BasicFaker, DateFaker } from '../../../common/fakers';
 import { UserRole } from '../interfaces';
+import { UserEntity } from '../user.entity';
 
 export interface UserFakerOptions {
 	createdFrom?: string;

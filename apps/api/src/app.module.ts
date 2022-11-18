@@ -16,7 +16,7 @@ import { GqlFactory } from './common/config/factories';
 import { envSchema } from './common/utils';
 import { GqlThrottlerModule } from './gql-throttler/gql-throttler.module';
 import { AuthModule } from './modules/auth/auth.module';
-import { UserModule } from './modules/user';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
 	imports: [
