@@ -23,11 +23,8 @@
 		},
 		{
 			"files": ["*.ts", "*.tsx"],
-			"extends": [
-				"plugin:@nrwl/nx/typescript",
-				"plugin:prettier/recommended"
-			],
 			"plugins": ["import", "unused-imports"],
+			"extends": ["plugin:@nrwl/nx/typescript", "plugin:prettier/recommended"],
 			"parserOptions": {
 				"ecmaVersion": 2020,
 				"sourceType": "module"
@@ -57,7 +54,7 @@
 					{
 						"newlines-between": "always",
 						"alphabetize": { "order": "asc" },
-						"groups": ["external", "index"],
+						"groups": ["external", "index", "internal"],
 						"pathGroups": [
 							{
 								"pattern": "@set-online/**",
@@ -67,6 +64,13 @@
 						]
 					}
 				],
+				"sort-imports": [
+					"warn",
+					{
+						"ignoreDeclarationSort": true
+					}
+				],
+				"no-duplicate-imports": "warn",
 				"no-multiple-empty-lines": ["warn", { "max": 1 }],
 				"space-before-blocks": ["warn", "always"],
 				"newline-before-return": ["warn"]
