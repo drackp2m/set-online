@@ -7,9 +7,9 @@ import {
 	ForbiddenException,
 	UnauthorizedException,
 } from '../../../common/exceptions';
+import { UserEntity } from '../../user';
 import { UserFaker } from '../../user/factories';
 import { UserRole } from '../../user/interfaces';
-import { UserEntity } from '../../user/user.entity';
 
 describe('RolesGuard', () => {
 	let guard: RolesGuard;

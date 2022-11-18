@@ -8,12 +8,7 @@ import { UserService } from '../../user/user.service';
 import { JwtPayload } from '../interfaces/jwt-payload.interface';
 import { JwtStrategyService } from './jwt.strategy.service';
 
-const uuid = '433b2725-c483-46b2-8b80-1b944158e04c';
-
-jest.mock('uuid', () => ({
-	v4: () => uuid,
-}));
-
+const uuidMock = '00000000-0000-4000-0000-000000000000';
 const jwtMock: JwtPayload = {
 	iat: 648600120,
 	nbf: 648600120,
@@ -21,7 +16,7 @@ const jwtMock: JwtPayload = {
 	aud: 'Jest',
 	iss: 'You',
 	sub: '42',
-	jti: 'c85e8f94-8777-4e3a-bebf-f8b886ea6d9e',
+	jti: uuidMock,
 };
 
 describe('JwtStrategyService', () => {
@@ -31,7 +26,7 @@ describe('JwtStrategyService', () => {
 
 	const userFaker = new UserFaker();
 	const fakeUser: UserEntity = userFaker.makeOne(
-		{ uuid },
+		{ uuid: uuidMock },
 		{ createdFrom: '2010' },
 	) as UserEntity;
 

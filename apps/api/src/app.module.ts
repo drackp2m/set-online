@@ -16,7 +16,7 @@ import { GqlFactory } from './common/config/factories';
 import { envSchema } from './common/utils';
 import { GqlThrottlerModule } from './gql-throttler/gql-throttler.module';
 import { AuthModule } from './modules/auth/auth.module';
-import { UserModule } from './modules/user/user.module';
+import { UserModule } from './modules/user';
 
 @Module({
 	imports: [
@@ -28,12 +28,12 @@ import { UserModule } from './modules/user/user.module';
 				allowUnknown: false,
 			},
 		}),
+		MikroOrmModule.forRootAsync({
+			useFactory: mikroOrmConfig,
+		}),
 		GraphQLModule.forRootAsync<ApolloDriverConfig>({
 			driver: ApolloDriver,
 			useClass: GqlFactory,
-		}),
-		MikroOrmModule.forRootAsync({
-			useFactory: mikroOrmConfig,
 		}),
 		GqlThrottlerModule,
 		AuthModule,

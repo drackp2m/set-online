@@ -2,7 +2,7 @@ import { ExecutionContext, createParamDecorator } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { Request } from 'express';
 
-import { UserEntity } from '../user.entity';
+import { UserEntity } from '..';
 
 export const CurrentUser = createParamDecorator(
 	(_: unknown, context: ExecutionContext): UserEntity => {

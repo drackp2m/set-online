@@ -1,7 +1,7 @@
 import {
-	BaseEntity as MikroBaseEntity,
 	Entity,
 	EntityData,
+	BaseEntity as MikroBaseEntity,
 	PrimaryKey,
 	Property,
 } from '@mikro-orm/core';

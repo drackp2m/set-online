@@ -2,23 +2,18 @@ import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as bcrypt from 'bcryptjs';
 
+import { AuthService } from '.';
+
 import {
 	BaseException,
 	NotFoundException,
 	UnauthorizedException,
-} from '../../common/exceptions/';
+} from '../../common/exceptions';
+import { UserEntity, UserService } from '../user';
 import { UserFaker } from '../user/factories';
-import { UserEntity } from '../user/user.entity';
-import { UserService } from '../user/user.service';
-import { AuthService } from './auth.service';
 import { TokenModel } from './dtos/token.model';
 
-const uuid = '433b2725-c483-46b2-8b80-1b944158e04c';
-
-jest.mock('uuid', () => ({
-	v4: () => uuid,
-}));
-
+const uuid = '00000000-0000-4000-0000-000000000000';
 describe('AuthService', () => {
 	let service: AuthService;
 	let userService: jest.Mocked<Partial<UserService>>;
