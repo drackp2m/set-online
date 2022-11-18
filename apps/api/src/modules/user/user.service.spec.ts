@@ -2,25 +2,24 @@ import { EntityData } from '@mikro-orm/core';
 import { EntityManager } from '@mikro-orm/postgresql';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { UserEntity, UserService } from '.';
-
 import {
 	BadRequestException,
 	NotFoundException,
 } from '../../common/exceptions';
 import { UserFaker } from './factories';
+import { UserEntity } from './user.entity';
+import { UserService } from './user.service';
 
-const uuid = '00000000-0000-4000-0000-000000000000';
-const passwordHashed = 'fJnUG@9?a8&a}YO/';
+const mockUuid = '00000000-0000-4000-0000-000000000000';
+const mockPasswordHashed = 'fJnUG@9?a8&a}YO/';
 
 jest.mock('uuid', () => ({
-	// FixMe => Why can't use uuid const
-	v4: () => '00000000-0000-4000-0000-000000000000',
+	v4: () => mockUuid,
 }));
 
 jest.mock('bcryptjs', () => ({
 	genSalt: () => 'randomSalt',
-	hash: () => passwordHashed,
+	hash: () => mockPasswordHashed,
 }));
 
 describe('UserService', () => {
@@ -28,16 +27,16 @@ describe('UserService', () => {
 	let entityManager: jest.Mocked<Partial<EntityManager>>;
 
 	const date = new Date(Date.UTC(1955, 2, 24));
-	const expectedUser: EntityData<UserEntity> = {
-		uuid,
+	const expectedMockUser: EntityData<UserEntity> = {
+		uuid: mockUuid,
 		username: 'user',
-		password: passwordHashed,
+		password: mockPasswordHashed,
 		createdAt: date,
 		updatedAt: date,
 	};
 
 	const userFaker = new UserFaker();
-	const expectedUsers: EntityData<UserEntity>[] = [
+	const expectedMockUsers: EntityData<UserEntity>[] = [
 		userFaker.makeOne(),
 		userFaker.makeOne(),
 	];
@@ -80,7 +79,7 @@ describe('UserService', () => {
 			await expect(user).rejects.toThrow(BadRequestException);
 
 			expect(entityManager.persistAndFlush).toBeCalledTimes(1);
-			expect(entityManager.persistAndFlush).toBeCalledWith(expectedUser);
+			expect(entityManager.persistAndFlush).toBeCalledWith(expectedMockUser);
 		});
 
 		it('should return User when EntityManager.persistAndFlush not throw Exception', async () => {
@@ -91,20 +90,20 @@ describe('UserService', () => {
 				password: 'pass',
 			});
 
-			expect(user).toEqual(expectedUser);
+			expect(user).toEqual(expectedMockUser);
 
 			expect(entityManager.persistAndFlush).toBeCalledTimes(1);
-			expect(entityManager.persistAndFlush).toBeCalledWith(expectedUser);
+			expect(entityManager.persistAndFlush).toBeCalledWith(expectedMockUser);
 		});
 	});
 
 	describe('getMany', () => {
 		it('should return User Array', async () => {
-			entityManager.find.mockResolvedValueOnce(expectedUsers);
+			entityManager.find.mockResolvedValueOnce(expectedMockUsers);
 
 			const users = await service.getMany();
 
-			expect(users).toEqual(expectedUsers);
+			expect(users).toEqual(expectedMockUsers);
 
 			expect(entityManager.find).toBeCalledTimes(1);
 			expect(entityManager.find).toBeCalledWith(UserEntity, {});
@@ -126,11 +125,11 @@ describe('UserService', () => {
 		});
 
 		it('should throw Exception when EntityManager.findOne return null', async () => {
-			entityManager.findOne.mockResolvedValueOnce(expectedUser);
+			entityManager.findOne.mockResolvedValueOnce(expectedMockUser);
 
 			const user = await service.getOneBy('email', 'user@domain.com');
 
-			expect(user).toEqual(expectedUser);
+			expect(user).toEqual(expectedMockUser);
 
 			expect(entityManager.findOne).toBeCalledTimes(1);
 			expect(entityManager.findOne).toBeCalledWith(UserEntity, {

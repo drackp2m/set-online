@@ -3,13 +3,12 @@ import { EntityManager } from '@mikro-orm/postgresql';
 import { Injectable } from '@nestjs/common';
 import { genSalt, hash } from 'bcryptjs';
 
-import { UserEntity } from '.';
-
 import {
 	BadRequestException,
 	NotFoundException,
 } from '../../common/exceptions';
 import { CreateUserInput } from './dtos';
+import { UserEntity } from './user.entity';
 
 @Injectable()
 export class UserService {

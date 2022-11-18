@@ -2,29 +2,30 @@ import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import * as bcrypt from 'bcryptjs';
 
-import { AuthService } from '.';
-
 import {
 	BaseException,
 	NotFoundException,
 	UnauthorizedException,
 } from '../../common/exceptions';
-import { UserEntity, UserService } from '../user';
 import { UserFaker } from '../user/factories';
+import { UserEntity } from '../user/user.entity';
+import { UserService } from '../user/user.service';
+import { AuthService } from './auth.service';
 import { TokenModel } from './dtos/token.model';
 
-const uuid = '00000000-0000-4000-0000-000000000000';
+const mockUuid = '00000000-0000-4000-0000-000000000000';
+
 describe('AuthService', () => {
 	let service: AuthService;
 	let userService: jest.Mocked<Partial<UserService>>;
 	let jwtService: jest.Mocked<Partial<JwtService>>;
 
 	const userFaker = new UserFaker();
-	const fakeUser: UserEntity = userFaker.makeOne(
-		{ uuid },
+	const mockUser: UserEntity = userFaker.makeOne(
+		{ uuid: mockUuid },
 		{ createdFrom: '2010' },
 	);
-	const jwtToken =
+	const mockJwtToken =
 		'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJKZXN0IiwiaXNzIjoiVW5pdmVyc2UiLCJzdWIiOiI0MiIsImV4cCI6NjQ4NjAwMTIwfQ.VJK798GWnHeEm3dETnrlKemINGqaZ286tDZg9aUhAh8';
 
 	beforeAll(async () => {
@@ -66,7 +67,7 @@ describe('AuthService', () => {
 		});
 
 		it('should throw UnauthorizedException when BcryptService.compare return False', async () => {
-			userService.getOneBy.mockResolvedValueOnce(fakeUser);
+			userService.getOneBy.mockResolvedValueOnce(mockUser);
 			jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(false as never);
 
 			const tokenModel = service.login({ username: 'user', password: 'pass' });
@@ -78,22 +79,22 @@ describe('AuthService', () => {
 		});
 
 		it('should return TokenModel when JwtService.sign return a token', async () => {
-			userService.getOneBy.mockResolvedValueOnce(fakeUser);
+			userService.getOneBy.mockResolvedValueOnce(mockUser);
 			jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(true as never);
-			jwtService.sign.mockReturnValueOnce(jwtToken);
+			jwtService.sign.mockReturnValueOnce(mockJwtToken);
 
 			const tokenModel = await service.login({
 				username: 'user',
 				password: 'pass',
 			});
 
-			expect(tokenModel).toStrictEqual(new TokenModel({ token: jwtToken }));
+			expect(tokenModel).toStrictEqual(new TokenModel({ token: mockJwtToken }));
 
 			expect(userService.getOneBy).toBeCalledTimes(1);
 			expect(userService.getOneBy).toBeCalledWith('username', 'user');
 
 			expect(jwtService.sign).toBeCalledTimes(1);
-			expect(jwtService.sign).toBeCalledWith({}, { subject: uuid });
+			expect(jwtService.sign).toBeCalledWith({}, { subject: mockUuid });
 		});
 	});
 
@@ -129,7 +130,7 @@ describe('AuthService', () => {
 		});
 
 		it('should return JwtPayload when pass valid jwt', () => {
-			const jwtPayload = service.getPayloadFromJwt(jwtToken);
+			const jwtPayload = service.getPayloadFromJwt(mockJwtToken);
 
 			const expectedPayload = {
 				aud: 'Jest',
