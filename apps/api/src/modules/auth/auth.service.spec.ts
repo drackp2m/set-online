@@ -8,7 +8,6 @@ import {
 	UnauthorizedException,
 } from '../../common/exceptions';
 import { UserFaker } from '../user/factories';
-import { UserEntity } from '../user/user.entity';
 import { UserService } from '../user/user.service';
 import { AuthService } from './auth.service';
 import { TokenModel } from './dtos/token.model';
@@ -21,7 +20,7 @@ describe('AuthService', () => {
 	let jwtService: jest.Mocked<Partial<JwtService>>;
 
 	const userFaker = new UserFaker();
-	const mockUser: UserEntity = userFaker.makeOne(
+	const mockUser = userFaker.makeOne(
 		{ uuid: mockUuid },
 		{ createdFrom: '2010' },
 	);
@@ -117,16 +116,16 @@ describe('AuthService', () => {
 	});
 
 	describe('getPayloadFromJwt', () => {
-		it('should throw Error when pass not jwt', () => {
-			const decodeHeaderAndPayload = service.getPayloadFromJwt;
+		it('should throw BaseException when not pass jwt', () => {
+			const execution = () => service.getPayloadFromJwt('anything');
 
-			expect(() => decodeHeaderAndPayload('anything')).toThrow(BaseException);
+			expect(execution).toThrow(BaseException);
 		});
 
-		it('should throw Error when pass invalid jwt', () => {
-			const decodeHeaderAndPayload = service['getPayloadFromJwt'];
+		it('should throw SyntaxError when pass invalid jwt', () => {
+			const execution = () => service['getPayloadFromJwt']('bad.jwt');
 
-			expect(() => decodeHeaderAndPayload('bad.jwt')).toThrow(SyntaxError);
+			expect(execution).toThrow(SyntaxError);
 		});
 
 		it('should return JwtPayload when pass valid jwt', () => {

@@ -6,7 +6,7 @@ networks:
 
 services:
   set-db:
-    image: postgres:14-alpine
+    image: postgres:15.1-alpine
     container_name: set-db
     hostname: set-db
     networks:
@@ -16,6 +16,7 @@ services:
     volumes:
       - .pgdata:/var/lib/postgresql/data
     environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASS}
@@ -38,6 +39,7 @@ services:
     tty: true
 
   set-node:
+    # image: node:19-alpine
     container_name: set-node
     hostname: set-node
     working_dir: /usr/src/app

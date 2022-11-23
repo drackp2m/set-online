@@ -66,7 +66,7 @@ describe('UserService', () => {
 	});
 
 	describe('insertOne', () => {
-		it('should throw Error when EntityManager.persistAndFlush throw BadRequestException', async () => {
+		it('should throw BadRequestException when EntityManager.persistAndFlush throw BadRequestException', async () => {
 			entityManager.persistAndFlush.mockRejectedValueOnce(() => {
 				throw new Error('duplicated key');
 			});
@@ -111,7 +111,7 @@ describe('UserService', () => {
 	});
 
 	describe('getOneBy', () => {
-		it('should throw Exception when EntityManager.findOne return null', async () => {
+		it('should throw NotFoundException when EntityManager.findOne return null', async () => {
 			entityManager.findOne.mockResolvedValueOnce(null);
 
 			const user = service.getOneBy('username', 'user');
@@ -124,7 +124,7 @@ describe('UserService', () => {
 			});
 		});
 
-		it('should throw Exception when EntityManager.findOne return null', async () => {
+		it('should throw UserEntity when EntityManager.findOne return UserEntity', async () => {
 			entityManager.findOne.mockResolvedValueOnce(expectedMockUser);
 
 			const user = await service.getOneBy('email', 'user@domain.com');
