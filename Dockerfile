@@ -15,16 +15,17 @@ USER user
 COPY package.json yarn.lock decorate-angular-cli.js ./
 
 RUN git config --global --add safe.directory /usr/src/app
-# RUN yarn
+# RUN yarn install --frozen-lockfile
 
 USER root
 
-# RUN apk del .build-deps
+RUN apk del .build-deps
 
 
 FROM deps AS dev
 
 USER user
+
 
 # FROM node:18-alpine AS runner
 

@@ -13,12 +13,11 @@ export class JwtGuard extends AuthGuard('jwt') {
 		return gqlContext.getContext<{ req: Request }>().req;
 	}
 
-	public handleRequest<User>(error: Error, user: User): User | undefined {
-		console.log({ error, user });
+	public handleRequest<T>(error: Error, payload: T | false): T | undefined {
 		if (error) {
 			throw new UnauthorizedException('invalid bearer', 'authorization');
 		}
 
-		return user || undefined;
+		return payload || undefined;
 	}
 }

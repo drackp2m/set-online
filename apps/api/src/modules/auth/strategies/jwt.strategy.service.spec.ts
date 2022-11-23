@@ -8,24 +8,24 @@ import { UserService } from '../../user/user.service';
 import { JwtPayload } from '../interfaces/jwt-payload.interface';
 import { JwtStrategyService } from './jwt.strategy.service';
 
-const mockUuid = '00000000-0000-4000-0000-000000000000';
-const mockJwt: JwtPayload = {
-	iat: 648600120,
-	nbf: 648600120,
-	exp: 1974062562,
-	aud: 'Jest',
-	iss: 'You',
-	sub: '42',
-	jti: mockUuid,
-};
-
 describe('JwtStrategyService', () => {
+	const userFaker = new UserFaker();
+
 	let service: JwtStrategyService;
 	let configService: jest.Mocked<Partial<ConfigService>>;
 	let userService: jest.Mocked<Partial<UserService>>;
 
-	const userFaker = new UserFaker();
-	const fakeUser: UserEntity = userFaker.makeOne(
+	const mockUuid = '00000000-0000-4000-0000-000000000000';
+	const mockJwt: JwtPayload = {
+		iat: 648600120,
+		nbf: 648600120,
+		exp: 1974062562,
+		aud: 'Jest',
+		iss: 'You',
+		sub: '42',
+		jti: mockUuid,
+	};
+	const mockUser = userFaker.makeOne(
 		{ uuid: mockUuid },
 		{ createdFrom: '2010' },
 	) as UserEntity;
@@ -64,15 +64,15 @@ describe('JwtStrategyService', () => {
 
 			const user = service.validate(mockJwt);
 
-			await expect(user).rejects.toThrow(NotFoundException);
+			expect(user).rejects.toThrow(NotFoundException);
 		});
-	});
 
-	it('should throw NotFoundException when EntityManager.getOneBy throw NotFoundException', async () => {
-		userService.getOneBy.mockResolvedValueOnce(fakeUser);
+		it('should return UserEntity when EntityManager.getOneBy return UserEntity', async () => {
+			userService.getOneBy.mockResolvedValueOnce(mockUser);
 
-		const user = await service.validate(mockJwt);
+			const user = await service.validate(mockJwt);
 
-		expect(user).toStrictEqual(fakeUser);
+			expect(user).toStrictEqual(mockUser);
+		});
 	});
 });

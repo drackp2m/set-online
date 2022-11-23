@@ -21,6 +21,7 @@ export class GqlFactory implements GqlOptionsFactory {
 	createGqlOptions(): ApolloDriverConfig {
 		return {
 			autoSchemaFile: 'apps/api/schema.gql',
+			useGlobalPrefix: true,
 			buildSchemaOptions: {
 				dateScalarMode: 'isoDate',
 				numberScalarMode: 'float',
