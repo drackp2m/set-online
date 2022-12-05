@@ -6,7 +6,7 @@ networks:
 
 services:
   set-db:
-    image: postgres:15.1-alpine
+    image: postgres:15-alpine
     container_name: set-db
     hostname: set-db
     networks:
@@ -39,7 +39,7 @@ services:
     tty: true
 
   set-node:
-    # image: node:19-alpine
+    # image: node:18-alpine
     container_name: set-node
     hostname: set-node
     working_dir: /usr/src/app
