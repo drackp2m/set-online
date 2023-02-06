@@ -6,3 +6,5 @@
 .pgdata
 apps/api/schema.gql
 libs/api-interfaces/src/lib/schema.ts
+
+.env
