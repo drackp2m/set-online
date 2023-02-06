@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-docker exec -t -u user set-node yarn lint-staged
+lint-staged

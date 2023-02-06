@@ -1,35 +1,37 @@
-FROM node:18-alpine AS deps
+FROM node:19.6-alpine3 AS deps
 
-USER root
-
-RUN addgroup -g 501 user && adduser -u 501 -G user -s /bin/sh -D user
-RUN apk add --no-cache git
-RUN apk add --no-cache --virtual .build-deps g++ gcc make python3
+RUN apk add --no-cache sudo git vim zsh g++ gcc make python3
 
 WORKDIR /usr/src/app
+
+RUN adduser -u 501 -s /bin/zsh -D user \
+&& addgroup user node \
+&& addgroup user root \
+&& echo "%root ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers
 
 RUN chown -R user.user /usr/src/app
 
 USER user
 
-COPY package.json yarn.lock decorate-angular-cli.js ./
-
 RUN git config --global --add safe.directory /usr/src/app
-# RUN yarn install --frozen-lockfile
 
-USER root
+COPY package.json yarn.lock* decorate-angular-cli.js* ./
 
-RUN apk del .build-deps
+RUN yarn install --frozen-lockfile
+
+RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k \
+&& echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+
 
 
 FROM deps AS dev
 
 USER user
 
+CMD yarn start
+
 
 # FROM node:18-alpine AS runner
-
-# RUN apk add --no-cache libc6-compat git openssh make g++ python3
 
 # WORKDIR /usr/src/app
 # COPY package.json yarn.lock ./

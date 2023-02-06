@@ -25,21 +25,7 @@ services:
     restart: unless-stopped
     tty: true
 
-  db-adminer:
-    image: adminer:4-standalone
-    container_name: set-adminer
-    hostname: set-adminer
-    networks:
-      - set-network
-    ports:
-      - 8080:8080
-    depends_on:
-      - set-db
-    restart: unless-stopped
-    tty: true
-
   set-node:
-    # image: node:18-alpine
     container_name: set-node
     hostname: set-node
     working_dir: /usr/src/app
@@ -49,11 +35,14 @@ services:
     networks:
       - set-network
     ports:
+      - ${APP_PORT}:4200
       - ${API_PORT}:${API_PORT}
-      - 4200:4200
-      - 9229:9229
+      - ${API_DEBUG_PORT}:9229
     volumes:
+      - ~/.ssh:/home/user/.ssh:ro
+      - ~/.gitconfig:/etc/gitconfig:ro
       - .:/usr/src/app
+      - /usr/src/app/node_modules
     environment:
       PATH: $PATH:/usr/src/app/node_modules/.bin
       TZ: Europe/Madrid
@@ -61,4 +50,3 @@ services:
       - set-db
     restart: unless-stopped
     tty: true
-    # command: yarn start
