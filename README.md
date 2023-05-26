@@ -1,5 +1,17 @@
 # SetNode
 
+
+**Default**
+```html
+    <button
+      b2m-button
+      [type]="'problem'"
+      [size]="'large'"
+      [disabled]="true"
+    >Button content</button>
+```
+
+
 ## Steps to run the project
 
 1. 🐳 Create Docker containers
