@@ -16,6 +16,7 @@ node_modules
 *.launch
 .settings/
 *.sublime-workspace
+.history/
 
 # IDE - VSCode
 .vscode/*
@@ -38,7 +39,10 @@ testem.log
 .DS_Store
 Thumbs.db
 
+#docker
+docker-compose.override.yml
+
 .angular
 .pgdata
-.dccache
-.env.prod
+.docker
+.env
