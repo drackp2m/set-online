@@ -2,7 +2,7 @@
 module.exports = {
 	extends: ['@commitlint/config-nx-scopes'],
 	rules: {
-		'type-empty': [1, 'never'],
+		'type-empty': [2, 'never'],
 		'type-enum': [
 			2,
 			'always',
@@ -16,7 +16,7 @@ module.exports = {
 				'test',
 				'build',
 				'ci',
-				'chore',
+				'🎒 chore',
 				'revert',
 			],
 		],
