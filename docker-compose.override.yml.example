@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  nx:
+    build:
+      target: dev-attached
+      args:
+        USER_UID: 501
+    volumes:
+      - ~/.ssh:/home/node/.ssh
+      - ~/.gnupg/pubring.kbx:/home/node/.gnupg/pubring.kbx:ro
+      - ~/.gnupg/private-keys-v1.d:/home/node/.gnupg/private-keys-v1.d:ro
+      - ~/.gitconfig:/etc/gitconfig:ro
+      - .docker/zsh/config:/home/node/.config/zsh
+      - .docker/zsh/local:/home/node/.local/share/zsh
+      - /home/node/.local/share/zsh/plugins

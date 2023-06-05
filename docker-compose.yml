@@ -39,8 +39,6 @@ services:
       - ${API_PORT}:${API_PORT}
       - ${API_DEBUG_PORT}:9229
     volumes:
-      - ~/.ssh:/home/user/.ssh:ro
-      - ~/.gitconfig:/etc/gitconfig:ro
       - .:/usr/src/app
       - /usr/src/app/node_modules
     environment:
