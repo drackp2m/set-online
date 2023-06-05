@@ -8,10 +8,10 @@ ConfigModule.forRoot({
 const [string, number] = [Joi.string(), Joi.number()];
 
 const ENVIRONMENTS = ['production', 'development', 'test'] as const;
-export type EnvEnvironment = typeof ENVIRONMENTS[number];
+export type EnvEnvironment = (typeof ENVIRONMENTS)[number];
 
 const PROTOCOLS = ['https', 'http'] as const;
-export type EnvProtocol = typeof PROTOCOLS[number];
+export type EnvProtocol = (typeof PROTOCOLS)[number];
 
 const JWT_ALGORITHMS = [
 	'HS256',
@@ -27,7 +27,7 @@ const JWT_ALGORITHMS = [
 	'PS384',
 	'PS512',
 ] as const;
-export type EnvJwtAlgorithm = typeof JWT_ALGORITHMS[number];
+export type EnvJwtAlgorithm = (typeof JWT_ALGORITHMS)[number];
 
 export interface IEnvSchema {
 	ENVIRONMENT: EnvEnvironment;
@@ -45,7 +45,7 @@ export interface IEnvSchema {
 	JWT_ISSUER: string;
 	JWT_AUDIENCE: string;
 	JWT_ID: string;
-	JWT_EXPIRES_IN: string;
+	JWT_TOKEN_EXPIRES_IN: string;
 }
 
 export const envSchema = Joi.object({
@@ -64,7 +64,7 @@ export const envSchema = Joi.object({
 	JWT_ISSUER: string,
 	JWT_AUDIENCE: string,
 	JWT_ID: string,
-	JWT_EXPIRES_IN: string,
+	JWT_TOKEN_EXPIRES_IN: string,
 }).unknown();
 
 export const processEnv = envSchema.validate(process.env).value as IEnvSchema;
