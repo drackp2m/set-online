@@ -25,9 +25,9 @@ services:
     restart: unless-stopped
     tty: true
 
-  set-node:
-    container_name: set-node
-    hostname: set-node
+  set-nx:
+    container_name: set-nx
+    hostname: set-nx
     working_dir: /usr/src/app
     build:
       context: .

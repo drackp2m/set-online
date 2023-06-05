@@ -19,6 +19,6 @@ export const jwtConfig = registerAs(
 		issuer: processEnv.JWT_ISSUER,
 		audience: processEnv.JWT_AUDIENCE,
 		id: processEnv.JWT_ID,
-		expiresIn: processEnv.JWT_EXPIRES_IN,
+		expiresIn: processEnv.JWT_TOKEN_EXPIRES_IN,
 	}),
 );
