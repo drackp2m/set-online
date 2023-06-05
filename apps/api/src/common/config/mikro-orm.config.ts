@@ -30,6 +30,7 @@ export const mikroOrmConfig = async (): Promise<MikroOrmModuleSyncOptions> => ({
 	migrations: {
 		tableName: 'migrations',
 		path: 'apps/api/migrations',
+		snapshot: false,
 	},
 });
 
