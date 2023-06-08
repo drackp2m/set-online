@@ -1,2 +1,3 @@
-export { JwtGuard } from './jwt.guard';
-export { RolesGuard } from './roles.guard';
+export * from './jwt.guard';
+
+export * from './roles.guard';

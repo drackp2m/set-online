@@ -1,2 +1,3 @@
-export { BaseEntity } from './base.entity';
-export { envSchema } from './env-schema';
+export * from './base.entity';
+
+export * from '../environment/env.validation';

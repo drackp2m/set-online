@@ -1,2 +1,3 @@
-export { LoginInput } from './login.input';
-export { TokenModel } from './token.model';
+export * from './login.input';
+
+export * from './token.model';

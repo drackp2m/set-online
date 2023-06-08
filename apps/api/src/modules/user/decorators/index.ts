@@ -1,2 +1,3 @@
-export { CurrentUser } from './current-user.decorator';
-export { IsUniqueUserProp } from './is-unique-user-prop.decorator';
+export * from './current-user.decorator';
+
+export * from './is-unique-user-prop.decorator';

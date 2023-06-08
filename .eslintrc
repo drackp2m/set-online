@@ -64,12 +64,16 @@
 						]
 					}
 				],
-				"sort-imports": [
+				"padding-line-between-statements": [
 					"warn",
-					{
-						"ignoreDeclarationSort": true
-					}
+					{ "blankLine": "always", "next": "export", "prev": "*" }
 				],
+				// "sort-imports": [
+				// 	"warn",
+				// 	{
+				// 		"ignoreDeclarationSort": true
+				// 	}
+				// ],
 				"no-duplicate-imports": "warn",
 				"no-multiple-empty-lines": ["warn", { "max": 1 }],
 				"space-before-blocks": ["warn", "always"],

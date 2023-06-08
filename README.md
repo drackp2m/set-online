@@ -4,7 +4,7 @@
 
 1. 🐳 Create Docker containers
 
-> docker-compose --env-file apps/api/.env.dev up -d --build
+> docker-compose up -d --build
 
 2. 📦 Install dependencies
 
