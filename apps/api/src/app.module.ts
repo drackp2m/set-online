@@ -6,14 +6,8 @@ import { GraphQLModule } from '@nestjs/graphql';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import {
-	appConfig,
-	databaseConfig,
-	jwtConfig,
-	mikroOrmConfig,
-} from './common/config';
-import { GqlFactory } from './common/config/factories';
-import { envSchema } from './common/utils';
+import { appConfig, databaseConfig, jwtConfig } from './common/config';
+import { GqlFactory, MikroOrmFactory } from './common/config/factories';
 import { GqlThrottlerModule } from './gql-throttler/gql-throttler.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
@@ -23,13 +17,9 @@ import { UserModule } from './modules/user/user.module';
 		ConfigModule.forRoot({
 			isGlobal: true,
 			load: [appConfig, databaseConfig, jwtConfig],
-			validationSchema: envSchema,
-			validationOptions: {
-				allowUnknown: false,
-			},
 		}),
 		MikroOrmModule.forRootAsync({
-			useFactory: mikroOrmConfig,
+			useClass: MikroOrmFactory,
 		}),
 		GraphQLModule.forRootAsync<ApolloDriverConfig>({
 			driver: ApolloDriver,

@@ -1,2 +1,3 @@
-export { BasicFaker } from './basic.faker';
-export { DateFaker } from './date.faker';
+export * from './basic.faker';
+
+export * from './date.faker';

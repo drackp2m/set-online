@@ -10,47 +10,47 @@
 
 export enum UserRole {
     Admin = "Admin",
-    Registered = "Registered",
-    Guest = "Guest"
-}
-
-export interface LoginInput {
-    username: string;
-    password: string;
-}
-
-export interface ValidateUserConstraintsInput {
-    username?: Nullable<string>;
-    email?: Nullable<string>;
+    Guest = "Guest",
+    Registered = "Registered"
 }
 
 export interface CreateUserInput {
-    username: string;
-    password: string;
     email?: Nullable<string>;
+    password: string;
+    username: string;
 }
 
-export interface UserEntity {
-    uuid: string;
-    createdAt: DateTime;
-    updatedAt: DateTime;
+export interface LoginInput {
+    password: string;
     username: string;
+}
+
+export interface ValidateUserConstraintsInput {
     email?: Nullable<string>;
-    role: UserRole;
+    username?: Nullable<string>;
+}
+
+export interface IMutation {
+    createUser(input: CreateUserInput): UserEntity | Promise<UserEntity>;
+}
+
+export interface IQuery {
+    getUsers(): UserEntity[] | Promise<UserEntity[]>;
+    login(input: LoginInput): TokenModel | Promise<TokenModel>;
+    validateUserConstraints(input: ValidateUserConstraintsInput): boolean | Promise<boolean>;
 }
 
 export interface TokenModel {
     token: string;
 }
 
-export interface IQuery {
-    login(input: LoginInput): TokenModel | Promise<TokenModel>;
-    validateUserConstraints(input: ValidateUserConstraintsInput): boolean | Promise<boolean>;
-    getUsers(): UserEntity[] | Promise<UserEntity[]>;
-}
-
-export interface IMutation {
-    createUser(input: CreateUserInput): UserEntity | Promise<UserEntity>;
+export interface UserEntity {
+    createdAt: DateTime;
+    email?: Nullable<string>;
+    role: UserRole;
+    updatedAt: DateTime;
+    username: string;
+    uuid: string;
 }
 
 export type DateTime = any;

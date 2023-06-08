@@ -1,2 +1,5 @@
-export { GqlFactory } from './gql.factory';
-export { JwtFactory } from './jwt.factory';
+export * from './gql.factory';
+
+export * from './jwt.factory';
+
+export * from './mikro-orm.factory';

@@ -1,1 +1,1 @@
-export { IsUniqueUserPropRule } from './is-unique-user-prop.validator';
+export * from './is-unique-user-prop.validator';

@@ -27,7 +27,7 @@ async function bootstrap(): Promise<{
 	);
 	app.setGlobalPrefix(config.prefix);
 
-	await app.listen(config.port, '0.0.0.0');
+	await app.listen(3000, '0.0.0.0');
 
 	useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
@@ -40,18 +40,14 @@ async function bootstrap(): Promise<{
 }
 
 bootstrap()
-	.then(({ protocol, domain, port, globalPrefix }) => {
-		const playgroundUrl = `${protocol}://${domain}:${port}${globalPrefix}/graphql`;
+	.then(({ protocol, domain, port }) => {
+		const playgroundUrl = `${protocol}://${domain}:${port}/graphql`;
 
 		Logger.log(
 			`🚀 GraphQL Playground ready at ${playgroundUrl}, started in ${process
 				.uptime()
 				.toFixed(3)}s`,
 			'Bootstrap',
-		),
-			Logger.log(
-				`🦑 Or if you prefer: https://studio.apollographql.com/sandbox?endpoint=${playgroundUrl}`,
-				'Bootstrap',
-			);
+		);
 	})
 	.catch((e) => Logger.error(e.message, e));

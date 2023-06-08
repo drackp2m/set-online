@@ -1,11 +1,11 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
 
-import { ProtectTo } from '../auth/decorators';
 import { CreateUserInput, ValidateUserConstraintsInput } from './dtos';
 import { UserRole } from './interfaces';
 import { UserEntity } from './user.entity';
 import { UserService } from './user.service';
+import { ProtectTo } from '../auth/decorators';
 
 const pubSub = new PubSub();
 

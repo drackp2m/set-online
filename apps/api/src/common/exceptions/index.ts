@@ -1,6 +1,11 @@
-export { BadRequestException } from './bad-request.exception';
-export { BaseException } from './base.exception';
-export { ForbiddenException } from './forbiden.exception';
-export { NotFoundException } from './not-found.exception';
-export { TooManyRequestsExcelption } from './too-many-requests.exception';
-export { UnauthorizedException } from './unauthorized-exception.exception';
+export * from './bad-request.exception';
+
+export * from './base.exception';
+
+export * from './forbiden.exception';
+
+export * from './not-found.exception';
+
+export * from './too-many-requests.exception';
+
+export * from './unauthorized-exception.exception';

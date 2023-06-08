@@ -1,8 +1,8 @@
 import { registerAs } from '@nestjs/config';
 
-import { processEnv } from '../utils/env-schema';
+import { validate } from '../utils';
 
-export interface DatabaseConfig {
+interface DatabaseConfig {
 	host: string;
 	port: number;
 	dbName: string;
@@ -10,13 +10,17 @@ export interface DatabaseConfig {
 	password: string;
 }
 
+const config = validate(process.env);
+
+const isProduction = config.NODE_ENV === 'production';
+
 export const databaseConfig = registerAs(
 	'database',
 	(): DatabaseConfig => ({
-		host: processEnv.DB_HOST,
-		port: processEnv.DB_PORT,
-		dbName: processEnv.DB_NAME,
-		user: processEnv.DB_USER,
-		password: processEnv.DB_PASS,
+		host: config.DB_HOST,
+		port: isProduction ? config.DB_PORT : 5432,
+		dbName: config.DB_NAME,
+		user: config.DB_USER,
+		password: config.DB_PASS,
 	}),
 );

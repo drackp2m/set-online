@@ -1,24 +1,29 @@
 import { registerAs } from '@nestjs/config';
 
-import { EnvJwtAlgorithm, processEnv } from '../utils/env-schema';
+import { JwtAlgorithm } from '../environment';
+import { validate } from '../utils';
+
+const config = validate(process.env);
 
 export interface JwtConfig {
-	algorithm: EnvJwtAlgorithm;
+	algorithm: JwtAlgorithm;
 	secret: string;
 	issuer: string;
 	audience: string;
 	id: string;
-	expiresIn: string;
+	tokenExpiresIn: string;
+	refreshExpiresIn: string;
 }
 
 export const jwtConfig = registerAs(
 	'jwt',
 	(): JwtConfig => ({
-		algorithm: processEnv.JWT_ALGORITHM,
-		secret: processEnv.JWT_SECRET,
-		issuer: processEnv.JWT_ISSUER,
-		audience: processEnv.JWT_AUDIENCE,
-		id: processEnv.JWT_ID,
-		expiresIn: processEnv.JWT_TOKEN_EXPIRES_IN,
+		algorithm: config.JWT_ALGORITHM,
+		secret: config.JWT_SECRET,
+		issuer: config.JWT_ISSUER,
+		audience: config.JWT_AUDIENCE,
+		id: config.JWT_ID,
+		tokenExpiresIn: config.JWT_TOKEN_EXPIRES_IN,
+		refreshExpiresIn: config.JWT_TOKEN_EXPIRES_IN,
 	}),
 );

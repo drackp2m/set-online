@@ -20,7 +20,7 @@ export class JwtFactory implements JwtOptionsFactory {
 				issuer: jwtConfig.issuer,
 				audience: jwtConfig.issuer,
 				jwtid: jwtConfig.id,
-				expiresIn: jwtConfig.expiresIn,
+				expiresIn: jwtConfig.tokenExpiresIn,
 				notBefore: 0,
 			},
 		};

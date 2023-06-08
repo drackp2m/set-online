@@ -1,4 +1,51 @@
 {
-	"typescript.tsdk": "node_modules/typescript/lib",
-	"jest.jestCommandLine": "de set-node yarn test"
+	"editor.rulers": [80],
+	"editor.linkedEditing": true,
+	"problems.showCurrentInStatus": true,
+	"javascript.updateImportsOnFileMove.enabled": "always",
+	"javascript.preferences.importModuleSpecifier": "project-relative",
+	"typescript.updateImportsOnFileMove.enabled": "always",
+	"typescript.preferences.importModuleSpecifier": "project-relative",
+	"eslint.validate": ["javascript", "typescript"],
+	"eslint.format.enable": true,
+	"eslint.lintTask.enable": true,
+	"stylelint.reportDescriptionlessDisables": true,
+	"stylelint.reportInvalidScopeDisables": true,
+	"stylelint.reportNeedlessDisables": true,
+	"stylelint.snippet": ["css", "scss"],
+	"stylelint.validate": ["css", "scss"],
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"[javascript]": {
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint"
+	},
+	"[css]": {
+		"editor.defaultFormatter": "stylelint.vscode-stylelint"
+	},
+	"[scss]": {
+		"editor.defaultFormatter": "stylelint.vscode-stylelint"
+	},
+	"todo-tree.regex.regexCaseSensitive": false,
+	"todo-tree.general.statusBar": "tags",
+	"todo-tree.general.tags": ["ToDo", "FixMe"],
+	"todo-tree.highlights.customHighlight": {
+		"ToDo": {
+			"icon": "code",
+			"iconColour": "#7582D1",
+			"type": "tag",
+			"foreground": "#ffffff",
+			"background": "#4280dd",
+			"opacity": 100
+		},
+		"FixMe": {
+			"icon": "tools",
+			"iconColour": "#e34c26",
+			"type": "text",
+			"foreground": "#ffffff",
+			"background": "#dd4242",
+			"opacity": 100
+		}
+	}
 }
