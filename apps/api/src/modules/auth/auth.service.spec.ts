@@ -1,7 +1,9 @@
 import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
-import * as bcrypt from 'bcryptjs';
+import bcrypt from 'bcryptjs';
 
+import { AuthService } from './auth.service';
+import { TokenModel } from './dtos/token.model';
 import {
 	BaseException,
 	NotFoundException,
@@ -9,8 +11,6 @@ import {
 } from '../../common/exceptions';
 import { UserFaker } from '../user/factories';
 import { UserService } from '../user/user.service';
-import { AuthService } from './auth.service';
-import { TokenModel } from './dtos/token.model';
 
 const mockUuid = '00000000-0000-4000-0000-000000000000';
 

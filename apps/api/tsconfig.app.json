@@ -7,7 +7,7 @@
 		"emitDecoratorMetadata": true,
 		"target": "es2015"
 	},
-	"exclude": ["jest.config.ts", "**/*.spec.ts", "**/*.test.ts"],
-	"include": ["src/**/*.ts", "src/common/config/mikro-orm.config.js"],
+	"exclude": ["jest.config.ts", "src/**/*.spec.ts", "src/**/*.test.ts"],
+	"include": ["src/**/*.ts"],
 	"files": ["../../.env.d.ts"]
 }
