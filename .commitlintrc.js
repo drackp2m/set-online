@@ -26,7 +26,6 @@ module.exports = {
 	},
 	prompt: {
 		useEmoji: true,
-		// FixMe => try to use emoji at start woithout crash empty type rule
 		emojiAlign: 'left',
 		enableMultipleScopes: true,
 		emptyScopesAlias: 'no scopes',
