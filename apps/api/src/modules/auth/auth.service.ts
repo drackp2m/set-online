@@ -2,10 +2,10 @@ import { HttpStatus, Inject, Injectable, forwardRef } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcryptjs';
 
-import { BaseException, UnauthorizedException } from '../../common/exceptions';
-import { UserService } from '../user/user.service';
 import { LoginInput, TokenModel } from './dtos';
 import { JwtPayload } from './interfaces';
+import { BaseException, UnauthorizedException } from '../../common/exceptions';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class AuthService {
