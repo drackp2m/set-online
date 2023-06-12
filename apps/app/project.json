@@ -62,7 +62,10 @@
 					"browserTarget": "app:build:development",
 					"liveReload": false,
 					"host": "0.0.0.0",
-					"disableHostCheck": true
+					"disableHostCheck": true,
+					"ssl": true,
+					"sslKey": "certs/set-selfsigned.key",
+					"sslCert": "certs/set-selfsigned.crt"
 				}
 			},
 			"defaultConfiguration": "development",

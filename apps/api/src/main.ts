@@ -5,6 +5,7 @@ import { useContainer } from 'class-validator';
 
 import { AppModule } from './app.module';
 import { AppConfig } from './common/config/app.config';
+import { readFileSync } from 'fs';
 
 async function bootstrap(): Promise<{
 	protocol: string;
@@ -12,7 +13,12 @@ async function bootstrap(): Promise<{
 	port: number;
 	globalPrefix: string;
 }> {
-	const app = await NestFactory.create(AppModule);
+	const httpsOptions = {
+		key: readFileSync('certs/set-selfsigned.key'),
+		cert: readFileSync('certs/set-selfsigned.crt'),
+	};
+
+	const app = await NestFactory.create(AppModule, { httpsOptions });
 
 	const configService = app.get(ConfigService);
 	const config: AppConfig = configService.get<AppConfig>('app', {
