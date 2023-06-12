@@ -16,7 +16,7 @@
 			"name": "Angular on Firefox",
 			"type": "firefox",
 			"request": "launch",
-			"url": "http://localhost:4200",
+			"url": "https://localhost:14200",
 			"pathMappings": [
 				{
 					"url": "webpack:///apps",
