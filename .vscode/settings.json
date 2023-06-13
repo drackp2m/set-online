@@ -1,5 +1,5 @@
 {
-	"editor.rulers": [80],
+	"editor.rulers": [100],
 	"editor.linkedEditing": true,
 	"problems.showCurrentInStatus": true,
 	"javascript.updateImportsOnFileMove.enabled": "always",
@@ -47,5 +47,8 @@
 			"background": "#dd4242",
 			"opacity": 100
 		}
+	},
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	}
 }

@@ -1,7 +1,13 @@
 {
 	"useTabs": true,
-	"tabWidth": 2,
-	"printWidth": 80,
 	"singleQuote": true,
-	"trailingComma": "all"
+	"trailingComma": "all",
+  "overrides": [
+    {
+      "files": "*.html",
+      "options": {
+        "parser": "angular"
+      }
+    }
+  ]
 }
