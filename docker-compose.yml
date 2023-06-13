@@ -1,0 +1,53 @@
+version: '3.8'
+
+networks:
+  set-network:
+    name: set-network
+
+services:
+  set-db:
+    image: postgres:15-alpine
+    container_name: set-db
+    hostname: set-db
+    networks:
+      - set-network
+    ports:
+      - ${DB_PORT}:5432
+    volumes:
+      - .pgdata:/var/lib/postgresql/data
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      TZ: Europe/Madrid
+      PGTZ: Europe/Madrid
+    restart: unless-stopped
+    tty: true
+
+  set-nx:
+    container_name: set-nx
+    hostname: set-nx
+    working_dir: /usr/src/app
+    build:
+      context: .
+      target: dev
+    networks:
+      - set-network
+    ports:
+      - ${APP_PORT}:4200
+      - ${API_PORT}:3000
+      - ${API_DEBUG_PORT}:9229
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      MIKRO_ORM_CLI_USE_TS_NODE: true
+      MIKRO_ORM_CLI_TS_CONFIG_PATH: apps/api/tsconfig.app.json
+      MIKRO_ORM_CLI: apps/api/src/common/config/mikro-orm.config.ts
+      PATH: $PATH:/usr/src/app/node_modules/.bin
+      TZ: Europe/Madrid
+    depends_on:
+      - set-db
+    restart: unless-stopped
+    tty: true
