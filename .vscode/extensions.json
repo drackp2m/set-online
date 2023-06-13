@@ -1,0 +1,18 @@
+{
+	"recommendations": [
+		"nrwl.angular-console",
+		"editorconfig.editorconfig",
+		"esbenp.prettier-vscode",
+		"dbaeumer.vscode-eslint",
+		"stylelint.vscode-stylelint",
+		"angular.ng-template",
+		"cyrilletuzi.angular-schematics",
+		"firsttris.vscode-jest-runner",
+		"ryanluker.vscode-coverage-gutters",
+		"gruntfuggly.todo-tree",
+		"ms-vscode-remote.vscode-remote-extensionpack",
+		"eamodio.gitlens",
+		"kumar-harsh.graphql-for-vscode",
+		"usernamehw.errorlens"
+	]
+}
