@@ -1,8 +1,9 @@
 import { Entity, Enum, Property } from '@mikro-orm/core';
 import { Field, ObjectType } from '@nestjs/graphql';
 
-import { UserRole } from './interfaces';
 import { BaseEntity } from '../../common/utils';
+
+import { UserRole } from './interfaces';
 
 @Entity({ tableName: 'users' })
 @ObjectType({ description: 'user ' })

@@ -13,10 +13,9 @@ import { Component, ViewEncapsulation } from '@angular/core';
 		<style>
 			html {
 				-webkit-text-size-adjust: 100%;
-				font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-					'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
-					'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-					'Noto Color Emoji';
+				font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+					'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+					'Segoe UI Symbol', 'Noto Color Emoji';
 				line-height: 1.5;
 				tab-size: 4;
 				scroll-behavior: smooth;
@@ -50,8 +49,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
 				text-decoration: inherit;
 			}
 			pre {
-				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-					'Liberation Mono', 'Courier New', monospace;
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+					'Courier New', monospace;
 			}
 			svg {
 				display: block;
@@ -66,8 +65,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
 				background-color: rgba(55, 65, 81, 1);
 				border-radius: 0.25rem;
 				color: rgba(229, 231, 235, 1);
-				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-					'Liberation Mono', 'Courier New', monospace;
+				font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+					'Courier New', monospace;
 				overflow: scroll;
 				padding: 0.5rem 0.75rem;
 			}
@@ -184,9 +183,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
 				display: flex;
 				margin-top: 1rem;
 				padding: 1rem;
-				transition-property: background-color, border-color, color, fill, stroke,
-					opacity, box-shadow, transform, filter, backdrop-filter,
-					-webkit-backdrop-filter;
+				transition-property: background-color, border-color, color, fill, stroke, opacity,
+					box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
 				transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 				transition-duration: 150ms;
 				width: 100%;
@@ -194,9 +192,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
 			.list-item-link svg:first-child {
 				margin-right: 1rem;
 				height: 1.5rem;
-				transition-property: background-color, border-color, color, fill, stroke,
-					opacity, box-shadow, transform, filter, backdrop-filter,
-					-webkit-backdrop-filter;
+				transition-property: background-color, border-color, color, fill, stroke, opacity,
+					box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
 				transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 				transition-duration: 150ms;
 				width: 1.5rem;
@@ -204,9 +201,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
 			.list-item-link > span {
 				flex-grow: 1;
 				font-weight: 400;
-				transition-property: background-color, border-color, color, fill, stroke,
-					opacity, box-shadow, transform, filter, backdrop-filter,
-					-webkit-backdrop-filter;
+				transition-property: background-color, border-color, color, fill, stroke, opacity,
+					box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
 				transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 				transition-duration: 150ms;
 			}
@@ -217,9 +213,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
 				font-size: 0.75rem;
 				font-weight: 300;
 				line-height: 1rem;
-				transition-property: background-color, border-color, color, fill, stroke,
-					opacity, box-shadow, transform, filter, backdrop-filter,
-					-webkit-backdrop-filter;
+				transition-property: background-color, border-color, color, fill, stroke, opacity,
+					box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
 				transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 				transition-duration: 150ms;
 			}
@@ -248,17 +243,15 @@ import { Component, ViewEncapsulation } from '@angular/core';
 			.button-pill {
 				padding: 1.5rem 2rem;
 				transition-duration: 300ms;
-				transition-property: background-color, border-color, color, fill, stroke,
-					opacity, box-shadow, transform, filter, backdrop-filter,
-					-webkit-backdrop-filter;
+				transition-property: background-color, border-color, color, fill, stroke, opacity,
+					box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
 				transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 				align-items: center;
 				display: flex;
 			}
 			.button-pill svg {
-				transition-property: background-color, border-color, color, fill, stroke,
-					opacity, box-shadow, transform, filter, backdrop-filter,
-					-webkit-backdrop-filter;
+				transition-property: background-color, border-color, color, fill, stroke, opacity,
+					box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
 				transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 				transition-duration: 150ms;
 				flex-shrink: 0;
@@ -382,9 +375,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
 				font-weight: 400;
 				padding: 0.5rem;
 				cursor: pointer;
-				transition-property: background-color, border-color, color, fill, stroke,
-					opacity, box-shadow, transform, filter, backdrop-filter,
-					-webkit-backdrop-filter;
+				transition-property: background-color, border-color, color, fill, stroke, opacity,
+					box-shadow, transform, filter, backdrop-filter, -webkit-backdrop-filter;
 				transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 				transition-duration: 150ms;
 			}
@@ -688,11 +680,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 						</a>
 						<div id="nx-cloud" class="rounded shadow">
 							<div>
-								<svg
-									viewBox="0 0 120 120"
-									fill="none"
-									xmlns="http://www.w3.org/2000/svg"
-								>
+								<svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path
 										d="M120 15V30C103.44 30 90 43.44 90 60C90 76.56 76.56 90 60 90C43.44 90 30 103.44 30 120H15C6.72 120 0 113.28 0 105V15C0 6.72 6.72 0 15 0H105C113.28 0 120 6.72 120 15Z"
 										fill="#0E2039"
@@ -707,16 +695,9 @@ import { Component, ViewEncapsulation } from '@angular/core';
 									<span> Enable faster CI & better DX </span>
 								</h2>
 							</div>
-							<p>
-								You can activate distributed tasks executions and caching by
-								running:
-							</p>
+							<p>You can activate distributed tasks executions and caching by running:</p>
 							<pre>nx connect-to-nx-cloud</pre>
-							<a
-								href="https://nx.app/?utm_source=nx-project"
-								target="_blank"
-								rel="noreferrer"
-							>
+							<a href="https://nx.app/?utm_source=nx-project" target="_blank" rel="noreferrer">
 								What is Nx Cloud?
 							</a>
 						</div>

@@ -1,7 +1,7 @@
 {
 	"files": ["*.css", "**/*.css"],
 	"extends": ["stylelint-config-standard-scss", "stylelint-config-clean-order"],
-	"plugins": ["stylelint-scss", "stylelint-order"],
+	"plugins": ["stylelint-prettier"],
 	"defaultSeverity": "warning",
 	"ignoreFiles": ["**/_*.scss"],
 	"overrides": [
@@ -11,8 +11,7 @@
 		}
 	],
 	"rules": {
-		"indentation": "tab",
-		"string-quotes": "single",
-		"color-hex-length": "long"
+    "prettier/prettier": true,
+		"color-hex-length": "short"
 	}
 }

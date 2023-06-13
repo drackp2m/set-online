@@ -11998,7 +11998,7 @@ stylelint-config-standard-scss@9.0.0:
     stylelint-config-recommended-scss "^11.0.0"
     stylelint-config-standard "^33.0.0"
 
-stylelint-config-standard@33.0.0, stylelint-config-standard@^33.0.0:
+stylelint-config-standard@^33.0.0:
   version "33.0.0"
   resolved "https://registry.npmjs.org/stylelint-config-standard/-/stylelint-config-standard-33.0.0.tgz"
   integrity sha512-eyxnLWoXImUn77+ODIuW9qXBDNM+ALN68L3wT1lN2oNspZ7D9NVGlNHb2QCUn4xDug6VZLsh0tF8NyoYzkgTzg==
@@ -12012,6 +12012,13 @@ stylelint-order@^6.0.2:
   dependencies:
     postcss "^8.4.21"
     postcss-sorting "^8.0.2"
+
+stylelint-prettier@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/stylelint-prettier/-/stylelint-prettier-3.0.0.tgz#57028b99866ed4c3ae045ddd891bf9a77d274726"
+  integrity sha512-kIks1xw6np0zElokMT2kP6ar3S4MBoj6vUtPJuND1pFELMpZxVS/0uHPR4HDAVn0WAD3I5oF0IA3qBFxBpMkLg==
+  dependencies:
+    prettier-linter-helpers "^1.0.0"
 
 stylelint-scss@^4.6.0:
   version "4.7.0"

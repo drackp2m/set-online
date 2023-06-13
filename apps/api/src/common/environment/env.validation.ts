@@ -1,10 +1,10 @@
 import { plainToInstance } from 'class-transformer';
 import { IsNotEmpty, IsNumber, IsString, validateSync } from 'class-validator';
 
-import { ApiProtocol } from '.';
-
 import { JwtAlgorithm } from './jwt-algorithm.type';
 import { NodeEnv } from './node-env.type';
+
+import { ApiProtocol } from '.';
 
 class EnvironmentVariables {
 	@IsString()

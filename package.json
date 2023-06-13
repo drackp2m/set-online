@@ -17,8 +17,8 @@
 		"migration:execute": "mikro-orm migration:up",
 		"prettier": "prettier -c --loglevel warn",
 		"prettier:fix": "prettier -w --loglevel warn",
-		"lint": "eslint -f tools/eslint-formatter --max-warnings 0",
-		"lint:fix": "yarn lint --fix",
+		"eslint": "eslint --max-warnings 0",
+		"eslint:fix": "yarn eslint --fix",
 		"stylelint": "stylelint --max-warnings 0",
 		"stylelint:fix": "yarn stylelint --fix",
 		"prepare": "husky install"
@@ -117,8 +117,8 @@
 		"prettier": "2.8.8",
 		"stylelint": "15.7.0",
 		"stylelint-config-clean-order": "5.0.1",
-		"stylelint-config-standard": "33.0.0",
 		"stylelint-config-standard-scss": "9.0.0",
+		"stylelint-prettier": "^3.0.0",
 		"ts-jest": "29.1.0",
 		"ts-node": "10.9.1",
 		"typescript": "5.0.4"

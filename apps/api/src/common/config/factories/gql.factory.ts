@@ -8,12 +8,9 @@ import { AppConfig } from '../app.config';
 
 @Injectable()
 export class GqlFactory implements GqlOptionsFactory {
-	private readonly config: AppConfig = this.configService.get<AppConfig>(
-		'app',
-		{
-			infer: true,
-		},
-	);
+	private readonly config: AppConfig = this.configService.get<AppConfig>('app', {
+		infer: true,
+	});
 
 	constructor(private readonly configService: ConfigService) {}
 
@@ -37,9 +34,7 @@ export class GqlFactory implements GqlOptionsFactory {
 				'graphql-ws': true,
 			},
 			playground: false,
-			plugins: [
-				...(isProduction ? [] : [ApolloServerPluginLandingPageLocalDefault()]),
-			],
+			plugins: [...(isProduction ? [] : [ApolloServerPluginLandingPageLocalDefault()])],
 		};
 	}
 }

@@ -1,8 +1,9 @@
+import { existsSync, readdirSync } from 'fs';
+
 import { AnyEntity, EntityClass } from '@mikro-orm/core';
 import { MikroOrmModuleSyncOptions } from '@mikro-orm/nestjs';
 
 import { databaseConfig } from './database.config';
-import { existsSync, readdirSync } from 'fs';
 
 export default async (): Promise<MikroOrmModuleSyncOptions> => ({
 	type: 'postgresql',
@@ -20,9 +21,7 @@ export default async (): Promise<MikroOrmModuleSyncOptions> => ({
 async function getEntities(): Promise<EntityClass<AnyEntity>[]> {
 	const promises = readdirSync('apps/api/src/modules')
 		.map((directory) => {
-			if (
-				existsSync(`apps/api/src/modules/${directory}/${directory}.entity.ts`)
-			) {
+			if (existsSync(`apps/api/src/modules/${directory}/${directory}.entity.ts`)) {
 				return require(`../../modules/${directory}/${directory}.entity.ts`);
 			}
 		})
@@ -30,7 +29,5 @@ async function getEntities(): Promise<EntityClass<AnyEntity>[]> {
 
 	const modules = await Promise.all(promises);
 
-	return modules.flatMap((module) =>
-		Object.keys(module).map((className) => module[className]),
-	);
+	return modules.flatMap((module) => Object.keys(module).map((className) => module[className]));
 }

@@ -5,6 +5,7 @@ import { NotFoundException } from '../../../common/exceptions';
 import { UserFaker } from '../factories';
 import { UserEntity } from '../user.entity';
 import { UserService } from '../user.service';
+
 import { IsUniqueUserPropRule } from './is-unique-user-prop.validator';
 
 describe('IsUniqueUserPropRule', () => {
@@ -14,10 +15,7 @@ describe('IsUniqueUserPropRule', () => {
 	let userService: jest.Mocked<Partial<UserService>>;
 
 	const mockUuid = '00000000-0000-4000-0000-000000000000';
-	const mockUser = userFaker.makeOne(
-		{ uuid: mockUuid },
-		{ createdFrom: '2010' },
-	) as UserEntity;
+	const mockUser = userFaker.makeOne({ uuid: mockUuid }, { createdFrom: '2010' }) as UserEntity;
 
 	beforeAll(async () => {
 		userService = {
@@ -25,10 +23,7 @@ describe('IsUniqueUserPropRule', () => {
 		};
 
 		const module: TestingModule = await Test.createTestingModule({
-			providers: [
-				IsUniqueUserPropRule,
-				{ provide: UserService, useValue: userService },
-			],
+			providers: [IsUniqueUserPropRule, { provide: UserService, useValue: userService }],
 		}).compile();
 
 		validator = module.get<IsUniqueUserPropRule>(IsUniqueUserPropRule);
