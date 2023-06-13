@@ -3,8 +3,8 @@ import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { useContainer } from 'class-validator';
 
-import { AppModule } from './app.module';
 import { AppConfig } from './common/config/app.config';
+import { AppModule } from './modules/app/app.module';
 import { readFileSync } from 'fs';
 
 async function bootstrap(): Promise<{
@@ -50,9 +50,7 @@ bootstrap()
 		const playgroundUrl = `${protocol}://${domain}:${port}/graphql`;
 
 		Logger.log(
-			`🚀 GraphQL Playground ready at ${playgroundUrl}, started in ${process
-				.uptime()
-				.toFixed(3)}s`,
+			`🚀 GraphQL Playground ready at ${playgroundUrl}, started in ${process.uptime().toFixed(3)}s`,
 			'Bootstrap',
 		);
 	})
