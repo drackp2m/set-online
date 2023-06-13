@@ -4,6 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UnauthorizedException } from '../../../common/exceptions';
 import { UserFaker } from '../../user/factories';
 import { UserEntity } from '../../user/user.entity';
+
 import { JwtGuard } from './jwt.guard';
 
 describe('JwtGuard', () => {
@@ -34,12 +35,7 @@ describe('JwtGuard', () => {
 
 	describe('getRequest', () => {
 		it('should transform the context correctly from GraphQL executation context', () => {
-			executionContext.getArgs.mockReturnValueOnce([
-				{},
-				{},
-				{ req: { key: 'value' } },
-				{},
-			]);
+			executionContext.getArgs.mockReturnValueOnce([{}, {}, { req: { key: 'value' } }, {}]);
 
 			const result = guard.getRequest(executionContext as ExecutionContext);
 
@@ -49,8 +45,7 @@ describe('JwtGuard', () => {
 
 	describe('handleRequest', () => {
 		it('should throws UnauthorizedException when pass error', () => {
-			const execution = () =>
-				guard.handleRequest<UserEntity>(new Error(), undefined);
+			const execution = () => guard.handleRequest<UserEntity>(new Error(), undefined);
 
 			expect(execution).toThrow(UnauthorizedException);
 		});

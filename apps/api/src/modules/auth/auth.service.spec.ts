@@ -2,15 +2,12 @@ import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import bcrypt from 'bcryptjs';
 
-import { AuthService } from './auth.service';
-import { TokenModel } from './dtos/token.model';
-import {
-	BaseException,
-	NotFoundException,
-	UnauthorizedException,
-} from '../../common/exceptions';
+import { BaseException, NotFoundException, UnauthorizedException } from '../../common/exceptions';
 import { UserFaker } from '../user/factories';
 import { UserService } from '../user/user.service';
+
+import { AuthService } from './auth.service';
+import { TokenModel } from './dtos/token.model';
 
 const mockUuid = '00000000-0000-4000-0000-000000000000';
 
@@ -20,10 +17,7 @@ describe('AuthService', () => {
 	let jwtService: jest.Mocked<Partial<JwtService>>;
 
 	const userFaker = new UserFaker();
-	const mockUser = userFaker.makeOne(
-		{ uuid: mockUuid },
-		{ createdFrom: '2010' },
-	);
+	const mockUser = userFaker.makeOne({ uuid: mockUuid }, { createdFrom: '2010' });
 	const mockJwtToken =
 		'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJKZXN0IiwiaXNzIjoiVW5pdmVyc2UiLCJzdWIiOiI0MiIsImV4cCI6NjQ4NjAwMTIwfQ.VJK798GWnHeEm3dETnrlKemINGqaZ286tDZg9aUhAh8';
 

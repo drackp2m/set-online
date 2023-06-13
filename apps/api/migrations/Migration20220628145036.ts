@@ -5,15 +5,9 @@ export class Migration20220628145036 extends Migration {
 		this.addSql(
 			'create table "users" ("uuid" varchar(255) not null, "created_at" timestamptz(0) not null, "updated_at" timestamptz(0) not null, "username" varchar(255) not null, "email" varchar(255) not null, "password" varchar(255) not null);',
 		);
-		this.addSql(
-			'alter table "users" add constraint "users_username_unique" unique ("username");',
-		);
-		this.addSql(
-			'alter table "users" add constraint "users_email_unique" unique ("email");',
-		);
-		this.addSql(
-			'alter table "users" add constraint "users_pkey" primary key ("uuid");',
-		);
+		this.addSql('alter table "users" add constraint "users_username_unique" unique ("username");');
+		this.addSql('alter table "users" add constraint "users_email_unique" unique ("email");');
+		this.addSql('alter table "users" add constraint "users_pkey" primary key ("uuid");');
 	}
 
 	async down(): Promise<void> {

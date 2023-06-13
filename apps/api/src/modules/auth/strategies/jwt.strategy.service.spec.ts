@@ -6,6 +6,7 @@ import { UserFaker } from '../../user/factories';
 import { UserEntity } from '../../user/user.entity';
 import { UserService } from '../../user/user.service';
 import { JwtPayload } from '../interfaces/jwt-payload.interface';
+
 import { JwtStrategyService } from './jwt.strategy.service';
 
 describe('JwtStrategyService', () => {
@@ -25,10 +26,7 @@ describe('JwtStrategyService', () => {
 		sub: '42',
 		jti: mockUuid,
 	};
-	const mockUser = userFaker.makeOne(
-		{ uuid: mockUuid },
-		{ createdFrom: '2010' },
-	) as UserEntity;
+	const mockUser = userFaker.makeOne({ uuid: mockUuid }, { createdFrom: '2010' }) as UserEntity;
 
 	beforeAll(async () => {
 		configService = {

@@ -2,10 +2,11 @@ import { HttpStatus, Inject, Injectable, forwardRef } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcryptjs';
 
-import { LoginInput, TokenModel } from './dtos';
-import { JwtPayload } from './interfaces';
 import { BaseException, UnauthorizedException } from '../../common/exceptions';
 import { UserService } from '../user/user.service';
+
+import { LoginInput, TokenModel } from './dtos';
+import { JwtPayload } from './interfaces';
 
 @Injectable()
 export class AuthService {
@@ -27,10 +28,7 @@ export class AuthService {
 		return new TokenModel({ token });
 	}
 
-	async passwordMatch(
-		password: string,
-		hashedPassword: string,
-	): Promise<boolean> {
+	async passwordMatch(password: string, hashedPassword: string): Promise<boolean> {
 		return await compare(password, hashedPassword);
 	}
 

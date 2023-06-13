@@ -5,6 +5,7 @@ import { JwtModule } from '@nestjs/jwt';
 
 import { JwtFactory } from '../../common/config/factories';
 import { UserModule } from '../user/user.module';
+
 import { AuthResolver } from './auth.resolver';
 import { AuthService } from './auth.service';
 import { JwtGuard } from './guards';

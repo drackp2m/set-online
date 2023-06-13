@@ -1,8 +1,5 @@
 import { Connection, IDatabaseDriver } from '@mikro-orm/core';
-import {
-	MikroOrmModuleOptions,
-	MikroOrmOptionsFactory,
-} from '@mikro-orm/nestjs';
+import { MikroOrmModuleOptions, MikroOrmOptionsFactory } from '@mikro-orm/nestjs';
 import { Injectable } from '@nestjs/common';
 
 import mikroOrmConfig from '../mikro-orm.config';

@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker';
 
 import { BasicFaker } from './basic.faker';
+
 export class DateFaker {
 	private readonly basicFaker = new BasicFaker();
 	private readonly now = new Date();
@@ -22,8 +23,6 @@ export class DateFaker {
 	}
 
 	modifiedAt(): Date {
-		return this.basicFaker.boolean()
-			? this.created
-			: faker.date.between(this.created, this.now);
+		return this.basicFaker.boolean() ? this.created : faker.date.between(this.created, this.now);
 	}
 }

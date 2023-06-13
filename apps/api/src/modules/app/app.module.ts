@@ -4,13 +4,14 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { appConfig, databaseConfig, jwtConfig } from '../../common/config';
 import { GqlFactory, MikroOrmFactory } from '../../common/config/factories';
 import { GqlThrottlerModule } from '../../gql-throttler/gql-throttler.module';
 import { AuthModule } from '../../modules/auth/auth.module';
 import { UserModule } from '../../modules/user/user.module';
+
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
 	imports: [

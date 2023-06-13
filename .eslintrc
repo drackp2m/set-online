@@ -4,7 +4,69 @@
 	"plugins": ["@nx"],
 	"overrides": [
 		{
-			"files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+			"files": ["*.ts"],
+			"plugins": ["import", "unused-imports"],
+			"extends": ["plugin:@nx/typescript"],
+			"parserOptions": {
+				"ecmaVersion": 2023,
+				"sourceType": "module"
+			},
+			"settings": {
+				"import/ignore": ["node_modules"],
+				"import/resolver": {
+					"node": true,
+					"typescript": {
+						"project": "tsconfig.base.json"
+					}
+				}
+			},
+			"rules": {
+				"unused-imports/no-unused-imports": "error",
+				"@typescript-eslint/no-unused-vars": [
+					"error",
+					{
+						"argsIgnorePattern": "^_",
+						"varsIgnorePattern": "^_",
+						"caughtErrorsIgnorePattern": "^_"
+					}
+				],
+				"import/order": [
+					"warn",
+					{
+						"newlines-between": "always",
+						"alphabetize": { "order": "asc" },
+						"pathGroups": [
+							{
+								"pattern": "@set-online/**",
+								"group": "builtin",
+								"position": "before"
+							}
+						]
+					}
+				],
+				"sort-imports": [
+					"warn",
+					{
+						"ignoreDeclarationSort": true
+					}
+				],
+				"padding-line-between-statements": [
+					"warn",
+					{ "blankLine": "always", "next": "export", "prev": "*" }
+				],
+				"no-duplicate-imports": "warn",
+				"no-multiple-empty-lines": ["warn", { "max": 1 }],
+				"space-before-blocks": ["warn", "always"],
+				"newline-before-return": ["warn"]
+			}
+		},
+		{
+			"files": ["*.js"],
+			"extends": ["plugin:@nx/javascript"],
+			"rules": {}
+		},
+		{
+			"files": ["*.ts", "*.js"],
 			"rules": {
 				"@nx/enforce-module-boundaries": [
 					"error",
@@ -22,68 +84,11 @@
 			}
 		},
 		{
-			"files": ["*.ts", "*.tsx"],
-			"plugins": ["import", "unused-imports"],
-			"extends": ["plugin:@nx/typescript", "plugin:prettier/recommended"],
-			"parserOptions": {
-				"ecmaVersion": 2023,
-				"sourceType": "module"
-			},
-			"settings": {
-				"import/ignore": ["node_modules"],
-				"import/resolver": {
-					"node": true,
-					"typescript": {
-						"project": "tsconfig.base.json"
-					}
-				}
-			},
+			"files": ["*.ts", "*.js", "*.html"],
+			"extends": ["plugin:prettier/recommended"],
 			"rules": {
-				"prettier/prettier": "warn",
-				"unused-imports/no-unused-imports": "error",
-				"@typescript-eslint/no-unused-vars": [
-					"error",
-					{
-						"argsIgnorePattern": "^_",
-						"varsIgnorePattern": "^_",
-						"caughtErrorsIgnorePattern": "^_"
-					}
-				],
-				"import/order": [
-					"warn",
-					{
-						"newlines-between": "always",
-						"alphabetize": { "order": "asc" },
-						"groups": ["external", "index", "internal"],
-						"pathGroups": [
-							{
-								"pattern": "@set-online/**",
-								"group": "internal",
-								"position": "before"
-							}
-						]
-					}
-				],
-				"padding-line-between-statements": [
-					"warn",
-					{ "blankLine": "always", "next": "export", "prev": "*" }
-				],
-				// "sort-imports": [
-				// 	"warn",
-				// 	{
-				// 		"ignoreDeclarationSort": true
-				// 	}
-				// ],
-				"no-duplicate-imports": "warn",
-				"no-multiple-empty-lines": ["warn", { "max": 1 }],
-				"space-before-blocks": ["warn", "always"],
-				"newline-before-return": ["warn"]
+				"prettier/prettier": "warn"
 			}
-		},
-		{
-			"files": ["*.js", "*.jsx"],
-			"extends": ["plugin:@nx/javascript"],
-			"rules": {}
 		}
 	]
 }

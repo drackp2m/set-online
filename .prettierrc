@@ -1,13 +1,12 @@
 {
-	"useTabs": true,
 	"singleQuote": true,
 	"trailingComma": "all",
-  "overrides": [
-    {
-      "files": "*.html",
-      "options": {
-        "parser": "angular"
-      }
-    }
-  ]
+	"overrides": [
+		{
+			"files": "*.html",
+			"options": {
+				"parser": "angular"
+			}
+		}
+	]
 }

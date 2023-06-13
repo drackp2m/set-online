@@ -1,15 +1,12 @@
 import { ExecutionContext } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { RolesGuard } from '.';
-
-import {
-	ForbiddenException,
-	UnauthorizedException,
-} from '../../../common/exceptions';
+import { ForbiddenException, UnauthorizedException } from '../../../common/exceptions';
 import { UserFaker } from '../../user/factories';
 import { UserRole } from '../../user/interfaces';
 import { UserEntity } from '../../user/user.entity';
+
+import { RolesGuard } from '.';
 
 describe('RolesGuard', () => {
 	let guard: RolesGuard;
@@ -42,9 +39,7 @@ describe('RolesGuard', () => {
 			Reflect.deleteMetadata('roles', handler);
 			executionContext.getHandler.mockReturnValueOnce(handler);
 
-			const result = await guard.canActivate(
-				executionContext as ExecutionContext,
-			);
+			const result = await guard.canActivate(executionContext as ExecutionContext);
 
 			expect(result).toStrictEqual(true);
 		});
@@ -52,9 +47,7 @@ describe('RolesGuard', () => {
 		it('should throws Unauthorized when context has UserRole but args does not have User', async () => {
 			Reflect.defineMetadata('roles', UserRole.Registered, handler);
 			executionContext.getHandler.mockReturnValueOnce(handler);
-			executionContext.getArgs.mockReturnValueOnce(
-				getExecutionContextArgsWith(undefined),
-			);
+			executionContext.getArgs.mockReturnValueOnce(getExecutionContextArgsWith(undefined));
 
 			const result = guard.canActivate(executionContext as ExecutionContext);
 
@@ -66,9 +59,7 @@ describe('RolesGuard', () => {
 
 			executionContext.getHandler.mockReturnValueOnce(handler);
 			executionContext.getArgs.mockReturnValueOnce(
-				getExecutionContextArgsWith(
-					userFaker.makeOne({ role: UserRole.Guest }),
-				),
+				getExecutionContextArgsWith(userFaker.makeOne({ role: UserRole.Guest })),
 			);
 
 			const result = guard.canActivate(executionContext as ExecutionContext);
@@ -81,22 +72,16 @@ describe('RolesGuard', () => {
 
 			executionContext.getHandler.mockReturnValueOnce(handler);
 			executionContext.getArgs.mockReturnValueOnce(
-				getExecutionContextArgsWith(
-					userFaker.makeOne({ role: UserRole.Admin }),
-				),
+				getExecutionContextArgsWith(userFaker.makeOne({ role: UserRole.Admin })),
 			);
 
-			const result = await guard.canActivate(
-				executionContext as ExecutionContext,
-			);
+			const result = await guard.canActivate(executionContext as ExecutionContext);
 
 			expect(result).toStrictEqual(true);
 		});
 	});
 
-	function getExecutionContextArgsWith(
-		user: UserEntity,
-	): Record<string, unknown>[] {
+	function getExecutionContextArgsWith(user: UserEntity): Record<string, unknown>[] {
 		return [
 			{},
 			{},

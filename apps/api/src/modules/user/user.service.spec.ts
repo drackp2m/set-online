@@ -2,10 +2,8 @@ import { EntityData } from '@mikro-orm/core';
 import { EntityManager } from '@mikro-orm/postgresql';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import {
-	BadRequestException,
-	NotFoundException,
-} from '../../common/exceptions';
+import { BadRequestException, NotFoundException } from '../../common/exceptions';
+
 import { UserFaker } from './factories';
 import { UserEntity } from './user.entity';
 import { UserService } from './user.service';
@@ -36,10 +34,7 @@ describe('UserService', () => {
 	};
 
 	const userFaker = new UserFaker();
-	const expectedMockUsers: EntityData<UserEntity>[] = [
-		userFaker.makeOne(),
-		userFaker.makeOne(),
-	];
+	const expectedMockUsers: EntityData<UserEntity>[] = [userFaker.makeOne(), userFaker.makeOne()];
 
 	beforeAll(async () => {
 		jest.useFakeTimers();
@@ -52,10 +47,7 @@ describe('UserService', () => {
 		};
 
 		const module: TestingModule = await Test.createTestingModule({
-			providers: [
-				UserService,
-				{ provide: EntityManager, useValue: entityManager },
-			],
+			providers: [UserService, { provide: EntityManager, useValue: entityManager }],
 		}).compile();
 
 		service = module.get<UserService>(UserService);
