@@ -1,12 +1,11 @@
-import { HttpStatus, Inject, Injectable, forwardRef } from '@nestjs/common';
+import { Inject, Injectable, forwardRef } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compare } from 'bcryptjs';
 
-import { BaseException, UnauthorizedException } from '../../common/exceptions';
+import { UnauthorizedException } from '../../common/exceptions';
 import { UserService } from '../user/user.service';
 
 import { LoginInput, TokenModel } from './dtos';
-import { JwtPayload } from './interfaces';
 
 @Injectable()
 export class AuthService {
@@ -28,17 +27,7 @@ export class AuthService {
 		return new TokenModel({ token });
 	}
 
-	async passwordMatch(password: string, hashedPassword: string): Promise<boolean> {
+	private async passwordMatch(password: string, hashedPassword: string): Promise<boolean> {
 		return await compare(password, hashedPassword);
-	}
-
-	getPayloadFromJwt(token: string): JwtPayload {
-		const [, payload] = token.split('.');
-
-		if (!payload) {
-			throw new BaseException('payload missing', HttpStatus.BAD_REQUEST);
-		}
-
-		return JSON.parse(Buffer.from(payload, 'base64url').toString());
 	}
 }

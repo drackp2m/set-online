@@ -10,7 +10,7 @@ import { JwtPayload } from '../interfaces';
 
 @Injectable()
 export class JwtStrategyService extends PassportStrategy(Strategy) {
-	public constructor(
+	constructor(
 		private readonly configService: ConfigService,
 		private readonly userService: UserService,
 	) {
@@ -25,7 +25,7 @@ export class JwtStrategyService extends PassportStrategy(Strategy) {
 		} as StrategyOptions);
 	}
 
-	public async validate(jwt: JwtPayload): Promise<UserEntity> {
+	async validate(jwt: JwtPayload): Promise<UserEntity> {
 		return await this.userService.getOneBy('uuid', jwt.sub);
 	}
 }

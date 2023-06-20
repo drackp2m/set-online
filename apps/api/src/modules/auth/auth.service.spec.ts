@@ -2,7 +2,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import bcrypt from 'bcryptjs';
 
-import { BaseException, NotFoundException, UnauthorizedException } from '../../common/exceptions';
+import { NotFoundException, UnauthorizedException } from '../../common/exceptions';
 import { UserFaker } from '../user/factories';
 import { UserService } from '../user/user.service';
 
@@ -88,51 +88,6 @@ describe('AuthService', () => {
 
 			expect(jwtService.sign).toBeCalledTimes(1);
 			expect(jwtService.sign).toBeCalledWith({}, { subject: mockUuid });
-		});
-	});
-
-	describe('passwordMatch', () => {
-		it('should return False when BcryptService.compare return False', async () => {
-			jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(false as never);
-
-			const passwordMatch = await service.passwordMatch('pass', 'hash');
-
-			expect(passwordMatch).toBeFalsy();
-		});
-
-		it('should return True when BcryptService.compare return True', async () => {
-			jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(true as never);
-
-			const passwordMatch = await service.passwordMatch('pass', 'hash');
-
-			expect(passwordMatch).toBeTruthy();
-		});
-	});
-
-	describe('getPayloadFromJwt', () => {
-		it('should throw BaseException when not pass jwt', () => {
-			const execution = () => service.getPayloadFromJwt('anything');
-
-			expect(execution).toThrow(BaseException);
-		});
-
-		it('should throw SyntaxError when pass invalid jwt', () => {
-			const execution = () => service['getPayloadFromJwt']('bad.jwt');
-
-			expect(execution).toThrow(SyntaxError);
-		});
-
-		it('should return JwtPayload when pass valid jwt', () => {
-			const jwtPayload = service.getPayloadFromJwt(mockJwtToken);
-
-			const expectedPayload = {
-				aud: 'Jest',
-				iss: 'Universe',
-				sub: '42',
-				exp: 648600120,
-			};
-
-			expect(jwtPayload).toEqual(expectedPayload);
 		});
 	});
 });

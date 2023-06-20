@@ -9,7 +9,7 @@ import { UserEntity } from '../../user/user.entity';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
-	public async canActivate(context: ExecutionContext): Promise<boolean> {
+	async canActivate(context: ExecutionContext): Promise<boolean> {
 		const roles = new Reflector().get<UserRole[]>('roles', context.getHandler());
 
 		if (!roles) {

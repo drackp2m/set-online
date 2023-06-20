@@ -20,15 +20,16 @@ export class GqlFactory implements GqlOptionsFactory {
 		return {
 			driver: ApolloDriver,
 			autoSchemaFile: true,
-			// autoSchemaFile: 'apps/api/schema.gql',
+			// autoSchemaFile: 'libs/api-interfaces/src/lib/graphql/schema.graphql',
 			sortSchema: true,
+			context: ({ req, res }) => ({ req, res }),
+			includeStacktraceInErrorResponses: !isProduction,
+			// definitions: {
+			// 	path: 'libs/api-interfaces/src/lib/graphql/definitions.ts',
+			// },
 			buildSchemaOptions: {
 				dateScalarMode: 'isoDate',
 				numberScalarMode: 'float',
-			},
-			definitions: {
-				path: 'libs/api-interfaces/src/lib/schema.ts',
-				// outputAs: 'class',
 			},
 			subscriptions: {
 				'graphql-ws': true,

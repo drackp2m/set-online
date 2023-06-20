@@ -6,10 +6,10 @@ export class LoginInput {
 	@IsDefined()
 	@IsString()
 	@Field()
-	public username!: string;
+	username!: string;
 
 	@IsDefined()
 	@IsString()
 	@Field()
-	public password!: string;
+	password!: string;
 }

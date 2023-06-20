@@ -4,6 +4,7 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { useContainer } from 'class-validator';
+import cookieParser from 'cookie-parser';
 
 import { AppConfig } from './common/config/app.config';
 import { AppModule } from './modules/app/app.module';
@@ -21,18 +22,21 @@ async function bootstrap(): Promise<{
 
 	const app = await NestFactory.create(AppModule, { httpsOptions });
 
+	app.use(cookieParser());
+	app.enableCors({ origin: true, credentials: true });
+
 	const configService = app.get(ConfigService);
 	const config: AppConfig = configService.get<AppConfig>('app', {
 		infer: true,
 	});
 
+	app.setGlobalPrefix(config.prefix);
 	app.useGlobalPipes(
 		new ValidationPipe({
 			whitelist: true,
 			transform: true,
 		}),
 	);
-	app.setGlobalPrefix(config.prefix);
 
 	await app.listen(3000, '0.0.0.0');
 
