@@ -6,14 +6,16 @@ import { LoginGQL } from '../graphql/apollo-operations';
 
 import { AppComponent } from './app.component';
 
-class MockLoginGQL {}
-
 describe('AppComponent', () => {
+	const mockLoginGQL = {
+		watch: () => null,
+	};
+
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
 			declarations: [AppComponent],
 			imports: [HttpClientModule, ApolloTestingModule],
-			providers: [{ provide: LoginGQL, useClass: MockLoginGQL }],
+			providers: [{ provide: LoginGQL, useValue: mockLoginGQL }],
 		}).compileComponents();
 	}));
 
