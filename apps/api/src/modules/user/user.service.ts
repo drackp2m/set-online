@@ -19,7 +19,6 @@ export class UserService {
 		return this.entityManager.persistAndFlush(entity).then(
 			() => entity,
 			async (reason) => {
-				console.log(reason);
 				throw new BadRequestException(reason.detail);
 			},
 		);

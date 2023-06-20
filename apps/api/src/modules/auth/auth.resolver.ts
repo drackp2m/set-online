@@ -1,19 +1,32 @@
-import { Args, Query, Resolver } from '@nestjs/graphql';
+import { Args, Context, Query, Resolver } from '@nestjs/graphql';
+import { Response } from 'express';
 
 import { AuthService } from './auth.service';
-import { LoginInput, TokenModel } from './dtos';
+import { LoginInput } from './dtos';
+import { LoginOutput } from './dtos/login.output';
 
 @Resolver()
 export class AuthResolver {
-	public constructor(private readonly authService: AuthService) {}
+	constructor(private readonly authService: AuthService) {}
 
-	@Query(() => TokenModel)
-	public async login(
-		@Args('input', {
-			type: () => LoginInput,
-		})
-		loginInput: LoginInput,
-	): Promise<TokenModel> {
-		return this.authService.login(loginInput);
+	@Query(() => LoginOutput)
+	async login(
+		@Args('input') loginInput: LoginInput,
+		@Context('res') res: Response,
+	): Promise<LoginOutput> {
+		const token = await this.authService.login(loginInput);
+
+		res.cookie('jwt-token', token.token, {
+			secure: true,
+			httpOnly: true,
+			sameSite: true,
+			path: '/graphql',
+			expires: new Date(new Date().getTime() + 60000),
+		});
+
+		return new LoginOutput({
+			result: true,
+			message: token.token,
+		});
 	}
 }

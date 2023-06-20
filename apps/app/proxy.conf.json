@@ -1,6 +1,10 @@
 {
-	"/": {
-		"target": "https://localhost:3000/api",
+	"/graphql": {
+		"target": "https://localhost:3000",
+		"secure": false
+	},
+	"/api": {
+		"target": "https://localhost:3000",
 		"secure": false
 	}
 }

@@ -9,6 +9,6 @@ export default {
 	},
 	moduleFileExtensions: ['ts', 'js', 'html'],
 	coverageDirectory: '../../coverage/apps/api',
-	coverageReporters: ['html', ['text-summary', { skipFull: true }]],
+	coverageReporters: ['html', 'lcov', ['text-summary', { skipFull: true }]],
 	clearMocks: true,
 };

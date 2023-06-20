@@ -46,4 +46,16 @@
 	</div>
 
 	<p>Message: {{ hello$ | async | json }}</p>
+
+	<form (ngSubmit)="onSubmit()" [formGroup]="form">
+		<input type="text" formControlName="email" />
+		<input type="password" formControlName="password" />
+
+		<p>
+			{{ error ? 'Error: ' + error : '' }}
+			{{ token ? 'Token: ' + token : '' }}
+		</p>
+
+		<button type="submit">Send</button>
+	</form>
 </section>

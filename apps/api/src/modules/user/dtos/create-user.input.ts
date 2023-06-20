@@ -8,15 +8,15 @@ export class CreateUserInput {
 	@IsString()
 	@IsUniqueUserProp('username')
 	@Field()
-	public username!: string;
+	username!: string;
 
 	@IsString()
 	@Field()
-	public password!: string;
+	password!: string;
 
 	@IsOptional()
 	@IsEmail()
 	@IsUniqueUserProp('email')
 	@Field({ nullable: true })
-	public email?: string;
+	email?: string;
 }

@@ -1,11 +1,14 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
-export class TokenModel {
+export class LoginOutput {
 	@Field()
-	token: string;
+	result: boolean;
 
-	constructor(token: TokenModel) {
+	@Field()
+	message: string;
+
+	constructor(token: LoginOutput) {
 		Object.assign(this, token);
 	}
 }

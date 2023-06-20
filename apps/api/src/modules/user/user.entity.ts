@@ -6,7 +6,7 @@ import { BaseEntity } from '../../common/utils';
 import { UserRole } from './interfaces';
 
 @Entity({ tableName: 'users' })
-@ObjectType({ description: 'user ' })
+@ObjectType({ description: 'user' })
 export class UserEntity extends BaseEntity<UserEntity> {
 	@Property({ unique: true })
 	@Field()
