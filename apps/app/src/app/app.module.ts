@@ -8,10 +8,9 @@ import { HttpLink } from 'apollo-angular/http';
 
 import { AppComponent } from './app.component';
 import { DirectivesModule } from './directives/directives.module';
-import { NxWelcomeComponent } from './nx-welcome.component';
 
 @NgModule({
-	declarations: [AppComponent, NxWelcomeComponent],
+	declarations: [AppComponent],
 	imports: [BrowserModule, HttpClientModule, ApolloModule, DirectivesModule, ReactiveFormsModule],
 	providers: [
 		{

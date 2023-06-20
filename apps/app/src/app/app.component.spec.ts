@@ -1,13 +1,19 @@
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed, waitForAsync } from '@angular/core/testing';
+import { ApolloTestingModule } from 'apollo-angular/testing';
+
+import { LoginGQL } from '../graphql/apollo-operations';
 
 import { AppComponent } from './app.component';
+
+class MockLoginGQL {}
 
 describe('AppComponent', () => {
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
 			declarations: [AppComponent],
-			imports: [HttpClientModule],
+			imports: [HttpClientModule, ApolloTestingModule],
+			providers: [{ provide: LoginGQL, useClass: MockLoginGQL }],
 		}).compileComponents();
 	}));
 
