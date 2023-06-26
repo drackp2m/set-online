@@ -50,10 +50,10 @@ export type LoginOutput = {
 
 export type Mutation = {
 	__typename?: 'Mutation';
-	createUser: UserEntity;
+	register: UserEntity;
 };
 
-export type MutationcreateUserArgs = {
+export type MutationregisterArgs = {
 	input: CreateUserInput;
 };
 
@@ -105,6 +105,23 @@ const result: PossibleTypesResultData = {
 
 export default result;
 
+export type RegisterMutationVariables = Exact<{
+	input: CreateUserInput;
+}>;
+
+export type RegisterMutation = {
+	__typename?: 'Mutation';
+	register: {
+		__typename?: 'UserEntity';
+		createdAt: Date;
+		email?: string | null;
+		role: UserRole;
+		updatedAt: Date;
+		username: string;
+		uuid: string;
+	};
+};
+
 export type LoginQueryVariables = Exact<{
 	input: LoginInput;
 }>;
@@ -113,6 +130,45 @@ export type LoginQuery = {
 	__typename?: 'Query';
 	login: { __typename?: 'LoginOutput'; result: boolean; message: string };
 };
+
+export type GetUsersQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetUsersQuery = {
+	__typename?: 'Query';
+	getUsers: Array<{
+		__typename?: 'UserEntity';
+		uuid: string;
+		username: string;
+		email?: string | null;
+		role: UserRole;
+		createdAt: Date;
+		updatedAt: Date;
+	}>;
+};
+
+export const RegisterDocument = gql`
+	mutation Register($input: CreateUserInput!) {
+		register(input: $input) {
+			createdAt
+			email
+			role
+			updatedAt
+			username
+			uuid
+		}
+	}
+`;
+
+@Injectable({
+	providedIn: 'root',
+})
+export class RegisterGQL extends Apollo.Mutation<RegisterMutation, RegisterMutationVariables> {
+	override document = RegisterDocument;
+
+	constructor(apollo: Apollo.Apollo) {
+		super(apollo);
+	}
+}
 
 export const LoginDocument = gql`
 	query Login($input: LoginInput!) {
@@ -128,6 +184,30 @@ export const LoginDocument = gql`
 })
 export class LoginGQL extends Apollo.Query<LoginQuery, LoginQueryVariables> {
 	override document = LoginDocument;
+
+	constructor(apollo: Apollo.Apollo) {
+		super(apollo);
+	}
+}
+
+export const GetUsersDocument = gql`
+	query GetUsers {
+		getUsers {
+			uuid
+			username
+			email
+			role
+			createdAt
+			updatedAt
+		}
+	}
+`;
+
+@Injectable({
+	providedIn: 'root',
+})
+export class GetUsersGQL extends Apollo.Query<GetUsersQuery, GetUsersQueryVariables> {
+	override document = GetUsersDocument;
 
 	constructor(apollo: Apollo.Apollo) {
 		super(apollo);

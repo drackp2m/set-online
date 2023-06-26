@@ -1,17 +1,23 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { InMemoryCache } from '@apollo/client/core';
 import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 
 import { AppComponent } from './app.component';
-import { DirectivesModule } from './directives/directives.module';
+import { APP_ROUTES } from './app.routes';
 
 @NgModule({
 	declarations: [AppComponent],
-	imports: [BrowserModule, HttpClientModule, ApolloModule, DirectivesModule, ReactiveFormsModule],
+	imports: [
+		RouterOutlet,
+		RouterModule.forRoot(APP_ROUTES),
+		BrowserModule,
+		HttpClientModule,
+		ApolloModule,
+	],
 	providers: [
 		{
 			provide: APOLLO_OPTIONS,

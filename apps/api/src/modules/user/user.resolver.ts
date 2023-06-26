@@ -15,7 +15,7 @@ export class UserResolver {
 	constructor(private readonly userService: UserService) {}
 
 	@Mutation(() => UserEntity, {
-		name: 'createUser',
+		name: 'register',
 	})
 	insertOne(
 		@Args('input', {
