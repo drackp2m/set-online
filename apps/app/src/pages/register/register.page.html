@@ -1,0 +1,11 @@
+<h4>Register form</h4>
+
+<form [formGroup]="form" (submit)="onSubmit()">
+	<input type="text" formControlName="username" />
+	<input type="password" formControlName="password" />
+
+	<button type="submit">Send</button>
+</form>
+
+<a routerLink="/home">go to home</a>
+<a routerLink="/example">go to example</a>

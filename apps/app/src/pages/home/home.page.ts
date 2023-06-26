@@ -1,7 +1,6 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-	selector: 'set-online-nx-welcome',
 	template: `
 		<!--
      * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -819,7 +818,5 @@ nx affected:e2e</pre>
 			</div>
 		</div>
 	`,
-	styles: [],
-	encapsulation: ViewEncapsulation.None,
 })
-export class NxWelcomeComponent {}
+export class HomePage {}
