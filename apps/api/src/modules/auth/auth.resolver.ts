@@ -17,9 +17,9 @@ export class AuthResolver {
 		const token = await this.authService.login(loginInput);
 
 		res.cookie('jwt-token', token.token, {
-			secure: false,
-			httpOnly: false,
-			sameSite: false,
+			secure: true,
+			httpOnly: true,
+			sameSite: true,
 			path: '/graphql',
 			expires: new Date(new Date().getTime() + 60000),
 		});
