@@ -3,7 +3,7 @@ import { existsSync, readdirSync } from 'fs';
 import { AnyEntity, EntityClass } from '@mikro-orm/core';
 import { MikroOrmModuleSyncOptions } from '@mikro-orm/nestjs';
 
-import { databaseConfig } from './database.config';
+import { databaseConfig } from './registers/database.config';
 
 export default async (): Promise<MikroOrmModuleSyncOptions> => ({
 	type: 'postgresql',

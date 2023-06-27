@@ -50,12 +50,12 @@
 	<p>{{ users() }}</p>
 
 	<form (ngSubmit)="onSubmit()" [formGroup]="form">
-		<input type="text" formControlName="email" />
+		<input type="text" formControlName="username" />
 		<input type="password" formControlName="password" />
 
 		<p>
 			{{ error ? 'Error: ' + error : '' }}
-			{{ token ? 'Token: ' + token : '' }}
+			{{ response ? 'Response: ' + response : '' }}
 		</p>
 
 		<button type="submit">Send</button>

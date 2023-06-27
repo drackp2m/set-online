@@ -42,12 +42,6 @@ export type LoginInput = {
 	username: Scalars['String']['input'];
 };
 
-export type LoginOutput = {
-	__typename?: 'LoginOutput';
-	message: Scalars['String']['output'];
-	result: Scalars['Boolean']['output'];
-};
-
 export type Mutation = {
 	__typename?: 'Mutation';
 	register: UserEntity;
@@ -60,7 +54,7 @@ export type MutationregisterArgs = {
 export type Query = {
 	__typename?: 'Query';
 	getUsers: Array<UserEntity>;
-	login: LoginOutput;
+	login: Scalars['Boolean']['output'];
 	validateUserConstraints: Scalars['Boolean']['output'];
 };
 
@@ -126,10 +120,7 @@ export type LoginQueryVariables = Exact<{
 	input: LoginInput;
 }>;
 
-export type LoginQuery = {
-	__typename?: 'Query';
-	login: { __typename?: 'LoginOutput'; result: boolean; message: string };
-};
+export type LoginQuery = { __typename?: 'Query'; login: boolean };
 
 export type GetUsersQueryVariables = Exact<{ [key: string]: never }>;
 
@@ -172,10 +163,7 @@ export class RegisterGQL extends Apollo.Mutation<RegisterMutation, RegisterMutat
 
 export const LoginDocument = gql`
 	query Login($input: LoginInput!) {
-		login(input: $input) {
-			result
-			message
-		}
+		login(input: $input)
 	}
 `;
 

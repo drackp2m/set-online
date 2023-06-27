@@ -1,19 +1,9 @@
 import { registerAs } from '@nestjs/config';
 
-import { JwtAlgorithm } from '../environment';
-import { validate } from '../utils';
+import { validate } from '../../environment';
+import { JwtConfig } from '../types/jwt-config.type';
 
 const config = validate(process.env);
-
-export interface JwtConfig {
-	algorithm: JwtAlgorithm;
-	secret: string;
-	issuer: string;
-	audience: string;
-	id: string;
-	tokenExpiresIn: string;
-	refreshExpiresIn: string;
-}
 
 export const jwtConfig = registerAs(
 	'jwt',

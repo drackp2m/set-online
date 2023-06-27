@@ -20,11 +20,11 @@ export default class ExamplePage {
 
 	users: WritableSignal<number | undefined> = signal(undefined);
 
-	token!: string;
+	response!: string;
 	error!: string;
 
 	form = new FormGroup({
-		email: new FormControl('', [Validators.required, Validators.email]),
+		username: new FormControl('', [Validators.required]),
 		password: new FormControl('', [Validators.required]),
 	});
 
@@ -51,16 +51,16 @@ export default class ExamplePage {
 	}
 
 	private gqlLogin(): void {
-		if (!this.form.value.email || !this.form.value.password) return;
+		if (!this.form.value.username || !this.form.value.password) return;
 
 		this.loginGQL
-			.fetch({ input: { username: this.form.value.email, password: this.form.value.password } })
+			.fetch({ input: { username: this.form.value.username, password: this.form.value.password } })
 			.subscribe({
 				error: (error) => {
 					this.error = error.message;
 				},
 				next: (data) => {
-					this.token = data.data.login.message;
+					this.response = data.data.login ? 'Login successful' : 'Login failed';
 				},
 			});
 	}

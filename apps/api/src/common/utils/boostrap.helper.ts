@@ -1,9 +1,9 @@
 import { readFileSync } from 'fs';
 
 import { INestApplication, Logger, NestApplicationOptions, ValidationPipe } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 
-import { AppConfig } from '../config';
+import { ConfigurationService } from '../config/configuration.service';
+import { AppConfig } from '../config/types/app-config.type';
 
 export class BootstrapHelper {
 	static nestApplicationOptions: NestApplicationOptions = {
@@ -14,11 +14,9 @@ export class BootstrapHelper {
 	};
 
 	static appConfig = (app: INestApplication): AppConfig => {
-		const configService = app.get(ConfigService);
+		const configService = app.get(ConfigurationService);
 
-		return configService.get<AppConfig>('app', {
-			infer: true,
-		});
+		return configService.app;
 	};
 
 	static validationPipe = new ValidationPipe({

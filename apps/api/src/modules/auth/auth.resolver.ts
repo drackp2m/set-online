@@ -3,20 +3,19 @@ import { Response } from 'express';
 
 import { AuthService } from './auth.service';
 import { LoginInput } from './dtos';
-import { LoginOutput } from './dtos/login.output';
 
 @Resolver()
 export class AuthResolver {
 	constructor(private readonly authService: AuthService) {}
 
-	@Query(() => LoginOutput)
+	@Query(() => Boolean)
 	async login(
 		@Args('input') loginInput: LoginInput,
 		@Context('res') res: Response,
-	): Promise<LoginOutput> {
+	): Promise<boolean> {
 		const token = await this.authService.login(loginInput);
 
-		res.cookie('jwt-token', token.token, {
+		res.cookie('jwt-access-token', token, {
 			secure: true,
 			httpOnly: true,
 			sameSite: true,
@@ -24,9 +23,6 @@ export class AuthResolver {
 			expires: new Date(new Date().getTime() + 60000),
 		});
 
-		return new LoginOutput({
-			result: true,
-			message: token.token,
-		});
+		return true;
 	}
 }

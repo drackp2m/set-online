@@ -1,14 +1,7 @@
 import { registerAs } from '@nestjs/config';
 
-import { validate } from '../utils';
-
-interface DatabaseConfig {
-	host: string;
-	port: number;
-	dbName: string;
-	user: string;
-	password: string;
-}
+import { validate } from '../../environment';
+import { DatabaseConfig } from '../types/database-config.type';
 
 const config = validate(process.env);
 

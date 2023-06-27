@@ -5,7 +5,7 @@ import { compare } from 'bcryptjs';
 import { UnauthorizedException } from '../../common/exceptions';
 import { UserService } from '../user/user.service';
 
-import { LoginInput, TokenModel } from './dtos';
+import { LoginInput } from './dtos';
 
 @Injectable()
 export class AuthService {
@@ -15,7 +15,7 @@ export class AuthService {
 		private readonly jwtService: JwtService,
 	) {}
 
-	async login(input: LoginInput): Promise<TokenModel> {
+	async login(input: LoginInput): Promise<string> {
 		const user = await this.userService.getOneBy('username', input.username);
 
 		if (!(await this.passwordMatch(input.password, user.password))) {
@@ -24,7 +24,7 @@ export class AuthService {
 
 		const token = this.jwtService.sign({}, { subject: user.uuid });
 
-		return new TokenModel({ token });
+		return token;
 	}
 
 	private async passwordMatch(password: string, hashedPassword: string): Promise<boolean> {
