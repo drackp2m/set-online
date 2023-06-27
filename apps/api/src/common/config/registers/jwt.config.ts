@@ -13,7 +13,7 @@ export const jwtConfig = registerAs(
 		issuer: config.JWT_ISSUER,
 		audience: config.JWT_AUDIENCE,
 		id: config.JWT_ID,
-		tokenExpiresIn: config.JWT_TOKEN_EXPIRES_IN,
-		refreshExpiresIn: config.JWT_TOKEN_EXPIRES_IN,
+		accessTokenExpiresIn: config.JWT_ACCESS_TOKEN_EXPIRES_IN,
+		refreshTokenExpiresIn: config.JWT_REFRESH_TOKEN_EXPIRES_IN,
 	}),
 );

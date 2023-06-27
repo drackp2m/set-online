@@ -1,25 +1,36 @@
 import { Controller, Get } from '@nestjs/common';
 import { Context } from '@nestjs/graphql';
-import { Request, Response } from 'express';
+import { Response } from 'express';
 
-import { AuthService } from './auth.service';
+import { RefreshSessionUsecase } from './usecases/refresh-session.usecase';
 
 @Controller()
 export class AuthController {
-	constructor(private readonly authService: AuthService) {}
+	constructor(private readonly refreshSession: RefreshSessionUsecase) {}
 
-	@Get('refresh')
-	async refresh(@Context('res') res: Response, @Context('req') req: Request): Promise<void> {
-		const refresh = req.cookies['jwt-refresh'];
+	@Get('refresh-session')
+	async refresh(@Context('res') res: Response): Promise<void> {
+		const currentRefreshToken = res.req.cookies['jwt-refresh-token'];
 
-		console.log(refresh);
+		const { accessToken, refreshToken } = await this.refreshSession.execute(currentRefreshToken);
 
-		// res.cookie('jwt-token', token.token, {
-		// 	secure: true,
-		// 	httpOnly: true,
-		// 	sameSite: true,
-		// 	path: '/graphql',
-		// 	expires: new Date(new Date().getTime() + 60000),
-		// });
+		// ToDo => add expiration time to cookies
+		res.cookie('jwt-access-token', accessToken, {
+			secure: true,
+			httpOnly: true,
+			sameSite: true,
+			path: '/graphql',
+		});
+
+		res.cookie('jwt-refresh-token', refreshToken, {
+			secure: true,
+			httpOnly: true,
+			sameSite: true,
+			path: '/api/refresh-session',
+		});
+
+		console.log('refreshed session');
+
+		res.status(200).send();
 	}
 }

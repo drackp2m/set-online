@@ -34,7 +34,7 @@ import { AppService } from './app.service';
 		AuthModule,
 		UserModule,
 	],
-	controllers: [AppController],
 	providers: [AppService, ConfigurationService],
+	controllers: [AppController],
 })
 export class AppModule {}

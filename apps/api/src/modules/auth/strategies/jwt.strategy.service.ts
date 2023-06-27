@@ -14,11 +14,11 @@ export class JwtStrategyService extends PassportStrategy(Strategy) {
 		private readonly configService: ConfigurationService,
 		private readonly userService: UserService,
 	) {
-		const secret = configService.jwt.secret;
-
 		super({
-			jwtFromRequest: ExtractJwt.fromExtractors([(req: Request) => req.cookies['jwt-token']]),
-			secretOrKey: secret,
+			jwtFromRequest: ExtractJwt.fromExtractors([
+				(req: Request) => req.cookies['jwt-access-token'],
+			]),
+			secretOrKey: configService.jwt.secret,
 			ignoreExpiration: false,
 		} as StrategyOptions);
 	}
