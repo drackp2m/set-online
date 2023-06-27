@@ -51,4 +51,5 @@ services:
     depends_on:
       - set-db
     restart: unless-stopped
+    stdin_open: true
     tty: true

@@ -1,6 +1,7 @@
-import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 
+import { ConfigurationService } from '../../../common/config/configuration.service';
+import { JwtConfig } from '../../../common/config/types/jwt-config.type';
 import { NotFoundException } from '../../../common/exceptions/not-found.exception';
 import { UserFaker } from '../../user/factories';
 import { UserEntity } from '../../user/user.entity';
@@ -13,7 +14,8 @@ describe('JwtStrategyService', () => {
 	const userFaker = new UserFaker();
 
 	let service: JwtStrategyService;
-	let configService: jest.Mocked<Partial<ConfigService>>;
+	let configurationService: jest.Mocked<Partial<ConfigurationService>>;
+	// let configService: jest.Mocked<Partial<ConfigService>>;
 	let userService: jest.Mocked<Partial<UserService>>;
 
 	const mockUuid = '00000000-0000-4000-0000-000000000000';
@@ -29,11 +31,9 @@ describe('JwtStrategyService', () => {
 	const mockUser = userFaker.makeOne({ uuid: mockUuid }, { createdFrom: '2010' }) as UserEntity;
 
 	beforeAll(async () => {
-		configService = {
-			get: jest.fn(),
+		configurationService = {
+			jwt: { secret: '1234' } as JwtConfig,
 		};
-
-		configService.get.mockReturnValueOnce({ secret: '1234' });
 
 		userService = {
 			getOneBy: jest.fn(),
@@ -42,7 +42,8 @@ describe('JwtStrategyService', () => {
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
 				JwtStrategyService,
-				{ provide: ConfigService, useValue: configService },
+				{ provide: ConfigurationService, useValue: configurationService },
+				// { provide: ConfigService, useValue: configService },
 				{ provide: UserService, useValue: userService },
 			],
 		}).compile();

@@ -7,7 +7,6 @@ import { UserFaker } from '../user/factories';
 import { UserService } from '../user/user.service';
 
 import { AuthService } from './auth.service';
-import { TokenModel } from './dtos/token.model';
 
 const mockUuid = '00000000-0000-4000-0000-000000000000';
 
@@ -81,7 +80,7 @@ describe('AuthService', () => {
 				password: 'pass',
 			});
 
-			expect(tokenModel).toStrictEqual(new TokenModel({ token: mockJwtToken }));
+			expect(tokenModel).toStrictEqual(mockJwtToken);
 
 			expect(userService.getOneBy).toBeCalledTimes(1);
 			expect(userService.getOneBy).toBeCalledWith('username', 'user');

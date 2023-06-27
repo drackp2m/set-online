@@ -1,15 +1,7 @@
 import { registerAs } from '@nestjs/config';
 
-import { ApiProtocol, NodeEnv } from '../environment';
-import { validate } from '../utils';
-
-export interface AppConfig {
-	environment: NodeEnv;
-	protocol: ApiProtocol;
-	domain: string;
-	prefix: string;
-	port: number;
-}
+import { validate } from '../../utils';
+import { AppConfig } from '../types/app-config.type';
 
 const config = validate(process.env);
 

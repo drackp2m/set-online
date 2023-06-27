@@ -48,4 +48,4 @@ RUN mkdir -p ~/.local/share/zsh/plugins \
 			&& ln -s /usr/share/zsh/plugins/powerlevel10k ~/.local/share/zsh/plugins/ \
 			&& mkdir -p ~/.config/zsh
 
-CMD yarn start
+# CMD yarn start
