@@ -24,8 +24,8 @@ export class AuthService {
 			throw new UnauthorizedException('not match', 'password');
 		}
 
-		const accessToken = this.createAccessToken.execute(user);
-		const refreshToken = this.createRefresToken.execute(user);
+		const accessToken = this.createAccessToken.execute(user.uuid);
+		const refreshToken = this.createRefresToken.execute(user.uuid);
 
 		return { accessToken, refreshToken };
 	}

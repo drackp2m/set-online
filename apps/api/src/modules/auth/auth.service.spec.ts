@@ -1,4 +1,3 @@
-import { JwtService } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import bcrypt from 'bcryptjs';
 
@@ -7,33 +6,43 @@ import { UserFaker } from '../user/factories';
 import { UserService } from '../user/user.service';
 
 import { AuthService } from './auth.service';
+import { CreateJwtAccessTokenUsecase } from './usecases/create-jwt-access-token.usecase';
+import { CreateJwtRefreshTokenUsecase } from './usecases/create-jwt-refresh-token.usecas';
 
 const mockUuid = '00000000-0000-4000-0000-000000000000';
 
 describe('AuthService', () => {
 	let service: AuthService;
 	let userService: jest.Mocked<Partial<UserService>>;
-	let jwtService: jest.Mocked<Partial<JwtService>>;
+	let createAccessToken: jest.Mocked<Partial<CreateJwtAccessTokenUsecase>>;
+	let createRefresjToken: jest.Mocked<Partial<CreateJwtRefreshTokenUsecase>>;
 
 	const userFaker = new UserFaker();
 	const mockUser = userFaker.makeOne({ uuid: mockUuid }, { createdFrom: '2010' });
-	const mockJwtToken =
-		'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJKZXN0IiwiaXNzIjoiVW5pdmVyc2UiLCJzdWIiOiI0MiIsImV4cCI6NjQ4NjAwMTIwfQ.VJK798GWnHeEm3dETnrlKemINGqaZ286tDZg9aUhAh8';
+	const mockJwtAccessToken =
+		'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODc5MDQ1NDYsIm5iZiI6MTY4NzkwNDU0NiwiZXhwIjoxNjg3OTA0NjA2LCJhdWQiOiJzZXQtb25saW5lLWFjY2Vzcy10b2tlbiIsImlzcyI6InNldC1vbmxpbmUiLCJzdWIiOiI3ZGNlNmEzNC05N2U3LTRlODMtOWFkMy00M2EzMjdiOGI2ZjEiLCJqdGkiOiJ1dWlkZ2VuIn0.1wFBRxXLrkpJCBnD4GyvsxgFLTAAFVEIuxb3925Sz7ksUG8rhz0IsXfQ1VX6-4c-1pgu1aDa3Mlp4yGbTraebA';
+	const mockJwtRefreshToken =
+		'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODc5MDQ1NDYsIm5iZiI6MTY4NzkwNDYwNiwiZXhwIjoxNjg5MjAwNTQ2LCJhdWQiOiJzZXQtb25saW5lLXJlZnJlc2gtdG9rZW4iLCJpc3MiOiJzZXQtb25saW5lIiwic3ViIjoiN2RjZTZhMzQtOTdlNy00ZTgzLTlhZDMtNDNhMzI3YjhiNmYxIiwianRpIjoidXVpZGdlbiJ9.Ri1I8tWENO8RhV45ySdlTiSEwBlDXstIvObhi15RqkR9QS8BotRTKzzYrPuEDtbKx60dtr-S5dNNZJRpGSje5g';
 
 	beforeAll(async () => {
 		userService = {
 			getOneBy: jest.fn(),
 		};
 
-		jwtService = {
-			sign: jest.fn(),
+		createAccessToken = {
+			execute: jest.fn(),
+		};
+
+		createRefresjToken = {
+			execute: jest.fn(),
 		};
 
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
 				AuthService,
 				{ provide: UserService, useValue: userService },
-				{ provide: JwtService, useValue: jwtService },
+				{ provide: CreateJwtAccessTokenUsecase, useValue: createAccessToken },
+				{ provide: CreateJwtRefreshTokenUsecase, useValue: createRefresjToken },
 			],
 		}).compile();
 
@@ -73,20 +82,22 @@ describe('AuthService', () => {
 		it('should return TokenModel when JwtService.sign return a token', async () => {
 			userService.getOneBy.mockResolvedValueOnce(mockUser);
 			jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(true as never);
-			jwtService.sign.mockReturnValueOnce(mockJwtToken);
+			createAccessToken.execute.mockReturnValueOnce(mockJwtAccessToken);
+			createRefresjToken.execute.mockReturnValueOnce(mockJwtRefreshToken);
 
-			const tokenModel = await service.login({
+			const { accessToken, refreshToken } = await service.login({
 				username: 'user',
 				password: 'pass',
 			});
 
-			expect(tokenModel).toStrictEqual(mockJwtToken);
+			expect(accessToken).toStrictEqual(mockJwtAccessToken);
+			expect(refreshToken).toStrictEqual(mockJwtRefreshToken);
 
 			expect(userService.getOneBy).toBeCalledTimes(1);
 			expect(userService.getOneBy).toBeCalledWith('username', 'user');
 
-			expect(jwtService.sign).toBeCalledTimes(1);
-			expect(jwtService.sign).toBeCalledWith({}, { subject: mockUuid });
+			expect(createAccessToken.execute).toBeCalledTimes(1);
+			expect(createAccessToken.execute).toBeCalledWith(mockUuid);
 		});
 	});
 });
