@@ -20,8 +20,8 @@ declare global {
 			JWT_ALGORITHM: string;
 			JWT_ISSUER: string;
 			JWT_AUDIENCE: string;
-			JWT_TOKEN_EXPIRES_IN: string;
-			JWT_REFRESH_EXPIRES_IN: string;
+			JWT_ACCESS_TOKEN_EXPIRES_IN: string;
+			JWT_REFRESH_TOKEN_EXPIRES_IN: string;
 			JWT_SECRET: string;
 		}
 	}

@@ -50,6 +50,14 @@ export default class ExamplePage {
 		});
 	}
 
+	refreshSession(): void {
+		this.http.get('/api/refresh-session').subscribe({
+			error: (error) => {
+				this.error = error.error.refreshToken;
+			},
+		});
+	}
+
 	private gqlLogin(): void {
 		if (!this.form.value.username || !this.form.value.password) return;
 

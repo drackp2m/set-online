@@ -6,6 +6,6 @@ export type JwtConfig = {
 	issuer: string;
 	audience: string;
 	id: string;
-	tokenExpiresIn: string;
-	refreshExpiresIn: string;
+	accessTokenExpiresIn: string;
+	refreshTokenExpiresIn: string;
 };

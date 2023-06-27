@@ -11,12 +11,9 @@ export class JwtFactory implements JwtOptionsFactory {
 		return {
 			secret: this.config.jwt.secret,
 			signOptions: {
+				jwtid: this.config.jwt.id,
 				algorithm: this.config.jwt.algorithm,
 				issuer: this.config.jwt.issuer,
-				audience: this.config.jwt.issuer,
-				jwtid: this.config.jwt.id,
-				expiresIn: this.config.jwt.tokenExpiresIn,
-				notBefore: 0,
 			},
 		};
 	}

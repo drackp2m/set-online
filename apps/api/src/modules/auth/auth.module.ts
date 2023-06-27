@@ -12,27 +12,33 @@ import { AuthResolver } from './auth.resolver';
 import { AuthService } from './auth.service';
 import { JwtGuard } from './guards';
 import { JwtStrategyService } from './strategies';
+import { CreateJwtAccessTokenUsecase } from './usecases/create-jwt-access-token.usecase';
+import { CreateJwtRefreshTokenUsecase } from './usecases/create-jwt-refresh-token.usecas';
+import { RefreshSessionUsecase } from './usecases/refresh-session.usecase';
 
 @Module({
 	imports: [
 		ConfigurationModule,
-		forwardRef(() => UserModule),
 		JwtModule.registerAsync({
 			imports: [ConfigurationModule],
 			inject: [ConfigurationService],
 			useClass: JwtFactory,
 		}),
+		forwardRef(() => UserModule),
 	],
 	providers: [
 		{
 			provide: APP_GUARD,
 			useClass: JwtGuard,
 		},
-		AuthController,
+		CreateJwtAccessTokenUsecase,
+		CreateJwtRefreshTokenUsecase,
+		RefreshSessionUsecase,
 		AuthResolver,
 		AuthService,
 		JwtStrategyService,
 	],
+	controllers: [AuthController],
 	exports: [AuthService],
 })
 export class AuthModule {}
