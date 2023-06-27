@@ -22,10 +22,8 @@ export class RefreshSessionUsecase {
 		try {
 			const refreshTokenPayload = this.jwtService.verify(currentRefreshToken) as { sub: string };
 
-			const user = await this.userService.getOneBy('uuid', refreshTokenPayload.sub);
-
-			const accessToken = this.createAccessToken.execute(user);
-			const refreshToken = this.createRefreshToken.execute(user);
+			const accessToken = this.createAccessToken.execute(refreshTokenPayload.sub);
+			const refreshToken = this.createRefreshToken.execute(refreshTokenPayload.sub);
 
 			return { accessToken, refreshToken };
 		} catch (error) {

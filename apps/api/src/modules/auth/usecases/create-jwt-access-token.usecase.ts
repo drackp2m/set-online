@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
 import { ConfigurationService } from '../../../common/config/configuration.service';
-import { UserEntity } from '../../user/user.entity';
 
 @Injectable()
 export class CreateJwtAccessTokenUsecase {
@@ -11,11 +10,11 @@ export class CreateJwtAccessTokenUsecase {
 		private readonly configurationService: ConfigurationService,
 	) {}
 
-	execute(user: UserEntity): string {
+	execute(userUuid: string): string {
 		return this.jwtService.sign(
 			{},
 			{
-				subject: user.uuid,
+				subject: userUuid,
 				audience: `${this.configurationService.jwt.audience}-access-token`,
 				expiresIn: this.configurationService.jwt.accessTokenExpiresIn,
 				notBefore: 0,
