@@ -40,12 +40,11 @@ export default class ExamplePage {
 
 	checkUsers(): void {
 		this.getUsersGQL.fetch().subscribe({
+			next: (data) => {
+				this.users.set(data.data.getUsers.length);
+			},
 			error: (error) => {
 				this.error = error.message;
-			},
-			next: (data) => {
-				console.log(data);
-				this.users.set(data.data.getUsers.length);
 			},
 		});
 	}

@@ -1,10 +1,12 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { InMemoryCache } from '@apollo/client/core';
 import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
+
+import { AuthInterceptor } from '../interceptors/auth.interceptor';
 
 import { AppComponent } from './app.component';
 import { APP_ROUTES } from './app.routes';
@@ -20,16 +22,21 @@ import { APP_ROUTES } from './app.routes';
 	],
 	providers: [
 		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: AuthInterceptor,
+			multi: true,
+		},
+		{
+			deps: [HttpLink],
 			provide: APOLLO_OPTIONS,
 			useFactory(httpLink: HttpLink) {
 				return {
 					cache: new InMemoryCache(),
 					link: httpLink.create({
-						uri: 'graphql',
+						uri: '/graphql',
 					}),
 				};
 			},
-			deps: [HttpLink],
 		},
 	],
 	bootstrap: [AppComponent],
