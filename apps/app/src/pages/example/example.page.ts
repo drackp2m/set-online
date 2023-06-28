@@ -44,7 +44,7 @@ export default class ExamplePage {
 				this.users.set(data.data.getUsers.length);
 			},
 			error: (error) => {
-				this.error = error.message;
+				this.show(error.message, true);
 			},
 		});
 	}
@@ -55,12 +55,17 @@ export default class ExamplePage {
 		this.loginGQL
 			.fetch({ input: { username: this.form.value.username, password: this.form.value.password } })
 			.subscribe({
-				error: (error) => {
-					this.error = error.message;
-				},
 				next: (data) => {
-					this.response = data.data.login ? 'Login successful' : 'Login failed';
+					this.show(data.data.login ? 'Login successful' : 'Login failed');
+				},
+				error: (error) => {
+					this.show(error.message, true);
 				},
 			});
+	}
+
+	private show(message: string, error = false) {
+		this.response = error ? '' : message;
+		this.error = error ? message : '';
 	}
 }
