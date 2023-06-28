@@ -13,10 +13,10 @@ import { GetUsersGQL, LoginGQL } from '../../graphql/apollo-operations';
 	styleUrls: ['./example.page.scss'],
 })
 export default class ExamplePage {
-	hello = toSignal<string, string>(
-		this.http.get<Message>('/api/hello').pipe(map((data) => data.message)),
-		{ initialValue: 'An error ocurred' },
-	);
+	private readonly hello$ = this.http.get<Message>('/api/hello');
+	hello = toSignal<string, string>(this.hello$.pipe(map((data) => data.message)), {
+		initialValue: 'An error ocurred',
+	});
 
 	users: WritableSignal<number | undefined> = signal(undefined);
 
@@ -45,14 +45,6 @@ export default class ExamplePage {
 			},
 			error: (error) => {
 				this.error = error.message;
-			},
-		});
-	}
-
-	refreshSession(): void {
-		this.http.get('/api/refresh-session').subscribe({
-			error: (error) => {
-				this.error = error.error.refreshToken;
 			},
 		});
 	}
