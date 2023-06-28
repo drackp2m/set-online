@@ -31,12 +31,23 @@ import { APP_ROUTES } from './app.routes';
 			provide: APOLLO_OPTIONS,
 			useFactory(httpLink: HttpLink) {
 				return {
-					cache: new InMemoryCache({
-						resultCacheMaxSize: 1,
-					}),
+					name: 'angular',
 					link: httpLink.create({
 						uri: '/graphql',
 					}),
+					defaultOptions: {
+						query: {
+							fetchPolicy: 'network-only',
+						},
+						watchQuery: {
+							fetchPolicy: 'network-only',
+						},
+						mutate: {
+							fetchPolicy: 'network-only',
+						},
+					},
+					cache: new InMemoryCache(),
+					connectToDevTools: true,
 				};
 			},
 		},
