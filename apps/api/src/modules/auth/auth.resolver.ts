@@ -21,14 +21,14 @@ export class AuthResolver {
 		const { accessToken, refreshToken } = await this.authService.login(loginInput);
 
 		// ToDo => add expiration time to cookies
-		res.cookie('jwt-access-token', accessToken, {
+		res.cookie('x-jwt-access-token', accessToken, {
 			secure: true,
 			httpOnly: true,
 			sameSite: true,
 			path: '/graphql',
 		});
 
-		res.cookie('jwt-refresh-token', refreshToken, {
+		res.cookie('x-jwt-refresh-token', refreshToken, {
 			secure: true,
 			httpOnly: true,
 			sameSite: true,

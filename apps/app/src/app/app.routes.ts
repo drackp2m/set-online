@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 
 import MainLayout from '../layouts/main/main.layout';
-import { HOME_ROUTES } from '../pages/home/home.routes';
 
 export const APP_ROUTES: Routes = [
 	{
@@ -15,7 +14,7 @@ export const APP_ROUTES: Routes = [
 		children: [
 			{
 				path: 'home',
-				children: HOME_ROUTES,
+				loadChildren: () => import('../pages/home/home.module'),
 			},
 			{
 				path: 'register',

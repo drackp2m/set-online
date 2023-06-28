@@ -10,19 +10,19 @@ export class AuthController {
 
 	@Get('refresh-session')
 	async refresh(@Context('res') res: Response): Promise<void> {
-		const currentRefreshToken = res.req.cookies['jwt-refresh-token'];
+		const currentRefreshToken = res.req.cookies['x-jwt-refresh-token'];
 
 		const { accessToken, refreshToken } = await this.refreshSession.execute(currentRefreshToken);
 
 		// ToDo => add expiration time to cookies
-		res.cookie('jwt-access-token', accessToken, {
+		res.cookie('x-jwt-access-token', accessToken, {
 			secure: true,
 			httpOnly: true,
 			sameSite: true,
 			path: '/graphql',
 		});
 
-		res.cookie('jwt-refresh-token', refreshToken, {
+		res.cookie('x-jwt-refresh-token', refreshToken, {
 			secure: true,
 			httpOnly: true,
 			sameSite: true,

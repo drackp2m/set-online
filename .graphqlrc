@@ -1,0 +1,4 @@
+{
+	"schema": "https://localhost:3000/graphql",
+	"documents": "libs/api-interfaces/src/lib/graphql/**/*.graphql"
+}
