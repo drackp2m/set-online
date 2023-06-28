@@ -15,7 +15,7 @@ describe('AuthService', () => {
 	let service: AuthService;
 	let userService: jest.Mocked<Partial<UserService>>;
 	let createAccessToken: jest.Mocked<Partial<CreateJwtAccessTokenUsecase>>;
-	let createRefresjToken: jest.Mocked<Partial<CreateJwtRefreshTokenUsecase>>;
+	let createRefreshToken: jest.Mocked<Partial<CreateJwtRefreshTokenUsecase>>;
 
 	const userFaker = new UserFaker();
 	const mockUser = userFaker.makeOne({ uuid: mockUuid }, { createdFrom: '2010' });
@@ -33,7 +33,7 @@ describe('AuthService', () => {
 			execute: jest.fn(),
 		};
 
-		createRefresjToken = {
+		createRefreshToken = {
 			execute: jest.fn(),
 		};
 
@@ -42,7 +42,7 @@ describe('AuthService', () => {
 				AuthService,
 				{ provide: UserService, useValue: userService },
 				{ provide: CreateJwtAccessTokenUsecase, useValue: createAccessToken },
-				{ provide: CreateJwtRefreshTokenUsecase, useValue: createRefresjToken },
+				{ provide: CreateJwtRefreshTokenUsecase, useValue: createRefreshToken },
 			],
 		}).compile();
 
@@ -83,7 +83,7 @@ describe('AuthService', () => {
 			userService.getOneBy.mockResolvedValueOnce(mockUser);
 			jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(true as never);
 			createAccessToken.execute.mockReturnValueOnce(mockJwtAccessToken);
-			createRefresjToken.execute.mockReturnValueOnce(mockJwtRefreshToken);
+			createRefreshToken.execute.mockReturnValueOnce(mockJwtRefreshToken);
 
 			const { accessToken, refreshToken } = await service.login({
 				username: 'user',

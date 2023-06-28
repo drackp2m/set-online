@@ -29,8 +29,6 @@ export class AuthController {
 			path: '/api/refresh-session',
 		});
 
-		console.log('refreshed session');
-
 		res.status(200).send();
 	}
 }
