@@ -1,8 +1,7 @@
-import { Component, WritableSignal, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
-import { LoginGQL, UserEntity } from '../../graphql/apollo-operations';
 
 @Component({
 	templateUrl: './login.page.html',
@@ -14,24 +13,20 @@ export default class LoginPage {
 		password: new FormControl('', [Validators.required]),
 	});
 
-	user: WritableSignal<UserEntity | null> = signal(null);
 	error = signal('');
 
-	constructor(private readonly loginGql: LoginGQL, private readonly router: Router) {}
+	constructor(private readonly httpClient: HttpClient, private readonly router: Router) {}
 
 	onSubmit() {
-		if (!this.form.value.username || !this.form.value.password) return;
+		if (!this.form.valid) return;
 
-		this.loginGql
-			.fetch({
-				input: { username: this.form.value.username, password: this.form.value.password },
-			})
-			.subscribe((result) => {
-				if (result.data) {
-					this.router.navigate(['/home']);
-				} else if (result.errors) {
-					this.error.set(result.errors?.[0].message);
-				}
-			});
+		this.httpClient.post('/api/login', this.form.value).subscribe({
+			next: () => {
+				this.router.navigate(['/home']);
+			},
+			error: (error) => {
+				this.error.set(error.statusText);
+			},
+		});
 	}
 }

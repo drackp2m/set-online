@@ -6,7 +6,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs';
 
-import { GetUsersGQL, LoginGQL } from '../../graphql/apollo-operations';
+import { GetUsersGQL } from '../../graphql/apollo-operations';
 
 @Component({
 	templateUrl: './example.page.html',
@@ -28,15 +28,7 @@ export default class ExamplePage {
 		password: new FormControl('', [Validators.required]),
 	});
 
-	constructor(
-		private readonly http: HttpClient,
-		private readonly loginGQL: LoginGQL,
-		private readonly getUsersGQL: GetUsersGQL,
-	) {}
-
-	onSubmit() {
-		this.gqlLogin();
-	}
+	constructor(private readonly http: HttpClient, private readonly getUsersGQL: GetUsersGQL) {}
 
 	checkUsers(): void {
 		this.getUsersGQL.fetch().subscribe({
@@ -48,21 +40,6 @@ export default class ExamplePage {
 				this.show(error.message, true);
 			},
 		});
-	}
-
-	private gqlLogin(): void {
-		if (!this.form.value.username || !this.form.value.password) return;
-
-		this.loginGQL
-			.fetch({ input: { username: this.form.value.username, password: this.form.value.password } })
-			.subscribe({
-				next: (data) => {
-					this.show(data.data.login ? 'Login successful' : 'Login failed');
-				},
-				error: (error) => {
-					this.show(error.message, true);
-				},
-			});
 	}
 
 	private show(message: string, error = false) {

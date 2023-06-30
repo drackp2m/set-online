@@ -49,17 +49,5 @@
 
 	<p>{{ users() }}</p>
 
-	<form (ngSubmit)="onSubmit()" [formGroup]="form">
-		<input type="text" formControlName="username" />
-		<input type="password" formControlName="password" />
-
-		<p>
-			{{ error ? 'Error: ' + error : '' }}
-			{{ response ? 'Response: ' + response : '' }}
-		</p>
-
-		<button type="submit">Send</button>
-	</form>
-
 	<button (click)="checkUsers()">Check users</button>
 </section>
