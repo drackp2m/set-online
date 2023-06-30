@@ -107,12 +107,12 @@ export type RegisterMutation = {
 	__typename?: 'Mutation';
 	register: {
 		__typename?: 'UserEntity';
-		createdAt: Date;
+		uuid: string;
+		username: string;
 		email?: string | null;
 		role: UserRole;
+		createdAt: Date;
 		updatedAt: Date;
-		username: string;
-		uuid: string;
 	};
 };
 
@@ -140,12 +140,12 @@ export type GetUsersQuery = {
 export const RegisterDocument = gql`
 	mutation Register($input: CreateUserInput!) {
 		register(input: $input) {
-			createdAt
+			uuid
+			username
 			email
 			role
+			createdAt
 			updatedAt
-			username
-			uuid
 		}
 	}
 `;

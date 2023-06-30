@@ -1,13 +1,14 @@
 import { Component, WritableSignal, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
-import { RegisterGQL, UserEntity } from '../../graphql/apollo-operations';
+import { LoginGQL, UserEntity } from '../../graphql/apollo-operations';
 
 @Component({
-	templateUrl: './register.page.html',
-	styleUrls: ['./register.page.scss'],
+	templateUrl: './login.page.html',
+	styleUrls: ['./login.page.scss'],
 })
-export default class RegisterPage {
+export default class LoginPage {
 	form = new FormGroup({
 		username: new FormControl('', [Validators.required]),
 		password: new FormControl('', [Validators.required]),
@@ -16,18 +17,18 @@ export default class RegisterPage {
 	user: WritableSignal<UserEntity | null> = signal(null);
 	error = signal('');
 
-	constructor(private readonly registerGql: RegisterGQL) {}
+	constructor(private readonly loginGql: LoginGQL, private readonly router: Router) {}
 
 	onSubmit() {
 		if (!this.form.value.username || !this.form.value.password) return;
 
-		this.registerGql
-			.mutate({
+		this.loginGql
+			.fetch({
 				input: { username: this.form.value.username, password: this.form.value.password },
 			})
 			.subscribe((result) => {
 				if (result.data) {
-					this.user.set(result.data.register);
+					this.router.navigate(['/home']);
 				} else if (result.errors) {
 					this.error.set(result.errors?.[0].message);
 				}

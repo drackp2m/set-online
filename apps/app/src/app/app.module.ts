@@ -30,6 +30,7 @@ import { APP_ROUTES } from './app.routes';
 			deps: [HttpLink],
 			provide: APOLLO_OPTIONS,
 			useFactory(httpLink: HttpLink) {
+				// https://www.apollographql.com/docs/react/api/core/ApolloClient/
 				return {
 					name: 'angular',
 					link: httpLink.create({
@@ -38,12 +39,15 @@ import { APP_ROUTES } from './app.routes';
 					defaultOptions: {
 						query: {
 							fetchPolicy: 'network-only',
+							errorPolicy: 'none',
 						},
 						watchQuery: {
 							fetchPolicy: 'network-only',
+							errorPolicy: 'none',
 						},
 						mutate: {
 							fetchPolicy: 'network-only',
+							errorPolicy: 'none',
 						},
 					},
 					cache: new InMemoryCache(),

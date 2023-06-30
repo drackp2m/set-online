@@ -1,10 +1,10 @@
 mutation Register($input: CreateUserInput!) {
 	register(input: $input) {
-		createdAt
+		uuid
+		username
 		email
 		role
+		createdAt
 		updatedAt
-		username
-		uuid
 	}
 }
