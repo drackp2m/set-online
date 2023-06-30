@@ -4,7 +4,7 @@ import { compare } from 'bcryptjs';
 import { UnauthorizedException } from '../../common/exceptions';
 import { UserService } from '../user/user.service';
 
-import { LoginInput } from './dtos';
+import { LoginRequestDto } from './dtos';
 import { CreateJwtAccessTokenUsecase } from './usecases/create-jwt-access-token.usecase';
 import { CreateJwtRefreshTokenUsecase } from './usecases/create-jwt-refresh-token.usecas';
 
@@ -17,7 +17,7 @@ export class AuthService {
 		private readonly createRefresToken: CreateJwtRefreshTokenUsecase,
 	) {}
 
-	async login(input: LoginInput): Promise<{ accessToken: string; refreshToken: string }> {
+	async login(input: LoginRequestDto): Promise<{ accessToken: string; refreshToken: string }> {
 		const user = await this.userService.getOneBy('username', input.username);
 
 		if (!(await this.passwordMatch(input.password, user.password))) {

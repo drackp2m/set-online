@@ -17,6 +17,10 @@ export const APP_ROUTES: Routes = [
 				loadChildren: () => import('../pages/home/home.module'),
 			},
 			{
+				path: 'login',
+				loadChildren: () => import('../pages/login/login.module'),
+			},
+			{
 				path: 'register',
 				loadChildren: () => import('../pages/register/register.module'),
 			},

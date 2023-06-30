@@ -8,7 +8,6 @@ import { JwtFactory } from '../../common/config/factories';
 import { UserModule } from '../user/user.module';
 
 import { AuthController } from './auth.controller';
-import { AuthResolver } from './auth.resolver';
 import { AuthService } from './auth.service';
 import { JwtGuard } from './guards';
 import { JwtStrategyService } from './strategies';
@@ -34,7 +33,6 @@ import { RefreshSessionUsecase } from './usecases/refresh-session.usecase';
 		CreateJwtAccessTokenUsecase,
 		CreateJwtRefreshTokenUsecase,
 		RefreshSessionUsecase,
-		AuthResolver,
 		AuthService,
 		JwtStrategyService,
 	],

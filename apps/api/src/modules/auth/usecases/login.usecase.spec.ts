@@ -1,18 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import bcrypt from 'bcryptjs';
 
-import { NotFoundException, UnauthorizedException } from '../../common/exceptions';
-import { UserFaker } from '../user/factories';
-import { UserService } from '../user/user.service';
+import { NotFoundException, UnauthorizedException } from '../../../common/exceptions';
+import { UserFaker } from '../../user/factories';
+import { UserService } from '../../user/user.service';
 
-import { AuthService } from './auth.service';
-import { CreateJwtAccessTokenUsecase } from './usecases/create-jwt-access-token.usecase';
-import { CreateJwtRefreshTokenUsecase } from './usecases/create-jwt-refresh-token.usecas';
+import { CreateJwtAccessTokenUsecase } from './create-jwt-access-token.usecase';
+import { CreateJwtRefreshTokenUsecase } from './create-jwt-refresh-token.usecas';
+import { LoginUsecase } from './login.usecase';
 
 const mockUuid = '00000000-0000-4000-0000-000000000000';
 
-describe('AuthService', () => {
-	let service: AuthService;
+describe('LoginUsecase', () => {
+	let usecase: LoginUsecase;
 	let userService: jest.Mocked<Partial<UserService>>;
 	let createAccessToken: jest.Mocked<Partial<CreateJwtAccessTokenUsecase>>;
 	let createRefreshToken: jest.Mocked<Partial<CreateJwtRefreshTokenUsecase>>;
@@ -39,18 +39,18 @@ describe('AuthService', () => {
 
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
-				AuthService,
+				LoginUsecase,
 				{ provide: UserService, useValue: userService },
 				{ provide: CreateJwtAccessTokenUsecase, useValue: createAccessToken },
 				{ provide: CreateJwtRefreshTokenUsecase, useValue: createRefreshToken },
 			],
 		}).compile();
 
-		service = module.get<AuthService>(AuthService);
+		usecase = module.get<LoginUsecase>(LoginUsecase);
 	});
 
 	it('should be defined', () => {
-		expect(service).toBeDefined();
+		expect(usecase).toBeDefined();
 	});
 
 	describe('login', () => {
@@ -59,7 +59,7 @@ describe('AuthService', () => {
 				throw new NotFoundException();
 			});
 
-			const tokenModel = service.login({ username: 'user', password: 'pass' });
+			const tokenModel = usecase.execute({ username: 'user', password: 'pass' });
 
 			await expect(tokenModel).rejects.toThrow(NotFoundException);
 
@@ -71,7 +71,7 @@ describe('AuthService', () => {
 			userService.getOneBy.mockResolvedValueOnce(mockUser);
 			jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(false as never);
 
-			const tokenModel = service.login({ username: 'user', password: 'pass' });
+			const tokenModel = usecase.execute({ username: 'user', password: 'pass' });
 
 			await expect(tokenModel).rejects.toThrow(UnauthorizedException);
 
@@ -85,7 +85,7 @@ describe('AuthService', () => {
 			createAccessToken.execute.mockReturnValueOnce(mockJwtAccessToken);
 			createRefreshToken.execute.mockReturnValueOnce(mockJwtRefreshToken);
 
-			const { accessToken, refreshToken } = await service.login({
+			const { accessToken, refreshToken } = await usecase.execute({
 				username: 'user',
 				password: 'pass',
 			});

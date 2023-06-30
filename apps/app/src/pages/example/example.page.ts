@@ -44,6 +44,7 @@ export default class ExamplePage {
 				this.users.set(data.data.getUsers.length);
 			},
 			error: (error) => {
+				console.log({ error });
 				this.show(error.message, true);
 			},
 		});
