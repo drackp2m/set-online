@@ -1,3 +1,4 @@
+import { Injectable } from '@nestjs/common';
 import { compare } from 'bcryptjs';
 
 import { UnauthorizedException } from '../../../common/exceptions';
@@ -7,6 +8,7 @@ import { LoginRequestDto } from '../dtos';
 import { CreateJwtAccessTokenUsecase } from './create-jwt-access-token.usecase';
 import { CreateJwtRefreshTokenUsecase } from './create-jwt-refresh-token.usecas';
 
+@Injectable()
 export class LoginUsecase {
 	constructor(
 		private readonly userService: UserService,
