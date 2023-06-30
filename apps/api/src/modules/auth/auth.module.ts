@@ -8,11 +8,11 @@ import { JwtFactory } from '../../common/config/factories';
 import { UserModule } from '../user/user.module';
 
 import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
 import { JwtGuard } from './guards';
 import { JwtStrategyService } from './strategies';
 import { CreateJwtAccessTokenUsecase } from './usecases/create-jwt-access-token.usecase';
 import { CreateJwtRefreshTokenUsecase } from './usecases/create-jwt-refresh-token.usecas';
+import { LoginUsecase } from './usecases/login.usecase';
 import { RefreshSessionUsecase } from './usecases/refresh-session.usecase';
 
 @Module({
@@ -30,13 +30,18 @@ import { RefreshSessionUsecase } from './usecases/refresh-session.usecase';
 			provide: APP_GUARD,
 			useClass: JwtGuard,
 		},
+		JwtStrategyService,
 		CreateJwtAccessTokenUsecase,
 		CreateJwtRefreshTokenUsecase,
 		RefreshSessionUsecase,
-		AuthService,
-		JwtStrategyService,
+		LoginUsecase,
 	],
 	controllers: [AuthController],
-	exports: [AuthService],
+	exports: [
+		CreateJwtAccessTokenUsecase,
+		CreateJwtRefreshTokenUsecase,
+		RefreshSessionUsecase,
+		LoginUsecase,
+	],
 })
 export class AuthModule {}
