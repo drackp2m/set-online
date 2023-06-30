@@ -116,12 +116,6 @@ export type RegisterMutation = {
 	};
 };
 
-export type LoginQueryVariables = Exact<{
-	input: LoginInput;
-}>;
-
-export type LoginQuery = { __typename?: 'Query'; login: boolean };
-
 export type GetUsersQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetUsersQuery = {
@@ -155,23 +149,6 @@ export const RegisterDocument = gql`
 })
 export class RegisterGQL extends Apollo.Mutation<RegisterMutation, RegisterMutationVariables> {
 	override document = RegisterDocument;
-
-	constructor(apollo: Apollo.Apollo) {
-		super(apollo);
-	}
-}
-
-export const LoginDocument = gql`
-	query Login($input: LoginInput!) {
-		login(input: $input)
-	}
-`;
-
-@Injectable({
-	providedIn: 'root',
-})
-export class LoginGQL extends Apollo.Query<LoginQuery, LoginQueryVariables> {
-	override document = LoginDocument;
 
 	constructor(apollo: Apollo.Apollo) {
 		super(apollo);

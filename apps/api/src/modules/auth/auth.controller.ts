@@ -1,6 +1,5 @@
-import { Controller, Get, Post } from '@nestjs/common';
-import { Args, Context } from '@nestjs/graphql';
-import { Response } from 'express';
+import { Body, Controller, Get, Post, Response } from '@nestjs/common';
+import { Response as ExpressResponse } from 'express';
 
 import { LoginRequestDto } from './dtos';
 import { LoginUsecase } from './usecases/login.usecase';
@@ -15,8 +14,8 @@ export class AuthController {
 
 	@Post('login')
 	async login(
-		@Args('input') loginRequest: LoginRequestDto,
-		@Context('res') res: Response,
+		@Body() loginRequest: LoginRequestDto,
+		@Response() res: ExpressResponse,
 	): Promise<void> {
 		const { accessToken, refreshToken } = await this.loginUsecase.execute(loginRequest);
 
@@ -39,7 +38,7 @@ export class AuthController {
 	}
 
 	@Get('refresh-session')
-	async refreshSession(@Context('res') res: Response): Promise<void> {
+	async refreshSession(@Response() res: ExpressResponse): Promise<void> {
 		const currentRefreshToken = res.req.cookies['x-jwt-refresh-token'];
 
 		const { accessToken, refreshToken } = await this.refreshSessionUsecase.execute(
