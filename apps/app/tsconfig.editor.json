@@ -1,6 +1,6 @@
 {
 	"extends": "./tsconfig.json",
-	"include": ["**/*.ts", "../../libs/api-interfaces/src/lib/graphql/apollo-operations.ts"],
+	"include": ["**/*.ts"],
 	"compilerOptions": {
 		"types": ["jest", "node"]
 	}

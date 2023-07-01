@@ -1,4 +1,4 @@
-import { Message } from '@set-online/api-interfaces';
+import { Message } from '@set-online/api-definitions';
 
 import { Controller, Get } from '@nestjs/common';
 
