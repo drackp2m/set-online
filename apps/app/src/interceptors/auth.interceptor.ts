@@ -13,8 +13,8 @@ import { catchError, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-	private readonly API_REFRESH_JWT_TOKENS_URL = '/api/refresh-session';
-	private readonly API_LOGIN_URL = '/api/refresh-session';
+	private readonly API_LOGIN_URL = '/api/login';
+	private readonly API_REFRESH_SESSION_URL = '/api/refresh-session';
 
 	private isInvalidToken = false;
 	private readonly JwtTokensRefreshed$: Subject<void> = new Subject<void>();
@@ -22,7 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
 	constructor(private readonly httpClient: HttpClient, private readonly router: Router) {}
 
 	intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-		const ignoredUrls = [this.API_REFRESH_JWT_TOKENS_URL, this.API_LOGIN_URL];
+		const ignoredUrls = [this.API_LOGIN_URL, this.API_REFRESH_SESSION_URL];
 
 		if (ignoredUrls.includes(req.url)) return next.handle(req);
 
@@ -66,6 +66,6 @@ export class AuthInterceptor implements HttpInterceptor {
 	}
 
 	private refreshJwtTokens(): Observable<void> {
-		return this.httpClient.get<void>(this.API_REFRESH_JWT_TOKENS_URL);
+		return this.httpClient.get<void>(this.API_REFRESH_SESSION_URL);
 	}
 }
