@@ -1,6 +1,6 @@
-import { Message } from '@set-online/api-definitions';
-
 import { Controller, Get } from '@nestjs/common';
+
+import { Message } from '@set-online/api-definitions';
 
 import { AppService } from './app.service';
 
