@@ -1,6 +1,6 @@
-import { LoginRequest } from '@set-online/api-definitions';
-
 import { IsDefined, IsString } from 'class-validator';
+
+import { LoginRequest } from '@set-online/api-definitions';
 
 export class LoginRequestDto implements LoginRequest {
 	@IsDefined()

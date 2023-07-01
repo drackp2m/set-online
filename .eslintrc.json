@@ -55,8 +55,8 @@
 						"pathGroups": [
 							{
 								"pattern": "@set-online/**",
-								"group": "builtin",
-								"position": "before"
+								"group": "external",
+								"position": "after"
 							}
 						]
 					}
@@ -105,6 +105,13 @@
 			"extends": ["plugin:prettier/recommended"],
 			"rules": {
 				"prettier/prettier": "warn"
+			}
+		},
+		{
+			"files": ["*.spec.ts"],
+			"rules": {
+				"max-lines": "off",
+				"max-lines-per-function": "off"
 			}
 		}
 	]

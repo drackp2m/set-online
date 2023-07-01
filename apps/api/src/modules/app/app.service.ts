@@ -1,6 +1,6 @@
-import { Message } from '@set-online/api-definitions';
-
 import { Injectable } from '@nestjs/common';
+
+import { Message } from '@set-online/api-definitions';
 
 @Injectable()
 export class AppService {

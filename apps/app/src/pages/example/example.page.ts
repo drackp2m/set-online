@@ -1,10 +1,10 @@
-import { Message } from '@set-online/api-definitions';
-
 import { HttpClient } from '@angular/common/http';
 import { Component, WritableSignal, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs';
+
+import { Message } from '@set-online/api-definitions';
 
 import { GetUsersGQL } from '../../graphql/apollo-operations';
 
