@@ -48,8 +48,5 @@
 			"background": "#dd4242",
 			"opacity": 100
 		}
-	},
-	"[json]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	}
 }
