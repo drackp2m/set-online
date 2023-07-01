@@ -5,7 +5,8 @@
 	"overrides": [
 		{
 			"files": ["*.ts"],
-			"plugins": ["import", "unused-imports"],
+			"parser": "@typescript-eslint/parser",
+			"plugins": ["@typescript-eslint", "import", "unused-imports"],
 			"extends": ["plugin:@nx/typescript"],
 			"parserOptions": {
 				"ecmaVersion": 2023,
@@ -45,6 +46,30 @@
 						"argsIgnorePattern": "^_",
 						"varsIgnorePattern": "^_",
 						"caughtErrorsIgnorePattern": "^_"
+					}
+				],
+				"@typescript-eslint/member-ordering": [
+					"warn",
+					{
+						"default": [
+							"signature",
+							"field",
+
+							"constructor",
+
+							"public-method",
+							"protected-method",
+							"private-method",
+							"#private-method",
+
+							"static-method",
+							"instance-method",
+							"abstract-method",
+
+							"decorated-method",
+
+							"method"
+						]
 					}
 				],
 				"import/order": [
