@@ -13,16 +13,16 @@ export class BootstrapHelper {
 		},
 	};
 
+	static validationPipe = new ValidationPipe({
+		whitelist: true,
+		transform: true,
+	});
+
 	static appConfig = (app: INestApplication): AppConfig => {
 		const configService = app.get(ConfigurationService);
 
 		return configService.app;
 	};
-
-	static validationPipe = new ValidationPipe({
-		whitelist: true,
-		transform: true,
-	});
 
 	static logAppBoostrap = (app: INestApplication): void => {
 		const appConfig = BootstrapHelper.appConfig(app);

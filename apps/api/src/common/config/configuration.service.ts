@@ -9,9 +9,15 @@ import { JwtConfig } from './types/jwt-config.type';
 export class ConfigurationService {
 	constructor(private readonly configService: ConfigService) {}
 
-	app: AppConfig = this.configService.get<AppConfig>('app', { infer: true });
+	get app(): AppConfig {
+		return this.configService.get<AppConfig>('app', { infer: true });
+	}
 
-	database: DatabaseConfig = this.configService.get<DatabaseConfig>('database', { infer: true });
+	get database(): DatabaseConfig {
+		return this.configService.get<DatabaseConfig>('database', { infer: true });
+	}
 
-	jwt: JwtConfig = this.configService.get<JwtConfig>('jwt', { infer: true });
+	get jwt(): JwtConfig {
+		return this.configService.get<JwtConfig>('jwt', { infer: true });
+	}
 }

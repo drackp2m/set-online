@@ -14,6 +14,7 @@ import { GetUsersGQL } from '../../graphql/apollo-operations';
 })
 export default class ExamplePage {
 	private readonly hello$ = this.http.get<Message>('/api/hello');
+
 	hello = toSignal<string, string>(this.hello$.pipe(map((data) => data.message)), {
 		initialValue: 'An error ocurred',
 	});
