@@ -1,14 +1,14 @@
 {
-	"name": "api-interfaces",
+	"name": "api-definitions",
 	"$schema": "../../node_modules/nx/schemas/project-schema.json",
-	"sourceRoot": "libs/api-interfaces/src",
+	"sourceRoot": "libs/api-definitions/src",
 	"projectType": "library",
 	"targets": {
 		"lint": {
 			"executor": "@nx/linter:eslint",
 			"outputs": ["{options.outputFile}"],
 			"options": {
-				"lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
+				"lintFilePatterns": ["libs/api-definitions/**/*.ts"]
 			}
 		}
 	},

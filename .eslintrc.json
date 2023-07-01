@@ -21,6 +21,23 @@
 				}
 			},
 			"rules": {
+				"max-lines": [
+					"warn",
+					{
+						"max": 400, // 300 Copilot
+						// "skipBlankLines": true,
+						"skipComments": true
+					}
+				],
+				"max-lines-per-function": [
+					"warn",
+					{
+						"max": 75, // 50 Copilot
+						// "skipBlankLines": true,
+						"skipComments": true,
+						"IIFEs": true
+					}
+				],
 				"unused-imports/no-unused-imports": "error",
 				"@typescript-eslint/no-unused-vars": [
 					"error",

@@ -1,4 +1,4 @@
-import { Message } from '@set-online/api-interfaces';
+import { Message } from '@set-online/api-definitions';
 
 import { HttpClient } from '@angular/common/http';
 import { Component, WritableSignal, signal } from '@angular/core';
