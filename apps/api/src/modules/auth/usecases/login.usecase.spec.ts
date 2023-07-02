@@ -1,5 +1,7 @@
+import { REQUEST } from '@nestjs/core';
 import { Test, TestingModule } from '@nestjs/testing';
 import bcrypt from 'bcryptjs';
+import { Request } from 'express';
 
 import { NotFoundException, UnauthorizedException } from '../../../common/exceptions';
 import { UserFaker } from '../../user/factories';
@@ -8,14 +10,17 @@ import { UserService } from '../../user/user.service';
 import { CreateJwtAccessTokenUsecase } from './create-jwt-access-token.usecase';
 import { CreateJwtRefreshTokenUsecase } from './create-jwt-refresh-token.usecas';
 import { LoginUsecase } from './login.usecase';
+import { SetJwtTokenUsecase } from './set-jwt-token.usecase';
 
 const mockUuid = '00000000-0000-4000-0000-000000000000';
 
 describe('LoginUsecase', () => {
 	let usecase: LoginUsecase;
+	let request: jest.Mocked<Partial<Request>>;
 	let userService: jest.Mocked<Partial<UserService>>;
 	let createAccessToken: jest.Mocked<Partial<CreateJwtAccessTokenUsecase>>;
 	let createRefreshToken: jest.Mocked<Partial<CreateJwtRefreshTokenUsecase>>;
+	let setToken: jest.Mocked<Partial<SetJwtTokenUsecase>>;
 
 	const userFaker = new UserFaker();
 	const mockUser = userFaker.makeOne({ uuid: mockUuid }, { createdFrom: '2010' });
@@ -25,6 +30,15 @@ describe('LoginUsecase', () => {
 		'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODc5MDQ1NDYsIm5iZiI6MTY4NzkwNDYwNiwiZXhwIjoxNjg5MjAwNTQ2LCJhdWQiOiJzZXQtb25saW5lLXJlZnJlc2gtdG9rZW4iLCJpc3MiOiJzZXQtb25saW5lIiwic3ViIjoiN2RjZTZhMzQtOTdlNy00ZTgzLTlhZDMtNDNhMzI3YjhiNmYxIiwianRpIjoidXVpZGdlbiJ9.Ri1I8tWENO8RhV45ySdlTiSEwBlDXstIvObhi15RqkR9QS8BotRTKzzYrPuEDtbKx60dtr-S5dNNZJRpGSje5g';
 
 	beforeAll(async () => {
+		request = {
+			res: {
+				cookie: jest.fn(),
+				status: () => ({
+					send: jest.fn(),
+				}),
+			} as unknown as Request['res'],
+		};
+
 		userService = {
 			getOneBy: jest.fn(),
 		};
@@ -37,16 +51,22 @@ describe('LoginUsecase', () => {
 			execute: jest.fn(),
 		};
 
+		setToken = {
+			execute: jest.fn(),
+		};
+
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
 				LoginUsecase,
+				{ provide: REQUEST, useValue: request },
 				{ provide: UserService, useValue: userService },
 				{ provide: CreateJwtAccessTokenUsecase, useValue: createAccessToken },
 				{ provide: CreateJwtRefreshTokenUsecase, useValue: createRefreshToken },
+				{ provide: SetJwtTokenUsecase, useValue: setToken },
 			],
 		}).compile();
 
-		usecase = module.get<LoginUsecase>(LoginUsecase);
+		usecase = await module.resolve<LoginUsecase>(LoginUsecase);
 	});
 
 	it('should be defined', () => {
@@ -85,13 +105,12 @@ describe('LoginUsecase', () => {
 			createAccessToken.execute.mockReturnValueOnce(mockJwtAccessToken);
 			createRefreshToken.execute.mockReturnValueOnce(mockJwtRefreshToken);
 
-			const { accessToken, refreshToken } = await usecase.execute({
+			const result = await usecase.execute({
 				username: 'user',
 				password: 'pass',
 			});
 
-			expect(accessToken).toStrictEqual(mockJwtAccessToken);
-			expect(refreshToken).toStrictEqual(mockJwtRefreshToken);
+			expect(result).toStrictEqual(undefined);
 
 			expect(userService.getOneBy).toBeCalledTimes(1);
 			expect(userService.getOneBy).toBeCalledWith('username', 'user');
