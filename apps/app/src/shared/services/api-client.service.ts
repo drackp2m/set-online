@@ -8,6 +8,6 @@ import { ApiSDK } from '@set-online/api-sdk';
 })
 export class ApiClient extends ApiSDK {
 	constructor(private readonly httpClient: HttpClient) {
-		super(httpClient);
+		super('https://localhost:14200/api', httpClient);
 	}
 }
