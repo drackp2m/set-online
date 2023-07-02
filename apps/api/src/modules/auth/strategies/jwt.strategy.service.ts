@@ -3,7 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Request } from 'express';
 import { ExtractJwt, Strategy, StrategyOptions } from 'passport-jwt';
 
-import { ConfigurationService } from '../../../common/config/configuration.service';
+import { ConfigurationService } from '../../../shared/config/configuration.service';
 import { UserEntity } from '../../user/user.entity';
 import { UserService } from '../../user/user.service';
 import { JsonWebToken } from '../definitions';

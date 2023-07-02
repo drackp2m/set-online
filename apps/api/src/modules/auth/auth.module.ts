@@ -2,9 +2,9 @@ import { Module, forwardRef } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
 
-import { ConfigurationModule } from '../../common/config/configuration.module';
-import { ConfigurationService } from '../../common/config/configuration.service';
-import { JwtFactory } from '../../common/config/factories';
+import { ConfigurationModule } from '../../shared/config/configuration.module';
+import { ConfigurationService } from '../../shared/config/configuration.service';
+import { JwtFactory } from '../../shared/config/factories';
 import { UserModule } from '../user/user.module';
 
 import { AuthController } from './auth.controller';
@@ -14,6 +14,7 @@ import { RegisterUsecase } from './usecases';
 import { CreateJwtAccessTokenUsecase } from './usecases/create-jwt-access-token.usecase';
 import { CreateJwtRefreshTokenUsecase } from './usecases/create-jwt-refresh-token.usecas';
 import { LoginUsecase } from './usecases/login.usecase';
+import { LogoutUsecase } from './usecases/logout.usecase';
 import { RefreshSessionUsecase } from './usecases/refresh-session.usecase';
 import { SetJwtTokenUsecase } from './usecases/set-jwt-token.usecase';
 
@@ -35,17 +36,12 @@ import { SetJwtTokenUsecase } from './usecases/set-jwt-token.usecase';
 		JwtStrategyService,
 		RegisterUsecase,
 		LoginUsecase,
+		LogoutUsecase,
 		RefreshSessionUsecase,
 		CreateJwtAccessTokenUsecase,
 		CreateJwtRefreshTokenUsecase,
 		SetJwtTokenUsecase,
 	],
 	controllers: [AuthController],
-	exports: [
-		CreateJwtAccessTokenUsecase,
-		CreateJwtRefreshTokenUsecase,
-		RefreshSessionUsecase,
-		LoginUsecase,
-	],
 })
 export class AuthModule {}

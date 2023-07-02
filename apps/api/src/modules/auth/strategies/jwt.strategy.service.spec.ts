@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { ConfigurationService } from '../../../common/config/configuration.service';
-import { JwtConfig } from '../../../common/config/types/jwt-config.type';
-import { NotFoundException } from '../../../common/exceptions/not-found.exception';
+import { ConfigurationService } from '../../../shared/config/configuration.service';
+import { JwtConfig } from '../../../shared/config/types/jwt-config.type';
+import { NotFoundException } from '../../../shared/exceptions/not-found.exception';
 import { UserFaker } from '../../user/factories';
 import { UserEntity } from '../../user/user.entity';
 import { UserService } from '../../user/user.service';
