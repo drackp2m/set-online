@@ -1,6 +1,6 @@
 import { LoginRequest, RegisterRequest, UserEntity } from '@set-online/api-definitions';
 
-export interface AuthPost {
+export type AuthPost = {
 	'/register': {
 		payload: [RegisterRequest];
 		response: UserEntity;
@@ -9,4 +9,4 @@ export interface AuthPost {
 		payload: [LoginRequest];
 		response: void;
 	};
-}
+};
