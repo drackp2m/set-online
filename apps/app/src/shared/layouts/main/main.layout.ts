@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
+
+import { ApiClient } from '../../services/api-client.service';
 
 @Component({
 	standalone: true,
@@ -9,10 +10,10 @@ import { Router, RouterModule, RouterOutlet } from '@angular/router';
 	imports: [RouterOutlet, RouterModule],
 })
 export default class MainLayout {
-	constructor(private readonly httpClient: HttpClient, private readonly router: Router) {}
+	constructor(private readonly apiClient: ApiClient, private readonly router: Router) {}
 
 	logout() {
-		this.httpClient.get('/api/logout').subscribe({
+		this.apiClient.auth.get('/logout').subscribe({
 			next: () => {
 				this.router.navigate(['/login']);
 			},

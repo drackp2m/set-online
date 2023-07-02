@@ -6,7 +6,7 @@ import { InMemoryCache } from '@apollo/client/core';
 import { APOLLO_OPTIONS, ApolloModule } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 
-import { AuthInterceptor } from '../interceptors/auth.interceptor';
+import { AuthInterceptor } from '../shared/interceptors/auth.interceptor';
 
 import { AppComponent } from './app.component';
 import { APP_ROUTES } from './app.routes';

@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
+import { ApiClient } from '../../shared/services/api-client.service';
 
 @Component({
 	templateUrl: './login.page.html',
@@ -9,24 +10,31 @@ import { Router } from '@angular/router';
 })
 export default class LoginPage {
 	form = new FormGroup({
-		username: new FormControl('', [Validators.required]),
+		username: new FormControl<string>('', [Validators.required]),
 		password: new FormControl('', [Validators.required]),
 	});
 
 	error = signal('');
 
-	constructor(private readonly httpClient: HttpClient, private readonly router: Router) {}
+	constructor(private readonly apiClient: ApiClient, private readonly router: Router) {}
 
 	onSubmit() {
-		if (!this.form.valid) return;
+		const controls = this.form.controls;
 
-		this.httpClient.post('/api/login', this.form.value).subscribe({
-			next: () => {
-				this.router.navigate(['/home']);
-			},
-			error: (error) => {
-				this.error.set(error.statusText);
-			},
-		});
+		if (!controls.username.value || !controls.password.value) return;
+
+		this.apiClient.auth
+			.post('/login', {
+				username: controls.username.value,
+				password: controls.password.value,
+			})
+			.subscribe({
+				next: () => {
+					this.router.navigate(['/home']);
+				},
+				error: (error) => {
+					this.error.set(error.statusText);
+				},
+			});
 	}
 }

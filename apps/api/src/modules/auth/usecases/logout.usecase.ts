@@ -11,8 +11,6 @@ export class LogoutUsecase {
 	execute(): void {
 		this.clearCookie(JwtCookie.access);
 		this.clearCookie(JwtCookie.refresh);
-
-		this.request.res.send();
 	}
 
 	private clearCookie(tokenType: JwtCookie): void {

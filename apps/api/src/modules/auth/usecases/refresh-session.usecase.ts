@@ -32,8 +32,6 @@ export class RefreshSessionUsecase {
 
 			this.setJwtToken.execute(accessToken, JwtCookie.access);
 			this.setJwtToken.execute(refreshToken, JwtCookie.refresh);
-
-			this.request.res.send();
 		} catch (error) {
 			throw new UnauthorizedException(error.message, 'refreshToken');
 		}

@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-import MainLayout from '../layouts/main/main.layout';
+import MainLayout from '../shared/layouts/main/main.layout';
 
 export const APP_ROUTES: Routes = [
 	{

@@ -35,7 +35,9 @@ export class LoginUsecase {
 		this.setJwtToken.execute(accessToken, JwtCookie.access);
 		this.setJwtToken.execute(refreshToken, JwtCookie.refresh);
 
-		this.request.res.send();
+		// this.request.res.status(HttpStatus.NO_CONTENT).send();
+
+		// return;
 	}
 
 	private async passwordMatch(password: string, hashedPassword: string): Promise<boolean> {
