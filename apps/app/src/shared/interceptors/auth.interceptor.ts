@@ -1,5 +1,4 @@
 import {
-	HttpClient,
 	HttpEvent,
 	HttpHandler,
 	HttpInterceptor,
@@ -11,6 +10,8 @@ import { Router } from '@angular/router';
 import { Observable, Subject, of } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 
+import { ApiClient } from '../services/api-client.service';
+
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 	private readonly API_LOGIN_URL = '/api/login';
@@ -19,7 +20,7 @@ export class AuthInterceptor implements HttpInterceptor {
 	private isInvalidToken = false;
 	private readonly JwtTokensRefreshed$: Subject<void> = new Subject<void>();
 
-	constructor(private readonly httpClient: HttpClient, private readonly router: Router) {}
+	constructor(private readonly apiClient: ApiClient, private readonly router: Router) {}
 
 	intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 		const ignoredUrls = [this.API_LOGIN_URL, this.API_REFRESH_SESSION_URL];
@@ -68,6 +69,6 @@ export class AuthInterceptor implements HttpInterceptor {
 	}
 
 	private refreshJwtTokens(): Observable<void> {
-		return this.httpClient.get<void>(this.API_REFRESH_SESSION_URL);
+		return this.apiClient.auth.get('/refresh-session');
 	}
 }

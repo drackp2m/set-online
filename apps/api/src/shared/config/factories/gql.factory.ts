@@ -22,6 +22,9 @@ export class GqlFactory implements GqlOptionsFactory {
 				dateScalarMode: 'isoDate',
 				numberScalarMode: 'float',
 			},
+			definitions: {
+				path: 'libs/api-definitions/src/lib/graphql/definitions.ts',
+			},
 			subscriptions: {
 				'graphql-ws': true,
 			},

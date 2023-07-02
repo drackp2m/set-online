@@ -1,19 +1,17 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, WritableSignal, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs';
 
-import { Message } from '@set-online/api-definitions';
-
-import { GetUsers2GQL, GetUsersGQL } from '../../graphql/apollo-operations';
+import { GetUsersGQL } from '../../graphql/apollo-operations';
+import { ApiClient } from '../../shared/services/api-client.service';
 
 @Component({
 	templateUrl: './example.page.html',
 	styleUrls: ['./example.page.scss'],
 })
 export default class ExamplePage {
-	private readonly hello$ = this.http.get<Message>('/api/hello');
+	private readonly hello$ = this.apiClient.default.get('/hello');
 
 	hello = toSignal<string, string>(this.hello$.pipe(map((data) => data.message)), {
 		initialValue: 'An error ocurred',
@@ -29,11 +27,7 @@ export default class ExamplePage {
 		password: new FormControl('', [Validators.required]),
 	});
 
-	constructor(
-		private readonly http: HttpClient,
-		private readonly getUsersGQL: GetUsersGQL,
-		private readonly getUsersGQL2: GetUsers2GQL,
-	) {}
+	constructor(private readonly apiClient: ApiClient, private readonly getUsersGQL: GetUsersGQL) {}
 
 	checkUsers(): void {
 		this.getUsersGQL.fetch().subscribe({
