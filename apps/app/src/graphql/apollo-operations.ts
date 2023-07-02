@@ -31,35 +31,10 @@ export type Scalars = {
 	DateTime: { input: Date; output: Date };
 };
 
-export type CreateUserInput = {
-	email?: InputMaybe<Scalars['String']['input']>;
-	password: Scalars['String']['input'];
-	username: Scalars['String']['input'];
-};
-
-export type LoginInput = {
-	password: Scalars['String']['input'];
-	username: Scalars['String']['input'];
-};
-
-export type Mutation = {
-	__typename?: 'Mutation';
-	register: UserEntity;
-};
-
-export type MutationregisterArgs = {
-	input: CreateUserInput;
-};
-
 export type Query = {
 	__typename?: 'Query';
 	getUsers: Array<UserEntity>;
-	login: Scalars['Boolean']['output'];
 	validateUserConstraints: Scalars['Boolean']['output'];
-};
-
-export type QueryloginArgs = {
-	input: LoginInput;
 };
 
 export type QueryvalidateUserConstraintsArgs = {
@@ -99,13 +74,11 @@ const result: PossibleTypesResultData = {
 
 export default result;
 
-export type RegisterMutationVariables = Exact<{
-	input: CreateUserInput;
-}>;
+export type GetUsers2QueryVariables = Exact<{ [key: string]: never }>;
 
-export type RegisterMutation = {
-	__typename?: 'Mutation';
-	register: {
+export type GetUsers2Query = {
+	__typename?: 'Query';
+	getUsers: Array<{
 		__typename?: 'UserEntity';
 		uuid: string;
 		username: string;
@@ -113,7 +86,7 @@ export type RegisterMutation = {
 		role: UserRole;
 		createdAt: Date;
 		updatedAt: Date;
-	};
+	}>;
 };
 
 export type GetUsersQueryVariables = Exact<{ [key: string]: never }>;
@@ -131,9 +104,9 @@ export type GetUsersQuery = {
 	}>;
 };
 
-export const RegisterDocument = gql`
-	mutation Register($input: CreateUserInput!) {
-		register(input: $input) {
+export const GetUsers2Document = gql`
+	query GetUsers2 {
+		getUsers {
 			uuid
 			username
 			email
@@ -147,8 +120,8 @@ export const RegisterDocument = gql`
 @Injectable({
 	providedIn: 'root',
 })
-export class RegisterGQL extends Apollo.Mutation<RegisterMutation, RegisterMutationVariables> {
-	override document = RegisterDocument;
+export class GetUsers2GQL extends Apollo.Query<GetUsers2Query, GetUsers2QueryVariables> {
+	override document = GetUsers2Document;
 
 	constructor(apollo: Apollo.Apollo) {
 		super(apollo);

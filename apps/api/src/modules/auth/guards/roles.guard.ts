@@ -3,7 +3,7 @@ import { Reflector } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { Request } from 'express';
 
-import { ForbiddenException, UnauthorizedException } from '../../../common/exceptions';
+import { ForbiddenException, UnauthorizedException } from '../../../shared/exceptions';
 import { UserRole } from '../../user/definitions';
 import { UserEntity } from '../../user/user.entity';
 

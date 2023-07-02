@@ -26,6 +26,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
 		if (ignoredUrls.includes(req.url)) return next.handle(req);
 
+		console.log(req.url);
+
 		return next.handle(req).pipe(
 			switchMap((event) => {
 				if (!(event instanceof HttpResponse)) return of(event);

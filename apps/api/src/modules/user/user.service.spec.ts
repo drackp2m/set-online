@@ -2,7 +2,7 @@ import { EntityData } from '@mikro-orm/core';
 import { EntityManager } from '@mikro-orm/postgresql';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { BadRequestException, NotFoundException } from '../../common/exceptions';
+import { BadRequestException, NotFoundException } from '../../shared/exceptions';
 
 import { UserFaker } from './factories';
 import { UserEntity } from './user.entity';

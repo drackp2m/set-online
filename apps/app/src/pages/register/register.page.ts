@@ -1,7 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, WritableSignal, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { RegisterGQL, UserEntity } from '../../graphql/apollo-operations';
+import { UserEntity } from '../../graphql/apollo-operations';
 
 @Component({
 	templateUrl: './register.page.html',
@@ -16,21 +17,18 @@ export default class RegisterPage {
 	user: WritableSignal<UserEntity | null> = signal(null);
 	error = signal('');
 
-	constructor(private readonly registerGql: RegisterGQL) {}
+	constructor(private readonly httpClient: HttpClient) {}
 
 	onSubmit() {
-		if (!this.form.value.username || !this.form.value.password) return;
+		if (!this.form.valid) return;
 
-		this.registerGql
-			.mutate({
-				input: { username: this.form.value.username, password: this.form.value.password },
-			})
-			.subscribe((result) => {
-				if (result.data) {
-					this.user.set(result.data.register);
-				} else if (result.errors) {
-					this.error.set(result.errors?.[0].message);
-				}
-			});
+		this.httpClient.post<UserEntity>('/api/register', this.form.value).subscribe({
+			next: (data) => {
+				this.user.set(data);
+			},
+			error: (error) => {
+				this.error.set(error.statusText);
+			},
+		});
 	}
 }

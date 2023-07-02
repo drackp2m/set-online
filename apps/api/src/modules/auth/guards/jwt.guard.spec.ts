@@ -1,7 +1,7 @@
 import { ExecutionContext } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { UnauthorizedException } from '../../../common/exceptions';
+import { UnauthorizedException } from '../../../shared/exceptions';
 import { UserFaker } from '../../user/factories';
 import { UserEntity } from '../../user/user.entity';
 

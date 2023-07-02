@@ -1,7 +1,7 @@
 import { Entity, Enum, Property } from '@mikro-orm/core';
 import { Field, ObjectType } from '@nestjs/graphql';
 
-import { BaseEntity } from '../../common/utils';
+import { BaseEntity } from '../../shared/utils';
 
 import { UserRole } from './definitions';
 

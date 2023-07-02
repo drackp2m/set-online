@@ -3,8 +3,8 @@ import { NestFactory } from '@nestjs/core';
 import { useContainer } from 'class-validator';
 import cookieParser from 'cookie-parser';
 
-import { BootstrapHelper } from './common/utils/boostrap.helper';
 import { AppModule } from './modules/app/app.module';
+import { BootstrapHelper } from './shared/utils/boostrap.helper';
 
 async function bootstrap(): Promise<void> {
 	const app = await NestFactory.create(AppModule, BootstrapHelper.nestApplicationOptions);

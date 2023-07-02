@@ -6,7 +6,7 @@ import { map } from 'rxjs';
 
 import { Message } from '@set-online/api-definitions';
 
-import { GetUsersGQL } from '../../graphql/apollo-operations';
+import { GetUsers2GQL, GetUsersGQL } from '../../graphql/apollo-operations';
 
 @Component({
 	templateUrl: './example.page.html',
@@ -29,15 +29,19 @@ export default class ExamplePage {
 		password: new FormControl('', [Validators.required]),
 	});
 
-	constructor(private readonly http: HttpClient, private readonly getUsersGQL: GetUsersGQL) {}
+	constructor(
+		private readonly http: HttpClient,
+		private readonly getUsersGQL: GetUsersGQL,
+		private readonly getUsersGQL2: GetUsers2GQL,
+	) {}
 
 	checkUsers(): void {
 		this.getUsersGQL.fetch().subscribe({
 			next: (data) => {
+				console.log({ data });
 				this.users.set(data.data.getUsers.length);
 			},
 			error: (error) => {
-				console.log({ error });
 				this.show(error.message, true);
 			},
 		});

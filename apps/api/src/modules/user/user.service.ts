@@ -3,7 +3,7 @@ import { EntityManager } from '@mikro-orm/postgresql';
 import { Injectable } from '@nestjs/common';
 import { genSalt, hash } from 'bcryptjs';
 
-import { BadRequestException, NotFoundException } from '../../common/exceptions';
+import { BadRequestException, NotFoundException } from '../../shared/exceptions';
 import { RegisterRequestDto } from '../auth/dtos/register-request.dto';
 
 import { UserEntity } from './user.entity';

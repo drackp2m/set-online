@@ -5,14 +5,20 @@ import { Request } from 'express';
 import { JwtCookie, JwtEndpoints } from '../definitions';
 
 @Injectable({ scope: Scope.REQUEST })
-export class SetJwtTokenUsecase {
+export class LogoutUsecase {
 	constructor(@Inject(REQUEST) private readonly request: Request) {}
 
-	execute(tokenValue: string, tokenType: JwtCookie): void {
+	execute(): void {
+		this.clearCookie(JwtCookie.access);
+		this.clearCookie(JwtCookie.refresh);
+
+		this.request.res.send();
+	}
+
+	private clearCookie(tokenType: JwtCookie): void {
 		const path = JwtEndpoints[tokenType];
 
-		// ToDo => add expiration time to cookies
-		this.request.res.cookie(tokenType, tokenValue, {
+		this.request.res.clearCookie(tokenType, {
 			secure: true,
 			httpOnly: true,
 			sameSite: true,

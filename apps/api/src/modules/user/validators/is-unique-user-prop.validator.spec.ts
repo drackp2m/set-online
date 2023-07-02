@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ValidationArguments } from 'class-validator';
 
-import { NotFoundException } from '../../../common/exceptions';
+import { NotFoundException } from '../../../shared/exceptions';
 import { UserFaker } from '../factories';
 import { UserEntity } from '../user.entity';
 import { UserService } from '../user.service';

@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import bcrypt from 'bcryptjs';
 import { Request } from 'express';
 
-import { NotFoundException, UnauthorizedException } from '../../../common/exceptions';
+import { NotFoundException, UnauthorizedException } from '../../../shared/exceptions';
 import { UserFaker } from '../../user/factories';
 import { UserService } from '../../user/user.service';
 

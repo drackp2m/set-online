@@ -3,7 +3,7 @@ import { REQUEST } from '@nestjs/core';
 import { compare } from 'bcryptjs';
 import { Request } from 'express';
 
-import { UnauthorizedException } from '../../../common/exceptions';
+import { UnauthorizedException } from '../../../shared/exceptions';
 import { UserService } from '../../user/user.service';
 import { JwtCookie } from '../definitions/jwt-cookie.enum';
 import { LoginRequestDto } from '../dtos';
@@ -35,7 +35,7 @@ export class LoginUsecase {
 		this.setJwtToken.execute(accessToken, JwtCookie.access);
 		this.setJwtToken.execute(refreshToken, JwtCookie.refresh);
 
-		this.request.res.status(200).send();
+		this.request.res.send();
 	}
 
 	private async passwordMatch(password: string, hashedPassword: string): Promise<boolean> {

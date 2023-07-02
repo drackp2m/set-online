@@ -3,7 +3,7 @@ import { REQUEST } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 
-import { UnauthorizedException } from '../../../common/exceptions';
+import { UnauthorizedException } from '../../../shared/exceptions';
 import { JsonWebToken } from '../definitions';
 import { JwtCookie } from '../definitions/jwt-cookie.enum';
 
@@ -33,7 +33,7 @@ export class RefreshSessionUsecase {
 			this.setJwtToken.execute(accessToken, JwtCookie.access);
 			this.setJwtToken.execute(refreshToken, JwtCookie.refresh);
 
-			this.request.res.status(200).send();
+			this.request.res.send();
 		} catch (error) {
 			throw new UnauthorizedException(error.message, 'refreshToken');
 		}
