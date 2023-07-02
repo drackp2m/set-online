@@ -1,8 +1,8 @@
 import { InputType, PartialType, PickType } from '@nestjs/graphql';
 
-import { CreateUserInput } from '.';
+import { RegisterRequestDto } from '../../../auth/dtos/register-request.dto';
 
 @InputType()
 export class ValidateUserConstraintsInput extends PartialType(
-	PickType(CreateUserInput, ['username', 'email'] as const),
+	PickType(RegisterRequestDto, ['username', 'email'] as const),
 ) {}

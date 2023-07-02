@@ -4,7 +4,7 @@ import { GqlExecutionContext } from '@nestjs/graphql';
 import { Request } from 'express';
 
 import { ForbiddenException, UnauthorizedException } from '../../../common/exceptions';
-import { UserRole } from '../../user/interfaces';
+import { UserRole } from '../../user/definitions';
 import { UserEntity } from '../../user/user.entity';
 
 @Injectable()

@@ -1,10 +1,12 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { IsEmail, IsOptional, IsString } from 'class-validator';
 
-import { IsUniqueUserProp } from '../decorators';
+import { RegisterRequest } from '@set-online/api-definitions';
+
+import { IsUniqueUserProp } from '../../user/decorators';
 
 @InputType()
-export class CreateUserInput {
+export class RegisterRequestDto implements RegisterRequest {
 	@IsString()
 	@IsUniqueUserProp('username')
 	@Field()

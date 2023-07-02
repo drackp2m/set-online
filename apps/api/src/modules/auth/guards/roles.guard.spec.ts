@@ -2,8 +2,8 @@ import { ExecutionContext } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { ForbiddenException, UnauthorizedException } from '../../../common/exceptions';
+import { UserRole } from '../../user/definitions';
 import { UserFaker } from '../../user/factories';
-import { UserRole } from '../../user/interfaces';
 import { UserEntity } from '../../user/user.entity';
 
 import { RolesGuard } from '.';

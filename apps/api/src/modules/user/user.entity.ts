@@ -3,7 +3,7 @@ import { Field, ObjectType } from '@nestjs/graphql';
 
 import { BaseEntity } from '../../common/utils';
 
-import { UserRole } from './interfaces';
+import { UserRole } from './definitions';
 
 @Entity({ tableName: 'users' })
 @ObjectType({ description: 'user' })

@@ -1,3 +1,1 @@
-export * from './create-user.input';
-
-export * from './validate-user-constraints.input';
+export * from './input/validate-user-constraints.input';
