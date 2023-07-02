@@ -1,9 +1,9 @@
-export interface JwtPayload {
+export interface JsonWebToken {
+	sub: string;
+	jti: string;
 	iss: string;
 	aud: string;
-	jti: string;
 	iat: number;
 	nbf: number;
 	exp: number;
-	sub: string;
 }

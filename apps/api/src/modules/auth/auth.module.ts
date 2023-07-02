@@ -10,10 +10,12 @@ import { UserModule } from '../user/user.module';
 import { AuthController } from './auth.controller';
 import { JwtGuard } from './guards';
 import { JwtStrategyService } from './strategies';
+import { RegisterUsecase } from './usecases';
 import { CreateJwtAccessTokenUsecase } from './usecases/create-jwt-access-token.usecase';
 import { CreateJwtRefreshTokenUsecase } from './usecases/create-jwt-refresh-token.usecas';
 import { LoginUsecase } from './usecases/login.usecase';
 import { RefreshSessionUsecase } from './usecases/refresh-session.usecase';
+import { SetJwtTokenUsecase } from './usecases/set-jwt-token.usecase';
 
 @Module({
 	imports: [
@@ -31,10 +33,12 @@ import { RefreshSessionUsecase } from './usecases/refresh-session.usecase';
 			useClass: JwtGuard,
 		},
 		JwtStrategyService,
+		RegisterUsecase,
+		LoginUsecase,
+		RefreshSessionUsecase,
 		CreateJwtAccessTokenUsecase,
 		CreateJwtRefreshTokenUsecase,
-		RefreshSessionUsecase,
-		LoginUsecase,
+		SetJwtTokenUsecase,
 	],
 	controllers: [AuthController],
 	exports: [

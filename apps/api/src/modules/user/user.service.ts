@@ -4,15 +4,15 @@ import { Injectable } from '@nestjs/common';
 import { genSalt, hash } from 'bcryptjs';
 
 import { BadRequestException, NotFoundException } from '../../common/exceptions';
+import { RegisterRequestDto } from '../auth/dtos/register-request.dto';
 
-import { CreateUserInput } from './dtos';
 import { UserEntity } from './user.entity';
 
 @Injectable()
 export class UserService {
 	constructor(private readonly entityManager: EntityManager) {}
 
-	async insertOne(input: CreateUserInput): Promise<UserEntity> {
+	async insertOne(input: RegisterRequestDto): Promise<UserEntity> {
 		input.password = await this.encryptPassword(input.password);
 		const entity = new UserEntity(input);
 

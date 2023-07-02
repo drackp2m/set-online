@@ -6,7 +6,7 @@ import { NotFoundException } from '../../../common/exceptions/not-found.exceptio
 import { UserFaker } from '../../user/factories';
 import { UserEntity } from '../../user/user.entity';
 import { UserService } from '../../user/user.service';
-import { JwtPayload } from '../interfaces/jwt-payload.interface';
+import { JsonWebToken } from '../definitions/json-web-token.interface';
 
 import { JwtStrategyService } from './jwt.strategy.service';
 
@@ -19,7 +19,7 @@ describe('JwtStrategyService', () => {
 	let userService: jest.Mocked<Partial<UserService>>;
 
 	const mockUuid = '00000000-0000-4000-0000-000000000000';
-	const mockJwt: JwtPayload = {
+	const mockJwt: JsonWebToken = {
 		iat: 648600120,
 		nbf: 648600120,
 		exp: 1974062562,

@@ -1,6 +1,6 @@
 import { UseGuards, applyDecorators } from '@nestjs/common';
 
-import { UserRole } from '../../user/interfaces';
+import { UserRole } from '../../user/definitions';
 import { RolesGuard } from '../guards';
 
 import { Roles } from '.';

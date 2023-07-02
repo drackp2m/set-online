@@ -8,6 +8,7 @@
 	"typescript.preferences.importModuleSpecifier": "project-relative",
 	"eslint.validate": ["javascript", "typescript"],
 	"eslint.format.enable": true,
+	"eslint.useESLintClass": true,
 	"eslint.lintTask.enable": true,
 	"stylelint.reportDescriptionlessDisables": true,
 	"stylelint.reportInvalidScopeDisables": true,
