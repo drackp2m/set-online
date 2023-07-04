@@ -1,32 +1,59 @@
-/* stylelint-disable selector-class-pattern -- allow utility classes for hiding elements */
 @use '../abstracts/mixins' as mix;
+@use '../abstracts/variables' as var;
 
-@include mix.xs {
-	.xs\:hide {
-		display: none;
+$display-rules: (
+	hide: (
+		display: none,
+	),
+	show: (
+		display: initial,
+	),
+);
+
+@each $rule, $properties in $display-rules {
+	@include mix.xs {
+		.xs\:#{$rule} {
+			@each $property, $value in $properties {
+				#{$property}: $value;
+			}
+		}
 	}
-}
 
-@include mix.sm {
-	.sm\:hide {
-		display: none;
+	@include mix.sm {
+		.sm\:#{$rule} {
+			@each $property, $value in $properties {
+				#{$property}: $value;
+			}
+		}
 	}
-}
 
-@include mix.md {
-	.md\:hide {
-		display: none;
+	@include mix.md {
+		.md\:#{$rule} {
+			@each $property, $value in $properties {
+				#{$property}: $value;
+			}
+		}
 	}
-}
 
-@include mix.lg {
-	.lg\:hide {
-		display: none;
+	@include mix.lg {
+		.lg\:#{$rule} {
+			@each $property, $value in $properties {
+				#{$property}: $value;
+			}
+		}
 	}
-}
 
-@include mix.xl {
-	.xl\:hide {
-		display: none;
+	@include mix.xl {
+		.xl\:#{$rule} {
+			@each $property, $value in $properties {
+				#{$property}: $value;
+			}
+		}
+	}
+
+	.#{$rule} {
+		@each $property, $value in $properties {
+			#{$property}: $value;
+		}
 	}
 }
