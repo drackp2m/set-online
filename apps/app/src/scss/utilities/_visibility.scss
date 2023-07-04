@@ -1,7 +1,7 @@
 @use '../abstracts/mixins' as mix;
 @use '../abstracts/variables' as var;
 
-$display-rules: (
+$rules: (
 	hide: (
 		display: none,
 	),
@@ -10,50 +10,4 @@ $display-rules: (
 	),
 );
 
-@each $rule, $properties in $display-rules {
-	@include mix.xs {
-		.xs\:#{$rule} {
-			@each $property, $value in $properties {
-				#{$property}: $value;
-			}
-		}
-	}
-
-	@include mix.sm {
-		.sm\:#{$rule} {
-			@each $property, $value in $properties {
-				#{$property}: $value;
-			}
-		}
-	}
-
-	@include mix.md {
-		.md\:#{$rule} {
-			@each $property, $value in $properties {
-				#{$property}: $value;
-			}
-		}
-	}
-
-	@include mix.lg {
-		.lg\:#{$rule} {
-			@each $property, $value in $properties {
-				#{$property}: $value;
-			}
-		}
-	}
-
-	@include mix.xl {
-		.xl\:#{$rule} {
-			@each $property, $value in $properties {
-				#{$property}: $value;
-			}
-		}
-	}
-
-	.#{$rule} {
-		@each $property, $value in $properties {
-			#{$property}: $value;
-		}
-	}
-}
+@include mix.generate-responsive($rules);

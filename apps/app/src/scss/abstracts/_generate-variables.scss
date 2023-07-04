@@ -10,6 +10,6 @@
 	}
 
 	@each $name, $value in var.$colors {
-		--#{$name}: #{$value};
+		--color-#{$name}: #{$value};
 	}
 }
