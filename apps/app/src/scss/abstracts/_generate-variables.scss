@@ -9,7 +9,7 @@
 		--border-radius-#{$size}: #{$value};
 	}
 
-	@each $size, $value in var.$border-radius {
-		--border-radius-#{$size}: #{$value};
+	@each $name, $value in var.$colors {
+		--#{$name}: #{$value};
 	}
 }
