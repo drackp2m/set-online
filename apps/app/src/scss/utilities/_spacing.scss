@@ -1,0 +1,63 @@
+@use '../abstracts/variables' as var;
+
+@each $size in map-keys(var.$spacing) {
+	.m-#{$size} {
+		margin: var(--spacing-#{$size});
+	}
+
+	.mt-#{$size} {
+		margin-top: var(--spacing-#{$size});
+	}
+
+	.mr-#{$size} {
+		margin-right: var(--spacing-#{$size});
+	}
+
+	.mb-#{$size} {
+		margin-bottom: var(--spacing-#{$size});
+	}
+
+	.ml-#{$size} {
+		margin-left: var(--spacing-#{$size});
+	}
+
+	.mx-#{$size} {
+		margin-right: var(--spacing-#{$size});
+		margin-left: var(--spacing-#{$size});
+	}
+
+	.my-#{$size} {
+		margin-top: var(--spacing-#{$size});
+		margin-bottom: var(--spacing-#{$size});
+	}
+
+	.p-#{$size} {
+		padding: var(--spacing-#{$size});
+	}
+
+	.pt-#{$size} {
+		padding-top: var(--spacing-#{$size});
+	}
+
+	.pr-#{$size} {
+		padding-right: var(--spacing-#{$size});
+	}
+
+	.pb-#{$size} {
+		padding-bottom: var(--spacing-#{$size});
+	}
+
+	.pl-#{$size} {
+		padding-left: var(--spacing-#{$size});
+	}
+
+	.px-#{$size} {
+		padding-right: var(--spacing-#{$size});
+		padding-left: var(--spacing-#{$size});
+	}
+
+	.py-#{$size} {
+		padding-top: var(--spacing-#{$size});
+		padding-bottom: var(--spacing-#{$size});
+	}
+}

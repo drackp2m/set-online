@@ -1,0 +1,32 @@
+/* stylelint-disable selector-class-pattern -- allow utility classes for hiding elements */
+@use '../abstracts/mixins' as mix;
+
+@include mix.xs {
+	.xs\:hide {
+		display: none;
+	}
+}
+
+@include mix.sm {
+	.sm\:hide {
+		display: none;
+	}
+}
+
+@include mix.md {
+	.md\:hide {
+		display: none;
+	}
+}
+
+@include mix.lg {
+	.lg\:hide {
+		display: none;
+	}
+}
+
+@include mix.xl {
+	.xl\:hide {
+		display: none;
+	}
+}

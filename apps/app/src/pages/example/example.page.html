@@ -1,7 +1,15 @@
-<section>
+<section class="content-fixed">
 	<h1>Welcome to app!</h1>
 
-	<div class="logos">
+	<ul>
+		<li class="xs:hide">xs</li>
+		<li class="sm:hide">sm</li>
+		<li class="md:hide">md</li>
+		<li class="lg:hide">lg</li>
+		<li class="xl:hide">xl</li>
+	</ul>
+
+	<div class="logos flex-row flex-wrap justify-center gap-xl my-xl xs:hide">
 		<a href="https://nx.dev" target="_blank">
 			<img
 				src="/assets/nx-grayscale-logo.svg"
@@ -49,5 +57,5 @@
 
 	<p>{{ users() }}</p>
 
-	<button (click)="checkUsers()">Check users</button>
+	<button class="p-md mt-md surface-radiant rounded-md" (click)="checkUsers()">Check users</button>
 </section>

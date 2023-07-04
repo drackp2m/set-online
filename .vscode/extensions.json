@@ -2,6 +2,7 @@
 	"recommendations": [
 		"nrwl.angular-console",
 		"editorconfig.editorconfig",
+		"mrmlnc.vscode-scss",
 		"esbenp.prettier-vscode",
 		"dbaeumer.vscode-eslint",
 		"stylelint.vscode-stylelint",

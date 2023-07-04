@@ -1,0 +1,30 @@
+$breakpoints: (
+	sm: 480px,
+	md: 768px,
+	lg: 1024px,
+	xl: 1280px,
+) !default;
+
+$spacing: (
+	zero: 0,
+	xs: 0.25rem,
+	sm: 0.5rem,
+	md: 1rem,
+	lg: 2rem,
+	xl: 4rem,
+) !default;
+
+$border-radius: (
+	zero: 0,
+	sm: 0.25rem,
+	md: 0.5rem,
+	lg: 1rem,
+) !default;
+
+$colors: (
+	cosmic: #341f97,
+	radiant: #fd5e53,
+	harmony: #00adb5,
+	vivid: #ffbe0b,
+	serene: #41aa1b,
+) !default;

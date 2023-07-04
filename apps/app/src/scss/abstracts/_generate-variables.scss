@@ -1,0 +1,15 @@
+@use '../abstracts/variables' as var;
+
+:root {
+	@each $size, $value in var.$spacing {
+		--spacing-#{$size}: #{$value};
+	}
+
+	@each $size, $value in var.$border-radius {
+		--border-radius-#{$size}: #{$value};
+	}
+
+	@each $size, $value in var.$border-radius {
+		--border-radius-#{$size}: #{$value};
+	}
+}

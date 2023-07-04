@@ -3,7 +3,6 @@
 	"extends": ["stylelint-config-standard-scss", "stylelint-config-clean-order"],
 	"plugins": ["stylelint-prettier"],
 	"defaultSeverity": "warning",
-	"ignoreFiles": ["**/_*.scss"],
 	"overrides": [
 		{
 			"files": ["*.scss", "**/*.scss"],
@@ -12,6 +11,7 @@
 	],
 	"rules": {
     "prettier/prettier": true,
-		"color-hex-length": "short"
+		"color-hex-length": "short",
+		"scss/dollar-variable-empty-line-before": null
 	}
 }
