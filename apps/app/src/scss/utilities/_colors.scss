@@ -1,23 +1,33 @@
-@use 'sass:color';
-@use '../abstracts/variables' as var;
+@use 'sass:map';
 
-@each $name, $color in var.$colors {
-	.color-#{$name} {
-		color: $color;
+@use '../abstracts/variables' as var;
+@use '../abstracts/mixins' as mix;
+
+@function get-rules($dark-mode: false) {
+	$all-rules: ();
+
+	@each $name in map-keys(var.$colors) {
+		$adjusted-color: if($dark-mode, var(--color-dark-#{$name}), var(--color-#{$name}));
+
+		$rules: (
+			color-#{$name}:
+				(
+					color: $adjusted-color,
+				),
+			surface-#{$name}:
+				(
+					background-color: $adjusted-color,
+				)
+		);
+
+		$all-rules: map.merge($all-rules, $rules);
 	}
-	.surface-#{$name} {
-		background-color: $color;
-	}
+
+	@return $all-rules;
 }
 
-.dark-mode {
-	@each $name, $color in var.$colors {
-		.color-#{$name} {
-			color: color.adjust($color, $lightness: -20%);
-		}
+@include mix.generate-responsive(get-rules());
 
-		.surface-#{$name} {
-			background-color: color.adjust($color, $lightness: -20%);
-		}
-	}
+.dark-mode {
+	@include mix.generate-responsive(get-rules(true));
 }

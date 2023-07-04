@@ -1,15 +1,15 @@
 <section class="content-fixed">
-	<h1 class="hide md:show">Welcome to app!</h1>
+	<h1>Welcome to app!</h1>
 
-	<ul>
-		<li class="xs:hide">xs</li>
-		<li class="sm:hide">sm</li>
-		<li class="md:hide">md</li>
-		<li class="lg:hide">lg</li>
-		<li class="xl:hide">xl</li>
+	<ul class="flex-row gap-sm m-md">
+		<li class="rounded-sm p-xs px-sm surface-radiant color-vivid xs-o:surface-serene">xs</li>
+		<li class="rounded-sm p-xs px-sm surface-radiant color-vivid sm-o:surface-serene">sm</li>
+		<li class="rounded-sm p-xs px-sm surface-radiant color-vivid md-o:surface-serene">md</li>
+		<li class="rounded-sm p-xs px-sm surface-radiant color-vivid lg-o:surface-serene">lg</li>
+		<li class="rounded-sm p-xs px-sm surface-radiant color-vivid xl-o:surface-serene">xl</li>
 	</ul>
 
-	<div class="logos flex-row flex-wrap justify-center gap-xl my-xl xs:hide">
+	<div class="logos flex-row flex-wrap justify-center gap-xl my-xl md:hide">
 		<a href="https://nx.dev" target="_blank">
 			<img
 				src="/assets/nx-grayscale-logo.svg"
@@ -57,5 +57,7 @@
 
 	<p>{{ users() }}</p>
 
-	<button class="p-md mt-md surface-radiant rounded-md" (click)="checkUsers()">Check users</button>
+	<button class="p-md mt-md surface-radiant rounded-md xl:surface-vivid" (click)="checkUsers()">
+		Check users
+	</button>
 </section>

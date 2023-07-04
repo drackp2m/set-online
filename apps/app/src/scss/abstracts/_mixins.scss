@@ -1,31 +1,130 @@
+@use 'sass:string';
+@use 'sass:map';
+
 @use 'variables' as var;
 
-@mixin xs {
-	@media screen and (width < map-get(var.$breakpoints, sm)) {
-		@content;
-	}
-}
-
 @mixin sm {
-	@media screen and (width >= map-get(var.$breakpoints, sm)) and (width < map-get(var.$breakpoints, md)) {
+	@media screen and (min-width: map-get(var.$breakpoints, sm)) {
 		@content;
 	}
 }
 
 @mixin md {
-	@media screen and (width >= map-get(var.$breakpoints, md)) and (width < map-get(var.$breakpoints, lg)) {
+	@media screen and (min-width: map-get(var.$breakpoints, md)) {
 		@content;
 	}
 }
 
 @mixin lg {
-	@media screen and (width >= map-get(var.$breakpoints, lg)) and (width < map-get(var.$breakpoints, xl)) {
+	@media screen and (min-width: map-get(var.$breakpoints, lg)) {
 		@content;
 	}
 }
 
 @mixin xl {
+	@media screen and (min-width: map-get(var.$breakpoints, xl)) {
+		@content;
+	}
+}
+
+@mixin xs-o {
+	@media screen and (width < map-get(var.$breakpoints, sm)) {
+		@content;
+	}
+}
+
+@mixin sm-o {
+	@media screen and (width >= map-get(var.$breakpoints, sm)) and (width < map-get(var.$breakpoints, md)) {
+		@content;
+	}
+}
+
+@mixin md-o {
+	@media screen and (width >= map-get(var.$breakpoints, md)) and (width < map-get(var.$breakpoints, lg)) {
+		@content;
+	}
+}
+
+@mixin lg-o {
+	@media screen and (width >= map-get(var.$breakpoints, lg)) and (width < map-get(var.$breakpoints, xl)) {
+		@content;
+	}
+}
+
+@mixin xl-o {
 	@media screen and (width >= map-get(var.$breakpoints, xl)) {
 		@content;
+	}
+}
+
+@mixin generate-responsive($rules) {
+	@each $rule, $properties in $rules {
+		.#{$rule} {
+			@each $property, $value in map.get($rules, $rule) {
+				#{$property}: $value;
+			}
+		}
+	}
+
+	@each $rule, $properties in $rules {
+		@include sm {
+			@include generate-media-class-rule(sm, $rule, $properties);
+		}
+	}
+
+	@each $rule, $properties in $rules {
+		@include md {
+			@include generate-media-class-rule(md, $rule, $properties);
+		}
+	}
+
+	@each $rule, $properties in $rules {
+		@include lg {
+			@include generate-media-class-rule(lg, $rule, $properties);
+		}
+	}
+
+	@each $rule, $properties in $rules {
+		@include xl {
+			@include generate-media-class-rule(xl, $rule, $properties);
+		}
+	}
+
+	@each $rule, $properties in $rules {
+		@include xs-o {
+			@include generate-media-class-rule(xs-o, $rule, $properties);
+		}
+	}
+
+	@each $rule, $properties in $rules {
+		@include sm-o {
+			@include generate-media-class-rule(sm-o, $rule, $properties);
+		}
+	}
+
+	@each $rule, $properties in $rules {
+		@include md-o {
+			@include generate-media-class-rule(md-o, $rule, $properties);
+		}
+	}
+
+	@each $rule, $properties in $rules {
+		@include lg-o {
+			@include generate-media-class-rule(lg-o, $rule, $properties);
+		}
+	}
+
+	@each $rule, $properties in $rules {
+		@include xl-o {
+			@include generate-media-class-rule(xl-o, $rule, $properties);
+		}
+	}
+}
+
+@mixin generate-media-class-rule($media-size, $class-name, $properties) {
+	.#{$media-size}\:#{$class-name} {
+		@each $property, $value in $properties {
+			#{$property}: $value;
+		}
 	}
 }
