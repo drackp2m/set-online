@@ -1,6 +1,8 @@
+@use 'sass:map';
+
 @use '../abstracts/variables' as var;
 
-@each $size in map-keys(var.$spacing) {
+@each $size in map.keys(var.$spacing) {
 	.m-#{$size} {
 		margin: var(--spacing-#{$size});
 	}

@@ -4,25 +4,25 @@
 @use 'variables' as var;
 
 @mixin sm {
-	@media screen and (min-width: map-get(var.$breakpoints, sm)) {
+	@media screen and (width >= map-get(var.$breakpoints, sm)) {
 		@content;
 	}
 }
 
 @mixin md {
-	@media screen and (min-width: map-get(var.$breakpoints, md)) {
+	@media screen and (width >= map-get(var.$breakpoints, md)) {
 		@content;
 	}
 }
 
 @mixin lg {
-	@media screen and (min-width: map-get(var.$breakpoints, lg)) {
+	@media screen and (width >= map-get(var.$breakpoints, lg)) {
 		@content;
 	}
 }
 
 @mixin xl {
-	@media screen and (min-width: map-get(var.$breakpoints, xl)) {
+	@media screen and (width >= map-get(var.$breakpoints, xl)) {
 		@content;
 	}
 }

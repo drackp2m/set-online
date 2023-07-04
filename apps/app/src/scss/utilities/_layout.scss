@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 @use '../abstracts/variables' as var;
 
 $padding: var(--spacing-lg);
@@ -78,7 +80,7 @@ $padding: var(--spacing-lg);
 	justify-content: space-evenly;
 }
 
-@each $size in map-keys(var.$spacing) {
+@each $size in map.keys(var.$spacing) {
 	.gap-#{$size} {
 		gap: var(--spacing-#{$size});
 	}

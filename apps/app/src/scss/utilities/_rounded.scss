@@ -1,5 +1,4 @@
 @use 'sass:map';
-@use 'sass:meta';
 
 @use '../abstracts/variables' as var;
 @use '../abstracts/mixins' as mix;
@@ -15,14 +14,7 @@
 }
 
 @function get-rule($name) {
-	@return (
-		color-#{$name}: (color: var(--color-#{$name})),
-		surface-#{$name}: (background-color: var(--color-#{$name}))
-	);
+	@return (rounded-#{$name}: (border-radius: var(--border-radius-#{$name})));
 }
 
-@include mix.generate-responsive(get-rules(var.$colors));
-
-.dark-mode {
-	@include mix.generate-responsive(get-rules(var.$dark-colors));
-}
+@include mix.generate-responsive(get-rules(var.$border-radius));
