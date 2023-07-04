@@ -1,0 +1,85 @@
+@use '../abstracts/variables' as var;
+
+$padding: var(--spacing-lg);
+
+.content-fixed {
+	width: 100%;
+	margin: 0 auto;
+	padding: 0 $padding;
+
+	@each $size in map-values(var.$breakpoints) {
+		@media screen and (min-width: $size) {
+			width: $size;
+		}
+	}
+}
+
+.content-fluid {
+	width: 100%;
+	padding: 0 $padding;
+}
+
+.flex-wrap {
+	flex-wrap: wrap;
+}
+
+.flex-column {
+	display: flex;
+	flex-direction: column;
+}
+
+@each $breakpoint, $size in var.$breakpoints {
+	@media screen and (min-width: $size) {
+		.#{$breakpoint}-flex-column {
+			display: flex;
+			flex-direction: column !important;
+		}
+	}
+}
+
+.flex-row {
+	display: flex;
+	flex-direction: row;
+}
+
+.align-center {
+	align-items: center;
+}
+
+.align-start {
+	align-items: flex-start;
+}
+
+.align-end {
+	align-items: flex-end;
+}
+
+.justify-center {
+	justify-content: center;
+}
+
+.justify-start {
+	justify-content: flex-start;
+}
+
+.justify-end {
+	justify-content: flex-end;
+}
+
+.justify-between {
+	justify-content: space-between;
+}
+
+.justify-around {
+	justify-content: space-around;
+}
+
+.justify-evenly {
+	justify-content: space-evenly;
+}
+
+@each $size in map-keys(var.$spacing) {
+	.gap-#{$size} {
+		gap: var(--spacing-#{$size});
+	}
+}

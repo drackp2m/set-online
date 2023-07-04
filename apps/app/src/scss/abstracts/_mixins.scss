@@ -1,0 +1,38 @@
+@use 'variables' as var;
+
+/**
+	sm: 480px,
+	md: 768px,
+	lg: 1024px,
+	xl: 1280px,
+	*/
+
+@mixin xs {
+	@media screen and (width < map-get(var.$breakpoints, sm)) {
+		@content;
+	}
+}
+
+@mixin sm {
+	@media screen and (width >= map-get(var.$breakpoints, sm)) and (width < map-get(var.$breakpoints, md)) {
+		@content;
+	}
+}
+
+@mixin md {
+	@media screen and (width >= map-get(var.$breakpoints, md)) and (width < map-get(var.$breakpoints, lg)) {
+		@content;
+	}
+}
+
+@mixin lg {
+	@media screen and (width >= map-get(var.$breakpoints, lg)) and (width < map-get(var.$breakpoints, xl)) {
+		@content;
+	}
+}
+
+@mixin xl {
+	@media screen and (width >= map-get(var.$breakpoints, xl)) {
+		@content;
+	}
+}

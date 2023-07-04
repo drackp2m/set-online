@@ -1,0 +1,21 @@
+@use '../abstracts/variables' as var;
+
+@each $name, $color in var.$colors {
+	.color-#{$name} {
+		color: $color;
+	}
+	.surface-#{$name} {
+		background-color: $color;
+	}
+}
+
+.dark-mode {
+	@each $name, $color in var.$colors {
+		.color-#{$name} {
+			color: color.adjust($color, $lightness: -20%);
+		}
+		.surface-#{$name} {
+			background-color: color.adjust($color, $lightness: -20%);
+		}
+	}
+}

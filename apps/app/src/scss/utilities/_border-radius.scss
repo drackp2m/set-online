@@ -1,0 +1,7 @@
+@use '../abstracts/variables' as var;
+
+@each $size in map-keys(var.$border-radius) {
+	.rounded-#{$size} {
+		border-radius: var(--border-radius-#{$size});
+	}
+}
