@@ -1,6 +1,8 @@
 @use 'sass:map';
+@use 'sass:meta';
 
 @use '../abstracts/variables' as var;
+@use '../abstracts/mixins' as mix;
 
 $padding: var(--spacing-lg);
 
@@ -10,7 +12,7 @@ $padding: var(--spacing-lg);
 	padding: 0 $padding;
 
 	@each $size in map-values(var.$breakpoints) {
-		@media screen and (min-width: $size) {
+		@media screen and (width >= $size) {
 			width: $size;
 		}
 	}
@@ -21,67 +23,63 @@ $padding: var(--spacing-lg);
 	padding: 0 $padding;
 }
 
-.flex-wrap {
-	flex-wrap: wrap;
-}
+$rules: (
+	flex-column: (
+		display: flex,
+		flex-direction: column,
+	),
+	flex-row: (
+		display: flex,
+		flex-direction: row,
+	),
+	flex-wrap: (
+		flex-wrap: wrap,
+	),
+	align-center: (
+		align-items: center,
+	),
+	align-start: (
+		align-items: flex-start,
+	),
+	align-end: (
+		align-items: flex-end,
+	),
+	justify-center: (
+		justify-content: center,
+	),
+	justify-start: (
+		justify-content: flex-start,
+	),
+	justify-end: (
+		justify-content: flex-end,
+	),
+	justify-between: (
+		justify-content: space-between,
+	),
+	justify-around: (
+		justify-content: space-around,
+	),
+	justify-evenly: (
+		justify-content: space-evenly,
+	),
+);
 
-.flex-column {
-	display: flex;
-	flex-direction: column;
-}
+@function get-list($items, $rules-getter: get-rules) {
+	$rules: ();
 
-@each $breakpoint, $size in var.$breakpoints {
-	@media screen and (min-width: $size) {
-		.#{$breakpoint}-flex-column {
-			display: flex;
-			flex-direction: column !important;
-		}
+	@each $name in map.keys($items) {
+		$rules-list: meta.call(meta.get-function($rules-getter), $name);
+
+		$rules: map.merge($rules, $rules-list);
 	}
+
+	@return $rules;
 }
 
-.flex-row {
-	display: flex;
-	flex-direction: row;
+@function get-gap-rules($name) {
+	@return (gap-#{$name}: (gap: var(--spacing-#{$name})));
 }
 
-.align-center {
-	align-items: center;
-}
+@include mix.generate-responsive($rules);
 
-.align-start {
-	align-items: flex-start;
-}
-
-.align-end {
-	align-items: flex-end;
-}
-
-.justify-center {
-	justify-content: center;
-}
-
-.justify-start {
-	justify-content: flex-start;
-}
-
-.justify-end {
-	justify-content: flex-end;
-}
-
-.justify-between {
-	justify-content: space-between;
-}
-
-.justify-around {
-	justify-content: space-around;
-}
-
-.justify-evenly {
-	justify-content: space-evenly;
-}
-
-@each $size in map.keys(var.$spacing) {
-	.gap-#{$size} {
-		gap: var(--spacing-#{$size});
-	}
-}
+@include mix.generate-responsive(get-list(var.$spacing, get-gap-rules));
