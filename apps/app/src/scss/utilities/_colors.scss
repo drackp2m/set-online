@@ -4,25 +4,25 @@
 @use '../abstracts/variables' as var;
 @use '../abstracts/mixins' as mix;
 
-@function get-rules($list) {
-	$all-rules: ();
+@function get-list($items) {
+	$rules: ();
 
-	@each $name in map.keys($list) {
-		$all-rules: map.merge($all-rules, get-rule($name));
+	@each $name in map.keys($items) {
+		$rules: map.merge($rules, get-rules($name));
 	}
 
-	@return $all-rules;
+	@return $rules;
 }
 
-@function get-rule($name) {
+@function get-rules($name) {
 	@return (
 		color-#{$name}: (color: var(--color-#{$name})),
 		surface-#{$name}: (background-color: var(--color-#{$name}))
 	);
 }
 
-@include mix.generate-responsive(get-rules(var.$colors));
+@include mix.generate-responsive(get-list(var.$colors));
 
 .dark-mode {
-	@include mix.generate-responsive(get-rules(var.$dark-colors));
+	@include mix.generate-responsive(get-list(var.$dark-colors));
 }

@@ -36,3 +36,28 @@ $dark-colors: (
 	vivid: #ffbe0b,
 	serene: #41aa1b,
 ) !default;
+
+$font-sizes: (
+	xs: 0.75rem,
+	sm: 0.875rem,
+	md: 1rem,
+	lg: 1.25rem,
+	xl: 1.5rem,
+	xxl: 2rem,
+) !default;
+
+$font-weights: (
+	light: 300,
+	regular: 400,
+	medium: 500,
+	bold: 700,
+) !default;
+
+$shadows: (
+	none: none,
+	sm: 0 1px 2px 0 rgb(0 0 0 / 5%),
+	md: 0 4px 6px -1px rgb(0 0 0 / 10%),
+	lg: 0 10px 15px -3px rgb(0 0 0 / 10%),
+	xl: 0 20px 25px -5px rgb(0 0 0 / 10%),
+	xxl: 0 25px 50px -12px rgb(0 0 0 / 25%),
+) !default;
