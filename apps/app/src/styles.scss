@@ -1,9 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
 @use 'the-new-css-reset/css/reset';
 
-@use 'scss/abstracts/generate-variables';
-@use 'scss/utilities/layout';
-@use 'scss/utilities/visibility';
-@use 'scss/utilities/spacing';
-@use 'scss/utilities/rounded';
-@use 'scss/utilities/colors';
+@use './scss/main';

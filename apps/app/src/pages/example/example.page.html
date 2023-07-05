@@ -53,11 +53,16 @@
 		/></a>
 	</div>
 
-	<p>Message: {{ hello() }}</p>
+	<div class="flex-column gap-md align-center">
+		<p>Message: {{ hello() }}</p>
 
-	<p>{{ users() }}</p>
+		<button
+			class="p-md surface-radiant rounded-md xl:surface-vivid md-o:p-sm"
+			(click)="checkUsers()"
+		>
+			Check users
+		</button>
 
-	<button class="p-md mt-md surface-radiant rounded-md xl:surface-vivid" (click)="checkUsers()">
-		Check users
-	</button>
+		<p *ngIf="users()">Now: {{ users() }} users.</p>
+	</div>
 </section>
