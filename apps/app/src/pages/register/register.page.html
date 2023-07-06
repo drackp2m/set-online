@@ -1,17 +1,25 @@
 <section class="content-fixed py-lg">
 	<h4>Register form</h4>
 
-	<div class="br-lg bg-serene c-vivid p-md mt-md" *ngIf="user()">
+	<div class="round-lg surface-serene color-vivid p-md mt-md" *ngIf="user()">
 		<h5>Welcome</h5>
 		{{ user() | json }}
 	</div>
 
-	<form class="fl-rw gap-sm mt-md" [formGroup]="form" (submit)="onSubmit()">
-		<input class="p-sm br-sm bg-radiant c-vivid" type="text" formControlName="username" />
-		<input class="p-sm br-sm bg-radiant c-vivid" type="password" formControlName="password" />
+	<form class="flex-row gap-sm mt-md" [formGroup]="form" (submit)="onSubmit()">
+		<input
+			class="p-sm round-sm surface-radiant color-vivid"
+			type="text"
+			formControlName="username"
+		/>
+		<input
+			class="p-sm round-sm surface-radiant color-vivid"
+			type="password"
+			formControlName="password"
+		/>
 
-		<button class="p-sm br-sm bg-serene c-vivid" type="submit">Send</button>
+		<button class="p-sm round-sm surface-serene color-vivid" type="submit">Send</button>
 	</form>
 
-	<p class="c-radiant mt-sm" *ngIf="error()">Error: {{ error() }}</p>
+	<p class="color-radiant mt-sm" *ngIf="error()">Error: {{ error() }}</p>
 </section>
