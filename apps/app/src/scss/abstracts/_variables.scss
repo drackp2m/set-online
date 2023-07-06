@@ -6,7 +6,7 @@ $breakpoints: (
 ) !default;
 
 $spacings: (
-	zero: 0,
+	none: 0,
 	xs: 0.25rem,
 	sm: 0.5rem,
 	md: 1rem,
@@ -17,7 +17,7 @@ $spacings: (
 ) !default;
 
 $borders-radius: (
-	zero: 0,
+	none: 0,
 	sm: 0.25rem,
 	md: 0.5rem,
 	lg: 1rem,
@@ -58,12 +58,14 @@ $font-weights: (
 ) !default;
 
 $font-obliques: (
+	none: 0,
 	sm: 5,
 	md: 10,
 	lg: 15,
 ) !default;
 
 $font-monospaces: (
+	none: 0,
 	xs: 0.2,
 	sm: 0.4,
 	md: 0.6,
@@ -72,6 +74,7 @@ $font-monospaces: (
 ) !default;
 
 $font-casuals: (
+	none: 0,
 	xs: 0.2,
 	sm: 0.4,
 	md: 0.6,
