@@ -1,3 +1,8 @@
+@use 'sass:map';
+
+@use '../abstracts/mixins' as mix;
+@use '../abstracts/variables' as var;
+
 @font-face {
 	font-family: HelveticaNowDisplay;
 	font-weight: normal;
@@ -16,3 +21,19 @@
 	font-family: Recursive;
 	src: url('/assets/fonts/recursive/latin_basic.woff2') format('woff2-variations');
 }
+
+@function get-list($items) {
+	$rules: ();
+
+	@each $name in map.keys($items) {
+		$rules: map.merge($rules, get-rules($name));
+	}
+
+	@return $rules;
+}
+
+@function get-rules($name) {
+	@return (fs-#{$name}: (font-size: var(--font-size-#{$name})));
+}
+
+@include mix.generate-responsive(get-list(var.$font-sizes));

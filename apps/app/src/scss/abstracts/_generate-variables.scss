@@ -12,4 +12,16 @@
 	@each $name, $value in var.$colors {
 		--color-#{$name}: #{$value};
 	}
+
+	@each $name, $value in var.$font-sizes {
+		--font-size-#{$name}: #{$value};
+	}
+
+	@each $name, $value in var.$font-weights {
+		--font-weight-#{$name}: #{$value};
+	}
+
+	@each $name, $value in var.$shadows {
+		--shadow-#{$name}: #{$value};
+	}
 }
