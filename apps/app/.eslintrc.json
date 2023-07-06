@@ -24,7 +24,7 @@
 					"error",
 					{
 						"type": "element",
-						"prefix": "set-online",
+						"prefix": "set",
 						"style": "kebab-case"
 					}
 				]
