@@ -17,7 +17,7 @@
 }
 
 @function get-rules($name) {
-	@return (br-#{$name}: (border-radius: var(--border-radius-#{$name})));
+	@return (round-#{$name}: (border-radius: var(--border-radius-#{$name})));
 }
 
 @include mix.generate-responsive(get-list(var.$borders-radius));

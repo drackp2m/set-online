@@ -16,8 +16,8 @@
 
 @function get-rules($name) {
 	@return (
-		c-#{$name}: (color: var(--color-#{$name})),
-		bg-#{$name}: (background-color: var(--color-#{$name}))
+		color-#{$name}: (color: var(--color-#{$name})),
+		surface-#{$name}: (background-color: var(--color-#{$name}))
 	);
 }
 

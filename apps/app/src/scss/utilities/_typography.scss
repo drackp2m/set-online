@@ -22,23 +22,23 @@
 }
 
 @function get-rules($name) {
-	@return (fs-#{$name}: (font-size: var(--font-size-#{$name})));
+	@return (size-#{$name}: (font-size: var(--font-size-#{$name})));
 }
 
 @function get-weight-rules($name) {
-	@return (fw-#{$name}: (font-weight: var(--font-weight-#{$name})));
+	@return (weight-#{$name}: (font-weight: var(--font-weight-#{$name})));
 }
 
 @function get-oblique-rules($name) {
-	@return (fo-#{$name}: (font-style: oblique calc(var(--font-oblique-#{$name}) * 1deg)));
+	@return (oblique-#{$name}: (font-style: oblique calc(var(--font-oblique-#{$name}) * 1deg)));
 }
 
 @function get-monospace-rules($name) {
-	@return (fm-#{$name}: (font-variation-settings: 'MONO' var(--font-monospace-#{$name})));
+	@return (mono-#{$name}: (font-variation-settings: 'MONO' var(--font-monospace-#{$name})));
 }
 
 @function get-casual-rules($name) {
-	@return (fc-#{$name}: (font-variation-settings: 'CASL' var(--font-casual-#{$name})));
+	@return (casual-#{$name}: (font-variation-settings: 'CASL' var(--font-casual-#{$name})));
 }
 
 @include mix.generate-responsive(get-list(var.$font-sizes));

@@ -4,16 +4,16 @@
 	<set-example-menu></set-example-menu>
 
 	<section id="media-query-indicator" class="mt-xl">
-		<ul class="fl-rw my-md gap-sm lg:gap-md">
-			<li class="br-sm p-xs px-sm bg-radiant c-vivid xs-o:surface-serene">xs</li>
-			<li class="br-sm p-xs px-sm bg-radiant c-vivid sm-o:surface-serene">sm</li>
-			<li class="br-sm p-xs px-sm bg-radiant c-vivid md-o:surface-serene">md</li>
-			<li class="br-sm p-xs px-sm bg-radiant c-vivid lg-o:surface-serene">lg</li>
-			<li class="br-sm p-xs px-sm bg-radiant c-vivid xl-o:surface-serene">xl</li>
+		<ul class="flex-row my-md gap-sm lg:gap-md">
+			<li class="round-sm p-xs px-sm surface-radiant color-vivid xs-o:surface-serene">xs</li>
+			<li class="round-sm p-xs px-sm surface-radiant color-vivid sm-o:surface-serene">sm</li>
+			<li class="round-sm p-xs px-sm surface-radiant color-vivid md-o:surface-serene">md</li>
+			<li class="round-sm p-xs px-sm surface-radiant color-vivid lg-o:surface-serene">lg</li>
+			<li class="round-sm p-xs px-sm surface-radiant color-vivid xl-o:surface-serene">xl</li>
 		</ul>
 	</section>
 
-	<section id="logos" class="fl-rw fl-wr js-cn gap-lg mt-lg">
+	<section id="logos" class="flex-row flex-wrap just-center gap-lg mt-lg">
 		<a href="https://nx.dev" target="_blank">
 			<img
 				src="/assets/nx-grayscale-logo.svg"
@@ -57,8 +57,8 @@
 		/></a>
 	</section>
 
-	<section class="fl-cl gap-md al-cn mt-lg">
-		<button class="p-md bg-radiant br-md xl:surface-vivid md-o:p-sm" (click)="checkUsers()">
+	<section class="flex-col gap-md align-center mt-lg">
+		<button class="p-md surface-radiant round-md xl:surface-vivid md-o:p-sm" (click)="checkUsers()">
 			Check users
 		</button>
 
