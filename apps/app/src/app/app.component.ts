@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-	selector: 'set-online-app',
+	selector: 'set-app',
 	template: `<router-outlet></router-outlet>`,
 })
 export class AppComponent {}

@@ -7,10 +7,17 @@ import { DirectivesModule } from '../../shared/directives/directives.module';
 
 import ExamplePage from './example.page';
 import { EXAMPLE_ROUTES } from './example.routes';
+import ExampleMenuComponent from './shared/components/menu/example-menu.component';
 
 @NgModule({
 	declarations: [ExamplePage],
-	imports: [RouterModule.forChild(EXAMPLE_ROUTES), DirectivesModule, ReactiveFormsModule, NgIf],
+	imports: [
+		RouterModule.forChild(EXAMPLE_ROUTES),
+		ExampleMenuComponent,
+		DirectivesModule,
+		ReactiveFormsModule,
+		NgIf,
+	],
 	exports: [ExamplePage],
 })
 export default class ExampleModule {}

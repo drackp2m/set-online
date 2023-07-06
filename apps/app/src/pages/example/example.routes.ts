@@ -7,4 +7,8 @@ export const EXAMPLE_ROUTES: Routes = [
 		path: '',
 		component: ExamplePage,
 	},
+	{
+		path: 'typographies',
+		loadComponent: () => import('./typographies/typography.page'),
+	},
 ];
