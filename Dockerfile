@@ -1,4 +1,4 @@
-FROM node:18.14.1-alpine3.16 AS deps
+FROM node:18-alpine3.17 AS deps
 
 RUN apk add --no-cache build-base python3
 
@@ -48,4 +48,4 @@ RUN mkdir -p ~/.local/share/zsh/plugins \
 			&& ln -s /usr/share/zsh/plugins/powerlevel10k ~/.local/share/zsh/plugins/ \
 			&& mkdir -p ~/.config/zsh
 
-# CMD yarn start
+CMD yarn start

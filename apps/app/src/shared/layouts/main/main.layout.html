@@ -1,11 +1,27 @@
-<h4>This is the main-layout</h4>
+<main class="flex-column">
+	<nav class="content-fixed flex-column align-center p-md gap-md">
+		<h4>This is the main-layout</h4>
 
-<ul>
-	<li><a routerLink="/register">register</a></li>
-	<li><a routerLink="/login">login</a></li>
-	<li><a href="javascript: void 0" (click)="logout()">logout</a></li>
-	<li><a routerLink="/home">home</a></li>
-	<li><a routerLink="/example">example</a></li>
-</ul>
+		<ul class="flex-row gap-sm">
+			<li class="rounded-sm p-xs px-sm surface-radiant color-vivid">
+				<a routerLink="/register">register</a>
+			</li>
+			<li class="rounded-sm p-xs px-sm surface-radiant color-vivid">
+				<a routerLink="/login">login</a>
+			</li>
+			<li class="rounded-sm p-xs px-sm surface-radiant color-vivid">
+				<a href="javascript: void 0" (click)="logout()">logout</a>
+			</li>
+			<li class="rounded-sm p-xs px-sm surface-radiant color-vivid">
+				<a routerLink="/home">home</a>
+			</li>
+			<li class="rounded-sm p-xs px-sm surface-radiant color-vivid">
+				<a routerLink="/example">example</a>
+			</li>
+		</ul>
+	</nav>
 
-<router-outlet></router-outlet>
+	<div class="scroll">
+		<router-outlet></router-outlet>
+	</div>
+</main>

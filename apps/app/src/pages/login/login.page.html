@@ -1,10 +1,20 @@
-<h4>Login form</h4>
+<section class="content-fixed py-lg">
+	<h4>Login form</h4>
 
-<span *ngIf="error()">Error: {{ error() }}</span>
+	<form class="flex-row gap-sm mt-md" [formGroup]="form" (submit)="onSubmit()">
+		<input
+			class="p-sm rounded-sm surface-radiant color-vivid"
+			type="text"
+			formControlName="username"
+		/>
+		<input
+			class="p-sm rounded-sm surface-radiant color-vivid"
+			type="password"
+			formControlName="password"
+		/>
 
-<form [formGroup]="form" (submit)="onSubmit()">
-	<input type="text" formControlName="username" />
-	<input type="password" formControlName="password" />
+		<button class="p-sm rounded-sm surface-serene color-vivid" type="submit">Send</button>
+	</form>
 
-	<button type="submit">Send</button>
-</form>
+	<p class="color-radiant mt-sm" *ngIf="error()">Error: {{ error() }}</p>
+</section>
