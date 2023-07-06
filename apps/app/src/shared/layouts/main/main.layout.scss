@@ -1,9 +1,14 @@
-ul {
-	display: flex;
-	gap: 0.5em;
+main {
+	height: 100vh;
+	background-color: pink;
 
-	margin: 0;
-	padding: 0;
+	nav {
+		background-color: white;
+		border-bottom: solid 1px pink;
+	}
 
-	list-style: none;
+	.scroll {
+		overflow: scroll;
+		flex: 1 auto;
+	}
 }

@@ -80,15 +80,13 @@ import { Component } from '@angular/core';
 			}
 
 			.wrapper {
-				width: 100%;
+				background-color: white;
 			}
 			.container {
 				margin-left: auto;
 				margin-right: auto;
 				max-width: 768px;
 				padding-bottom: 3rem;
-				padding-left: 1rem;
-				padding-right: 1rem;
 				color: rgba(55, 65, 81, 1);
 				width: 100%;
 			}
@@ -417,7 +415,8 @@ import { Component } from '@angular/core';
 				}
 			}
 		</style>
-		<div class="wrapper">
+
+		<div class="wrapper content-fixed py-lg">
 			<div class="container">
 				<!--  WELCOME  -->
 				<div id="welcome">
