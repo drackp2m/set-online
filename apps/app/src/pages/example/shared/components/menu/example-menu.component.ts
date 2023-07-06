@@ -13,6 +13,10 @@ import { RouterModule } from '@angular/router';
 				<li class="round-sm p-xs px-sm surface-vivid">
 					<a routerLink="/example/typographies">Typographies</a>
 				</li>
+
+				<li class="round-sm p-xs px-sm surface-vivid">
+					<a routerLink="/example/shadows">shadows</a>
+				</li>
 			</ul>
 		</nav>
 	`,

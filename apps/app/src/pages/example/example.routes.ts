@@ -9,6 +9,10 @@ export const EXAMPLE_ROUTES: Routes = [
 	},
 	{
 		path: 'typographies',
-		loadComponent: () => import('./typographies/typography.page'),
+		loadComponent: () => import('./typography/typography.page'),
+	},
+	{
+		path: 'shadows',
+		loadComponent: () => import('./shadow/shadow.page'),
 	},
 ];
