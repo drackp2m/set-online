@@ -5,7 +5,7 @@ $breakpoints: (
 	xl: 1280px,
 ) !default;
 
-$spacing: (
+$spacings: (
 	zero: 0,
 	xs: 0.25rem,
 	sm: 0.5rem,
@@ -14,7 +14,7 @@ $spacing: (
 	xl: 4rem,
 ) !default;
 
-$border-radius: (
+$borders-radius: (
 	zero: 0,
 	sm: 0.25rem,
 	md: 0.5rem,
@@ -38,19 +38,43 @@ $dark-colors: (
 ) !default;
 
 $font-sizes: (
-	xs: 0.75rem,
-	sm: 0.875rem,
+	sm: 0.8rem,
 	md: 1rem,
 	lg: 1.25rem,
 	xl: 1.5rem,
 	xxl: 2rem,
+	xxxl: 2.75rem,
 ) !default;
 
 $font-weights: (
-	light: 300,
-	regular: 400,
-	medium: 500,
-	bold: 700,
+	sm: 300,
+	md: 400,
+	lg: 500,
+	xl: 600,
+	xxl: 700,
+	xxxl: 900,
+) !default;
+
+$font-obliques: (
+	sm: 5,
+	md: 10,
+	lg: 15,
+) !default;
+
+$font-monospaces: (
+	xs: 0.2,
+	sm: 0.4,
+	md: 0.6,
+	lg: 0.8,
+	xl: 1,
+) !default;
+
+$font-casuals: (
+	xs: 0.2,
+	sm: 0.4,
+	md: 0.6,
+	lg: 0.8,
+	xl: 1,
 ) !default;
 
 $shadows: (

@@ -1,58 +1,58 @@
-@use 'sass:string';
 @use 'sass:map';
+@use 'sass:string';
 
 @use 'variables' as var;
 
 @mixin sm {
-	@media screen and (width >= map-get(var.$breakpoints, sm)) {
+	@media screen and (map.get(var.$breakpoints, sm) <= width) {
 		@content;
 	}
 }
 
 @mixin md {
-	@media screen and (width >= map-get(var.$breakpoints, md)) {
+	@media screen and (map.get(var.$breakpoints, md) <= width) {
 		@content;
 	}
 }
 
 @mixin lg {
-	@media screen and (width >= map-get(var.$breakpoints, lg)) {
+	@media screen and (map.get(var.$breakpoints, lg) <= width) {
 		@content;
 	}
 }
 
 @mixin xl {
-	@media screen and (width >= map-get(var.$breakpoints, xl)) {
+	@media screen and (map.get(var.$breakpoints, xl) <= width) {
 		@content;
 	}
 }
 
 @mixin xs-o {
-	@media screen and (width < map-get(var.$breakpoints, sm)) {
+	@media screen and (map.get(var.$breakpoints, sm) > width) {
 		@content;
 	}
 }
 
 @mixin sm-o {
-	@media screen and (width >= map-get(var.$breakpoints, sm)) and (width < map-get(var.$breakpoints, md)) {
+	@media screen and (map.get(var.$breakpoints, sm) <= width) and (map.get(var.$breakpoints, md) > width) {
 		@content;
 	}
 }
 
 @mixin md-o {
-	@media screen and (width >= map-get(var.$breakpoints, md)) and (width < map-get(var.$breakpoints, lg)) {
+	@media screen and (map.get(var.$breakpoints, md) <= width) and (map.get(var.$breakpoints, lg) > width) {
 		@content;
 	}
 }
 
 @mixin lg-o {
-	@media screen and (width >= map-get(var.$breakpoints, lg)) and (width < map-get(var.$breakpoints, xl)) {
+	@media screen and (map.get(var.$breakpoints, lg) <= width) and (map.get(var.$breakpoints, xl) > width) {
 		@content;
 	}
 }
 
 @mixin xl-o {
-	@media screen and (width >= map-get(var.$breakpoints, xl)) {
+	@media screen and (map.get(var.$breakpoints, xl) <= width) {
 		@content;
 	}
 }

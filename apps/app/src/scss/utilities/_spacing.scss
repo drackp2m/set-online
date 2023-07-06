@@ -32,4 +32,4 @@
 	);
 }
 
-@include mix.generate-responsive(get-list(var.$spacing));
+@include mix.generate-responsive(get-list(var.$spacings));

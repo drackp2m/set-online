@@ -1,32 +1,21 @@
+@use 'sass:meta';
 @use 'sass:map';
 
 @use '../abstracts/mixins' as mix;
 @use '../abstracts/variables' as var;
 
 @font-face {
-	font-family: HelveticaNowDisplay;
-	font-weight: normal;
-	font-style: normal;
-	src: url('/assets/fonts/helvetica-now/regular.woff2') format('woff2-variations');
-}
-
-@font-face {
-	font-family: HelveticaNowDisplay;
-	font-weight: normal;
-	font-style: italic;
-	src: url('/assets/fonts/helvetica-now/italic.woff2') format('woff2-variations');
-}
-
-@font-face {
 	font-family: Recursive;
 	src: url('/assets/fonts/recursive/latin_basic.woff2') format('woff2-variations');
 }
 
-@function get-list($items) {
+@function get-list($items, $rules-getter: get-rules) {
 	$rules: ();
 
 	@each $name in map.keys($items) {
-		$rules: map.merge($rules, get-rules($name));
+		$rules-list: meta.call(meta.get-function($rules-getter), $name);
+
+		$rules: map.merge($rules, $rules-list);
 	}
 
 	@return $rules;
@@ -36,4 +25,28 @@
 	@return (fs-#{$name}: (font-size: var(--font-size-#{$name})));
 }
 
+@function get-weight-rules($name) {
+	@return (fw-#{$name}: (font-weight: var(--font-weight-#{$name})));
+}
+
+@function get-oblique-rules($name) {
+	@return (fo-#{$name}: (font-style: oblique calc(var(--font-oblique-#{$name}) * 1deg)));
+}
+
+@function get-monospace-rules($name) {
+	@return (fm-#{$name}: (font-variation-settings: 'MONO' var(--font-monospace-#{$name})));
+}
+
+@function get-casual-rules($name) {
+	@return (fc-#{$name}: (font-variation-settings: 'CASL' var(--font-casual-#{$name})));
+}
+
 @include mix.generate-responsive(get-list(var.$font-sizes));
+
+@include mix.generate-responsive(get-list(var.$font-weights, get-weight-rules));
+
+@include mix.generate-responsive(get-list(var.$font-obliques, get-oblique-rules));
+
+@include mix.generate-responsive(get-list(var.$font-monospaces, get-monospace-rules));
+
+@include mix.generate-responsive(get-list(var.$font-casuals, get-casual-rules));
