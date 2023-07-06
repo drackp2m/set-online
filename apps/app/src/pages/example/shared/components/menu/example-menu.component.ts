@@ -7,10 +7,10 @@ import { RouterModule } from '@angular/router';
 	imports: [RouterModule],
 	template: `
 		<nav>
-			<ul class="flx-row my-md gap-sm">
-				<li class="br-sm p-xs px-sm surface-vivid"><a routerLink="/example">Example</a></li>
+			<ul class="fl-rw my-md gap-sm">
+				<li class="br-sm p-xs px-sm bg-vivid"><a routerLink="/example">Example</a></li>
 
-				<li class="br-sm p-xs px-sm surface-vivid">
+				<li class="br-sm p-xs px-sm bg-vivid">
 					<a routerLink="/example/typographies">Typographies</a>
 				</li>
 			</ul>

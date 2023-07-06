@@ -34,42 +34,42 @@
 }
 
 $rules: (
-	flx-col: (
+	fl-cl: (
 		display: flex,
 		flex-direction: column,
 	),
-	flx-row: (
+	fl-rw: (
 		display: flex,
 		flex-direction: row,
 	),
-	flx-wrp: (
-		flx-wrp: wrap,
+	fl-wr: (
+		flex-wrap: wrap,
 	),
-	alg-cen: (
-		align-items: center,
-	),
-	alg-str: (
+	al-st: (
 		align-items: flex-start,
 	),
-	alg-end: (
+	al-cn: (
+		align-items: center,
+	),
+	al-nd: (
 		align-items: flex-end,
 	),
-	jst-cen: (
-		justify-content: center,
-	),
-	jst-str: (
+	js-st: (
 		justify-content: flex-start,
 	),
-	jst-end: (
+	js-cn: (
+		justify-content: center,
+	),
+	js-nd: (
 		justify-content: flex-end,
 	),
-	jst-btw: (
+	js-bw: (
 		justify-content: space-between,
 	),
-	jst-ard: (
+	js-rd: (
 		justify-content: space-around,
 	),
-	jst-evl: (
+	js-ev: (
 		justify-content: space-evenly,
 	),
 );
