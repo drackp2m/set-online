@@ -1,47 +1,17 @@
-<section class="content-fixed py-lg">
-	<h1>Welcome to app!</h1>
+<main class="content-fixed py-lg">
+	<h2 class="tc">{{ hello() }}</h2>
 
-	Ahora qué no sè coño barça
+	<section class="media-query-indicator">
+		<ul class="flx-row my-md gap-sm lg:gap-md">
+			<li class="br-sm p-xs px-sm surface-radiant color-vivid xs-o:surface-serene">xs</li>
+			<li class="br-sm p-xs px-sm surface-radiant color-vivid sm-o:surface-serene">sm</li>
+			<li class="br-sm p-xs px-sm surface-radiant color-vivid md-o:surface-serene">md</li>
+			<li class="br-sm p-xs px-sm surface-radiant color-vivid lg-o:surface-serene">lg</li>
+			<li class="br-sm p-xs px-sm surface-radiant color-vivid xl-o:surface-serene">xl</li>
+		</ul>
+	</section>
 
-	<ul class="flex-row m-md gap-sm lg:gap-md">
-		<li class="rounded-sm p-xs px-sm surface-radiant color-vivid xs-o:surface-serene">xs</li>
-		<li class="rounded-sm p-xs px-sm surface-radiant color-vivid sm-o:surface-serene">sm</li>
-		<li class="rounded-sm p-xs px-sm surface-radiant color-vivid md-o:surface-serene">md</li>
-		<li class="rounded-sm p-xs px-sm surface-radiant color-vivid lg-o:surface-serene">lg</li>
-		<li class="rounded-sm p-xs px-sm surface-radiant color-vivid xl-o:surface-serene">xl</li>
-	</ul>
-
-	<p class="my-md fs-xs">
-		Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-		dolorum illum nobis mollitia.
-	</p>
-
-	<p class="my-md fs-sm">
-		Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-		dolorum illum nobis mollitia.
-	</p>
-
-	<p class="my-md fs-md">
-		Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-		dolorum illum nobis mollitia.
-	</p>
-
-	<p class="my-md fs-lg">
-		Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-		dolorum illum nobis mollitia.
-	</p>
-
-	<p class="my-md fs-xl">
-		Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-		dolorum illum nobis mollitia.
-	</p>
-
-	<p class="my-md fs-xxl">
-		Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-		dolorum illum nobis mollitia.
-	</p>
-
-	<div class="logos flex-row flex-wrap justify-center gap-lg my-xl">
+	<section id="logos" class="flx-row flx-wrp jst-cen gap-lg mt-lg">
 		<a href="https://nx.dev" target="_blank">
 			<img
 				src="/assets/nx-grayscale-logo.svg"
@@ -83,18 +53,213 @@
 				alt="A Reactive Store with Magical Powers"
 				[setOnlineHoverSrc]="'/assets/elf-logo.svg'"
 		/></a>
-	</div>
+	</section>
 
-	<div class="flex-column gap-md align-center">
-		<p>Message: {{ hello() }}</p>
+	<h3 class="mt-xl">Font sizes</h3>
 
-		<button
-			class="p-md surface-radiant rounded-md xl:surface-vivid md-o:p-sm"
-			(click)="checkUsers()"
-		>
+	<section id="font-sizes" class="flx-col gap-lg my-md">
+		<p>
+			<span class="surface-radiant br-sm px-xs">off</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p class="fs-sm">
+			<span class="surface-vivid br-sm px-xs">sm</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p class="fs-md">
+			<span class="surface-vivid br-sm px-sm fm-xl">md</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p class="fs-lg">
+			<span class="surface-vivid br-sm px-sm fm-xl">lg</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p class="fs-xl">
+			<span class="surface-vivid br-sm px-sm fm-xl">xl</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p class="fs-xxl">
+			<span class="surface-vivid br-sm px-sm fm-xl">xxl</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p class="fs-xxxl">
+			<span class="surface-vivid br-sm px-sm fm-xl">xxxl</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+	</section>
+
+	<h3 class="mt-xl">Font weights</h3>
+
+	<section id="font-weights" class="flx-col gap-lg mt-md">
+		<p>
+			<span class="surface-radiant br-sm px-xs">off</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p class="fw-sm">
+			<span class="surface-vivid br-sm px-sm fm-xl">sm</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p class="fw-md">
+			<span class="surface-vivid br-sm px-sm fm-xl">md</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p class="fw-lg">
+			<span class="surface-vivid br-sm px-sm fm-xl">lg</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p class="fw-xl">
+			<span class="surface-vivid br-sm px-sm fm-xl">xl</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p class="fw-xxl">
+			<span class="surface-vivid br-sm px-sm fm-xl">xxl</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p class="fw-xxxl">
+			<span class="surface-vivid br-sm px-sm fm-xl">xxxl</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+	</section>
+
+	<h3 class="mt-xl">Font obliques</h3>
+
+	<section id="font-obliques" class="flx-col gap-lg mt-md">
+		<p>
+			<span class="surface-radiant br-sm px-xs">off</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p class="fo-sm">
+			<span class="surface-vivid br-sm px-sm fm-xl">sm</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p class="fo-md">
+			<span class="surface-vivid br-sm px-sm fm-xl">md</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p class="fo-lg">
+			<span class="surface-vivid br-sm px-sm fm-xl">lg</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+	</section>
+
+	<h3 class="mt-xl">Font monospaces</h3>
+
+	<section id="font-monospaces" class="flx-col gap-lg mt-md">
+		<p>
+			<span class="surface-radiant br-sm px-xs">off</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p class="fm-xs">
+			<span class="surface-vivid br-sm px-sm fm-xl">xs</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p class="fm-sm">
+			<span class="surface-vivid br-sm px-sm fm-xl">sm</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p class="fm-md">
+			<span class="surface-vivid br-sm px-sm fm-xl">md</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p class="fm-lg">
+			<span class="surface-vivid br-sm px-sm fm-xl">lg</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p class="fm-xl">
+			<span class="surface-vivid br-sm px-sm fm-xl">xl</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+	</section>
+
+	<h3 class="mt-xl">Font casuals</h3>
+
+	<section id="font-casuals" class="flx-col gap-lg mt-md">
+		<p>
+			<span class="surface-radiant br-sm px-xs">off</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p class="fc-xs">
+			<span class="surface-vivid br-sm px-sm fm-xl">xs</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p class="fc-sm">
+			<span class="surface-vivid br-sm px-sm fm-xl">sm</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p class="fc-md">
+			<span class="surface-vivid br-sm px-sm fm-xl">md</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p class="fc-lg">
+			<span class="surface-vivid br-sm px-sm fm-xl">lg</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p class="fc-xl">
+			<span class="surface-vivid br-sm px-sm fm-xl">xl</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+	</section>
+
+	<section class="flx-col gap-md alg-cen">
+		<button class="p-md surface-radiant br-md xl:surface-vivid md-o:p-sm" (click)="checkUsers()">
 			Check users
 		</button>
 
 		<p *ngIf="users()">Now: {{ users() }} users.</p>
-	</div>
-</section>
+	</section>
+</main>

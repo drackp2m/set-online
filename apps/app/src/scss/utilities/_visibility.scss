@@ -5,9 +5,6 @@ $rules: (
 	hide: (
 		display: none,
 	),
-	show: (
-		display: initial,
-	),
 );
 
 @include mix.generate-responsive($rules);

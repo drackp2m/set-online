@@ -4,14 +4,12 @@
 @use '../abstracts/variables' as var;
 @use '../abstracts/mixins' as mix;
 
-$padding: var(--spacing-lg);
-
 .content-fixed {
 	width: 100%;
 	margin: 0 auto;
-	padding: 0 $padding;
+	padding: 0 var(--layout-padding);
 
-	@each $size in map-values(var.$breakpoints) {
+	@each $size in map.values(var.$breakpoints) {
 		@media screen and (width >= $size) {
 			width: $size;
 		}
@@ -20,46 +18,58 @@ $padding: var(--spacing-lg);
 
 .content-fluid {
 	width: 100%;
-	padding: 0 $padding;
+	padding: 0 var(--layout-padding);
+}
+
+:root {
+	--layout-padding: var(--spacing-md);
+
+	@include mix.sm {
+		--layout-padding: var(--spacing-lg);
+	}
+
+	@include mix.lg {
+		--layout-padding: var(--spacing-xl);
+	}
 }
 
 $rules: (
-	flex-column: (
+	flx-col: (
 		display: flex,
 		flex-direction: column,
 	),
-	flex-row: (
+	flx-row: (
 		display: flex,
 		flex-direction: row,
 	),
-	flex-wrap: (
-		flex-wrap: wrap,
+	flx-wrp: (
+		flx-wrp: wrap,
 	),
-	align-center: (
+	alg-cen: (
 		align-items: center,
 	),
-	align-start: (
+	alg-str: (
 		align-items: flex-start,
 	),
-	align-end: (
+	alg-end: (
 		align-items: flex-end,
 	),
-	justify-center: (
+	jst-cen: (
 		justify-content: center,
 	),
-	justify-start: (
+	jst-str: (
 		justify-content: flex-start,
 	),
-	justify-end: (
+	jst-end: (
 		justify-content: flex-end,
 	),
-	justify-between: (
+	jst-btw: (
 		justify-content: space-between,
 	),
-	justify-around: (
+	jst-ard: (
 		justify-content: space-around,
 	),
-	justify-evenly: (
+	jst-evl: (
 		justify-content: space-evenly,
 	),
 );
@@ -82,4 +92,4 @@ $rules: (
 
 @include mix.generate-responsive($rules);
 
-@include mix.generate-responsive(get-list(var.$spacing, get-gap-rules));
+@include mix.generate-responsive(get-list(var.$spacings, get-gap-rules));
