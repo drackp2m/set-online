@@ -15,15 +15,15 @@ RUN chown -R node:node /usr/src/app \
 
 USER node
 
-COPY package.json yarn.lock* ./
+COPY package.json package.lock* yarn.lock* ./
 
-RUN yarn install --ignore-optional --frozen-lockfile
+RUN npm install
 
 
 
 FROM deps AS dev
 
-CMD yarn start
+CMD npm start
 
 
 
@@ -48,4 +48,4 @@ RUN mkdir -p ~/.local/share/zsh/plugins \
 			&& ln -s /usr/share/zsh/plugins/powerlevel10k ~/.local/share/zsh/plugins/ \
 			&& mkdir -p ~/.config/zsh
 
-CMD yarn start
+CMD npm start
