@@ -20,6 +20,12 @@ import { RouterModule } from '@angular/router';
 			<ng-container
 				*ngTemplateOutlet="button; context: { text: 'Colors', link: '/example/colors' }"
 			></ng-container>
+			<ng-container
+				*ngTemplateOutlet="
+					button;
+					context: { text: 'Border radius', link: '/example/border-radius' }
+				"
+			></ng-container>
 		</nav>
 
 		<ng-template #button let-text="text" let-link="link">
