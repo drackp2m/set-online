@@ -9,22 +9,22 @@ import { RouterModule } from '@angular/router';
 	template: `
 		<nav class="flex-row my-md gap-sm">
 			<ng-container
-				*ngTemplateOutlet="button; context: { text: 'Example', link: '/example' }"
-			></ng-container>
-			<ng-container
 				*ngTemplateOutlet="button; context: { text: 'Typographies', link: '/example/typographies' }"
 			></ng-container>
 			<ng-container
-				*ngTemplateOutlet="button; context: { text: 'Shadows', link: '/example/shadows' }"
+				*ngTemplateOutlet="button; context: { text: 'Colors', link: '/example/colors' }"
 			></ng-container>
 			<ng-container
-				*ngTemplateOutlet="button; context: { text: 'Colors', link: '/example/colors' }"
+				*ngTemplateOutlet="button; context: { text: 'Spacings', link: '/example/spacings' }"
 			></ng-container>
 			<ng-container
 				*ngTemplateOutlet="
 					button;
 					context: { text: 'Border radius', link: '/example/border-radius' }
 				"
+			></ng-container>
+			<ng-container
+				*ngTemplateOutlet="button; context: { text: 'Shadows', link: '/example/shadows' }"
 			></ng-container>
 		</nav>
 

@@ -2,8 +2,8 @@ main {
 	min-height: 100%;
 	background-color: white;
 
-	#border-radius-sizes {
+	.grid {
 		display: grid;
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(4, 1fr);
 	}
 }

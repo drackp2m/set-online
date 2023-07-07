@@ -23,4 +23,8 @@ export const EXAMPLE_ROUTES: Routes = [
 		path: 'border-radius',
 		loadComponent: () => import('./border-radius/border-radius.page'),
 	},
+	{
+		path: 'spacings',
+		loadComponent: () => import('./spacing/spacing.page'),
+	},
 ];
