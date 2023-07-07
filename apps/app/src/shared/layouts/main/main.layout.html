@@ -1,25 +1,40 @@
 <div id="main-layout" class="flex-col">
-	<nav class="content-fixed flex-col align-center py-md gap-md">
+	<section id="header" class="content-fixed flex-col align-center py-md gap-md">
 		<h1>This is the main-layout</h1>
 
-		<ul class="flex-row gap-sm">
-			<li class="round-sm p-xs px-sm surface-radiant color-vivid">
-				<a routerLink="/register">register</a>
-			</li>
-			<li class="round-sm p-xs px-sm surface-radiant color-vivid">
-				<a routerLink="/login">login</a>
-			</li>
-			<li class="round-sm p-xs px-sm surface-radiant color-vivid">
-				<a href="javascript: void 0" (click)="logout()">logout</a>
-			</li>
-			<li class="round-sm p-xs px-sm surface-radiant color-vivid">
-				<a routerLink="/home">home</a>
-			</li>
-			<li class="round-sm p-xs px-sm surface-radiant color-vivid">
-				<a routerLink="/example">example</a>
-			</li>
-		</ul>
-	</nav>
+		<nav class="flex-row my-md gap-sm">
+			<ng-container
+				*ngTemplateOutlet="button; context: { text: 'Register', link: '/register' }"
+			></ng-container>
+			<ng-container
+				*ngTemplateOutlet="button; context: { text: 'Login', link: '/login' }"
+			></ng-container>
+			<ng-container
+				*ngTemplateOutlet="
+					button;
+					context: { text: 'Logout', link: '/logout', click: logout(), surface: 'radiant' }
+				"
+			></ng-container>
+			<ng-container
+				*ngTemplateOutlet="button; context: { text: 'Home', link: '/home' }"
+			></ng-container>
+			<ng-container
+				*ngTemplateOutlet="button; context: { text: 'Example', link: '/example' }"
+			></ng-container>
+		</nav>
+
+		<ng-template #button let-text="text" let-link="link" let-click="click" let-surface="surface">
+			<a
+				class="round-sm p-xs px-sm"
+				[class]="active.isActive ? 'weight-xxl surface-serene' : 'surface-' + (surface || 'vivid')"
+				routerLinkActive
+				#active="routerLinkActive"
+				[routerLink]="click ? '/logout' : link"
+				(click)="click ? click() : null"
+				>{{ text }}</a
+			>
+		</ng-template>
+	</section>
 
 	<div class="scroll">
 		<router-outlet></router-outlet>

@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
 
@@ -7,16 +8,17 @@ import { ApiClient } from '../../services/api-client.service';
 	standalone: true,
 	templateUrl: './main.layout.html',
 	styleUrls: ['./main.layout.scss'],
-	imports: [RouterOutlet, RouterModule],
+	imports: [RouterOutlet, RouterModule, NgTemplateOutlet],
 })
 export default class MainLayout {
 	constructor(private readonly apiClient: ApiClient, private readonly router: Router) {}
 
 	logout() {
-		this.apiClient.auth.get('/logout').subscribe({
-			next: () => {
-				this.router.navigate(['/login']);
-			},
-		});
+		return () =>
+			this.apiClient.auth.get('/logout').subscribe({
+				next: () => {
+					this.router.navigate(['/login']);
+				},
+			});
 	}
 }
