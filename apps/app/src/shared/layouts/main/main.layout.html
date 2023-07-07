@@ -2,7 +2,7 @@
 	<section id="header" class="content-fixed flex-col align-center py-md gap-md">
 		<h1>This is the main-layout</h1>
 
-		<nav class="flex-row my-md gap-sm">
+		<nav class="flex-row flex-wrap my-md gap-sm">
 			<ng-container
 				*ngTemplateOutlet="button; context: { text: 'Register', link: '/register' }"
 			></ng-container>
@@ -12,7 +12,7 @@
 			<ng-container
 				*ngTemplateOutlet="
 					button;
-					context: { text: 'Logout', link: '/logout', click: logout(), surface: 'radiant' }
+					context: { text: 'Logout', link: '/login', click: logout(), surface: 'radiant' }
 				"
 			></ng-container>
 			<ng-container
@@ -29,7 +29,7 @@
 				[class]="active.isActive ? 'weight-xxl surface-serene' : 'surface-' + (surface || 'vivid')"
 				routerLinkActive
 				#active="routerLinkActive"
-				[routerLink]="click ? '/logout' : link"
+				[routerLink]="link"
 				(click)="click ? click() : null"
 				>{{ text }}</a
 			>

@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 	selector: 'set-example-menu',
 	imports: [RouterModule, NgTemplateOutlet],
 	template: `
-		<nav class="flex-row my-md gap-sm">
+		<nav class="flex-row flex-wrap my-md gap-sm">
 			<ng-container
 				*ngTemplateOutlet="button; context: { text: 'Typographies', link: '/example/typographies' }"
 			></ng-container>
