@@ -15,7 +15,7 @@ RUN chown -R node:node /usr/src/app \
 
 USER node
 
-COPY package.json ./
+COPY package.json yarn.lock* ./
 
 RUN yarn install
 
