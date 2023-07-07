@@ -15,4 +15,8 @@ export const EXAMPLE_ROUTES: Routes = [
 		path: 'shadows',
 		loadComponent: () => import('./shadow/shadow.page'),
 	},
+	{
+		path: 'colors',
+		loadComponent: () => import('./color/color.page'),
+	},
 ];
