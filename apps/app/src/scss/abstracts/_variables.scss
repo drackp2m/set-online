@@ -5,40 +5,6 @@ $breakpoints: (
 	xl: 1280px,
 ) !default;
 
-$spacings: (
-	none: 0,
-	xs: 0.25rem,
-	sm: 0.5rem,
-	md: 1rem,
-	lg: 2rem,
-	xl: 3rem,
-	xxl: 4rem,
-	xxxl: 6rem,
-) !default;
-
-$borders-radius: (
-	none: 0,
-	sm: 0.25rem,
-	md: 0.5rem,
-	lg: 1rem,
-) !default;
-
-$colors: (
-	cosmic: #341f97,
-	radiant: #fd5e53,
-	harmony: #00adb5,
-	vivid: #ffbe0b,
-	serene: #41aa1b,
-) !default;
-
-$dark-colors: (
-	cosmic: #341f97,
-	radiant: #fd5e53,
-	harmony: #00adb5,
-	vivid: #ffbe0b,
-	serene: #41aa1b,
-) !default;
-
 $font-sizes: (
 	sm: 0.8rem,
 	md: 1rem,
@@ -80,6 +46,46 @@ $font-casuals: (
 	md: 0.6,
 	lg: 0.8,
 	xl: 1,
+) !default;
+
+$card-colors: (
+	primary-1: #ef3d44,
+	primary-2: #492f93,
+	primary-3: #00b458,
+) !default;
+
+$colors: (
+	cosmic: #341f97,
+	radiant: #fd5e53,
+	harmony: #00adb5,
+	vivid: #ffbe0b,
+	serene: #41aa1b,
+) !default;
+
+$dark-colors: (
+	cosmic: #341f97,
+	radiant: #fd5e53,
+	harmony: #00adb5,
+	vivid: #ffbe0b,
+	serene: #41aa1b,
+) !default;
+
+$spacings: (
+	none: 0,
+	xs: 0.25rem,
+	sm: 0.5rem,
+	md: 1rem,
+	lg: 2rem,
+	xl: 3rem,
+	xxl: 4rem,
+	xxxl: 6rem,
+) !default;
+
+$borders-radius: (
+	none: 0,
+	sm: 0.25rem,
+	md: 0.5rem,
+	lg: 1rem,
 ) !default;
 
 $shadows: (
