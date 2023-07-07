@@ -1,3 +1,4 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 
 import ExampleMenuComponent from '../shared/components/menu/example-menu.component';
@@ -6,6 +7,8 @@ import ExampleMenuComponent from '../shared/components/menu/example-menu.compone
 	standalone: true,
 	templateUrl: './border-radius.page.html',
 	styleUrls: ['./border-radius.page.scss'],
-	imports: [ExampleMenuComponent],
+	imports: [ExampleMenuComponent, NgFor],
 })
-export default class BorderRadiusPage {}
+export default class BorderRadiusPage {
+	rounds = ['none', 'sm', 'md', 'lg'];
+}
