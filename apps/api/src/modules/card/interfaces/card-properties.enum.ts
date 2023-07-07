@@ -1,6 +1,6 @@
 export enum CardProperties {
-	number = 'a',
-	shape = 'b',
-	color = 'c',
-	fill = 'd',
+	shape = 'a',
+	color = 'b',
+	number = 'c',
+	shading = 'd',
 }

@@ -1,5 +1,5 @@
 export enum ShapeEnum {
-	pill = 1,
-	rhombus = 2,
-	worm = 3,
+	oval = 1,
+	squiggle = 2,
+	diamond = 3,
 }
