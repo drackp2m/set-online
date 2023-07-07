@@ -12,38 +12,8 @@
 			dolorum illum nobis mollitia.
 		</p>
 
-		<p class="size-sm">
-			<span class="surface-vivid round-sm px-xs">sm</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
-
-		<p class="size-md">
-			<span class="surface-vivid round-sm px-sm mono-xl">md</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
-
-		<p class="size-lg">
-			<span class="surface-vivid round-sm px-sm mono-xl">lg</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
-
-		<p class="size-xl">
-			<span class="surface-vivid round-sm px-sm mono-xl">xl</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
-
-		<p class="size-xxl">
-			<span class="surface-vivid round-sm px-sm mono-xl">xxl</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
-
-		<p class="size-xxxl">
-			<span class="surface-vivid round-sm px-sm mono-xl">xxxl</span>
+		<p [class]="'size-' + size" *ngFor="let size of sizes">
+			<span class="surface-vivid round-sm px-xs">{{ size }}</span>
 			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
 			dolorum illum nobis mollitia.
 		</p>
@@ -58,38 +28,8 @@
 			dolorum illum nobis mollitia.
 		</p>
 
-		<p class="weight-sm">
-			<span class="surface-vivid round-sm px-sm mono-xl">sm</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
-
-		<p class="weight-md">
-			<span class="surface-vivid round-sm px-sm mono-xl">md</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
-
-		<p class="weight-lg">
-			<span class="surface-vivid round-sm px-sm mono-xl">lg</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
-
-		<p class="weight-xl">
-			<span class="surface-vivid round-sm px-sm mono-xl">xl</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
-
-		<p class="weight-xxl">
-			<span class="surface-vivid round-sm px-sm mono-xl">xxl</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
-
-		<p class="weight-xxxl">
-			<span class="surface-vivid round-sm px-sm mono-xl">xxxl</span>
+		<p [class]="'weight-' + weight" *ngFor="let weight of weights">
+			<span class="surface-vivid round-sm px-sm mono-xl">{{ weight }}</span>
 			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
 			dolorum illum nobis mollitia.
 		</p>
@@ -104,20 +44,8 @@
 			dolorum illum nobis mollitia.
 		</p>
 
-		<p class="oblique-sm">
-			<span class="surface-vivid round-sm px-sm mono-xl">sm</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
-
-		<p class="oblique-md">
-			<span class="surface-vivid round-sm px-sm mono-xl">md</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
-
-		<p class="oblique-lg">
-			<span class="surface-vivid round-sm px-sm mono-xl">lg</span>
+		<p [class]="'oblique-' + oblique" *ngFor="let oblique of obliques">
+			<span class="surface-vivid round-sm px-sm mono-xl">{{ oblique }}</span>
 			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
 			dolorum illum nobis mollitia.
 		</p>
@@ -132,32 +60,8 @@
 			dolorum illum nobis mollitia.
 		</p>
 
-		<p class="mono-xs">
-			<span class="surface-vivid round-sm px-sm mono-xl">xs</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
-
-		<p class="mono-sm">
-			<span class="surface-vivid round-sm px-sm mono-xl">sm</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
-
-		<p class="mono-md">
-			<span class="surface-vivid round-sm px-sm mono-xl">md</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
-
-		<p class="mono-lg">
-			<span class="surface-vivid round-sm px-sm mono-xl">lg</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
-
-		<p class="mono-xl">
-			<span class="surface-vivid round-sm px-sm mono-xl">xl</span>
+		<p [class]="'mono-' + mono" *ngFor="let mono of monos">
+			<span class="surface-vivid round-sm px-sm mono-xl">{{ mono }}</span>
 			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
 			dolorum illum nobis mollitia.
 		</p>
@@ -172,32 +76,8 @@
 			dolorum illum nobis mollitia.
 		</p>
 
-		<p class="casual-xs">
-			<span class="surface-vivid round-sm px-sm mono-xl">xs</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
-
-		<p class="casual-sm">
-			<span class="surface-vivid round-sm px-sm mono-xl">sm</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
-
-		<p class="casual-md">
-			<span class="surface-vivid round-sm px-sm mono-xl">md</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
-
-		<p class="casual-lg">
-			<span class="surface-vivid round-sm px-sm mono-xl">lg</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
-
-		<p class="casual-xl">
-			<span class="surface-vivid round-sm px-sm mono-xl">xl</span>
+		<p [class]="'casual-' + casual" *ngFor="let casual of casuals">
+			<span class="surface-vivid round-sm px-sm mono-xl">{{ casual }}</span>
 			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
 			dolorum illum nobis mollitia.
 		</p>
