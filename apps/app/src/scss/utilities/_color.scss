@@ -4,11 +4,13 @@
 @use '../abstracts/variables' as var;
 @use '../abstracts/mixins' as mix;
 
-@function get-list($items) {
+@function get-list($items, $rules-getter: get-rules) {
 	$rules: ();
 
 	@each $name in map.keys($items) {
-		$rules: map.merge($rules, get-rules($name));
+		$rules-list: meta.call(meta.get-function($rules-getter), $name);
+
+		$rules: map.merge($rules, $rules-list);
 	}
 
 	@return $rules;
@@ -21,8 +23,14 @@
 	);
 }
 
+@function get-card-rules($name) {
+	@return (card-#{$name}: (background-color: var(--card-#{$name})));
+}
+
 @include mix.generate-responsive(get-list(var.$colors));
 
 .dark-mode {
 	@include mix.generate-responsive(get-list(var.$dark-colors));
 }
+
+@include mix.generate-responsive(get-list(var.$card-colors, get-card-rules));

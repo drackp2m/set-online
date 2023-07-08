@@ -12,11 +12,11 @@
 
 3. 🐘 Execute database migrations
 
-> docker exec -it set-node npm migration:execute
+> docker exec -it set-node yarn migration:execute
 
 4. 🚦 Start the application
 
-> docker exec -it set-node npm start
+> docker exec -it set-node yarn start
 
 5. 🙂 Enjoy [GraphQL Playground](http://localhost:3000/graphql) and [Angular App](http://localhost:4200)
 

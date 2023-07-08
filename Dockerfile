@@ -1,4 +1,4 @@
-FROM node:20.4.0-alpine3.18 AS deps
+FROM node:20.2.0-alpine3.18 AS deps
 
 RUN apk add --no-cache build-base python3
 
@@ -15,15 +15,15 @@ RUN chown -R node:node /usr/src/app \
 
 USER node
 
-COPY package.json yarn.lock* package-lock.json* ./
+COPY package.json yarn.lock* ./
 
-RUN npm install
+RUN yarn install
 
 
 
 FROM deps AS dev
 
-CMD npm start
+CMD yarn start
 
 
 
@@ -48,4 +48,4 @@ RUN mkdir -p ~/.local/share/zsh/plugins \
 			&& ln -s /usr/share/zsh/plugins/powerlevel10k ~/.local/share/zsh/plugins/ \
 			&& mkdir -p ~/.config/zsh
 
-CMD npm start
+CMD yarn start
