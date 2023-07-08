@@ -13,6 +13,10 @@
 		--color-#{$name}: #{$value};
 	}
 
+	@each $name, $value in var.$card-colors {
+		--card-#{"" + $name}: #{$value};
+	}
+
 	@each $name, $value in var.$font-sizes {
 		--font-size-#{$name}: #{$value};
 	}

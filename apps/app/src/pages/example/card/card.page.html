@@ -1,0 +1,20 @@
+<main id="typograpy" class="content-fixed pt-lg pb-xxl">
+	<set-example-menu></set-example-menu>
+
+	<h2 class="mt-xl">Welcome to Cards!</h2>
+
+	<h3 class="mt-xl">Card test</h3>
+
+	<section id="card-test" class="flex-row flex-wrap gap-x-xl gap-y-lg my-md">
+		<ng-container *ngFor="let shape of shapes">
+			<ng-container *ngFor="let color of colors">
+				<div [class]="'card ' + shape">
+					<div [class]="'border card-' + color"></div>
+					<div class="mask">
+						<div [class]="'strip card-' + color" *ngIf="needPattern(shape)"></div>
+					</div>
+				</div>
+			</ng-container>
+		</ng-container>
+	</section>
+</main>

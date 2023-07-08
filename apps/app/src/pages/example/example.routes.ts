@@ -27,4 +27,8 @@ export const EXAMPLE_ROUTES: Routes = [
 		path: 'spacings',
 		loadComponent: () => import('./spacing/spacing.page'),
 	},
+	{
+		path: 'cards',
+		loadComponent: () => import('./card/card.page'),
+	},
 ];
