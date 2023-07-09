@@ -1,4 +1,4 @@
-export enum CardProperties {
+export enum CardPropertiesEnum {
 	shape = 'a',
 	color = 'b',
 	number = 'c',
