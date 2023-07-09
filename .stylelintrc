@@ -3,12 +3,6 @@
 	"extends": ["stylelint-config-standard-scss", "stylelint-config-clean-order"],
 	"plugins": ["stylelint-prettier"],
 	"defaultSeverity": "warning",
-	"overrides": [
-		{
-			"files": ["*.scss", "**/*.scss"],
-			"customSyntax": "postcss-scss"
-		}
-	],
 	"rules": {
     "prettier/prettier": true,
 		"color-hex-length": "short",

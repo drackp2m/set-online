@@ -2,92 +2,9 @@ main {
 	min-height: 100%;
 	background-color: white;
 
-	.card {
+	set-card-shape {
 		position: relative;
 		aspect-ratio: 0.48 / 1;
 		width: 84px;
-
-		.border,
-		.mask,
-		.strip {
-			aspect-ratio: 0.48 / 1;
-		}
-
-		.mask {
-			position: absolute;
-			top: 0;
-			aspect-ratio: 0.48 / 1;
-			width: 100%;
-		}
-
-		&.diamond-solid .border {
-			mask: url('/assets/icons/diamond-solid.svg') no-repeat center;
-		}
-
-		&.diamond-outlined .border {
-			mask: url('/assets/icons/diamond-outlined.svg') no-repeat center;
-		}
-
-		&.diamond-striped {
-			.border {
-				mask: url('/assets/icons/diamond-outlined.svg') no-repeat center;
-			}
-
-			.mask {
-				mask: url('/assets/icons/diamond-solid.svg') no-repeat center;
-
-				.strip {
-					mask: url('/assets/icons/strips.svg') no-repeat center;
-				}
-			}
-		}
-
-		&.oval-solid {
-			mask: url('/assets/icons/oval-solid.svg') no-repeat center;
-		}
-
-		&.oval-outlined {
-			mask: url('/assets/icons/oval-outlined.svg') no-repeat center;
-		}
-
-		&.oval-striped {
-			.border {
-				mask: url('/assets/icons/oval-outlined.svg') no-repeat center;
-			}
-
-			.mask {
-				mask: url('/assets/icons/oval-solid.svg') no-repeat center;
-
-				.strip {
-					mask: url('/assets/icons/strips.svg') no-repeat center;
-				}
-			}
-		}
-
-		&.squiggle-solid {
-			mask: url('/assets/icons/squiggle-solid.svg') no-repeat center;
-		}
-
-		&.squiggle-outlined {
-			mask: url('/assets/icons/squiggle-outlined.svg') no-repeat center;
-		}
-
-		&.squiggle-striped {
-			.border {
-				mask: url('/assets/icons/squiggle-outlined.svg') no-repeat center;
-			}
-
-			.mask {
-				mask: url('/assets/icons/squiggle-solid.svg') no-repeat center;
-
-				.strip {
-					mask: url('/assets/icons/strips.svg') no-repeat center;
-				}
-			}
-		}
-
-		// .border {
-		// mask: url('/assets/icons/stips.svg');
-		// }
 	}
 }
