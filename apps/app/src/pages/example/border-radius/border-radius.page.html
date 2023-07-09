@@ -6,9 +6,8 @@
 	<h3 class="mt-xl">Border radius sizes</h3>
 
 	<section id="border-radius-sizes" class="flex-col gap-xl my-md">
-		<div class="flex-col align-center just-end gap-md" *ngFor="let round of rounds">
-			<div class="surface-vivid px-xxxl py-xl" [class]="'round-' + round">
-			</div>
+		<div class="flex-col align-center justify-end gap-md" *ngFor="let round of rounds">
+			<div class="surface-vivid px-xxxl py-xl" [class]="'round-' + round"></div>
 
 			<h5>{{ round }}</h5>
 		</div>

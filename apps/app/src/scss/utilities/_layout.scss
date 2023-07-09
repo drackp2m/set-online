@@ -54,22 +54,22 @@ $rules: (
 	align-end: (
 		align-items: flex-end,
 	),
-	just-start: (
+	justify-start: (
 		justify-content: flex-start,
 	),
-	just-center: (
+	justify-center: (
 		justify-content: center,
 	),
-	just-end: (
+	justify-end: (
 		justify-content: flex-end,
 	),
-	just-between: (
+	justify-between: (
 		justify-content: space-between,
 	),
-	just-around: (
+	justify-around: (
 		justify-content: space-around,
 	),
-	just-evenly: (
+	justify-evenly: (
 		justify-content: space-evenly,
 	),
 );

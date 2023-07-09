@@ -3,8 +3,10 @@ main {
 	background-color: white;
 
 	set-card-shape {
-		position: relative;
-		aspect-ratio: 0.48 / 1;
 		width: 84px;
+	}
+
+	set-card {
+		width: 365px;
 	}
 }
