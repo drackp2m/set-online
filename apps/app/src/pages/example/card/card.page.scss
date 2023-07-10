@@ -3,10 +3,18 @@ main {
 	background-color: white;
 
 	set-card-shape {
-		width: 84px;
+		width: 85px;
 	}
 
-	set-card {
-		width: 365px;
+	#card-list-horizontal {
+		set-card {
+			width: 373px;
+		}
+	}
+
+	#card-list-vertical {
+		set-card {
+			width: 178px;
+		}
 	}
 }
