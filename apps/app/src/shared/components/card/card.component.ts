@@ -14,7 +14,7 @@ import { CardShapeComponent } from '../card-shape/card-shape.component';
 })
 export class CardComponent implements AfterViewInit, OnDestroy {
 	private resizeObserver!: ResizeObserver;
-	@ViewChild('card') card!: ElementRef<HTMLDivElement>;
+	@ViewChild('container') container!: ElementRef<HTMLDivElement>;
 
 	@Input({ required: true }) shape!: keyof typeof CardShapeEnum;
 	@Input({ required: true }) color!: keyof typeof CardColorEnum;
@@ -26,9 +26,6 @@ export class CardComponent implements AfterViewInit, OnDestroy {
 
 	ngAfterViewInit() {
 		if (this.rotate) {
-			this.card.nativeElement.style.maxWidth = 'initial';
-			this.card.nativeElement.style.maxHeight = 'initial';
-
 			this.initResizeObserver();
 		}
 	}
@@ -59,9 +56,18 @@ export class CardComponent implements AfterViewInit, OnDestroy {
 	private recalculateSize() {
 		const containerWidth = this.elementRef.nativeElement.offsetWidth;
 
-		this.elementRef.nativeElement.style.height = `${containerWidth / 0.666}px`;
+		this.container.nativeElement.style.height = `${containerWidth / 0.666}px`;
 
-		this.card.nativeElement.style.width = `${containerWidth / 0.666}px`;
-		this.card.nativeElement.style.height = `${containerWidth}px`;
+		const card = this.container.nativeElement.querySelector<HTMLDivElement>('.card');
+
+		if (card) {
+			card.style.width = `${containerWidth / 0.666}px`;
+			card.style.height = `${containerWidth}px`;
+		}
+
+		// this.elementRef.nativeElement.style.height = `${containerWidth / 0.666}px`;
+
+		// this.container.nativeElement.style.width = `${containerWidth / 0.666}px`;
+		// this.container.nativeElement.style.height = `${containerWidth}px`;
 	}
 }
