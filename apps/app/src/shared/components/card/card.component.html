@@ -1,5 +1,5 @@
-<div #container class="container shadow-sm">
-	<div class="card flex-row justify-center" [class]="{ rotate }">
+<div #container class="container shadow-sm" [class]="{ selected, rotate, highlighted }">
+	<div class="card flex-row justify-center">
 		<set-card-shape
 			*ngFor="let count of repetitions"
 			[shape]="shape"

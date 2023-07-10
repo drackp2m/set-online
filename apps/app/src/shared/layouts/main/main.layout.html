@@ -1,8 +1,9 @@
 <div id="main-layout" class="flex-col">
 	<section id="header" class="content-fixed flex-col align-center py-md gap-md">
-		<h1>This is the main-layout</h1>
+		<h1>This is the main layout</h1>
 
 		<nav class="flex-row flex-wrap my-md gap-sm">
+			<set-media-debug></set-media-debug>
 			<ng-container
 				*ngTemplateOutlet="button; context: { text: 'Register', link: '/register' }"
 			></ng-container>
@@ -12,7 +13,7 @@
 			<ng-container
 				*ngTemplateOutlet="
 					button;
-					context: { text: 'Logout', link: '/login', click: logout(), surface: 'radiant' }
+					context: { text: 'Logout', link: '/logout', click: logout(), surface: 'radiant' }
 				"
 			></ng-container>
 			<ng-container
@@ -20,6 +21,9 @@
 			></ng-container>
 			<ng-container
 				*ngTemplateOutlet="button; context: { text: 'Example', link: '/example' }"
+			></ng-container>
+			<ng-container
+				*ngTemplateOutlet="button; context: { text: 'Game', link: '/game' }"
 			></ng-container>
 		</nav>
 

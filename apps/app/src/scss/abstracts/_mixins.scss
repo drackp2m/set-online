@@ -57,6 +57,39 @@
 	}
 }
 
+@mixin xs-e {
+	@media screen and (map.get(var.$breakpoints, sm) <= width) {
+		@content;
+	}
+}
+
+@mixin sm-e {
+	@media screen and (map.get(var.$breakpoints, sm) > width),
+		screen and (map.get(var.$breakpoints, md) <= width) {
+		@content;
+	}
+}
+
+@mixin md-e {
+	@media screen and (map.get(var.$breakpoints, md) > width),
+		screen and (map.get(var.$breakpoints, lg) <= width) {
+		@content;
+	}
+}
+
+@mixin lg-e {
+	@media screen and (map.get(var.$breakpoints, lg) > width),
+		screen and (map.get(var.$breakpoints, xl) <= width) {
+		@content;
+	}
+}
+
+@mixin xl-e {
+	@media screen and (map.get(var.$breakpoints, xl) > width) {
+		@content;
+	}
+}
+
 @mixin generate-responsive($rules) {
 	@each $rule, $properties in $rules {
 		.#{$rule} {
@@ -117,6 +150,38 @@
 	@each $rule, $properties in $rules {
 		@include xl-o {
 			@include generate-media-class-rule(xl-o, $rule, $properties);
+		}
+	}
+}
+
+@mixin generate-exclude-responsive($rules) {
+	@each $rule, $properties in $rules {
+		@include xs-e {
+			@include generate-media-class-rule(xs-e, $rule, $properties);
+		}
+	}
+
+	@each $rule, $properties in $rules {
+		@include sm-e {
+			@include generate-media-class-rule(sm-e, $rule, $properties);
+		}
+	}
+
+	@each $rule, $properties in $rules {
+		@include md-e {
+			@include generate-media-class-rule(md-e, $rule, $properties);
+		}
+	}
+
+	@each $rule, $properties in $rules {
+		@include lg-e {
+			@include generate-media-class-rule(lg-e, $rule, $properties);
+		}
+	}
+
+	@each $rule, $properties in $rules {
+		@include xl-e {
+			@include generate-media-class-rule(xl-e, $rule, $properties);
 		}
 	}
 }

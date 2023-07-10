@@ -8,13 +8,15 @@ main {
 
 	#card-list-horizontal {
 		set-card {
-			width: 373px;
+			// width: 373px;
+			width: 30%;
 		}
 	}
 
 	#card-list-vertical {
 		set-card {
-			width: 178px;
+			// width: 178px;
+			width: 15%;
 		}
 	}
 }

@@ -28,6 +28,10 @@ export const APP_ROUTES: Routes = [
 				path: 'example',
 				loadChildren: () => import('../pages/example/example.module'),
 			},
+			{
+				path: 'game',
+				loadChildren: () => import('../pages/game/game.module'),
+			},
 		],
 	},
 ];
