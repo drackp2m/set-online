@@ -8,3 +8,5 @@ $rules: (
 );
 
 @include mix.generate-responsive($rules);
+
+@include mix.generate-exclude-responsive($rules);

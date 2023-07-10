@@ -21,6 +21,8 @@ export class CardComponent implements AfterViewInit, OnDestroy {
 	@Input({ required: true }) shading!: keyof typeof CardShadingEnum;
 	@Input({ required: true }) count!: number;
 	@Input() rotate = false;
+	@Input() selected = false;
+	@Input() highlighted = false;
 
 	constructor(private elementRef: ElementRef) {}
 
@@ -64,10 +66,5 @@ export class CardComponent implements AfterViewInit, OnDestroy {
 			card.style.width = `${containerWidth / 0.666}px`;
 			card.style.height = `${containerWidth}px`;
 		}
-
-		// this.elementRef.nativeElement.style.height = `${containerWidth / 0.666}px`;
-
-		// this.container.nativeElement.style.width = `${containerWidth / 0.666}px`;
-		// this.container.nativeElement.style.height = `${containerWidth}px`;
 	}
 }
