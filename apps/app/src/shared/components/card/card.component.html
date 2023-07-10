@@ -1,8 +1,10 @@
-<div #card class="card flex-row justify-center shadow-sm" [class]="{ rotate }">
-	<set-card-shape
-		*ngFor="let count of repetitions"
-		[shape]="shape"
-		[color]="color"
-		[shading]="shading"
-	></set-card-shape>
+<div #container class="container shadow-sm">
+	<div class="card flex-row justify-center" [class]="{ rotate }">
+		<set-card-shape
+			*ngFor="let count of repetitions"
+			[shape]="shape"
+			[color]="color"
+			[shading]="shading"
+		></set-card-shape>
+	</div>
 </div>
