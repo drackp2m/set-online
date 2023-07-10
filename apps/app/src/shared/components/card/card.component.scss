@@ -4,8 +4,15 @@
 	aspect-ratio: 1 / 0.666;
 	max-width: 100%;
 	max-height: 100%;
-	margin: 0 auto;
-	padding: 9.6% 0;
+	padding: 9.5% 0;
+
+	border-radius: 3.3% / 5%;
+
+	&.rotate {
+		translate: -16.7% 25.2%;
+		rotate: 90deg;
+		padding: 14.5% 0;
+	}
 
 	set-card-shape {
 		display: contents;
