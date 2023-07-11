@@ -57,18 +57,13 @@
 
 							"constructor",
 
-							"public-method",
-							"protected-method",
-							"private-method",
-							"#private-method",
-
+							"decorated-method",
+							"method",
 							"static-method",
 							"instance-method",
 							"abstract-method",
-
-							"decorated-method",
-
-							"method"
+							"protected-method",
+							"private-method"
 						]
 					}
 				],

@@ -1,10 +1,10 @@
 import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 
 @Directive({
-	selector: 'img[setOnlineHoverSrc]',
+	selector: 'img[setHoverSrc]',
 })
 export class HoverSrcDirective {
-	@Input() setOnlineHoverSrc = '';
+	@Input() setHoverSrc = '';
 
 	private src: string;
 
@@ -13,7 +13,7 @@ export class HoverSrcDirective {
 	}
 
 	@HostListener('mouseenter') onMouseEnter() {
-		this.el.nativeElement.attributes.src.value = this.setOnlineHoverSrc;
+		this.el.nativeElement.attributes.src.value = this.setHoverSrc;
 	}
 
 	@HostListener('mouseleave') onMouseLeave() {
