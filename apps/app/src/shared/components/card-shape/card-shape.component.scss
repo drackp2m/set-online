@@ -1,0 +1,16 @@
+.card,
+.basic,
+.mask,
+.strip {
+	aspect-ratio: 0.48 / 1;
+}
+
+.card {
+	position: relative;
+}
+
+.mask {
+	position: absolute;
+	top: 0;
+	width: 100%;
+}

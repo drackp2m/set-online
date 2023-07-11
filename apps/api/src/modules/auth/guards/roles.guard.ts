@@ -3,20 +3,14 @@ import { Reflector } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { Request } from 'express';
 
-import {
-	ForbiddenException,
-	UnauthorizedException,
-} from '../../../common/exceptions';
-import { UserRole } from '../../user/interfaces';
+import { ForbiddenException, UnauthorizedException } from '../../../shared/exceptions';
+import { UserRole } from '../../user/definitions';
 import { UserEntity } from '../../user/user.entity';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
-	public async canActivate(context: ExecutionContext): Promise<boolean> {
-		const roles = new Reflector().get<UserRole[]>(
-			'roles',
-			context.getHandler(),
-		);
+	async canActivate(context: ExecutionContext): Promise<boolean> {
+		const roles = new Reflector().get<UserRole[]>('roles', context.getHandler());
 
 		if (!roles) {
 			return true;

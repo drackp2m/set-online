@@ -1,0 +1,56 @@
+<main id="typograpy" class="content-fixed pt-lg pb-xxl">
+	<set-example-menu></set-example-menu>
+
+	<h2 class="mt-xl">Welcome to Cards!</h2>
+
+	<h3 class="mt-xl">Card shapes</h3>
+
+	<section id="card-shapes" class="flex-row flex-wrap gap-x-xl gap-y-lg my-md">
+		<ng-container *ngFor="let shape of shapes">
+			<ng-container *ngFor="let color of colors">
+				<ng-container *ngFor="let shading of shadings">
+					<set-card-shape [shape]="shape" [color]="color" [shading]="shading"></set-card-shape>
+				</ng-container>
+			</ng-container>
+		</ng-container>
+	</section>
+
+	<h3 class="mt-xl">Card list horizontal</h3>
+
+	<section id="card-list-horizontal" class="flex-row flex-wrap gap-md my-md">
+		<ng-container *ngFor="let shape of shapes">
+			<ng-container *ngFor="let color of colors">
+				<ng-container *ngFor="let shading of shadings">
+					<ng-container *ngFor="let count of counts">
+						<set-card
+							[shape]="shape"
+							[color]="color"
+							[shading]="shading"
+							[count]="count"
+						></set-card>
+					</ng-container>
+				</ng-container>
+			</ng-container>
+		</ng-container>
+	</section>
+
+	<h3 class="mt-xl">Card list vertical</h3>
+
+	<section id="card-list-vertical" class="flex-row flex-wrap gap-sm lg:gap-md my-md">
+		<ng-container *ngFor="let shape of shapes">
+			<ng-container *ngFor="let color of colors">
+				<ng-container *ngFor="let shading of shadings">
+					<ng-container *ngFor="let count of counts">
+						<set-card
+							[shape]="shape"
+							[color]="color"
+							[shading]="shading"
+							[count]="count"
+							[rotate]="true"
+						></set-card>
+					</ng-container>
+				</ng-container>
+			</ng-container>
+		</ng-container>
+	</section>
+</main>

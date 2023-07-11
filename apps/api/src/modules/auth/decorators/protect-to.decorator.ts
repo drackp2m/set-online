@@ -1,9 +1,9 @@
 import { UseGuards, applyDecorators } from '@nestjs/common';
 
-import { Roles } from '.';
-
-import { UserRole } from '../../user/interfaces';
+import { UserRole } from '../../user/definitions';
 import { RolesGuard } from '../guards';
+
+import { Roles } from '.';
 
 export const ProtectTo = (
 	...roles: UserRole[]

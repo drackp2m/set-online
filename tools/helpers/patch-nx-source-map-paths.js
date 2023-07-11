@@ -9,5 +9,6 @@ module.exports = function patchNxSourceMapPaths(config) {
     const rel = path.relative(process.cwd(), info.absoluteResourcePath);
     return `webpack:///./${rel}`;
   };
+
   return config;
 };

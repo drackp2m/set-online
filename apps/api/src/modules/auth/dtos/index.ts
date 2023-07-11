@@ -1,3 +1,1 @@
-export * from './login.input';
-
-export * from './token.model';
+export * from './login-request.dto';

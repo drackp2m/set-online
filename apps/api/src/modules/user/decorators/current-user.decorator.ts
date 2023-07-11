@@ -8,7 +8,6 @@ export const CurrentUser = createParamDecorator(
 	(_: unknown, context: ExecutionContext): UserEntity => {
 		const gqlContext = GqlExecutionContext.create(context);
 
-		return gqlContext.getContext<{ req: Request & { user: UserEntity } }>().req
-			.user;
+		return gqlContext.getContext<{ req: Request & { user: UserEntity } }>().req.user;
 	},
 );

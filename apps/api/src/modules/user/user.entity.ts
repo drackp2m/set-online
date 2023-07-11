@@ -1,11 +1,12 @@
 import { Entity, Enum, Property } from '@mikro-orm/core';
 import { Field, ObjectType } from '@nestjs/graphql';
 
-import { UserRole } from './interfaces';
-import { BaseEntity } from '../../common/utils';
+import { BaseEntity } from '../../shared/utils';
+
+import { UserRole } from './definitions';
 
 @Entity({ tableName: 'users' })
-@ObjectType({ description: 'user ' })
+@ObjectType({ description: 'user' })
 export class UserEntity extends BaseEntity<UserEntity> {
 	@Property({ unique: true })
 	@Field()

@@ -3,25 +3,22 @@ import { EntityManager } from '@mikro-orm/postgresql';
 import { Injectable } from '@nestjs/common';
 import { genSalt, hash } from 'bcryptjs';
 
-import { CreateUserInput } from './dtos';
+import { BadRequestException, NotFoundException } from '../../shared/exceptions';
+import { RegisterRequestDto } from '../auth/dtos/register-request.dto';
+
 import { UserEntity } from './user.entity';
-import {
-	BadRequestException,
-	NotFoundException,
-} from '../../common/exceptions';
 
 @Injectable()
 export class UserService {
 	constructor(private readonly entityManager: EntityManager) {}
 
-	async insertOne(input: CreateUserInput): Promise<UserEntity> {
+	async insertOne(input: RegisterRequestDto): Promise<UserEntity> {
 		input.password = await this.encryptPassword(input.password);
 		const entity = new UserEntity(input);
 
 		return this.entityManager.persistAndFlush(entity).then(
 			() => entity,
 			async (reason) => {
-				console.log(reason);
 				throw new BadRequestException(reason.detail);
 			},
 		);

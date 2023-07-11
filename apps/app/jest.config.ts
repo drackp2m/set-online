@@ -19,5 +19,5 @@ export default {
 		'jest-preset-angular/build/serializers/html-comment',
 	],
 	coverageDirectory: '../../coverage/apps/app',
-	coverageReporters: ['html', ['text', { skipFull: true }]],
+	coverageReporters: ['html', 'lcov', ['text', { skipFull: true }]],
 };

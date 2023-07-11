@@ -1,0 +1,44 @@
+<div id="main-layout" class="flex-col">
+	<section id="header" class="content-fixed flex-col align-center py-md gap-md">
+		<nav class="flex-row flex-wrap my-md gap-sm">
+			<set-media-debug></set-media-debug>
+			<ng-container
+				*ngTemplateOutlet="button; context: { text: 'Register', link: '/register' }"
+			></ng-container>
+			<ng-container
+				*ngTemplateOutlet="button; context: { text: 'Login', link: '/login' }"
+			></ng-container>
+			<ng-container
+				*ngTemplateOutlet="
+					button;
+					context: { text: 'Logout', link: '/logout', click: logout(), surface: 'radiant' }
+				"
+			></ng-container>
+			<ng-container
+				*ngTemplateOutlet="button; context: { text: 'Home', link: '/home' }"
+			></ng-container>
+			<ng-container
+				*ngTemplateOutlet="button; context: { text: 'Example', link: '/example' }"
+			></ng-container>
+			<ng-container
+				*ngTemplateOutlet="button; context: { text: 'Game', link: '/game' }"
+			></ng-container>
+		</nav>
+
+		<ng-template #button let-text="text" let-link="link" let-click="click" let-surface="surface">
+			<a
+				class="round-sm p-xs px-sm"
+				[class]="active.isActive ? 'weight-xxl surface-serene' : 'surface-' + (surface || 'vivid')"
+				routerLinkActive
+				#active="routerLinkActive"
+				[routerLink]="link"
+				(click)="click ? click() : null"
+				>{{ text }}</a
+			>
+		</ng-template>
+	</section>
+
+	<div class="scroll">
+		<router-outlet></router-outlet>
+	</div>
+</div>
