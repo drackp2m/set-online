@@ -16,7 +16,7 @@
 					"error",
 					{
 						"type": ["element", "attribute"],
-						"prefix": "setOnline",
+						"prefix": "set",
 						"style": "camelCase"
 					}
 				],
