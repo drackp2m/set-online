@@ -26,8 +26,8 @@ This project was generated using [Nx](https://nx.dev).
 
 <p style="text-align: center;">
 <picture>
-  <source srcset="https://raw.githubusercontent.com/drackp2m/set-online/dev/apps/app/src/assets/nx-logo-dark.svg" media="(prefers-color-scheme: light)">
-  <source srcset="https://raw.githubusercontent.com/drackp2m/set-online/dev/apps/app/src/assets/nx-logo-light.svg" media="(prefers-color-scheme: dark)">
+  <source srcset="https://raw.githubusercontent.com/drackp2m/set-online/dev/apps/app/src/assets/logos/nx-dark.svg" media="(prefers-color-scheme: light)">
+  <source srcset="https://raw.githubusercontent.com/drackp2m/set-online/dev/apps/app/src/assets/logos/nx-light.svg" media="(prefers-color-scheme: dark)">
   <img width="450">
 </picture>
 </p>
