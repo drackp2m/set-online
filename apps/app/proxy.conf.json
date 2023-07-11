@@ -10,7 +10,6 @@
 	"/assets": {
 		"target": "https://raw.githubusercontent.com/drackp2m/set-online/dev/apps/app/src/",
 		"secure": true,
-		"changeOrigin": true,
-		"logLevel": "debug"
+		"changeOrigin": true
 	}
 }

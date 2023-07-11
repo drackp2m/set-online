@@ -1,16 +1,14 @@
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 
 @Directive({
 	selector: 'img[setHoverSrc]',
 })
-export class HoverSrcDirective {
+export class HoverSrcDirective implements OnInit {
 	@Input() setHoverSrc = '';
 
-	private src: string;
+	private src!: string;
 
-	constructor(private el: ElementRef) {
-		this.src = this.el.nativeElement.attributes.src.value;
-	}
+	constructor(private el: ElementRef) {}
 
 	@HostListener('mouseenter') onMouseEnter() {
 		this.el.nativeElement.attributes.src.value = this.setHoverSrc;
@@ -18,5 +16,9 @@ export class HoverSrcDirective {
 
 	@HostListener('mouseleave') onMouseLeave() {
 		this.el.nativeElement.attributes.src.value = this.src;
+	}
+
+	ngOnInit(): void {
+		this.src = this.el.nativeElement.attributes.src.value;
 	}
 }
