@@ -1,0 +1,85 @@
+<main id="typograpy" class="content-fixed pt-lg pb-xxl">
+	<set-example-menu></set-example-menu>
+
+	<h2 class="mt-xl">Welcome to Typographies!</h2>
+
+	<h3 class="mt-xl">Font sizes</h3>
+
+	<section id="font-sizes" class="flex-col gap-lg my-md">
+		<p>
+			<span class="surface-radiant round-sm px-xs">off</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p [class]="'size-' + size" *ngFor="let size of sizes">
+			<span class="surface-vivid round-sm px-xs">{{ size }}</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+	</section>
+
+	<h3 class="mt-xxl">Font weights</h3>
+
+	<section id="font-weights" class="flex-col gap-lg mt-md">
+		<p>
+			<span class="surface-radiant round-sm px-xs">off</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p [class]="'weight-' + weight" *ngFor="let weight of weights">
+			<span class="surface-vivid round-sm px-sm mono-xl">{{ weight }}</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+	</section>
+
+	<h3 class="mt-xxl">Font obliques</h3>
+
+	<section id="font-obliques" class="flex-col gap-lg mt-md">
+		<p>
+			<span class="surface-radiant round-sm px-xs">off</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p [class]="'oblique-' + oblique" *ngFor="let oblique of obliques">
+			<span class="surface-vivid round-sm px-sm mono-xl">{{ oblique }}</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+	</section>
+
+	<h3 class="mt-xxl">Font monospaces</h3>
+
+	<section id="font-monospaces" class="flex-col gap-lg mt-md">
+		<p>
+			<span class="surface-radiant round-sm px-xs">off</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p [class]="'mono-' + mono" *ngFor="let mono of monos">
+			<span class="surface-vivid round-sm px-sm mono-xl">{{ mono }}</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+	</section>
+
+	<h3 class="mt-xxl">Font casuals</h3>
+
+	<section id="font-casuals" class="flex-col gap-lg mt-md">
+		<p>
+			<span class="surface-radiant round-sm px-xs">off</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		<p [class]="'casual-' + casual" *ngFor="let casual of casuals">
+			<span class="surface-vivid round-sm px-sm mono-xl">{{ casual }}</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+	</section>
+</main>

@@ -15,7 +15,8 @@
 		"skipDefaultLibCheck": true,
 		"baseUrl": ".",
 		"paths": {
-			"@set-online/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+			"@set-online/api-definitions": ["libs/api-definitions/src/index.ts"],
+			"@set-online/api-sdk": ["libs/api-sdk/src/index.ts"]
 		}
 	},
 	"exclude": ["node_modules", "tmp"]

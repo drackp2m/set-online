@@ -1,4 +1,4 @@
-FROM node:18.14.0-alpine3.16 AS deps
+FROM node:20.2-alpine3.18 AS deps
 
 RUN apk add --no-cache build-base python3
 
@@ -17,7 +17,7 @@ USER node
 
 COPY package.json yarn.lock* ./
 
-RUN yarn install --ignore-optional --frozen-lockfile
+RUN yarn install
 
 
 

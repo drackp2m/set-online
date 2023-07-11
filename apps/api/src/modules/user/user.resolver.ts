@@ -1,29 +1,18 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Query, Resolver } from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
 
-import { CreateUserInput, ValidateUserConstraintsInput } from './dtos';
-import { UserRole } from './interfaces';
+import { ProtectTo } from '../auth/decorators';
+
+import { UserRole } from './definitions';
+import { ValidateUserConstraintsInput } from './dtos';
 import { UserEntity } from './user.entity';
 import { UserService } from './user.service';
-import { ProtectTo } from '../auth/decorators';
 
 const pubSub = new PubSub();
 
 @Resolver(() => UserEntity)
 export class UserResolver {
 	constructor(private readonly userService: UserService) {}
-
-	@Mutation(() => UserEntity, {
-		name: 'createUser',
-	})
-	insertOne(
-		@Args('input', {
-			type: () => CreateUserInput,
-		})
-		input: CreateUserInput,
-	): Promise<UserEntity> {
-		return this.userService.insertOne(input);
-	}
 
 	@Query(() => Boolean, {
 		name: 'validateUserConstraints',

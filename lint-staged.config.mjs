@@ -15,7 +15,7 @@ export default {
 	'*.{html,json,yml,yaml,md}': ['yarn prettier:fix'],
 	'*.{js,ts}': async (files) => {
 		const filesToLint = await removeIgnoredFiles(files);
-		return [`yarn lint:fix ${filesToLint}`];
+		return [`yarn eslint:fix ${filesToLint}`];
 	},
 	'*.{css,scss}': ['yarn stylelint:fix'],
 };

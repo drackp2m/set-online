@@ -1,0 +1,10 @@
+query GetUsers {
+  getUsers {
+    uuid
+    username
+    email
+    role
+    createdAt
+    updatedAt
+  }
+}

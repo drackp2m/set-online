@@ -5,7 +5,7 @@
 		"defaultBase": "main"
 	},
 	"cli": {
-		"packageManager": "yarn"
+		"packageManager": "npm"
 	},
 	"tasksRunnerOptions": {
 		"default": {
@@ -54,7 +54,8 @@
 			"!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
 			"!{projectRoot}/tsconfig.spec.json",
 			"!{projectRoot}/jest.config.[jt]s",
-			"!{projectRoot}/.eslintrc"
+			"!{projectRoot}/.eslintrc",
+			"!{projectRoot}/src/test-setup.[jt]s"
 		]
 	}
 }

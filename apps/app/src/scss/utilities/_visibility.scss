@@ -1,0 +1,12 @@
+@use '../abstracts/mixins' as mix;
+@use '../abstracts/variables' as var;
+
+$rules: (
+	hide: (
+		display: none,
+	),
+);
+
+@include mix.generate-responsive($rules);
+
+@include mix.generate-exclude-responsive($rules);

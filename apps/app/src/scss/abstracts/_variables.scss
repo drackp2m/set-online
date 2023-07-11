@@ -1,0 +1,98 @@
+$breakpoints: (
+	sm: 480px,
+	md: 768px,
+	lg: 1024px,
+	xl: 1280px,
+) !default;
+
+$font-sizes: (
+	sm: 0.8rem,
+	md: 1rem,
+	lg: 1.25rem,
+	xl: 1.5rem,
+	xxl: 2rem,
+	xxxl: 2.75rem,
+) !default;
+
+$font-weights: (
+	sm: 300,
+	md: 400,
+	lg: 500,
+	xl: 600,
+	xxl: 700,
+	xxxl: 900,
+) !default;
+
+$font-obliques: (
+	none: 0,
+	sm: 5,
+	md: 10,
+	lg: 15,
+) !default;
+
+$font-monospaces: (
+	none: 0,
+	xs: 0.2,
+	sm: 0.4,
+	md: 0.6,
+	lg: 0.8,
+	xl: 1,
+) !default;
+
+$font-casuals: (
+	none: 0,
+	xs: 0.2,
+	sm: 0.4,
+	md: 0.6,
+	lg: 0.8,
+	xl: 1,
+) !default;
+
+$card-colors: (
+	red: #ef3d44,
+	purple: #492f93,
+	green: #00b458,
+) !default;
+
+$colors: (
+	cosmic: #341f97,
+	radiant: #fd5e53,
+	harmony: #00adb5,
+	vivid: #ffbe0b,
+	serene: #41aa1b,
+) !default;
+
+$dark-colors: (
+	cosmic: #341f97,
+	radiant: #fd5e53,
+	harmony: #00adb5,
+	vivid: #ffbe0b,
+	serene: #41aa1b,
+) !default;
+
+$spacings: (
+	none: 0,
+	xs: 0.25rem,
+	sm: 0.5rem,
+	md: 1rem,
+	lg: 2rem,
+	xl: 3rem,
+	xxl: 4rem,
+	xxxl: 6rem,
+) !default;
+
+$borders-radius: (
+	none: 0,
+	sm: 0.25rem,
+	md: 0.5rem,
+	lg: 1rem,
+) !default;
+
+$shadows: (
+	none: none,
+	sm: 0 4px 8px 2px rgb(0 0 0 / 5%),
+	md: 0 6px 12px 1px rgb(0 0 0 / 10%),
+	lg: 0 8px 16px -1px rgb(0 0 0 / 15%),
+	xl: 0 10px 20px -3px rgb(0 0 0 / 20%),
+	xxl: 0 12px 24px -4px rgb(0 0 0 / 25%),
+) !default;
