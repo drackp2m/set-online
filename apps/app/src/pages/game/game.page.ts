@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { Component, OnInit } from '@angular/core';
 
 import { CardColorEnum, CardShadingEnum, CardShapeEnum } from '@set-online/api-definitions';
@@ -24,6 +25,10 @@ export default class GamePage implements OnInit {
 
 	wrongSetsCount = 0;
 
+	showSets = false;
+
+	message = '';
+
 	ngOnInit(): void {
 		for (let i = 0; i < 12; i++) {
 			this.boardCards.push(this.getValidCard());
@@ -46,8 +51,53 @@ export default class GamePage implements OnInit {
 		this.checkSet();
 	}
 
-	ImInSet(card: CardInterface): boolean {
+	imInSet(card: CardInterface): boolean {
 		return this.cardsInSets.includes(card);
+	}
+
+	checkIfSetExists(): void {
+		const cards = this.boardCards;
+
+		this.cardsInSets = [];
+
+		for (let i = 0; i < cards.length - 2; i++) {
+			for (let j = i + 1; j < cards.length - 1; j++) {
+				for (let k = j + 1; k < cards.length; k++) {
+					if (this.isSet(cards[i], cards[j], cards[k])) {
+						// this.cardsInSets.push(cards[i], cards[j], cards[k]);
+						this.cardsInSets = [cards[i], cards[j], cards[k]];
+					}
+				}
+			}
+		}
+
+		if (this.sets.length + this.boardCards.length === 81 && this.cardsInSets.length === 0) {
+			this.showMessages('You won!');
+		}
+	}
+
+	addExtraCards(): void {
+		if (this.boardCards.length >= 15) {
+			this.showMessages('You can only add extra cards once per game!');
+
+			return;
+		}
+
+		if (this.cardsInSets.length > 0) {
+			this.showMessages('Yes there is, keep looking.');
+
+			return;
+		}
+
+		for (let i = 0; i < 3; i++) {
+			this.boardCards.push(this.getValidCard());
+		}
+
+		this.checkIfSetExists();
+	}
+
+	toggleShowSets(): void {
+		this.showSets = !this.showSets;
 	}
 
 	private getValidCard(): CardInterface {
@@ -97,11 +147,16 @@ export default class GamePage implements OnInit {
 
 		if (this.isSet(first, second, third)) {
 			this.sets.push(...this.selectedCards);
-			this.selectedCards = [];
 
-			this.replaceCard(first);
-			this.replaceCard(second);
-			this.replaceCard(third);
+			const removeCards =
+				this.boardCards.length > 12 || this.sets.length + this.boardCards.length > 81;
+
+			this.selectedCards.forEach((card) => {
+				const newCard = removeCards ? null : this.getValidCard();
+				this.replaceCard(card, newCard);
+			});
+
+			this.selectedCards = [];
 
 			this.checkIfSetExists();
 
@@ -133,31 +188,22 @@ export default class GamePage implements OnInit {
 		);
 	}
 
-	private replaceCard(card: CardInterface): void {
-		this.boardCards = this.boardCards.map((c) => {
-			if (c.id === card.id) {
-				return this.getValidCard();
-			}
+	private replaceCard(card: CardInterface, replace: CardInterface | null): void {
+		this.boardCards = this.boardCards
+			.map((c) => {
+				if (c.id === card.id) {
+					return replace;
+				}
 
-			return c;
-		});
+				return c;
+			})
+			.filter((c) => c !== null) as CardInterface[];
 	}
 
-	checkIfSetExists(): void {
-		const cards = [...this.boardCards];
-
-		for (let i = 0; i < cards.length - 2; i++) {
-			for (let j = i + 1; j < cards.length - 1; j++) {
-				for (let k = j + 1; k < cards.length; k++) {
-					if (this.isSet(cards[i], cards[j], cards[k])) {
-						this.cardsInSets = [cards[i], cards[j], cards[k]];
-
-						return;
-					}
-				}
-			}
-		}
-
-		this.cardsInSets = [];
+	private showMessages(text: string): void {
+		this.message = text;
+		setTimeout(() => {
+			this.message = '';
+		}, text.length * 100);
 	}
 }

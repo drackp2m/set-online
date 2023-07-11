@@ -2,6 +2,7 @@
 	background: white;
 	border: solid 0.1rem #e5e5e5;
 	border-radius: 3.3% / 5%;
+	transition: scale 0.2s;
 
 	.card {
 		gap: 6%;
@@ -13,12 +14,16 @@
 		}
 	}
 
+	&:hover {
+		scale: 1.05;
+	}
+
 	&.highlighted {
-		border: solid 0.1rem #25b148;
+		border-color: #25b148;
 	}
 
 	&.selected {
-		border: solid 0.1rem #4d4d4d;
+		border-color: #4d4d4d;
 	}
 
 	&.rotate {

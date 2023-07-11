@@ -1,4 +1,4 @@
-FROM node:20.4-alpine3.18 AS deps
+FROM node:20.2-alpine3.18 AS deps
 
 RUN apk add --no-cache build-base python3
 
