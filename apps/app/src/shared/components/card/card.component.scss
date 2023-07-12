@@ -27,6 +27,8 @@
 	}
 
 	&.rotate {
+		border-radius: 5% / 3.3%;
+
 		.card {
 			translate: -16.7% 25.2%;
 			rotate: 90deg;

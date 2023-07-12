@@ -9,6 +9,21 @@
 	src: url('/assets/fonts/recursive/latin_basic.woff2') format('woff2-variations');
 }
 
+$text-align: (
+	text-left: (
+		text-align: left,
+	),
+	text-center: (
+		text-align: center,
+	),
+	text-right: (
+		text-align: right,
+	),
+	text-justify: (
+		text-align: justify,
+	),
+);
+
 @function get-list($items, $rules-getter: get-rules) {
 	$rules: ();
 
@@ -40,6 +55,8 @@
 @function get-casual-rules($name) {
 	@return (casual-#{$name}: (font-variation-settings: 'CASL' var(--font-casual-#{$name})));
 }
+
+@include mix.generate-responsive($text-align);
 
 @include mix.generate-responsive(get-list(var.$font-sizes));
 
