@@ -1,0 +1,14 @@
+{
+	"name": "Set Online (not today)",
+	"short_name": "Set",
+	"icons": [
+		{
+			"src": "assets/app-logo.svg",
+			"sizes": "192x192",
+			"type": "image/svg+xml"
+		}
+	],
+	"theme_color": "#ff00ff",
+	"background_color": "#ffffff",
+	"display": "standalone"
+}
