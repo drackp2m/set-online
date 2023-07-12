@@ -1,0 +1,33 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build and deploy
+        run: |
+          nx build app --prod --base-href https://raw.githubusercontent.com/drackp2m/set-online/dev/apps/app/src
+          cd dist/app
+          git init
+          git config user.name "GitHub Actions"
+          git config user.email "drackiouscolinatesianos@gmail.com"
+          git add .
+          git commit -m "Deploy to GitHub Pages"
+          git push --force "https://${{ secrets.GITHUB_TOKEN }}" master:gh-pages
