@@ -1,4 +1,4 @@
 export const environment = {
 	production: true,
-	app_url: 'https://raw.githubusercontent.com/drackp2m/set-online/dev/apps/app/src',
+	app_url: 'https://drackp2m.github.io/set-online/',
 };
