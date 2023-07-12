@@ -23,7 +23,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Build application
-        run: ./node_modules/.bin/nx build app
+        run: ./node_modules/.bin/nx build app --prod --base-href https://raw.githubusercontent.com/drackp2m/set-online/dev/apps/app/src
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
