@@ -3,12 +3,23 @@
 	"short_name": "Set",
 	"icons": [
 		{
-			"src": "assets/app-logo.svg",
-			"sizes": "192x192",
-			"type": "image/svg+xml"
+			"src": "/assets/icon-512.png",
+			"type": "image/png",
+			"sizes": "512x512"
+		},
+		{
+			"src": "/assets/icon-1014.png",
+			"type": "image/png",
+			"sizes": "1014x1014"
+		},
+		{
+			"src": "/assets/icon-512.png",
+			"type": "image/png",
+			"sizes": "512x512",
+			"purpose": "maskable"
 		}
 	],
-	"theme_color": "#00b458",
-	"background_color": "#ffbfcb",
+	"theme_color": "#8e3333",
+	"background_color": "#8e3333",
 	"display": "standalone"
 }
