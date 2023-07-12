@@ -5,12 +5,12 @@ import MainLayout from '../shared/layouts/main/main.layout';
 export const APP_ROUTES: Routes = [
 	{
 		path: '',
+		loadChildren: () => import('../pages/game/game.module'),
+	},
+	{
+		path: '',
 		component: MainLayout,
 		children: [
-			{
-				path: '',
-				loadChildren: () => import('../pages/game/game.module'),
-			},
 			{
 				path: 'home',
 				loadChildren: () => import('../pages/home/home.module'),
@@ -26,6 +26,10 @@ export const APP_ROUTES: Routes = [
 			{
 				path: 'example',
 				loadChildren: () => import('../pages/example/example.module'),
+			},
+			{
+				path: 'game',
+				loadChildren: () => import('../pages/game/game.module'),
 			},
 		],
 	},
