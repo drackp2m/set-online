@@ -28,7 +28,7 @@ jobs:
 
         # https://drackp2m.github.io/set-online/
       - name: Build application
-        run: ./node_modules/.bin/nx build app --prod --base-href ${{ steps.deployment.outputs.page_url }}
+        run: ./node_modules/.bin/nx build app --prod --base-href "${{ steps.pages.outputs.base_path }}"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
