@@ -22,22 +22,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v3
+
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: 'npm'
 
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v3
-
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
         # https://drackp2m.github.io/set-online/
       - name: Build application
-        run: ./node_modules/.bin/nx build app --prod --base-href "${{ steps.deployment.outputs.page_url }}"
+        run: ./node_modules/.bin/nx build app --prod --base-href ${{ steps.pages.outputs.page_url }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
