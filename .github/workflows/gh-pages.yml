@@ -1,32 +1,43 @@
-name: Deploy to GitHub Pages
+name: Deploy SetOnline to Pages
 
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: 18
+          cache: 'npm'
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
       - name: Build application
-        run: ./node_modules/.bin/nx build app --prod --base-href https://drackp2m.github.io/set-online/
+        # https://drackp2m.github.io/set-online/
+        run: ./node_modules/.bin/nx build app --prod --base-href ${{ steps.deployment.outputs.page_url }}
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/apps/app
+          path: ./dist/apps/app
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
