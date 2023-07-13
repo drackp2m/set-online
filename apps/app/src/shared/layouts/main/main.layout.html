@@ -20,9 +20,7 @@
 			<ng-container
 				*ngTemplateOutlet="button; context: { text: 'Example', link: '/example' }"
 			></ng-container>
-			<ng-container
-				*ngTemplateOutlet="button; context: { text: 'Game', link: '/game' }"
-			></ng-container>
+			<ng-container *ngTemplateOutlet="button; context: { text: 'Game', link: '/' }"></ng-container>
 		</nav>
 
 		<ng-template #button let-text="text" let-link="link" let-click="click" let-surface="surface">

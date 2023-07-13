@@ -2,7 +2,6 @@
 	background: white;
 	border: solid 0.1rem #e5e5e5;
 	border-radius: 3.3% / 5%;
-	transition: scale 0.2s;
 
 	.card {
 		gap: 6%;
@@ -12,10 +11,6 @@
 		set-card-shape {
 			display: contents;
 		}
-	}
-
-	&:hover {
-		scale: 1.05;
 	}
 
 	&.highlighted {
