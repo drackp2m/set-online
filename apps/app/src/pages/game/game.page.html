@@ -3,7 +3,7 @@
 		<div class="flex-col gap-sm">
 			<p>Sets found: {{ sets.length / 3 }}</p>
 			<p>Wrong sets: {{ wrongSetsCount }}</p>
-			<p>Card in deck: {{ 81 - (boardCards.length + sets.length) }}</p>
+			<a routerLink="/game">Card in deck: {{ 81 - (boardCards.length + sets.length) }}</a>
 		</div>
 
 		<div class="flex-col gap-sm">
