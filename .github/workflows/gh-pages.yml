@@ -35,7 +35,6 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-        # https://drackp2m.github.io/set-online/
       - name: Build application
         run: ./node_modules/.bin/nx build app --prod --base-href ${{ steps.pages.outputs.base_url }}/
 

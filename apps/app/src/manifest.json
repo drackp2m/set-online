@@ -1,6 +1,13 @@
 {
 	"name": "Set Online (not today)",
 	"short_name": "Set",
+	"display": "standalone",
+	"orientation": "portrait-primary",
+	"theme_color": "#ffffff",
+	"background_color": "#ffffff",
+	"launch_handler": {
+		"client_mode": "focus-existing"
+	},
 	"icons": [
 		{
 			"src": "/assets/icon-512.png",
@@ -13,13 +20,22 @@
 			"sizes": "1014x1014"
 		},
 		{
+			"src": "/assets/icon.svg",
+			"type": "image/svg+xml",
+			"sizes": "any"
+		},
+		{
 			"src": "/assets/icon-512.png",
 			"type": "image/png",
 			"sizes": "512x512",
 			"purpose": "maskable"
 		}
 	],
-	"theme_color": "#8e3333",
-	"background_color": "#8e3333",
-	"display": "standalone"
+	"shortcuts": [
+		{
+			"name": "New game",
+			"url": "/",
+			"description": "Play new game with friends"
+		}
+	]
 }
