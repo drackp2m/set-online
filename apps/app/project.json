@@ -42,6 +42,10 @@
 						{
 							"replace": "apps/app/src/environments/environment.ts",
 							"with": "apps/app/src/environments/environment.prod.ts"
+						},
+						{
+							"replace": "apps/app/src/scss/_environment.scss",
+							"with": "apps/app/src/scss/_environment.prod.scss"
 						}
 					],
 					"outputHashing": "all"
