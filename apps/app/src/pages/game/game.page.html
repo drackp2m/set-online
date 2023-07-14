@@ -27,7 +27,7 @@
 				[count]="card.number"
 				[rotate]="true"
 				[selected]="isSelected(card)"
-				[highlighted]="showSets() && imInSet(card)"
+				[highlighted]="showSets() % 2 === 1 && imInSet(card)"
 				(click)="selectCard(card)"
 			></set-card>
 		</ng-container>
