@@ -60,7 +60,6 @@
 							"decorated-method",
 							"method",
 							"static-method",
-							"instance-method",
 							"abstract-method",
 							"protected-method",
 							"private-method"
