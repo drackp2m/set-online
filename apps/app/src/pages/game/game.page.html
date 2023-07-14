@@ -1,9 +1,9 @@
 <main id="game" class="content-fixed py-sm px-md">
 	<div class="flex-row justify-between">
 		<div class="flex-col gap-sm">
-			<p>Sets found: {{ sets.length / 3 }}</p>
-			<p>Wrong sets: {{ wrongSetsCount }}</p>
-			<a routerLink="/game">Card in deck: {{ 81 - (boardCards.length + sets.length) }}</a>
+			<p>Sets found: {{ sets().length / 3 }}</p>
+			<p>Wrong sets: {{ wrongSetsCount() }}</p>
+			<a routerLink="/game">Card in deck: {{ remainingCardsCount() }}</a>
 		</div>
 
 		<div class="flex-col gap-sm">
@@ -11,15 +11,15 @@
 				No sets
 			</button>
 			<button class="p-sm surface-vivid round-md" (click)="toggleShowSets()">
-				{{ showSets ? 'Disable cheats' : 'Enable cheats' }}
+				{{ 'Highlight set' }}
 			</button>
 		</div>
 	</div>
 
-	<p class="info my-sm mb-md">{{ message }}</p>
+	<p class="info my-sm mb-md">{{ message() }}</p>
 
 	<section id="card-game" class="flex-row flex-wrap justify-center">
-		<ng-container *ngFor="let card of boardCards">
+		<ng-container *ngFor="let card of boardCards()">
 			<set-card
 				[shape]="card.shape"
 				[color]="card.color"
@@ -27,9 +27,16 @@
 				[count]="card.number"
 				[rotate]="true"
 				[selected]="isSelected(card)"
-				[highlighted]="showSets && imInSet(card)"
+				[highlighted]="showSets() && imInSet(card)"
 				(click)="selectCard(card)"
 			></set-card>
 		</ng-container>
 	</section>
+
+	<div id="tsparticles"></div>
+
+	<set-you-won
+		*ngIf="remainingCardsCount() === 0 && cardsInSets().length === 0"
+		(playAgain)="newGame()"
+	></set-you-won>
 </main>

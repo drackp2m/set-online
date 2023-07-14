@@ -1,5 +1,5 @@
-/* eslint-disable max-lines */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, computed, signal } from '@angular/core';
+import { confetti } from 'tsparticles-confetti';
 
 import { CardColorEnum, CardShadingEnum, CardShapeEnum } from '@set-online/api-definitions';
 
@@ -15,93 +15,130 @@ export default class GamePage implements OnInit {
 	private readonly shadings: (keyof typeof CardShadingEnum)[] = ['solid', 'striped', 'outlined'];
 	private readonly counts: number[] = [1, 2, 3];
 
-	boardCards: CardInterface[] = [];
-
-	sets: CardInterface[] = [];
-
-	cardsInSets: CardInterface[] = [];
-
-	selectedCards: CardInterface[] = [];
-
-	wrongSetsCount = 0;
-
-	showSets = false;
-
-	message = '';
+	boardCards = signal<CardInterface[]>([]);
+	sets = signal<CardInterface[]>([]);
+	remainingCardsCount = computed(() => 81 - this.boardCards().length - this.sets().length);
+	cardsInSets = signal<CardInterface[]>([]);
+	selectedCards = signal<CardInterface[]>([]);
+	wrongSetsCount = signal<number>(0);
+	showSets = signal<boolean>(false);
+	message = signal<string>('');
 
 	ngOnInit(): void {
-		for (let i = 0; i < 12; i++) {
-			this.boardCards.push(this.getValidCard());
-		}
+		this.prepareNewGame();
 
-		this.checkIfSetExists();
+		this.ultraCheats();
 	}
 
 	isSelected(card: CardInterface): boolean {
-		return this.selectedCards.includes(card);
+		return this.selectedCards().includes(card);
 	}
 
 	selectCard(card: CardInterface): void {
-		if (this.selectedCards.includes(card)) {
-			this.selectedCards = this.selectedCards.filter((c) => c !== card);
+		if (this.selectedCards().includes(card)) {
+			this.selectedCards.update((cards) => cards.filter((c) => c !== card));
 		} else {
-			this.selectedCards.push(card);
+			this.selectedCards.update((cards) => [...cards, card]);
 		}
 
 		this.checkSet();
 	}
 
 	imInSet(card: CardInterface): boolean {
-		return this.cardsInSets.includes(card);
+		return this.cardsInSets().includes(card);
 	}
 
 	checkIfSetExists(): void {
-		const cards = this.boardCards;
+		const cards = this.boardCards();
 
-		this.cardsInSets = [];
+		this.cardsInSets.set([]);
 
 		for (let i = 0; i < cards.length - 2; i++) {
 			for (let j = i + 1; j < cards.length - 1; j++) {
 				for (let k = j + 1; k < cards.length; k++) {
 					if (this.isSet(cards[i], cards[j], cards[k])) {
-						// this.cardsInSets.push(cards[i], cards[j], cards[k]);
-						this.cardsInSets = [cards[i], cards[j], cards[k]];
+						// this.cardsInSets.update((cards) => [...cards, cards[i], cards[j], cards[k]]);
+						this.cardsInSets.set([cards[i], cards[j], cards[k]]);
 					}
 				}
 			}
 		}
 
-		if (this.sets.length + this.boardCards.length === 81 && this.cardsInSets.length === 0) {
+		if (this.sets().length + this.boardCards().length === 81 && this.cardsInSets().length === 0) {
+			this.startConfetti();
 			this.showMessages('You won!');
 		}
 	}
 
 	addExtraCards(): void {
-		if (this.boardCards.length >= 15) {
+		if (this.remainingCardsCount() === 0) {
+			this.showMessages('There are no more cards in the deck.');
+
+			return;
+		}
+
+		if (this.boardCards().length >= 15) {
 			this.showMessages('You can only add extra cards once per game!');
 
 			return;
 		}
 
-		if (this.cardsInSets.length > 0) {
+		if (this.cardsInSets().length > 0) {
 			this.showMessages('Yes there is, keep looking.');
 
 			return;
 		}
 
 		for (let i = 0; i < 3; i++) {
-			this.boardCards.push(this.getValidCard());
+			this.boardCards.update((cards) => [...cards, this.getValidCard()]);
 		}
 
 		this.checkIfSetExists();
 	}
 
 	toggleShowSets(): void {
-		this.showSets = !this.showSets;
+		// loop three times a timeout to blink the sets
+		for (let i = 0; i < 6; i++) {
+			setTimeout(() => {
+				this.showSets.update((show) => !show);
+			}, i * 300);
+		}
+	}
+
+	newGame(): void {
+		this.sets.set([]);
+		this.boardCards.set([]);
+		this.wrongSetsCount.set(0);
+		this.selectedCards.set([]);
+		this.cardsInSets.set([]);
+		this.message.set('');
+
+		this.prepareNewGame();
+	}
+
+	private prepareNewGame(): void {
+		for (let i = 0; i < 12; i++) {
+			this.boardCards.update((cards) => [...cards, this.getValidCard()]);
+		}
+
+		this.checkIfSetExists();
+	}
+
+	private ultraCheats(): void {
+		const remainingCardsInDeck = 3;
+
+		for (let i = 0; i < (81 - this.boardCards().length - remainingCardsInDeck) / 3; i++) {
+			if (!this.cardsInSets().length) {
+				this.addExtraCards();
+			}
+			this.selectCard(this.cardsInSets()[0]);
+			this.selectCard(this.cardsInSets()[1]);
+			this.selectCard(this.cardsInSets()[2]);
+		}
 	}
 
 	private getValidCard(): CardInterface {
-		const currentCards = [...this.boardCards, ...this.sets];
+		const currentCards = [...this.boardCards(), ...this.sets()];
 
 		let card = this.generateCard();
 
@@ -139,33 +176,33 @@ export default class GamePage implements OnInit {
 	}
 
 	private checkSet(): void {
-		if (this.selectedCards.length !== 3) {
+		if (this.selectedCards().length !== 3) {
 			return;
 		}
 
-		const [first, second, third] = this.selectedCards;
+		const [first, second, third] = this.selectedCards();
 
 		if (this.isSet(first, second, third)) {
-			this.sets.push(...this.selectedCards);
+			this.sets.update((cards) => [...cards, ...this.selectedCards()]);
 
 			const removeCards =
-				this.boardCards.length > 12 || this.sets.length + this.boardCards.length > 81;
+				this.boardCards().length > 12 || this.sets().length + this.boardCards().length > 81;
 
-			this.selectedCards.forEach((card) => {
+			this.selectedCards().forEach((card) => {
 				const newCard = removeCards ? null : this.getValidCard();
 				this.replaceCard(card, newCard);
 			});
 
-			this.selectedCards = [];
+			this.selectedCards.set([]);
 
 			this.checkIfSetExists();
 
 			return;
 		}
 
-		this.wrongSetsCount++;
+		this.wrongSetsCount.update((count) => count + 1);
 
-		this.selectedCards = [];
+		this.selectedCards.set([]);
 	}
 
 	private isSet(first: CardInterface, second: CardInterface, third: CardInterface): boolean {
@@ -189,21 +226,39 @@ export default class GamePage implements OnInit {
 	}
 
 	private replaceCard(card: CardInterface, replace: CardInterface | null): void {
-		this.boardCards = this.boardCards
-			.map((c) => {
-				if (c.id === card.id) {
-					return replace;
-				}
+		this.boardCards.update(
+			(cards) =>
+				cards
+					.map((c) => {
+						if (c.id === card.id) {
+							return replace;
+						}
 
-				return c;
-			})
-			.filter((c) => c !== null) as CardInterface[];
+						return c;
+					})
+					.filter((c) => c !== null) as CardInterface[],
+		);
 	}
 
 	private showMessages(text: string): void {
-		this.message = text;
+		this.message.set(text);
 		setTimeout(() => {
-			this.message = '';
+			this.message.set('');
 		}, text.length * 100);
+	}
+
+	private startConfetti(): void {
+		confetti({
+			count: 500, // number of confetti particles; default: 50
+			angle: 90, // angle of the burst; default: 90
+			spread: 180, // spread of confetti particles in degrees; default 45, try 360 for fun
+			ticks: 10, // time until confetti disappears; default: 200
+			drift: 5, // random drift of confetti particles; default: 0
+			gravity: 0.8,
+			origin: {
+				x: 0.5,
+				y: 0,
+			},
+		});
 	}
 }
