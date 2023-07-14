@@ -21,7 +21,7 @@ export default class GamePage implements OnInit {
 	cardsInSets = signal<CardInterface[]>([]);
 	selectedCards = signal<CardInterface[]>([]);
 	wrongSetsCount = signal<number>(0);
-	showSets = signal<boolean>(false);
+	showSets = signal<number>(0);
 	message = signal<string>('');
 
 	ngOnInit(): void {
@@ -97,10 +97,12 @@ export default class GamePage implements OnInit {
 	}
 
 	toggleShowSets(): void {
-		// loop three times a timeout to blink the sets
+		if (this.showSets() !== 0) return;
+
+		this.showSets.set(6);
 		for (let i = 0; i < 6; i++) {
 			setTimeout(() => {
-				this.showSets.update((show) => !show);
+				this.showSets.update((show) => show - 1);
 			}, i * 300);
 		}
 	}
