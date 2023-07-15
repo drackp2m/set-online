@@ -15,6 +15,8 @@ export default class GamePage implements OnInit {
 	private readonly shadings: (keyof typeof CardShadingEnum)[] = ['solid', 'striped', 'outlined'];
 	private readonly counts: number[] = [1, 2, 3];
 
+	private highlightInterval!: number;
+
 	boardCards = signal<CardInterface[]>([]);
 	sets = signal<CardInterface[]>([]);
 	remainingCardsCount = computed(() => 81 - this.boardCards().length - this.sets().length);
@@ -66,7 +68,6 @@ export default class GamePage implements OnInit {
 
 		if (this.sets().length + this.boardCards().length === 81 && this.cardsInSets().length === 0) {
 			this.startConfetti();
-			this.showMessages('You won!');
 		}
 	}
 
@@ -96,15 +97,23 @@ export default class GamePage implements OnInit {
 		this.checkIfSetExists();
 	}
 
-	toggleShowSets(): void {
+	highlightSet(): void {
 		if (this.showSets() !== 0) return;
 
-		this.showSets.set(6);
-		for (let i = 0; i < 6; i++) {
-			setTimeout(() => {
-				this.showSets.update((show) => show - 1);
-			}, i * 300);
+		if (this.cardsInSets().length === 0) {
+			this.showMessages('There are no sets on the board.');
+
+			return;
 		}
+
+		this.showSets.set(6);
+		this.highlightInterval = window.setInterval(() => {
+			this.showSets.update((show) => show - 1);
+
+			if (this.showSets() === 0) {
+				clearInterval(this.highlightInterval);
+			}
+		}, 300);
 	}
 
 	newGame(): void {
@@ -185,6 +194,8 @@ export default class GamePage implements OnInit {
 		const [first, second, third] = this.selectedCards();
 
 		if (this.isSet(first, second, third)) {
+			this.clearHighlightInterval();
+
 			this.sets.update((cards) => [...cards, ...this.selectedCards()]);
 
 			const removeCards =
@@ -240,6 +251,11 @@ export default class GamePage implements OnInit {
 					})
 					.filter((c) => c !== null) as CardInterface[],
 		);
+	}
+
+	private clearHighlightInterval(): void {
+		this.showSets.set(0);
+		clearInterval(this.highlightInterval);
 	}
 
 	private showMessages(text: string): void {
