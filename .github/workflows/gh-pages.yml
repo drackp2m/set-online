@@ -29,7 +29,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install --workspace=set-online-app
+        run: npm ci
 
       - name: Run tests
         run: npm test
@@ -52,7 +52,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install --workspace=set-online-app
+        run: npm ci
 
       - name: Build application
         run: ./node_modules/.bin/nx build app --prod --base-href ${{ steps.pages.outputs.base_url }}/
