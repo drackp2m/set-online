@@ -26,13 +26,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'yarn'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm install --workspace=set-online-app
 
       - name: Run tests
-        run: yarn test
+        run: npm test
 
   build:
     runs-on: ubuntu-latest
@@ -49,10 +49,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'yarn'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm install --workspace=set-online-app
 
       - name: Build application
         run: ./node_modules/.bin/nx build app --prod --base-href ${{ steps.pages.outputs.base_url }}/
