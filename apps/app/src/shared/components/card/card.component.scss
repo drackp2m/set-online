@@ -2,7 +2,6 @@
 	background: white;
 	border: solid 0.1rem #e5e5e5;
 	border-radius: 3.3% / 5%;
-	transition: scale 0.2s;
 
 	.card {
 		gap: 6%;
@@ -14,10 +13,6 @@
 		}
 	}
 
-	&:hover {
-		scale: 1.05;
-	}
-
 	&.highlighted {
 		border-color: #25b148;
 	}
@@ -27,6 +22,8 @@
 	}
 
 	&.rotate {
+		border-radius: 5% / 3.3%;
+
 		.card {
 			translate: -16.7% 25.2%;
 			rotate: 90deg;

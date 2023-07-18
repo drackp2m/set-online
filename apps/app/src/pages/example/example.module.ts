@@ -4,7 +4,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { DirectivesModule } from '../../shared/directives/directives.module';
-import { PipesModule } from '../../shared/pipes/pipes.module';
 
 import ExamplePage from './example.page';
 import { EXAMPLE_ROUTES } from './example.routes';
@@ -16,7 +15,6 @@ import ExampleMenuComponent from './shared/components/menu/example-menu.componen
 		RouterModule.forChild(EXAMPLE_ROUTES),
 		ExampleMenuComponent,
 		DirectivesModule,
-		PipesModule,
 		ReactiveFormsModule,
 		NgIf,
 	],

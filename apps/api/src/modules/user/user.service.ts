@@ -3,8 +3,9 @@ import { EntityManager } from '@mikro-orm/postgresql';
 import { Injectable } from '@nestjs/common';
 import { genSalt, hash } from 'bcryptjs';
 
-import { BadRequestException, NotFoundException } from '../../shared/exceptions';
-import { RegisterRequestDto } from '../auth/dtos/register-request.dto';
+import { BadRequestException } from '../../shared/exceptions/bad-request.exception';
+import { NotFoundException } from '../../shared/exceptions/not-found.exception';
+import { RegisterRequestDto } from '../auth/dto/register-request.dto';
 
 import { UserEntity } from './user.entity';
 
