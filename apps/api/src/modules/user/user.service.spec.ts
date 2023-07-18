@@ -4,7 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 import { BadRequestException, NotFoundException } from '../../shared/exceptions';
 
-import { UserFaker } from './factories';
+import { UserFaker } from './factory';
 import { UserEntity } from './user.entity';
 import { UserService } from './user.service';
 

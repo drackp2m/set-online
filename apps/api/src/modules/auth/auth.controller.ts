@@ -2,10 +2,12 @@ import { Body, Controller, Get, HttpCode, HttpStatus, Post } from '@nestjs/commo
 
 import { UserEntity } from '../user/user.entity';
 
-import { LoginRequestDto } from './dtos';
-import { RegisterRequestDto } from './dtos/register-request.dto';
-import { LoginUsecase, RefreshSessionUsecase, RegisterUsecase } from './usecases';
-import { LogoutUsecase } from './usecases/logout.usecase';
+import { LoginRequestDto } from './dto/login-request.dto';
+import { RegisterRequestDto } from './dto/register-request.dto';
+import { LoginUsecase } from './usecase/login.usecase';
+import { LogoutUsecase } from './usecase/logout.usecase';
+import { RefreshSessionUsecase } from './usecase/refresh-session.usecase';
+import { RegisterUsecase } from './usecase/register.usecase';
 
 @Controller()
 export class AuthController {

@@ -1,4 +1,4 @@
-import { JwtAlgorithm } from '../../environment';
+import { JwtAlgorithm } from '../../environment/jwt-algorithm.type';
 
 export type JwtConfig = {
 	algorithm: JwtAlgorithm;
