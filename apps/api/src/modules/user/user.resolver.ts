@@ -1,10 +1,10 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
 
-import { ProtectTo } from '../auth/decorators';
+import { ProtectTo } from '../auth/decorator/protect-to.decorator';
 
-import { UserRole } from './definitions';
-import { ValidateUserConstraintsInput } from './dtos';
+import { UserRole } from './definition/user-role.enum';
+import { ValidateUserConstraintsInput } from './dto/input/validate-user-constraints.input';
 import { UserEntity } from './user.entity';
 import { UserService } from './user.service';
 

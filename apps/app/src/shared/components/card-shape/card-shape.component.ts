@@ -3,23 +3,17 @@ import { Component, Input } from '@angular/core';
 
 import { CardColorEnum, CardShadingEnum, CardShapeEnum } from '@set-online/api-definitions';
 
-import { AppUrlPipe } from '../../pipes/app-url.pipe';
-import { PipesModule } from '../../pipes/pipes.module';
-
 @Component({
 	standalone: true,
 	selector: 'set-card-shape',
 	templateUrl: './card-shape.component.html',
 	styleUrls: ['./card-shape.component.scss'],
-	imports: [NgIf, PipesModule],
-	providers: [AppUrlPipe],
+	imports: [NgIf],
 })
 export class CardShapeComponent {
 	@Input({ required: true }) shape!: keyof typeof CardShapeEnum;
 	@Input({ required: true }) color!: keyof typeof CardColorEnum;
 	@Input({ required: true }) shading!: keyof typeof CardShadingEnum;
-
-	constructor(private readonly appUrlPipe: AppUrlPipe) {}
 
 	get basicMask(): string {
 		const shading = this.shading === 'striped' ? 'outlined' : this.shading;
@@ -36,8 +30,6 @@ export class CardShapeComponent {
 	}
 
 	private getUrl(iconName: string): string {
-		const url = this.appUrlPipe.transform(`/assets/icons/${iconName}.svg`);
-
-		return `url(${url}) no-repeat center`;
+		return `url(assets/icons/${iconName}.svg) no-repeat center`;
 	}
 }

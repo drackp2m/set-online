@@ -4,6 +4,7 @@
 @use './scss/main';
 
 html {
+	overflow: hidden;
 	font-family: Recursive, sans-serif;
 	font-size: 16px;
 	font-weight: var(--font-weight-md);

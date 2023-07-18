@@ -5,8 +5,7 @@ import MainLayout from '../shared/layouts/main/main.layout';
 export const APP_ROUTES: Routes = [
 	{
 		path: '',
-		redirectTo: 'home',
-		pathMatch: 'full',
+		loadChildren: () => import('../pages/game/game.module'),
 	},
 	{
 		path: '',

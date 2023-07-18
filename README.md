@@ -8,7 +8,7 @@
 
 2. 📦 Install dependencies
 
-> docker exec -it set-node yarn
+> docker exec -it set-node yarn install
 
 3. 🐘 Execute database migrations
 
