@@ -4,6 +4,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 import { BadRequestException } from '../../shared/exceptions/bad-request.exception';
 import { NotFoundException } from '../../shared/exceptions/not-found.exception';
+import { HashPasswordUsecase } from '../../shared/usecases/hash-password.usecase';
 
 import { UserFaker } from './factory/user.faker';
 import { UserEntity } from './user.entity';
@@ -16,14 +17,10 @@ jest.mock('uuid', () => ({
 	v4: () => mockUuid,
 }));
 
-jest.mock('bcryptjs', () => ({
-	genSalt: () => 'randomSalt',
-	hash: () => mockPasswordHashed,
-}));
-
 describe('UserService', () => {
 	let service: UserService;
 	let entityManager: jest.Mocked<Partial<EntityManager>>;
+	let hashPassword: jest.Mocked<Partial<HashPasswordUsecase>>;
 
 	const date = new Date(Date.UTC(1955, 2, 24));
 	const expectedMockUser: EntityData<UserEntity> = {
@@ -47,8 +44,16 @@ describe('UserService', () => {
 			findOne: jest.fn(),
 		};
 
+		hashPassword = {
+			execute: jest.fn().mockResolvedValue(mockPasswordHashed),
+		};
+
 		const module: TestingModule = await Test.createTestingModule({
-			providers: [UserService, { provide: EntityManager, useValue: entityManager }],
+			providers: [
+				UserService,
+				{ provide: EntityManager, useValue: entityManager },
+				{ provide: HashPasswordUsecase, useValue: hashPassword },
+			],
 		}).compile();
 
 		service = module.get<UserService>(UserService);

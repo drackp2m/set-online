@@ -1,10 +1,10 @@
 import { REQUEST } from '@nestjs/core';
 import { Test, TestingModule } from '@nestjs/testing';
-import bcrypt from 'bcryptjs';
 import { Request } from 'express';
 
 import { NotFoundException } from '../../../shared/exceptions/not-found.exception';
 import { UnauthorizedException } from '../../../shared/exceptions/unauthorized-exception.exception';
+import { CheckPasswordUsecase } from '../../../shared/usecases/check-password.usecase';
 import { UserFaker } from '../../user/factory/user.faker';
 import { UserService } from '../../user/user.service';
 
@@ -19,6 +19,7 @@ describe('LoginUsecase', () => {
 	let usecase: LoginUsecase;
 	let request: jest.Mocked<Partial<Request>>;
 	let userService: jest.Mocked<Partial<UserService>>;
+	let checkPassword: jest.Mocked<Partial<CheckPasswordUsecase>>;
 	let createAccessToken: jest.Mocked<Partial<CreateJwtAccessTokenUsecase>>;
 	let createRefreshToken: jest.Mocked<Partial<CreateJwtRefreshTokenUsecase>>;
 	let setToken: jest.Mocked<Partial<SetJwtTokenUsecase>>;
@@ -44,6 +45,10 @@ describe('LoginUsecase', () => {
 			getOneBy: jest.fn(),
 		};
 
+		checkPassword = {
+			execute: jest.fn(),
+		};
+
 		createAccessToken = {
 			execute: jest.fn(),
 		};
@@ -61,6 +66,7 @@ describe('LoginUsecase', () => {
 				LoginUsecase,
 				{ provide: REQUEST, useValue: request },
 				{ provide: UserService, useValue: userService },
+				{ provide: CheckPasswordUsecase, useValue: checkPassword },
 				{ provide: CreateJwtAccessTokenUsecase, useValue: createAccessToken },
 				{ provide: CreateJwtRefreshTokenUsecase, useValue: createRefreshToken },
 				{ provide: SetJwtTokenUsecase, useValue: setToken },
@@ -74,7 +80,7 @@ describe('LoginUsecase', () => {
 		expect(usecase).toBeDefined();
 	});
 
-	describe('login', () => {
+	describe('execute', () => {
 		it('should throw NotFoundException when UserService.getOneBy throw exception', async () => {
 			userService.getOneBy.mockRejectedValueOnce(() => {
 				throw new NotFoundException();
@@ -90,7 +96,7 @@ describe('LoginUsecase', () => {
 
 		it('should throw UnauthorizedException when BcryptService.compare return False', async () => {
 			userService.getOneBy.mockResolvedValueOnce(mockUser);
-			jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(false as never);
+			checkPassword.execute.mockResolvedValueOnce(false);
 
 			const tokenModel = usecase.execute({ username: 'user', password: 'pass' });
 
@@ -102,7 +108,7 @@ describe('LoginUsecase', () => {
 
 		it('should return TokenModel when JwtService.sign return a token', async () => {
 			userService.getOneBy.mockResolvedValueOnce(mockUser);
-			jest.spyOn(bcrypt, 'compare').mockResolvedValueOnce(true as never);
+			checkPassword.execute.mockResolvedValueOnce(true);
 			createAccessToken.execute.mockReturnValueOnce(mockJwtAccessToken);
 			createRefreshToken.execute.mockReturnValueOnce(mockJwtRefreshToken);
 
