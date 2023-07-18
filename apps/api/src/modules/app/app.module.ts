@@ -9,8 +9,11 @@ import { AuthModule } from '../../modules/auth/auth.module';
 import { UserModule } from '../../modules/user/user.module';
 import { ConfigurationModule } from '../../shared/config/configuration.module';
 import { ConfigurationService } from '../../shared/config/configuration.service';
-import { GqlFactory, MikroOrmFactory } from '../../shared/config/factories';
-import { appConfig, databaseConfig, jwtConfig } from '../../shared/config/registers';
+import { GqlFactory } from '../../shared/config/factories/gql.factory';
+import { MikroOrmFactory } from '../../shared/config/factories/mikro-orm.factory';
+import { appConfig } from '../../shared/config/registers/app.config';
+import { databaseConfig } from '../../shared/config/registers/database.config';
+import { jwtConfig } from '../../shared/config/registers/jwt.config';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';

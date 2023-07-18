@@ -8,6 +8,8 @@ import {
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { v4 } from 'uuid';
 
+import { GetNowDateUsecase } from '../usecases/get-now-date.usecase';
+
 @Entity({ abstract: true })
 @ObjectType()
 export abstract class BaseEntity<
@@ -21,11 +23,11 @@ export abstract class BaseEntity<
 
 	@Property()
 	@Field((_type) => Date)
-	createdAt: Date = new Date();
+	createdAt: Date = GetNowDateUsecase.execute();
 
-	@Property({ onUpdate: () => new Date() })
+	@Property({ onUpdate: GetNowDateUsecase.execute })
 	@Field((_type) => Date)
-	updatedAt: Date = new Date();
+	updatedAt: Date = GetNowDateUsecase.execute();
 
 	constructor(entity?: EntityData<T>) {
 		super();

@@ -4,7 +4,7 @@ import { AuthModule } from '../auth/auth.module';
 
 import { UserResolver } from './user.resolver';
 import { UserService } from './user.service';
-import { IsUniqueUserPropRule } from './validators';
+import { IsUniqueUserPropRule } from './validator/is-unique-user-prop.validator';
 
 @Module({
 	imports: [forwardRef(() => AuthModule)],
