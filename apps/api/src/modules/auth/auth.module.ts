@@ -1,11 +1,13 @@
-import { Module, forwardRef } from '@nestjs/common';
+import { MikroOrmModule } from '@mikro-orm/nestjs';
+import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
 
 import { ConfigurationModule } from '../../shared/config/configuration.module';
 import { ConfigurationService } from '../../shared/config/configuration.service';
 import { JwtFactory } from '../../shared/config/factories/jwt.factory';
-import { UserModule } from '../user/user.module';
+import { CheckPasswordUsecase } from '../../shared/usecases/check-password.usecase';
+import { UserEntity } from '../user/user.entity';
 
 import { AuthController } from './auth.controller';
 import { JwtGuard } from './guard/jwt.guard';
@@ -26,7 +28,7 @@ import { SetJwtTokenUsecase } from './usecase/set-jwt-token.usecase';
 			inject: [ConfigurationService],
 			useClass: JwtFactory,
 		}),
-		forwardRef(() => UserModule),
+		MikroOrmModule.forFeature({ entities: [UserEntity] }),
 	],
 	providers: [
 		{
@@ -41,6 +43,7 @@ import { SetJwtTokenUsecase } from './usecase/set-jwt-token.usecase';
 		CreateJwtAccessTokenUsecase,
 		CreateJwtRefreshTokenUsecase,
 		SetJwtTokenUsecase,
+		CheckPasswordUsecase,
 	],
 	controllers: [AuthController],
 })

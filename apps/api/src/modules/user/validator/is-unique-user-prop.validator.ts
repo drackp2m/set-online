@@ -7,18 +7,18 @@ import {
 } from 'class-validator';
 
 import { UserEntity } from '../user.entity';
-import { UserService } from '../user.service';
+import { UserEntityRepository } from '../user.repository';
 
 @ValidatorConstraint({ name: 'IsUniqueUserProp', async: true })
 @Injectable()
 export class IsUniqueUserPropRule implements ValidatorConstraintInterface {
-	constructor(private readonly userService: UserService) {}
+	constructor(private readonly userRepository: UserEntityRepository) {}
 
 	async validate(value: string, args: ValidationArguments) {
 		const prop = args.property as keyof EntityData<UserEntity>;
 
 		try {
-			await this.userService.getOneBy(prop, value);
+			await this.userRepository.getOne({ [prop]: value });
 		} catch {
 			return true;
 		}

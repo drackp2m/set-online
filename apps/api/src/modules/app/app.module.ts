@@ -37,6 +37,7 @@ import { AppService } from './app.service';
 		AuthModule,
 		UserModule,
 	],
+	exports: [MikroOrmModule],
 	providers: [AppService, ConfigurationService],
 	controllers: [AppController],
 })
