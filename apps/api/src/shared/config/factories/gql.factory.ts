@@ -18,6 +18,7 @@ export class GqlFactory implements GqlOptionsFactory {
 			sortSchema: true,
 			context: ({ req, res }) => ({ req, res }),
 			includeStacktraceInErrorResponses: !isProduction,
+			installSubscriptionHandlers: true,
 			buildSchemaOptions: {
 				dateScalarMode: 'isoDate',
 				numberScalarMode: 'float',

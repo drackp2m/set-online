@@ -10,6 +10,7 @@ export default async (): Promise<MikroOrmModuleSyncOptions> => ({
 	...databaseConfig(),
 	allowGlobalContext: true,
 	entities: await getEntities(),
+	entitiesTs: ['apps/api/src/modules/**/*.entity.ts'],
 	forceUtcTimezone: true,
 	migrations: {
 		tableName: 'migrations',
