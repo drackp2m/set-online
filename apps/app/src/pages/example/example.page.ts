@@ -1,6 +1,7 @@
 import { Component, WritableSignal, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Apollo, gql } from 'apollo-angular';
 import { map } from 'rxjs';
 
 import { GetUsersGQL } from '../../graphql/apollo-operations';
@@ -27,7 +28,31 @@ export default class ExamplePage {
 		password: new FormControl('', [Validators.required]),
 	});
 
-	constructor(private readonly apiClient: ApiClient, private readonly getUsersGQL: GetUsersGQL) {}
+	constructor(
+		private readonly apiClient: ApiClient,
+		private readonly getUsersGQL: GetUsersGQL,
+		private readonly apollo: Apollo,
+	) {
+		const result = this.apollo.subscribe(
+			{
+				query: gql`
+					subscription Subscription {
+						getManySubscription
+					}
+				`,
+				fetchPolicy: 'standby',
+			},
+			{
+				useZone: true,
+			},
+		);
+
+		result.subscribe({
+			next: (data) => {
+				console.log(data.data);
+			},
+		});
+	}
 
 	checkUsers(): void {
 		this.getUsersGQL.fetch().subscribe({
