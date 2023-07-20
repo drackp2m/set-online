@@ -20,7 +20,10 @@ export class AuthInterceptor implements HttpInterceptor {
 	private isInvalidToken = false;
 	private readonly JwtTokensRefreshed$: Subject<void> = new Subject<void>();
 
-	constructor(private readonly apiClient: ApiClient, private readonly router: Router) {}
+	constructor(
+		private readonly apiClient: ApiClient,
+		private readonly router: Router,
+	) {}
 
 	intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 		const ignoredUrls = [this.API_LOGIN_URL, this.API_REFRESH_SESSION_URL];

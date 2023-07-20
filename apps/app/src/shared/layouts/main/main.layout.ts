@@ -12,7 +12,10 @@ import { ApiClient } from '../../services/api-client.service';
 	imports: [RouterOutlet, RouterModule, NgTemplateOutlet, MediaDebugComponent],
 })
 export default class MainLayout {
-	constructor(private readonly apiClient: ApiClient, private readonly router: Router) {}
+	constructor(
+		private readonly apiClient: ApiClient,
+		private readonly router: Router,
+	) {}
 
 	logout() {
 		return () =>

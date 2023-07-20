@@ -3,8 +3,8 @@ import { NestFactory } from '@nestjs/core';
 import { useContainer } from 'class-validator';
 import cookieParser from 'cookie-parser';
 
-import { AppModule } from './modules/app/app.module';
-import { BootstrapHelper } from './shared/utils/boostrap.helper';
+import { AppModule } from './module/app/app.module';
+import { BootstrapHelper } from './shared/util/boostrap.helper';
 
 async function bootstrap(): Promise<void> {
 	const app = await NestFactory.create(AppModule, BootstrapHelper.nestApplicationOptions);
@@ -16,7 +16,7 @@ async function bootstrap(): Promise<void> {
 	app.setGlobalPrefix(appConfig.prefix);
 	app.useGlobalPipes(BootstrapHelper.validationPipe);
 	app.enableCors({ origin: true, credentials: true, methods: 'GET,POST' });
-	app.use(cookieParser());
+	app.use(cookieParser(appConfig.cookieSecret));
 
 	await app.listen(3000, '0.0.0.0', () => BootstrapHelper.logAppBoostrap(app));
 }

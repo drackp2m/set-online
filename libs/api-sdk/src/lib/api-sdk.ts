@@ -4,7 +4,10 @@ import { AuthSDK } from './models/auth/auth.sdk';
 import { DefaultSDK } from './models/default/default.sdk';
 
 export class ApiSDK {
-	constructor(private readonly apiUrl: string, private readonly client: HttpClientType) {
+	constructor(
+		private readonly apiUrl: string,
+		private readonly client: HttpClientType,
+	) {
 		HttpClient.initialize(apiUrl, client);
 	}
 

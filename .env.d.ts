@@ -15,6 +15,7 @@ declare global {
 			API_PREFIX: string;
 			API_DEBUG_PORT: string;
 			APP_PORT: string;
+			API_COOKIE_SECRET: string;
 
 			JWT_ID: string;
 			JWT_ALGORITHM: string;

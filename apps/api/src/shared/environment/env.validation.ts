@@ -47,6 +47,9 @@ class EnvironmentVariables {
 	@IsNumber()
 	API_DEBUG_PORT: number;
 
+	@IsString()
+	API_COOKIE_SECRET: string;
+
 	@IsNumber()
 	APP_PORT: number;
 

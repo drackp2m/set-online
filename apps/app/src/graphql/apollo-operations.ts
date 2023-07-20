@@ -41,6 +41,11 @@ export type QueryvalidateUserConstraintsArgs = {
 	input: ValidateUserConstraintsInput;
 };
 
+export type Subscription = {
+	__typename?: 'Subscription';
+	getAllUsers: Scalars['String']['output'];
+};
+
 /** user */
 export type UserEntity = {
 	__typename?: 'UserEntity';
@@ -74,21 +79,6 @@ const result: PossibleTypesResultData = {
 
 export default result;
 
-export type GetUsers2QueryVariables = Exact<{ [key: string]: never }>;
-
-export type GetUsers2Query = {
-	__typename?: 'Query';
-	getUsers: Array<{
-		__typename?: 'UserEntity';
-		uuid: string;
-		username: string;
-		email?: string | null;
-		role: UserRole;
-		createdAt: Date;
-		updatedAt: Date;
-	}>;
-};
-
 export type GetUsersQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetUsersQuery = {
@@ -103,30 +93,6 @@ export type GetUsersQuery = {
 		updatedAt: Date;
 	}>;
 };
-
-export const GetUsers2Document = gql`
-	query GetUsers2 {
-		getUsers {
-			uuid
-			username
-			email
-			role
-			createdAt
-			updatedAt
-		}
-	}
-`;
-
-@Injectable({
-	providedIn: 'root',
-})
-export class GetUsers2GQL extends Apollo.Query<GetUsers2Query, GetUsers2QueryVariables> {
-	override document = GetUsers2Document;
-
-	constructor(apollo: Apollo.Apollo) {
-		super(apollo);
-	}
-}
 
 export const GetUsersDocument = gql`
 	query GetUsers {
