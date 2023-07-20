@@ -4,7 +4,7 @@ import { ValidationArguments } from 'class-validator';
 import { NotFoundException } from '../../../shared/exception/not-found.exception';
 import { UserFaker } from '../factory/user.faker';
 import { UserEntity } from '../user.entity';
-import { UserService } from '../user.service';
+import { UserEntityRepository } from '../user.repository';
 
 import { IsUniqueUserPropRule } from './is-unique-user-prop.validator';
 
@@ -12,18 +12,21 @@ describe('IsUniqueUserPropRule', () => {
 	const userFaker = new UserFaker();
 
 	let validator: IsUniqueUserPropRule;
-	let userService: jest.Mocked<Partial<UserService>>;
+	let userEntityRepository: jest.Mocked<Partial<UserEntityRepository>>;
 
 	const mockUuid = '00000000-0000-4000-0000-000000000000';
 	const mockUser = userFaker.makeOne({ uuid: mockUuid }, { createdFrom: '2010' }) as UserEntity;
 
 	beforeAll(async () => {
-		userService = {
-			getOneBy: jest.fn(),
+		userEntityRepository = {
+			getOne: jest.fn(),
 		};
 
 		const module: TestingModule = await Test.createTestingModule({
-			providers: [IsUniqueUserPropRule, { provide: UserService, useValue: userService }],
+			providers: [
+				IsUniqueUserPropRule,
+				{ provide: UserEntityRepository, useValue: userEntityRepository },
+			],
 		}).compile();
 
 		validator = module.get<IsUniqueUserPropRule>(IsUniqueUserPropRule);
@@ -34,8 +37,8 @@ describe('IsUniqueUserPropRule', () => {
 	});
 
 	describe('validate', () => {
-		it('should return True when UserService.getOneBy throw exception', async () => {
-			userService.getOneBy.mockRejectedValueOnce(() => {
+		it('should return True when UserService.getOne throw exception', async () => {
+			userEntityRepository.getOne.mockRejectedValueOnce(() => {
 				throw new NotFoundException();
 			});
 
@@ -45,12 +48,12 @@ describe('IsUniqueUserPropRule', () => {
 
 			expect(result).toStrictEqual(true);
 
-			expect(userService.getOneBy).toBeCalledTimes(1);
-			expect(userService.getOneBy).toBeCalledWith('username', 'admin');
+			expect(userEntityRepository.getOne).toBeCalledTimes(1);
+			expect(userEntityRepository.getOne).toBeCalledWith({ username: 'admin' });
 		});
 
-		it('should return False when UserService.getOneBy return a UserEntity', async () => {
-			userService.getOneBy.mockResolvedValueOnce(mockUser);
+		it('should return False when UserService.getOne return a UserEntity', async () => {
+			userEntityRepository.getOne.mockResolvedValueOnce(mockUser);
 
 			const result = await validator.validate('admin', {
 				property: 'username',
@@ -58,8 +61,8 @@ describe('IsUniqueUserPropRule', () => {
 
 			expect(result).toStrictEqual(false);
 
-			expect(userService.getOneBy).toBeCalledTimes(1);
-			expect(userService.getOneBy).toBeCalledWith('username', 'admin');
+			expect(userEntityRepository.getOne).toBeCalledTimes(1);
+			expect(userEntityRepository.getOne).toBeCalledWith({ username: 'admin' });
 		});
 	});
 

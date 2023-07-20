@@ -5,7 +5,7 @@ import { ConfigurationService } from '../../../shared/module/config/configuratio
 import { JwtConfig } from '../../../shared/module/config/types/jwt-config.type';
 import { UserFaker } from '../../user/factory/user.faker';
 import { UserEntity } from '../../user/user.entity';
-import { UserService } from '../../user/user.service';
+import { UserEntityRepository } from '../../user/user.repository';
 import { JsonWebToken } from '../definition/json-web-token.interface';
 
 import { JwtStrategyService } from './jwt.strategy.service';
@@ -16,7 +16,7 @@ describe('JwtStrategyService', () => {
 	let service: JwtStrategyService;
 	let configurationService: jest.Mocked<Partial<ConfigurationService>>;
 	// let configService: jest.Mocked<Partial<ConfigService>>;
-	let userService: jest.Mocked<Partial<UserService>>;
+	let userEntityRepository: jest.Mocked<Partial<UserEntityRepository>>;
 
 	const mockUuid = '00000000-0000-4000-0000-000000000000';
 	const mockJwt: JsonWebToken = {
@@ -35,16 +35,15 @@ describe('JwtStrategyService', () => {
 			jwt: { secret: '1234' } as JwtConfig,
 		};
 
-		userService = {
-			getOneBy: jest.fn(),
+		userEntityRepository = {
+			getOne: jest.fn(),
 		};
 
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
 				JwtStrategyService,
 				{ provide: ConfigurationService, useValue: configurationService },
-				// { provide: ConfigService, useValue: configService },
-				{ provide: UserService, useValue: userService },
+				{ provide: UserEntityRepository, useValue: userEntityRepository },
 			],
 		}).compile();
 
@@ -57,7 +56,7 @@ describe('JwtStrategyService', () => {
 
 	describe('validate', () => {
 		it('should throw NotFoundException when EntityManager.getOneBy throw NotFoundException', async () => {
-			userService.getOneBy.mockRejectedValueOnce(() => {
+			userEntityRepository.getOne.mockRejectedValueOnce(() => {
 				throw new NotFoundException();
 			});
 
@@ -67,7 +66,7 @@ describe('JwtStrategyService', () => {
 		});
 
 		it('should return UserEntity when EntityManager.getOneBy return UserEntity', async () => {
-			userService.getOneBy.mockResolvedValueOnce(mockUser);
+			userEntityRepository.getOne.mockResolvedValueOnce(mockUser);
 
 			const user = await service.validate(mockJwt);
 

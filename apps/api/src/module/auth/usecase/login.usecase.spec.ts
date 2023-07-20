@@ -6,7 +6,7 @@ import { NotFoundException } from '../../../shared/exception/not-found.exception
 import { UnauthorizedException } from '../../../shared/exception/unauthorized-exception.exception';
 import { CheckPasswordUsecase } from '../../../shared/usecase/check-password.usecase';
 import { UserFaker } from '../../user/factory/user.faker';
-import { UserService } from '../../user/user.service';
+import { UserEntityRepository } from '../../user/user.repository';
 
 import { CreateJwtAccessTokenUsecase } from './create-jwt-access-token.usecase';
 import { CreateJwtRefreshTokenUsecase } from './create-jwt-refresh-token.usecas';
@@ -18,7 +18,7 @@ const mockUuid = '00000000-0000-4000-0000-000000000000';
 describe('LoginUsecase', () => {
 	let usecase: LoginUsecase;
 	let request: jest.Mocked<Partial<Request>>;
-	let userService: jest.Mocked<Partial<UserService>>;
+	let userEntityRepository: jest.Mocked<Partial<UserEntityRepository>>;
 	let checkPassword: jest.Mocked<Partial<CheckPasswordUsecase>>;
 	let createAccessToken: jest.Mocked<Partial<CreateJwtAccessTokenUsecase>>;
 	let createRefreshToken: jest.Mocked<Partial<CreateJwtRefreshTokenUsecase>>;
@@ -41,8 +41,8 @@ describe('LoginUsecase', () => {
 			} as unknown as Request['res'],
 		};
 
-		userService = {
-			getOneBy: jest.fn(),
+		userEntityRepository = {
+			getOne: jest.fn(),
 		};
 
 		checkPassword = {
@@ -65,7 +65,7 @@ describe('LoginUsecase', () => {
 			providers: [
 				LoginUsecase,
 				{ provide: REQUEST, useValue: request },
-				{ provide: UserService, useValue: userService },
+				{ provide: UserEntityRepository, useValue: userEntityRepository },
 				{ provide: CheckPasswordUsecase, useValue: checkPassword },
 				{ provide: CreateJwtAccessTokenUsecase, useValue: createAccessToken },
 				{ provide: CreateJwtRefreshTokenUsecase, useValue: createRefreshToken },
@@ -81,8 +81,8 @@ describe('LoginUsecase', () => {
 	});
 
 	describe('execute', () => {
-		it('should throw NotFoundException when UserService.getOneBy throw exception', async () => {
-			userService.getOneBy.mockRejectedValueOnce(() => {
+		it('should throw NotFoundException when UserService.getOne throw exception', async () => {
+			userEntityRepository.getOne.mockRejectedValueOnce(() => {
 				throw new NotFoundException();
 			});
 
@@ -90,24 +90,24 @@ describe('LoginUsecase', () => {
 
 			await expect(tokenModel).rejects.toThrow(NotFoundException);
 
-			expect(userService.getOneBy).toBeCalledTimes(1);
-			expect(userService.getOneBy).toBeCalledWith('username', 'user');
+			expect(userEntityRepository.getOne).toBeCalledTimes(1);
+			expect(userEntityRepository.getOne).toBeCalledWith({ username: 'user' });
 		});
 
 		it('should throw UnauthorizedException when BcryptService.compare return False', async () => {
-			userService.getOneBy.mockResolvedValueOnce(mockUser);
+			userEntityRepository.getOne.mockResolvedValueOnce(mockUser);
 			checkPassword.execute.mockResolvedValueOnce(false);
 
 			const tokenModel = usecase.execute({ username: 'user', password: 'pass' });
 
 			await expect(tokenModel).rejects.toThrow(UnauthorizedException);
 
-			expect(userService.getOneBy).toBeCalledTimes(1);
-			expect(userService.getOneBy).toBeCalledWith('username', 'user');
+			expect(userEntityRepository.getOne).toBeCalledTimes(1);
+			expect(userEntityRepository.getOne).toBeCalledWith({ username: 'user' });
 		});
 
 		it('should return TokenModel when JwtService.sign return a token', async () => {
-			userService.getOneBy.mockResolvedValueOnce(mockUser);
+			userEntityRepository.getOne.mockResolvedValueOnce(mockUser);
 			checkPassword.execute.mockResolvedValueOnce(true);
 			createAccessToken.execute.mockReturnValueOnce(mockJwtAccessToken);
 			createRefreshToken.execute.mockReturnValueOnce(mockJwtRefreshToken);
@@ -119,8 +119,8 @@ describe('LoginUsecase', () => {
 
 			expect(result).toStrictEqual(undefined);
 
-			expect(userService.getOneBy).toBeCalledTimes(1);
-			expect(userService.getOneBy).toBeCalledWith('username', 'user');
+			expect(userEntityRepository.getOne).toBeCalledTimes(1);
+			expect(userEntityRepository.getOne).toBeCalledWith({ username: 'user' });
 
 			expect(createAccessToken.execute).toBeCalledTimes(1);
 			expect(createAccessToken.execute).toBeCalledWith(mockUuid);
