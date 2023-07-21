@@ -1,0 +1,38 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  getUsers: [UserEntity!]!
+  validateUserConstraints(input: ValidateUserConstraintsInput!): Boolean!
+}
+
+type Subscription {
+  getManySubscription: String
+}
+
+"""user"""
+type UserEntity {
+  createdAt: DateTime!
+  email: String
+  role: UserRole!
+  updatedAt: DateTime!
+  username: String!
+  uuid: ID!
+}
+
+enum UserRole {
+  Admin
+  Guest
+  Registered
+}
+
+input ValidateUserConstraintsInput {
+  email: String
+  username: String
+}
