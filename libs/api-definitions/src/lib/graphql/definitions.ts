@@ -24,6 +24,10 @@ export interface IQuery {
     validateUserConstraints(input: ValidateUserConstraintsInput): boolean | Promise<boolean>;
 }
 
+export interface ISubscription {
+    getManySubscription(): Nullable<string> | Promise<Nullable<string>>;
+}
+
 export interface UserEntity {
     createdAt: DateTime;
     email?: Nullable<string>;

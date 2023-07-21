@@ -16,7 +16,10 @@ export default class LoginPage {
 
 	error = signal('');
 
-	constructor(private readonly apiClient: ApiClient, private readonly router: Router) {}
+	constructor(
+		private readonly apiClient: ApiClient,
+		private readonly router: Router,
+	) {}
 
 	onSubmit() {
 		const controls = this.form.controls;
