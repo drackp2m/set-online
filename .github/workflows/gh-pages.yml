@@ -1,8 +1,10 @@
 name: Deploy SetOnline to Pages
 
 on:
-  merge:
-    branches: ['main']
+  pull_request:
+    branches:
+      - main
+    types: [closed]
 
 permissions:
   contents: read
