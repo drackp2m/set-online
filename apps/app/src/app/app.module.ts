@@ -51,7 +51,6 @@ import { APP_ROUTES } from './app.routes';
 				);
 
 				const link = split(
-					// split based on operation type
 					({ query }) => {
 						const { kind, operation } = getMainDefinition(query) as OperationDefinitionNode;
 
@@ -63,7 +62,7 @@ import { APP_ROUTES } from './app.routes';
 
 				// https://www.apollographql.com/docs/react/api/core/ApolloClient/
 				return {
-					name: 'angular',
+					name: 'set-online',
 					link,
 					defaultOptions: {
 						query: {
