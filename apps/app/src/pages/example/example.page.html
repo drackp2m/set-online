@@ -58,6 +58,8 @@
 	</section>
 
 	<section class="flex-col gap-md align-center mt-lg">
+		{{ apolloSubscription()?.data?.getManySubscription }}
+
 		<button class="p-sm md:p-md surface-radiant round-md xl-o:surface-vivid" (click)="checkUsers()">
 			Check users
 		</button>
