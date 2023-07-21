@@ -8491,7 +8491,7 @@ graphql-request@^6.0.0:
     "@graphql-typed-document-node/core" "^3.2.0"
     cross-fetch "^3.1.5"
 
-graphql-subscriptions@^2.0.0:
+graphql-subscriptions@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/graphql-subscriptions/-/graphql-subscriptions-2.0.0.tgz#11ec181d475852d8aec879183e8e1eb94f2eb79a"
   integrity sha512-s6k2b8mmt9gF9pEfkxsaO1lTxaySfKoEJzEfmwguBbQ//Oq23hIXCfR1hm4kdh5hnR20RdwB+s3BCb+0duHSZA==
@@ -14113,7 +14113,7 @@ tslib@~2.4.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.1.tgz#0d0bfbaac2880b91e22df0768e55be9753a5b17e"
   integrity sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==
 
-tsparticles-confetti@^2.11.0:
+tsparticles-confetti@2.11.0:
   version "2.11.0"
   resolved "https://registry.yarnpkg.com/tsparticles-confetti/-/tsparticles-confetti-2.11.0.tgz#c19aeaf152e832505877ce24acb0b4a69865b0ce"
   integrity sha512-chh3Ri+vCYLW6cPhBxx8KwQQmc1NCG890/Y/47aDqXvyfglzGQ4rl37IcdTROo07W/Pg3s6n8m1lh7QtzDw4Vg==
