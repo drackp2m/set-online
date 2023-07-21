@@ -48,7 +48,7 @@
 			"cwd": "${workspaceFolder}",
 			"args": [
 				"set-node",
-				"npm",
+				"yarn",
 				"test",
 				"--runInBand",
 				"--watchAll=false",
