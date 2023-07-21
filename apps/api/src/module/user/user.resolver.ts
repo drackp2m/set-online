@@ -11,6 +11,8 @@ import { UserEntityRepository } from './user.repository';
 
 @Resolver(() => UserEntity)
 export class UserResolver {
+	private interval: NodeJS.Timer;
+
 	constructor(
 		private readonly userRepository: UserEntityRepository,
 		@Inject('PUB_SUB') private readonly pubSub: PubSub,
@@ -33,7 +35,6 @@ export class UserResolver {
 		name: 'getUsers',
 	})
 	async getMany(): Promise<UserEntity[]> {
-		console.log('getMany');
 		this.pubSub.publish('getManySubscription', 'Hello from getMany');
 
 		const users = await this.userRepository.getMany();
@@ -46,7 +47,12 @@ export class UserResolver {
 		resolve: (value) => value,
 	})
 	getManySubscription() {
-		console.log('getManySubscription');
+		clearInterval(this.interval);
+
+		this.interval = setInterval(() => {
+			const message = `Hello from event emitter at ${new Date().toISOString()}`;
+			this.pubSub.publish('getManySubscription', message);
+		}, 5000);
 
 		return this.pubSub.asyncIterator('getManySubscription');
 

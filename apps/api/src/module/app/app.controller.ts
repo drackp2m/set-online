@@ -14,8 +14,6 @@ export class AppController {
 
 	@Get('hello')
 	getData(): Message {
-		console.log('hello');
-
 		this.pubSub.publish('getManySubscription', 'Hello from hello');
 
 		return this.appService.getData();

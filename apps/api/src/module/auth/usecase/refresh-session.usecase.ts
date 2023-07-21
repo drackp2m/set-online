@@ -23,7 +23,7 @@ export class RefreshSessionUsecase {
 
 	async execute(): Promise<void> {
 		try {
-			const currentRefreshToken = this.request.cookies[JwtCookie.refresh];
+			const currentRefreshToken = this.request.signedCookies[JwtCookie.refresh];
 
 			const refreshTokenPayload = this.jwtService.verify(currentRefreshToken) as JsonWebToken;
 
