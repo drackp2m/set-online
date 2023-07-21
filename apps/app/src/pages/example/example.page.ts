@@ -1,4 +1,4 @@
-import { Component, WritableSignal, signal } from '@angular/core';
+import { Component, WritableSignal, effect, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Apollo, gql } from 'apollo-angular';
@@ -20,6 +20,16 @@ export default class ExamplePage {
 
 	users: WritableSignal<number | undefined> = signal(undefined);
 
+	apolloSubscription = toSignal(
+		this.apollo.subscribe<{ getManySubscription: string }>({
+			query: gql`
+				subscription Subscription {
+					getManySubscription
+				}
+			`,
+		}),
+	);
+
 	response!: string;
 	error!: string;
 
@@ -33,24 +43,8 @@ export default class ExamplePage {
 		private readonly getUsersGQL: GetUsersGQL,
 		private readonly apollo: Apollo,
 	) {
-		const result = this.apollo.subscribe(
-			{
-				query: gql`
-					subscription Subscription {
-						getManySubscription
-					}
-				`,
-				fetchPolicy: 'standby',
-			},
-			{
-				useZone: true,
-			},
-		);
-
-		result.subscribe({
-			next: (data) => {
-				console.log(data.data);
-			},
+		effect(() => {
+			console.log(this.apolloSubscription()?.data);
 		});
 	}
 
