@@ -1,0 +1,94 @@
+{
+	"name": "Set Online Development",
+	"service": "set-nx",
+	"dockerComposeFile": ["../docker-compose.yml", "docker-compose.yml"],
+	"workspaceFolder": "/usr/src/app",
+	"forwardPorts": [4200, 3000, 9229],
+	"portsAttributes": {
+		"3000": {
+			"label": "Api",
+			"protocol": "https",
+			"onAutoForward": "notify"
+		},
+		"4200": {
+			"label": "App",
+			"protocol": "https",
+			"onAutoForward": "notify"
+		}
+	},
+	"overrideCommand": false,
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"nrwl.angular-console",
+				"editorconfig.editorconfig",
+				"mrmlnc.vscode-scss",
+				"esbenp.prettier-vscode",
+				"dbaeumer.vscode-eslint",
+				"stylelint.vscode-stylelint",
+				"angular.ng-template",
+				"gruntfuggly.todo-tree",
+				"cyrilletuzi.angular-schematics",
+				"firsttris.vscode-jest-runner",
+				"ryanluker.vscode-coverage-gutters",
+				"kumar-harsh.graphql-for-vscode",
+				"eamodio.gitlens",
+				"usernamehw.errorlens",
+				"firefox-devtools.vscode-firefox-debug"
+			],
+			"settings": {
+				"editor.rulers": [100],
+				"editor.linkedEditing": true,
+				"problems.showCurrentInStatus": true,
+				"javascript.updateImportsOnFileMove.enabled": "always",
+				"javascript.preferences.importModuleSpecifier": "project-relative",
+				"typescript.updateImportsOnFileMove.enabled": "always",
+				"typescript.preferences.importModuleSpecifier": "project-relative",
+				"eslint.validate": ["javascript", "typescript"],
+				"eslint.format.enable": true,
+				"eslint.useESLintClass": true,
+				"eslint.lintTask.enable": true,
+				"stylelint.reportDescriptionlessDisables": true,
+				"stylelint.reportInvalidScopeDisables": true,
+				"stylelint.reportNeedlessDisables": true,
+				"stylelint.snippet": ["css", "scss"],
+				"stylelint.validate": ["css", "scss"],
+				"prettier.prettierPath": "/usr/src/app/node_modules/prettier",
+				"editor.defaultFormatter": "esbenp.prettier-vscode",
+				"[javascript]": {
+					"editor.defaultFormatter": "dbaeumer.vscode-eslint"
+				},
+				"[typescript]": {
+					"editor.defaultFormatter": "dbaeumer.vscode-eslint"
+				},
+				"[css]": {
+					"editor.defaultFormatter": "stylelint.vscode-stylelint"
+				},
+				"[scss]": {
+					"editor.defaultFormatter": "stylelint.vscode-stylelint"
+				},
+				"todo-tree.regex.regexCaseSensitive": false,
+				"todo-tree.general.statusBar": "tags",
+				"todo-tree.general.tags": ["ToDo", "FixMe"],
+				"todo-tree.highlights.customHighlight": {
+					"ToDo": {
+						"icon": "code",
+						"iconColour": "#7582D1",
+						"type": "tag",
+						"foreground": "#ffffff",
+						"background": "#4280dd",
+						"opacity": 100
+					},
+					"FixMe": {
+						"icon": "tools",
+						"iconColour": "#e34c26",
+						"type": "text",
+						"foreground": "#ffffff",
+						"background": "#dd4242",
+						"opacity": 100
+					}
+				}
+			}
+		}
+	}
+}
