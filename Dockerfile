@@ -1,4 +1,4 @@
-FROM node:20.2-alpine3.18 AS deps
+FROM node:20.2-alpine3.17 AS deps
 
 RUN apk add --no-cache build-base python3
 
@@ -10,12 +10,12 @@ RUN if [ -n "$USER_UID" ] && [ "$USER_UID" != "1000" ]; then \
 
 WORKDIR /usr/src/app
 
+COPY package.json yarn.lock* .
+
 RUN chown -R node:node /usr/src/app \
 			&& chown -R node:node /home/node
 
 USER node
-
-COPY package.json yarn.lock* ./
 
 RUN yarn install
 
