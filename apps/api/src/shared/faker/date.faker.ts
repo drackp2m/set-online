@@ -1,12 +1,12 @@
 import { faker } from '@faker-js/faker';
 
-import { GetNowDateUsecase } from '../usecase/get-now-date.usecase';
+import { GenerateNowDateUsecase } from '../usecase/generate-now-date.usecase';
 
 import { BasicFaker } from './basic.faker';
 
 export class DateFaker {
 	private readonly basicFaker = new BasicFaker();
-	private readonly now = GetNowDateUsecase.execute();
+	private readonly now = GenerateNowDateUsecase.execute();
 	private created: Date;
 
 	constructor() {
