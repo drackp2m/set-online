@@ -74,26 +74,32 @@ $rules: (
 	),
 );
 
-@function get-list($items, $rules-getter: get-rules) {
+@include mix.generate-responsive($rules);
+
+$gap-rules: (
+	gap: grid-gap,
+	gapx: grid-column-gap,
+	gapy: grid-row-gap,
+);
+
+@function get-list() {
+	$list: ();
+
+	@each $rule, $property in $gap-rules {
+		$list: map.merge($list, get-rules($rule, $property));
+	}
+
+	@return $list;
+}
+
+@function get-rules($rule, $property) {
 	$rules: ();
 
-	@each $name in map.keys($items) {
-		$rules-list: meta.call(meta.get-function($rules-getter), $name);
-
-		$rules: map.merge($rules, $rules-list);
+	@each $spacing in map.keys(var.$spacings) {
+		$rules: map.merge($rules, (#{$rule}-#{$spacing}: (#{$property}: var(--spacing-#{$spacing}))));
 	}
 
 	@return $rules;
 }
 
-@function get-gap-rules($name) {
-	@return (
-		gap-#{$name}: (grid-gap: var(--spacing-#{$name})),
-		gap-x-#{$name}: (grid-column-gap: var(--spacing-#{$name})),
-		gap-y-#{$name}: (grid-row-gap: var(--spacing-#{$name}))
-	);
-}
-
-@include mix.generate-responsive($rules);
-
-@include mix.generate-responsive(get-list(var.$spacings, get-gap-rules));
+@include mix.generate-responsive(get-list());

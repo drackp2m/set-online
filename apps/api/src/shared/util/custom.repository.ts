@@ -1,5 +1,4 @@
-import { AnyEntity, FilterQuery } from '@mikro-orm/core';
-import { EntityRepository } from '@mikro-orm/postgresql';
+import { AnyEntity, EntityRepository, FilterQuery } from '@mikro-orm/core';
 
 import { NotFoundException } from '../exception/not-found.exception';
 

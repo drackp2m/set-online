@@ -15,3 +15,8 @@ main {
 		}
 	}
 }
+
+.test-gap {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+}

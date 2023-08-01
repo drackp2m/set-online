@@ -155,7 +155,7 @@
 	}
 }
 
-@mixin generate-exclude-responsive($rules) {
+@mixin generate-except-responsive($rules) {
 	@each $rule, $properties in $rules {
 		@include xs-e {
 			@include generate-media-class-rule(xs-e, $rule, $properties);
