@@ -1,23 +1,23 @@
 import { Injectable, Scope } from '@nestjs/common';
 
 import { UnauthorizedException } from '../../../shared/exception/unauthorized-exception.exception';
-import { CheckPasswordUsecase } from '../../../shared/usecase/check-password.usecase';
-import { UserEntityRepository } from '../../user/user.repository';
+import { CheckPasswordUseCase } from '../../../shared/use-case/check-password.use-case';
+import { UserRepository } from '../../user/user.repository';
 import { JwtCookie } from '../definition/jwt-cookie.enum';
 import { LoginRequestDto } from '../dto/login-request.dto';
 
-import { CreateJwtAccessTokenUsecase } from './create-jwt-access-token.usecase';
-import { CreateJwtRefreshTokenUsecase } from './create-jwt-refresh-token.usecas';
-import { SetJwtTokenUsecase } from './set-jwt-token.usecase';
+import { CreateJwtAccessTokenUseCase } from './create-jwt-access-token.use-case';
+import { CreateJwtRefreshTokenUseCase } from './create-jwt-refresh-token.use-cas';
+import { SetJwtTokenUseCase } from './set-jwt-token.use-case';
 
 @Injectable({ scope: Scope.REQUEST })
-export class LoginUsecase {
+export class LoginUseCase {
 	constructor(
-		private readonly userRepository: UserEntityRepository,
-		private readonly checkPassword: CheckPasswordUsecase,
-		private readonly createAccessToken: CreateJwtAccessTokenUsecase,
-		private readonly createRefreshToken: CreateJwtRefreshTokenUsecase,
-		private readonly setJwtToken: SetJwtTokenUsecase,
+		private readonly userRepository: UserRepository,
+		private readonly checkPassword: CheckPasswordUseCase,
+		private readonly createAccessToken: CreateJwtAccessTokenUseCase,
+		private readonly createRefreshToken: CreateJwtRefreshTokenUseCase,
+		private readonly setJwtToken: SetJwtTokenUseCase,
 	) {}
 
 	async execute(loginRequest: LoginRequestDto): Promise<void> {

@@ -5,7 +5,7 @@ import { ConfigurationService } from '../../../shared/module/config/configuratio
 import { JwtConfig } from '../../../shared/module/config/types/jwt-config.type';
 import { UserFaker } from '../../user/factory/user.faker';
 import { UserEntity } from '../../user/user.entity';
-import { UserEntityRepository } from '../../user/user.repository';
+import { UserRepository } from '../../user/user.repository';
 import { JsonWebToken } from '../definition/json-web-token.interface';
 
 import { JwtStrategyService } from './jwt.strategy.service';
@@ -16,7 +16,7 @@ describe('JwtStrategyService', () => {
 	let service: JwtStrategyService;
 	let configurationService: jest.Mocked<Partial<ConfigurationService>>;
 	// let configService: jest.Mocked<Partial<ConfigService>>;
-	let userEntityRepository: jest.Mocked<Partial<UserEntityRepository>>;
+	let userEntityRepository: jest.Mocked<Partial<UserRepository>>;
 
 	const mockUuid = '00000000-0000-4000-0000-000000000000';
 	const mockJwt: JsonWebToken = {
@@ -43,7 +43,7 @@ describe('JwtStrategyService', () => {
 			providers: [
 				JwtStrategyService,
 				{ provide: ConfigurationService, useValue: configurationService },
-				{ provide: UserEntityRepository, useValue: userEntityRepository },
+				{ provide: UserRepository, useValue: userEntityRepository },
 			],
 		}).compile();
 

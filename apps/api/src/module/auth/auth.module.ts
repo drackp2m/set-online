@@ -6,19 +6,19 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigurationModule } from '../../shared/module/config/configuration.module';
 import { ConfigurationService } from '../../shared/module/config/configuration.service';
 import { JwtFactory } from '../../shared/module/config/factories/jwt.factory';
-import { CheckPasswordUsecase } from '../../shared/usecase/check-password.usecase';
+import { CheckPasswordUseCase } from '../../shared/use-case/check-password.use-case';
 import { UserEntity } from '../user/user.entity';
 
 import { AuthController } from './auth.controller';
 import { JwtGuard } from './guard/jwt.guard';
 import { JwtStrategyService } from './strategy/jwt.strategy.service';
-import { CreateJwtAccessTokenUsecase } from './usecase/create-jwt-access-token.usecase';
-import { CreateJwtRefreshTokenUsecase } from './usecase/create-jwt-refresh-token.usecas';
-import { LoginUsecase } from './usecase/login.usecase';
-import { LogoutUsecase } from './usecase/logout.usecase';
-import { RefreshSessionUsecase } from './usecase/refresh-session.usecase';
-import { RegisterUsecase } from './usecase/register.usecase';
-import { SetJwtTokenUsecase } from './usecase/set-jwt-token.usecase';
+import { CreateJwtAccessTokenUseCase } from './use-case/create-jwt-access-token.use-case';
+import { CreateJwtRefreshTokenUseCase } from './use-case/create-jwt-refresh-token.use-cas';
+import { LoginUseCase } from './use-case/login.use-case';
+import { LogoutUseCase } from './use-case/logout.use-case';
+import { RefreshSessionUseCase } from './use-case/refresh-session.use-case';
+import { RegisterUseCase } from './use-case/register.use-case';
+import { SetJwtTokenUseCase } from './use-case/set-jwt-token.use-case';
 
 @Module({
 	imports: [
@@ -36,14 +36,14 @@ import { SetJwtTokenUsecase } from './usecase/set-jwt-token.usecase';
 			useClass: JwtGuard,
 		},
 		JwtStrategyService,
-		RegisterUsecase,
-		LoginUsecase,
-		LogoutUsecase,
-		RefreshSessionUsecase,
-		CreateJwtAccessTokenUsecase,
-		CreateJwtRefreshTokenUsecase,
-		SetJwtTokenUsecase,
-		CheckPasswordUsecase,
+		RegisterUseCase,
+		LoginUseCase,
+		LogoutUseCase,
+		RefreshSessionUseCase,
+		CreateJwtAccessTokenUseCase,
+		CreateJwtRefreshTokenUseCase,
+		SetJwtTokenUseCase,
+		CheckPasswordUseCase,
 	],
 	controllers: [AuthController],
 })
