@@ -4,11 +4,11 @@ import { BadRequestException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { NotFoundException } from '../../shared/exception/not-found.exception';
-import { HashPasswordUsecase } from '../../shared/usecase/hash-password.usecase';
+import { HashPasswordUseCase } from '../../shared/use-case/hash-password.use-case';
 
 import { UserFaker } from './factory/user.faker';
 import { UserEntity } from './user.entity';
-import { UserEntityRepository } from './user.repository';
+import { UserRepository } from './user.repository';
 
 const mockUuid = '00000000-0000-4000-0000-000000000000';
 const mockPasswordHashed = 'fJnUG@9?a8&a}YO/';
@@ -18,9 +18,9 @@ jest.mock('uuid', () => ({
 }));
 
 describe.skip('UserService', () => {
-	let userEntityRepository: UserEntityRepository;
+	let userEntityRepository: UserRepository;
 	let entityManager: jest.Mocked<Partial<EntityManager>>;
-	let hashPassword: jest.Mocked<Partial<HashPasswordUsecase>>;
+	let hashPassword: jest.Mocked<Partial<HashPasswordUseCase>>;
 
 	const date = new Date(Date.UTC(1955, 2, 24));
 	const expectedMockUser: EntityData<UserEntity> = {
@@ -50,13 +50,13 @@ describe.skip('UserService', () => {
 
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
-				UserEntityRepository,
+				UserRepository,
 				{ provide: EntityManager, useValue: entityManager },
-				{ provide: HashPasswordUsecase, useValue: hashPassword },
+				{ provide: HashPasswordUseCase, useValue: hashPassword },
 			],
 		}).compile();
 
-		userEntityRepository = module.get<UserEntityRepository>(UserEntityRepository);
+		userEntityRepository = module.get<UserRepository>(UserRepository);
 	});
 
 	it('should be defined', () => {

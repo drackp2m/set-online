@@ -92,7 +92,6 @@
 
 @mixin generate-responsive($rules) {
 	@each $rule, $properties in $rules {
-		@debug $rule;
 		.#{$rule} {
 			@each $property, $value in map.get($rules, $rule) {
 				#{$property}: $value;

@@ -7,8 +7,8 @@ import {
 } from '@mikro-orm/core';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 
-import { GenerateNowDateUsecase } from '../usecase/generate-now-date.usecase';
-import { GenerateUuidUsecase } from '../usecase/generate-uuid.usecase';
+import { GenerateNowDateUseCase } from '../use-case/generate-now-date.use-case';
+import { GenerateUuidUseCase } from '../use-case/generate-uuid.use-case';
 
 @Entity({ abstract: true })
 @ObjectType()
@@ -19,15 +19,15 @@ export abstract class BaseEntity<
 > extends MikroBaseEntity<T, PK, P> {
 	@PrimaryKey()
 	@Field((_type) => ID)
-	uuid: string = GenerateUuidUsecase.execute();
+	uuid: string = GenerateUuidUseCase.execute();
 
 	@Property()
 	@Field((_type) => Date)
-	createdAt: Date = GenerateNowDateUsecase.execute();
+	createdAt: Date = GenerateNowDateUseCase.execute();
 
-	@Property({ onUpdate: GenerateNowDateUsecase.execute })
+	@Property({ onUpdate: GenerateNowDateUseCase.execute })
 	@Field((_type) => Date)
-	updatedAt: Date = GenerateNowDateUsecase.execute();
+	updatedAt: Date = GenerateNowDateUseCase.execute();
 
 	constructor(entity?: EntityData<T>) {
 		super();

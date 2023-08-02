@@ -7,18 +7,18 @@ import { UnauthorizedException } from '../../../shared/exception/unauthorized-ex
 import { JsonWebToken } from '../definition/json-web-token.interface';
 import { JwtCookie } from '../definition/jwt-cookie.enum';
 
-import { CreateJwtAccessTokenUsecase } from './create-jwt-access-token.usecase';
-import { CreateJwtRefreshTokenUsecase } from './create-jwt-refresh-token.usecas';
-import { SetJwtTokenUsecase } from './set-jwt-token.usecase';
+import { CreateJwtAccessTokenUseCase } from './create-jwt-access-token.use-case';
+import { CreateJwtRefreshTokenUseCase } from './create-jwt-refresh-token.use-cas';
+import { SetJwtTokenUseCase } from './set-jwt-token.use-case';
 
 @Injectable({ scope: Scope.REQUEST })
-export class RefreshSessionUsecase {
+export class RefreshSessionUseCase {
 	constructor(
 		@Inject(REQUEST) private readonly request: Request,
 		private readonly jwtService: JwtService,
-		private readonly createAccessToken: CreateJwtAccessTokenUsecase,
-		private readonly createRefreshToken: CreateJwtRefreshTokenUsecase,
-		private readonly setJwtToken: SetJwtTokenUsecase,
+		private readonly createAccessToken: CreateJwtAccessTokenUseCase,
+		private readonly createRefreshToken: CreateJwtRefreshTokenUseCase,
+		private readonly setJwtToken: SetJwtTokenUseCase,
 	) {}
 
 	async execute(): Promise<void> {

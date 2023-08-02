@@ -2,7 +2,7 @@ import { EntityData } from '@mikro-orm/core';
 import { ValidationOptions, registerDecorator } from 'class-validator';
 
 import { UserEntity } from '../user.entity';
-import { IsUniqueUserPropRule } from '../validator/is-unique-user-prop.validator';
+import { IsUniqueUserPropRule } from '../validator/is-unique-user-prop';
 
 export const IsUniqueUserProp =
 	(prop: keyof EntityData<UserEntity>, options?: ValidationOptions) =>
