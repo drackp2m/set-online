@@ -7,14 +7,14 @@ import { ProtectTo } from '../auth/decorator/protect-to.decorator';
 import { UserRole } from './definition/user-role.enum';
 import { ValidateUserConstraintsInput } from './dto/input/validate-user-constraints.input';
 import { UserEntity } from './user.entity';
-import { UserEntityRepository } from './user.repository';
+import { UserRepository } from './user.repository';
 
 @Resolver(() => UserEntity)
 export class UserResolver {
 	private interval: NodeJS.Timer;
 
 	constructor(
-		private readonly userRepository: UserEntityRepository,
+		private readonly userRepository: UserRepository,
 		@Inject('PUB_SUB') private readonly pubSub: PubSub,
 	) {}
 

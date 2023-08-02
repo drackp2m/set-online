@@ -5,11 +5,13 @@ import { INestApplication, Logger, NestApplicationOptions, ValidationPipe } from
 import { ConfigurationService } from '../module/config/configuration.service';
 import { AppConfig } from '../module/config/types/app-config.type';
 
+import { HttpExceptionFilter } from './exception-filter';
+
 export class BootstrapHelper {
 	static nestApplicationOptions: NestApplicationOptions = {
 		httpsOptions: {
-			key: readFileSync('certs/set-selfsigned.key'),
-			cert: readFileSync('certs/set-selfsigned.crt'),
+			key: readFileSync('certs/set-self-signed.key'),
+			cert: readFileSync('certs/set-self-signed.crt'),
 		},
 	};
 
@@ -18,13 +20,15 @@ export class BootstrapHelper {
 		transform: true,
 	});
 
+	static exceptionsFilter = new HttpExceptionFilter();
+
 	static appConfig = (app: INestApplication): AppConfig => {
 		const configService = app.get(ConfigurationService);
 
 		return configService.app;
 	};
 
-	static logAppBoostrap = (app: INestApplication): void => {
+	static logAppBootstrap = (app: INestApplication): void => {
 		const appConfig = BootstrapHelper.appConfig(app);
 
 		const playgroundUrl = `${appConfig.protocol}://${appConfig.domain}:${appConfig.port}/graphql`;

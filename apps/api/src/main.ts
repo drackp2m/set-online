@@ -4,7 +4,7 @@ import { useContainer } from 'class-validator';
 import cookieParser from 'cookie-parser';
 
 import { AppModule } from './module/app/app.module';
-import { BootstrapHelper } from './shared/util/boostrap.helper';
+import { BootstrapHelper } from './shared/util/bootstrap.helper';
 
 async function bootstrap(): Promise<void> {
 	const app = await NestFactory.create(AppModule, BootstrapHelper.nestApplicationOptions);
@@ -15,10 +15,11 @@ async function bootstrap(): Promise<void> {
 
 	app.setGlobalPrefix(appConfig.prefix);
 	app.useGlobalPipes(BootstrapHelper.validationPipe);
-	app.enableCors({ origin: true, credentials: true, methods: 'GET,POST' });
+	app.useGlobalFilters(BootstrapHelper.exceptionsFilter);
+	app.enableCors({ origin: true, methods: 'GET,POST' });
 	app.use(cookieParser(appConfig.cookieSecret));
 
-	await app.listen(3000, '0.0.0.0', () => BootstrapHelper.logAppBoostrap(app));
+	await app.listen(3000, '0.0.0.0', () => BootstrapHelper.logAppBootstrap(app));
 }
 
 bootstrap().catch((e) => Logger.error(e.message, e));

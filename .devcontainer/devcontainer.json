@@ -34,7 +34,9 @@
 				"kumar-harsh.graphql-for-vscode",
 				"eamodio.gitlens",
 				"usernamehw.errorlens",
+				"streetsidesoftware.code-spell-checker",
 				"tomoki1207.selectline-statusbar",
+				"chamboug.js-auto-backticks",
 				"firefox-devtools.vscode-firefox-debug"
 			],
 			"settings": {

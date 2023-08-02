@@ -2,9 +2,13 @@ FROM node:20.2-alpine3.17 AS deps
 
 RUN apk add --no-cache build-base python3
 
+ARG USER_GID
 ARG USER_UID
 
-RUN if [ -n "$USER_UID" ] && [ "$USER_UID" != "1000" ]; then \
+RUN if [ -n "$USER_GID" ] && [ "$USER_GID" != "1000" ]; then \
+			sed -i "s/node:x:1000:1000:/node:x:1000:$USER_GID:/" /etc/passwd; \
+		fi && \
+		if [ -n "$USER_UID" ] && [ "$USER_UID" != "1000" ]; then \
 			sed -i "s/node:x:1000:/node:x:$USER_UID:/" /etc/passwd; \
 		fi
 

@@ -4,12 +4,12 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import { BaseEntity } from '../../shared/util/base.entity';
 
 import { UserRole } from './definition/user-role.enum';
-import { UserEntityRepository } from './user.repository';
+import { UserRepository } from './user.repository';
 
-@Entity({ tableName: 'users', customRepository: () => UserEntityRepository })
+@Entity({ tableName: 'users', customRepository: () => UserRepository })
 @ObjectType({ description: 'user' })
 export class UserEntity extends BaseEntity<UserEntity> {
-	[EntityRepositoryType]: UserEntityRepository;
+	[EntityRepositoryType]: UserRepository;
 
 	@Property({ unique: true })
 	@Field()
