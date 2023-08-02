@@ -4,25 +4,25 @@ import { Request } from 'express';
 
 import { NotFoundException } from '../../../shared/exception/not-found.exception';
 import { UnauthorizedException } from '../../../shared/exception/unauthorized-exception.exception';
-import { CheckPasswordUsecase } from '../../../shared/usecase/check-password.usecase';
+import { CheckPasswordUseCase } from '../../../shared/use-case/check-password.use-case';
 import { UserFaker } from '../../user/factory/user.faker';
-import { UserEntityRepository } from '../../user/user.repository';
+import { UserRepository } from '../../user/user.repository';
 
-import { CreateJwtAccessTokenUsecase } from './create-jwt-access-token.usecase';
-import { CreateJwtRefreshTokenUsecase } from './create-jwt-refresh-token.usecas';
-import { LoginUsecase } from './login.usecase';
-import { SetJwtTokenUsecase } from './set-jwt-token.usecase';
+import { CreateJwtAccessTokenUseCase } from './create-jwt-access-token.use-case';
+import { CreateJwtRefreshTokenUseCase } from './create-jwt-refresh-token.use-cas';
+import { LoginUseCase } from './login.use-case';
+import { SetJwtTokenUseCase } from './set-jwt-token.use-case';
 
 const mockUuid = '00000000-0000-4000-0000-000000000000';
 
-describe('LoginUsecase', () => {
-	let usecase: LoginUsecase;
+describe('LoginUseCase', () => {
+	let useCase: LoginUseCase;
 	let request: jest.Mocked<Partial<Request>>;
-	let userEntityRepository: jest.Mocked<Partial<UserEntityRepository>>;
-	let checkPassword: jest.Mocked<Partial<CheckPasswordUsecase>>;
-	let createAccessToken: jest.Mocked<Partial<CreateJwtAccessTokenUsecase>>;
-	let createRefreshToken: jest.Mocked<Partial<CreateJwtRefreshTokenUsecase>>;
-	let setToken: jest.Mocked<Partial<SetJwtTokenUsecase>>;
+	let userEntityRepository: jest.Mocked<Partial<UserRepository>>;
+	let checkPassword: jest.Mocked<Partial<CheckPasswordUseCase>>;
+	let createAccessToken: jest.Mocked<Partial<CreateJwtAccessTokenUseCase>>;
+	let createRefreshToken: jest.Mocked<Partial<CreateJwtRefreshTokenUseCase>>;
+	let setToken: jest.Mocked<Partial<SetJwtTokenUseCase>>;
 
 	const userFaker = new UserFaker();
 	const mockUser = userFaker.makeOne({ uuid: mockUuid }, { createdFrom: '2010' });
@@ -63,21 +63,21 @@ describe('LoginUsecase', () => {
 
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
-				LoginUsecase,
+				LoginUseCase,
 				{ provide: REQUEST, useValue: request },
-				{ provide: UserEntityRepository, useValue: userEntityRepository },
-				{ provide: CheckPasswordUsecase, useValue: checkPassword },
-				{ provide: CreateJwtAccessTokenUsecase, useValue: createAccessToken },
-				{ provide: CreateJwtRefreshTokenUsecase, useValue: createRefreshToken },
-				{ provide: SetJwtTokenUsecase, useValue: setToken },
+				{ provide: UserRepository, useValue: userEntityRepository },
+				{ provide: CheckPasswordUseCase, useValue: checkPassword },
+				{ provide: CreateJwtAccessTokenUseCase, useValue: createAccessToken },
+				{ provide: CreateJwtRefreshTokenUseCase, useValue: createRefreshToken },
+				{ provide: SetJwtTokenUseCase, useValue: setToken },
 			],
 		}).compile();
 
-		usecase = await module.resolve<LoginUsecase>(LoginUsecase);
+		useCase = await module.resolve<LoginUseCase>(LoginUseCase);
 	});
 
 	it('should be defined', () => {
-		expect(usecase).toBeDefined();
+		expect(useCase).toBeDefined();
 	});
 
 	describe('execute', () => {
@@ -86,7 +86,7 @@ describe('LoginUsecase', () => {
 				throw new NotFoundException();
 			});
 
-			const tokenModel = usecase.execute({ username: 'user', password: 'pass' });
+			const tokenModel = useCase.execute({ username: 'user', password: 'pass' });
 
 			await expect(tokenModel).rejects.toThrow(NotFoundException);
 
@@ -98,7 +98,7 @@ describe('LoginUsecase', () => {
 			userEntityRepository.getOne.mockResolvedValueOnce(mockUser);
 			checkPassword.execute.mockResolvedValueOnce(false);
 
-			const tokenModel = usecase.execute({ username: 'user', password: 'pass' });
+			const tokenModel = useCase.execute({ username: 'user', password: 'pass' });
 
 			await expect(tokenModel).rejects.toThrow(UnauthorizedException);
 
@@ -112,7 +112,7 @@ describe('LoginUsecase', () => {
 			createAccessToken.execute.mockReturnValueOnce(mockJwtAccessToken);
 			createRefreshToken.execute.mockReturnValueOnce(mockJwtRefreshToken);
 
-			const result = await usecase.execute({
+			const result = await useCase.execute({
 				username: 'user',
 				password: 'pass',
 			});

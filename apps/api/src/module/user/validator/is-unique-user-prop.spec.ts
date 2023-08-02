@@ -4,15 +4,15 @@ import { ValidationArguments } from 'class-validator';
 import { NotFoundException } from '../../../shared/exception/not-found.exception';
 import { UserFaker } from '../factory/user.faker';
 import { UserEntity } from '../user.entity';
-import { UserEntityRepository } from '../user.repository';
+import { UserRepository } from '../user.repository';
 
-import { IsUniqueUserPropRule } from './is-unique-user-prop.validator';
+import { IsUniqueUserPropRule } from './is-unique-user-prop';
 
 describe('IsUniqueUserPropRule', () => {
 	const userFaker = new UserFaker();
 
 	let validator: IsUniqueUserPropRule;
-	let userEntityRepository: jest.Mocked<Partial<UserEntityRepository>>;
+	let userEntityRepository: jest.Mocked<Partial<UserRepository>>;
 
 	const mockUuid = '00000000-0000-4000-0000-000000000000';
 	const mockUser = userFaker.makeOne({ uuid: mockUuid }, { createdFrom: '2010' }) as UserEntity;
@@ -25,7 +25,7 @@ describe('IsUniqueUserPropRule', () => {
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
 				IsUniqueUserPropRule,
-				{ provide: UserEntityRepository, useValue: userEntityRepository },
+				{ provide: UserRepository, useValue: userEntityRepository },
 			],
 		}).compile();
 

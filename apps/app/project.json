@@ -69,8 +69,8 @@
 					"host": "0.0.0.0",
 					"disableHostCheck": true,
 					"ssl": true,
-					"sslKey": "certs/set-selfsigned.key",
-					"sslCert": "certs/set-selfsigned.crt"
+					"sslKey": "certs/set-self-signed.key",
+					"sslCert": "certs/set-self-signed.crt"
 				}
 			},
 			"defaultConfiguration": "development",

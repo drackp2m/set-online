@@ -4,7 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigurationService } from '../../../shared/module/config/configuration.service';
 
 @Injectable()
-export class CreateJwtAccessTokenUsecase {
+export class CreateJwtAccessTokenUseCase {
 	constructor(
 		private readonly jwtService: JwtService,
 		private readonly configurationService: ConfigurationService,
