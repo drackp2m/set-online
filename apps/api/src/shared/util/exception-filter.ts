@@ -13,7 +13,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
 			const request = ctx.getRequest<Request>();
 			const status = exception.getStatus();
 			const exceptionResponse = exception.getResponse();
-			console.log(exception);
 
 			if (exception instanceof BaseException) {
 				response.status(status).json({
@@ -26,7 +25,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
 					ip: request.ip,
 				});
 			} else if (exceptionResponse instanceof Object) {
-				console.log('is object');
 				response.status(status).json({ ...exceptionResponse, ip: request.ip });
 			}
 		} else {

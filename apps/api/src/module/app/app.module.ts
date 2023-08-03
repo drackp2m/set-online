@@ -14,7 +14,6 @@ import { jwtConfig } from '../../shared/module/config/registers/jwt.config';
 import { GqlThrottlerModule } from '../../shared/module/gql-throttler/gql-throttler.module';
 import { PubSubModule } from '../../shared/module/pub-sub/pub-sub-module';
 import { AuthModule } from '../auth/auth.module';
-import { UserModule } from '../user/user.module';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -37,9 +36,8 @@ import { AppService } from './app.service';
 		PubSubModule,
 		GqlThrottlerModule,
 		AuthModule,
-		UserModule,
 	],
-	providers: [AppService, ConfigurationService],
+	providers: [AppService],
 	controllers: [AppController],
 })
 export class AppModule {}

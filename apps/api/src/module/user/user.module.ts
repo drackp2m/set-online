@@ -12,5 +12,6 @@ import { IsUniqueUserPropRule } from './validator/is-unique-user-prop';
 @Module({
 	imports: [forwardRef(() => AuthModule), MikroOrmModule.forFeature([UserEntity]), PubSubModule],
 	providers: [UserResolver, IsUniqueUserPropRule, HashPasswordUseCase],
+	exports: [MikroOrmModule],
 })
 export class UserModule {}

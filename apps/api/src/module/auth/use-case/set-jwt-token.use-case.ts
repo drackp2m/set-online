@@ -15,8 +15,8 @@ export class SetJwtTokenUseCase {
 
 		// ToDo => add expiration time to cookies
 		this.request.res.cookie(tokenType, tokenValue, {
-			secure: true,
 			signed: true,
+			secure: true,
 			httpOnly: true,
 			sameSite: true,
 			path,
