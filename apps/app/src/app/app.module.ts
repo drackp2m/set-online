@@ -20,7 +20,7 @@ import { APP_ROUTES } from './app.routes';
 	declarations: [AppComponent],
 	imports: [
 		RouterOutlet,
-		RouterModule.forRoot(APP_ROUTES),
+		RouterModule.forRoot(APP_ROUTES, { useHash: true }),
 		BrowserModule,
 		HttpClientModule,
 		ApolloModule,
