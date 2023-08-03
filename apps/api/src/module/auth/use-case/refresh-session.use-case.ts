@@ -8,7 +8,7 @@ import { JsonWebToken } from '../definition/json-web-token.interface';
 import { JwtCookie } from '../definition/jwt-cookie.enum';
 
 import { CreateJwtAccessTokenUseCase } from './create-jwt-access-token.use-case';
-import { CreateJwtRefreshTokenUseCase } from './create-jwt-refresh-token.use-cas';
+import { CreateJwtRefreshTokenUseCase } from './create-jwt-refresh-token.use-case';
 import { SetJwtTokenUseCase } from './set-jwt-token.use-case';
 
 @Injectable({ scope: Scope.REQUEST })

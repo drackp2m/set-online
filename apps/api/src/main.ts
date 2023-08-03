@@ -16,7 +16,7 @@ async function bootstrap(): Promise<void> {
 	app.setGlobalPrefix(appConfig.prefix);
 	app.useGlobalPipes(BootstrapHelper.validationPipe);
 	app.useGlobalFilters(BootstrapHelper.exceptionsFilter);
-	app.enableCors({ origin: true, methods: 'GET,POST' });
+	app.enableCors({ credentials: true, origin: true, methods: 'GET,POST' });
 	app.use(cookieParser(appConfig.cookieSecret));
 
 	await app.listen(3000, '0.0.0.0', () => BootstrapHelper.logAppBootstrap(app));
