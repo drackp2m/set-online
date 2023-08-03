@@ -2,7 +2,9 @@ import { ArgumentsHost, Catch, ExceptionFilter, HttpException } from '@nestjs/co
 import { GqlArgumentsHost } from '@nestjs/graphql';
 import { Request, Response } from 'express';
 
-@Catch(HttpException)
+import { BaseException } from '../exception/base.exception';
+
+@Catch(HttpException, BaseException)
 export class HttpExceptionFilter implements ExceptionFilter {
 	catch(exception: HttpException, host: ArgumentsHost) {
 		if (host.getType() === 'http') {
@@ -11,8 +13,20 @@ export class HttpExceptionFilter implements ExceptionFilter {
 			const request = ctx.getRequest<Request>();
 			const status = exception.getStatus();
 			const exceptionResponse = exception.getResponse();
+			console.log(exception);
 
-			if (exceptionResponse instanceof Object) {
+			if (exception instanceof BaseException) {
+				response.status(status).json({
+					message: [exception.getResponse()],
+					error: exception.stack.substring(
+						exception.stack.indexOf(': ') + 2,
+						exception.stack.indexOf('\n'),
+					),
+					statusCode: exception.getStatus(),
+					ip: request.ip,
+				});
+			} else if (exceptionResponse instanceof Object) {
+				console.log('is object');
 				response.status(status).json({ ...exceptionResponse, ip: request.ip });
 			}
 		} else {
