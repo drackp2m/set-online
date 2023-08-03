@@ -2,6 +2,7 @@ import { Inject, Injectable, Scope } from '@nestjs/common';
 import { REQUEST } from '@nestjs/core';
 import { Request } from 'express';
 
+import { getEnumKey } from '../../../shared/util/get-enum-key.util';
 import { JwtCookie } from '../definition/jwt-cookie.enum';
 import { JwtEndpoints } from '../definition/jwt-endpoints.enum';
 
@@ -15,13 +16,15 @@ export class LogoutUseCase {
 	}
 
 	private clearCookie(tokenType: JwtCookie): void {
-		const path = JwtEndpoints[tokenType];
+		const path = JwtEndpoints[getEnumKey(JwtCookie, tokenType)];
 
 		this.request.res.clearCookie(tokenType, {
+			signed: true,
 			secure: true,
 			httpOnly: true,
 			sameSite: true,
 			path,
+			domain: 'localhost',
 		});
 	}
 }

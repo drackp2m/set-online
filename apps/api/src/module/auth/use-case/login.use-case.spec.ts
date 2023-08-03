@@ -9,7 +9,7 @@ import { UserFaker } from '../../user/factory/user.faker';
 import { UserRepository } from '../../user/user.repository';
 
 import { CreateJwtAccessTokenUseCase } from './create-jwt-access-token.use-case';
-import { CreateJwtRefreshTokenUseCase } from './create-jwt-refresh-token.use-cas';
+import { CreateJwtRefreshTokenUseCase } from './create-jwt-refresh-token.use-case';
 import { LoginUseCase } from './login.use-case';
 import { SetJwtTokenUseCase } from './set-jwt-token.use-case';
 
