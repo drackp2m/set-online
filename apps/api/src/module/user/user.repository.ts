@@ -7,6 +7,6 @@ import { UserEntity } from './user.entity';
 @Injectable()
 export class UserRepository extends BaseRepository<UserEntity> {
 	findActiveUsers(): UserEntity[] {
-		throw new Error('Method not implemented.');
+		return [];
 	}
 }

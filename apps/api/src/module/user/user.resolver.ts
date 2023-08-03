@@ -14,8 +14,8 @@ export class UserResolver {
 	private interval: NodeJS.Timer;
 
 	constructor(
-		private readonly userRepository: UserRepository,
 		@Inject('PUB_SUB') private readonly pubSub: PubSub,
+		private readonly userRepository: UserRepository,
 	) {}
 
 	@Query(() => Boolean, {
