@@ -13,7 +13,7 @@ export class AppController {
 	) {}
 
 	@Get('hello')
-	async getData(): Promise<Message> {
+	getData(): Message {
 		this.pubSub.publish('getManySubscription', 'Hello from hello');
 
 		return this.appService.getData();
