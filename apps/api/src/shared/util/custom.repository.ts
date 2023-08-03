@@ -10,7 +10,8 @@ export abstract class BaseRepository<T extends AnyEntity<T>> extends EntityRepos
 		const user = await this.entityManager.findOne(this.entityName, query);
 
 		if (!user) {
-			throw new NotFoundException('user not exists');
+			const entityName = this.entityName.toString().replace('Entity', '').toLocaleLowerCase();
+			throw new NotFoundException('not exists', entityName);
 		}
 
 		return user;
