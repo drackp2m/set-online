@@ -18,10 +18,13 @@ import { AuthModule } from '../auth/auth.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
+// const isTestIntegrationEnv = 'test-int' === process.env.NODE_ENV;
+
 @Module({
 	imports: [
 		ConfigModule.forRoot({
 			isGlobal: true,
+			// envFilePath: isTestIntegrationEnv ? 'apps/api/.env.test-int' : '.env',
 			load: [appConfig, databaseConfig, jwtConfig],
 		}),
 		MikroOrmModule.forRootAsync({
