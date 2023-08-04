@@ -6,7 +6,7 @@ networks:
 
 services:
   set-db:
-    image: postgres:15-alpine
+    image: postgres:15.3-alpine3.18
     container_name: set-db
     hostname: set-db
     networks:
@@ -45,7 +45,7 @@ services:
       MIKRO_ORM_CLI_USE_TS_NODE: 1
       MIKRO_ORM_CLI_TS_CONFIG_PATH: apps/api/tsconfig.app.json
       MIKRO_ORM_CLI: apps/api/src/shared/module/config/mikro-orm.config.ts
-      NODE_TLS_REJECT_UNAUTHORIZED: 0
+      NODE_TLS_REJECT_UNAUTHORIZED: 1
       PATH: $PATH:/usr/src/app/node_modules/.bin
       TZ: Europe/Madrid
     depends_on:

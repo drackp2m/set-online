@@ -1,17 +1,24 @@
 import { registerAs } from '@nestjs/config';
+import { config as dotenvConfigLoader } from 'dotenv';
 
 import { validate } from '../../../environment/env.validation';
 import { DatabaseConfig } from '../types/database-config.type';
 
-const config = validate(process.env);
+const isTestIntegrationEnv = ['test-int', 'test'].includes(process.env.NODE_ENV);
 
-const isProduction = config.NODE_ENV === 'production';
+const dotenvConfig = dotenvConfigLoader({
+	path: isTestIntegrationEnv ? 'apps/api/.env.test-int' : '.env',
+});
+
+const config = validate(dotenvConfig.parsed);
+
+// const config = validate(process.env);
 
 export const databaseConfig = registerAs(
 	'database',
 	(): DatabaseConfig => ({
 		host: config.DB_HOST,
-		port: isProduction ? config.DB_PORT : 5432,
+		port: config.DB_PORT,
 		dbName: config.DB_NAME,
 		user: config.DB_USER,
 		password: config.DB_PASS,
