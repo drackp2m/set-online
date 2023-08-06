@@ -4,7 +4,7 @@ import { NotFoundException } from '../exception/not-found.exception';
 
 import { BaseEntity } from './base.entity';
 
-export abstract class BaseRepository<T extends BaseEntity<T>> {
+export class BaseRepository<T extends BaseEntity<T>> {
 	protected readonly repository: EntityRepository<T> = new EntityRepository<T>(
 		this.entityManager,
 		this.entityName,
@@ -48,5 +48,9 @@ export abstract class BaseRepository<T extends BaseEntity<T>> {
 
 	async delete(entity: T): Promise<void> {
 		await this.repository.nativeDelete(entity);
+	}
+
+	async deleteMany(query: FilterQuery<T>): Promise<void> {
+		await this.repository.nativeDelete(query);
 	}
 }
