@@ -19,14 +19,6 @@
 			"url": "https://localhost:4200",
 			"pathMappings": [
 				{
-					"url": "webpack:///apps",
-					"path": "${workspaceFolder}/apps"
-				},
-				{
-					"url": "webpack:///apps",
-					"path": "${workspaceFolder}/apps"
-				},
-				{
 					"url": "webpack:///apps/app",
 					"path": "${workspaceFolder}/apps/app"
 				}

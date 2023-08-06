@@ -42,5 +42,6 @@ import { AppService } from './app.service';
 	],
 	providers: [AppService],
 	controllers: [AppController],
+	exports: [MikroOrmModule],
 })
 export class AppModule {}
