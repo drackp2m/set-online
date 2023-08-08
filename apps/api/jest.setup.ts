@@ -1,5 +1,4 @@
 import { EntityManager, MikroORM } from '@mikro-orm/postgresql';
-// import { config as dotenvConfigLoader } from 'dotenv';
 
 import dbConfig from './src/shared/module/config/mikro-orm.config';
 

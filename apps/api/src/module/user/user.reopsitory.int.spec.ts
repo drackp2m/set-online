@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { mock } from 'jest-mock-extended';
 
 import { NotFoundException } from '../../shared/exception/not-found.exception';
 import { AppModule } from '../app/app.module';
@@ -10,7 +11,8 @@ import { UserRepository } from './user.repository';
 
 describe('UserRepository', () => {
 	let userEntityRepository: UserRepository;
-	let authModule: jest.Mocked<Partial<AuthModule>>;
+
+	const authModule = mock<AuthModule>();
 
 	beforeAll(async () => {
 		const module: TestingModule = await Test.createTestingModule({

@@ -1,5 +1,6 @@
 import { ExecutionContext } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import { mock } from 'jest-mock-extended';
 
 import { UnauthorizedException } from '../../../shared/exception/unauthorized-exception.exception';
 import { UserFaker } from '../../user/factory/user.faker';
@@ -9,19 +10,12 @@ import { JwtGuard } from './jwt.guard';
 
 describe('JwtGuard', () => {
 	let guard: JwtGuard;
-	let executionContext: jest.Mocked<Partial<ExecutionContext>>;
+	const executionContext = mock<ExecutionContext>();
 
 	const userFaker = new UserFaker();
 	const mockUser = userFaker.makeOne();
 
 	beforeAll(async () => {
-		executionContext = {
-			getHandler: jest.fn(),
-			getType: jest.fn().mockReturnValueOnce('graphql'),
-			getArgs: jest.fn(),
-			getClass: jest.fn(),
-		};
-
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [JwtGuard],
 		}).compile();

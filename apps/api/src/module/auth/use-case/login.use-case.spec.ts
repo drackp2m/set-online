@@ -1,6 +1,7 @@
 import { REQUEST } from '@nestjs/core';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Request } from 'express';
+import { mock } from 'jest-mock-extended';
 
 import { NotFoundException } from '../../../shared/exception/not-found.exception';
 import { UnauthorizedException } from '../../../shared/exception/unauthorized-exception.exception';
@@ -17,12 +18,12 @@ const mockUuid = '00000000-0000-4000-0000-000000000000';
 
 describe('LoginUseCase', () => {
 	let useCase: LoginUseCase;
-	let request: jest.Mocked<Partial<Request>>;
-	let userEntityRepository: jest.Mocked<Partial<UserRepository>>;
-	let checkPassword: jest.Mocked<Partial<CheckPasswordUseCase>>;
-	let createAccessToken: jest.Mocked<Partial<CreateJwtAccessTokenUseCase>>;
-	let createRefreshToken: jest.Mocked<Partial<CreateJwtRefreshTokenUseCase>>;
-	let setToken: jest.Mocked<Partial<SetJwtTokenUseCase>>;
+	const request = mock<Request>();
+	const userEntityRepository = mock<UserRepository>();
+	const checkPassword = mock<CheckPasswordUseCase>();
+	const createAccessToken = mock<CreateJwtAccessTokenUseCase>();
+	const createRefreshToken = mock<CreateJwtRefreshTokenUseCase>();
+	const setToken = mock<SetJwtTokenUseCase>();
 
 	const userFaker = new UserFaker();
 	const mockUser = userFaker.makeOne({ uuid: mockUuid }, { createdFrom: '2010' });
@@ -32,35 +33,6 @@ describe('LoginUseCase', () => {
 		'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODc5MDQ1NDYsIm5iZiI6MTY4NzkwNDYwNiwiZXhwIjoxNjg5MjAwNTQ2LCJhdWQiOiJzZXQtb25saW5lLXJlZnJlc2gtdG9rZW4iLCJpc3MiOiJzZXQtb25saW5lIiwic3ViIjoiN2RjZTZhMzQtOTdlNy00ZTgzLTlhZDMtNDNhMzI3YjhiNmYxIiwianRpIjoidXVpZGdlbiJ9.Ri1I8tWENO8RhV45ySdlTiSEwBlDXstIvObhi15RqkR9QS8BotRTKzzYrPuEDtbKx60dtr-S5dNNZJRpGSje5g';
 
 	beforeAll(async () => {
-		request = {
-			res: {
-				cookie: jest.fn(),
-				status: () => ({
-					send: jest.fn(),
-				}),
-			} as unknown as Request['res'],
-		};
-
-		userEntityRepository = {
-			getOne: jest.fn(),
-		};
-
-		checkPassword = {
-			execute: jest.fn(),
-		};
-
-		createAccessToken = {
-			execute: jest.fn(),
-		};
-
-		createRefreshToken = {
-			execute: jest.fn(),
-		};
-
-		setToken = {
-			execute: jest.fn(),
-		};
-
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
 				LoginUseCase,
