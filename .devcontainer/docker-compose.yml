@@ -13,8 +13,8 @@ services:
       - ~/.gnupg/private-keys-v1.d:/home/node/.gnupg/private-keys-v1.d:ro
       # - ~/.gitconfig:/etc/gitconfig:ro
       - ~/.gitconfig:/home/node/.gitconfig:ro
-      # - .docker/zsh/config:/home/node/.config/zsh
-      # - .docker/zsh/local:/home/node/.local/share/zsh
+      - .docker/zsh/config:/home/node/.config/zsh
+      - .docker/zsh/local:/home/node/.local/share/zsh
       # - /home/node/.local/share/zsh/plugins
       - .docker/zsh/config/.zshrc:/home/node/.zshrc
       - .docker/zsh/config/.p10k.zsh:/home/node/.p10k.zsh
