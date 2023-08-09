@@ -6,15 +6,13 @@ networks:
 
 services:
   set-db-test:
-    image: postgres:15.3-alpine3.18
+    image: postgres:15.3-alpine3.17
     container_name: set-db-test
     hostname: set-db-test
     networks:
       - set-network
     ports:
       - ${DB_PORT}:5432
-    volumes:
-      - .pgdata-test:/var/lib/postgresql/data
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_DB: ${DB_NAME}

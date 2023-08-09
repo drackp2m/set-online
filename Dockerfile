@@ -49,7 +49,6 @@ RUN mkdir /home/node/.gnupg \
 			&& chmod 700 /home/node/.gnupg
 
 RUN mkdir -p ~/.local/share/zsh/plugins \
-			&& ln -s /usr/share/zsh/plugins/powerlevel10k ~/.local/share/zsh/plugins/ \
-			&& mkdir -p ~/.config/zsh
+			&& ln -s /usr/share/zsh/plugins/powerlevel10k ~/.local/share/zsh/plugins/
 
 CMD yarn start
