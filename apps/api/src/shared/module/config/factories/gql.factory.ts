@@ -7,10 +7,10 @@ import { ConfigurationService } from '../configuration.service';
 
 @Injectable()
 export class GqlFactory implements GqlOptionsFactory {
-	constructor(private readonly config: ConfigurationService) {}
+	constructor(private readonly configurationService: ConfigurationService) {}
 
 	createGqlOptions(): ApolloDriverConfig {
-		const isProduction = this.config.app.environment === 'production';
+		const isProduction = this.configurationService.app.environment === 'production';
 
 		return {
 			driver: ApolloDriver,

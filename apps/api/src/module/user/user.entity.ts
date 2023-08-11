@@ -1,16 +1,14 @@
-import { Entity, EntityRepositoryType, Enum, Property } from '@mikro-orm/core';
+import { Entity, Enum, Property } from '@mikro-orm/core';
 import { Field, ObjectType } from '@nestjs/graphql';
 
-import { BaseEntity } from '../../shared/util/base.entity';
+import { CustomBaseEntity } from '../../shared/util/base.entity';
 
 import { UserRole } from './definition/user-role.enum';
 import { UserRepository } from './user.repository';
 
 @Entity({ tableName: 'users', customRepository: () => UserRepository })
 @ObjectType({ description: 'user' })
-export class UserEntity extends BaseEntity<UserEntity> {
-	[EntityRepositoryType]: UserRepository;
-
+export class UserEntity extends CustomBaseEntity<UserEntity> {
 	@Property({ unique: true })
 	@Field()
 	username!: string;
