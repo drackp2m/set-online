@@ -1,4 +1,4 @@
-FROM node:20.2-alpine3.17 AS deps
+FROM node:20.2-alpine3.18 AS deps
 
 RUN apk add --no-cache build-base python3
 
@@ -49,7 +49,6 @@ RUN mkdir /home/node/.gnupg \
 			&& chmod 700 /home/node/.gnupg
 
 RUN mkdir -p ~/.local/share/zsh/plugins \
-			&& ln -s /usr/share/zsh/plugins/powerlevel10k ~/.local/share/zsh/plugins/ \
-			&& mkdir -p ~/.config/zsh
+			&& ln -s /usr/share/zsh/plugins/powerlevel10k ~/.local/share/zsh/plugins/
 
 CMD yarn start

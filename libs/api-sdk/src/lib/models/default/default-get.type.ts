@@ -5,4 +5,16 @@ export type DefaultGet = {
 		payload: [];
 		response: Message;
 	};
+	'/hello2': {
+		payload: [];
+		response: Message;
+	};
+	'/hello3': {
+		payload: [];
+		response: Message;
+	};
+	'/hello4': {
+		payload: [];
+		response: Message;
+	};
 };
