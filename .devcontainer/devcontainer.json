@@ -20,6 +20,8 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
+				"GitHub.copilot",
+				"GitHub.copilot-chat",
 				"nrwl.angular-console",
 				"editorconfig.editorconfig",
 				"mrmlnc.vscode-scss",

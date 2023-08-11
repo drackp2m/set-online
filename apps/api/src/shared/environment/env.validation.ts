@@ -82,13 +82,13 @@ class EnvironmentVariables {
 	JWT_SECRET: string;
 }
 
-export function validate(config: Record<string, unknown>) {
+export function validate(config: Record<string, unknown>): EnvironmentVariables {
 	const validatedConfig = plainToInstance(EnvironmentVariables, config, {
 		enableImplicitConversion: true,
 	});
 
 	const errors = validateSync(validatedConfig, {
-		skipMissingProperties: false,
+		skipMissingProperties: true,
 	});
 
 	if (errors.length > 0) {

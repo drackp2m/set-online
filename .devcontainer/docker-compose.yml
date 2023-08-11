@@ -8,10 +8,12 @@ services:
         USER_GID: 20
         USER_UID: 501
     volumes:
-      - ~/.ssh:/home/node/.ssh
+      # - .docker/home/:/home/node/
+      - ~/.ssh:/home/node/.ssh:ro
       - ~/.gnupg/pubring.kbx:/home/node/.gnupg/pubring.kbx:ro
       - ~/.gnupg/private-keys-v1.d:/home/node/.gnupg/private-keys-v1.d:ro
-      - ~/.gitconfig:/etc/gitconfig:ro
-      - .docker/zsh/config:/home/node/.config/zsh
-      - .docker/zsh/local:/home/node/.local/share/zsh
-      - /home/node/.local/share/zsh/plugins
+      - ~/.gitconfig:/home/node/.gitconfig
+      - .docker/.p10k.zsh:/home/node/.p10k.zsh
+      - .docker/.zsh_history:/home/node/.zsh_history
+      - .docker/.zshrc:/home/node/.zshrc
+      - .docker/zsh-syntax-highlighting:/home/node/zsh-syntax-highlighting

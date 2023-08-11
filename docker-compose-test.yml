@@ -1,0 +1,24 @@
+version: '3.8'
+
+networks:
+  set-network:
+    name: set-network
+
+services:
+  set-db-test:
+    image: postgres:15.3-alpine3.17
+    container_name: set-db-test
+    hostname: set-db-test
+    networks:
+      - set-network
+    ports:
+      - ${DB_PORT}:5432
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      TZ: Europe/Madrid
+      PGTZ: Europe/Madrid
+    restart: unless-stopped
+    tty: true

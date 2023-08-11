@@ -1,7 +1,8 @@
 import { ExecutionContext } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import { mock } from 'jest-mock-extended';
 
-import { ForbiddenException } from '../../../shared/exception/forbiden.exception';
+import { ForbiddenException } from '../../../shared/exception/forbidden.exception';
 import { UnauthorizedException } from '../../../shared/exception/unauthorized-exception.exception';
 import { UserRole } from '../../user/definition/user-role.enum';
 import { UserFaker } from '../../user/factory/user.faker';
@@ -10,22 +11,14 @@ import { UserEntity } from '../../user/user.entity';
 import { RolesGuard } from './roles.guard';
 
 describe('RolesGuard', () => {
-	type NewType = RolesGuard;
+	let guard: RolesGuard;
 
-	let guard: NewType;
-	let executionContext: jest.Mocked<Partial<ExecutionContext>>;
+	const executionContext = mock<ExecutionContext>();
 
-	const handler = () => undefined;
+	const handler = () => 22;
 	const userFaker = new UserFaker();
 
 	beforeAll(async () => {
-		executionContext = {
-			getHandler: jest.fn(),
-			getType: jest.fn().mockReturnValueOnce('graphql'),
-			getArgs: jest.fn(),
-			getClass: jest.fn(),
-		};
-
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [RolesGuard],
 		}).compile();
