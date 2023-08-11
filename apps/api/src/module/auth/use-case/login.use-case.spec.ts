@@ -74,30 +74,30 @@ describe('LoginUseCase', () => {
 
 		it('should return TokenModel when JwtService.sign return a token', async () => {
 			userEntityRepository.getOne.mockResolvedValueOnce(
-				new UserEntity({ uuid: 'a1b2', password: 's4T0' }),
+				new UserEntity({ uuid: 'user-uuid', password: 'hashed-password' }),
 			);
 			checkPassword.execute.mockResolvedValueOnce(true);
 			createAccessToken.execute.mockReturnValueOnce('access-token');
 			createRefreshToken.execute.mockReturnValueOnce('refresh-token');
 
 			const result = await useCase.execute({
-				username: 'user',
-				password: 'pass',
+				username: 'drackp2m',
+				password: 'plaintext-password',
 			});
 
 			expect(result).toStrictEqual(undefined);
 
 			expect(userEntityRepository.getOne).toBeCalledTimes(1);
-			expect(userEntityRepository.getOne).toBeCalledWith({ username: 'user' });
+			expect(userEntityRepository.getOne).toBeCalledWith({ username: 'drackp2m' });
 
 			expect(checkPassword.execute).toBeCalledTimes(1);
-			expect(checkPassword.execute).toBeCalledWith('pass', 's4T0');
+			expect(checkPassword.execute).toBeCalledWith('plaintext-password', 'hashed-password');
 
 			expect(createAccessToken.execute).toBeCalledTimes(1);
-			expect(createAccessToken.execute).toBeCalledWith('a1b2');
+			expect(createAccessToken.execute).toBeCalledWith('user-uuid');
 
 			expect(createRefreshToken.execute).toBeCalledTimes(1);
-			expect(createRefreshToken.execute).toBeCalledWith('a1b2');
+			expect(createRefreshToken.execute).toBeCalledWith('user-uuid');
 
 			expect(setToken.execute).toBeCalledTimes(2);
 			expect(setToken.execute).toHaveBeenNthCalledWith(1, 'access-token', JwtCookie.access);

@@ -12,14 +12,14 @@ import { JwtCookie } from '../definition/jwt-cookie.enum';
 @Injectable()
 export class JwtStrategyService extends PassportStrategy(Strategy) {
 	constructor(
-		private readonly configService: ConfigurationService,
+		private readonly configurationService: ConfigurationService,
 		private readonly userRepository: UserRepository,
 	) {
 		super({
 			jwtFromRequest: ExtractJwt.fromExtractors([
 				(req: Request) => req.signedCookies?.[JwtCookie.access],
 			]),
-			secretOrKey: configService.jwt.secret,
+			secretOrKey: configurationService.jwt.secret,
 			ignoreExpiration: false,
 		} as StrategyOptions);
 	}
