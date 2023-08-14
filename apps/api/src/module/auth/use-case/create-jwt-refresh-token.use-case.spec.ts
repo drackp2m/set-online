@@ -5,11 +5,11 @@ import { mock } from 'jest-mock-extended';
 import { ConfigurationService } from '../../../shared/module/config/configuration.service';
 import { JwtFactory } from '../../../shared/module/config/factories/jwt.factory';
 
-import { CreateJwtAccessTokenUseCase } from './create-jwt-access-token.use-case';
+import { CreateJwtRefreshTokenUseCase } from './create-jwt-refresh-token.use-case';
 
-describe('CreateJwtAccessTokenUseCase', () => {
+describe('CreateJwtRefreshTokenUseCase', () => {
 	let module: TestingModule;
-	let useCase: CreateJwtAccessTokenUseCase;
+	let useCase: CreateJwtRefreshTokenUseCase;
 
 	const prepareTestingModule = async (
 		configurationService: ConfigurationService,
@@ -21,12 +21,12 @@ describe('CreateJwtAccessTokenUseCase', () => {
 				}),
 			],
 			providers: [
-				CreateJwtAccessTokenUseCase,
+				CreateJwtRefreshTokenUseCase,
 				{ provide: ConfigurationService, useValue: configurationService },
 			],
 		}).compile();
 
-		useCase = await module.resolve<CreateJwtAccessTokenUseCase>(CreateJwtAccessTokenUseCase);
+		useCase = await module.resolve<CreateJwtRefreshTokenUseCase>(CreateJwtRefreshTokenUseCase);
 	};
 
 	beforeEach(async () => {
@@ -38,6 +38,7 @@ describe('CreateJwtAccessTokenUseCase', () => {
 				issuer: 'test',
 				audience: 'test-runner',
 				accessTokenExpiresIn: '15m',
+				refreshTokenExpiresIn: '15d',
 			},
 		});
 
@@ -57,7 +58,8 @@ describe('CreateJwtAccessTokenUseCase', () => {
 					id: 'uuid',
 					issuer: 'test',
 					audience: 'test-runner',
-					accessTokenExpiresIn: '15x',
+					accessTokenExpiresIn: '15y',
+					refreshTokenExpiresIn: '15x',
 				},
 			});
 
@@ -76,14 +78,14 @@ describe('CreateJwtAccessTokenUseCase', () => {
 				{},
 				{
 					subject: 'user-uuid',
-					audience: 'test-runner-access-token',
+					audience: 'test-runner-refresh-token',
 					expiresIn: '15x',
-					notBefore: 0,
+					notBefore: '15y',
 				},
 			);
 		});
 
-		it('should return valid jwt', () => {
+		it('should return valid jwt', async () => {
 			const jwtServiceSign = jest.spyOn(JwtService.prototype, 'sign');
 
 			const jwtToken = useCase.execute('user-uuid');
@@ -95,15 +97,15 @@ describe('CreateJwtAccessTokenUseCase', () => {
 				{},
 				{
 					subject: 'user-uuid',
-					audience: 'test-runner-access-token',
-					expiresIn: '15m',
-					notBefore: 0,
+					audience: 'test-runner-refresh-token',
+					expiresIn: '15d',
+					notBefore: '15m',
 				},
 			);
 
 			expect(typeof jwtToken).toStrictEqual('string');
 			expect(parts.length).toStrictEqual(3);
-			expect(jwtToken.length).toStrictEqual(296);
+			expect(jwtToken.length).toStrictEqual(298);
 		});
 	});
 });
