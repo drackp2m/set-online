@@ -11,6 +11,8 @@ describe('CreateJwtAccessTokenUseCase', () => {
 	let module: TestingModule;
 	let useCase: CreateJwtAccessTokenUseCase;
 
+	const jwtServiceSign = jest.spyOn(JwtService.prototype, 'sign');
+
 	const prepareTestingModule = async (
 		configurationService: ConfigurationService,
 	): Promise<void> => {
@@ -63,8 +65,6 @@ describe('CreateJwtAccessTokenUseCase', () => {
 
 			await prepareTestingModule(configurationService);
 
-			const jwtServiceSign = jest.spyOn(JwtService.prototype, 'sign');
-
 			expect(() => useCase.execute('user-uuid')).toThrow(
 				Error(
 					'"expiresIn" should be a number of seconds or string representing a timespan eg: "1d", "20h", 60',
@@ -84,8 +84,6 @@ describe('CreateJwtAccessTokenUseCase', () => {
 		});
 
 		it('should return valid jwt', () => {
-			const jwtServiceSign = jest.spyOn(JwtService.prototype, 'sign');
-
 			const jwtToken = useCase.execute('user-uuid');
 
 			const parts = jwtToken.split('.');
