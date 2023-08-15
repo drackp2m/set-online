@@ -29,12 +29,6 @@ describe('RefreshSessionUseCase', () => {
 
 	const request = mock<Request>();
 
-	// const getRequestTokenFromRequest = jest.spyOn(
-	// 	request.signedCookies,
-	// 	'x-jwt-refresh-token',
-	// 	'get',
-	// );
-
 	const prepareTestingModule = async (
 		configurationService: ConfigurationService,
 	): Promise<void> => {
