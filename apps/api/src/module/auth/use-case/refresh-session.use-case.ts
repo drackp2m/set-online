@@ -30,8 +30,8 @@ export class RefreshSessionUseCase {
 			const accessToken = this.createAccessToken.execute(refreshTokenPayload.sub);
 			const refreshToken = this.createRefreshToken.execute(refreshTokenPayload.sub);
 
-			this.setJwtToken.execute(accessToken, JwtCookie.access);
-			this.setJwtToken.execute(refreshToken, JwtCookie.refresh);
+			this.setJwtToken.execute(JwtCookie.access, accessToken);
+			this.setJwtToken.execute(JwtCookie.refresh, refreshToken);
 		} catch (error) {
 			throw new UnauthorizedException(error.message, 'refreshToken');
 		}

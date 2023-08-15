@@ -10,7 +10,7 @@ import { JwtEndpoints } from '../definition/jwt-endpoints.enum';
 export class SetJwtTokenUseCase {
 	constructor(@Inject(REQUEST) private readonly request: Request) {}
 
-	execute(tokenValue: string, tokenType: JwtCookie): void {
+	execute(tokenType: JwtCookie, tokenValue: string): void {
 		const path = JwtEndpoints[getEnumKey(JwtCookie, tokenType)];
 
 		// ToDo => add expiration time to cookies

@@ -8,7 +8,6 @@ services:
         USER_GID: 20
         USER_UID: 501
     volumes:
-      # - .docker/home/:/home/node/
       - ~/.ssh:/home/node/.ssh:ro
       - ~/.gnupg/pubring.kbx:/home/node/.gnupg/pubring.kbx:ro
       - ~/.gnupg/private-keys-v1.d:/home/node/.gnupg/private-keys-v1.d:ro
