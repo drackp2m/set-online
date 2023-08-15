@@ -19,7 +19,7 @@ describe('LoginUseCase', () => {
 	const checkPassword = mock<CheckPasswordUseCase>();
 	const createAccessToken = mock<CreateJwtAccessTokenUseCase>();
 	const createRefreshToken = mock<CreateJwtRefreshTokenUseCase>();
-	const setToken = mock<SetJwtTokenUseCase>();
+	const setJwtToken = mock<SetJwtTokenUseCase>();
 
 	beforeAll(async () => {
 		const module: TestingModule = await Test.createTestingModule({
@@ -29,7 +29,7 @@ describe('LoginUseCase', () => {
 				{ provide: CheckPasswordUseCase, useValue: checkPassword },
 				{ provide: CreateJwtAccessTokenUseCase, useValue: createAccessToken },
 				{ provide: CreateJwtRefreshTokenUseCase, useValue: createRefreshToken },
-				{ provide: SetJwtTokenUseCase, useValue: setToken },
+				{ provide: SetJwtTokenUseCase, useValue: setJwtToken },
 			],
 		}).compile();
 
@@ -72,7 +72,7 @@ describe('LoginUseCase', () => {
 			expect(createAccessToken.execute).toBeCalledTimes(0);
 		});
 
-		it('should return TokenModel when JwtService.sign return a token', async () => {
+		it('should call two times to setJwtToken useCase', async () => {
 			userEntityRepository.getOne.mockResolvedValueOnce(
 				new UserEntity({ uuid: 'user-uuid', password: 'hashed-password' }),
 			);
@@ -99,9 +99,9 @@ describe('LoginUseCase', () => {
 			expect(createRefreshToken.execute).toBeCalledTimes(1);
 			expect(createRefreshToken.execute).toBeCalledWith('user-uuid');
 
-			expect(setToken.execute).toBeCalledTimes(2);
-			expect(setToken.execute).toHaveBeenNthCalledWith(1, 'access-token', JwtCookie.access);
-			expect(setToken.execute).toHaveBeenNthCalledWith(2, 'refresh-token', JwtCookie.refresh);
+			expect(setJwtToken.execute).toBeCalledTimes(2);
+			expect(setJwtToken.execute).toHaveBeenNthCalledWith(1, JwtCookie.access, 'access-token');
+			expect(setJwtToken.execute).toHaveBeenNthCalledWith(2, JwtCookie.refresh, 'refresh-token');
 		});
 	});
 });

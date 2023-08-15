@@ -4,13 +4,11 @@ import { Request } from 'express';
 import { mock } from 'jest-mock-extended';
 
 import { LogoutUseCase } from './logout.use-case';
+
 describe('LogoutUseCase', () => {
 	let useCase: LogoutUseCase;
-	const request = mock<Request>({
-		res: {
-			clearCookie: jest.fn(),
-		},
-	});
+
+	const request = mock<Request>({ res: {} });
 
 	const requestResponseClearCookie = jest.spyOn(request.res, 'clearCookie');
 
