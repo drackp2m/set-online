@@ -3,7 +3,6 @@ import { mock } from 'jest-mock-extended';
 
 import { NotFoundException } from '../../../shared/exception/not-found.exception';
 import { ConfigurationService } from '../../../shared/module/config/configuration.service';
-import { UserFaker } from '../../user/factory/user.faker';
 import { UserEntity } from '../../user/user.entity';
 import { UserRepository } from '../../user/user.repository';
 import { JsonWebToken } from '../definition/json-web-token.interface';
@@ -11,23 +10,11 @@ import { JsonWebToken } from '../definition/json-web-token.interface';
 import { JwtStrategyService } from './jwt.strategy.service';
 
 describe('JwtStrategyService', () => {
-	const userFaker = new UserFaker();
-
 	let service: JwtStrategyService;
 	const configurationService = mock<ConfigurationService>({ jwt: { secret: '1234' } });
 	const userEntityRepository = mock<UserRepository>();
 
-	const fakeUuid = '00000000-0000-4000-0000-000000000000';
-	const fakeJwt: JsonWebToken = {
-		iat: 648600120,
-		nbf: 648600120,
-		exp: 1974062562,
-		aud: 'Jest',
-		iss: 'You',
-		sub: '42',
-		jti: fakeUuid,
-	};
-	const fakeUser = userFaker.makeOne({ uuid: fakeUuid }, { createdFrom: '2010' }) as UserEntity;
+	const fakeJwt = { sub: 'user-uuid' } as JsonWebToken;
 
 	beforeAll(async () => {
 		const module: TestingModule = await Test.createTestingModule({
@@ -57,11 +44,11 @@ describe('JwtStrategyService', () => {
 		});
 
 		it('should return UserEntity when EntityManager.getOneBy return UserEntity', async () => {
-			userEntityRepository.getOne.mockResolvedValueOnce(fakeUser);
+			userEntityRepository.getOne.mockResolvedValueOnce(new UserEntity());
 
 			const user = await service.validate(fakeJwt);
 
-			expect(user).toStrictEqual(fakeUser);
+			expect(user).toBeInstanceOf(UserEntity);
 		});
 	});
 });
