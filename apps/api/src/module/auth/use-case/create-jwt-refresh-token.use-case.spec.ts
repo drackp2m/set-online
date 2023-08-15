@@ -52,7 +52,7 @@ describe('CreateJwtRefreshTokenUseCase', () => {
 	});
 
 	describe('execute', () => {
-		it('should throw Error when config is invalid', async () => {
+		it('throw Error when config is invalid', async () => {
 			const configurationService = mock<ConfigurationService>({
 				jwt: {
 					secret: 'secret',

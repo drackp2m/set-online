@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ValidationArguments } from 'class-validator';
+import { mock } from 'jest-mock-extended';
 
 import { NotFoundException } from '../../../shared/exception/not-found.exception';
 import { UserFaker } from '../factory/user.faker';
@@ -14,8 +15,10 @@ describe('IsUniqueUserPropRule', () => {
 	let validator: IsUniqueUserPropRule;
 	let userEntityRepository: jest.Mocked<Partial<UserRepository>>;
 
-	const mockUuid = '00000000-0000-4000-0000-000000000000';
-	const mockUser = userFaker.makeOne({ uuid: mockUuid }, { createdFrom: '2010' }) as UserEntity;
+	const validateArgs = mock<ValidationArguments>({ property: 'username' });
+
+	const fakeUuid = '00000000-0000-4000-0000-000000000000';
+	const fakeUser = userFaker.makeOne({ uuid: fakeUuid }, { createdFrom: '2010' }) as UserEntity;
 
 	beforeAll(async () => {
 		userEntityRepository = {
@@ -38,13 +41,9 @@ describe('IsUniqueUserPropRule', () => {
 
 	describe('validate', () => {
 		it('should return True when UserService.getOne throw exception', async () => {
-			userEntityRepository.getOne.mockRejectedValueOnce(() => {
-				throw new NotFoundException();
-			});
+			userEntityRepository.getOne.mockRejectedValueOnce(NotFoundException);
 
-			const result = await validator.validate('admin', {
-				property: 'username',
-			} as ValidationArguments);
+			const result = await validator.validate('admin', validateArgs);
 
 			expect(result).toStrictEqual(true);
 
@@ -53,11 +52,9 @@ describe('IsUniqueUserPropRule', () => {
 		});
 
 		it('should return False when UserService.getOne return a UserEntity', async () => {
-			userEntityRepository.getOne.mockResolvedValueOnce(mockUser);
+			userEntityRepository.getOne.mockResolvedValueOnce(fakeUser);
 
-			const result = await validator.validate('admin', {
-				property: 'username',
-			} as ValidationArguments);
+			const result = await validator.validate('admin', validateArgs);
 
 			expect(result).toStrictEqual(false);
 
@@ -76,9 +73,9 @@ describe('IsUniqueUserPropRule', () => {
 		});
 
 		it('should return valid messages when property is email', async () => {
-			const result = validator.defaultMessage({
-				property: 'email',
-			} as ValidationArguments);
+			validateArgs.property = 'email';
+
+			const result = validator.defaultMessage(validateArgs);
 
 			expect(result).toStrictEqual('email already exists');
 		});
