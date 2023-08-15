@@ -30,7 +30,7 @@ export class LoginUseCase {
 		const accessToken = this.createAccessToken.execute(user.uuid);
 		const refreshToken = this.createRefreshToken.execute(user.uuid);
 
-		this.setJwtToken.execute(accessToken, JwtCookie.access);
-		this.setJwtToken.execute(refreshToken, JwtCookie.refresh);
+		this.setJwtToken.execute(JwtCookie.access, accessToken);
+		this.setJwtToken.execute(JwtCookie.refresh, refreshToken);
 	}
 }
