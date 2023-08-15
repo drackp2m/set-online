@@ -13,7 +13,7 @@ describe('JwtGuard', () => {
 	const executionContext = mock<ExecutionContext>();
 
 	const userFaker = new UserFaker();
-	const mockUser = userFaker.makeOne();
+	const fakeUser = userFaker.makeOne();
 
 	beforeAll(async () => {
 		const module: TestingModule = await Test.createTestingModule({
@@ -38,7 +38,7 @@ describe('JwtGuard', () => {
 	});
 
 	describe('handleRequest', () => {
-		it('should throws UnauthorizedException when pass error', () => {
+		it('throw UnauthorizedException when pass error', () => {
 			const execution = () => guard.handleRequest<UserEntity>(new Error(), undefined);
 
 			expect(execution).toThrow(UnauthorizedException);
@@ -51,9 +51,9 @@ describe('JwtGuard', () => {
 		});
 
 		it('should return UserEntity when error is missing and payload is an UserEntity', () => {
-			const payload = guard.handleRequest<UserEntity>(undefined, mockUser);
+			const payload = guard.handleRequest<UserEntity>(undefined, fakeUser);
 
-			expect(payload).toStrictEqual(mockUser);
+			expect(payload).toStrictEqual(fakeUser);
 		});
 	});
 });

@@ -38,7 +38,7 @@ describe('UserRepository', () => {
 	});
 
 	describe('getOne', () => {
-		it('should throw exception when user not exists', async () => {
+		it('throw NotFoundException when user not exists', async () => {
 			const searchedUser = userEntityRepository.getOne({ username: 'drackp2m' });
 
 			await expect(searchedUser).rejects.toThrow(NotFoundException);

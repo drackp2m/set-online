@@ -17,17 +17,17 @@ describe('JwtStrategyService', () => {
 	const configurationService = mock<ConfigurationService>({ jwt: { secret: '1234' } });
 	const userEntityRepository = mock<UserRepository>();
 
-	const mockUuid = '00000000-0000-4000-0000-000000000000';
-	const mockJwt: JsonWebToken = {
+	const fakeUuid = '00000000-0000-4000-0000-000000000000';
+	const fakeJwt: JsonWebToken = {
 		iat: 648600120,
 		nbf: 648600120,
 		exp: 1974062562,
 		aud: 'Jest',
 		iss: 'You',
 		sub: '42',
-		jti: mockUuid,
+		jti: fakeUuid,
 	};
-	const mockUser = userFaker.makeOne({ uuid: mockUuid }, { createdFrom: '2010' }) as UserEntity;
+	const fakeUser = userFaker.makeOne({ uuid: fakeUuid }, { createdFrom: '2010' }) as UserEntity;
 
 	beforeAll(async () => {
 		const module: TestingModule = await Test.createTestingModule({
@@ -46,22 +46,22 @@ describe('JwtStrategyService', () => {
 	});
 
 	describe('validate', () => {
-		it('should throw NotFoundException when EntityManager.getOneBy throw NotFoundException', async () => {
+		it('throw NotFoundException when EntityManager.getOneBy throw NotFoundException', async () => {
 			userEntityRepository.getOne.mockRejectedValueOnce(() => {
 				throw new NotFoundException();
 			});
 
-			const user = service.validate(mockJwt);
+			const user = service.validate(fakeJwt);
 
 			expect(user).rejects.toThrow(NotFoundException);
 		});
 
 		it('should return UserEntity when EntityManager.getOneBy return UserEntity', async () => {
-			userEntityRepository.getOne.mockResolvedValueOnce(mockUser);
+			userEntityRepository.getOne.mockResolvedValueOnce(fakeUser);
 
-			const user = await service.validate(mockJwt);
+			const user = await service.validate(fakeJwt);
 
-			expect(user).toStrictEqual(mockUser);
+			expect(user).toStrictEqual(fakeUser);
 		});
 	});
 });
