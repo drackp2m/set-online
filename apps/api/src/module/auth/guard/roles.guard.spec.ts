@@ -40,7 +40,7 @@ describe('RolesGuard', () => {
 			expect(result).toStrictEqual(true);
 		});
 
-		it('should throws Unauthorized when context has UserRole but args does not have User', async () => {
+		it('throw UnauthorizedException when context has UserRole but args does not have User', async () => {
 			Reflect.defineMetadata('roles', UserRole.Registered, handler);
 			executionContext.getHandler.mockReturnValueOnce(handler);
 			executionContext.getArgs.mockReturnValueOnce(getExecutionContextArgsWith(undefined));
@@ -50,7 +50,7 @@ describe('RolesGuard', () => {
 			await expect(result).rejects.toThrow(UnauthorizedException);
 		});
 
-		it('should throws Forbidden when context has UserRole but args User has no privileges', async () => {
+		it('throw ForbiddenException when context has UserRole but args User has no privileges', async () => {
 			Reflect.defineMetadata('roles', UserRole.Registered, handler);
 
 			executionContext.getHandler.mockReturnValueOnce(handler);

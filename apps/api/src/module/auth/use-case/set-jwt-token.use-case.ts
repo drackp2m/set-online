@@ -22,16 +22,5 @@ export class SetJwtTokenUseCase {
 			path,
 			domain: 'localhost',
 		});
-
-		if (JwtCookie.access === tokenType) {
-			this.request.res.cookie(tokenType, tokenValue, {
-				signed: true,
-				secure: true,
-				httpOnly: true,
-				sameSite: true,
-				path: '/api',
-				domain: 'localhost',
-			});
-		}
 	}
 }
