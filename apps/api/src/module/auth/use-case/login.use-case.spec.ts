@@ -41,7 +41,7 @@ describe('LoginUseCase', () => {
 	});
 
 	describe('execute', () => {
-		it('should throw NotFoundException when UserService.getOne throw exception', async () => {
+		it('throw NotFoundException when UserService.getOne throw exception', async () => {
 			userEntityRepository.getOne.mockRejectedValueOnce(() => {
 				throw new NotFoundException();
 			});
@@ -56,7 +56,7 @@ describe('LoginUseCase', () => {
 			expect(checkPassword.execute).toBeCalledTimes(0);
 		});
 
-		it('should throw UnauthorizedException when BcryptService.compare return False', async () => {
+		it('throw UnauthorizedException when BcryptService.compare return False', async () => {
 			userEntityRepository.getOne.mockResolvedValueOnce(new UserEntity());
 			checkPassword.execute.mockResolvedValueOnce(false);
 

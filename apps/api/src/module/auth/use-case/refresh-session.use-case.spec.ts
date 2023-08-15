@@ -15,7 +15,7 @@ import { SetJwtTokenUseCase } from './set-jwt-token.use-case';
 
 describe('RefreshSessionUseCase', () => {
 	// ToDo => create jwtFakerFactory;
-	const jwtRefreshTokenMock =
+	const fakeRefreshToken =
 		'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2OTIwNTcyNDgsIm5iZiI6MTY5MjA1NzI0OCwiZXhwIjo0ODE2MjU5NjQ4LCJhdWQiOiJ0ZXN0LXJ1bm5lci1yZWZyZXNoLXRva2VuIiwiaXNzIjoidGVzdCIsInN1YiI6InVzZXItdXVpZCIsImp0aSI6InV1aWQifQ.NIX34s_7lJGlaEPRnoIj_mONQiwsoxgD9Q_NiS9pqG6c-R8k12IMNybKgVUlHt8eo7tsfh-eQsSt7oDXS_5Kkg';
 
 	let module: TestingModule;
@@ -77,13 +77,13 @@ describe('RefreshSessionUseCase', () => {
 	});
 
 	describe('execute', () => {
-		it('should throw UnauthorizedException when the request missing cookies', async () => {
+		it('throw UnauthorizedException when the request missing cookies', async () => {
 			const execution = useCase.execute();
 
 			await expect(execution).rejects.toThrowError(UnauthorizedException);
 		});
 
-		it('should throw UnauthorizedException when token is invalid', async () => {
+		it('throw UnauthorizedException when token is invalid', async () => {
 			request.signedCookies['x-jwt-refresh-token'] = 'wrong-refresh-token';
 
 			const execution = useCase.execute();
@@ -95,7 +95,7 @@ describe('RefreshSessionUseCase', () => {
 		});
 
 		it('should call two times to setJwtToken useCase', async () => {
-			request.signedCookies['x-jwt-refresh-token'] = jwtRefreshTokenMock;
+			request.signedCookies['x-jwt-refresh-token'] = fakeRefreshToken;
 
 			const configurationService = mock<ConfigurationService>({
 				jwt: {
@@ -119,7 +119,7 @@ describe('RefreshSessionUseCase', () => {
 			expect(execution).toStrictEqual(undefined);
 
 			expect(jwtServiceVerify).toBeCalledTimes(1);
-			expect(jwtServiceVerify).toBeCalledWith(jwtRefreshTokenMock);
+			expect(jwtServiceVerify).toBeCalledWith(fakeRefreshToken);
 
 			expect(createAccessToken.execute).toBeCalledTimes(1);
 			expect(createAccessToken.execute).toBeCalledWith('user-uuid');
