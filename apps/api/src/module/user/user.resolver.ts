@@ -11,7 +11,7 @@ import { UserRepository } from './user.repository';
 
 @Resolver(() => UserEntity)
 export class UserResolver {
-	private interval: NodeJS.Timer;
+	private interval: NodeJS.Timeout;
 
 	constructor(
 		@Inject('PUB_SUB') private readonly pubSub: PubSub,

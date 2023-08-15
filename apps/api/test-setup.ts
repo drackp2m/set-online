@@ -2,7 +2,13 @@ import { EntityManager, MikroORM } from '@mikro-orm/postgresql';
 
 import dbConfig from './src/shared/module/config/mikro-orm.config';
 
-const removeDatabases = async () => {
+module.exports = async function () {
+	await dropDatabases();
+
+	await executeMigrations();
+};
+
+const dropDatabases = async () => {
 	const config = await dbConfig();
 	const orm = await MikroORM.init(config);
 
@@ -12,19 +18,29 @@ const removeDatabases = async () => {
 	await em.execute('DROP TABLE IF EXISTS migrations;');
 };
 
-const jestSetup = async () => {
+const executeMigrations = async () => {
+	log('Cheking migrations...\n');
+
 	const config = await dbConfig();
 	const orm = await MikroORM.init(config);
 	const migrator = orm.getMigrator();
 	const migratorCheckResult = await migrator.checkMigrationNeeded();
 
 	if (migratorCheckResult) {
-		await migrator.up();
+		const list = await migrator.up();
+
+		log(`Executed ${list.length} migrations:`);
+
+		list.forEach((item) => {
+			log(`  - ${item.name}`);
+		});
+
+		log(`\n`);
 	}
 
 	await orm.close(true);
 };
 
-export { removeDatabases, jestSetup };
-
-export default jestSetup;
+const log = (message: string): void => {
+	process.stdout.write(`${message}\n`);
+};

@@ -17,6 +17,7 @@ export default async (): Promise<MikroOrmModuleSyncOptions> =>
 			tableName: 'migrations',
 			path: 'apps/api/migrations',
 			snapshot: false,
+			silent: true,
 		},
 	});
 
