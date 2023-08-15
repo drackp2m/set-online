@@ -6,22 +6,23 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 describe('AppController', () => {
-	let app: TestingModule;
+	let appController: AppController;
 
 	beforeAll(async () => {
-		app = await Test.createTestingModule({
+		const module: TestingModule = await Test.createTestingModule({
 			controllers: [AppController],
 			imports: [PubSubModule],
 			providers: [AppService],
 		}).compile();
+
+		appController = module.get<AppController>(AppController);
 	});
 
 	describe('getData', () => {
 		it('should return "Welcome to set-online!"', () => {
-			const appController = app.get<AppController>(AppController);
-			expect(appController.getData()).toEqual({
-				message: 'Welcome to set-online!',
-			});
+			const result = appController.getData();
+
+			expect(result).toEqual({ message: 'Welcome to set-online!' });
 		});
 	});
 });
