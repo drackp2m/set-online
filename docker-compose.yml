@@ -42,10 +42,10 @@ services:
       - .:/usr/src/app
       - /usr/src/app/node_modules
     environment:
-      MIKRO_ORM_CLI_USE_TS_NODE: 1
-      MIKRO_ORM_CLI_TS_CONFIG_PATH: apps/api/tsconfig.app.json
       MIKRO_ORM_CLI: apps/api/src/shared/module/config/mikro-orm.config.ts
-      NODE_TLS_REJECT_UNAUTHORIZED: 1
+      MIKRO_ORM_CLI_TS_CONFIG_PATH: apps/api/tsconfig.app.json
+      MIKRO_ORM_CLI_USE_TS_NODE: true
+      NODE_TLS_REJECT_UNAUTHORIZED: false
       PATH: $PATH:/usr/src/app/node_modules/.bin
       TZ: Europe/Madrid
     depends_on:
