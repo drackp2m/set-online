@@ -2,9 +2,6 @@ import { Inject } from '@nestjs/common';
 import { Args, Query, Resolver, Subscription } from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
 
-import { ProtectTo } from '../auth/decorator/protect-to.decorator';
-
-import { UserRole } from './definition/user-role.enum';
 import { ValidateUserConstraintsInput } from './dto/input/validate-user-constraints.input';
 import { UserEntity } from './user.entity';
 import { UserRepository } from './user.repository';
@@ -30,7 +27,7 @@ export class UserResolver {
 		return true;
 	}
 
-	@ProtectTo(UserRole.Admin)
+	// @ProtectTo(UserRole.Admin)
 	@Query(() => [UserEntity], {
 		name: 'getUsers',
 	})
