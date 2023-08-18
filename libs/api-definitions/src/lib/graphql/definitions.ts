@@ -8,6 +8,13 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export enum GameStatus {
+    Completed = "Completed",
+    Expired = "Expired",
+    InProgress = "InProgress",
+    WaitingOpponents = "WaitingOpponents"
+}
+
 export enum UserRole {
     Admin = "Admin",
     Guest = "Guest",
@@ -17,6 +24,20 @@ export enum UserRole {
 export interface ValidateUserConstraintsInput {
     email?: Nullable<string>;
     username?: Nullable<string>;
+}
+
+export interface GameEntity {
+    createdAt: DateTime;
+    expiresOn: DateTime;
+    participants: UserEntity[];
+    status: GameStatus;
+    tableCards: string[];
+    updatedAt: DateTime;
+    uuid: string;
+}
+
+export interface IMutation {
+    newGame(): GameEntity | Promise<GameEntity>;
 }
 
 export interface IQuery {
@@ -31,6 +52,7 @@ export interface ISubscription {
 export interface UserEntity {
     createdAt: DateTime;
     email?: Nullable<string>;
+    games: GameEntity[];
     role: UserRole;
     updatedAt: DateTime;
     username: string;

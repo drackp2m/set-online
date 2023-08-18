@@ -30,7 +30,7 @@ export class CustomEntityRepository<T extends CustomBaseEntity<T>> {
 	}
 
 	async insert(entity: T): Promise<T> {
-		await this.entityManager.insert(entity);
+		await this.entityManager.persistAndFlush(entity);
 
 		return entity;
 	}
