@@ -1,0 +1,10 @@
+mutation NewGame {
+  newGame {
+		uuid
+		status
+		tableCards
+		expiresOn
+		createdAt
+		updatedAt
+	}
+}

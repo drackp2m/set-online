@@ -65,5 +65,11 @@
 		</button>
 
 		<p *ngIf="users()">Now: {{ users() }} users.</p>
+
+		<button class="p-sm md:p-md surface-radiant round-md xl-o:surface-vivid" (click)="newGame()">
+			Create new online game
+		</button>
+
+		<p *ngIf="newGameInfo()">{{ newGameInfo() }}</p>
 	</section>
 </main>

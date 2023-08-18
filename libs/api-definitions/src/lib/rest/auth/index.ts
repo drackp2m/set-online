@@ -1,3 +1,3 @@
-export * from './requests/login.interface';
+export * from './request/login.interface';
 
-export * from './requests/register.interface';
+export * from './request/register.interface';

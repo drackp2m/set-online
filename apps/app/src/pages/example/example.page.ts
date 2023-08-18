@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Apollo, gql } from 'apollo-angular';
 import { map } from 'rxjs';
 
-import { GetUsersGQL } from '../../graphql/apollo-operations';
+import { GetUsersGQL, NewGameGQL } from '../../graphql/apollo-operations';
 import { ApiClient } from '../../shared/services/api-client.service';
 
 @Component({
@@ -19,6 +19,8 @@ export default class ExamplePage {
 	});
 
 	users: WritableSignal<number | undefined> = signal(undefined);
+
+	newGameInfo: WritableSignal<string> = signal('');
 
 	apolloSubscription = toSignal(
 		this.apollo.subscribe<{ getManySubscription: string }>({
@@ -41,6 +43,7 @@ export default class ExamplePage {
 	constructor(
 		private readonly apiClient: ApiClient,
 		private readonly getUsersGQL: GetUsersGQL,
+		private readonly newGameGQL: NewGameGQL,
 		private readonly apollo: Apollo,
 	) {
 		effect(() => {
@@ -55,6 +58,18 @@ export default class ExamplePage {
 			},
 			error: (error) => {
 				this.show(error.message, true);
+			},
+		});
+	}
+
+	newGame(): void {
+		this.newGameGQL.mutate().subscribe({
+			next: (data) => {
+				console.log(data);
+				this.newGameInfo.set(data.data?.newGame.uuid ?? '');
+			},
+			error: (error) => {
+				this.newGameInfo.set(error.message);
 			},
 		});
 	}

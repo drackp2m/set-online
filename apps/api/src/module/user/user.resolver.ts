@@ -2,6 +2,9 @@ import { Inject } from '@nestjs/common';
 import { Args, Query, Resolver, Subscription } from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
 
+import { ProtectTo } from '../auth/decorator/protect-to.decorator';
+
+import { UserRole } from './definition/user-role.enum';
 import { ValidateUserConstraintsInput } from './dto/input/validate-user-constraints.input';
 import { UserEntity } from './user.entity';
 import { UserRepository } from './user.repository';
@@ -27,7 +30,7 @@ export class UserResolver {
 		return true;
 	}
 
-	// @ProtectTo(UserRole.Admin)
+	@ProtectTo(UserRole.Admin)
 	@Query(() => [UserEntity], {
 		name: 'getUsers',
 	})
@@ -52,15 +55,5 @@ export class UserResolver {
 		}, 5000);
 
 		return this.pubSub.asyncIterator('getManySubscription');
-
-		return {
-			async *[Symbol.asyncIterator]() {
-				while (true) {
-					await new Promise((resolve) => setTimeout(resolve, 1000));
-					const message = `Hello from event emitter at ${new Date().toISOString()}`;
-					yield message;
-				}
-			},
-		};
 	}
 }

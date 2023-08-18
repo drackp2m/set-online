@@ -65,11 +65,11 @@ import { APP_ROUTES } from './app.routes';
 					name: 'set-online',
 					link,
 					defaultOptions: {
-						query: {
+						watchQuery: {
 							fetchPolicy: 'network-only',
 							errorPolicy: 'none',
 						},
-						watchQuery: {
+						query: {
 							fetchPolicy: 'network-only',
 							errorPolicy: 'none',
 						},

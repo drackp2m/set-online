@@ -31,6 +31,30 @@ export type Scalars = {
 	DateTime: { input: Date; output: Date };
 };
 
+/** games */
+export type GameEntity = {
+	__typename?: 'GameEntity';
+	createdAt: Scalars['DateTime']['output'];
+	expiresOn: Scalars['DateTime']['output'];
+	participants: Array<UserEntity>;
+	status: GameStatus;
+	tableCards: Array<Scalars['String']['output']>;
+	updatedAt: Scalars['DateTime']['output'];
+	uuid: Scalars['ID']['output'];
+};
+
+export enum GameStatus {
+	Completed = 'Completed',
+	Expired = 'Expired',
+	InProgress = 'InProgress',
+	WaitingOpponents = 'WaitingOpponents',
+}
+
+export type Mutation = {
+	__typename?: 'Mutation';
+	newGame: GameEntity;
+};
+
 export type Query = {
 	__typename?: 'Query';
 	getUsers: Array<UserEntity>;
@@ -43,7 +67,7 @@ export type QueryvalidateUserConstraintsArgs = {
 
 export type Subscription = {
 	__typename?: 'Subscription';
-	getAllUsers: Scalars['String']['output'];
+	getManySubscription?: Maybe<Scalars['String']['output']>;
 };
 
 /** user */
@@ -51,6 +75,7 @@ export type UserEntity = {
 	__typename?: 'UserEntity';
 	createdAt: Scalars['DateTime']['output'];
 	email?: Maybe<Scalars['String']['output']>;
+	games: Array<GameEntity>;
 	role: UserRole;
 	updatedAt: Scalars['DateTime']['output'];
 	username: Scalars['String']['output'];
@@ -79,6 +104,22 @@ const result: PossibleTypesResultData = {
 
 export default result;
 
+export type NewGameMutationVariables = Exact<{ [key: string]: never }>;
+
+export type NewGameMutation = {
+	__typename?: 'Mutation';
+	newGame: {
+		__typename?: 'GameEntity';
+		uuid: string;
+		status: GameStatus;
+		tableCards: Array<string>;
+		expiresOn: Date;
+		createdAt: Date;
+		updatedAt: Date;
+		participants: Array<{ __typename?: 'UserEntity'; uuid: string; username: string }>;
+	};
+};
+
 export type GetUsersQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetUsersQuery = {
@@ -93,6 +134,34 @@ export type GetUsersQuery = {
 		updatedAt: Date;
 	}>;
 };
+
+export const NewGameDocument = gql`
+	mutation NewGame {
+		newGame {
+			uuid
+			participants {
+				uuid
+				username
+			}
+			status
+			tableCards
+			expiresOn
+			createdAt
+			updatedAt
+		}
+	}
+`;
+
+@Injectable({
+	providedIn: 'root',
+})
+export class NewGameGQL extends Apollo.Mutation<NewGameMutation, NewGameMutationVariables> {
+	override document = NewGameDocument;
+
+	constructor(apollo: Apollo.Apollo) {
+		super(apollo);
+	}
+}
 
 export const GetUsersDocument = gql`
 	query GetUsers {
