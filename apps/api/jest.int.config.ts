@@ -6,7 +6,7 @@ export default {
 	globalTeardown: '<rootDir>/global-teardown.ts',
 	setupFiles: ['<rootDir>/test-setup.ts'],
 	maxWorkers: 2,
-	testMatch: ['**/?(*.)+(int.spec|int.test).[jt]s?(x)'],
+	testMatch: ['**/?(*.)+(int).(spec|test).[jt]s?(x)'],
 	transform: {
 		'^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
 	},

@@ -1,5 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { TestBed, waitForAsync } from '@angular/core/testing';
+import { RouterOutlet } from '@angular/router';
 
 import { AppComponent } from './app.component';
 
@@ -7,7 +8,7 @@ describe('AppComponent', () => {
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
 			declarations: [AppComponent],
-			imports: [HttpClientModule],
+			imports: [RouterOutlet, HttpClientModule],
 		}).compileComponents();
 	}));
 
