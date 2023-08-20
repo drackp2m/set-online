@@ -20,8 +20,6 @@ export default class ExamplePage {
 
 	users: WritableSignal<number | undefined> = signal(undefined);
 
-	newGameInfo: WritableSignal<string> = signal('');
-
 	apolloSubscription = toSignal(
 		this.apollo.subscribe<{ getManySubscription: string }>({
 			query: gql`
@@ -58,18 +56,6 @@ export default class ExamplePage {
 			},
 			error: (error) => {
 				this.show(error.message, true);
-			},
-		});
-	}
-
-	newGame(): void {
-		this.newGameGQL.mutate().subscribe({
-			next: (data) => {
-				console.log(data);
-				this.newGameInfo.set(data.data?.newGame.uuid ?? '');
-			},
-			error: (error) => {
-				this.newGameInfo.set(error.message);
 			},
 		});
 	}

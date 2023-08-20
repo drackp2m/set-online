@@ -58,6 +58,7 @@ export type Mutation = {
 export type Query = {
 	__typename?: 'Query';
 	getUsers: Array<UserEntity>;
+	listGames: Array<GameEntity>;
 	validateUserConstraints: Scalars['Boolean']['output'];
 };
 
@@ -111,13 +112,29 @@ export type NewGameMutation = {
 	newGame: {
 		__typename?: 'GameEntity';
 		uuid: string;
-		status: GameStatus;
 		tableCards: Array<string>;
+		status: GameStatus;
 		expiresOn: Date;
 		createdAt: Date;
 		updatedAt: Date;
 		participants: Array<{ __typename?: 'UserEntity'; uuid: string; username: string }>;
 	};
+};
+
+export type ListGamesQueryVariables = Exact<{ [key: string]: never }>;
+
+export type ListGamesQuery = {
+	__typename?: 'Query';
+	listGames: Array<{
+		__typename?: 'GameEntity';
+		uuid: string;
+		tableCards: Array<string>;
+		status: GameStatus;
+		expiresOn: Date;
+		createdAt: Date;
+		updatedAt: Date;
+		participants: Array<{ __typename?: 'UserEntity'; uuid: string; username: string }>;
+	}>;
 };
 
 export type GetUsersQueryVariables = Exact<{ [key: string]: never }>;
@@ -139,12 +156,12 @@ export const NewGameDocument = gql`
 	mutation NewGame {
 		newGame {
 			uuid
+			tableCards
 			participants {
 				uuid
 				username
 			}
 			status
-			tableCards
 			expiresOn
 			createdAt
 			updatedAt
@@ -157,6 +174,34 @@ export const NewGameDocument = gql`
 })
 export class NewGameGQL extends Apollo.Mutation<NewGameMutation, NewGameMutationVariables> {
 	override document = NewGameDocument;
+
+	constructor(apollo: Apollo.Apollo) {
+		super(apollo);
+	}
+}
+
+export const ListGamesDocument = gql`
+	query ListGames {
+		listGames {
+			uuid
+			tableCards
+			participants {
+				uuid
+				username
+			}
+			status
+			expiresOn
+			createdAt
+			updatedAt
+		}
+	}
+`;
+
+@Injectable({
+	providedIn: 'root',
+})
+export class ListGamesGQL extends Apollo.Query<ListGamesQuery, ListGamesQueryVariables> {
+	override document = ListGamesDocument;
 
 	constructor(apollo: Apollo.Apollo) {
 		super(apollo);

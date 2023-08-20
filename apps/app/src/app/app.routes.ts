@@ -31,6 +31,10 @@ export const APP_ROUTES: Routes = [
 				path: 'game',
 				loadChildren: () => import('../pages/game/game.module'),
 			},
+			{
+				path: 'online',
+				loadChildren: () => import('../pages/online/online.module'),
+			},
 		],
 	},
 ];
