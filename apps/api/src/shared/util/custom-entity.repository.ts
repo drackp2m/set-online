@@ -25,8 +25,8 @@ export class CustomEntityRepository<T extends CustomBaseEntity<T>> {
 		return user;
 	}
 
-	async getMany(): Promise<T[]> {
-		return this.entityManager.find(this.entityName, {});
+	async getMany(query?: FilterQuery<T>): Promise<T[]> {
+		return this.entityManager.find(this.entityName, query);
 	}
 
 	async insert(entity: T): Promise<T> {

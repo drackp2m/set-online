@@ -1,5 +1,5 @@
-mutation NewGame {
-  newGame {
+query ListGames {
+	listGames {
     uuid
     tableCards
     participants {
@@ -10,5 +10,5 @@ mutation NewGame {
     expiresOn
     createdAt
     updatedAt
-	}
+  }
 }

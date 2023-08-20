@@ -10,25 +10,25 @@ export class CreateGameUseCase {
 	constructor(private readonly gameRepository: GameRepository) {}
 
 	async execute(participant: UserEntity): Promise<GameEntity> {
-		const existingGame = await this.gameRepository.getOne({
-			participants: { uuid: participant.uuid },
-		});
+		try {
+			await this.gameRepository.getOne({
+				participants: { uuid: participant.uuid },
+			});
+		} catch (error) {
+			const expiresOnDate = new Date();
+			expiresOnDate.setDate(expiresOnDate.getDate() + 1);
 
-		if (existingGame) {
-			throw new PreconditionFailedException('already in a game', 'user');
+			const newGame = new GameEntity({
+				tableCards: ['a', 'b', 'c'],
+				deckCards: ['d', 'e', 'f'],
+				expiresOn: expiresOnDate,
+			});
+
+			newGame.participants.add(participant);
+
+			return this.gameRepository.insert(newGame);
 		}
 
-		const expiresOnDate = new Date();
-		expiresOnDate.setDate(expiresOnDate.getDate() + 1);
-
-		const newGame = new GameEntity({
-			tableCards: ['a', 'b', 'c'],
-			deckCards: ['d', 'e', 'f'],
-			expiresOn: expiresOnDate,
-		});
-
-		newGame.participants.add(participant);
-
-		return this.gameRepository.insert(newGame);
+		throw new PreconditionFailedException('already in a game', 'user');
 	}
 }
