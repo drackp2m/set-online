@@ -25,7 +25,12 @@ enum GameStatus {
   WaitingOpponents
 }
 
+input JoinGameInput {
+  gameUuid: String!
+}
+
 type Mutation {
+  joinGame(input: JoinGameInput!): GameEntity!
   newGame: GameEntity!
 }
 

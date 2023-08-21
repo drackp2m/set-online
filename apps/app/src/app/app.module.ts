@@ -42,11 +42,6 @@ import { APP_ROUTES } from './app.routes';
 				const ws = new GraphQLWsLink(
 					createClient({
 						url: `${environment.wsUrl}/graphql`,
-						// connectionParams: () => {
-						// 	return {
-						// 		Authorization: `caca ${22}`,
-						// 	};
-						// },
 					}),
 				);
 
