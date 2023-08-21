@@ -14,8 +14,9 @@ declare global {
 			API_PORT: string;
 			API_PREFIX: string;
 			API_DEBUG_PORT: string;
-			APP_PORT: string;
 			API_COOKIE_SECRET: string;
+
+			APP_PORT: string;
 
 			JWT_ID: string;
 			JWT_ALGORITHM: string;
@@ -28,4 +29,4 @@ declare global {
 	}
 }
 
-export {};
+export { NodeJS };

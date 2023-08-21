@@ -36,7 +36,7 @@ export class CustomEntityRepository<T extends CustomBaseEntity<T>> {
 	}
 
 	async update(entity: T): Promise<T> {
-		await this.entityManager.upsert(entity);
+		await this.entityManager.persistAndFlush(entity);
 
 		return entity;
 	}

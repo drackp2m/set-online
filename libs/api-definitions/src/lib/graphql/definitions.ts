@@ -21,6 +21,10 @@ export enum UserRole {
     Registered = "Registered"
 }
 
+export interface JoinGameInput {
+    gameUuid: string;
+}
+
 export interface ValidateUserConstraintsInput {
     email?: Nullable<string>;
     username?: Nullable<string>;
@@ -37,6 +41,7 @@ export interface GameEntity {
 }
 
 export interface IMutation {
+    joinGame(input: JoinGameInput): GameEntity | Promise<GameEntity>;
     newGame(): GameEntity | Promise<GameEntity>;
 }
 

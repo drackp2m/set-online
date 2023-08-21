@@ -22,9 +22,7 @@ export class UserResolver {
 		name: 'validateUserConstraints',
 	})
 	validateUserConstraints(
-		@Args('input', {
-			type: () => ValidateUserConstraintsInput,
-		})
+		@Args('input', { type: () => ValidateUserConstraintsInput })
 		_input: ValidateUserConstraintsInput,
 	): boolean {
 		return true;

@@ -50,9 +50,18 @@ export enum GameStatus {
 	WaitingOpponents = 'WaitingOpponents',
 }
 
+export type JoinGameInput = {
+	gameUuid: Scalars['String']['input'];
+};
+
 export type Mutation = {
 	__typename?: 'Mutation';
+	joinGame: GameEntity;
 	newGame: GameEntity;
+};
+
+export type MutationjoinGameArgs = {
+	input: JoinGameInput;
 };
 
 export type Query = {
@@ -105,6 +114,24 @@ const result: PossibleTypesResultData = {
 
 export default result;
 
+export type JoinGameMutationVariables = Exact<{
+	input: JoinGameInput;
+}>;
+
+export type JoinGameMutation = {
+	__typename?: 'Mutation';
+	joinGame: {
+		__typename?: 'GameEntity';
+		uuid: string;
+		tableCards: Array<string>;
+		status: GameStatus;
+		expiresOn: Date;
+		createdAt: Date;
+		updatedAt: Date;
+		participants: Array<{ __typename?: 'UserEntity'; uuid: string; username: string }>;
+	};
+};
+
 export type NewGameMutationVariables = Exact<{ [key: string]: never }>;
 
 export type NewGameMutation = {
@@ -151,6 +178,43 @@ export type GetUsersQuery = {
 		updatedAt: Date;
 	}>;
 };
+
+export type ValidateUserConstraintsQueryVariables = Exact<{
+	input: ValidateUserConstraintsInput;
+}>;
+
+export type ValidateUserConstraintsQuery = {
+	__typename?: 'Query';
+	validateUserConstraints: boolean;
+};
+
+export const JoinGameDocument = gql`
+	mutation JoinGame($input: JoinGameInput!) {
+		joinGame(input: $input) {
+			uuid
+			tableCards
+			participants {
+				uuid
+				username
+			}
+			status
+			expiresOn
+			createdAt
+			updatedAt
+		}
+	}
+`;
+
+@Injectable({
+	providedIn: 'root',
+})
+export class JoinGameGQL extends Apollo.Mutation<JoinGameMutation, JoinGameMutationVariables> {
+	override document = JoinGameDocument;
+
+	constructor(apollo: Apollo.Apollo) {
+		super(apollo);
+	}
+}
 
 export const NewGameDocument = gql`
 	mutation NewGame {
@@ -226,6 +290,26 @@ export const GetUsersDocument = gql`
 })
 export class GetUsersGQL extends Apollo.Query<GetUsersQuery, GetUsersQueryVariables> {
 	override document = GetUsersDocument;
+
+	constructor(apollo: Apollo.Apollo) {
+		super(apollo);
+	}
+}
+
+export const ValidateUserConstraintsDocument = gql`
+	query ValidateUserConstraints($input: ValidateUserConstraintsInput!) {
+		validateUserConstraints(input: $input)
+	}
+`;
+
+@Injectable({
+	providedIn: 'root',
+})
+export class ValidateUserConstraintsGQL extends Apollo.Query<
+	ValidateUserConstraintsQuery,
+	ValidateUserConstraintsQueryVariables
+> {
+	override document = ValidateUserConstraintsDocument;
 
 	constructor(apollo: Apollo.Apollo) {
 		super(apollo);

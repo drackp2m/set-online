@@ -1,13 +1,13 @@
-import { IsDefined, IsString } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 import { LoginRequest } from '@set-online/api-definitions';
 
 export class LoginRequestDto implements LoginRequest {
-	@IsDefined()
 	@IsString()
+	@IsNotEmpty()
 	username: string;
 
-	@IsDefined()
 	@IsString()
+	@IsNotEmpty()
 	password: string;
 }
