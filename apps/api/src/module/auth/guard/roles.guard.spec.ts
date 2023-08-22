@@ -15,7 +15,7 @@ describe('RolesGuard', () => {
 
 	const executionContext = mock<ExecutionContext>();
 
-	const handler = () => 22;
+	const handler = () => [];
 	const userFaker = new UserFaker();
 
 	beforeAll(async () => {
@@ -31,23 +31,26 @@ describe('RolesGuard', () => {
 	});
 
 	describe('canActivate', () => {
-		it('should return True when context is empty', async () => {
-			Reflect.deleteMetadata('roles', handler);
-			executionContext.getHandler.mockReturnValueOnce(handler);
-
-			const result = await guard.canActivate(executionContext as ExecutionContext);
-
-			expect(result).toStrictEqual(true);
-		});
-
-		it('throw UnauthorizedException when context has UserRole but args does not have User', async () => {
-			Reflect.defineMetadata('roles', UserRole.Registered, handler);
+		it('throw UnauthorizedException when context is empty', async () => {
 			executionContext.getHandler.mockReturnValueOnce(handler);
 			executionContext.getArgs.mockReturnValueOnce(getExecutionContextArgsWith(undefined));
 
 			const result = guard.canActivate(executionContext as ExecutionContext);
 
-			await expect(result).rejects.toThrow(UnauthorizedException);
+			expect(result).rejects.toThrow(UnauthorizedException);
+			expect(result).rejects.toMatchObject({ response: { authorization: 'invalid bearer' } });
+		});
+
+		it('throw UnauthorizedException when context has UserRole but args does not have User', async () => {
+			Reflect.defineMetadata('roles', [UserRole.Registered], handler);
+
+			executionContext.getHandler.mockReturnValueOnce(handler);
+			executionContext.getArgs.mockReturnValueOnce(getExecutionContextArgsWith(undefined));
+
+			const result = guard.canActivate(executionContext as ExecutionContext);
+
+			expect(result).rejects.toThrow(UnauthorizedException);
+			expect(result).rejects.toMatchObject({ response: { authorization: 'invalid bearer' } });
 		});
 
 		it('throw ForbiddenException when context has UserRole but args User has no privileges', async () => {
@@ -60,7 +63,8 @@ describe('RolesGuard', () => {
 
 			const result = guard.canActivate(executionContext as ExecutionContext);
 
-			await expect(result).rejects.toThrow(ForbiddenException);
+			expect(result).rejects.toThrow(ForbiddenException);
+			expect(result).rejects.toMatchObject({ response: { role: 'not allowed' } });
 		});
 
 		it('should return True when context has UserRole and args User has privileges', async () => {
@@ -77,7 +81,7 @@ describe('RolesGuard', () => {
 		});
 	});
 
-	function getExecutionContextArgsWith(user: UserEntity): Record<string, unknown>[] {
+	function getExecutionContextArgsWith(user: UserEntity | undefined): Record<string, unknown>[] {
 		return [
 			{},
 			{},

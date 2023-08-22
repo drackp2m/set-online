@@ -1,6 +1,6 @@
 <div id="main-layout" class="flex-col">
-	<section id="header" class="content-fixed flex-col align-center py-md gap-md">
-		<nav class="flex-row flex-wrap my-md gap-sm">
+	<section id="header" class="content-fixed flex-col py-md">
+		<nav class="flex-row flex-wrap justify-center gap-sm my-md">
 			<set-media-debug></set-media-debug>
 			<ng-container
 				*ngTemplateOutlet="button; context: { text: 'Register', link: '/register' }"
@@ -39,6 +39,11 @@
 				>{{ text }}</a
 			>
 		</ng-template>
+
+		<p *ngIf="user()" class="text-sm text-right">Welcome {{ user()?.username }}</p>
+		<p *ngIf="userError()" class="text-sm text-right">
+			GetUserInfo error: {{ userError() | json }}
+		</p>
 	</section>
 
 	<div class="scroll">

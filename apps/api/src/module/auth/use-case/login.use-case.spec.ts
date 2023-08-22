@@ -48,7 +48,7 @@ describe('LoginUseCase', () => {
 
 			const tokenModel = useCase.execute({ username: 'not', password: 'found' });
 
-			await expect(tokenModel).rejects.toThrow(NotFoundException);
+			expect(tokenModel).rejects.toThrow(NotFoundException);
 
 			expect(userEntityRepository.getOne).toBeCalledTimes(1);
 			expect(userEntityRepository.getOne).toBeCalledWith({ username: 'not' });
@@ -63,6 +63,7 @@ describe('LoginUseCase', () => {
 			const tokenModel = useCase.execute({ username: 'bad', password: 'password' });
 
 			await expect(tokenModel).rejects.toThrow(UnauthorizedException);
+			expect(tokenModel).rejects.toMatchObject({ response: { password: 'not match' } });
 
 			expect(userEntityRepository.getOne).toBeCalledTimes(1);
 			expect(userEntityRepository.getOne).toBeCalledWith({ username: 'bad' });

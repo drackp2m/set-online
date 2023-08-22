@@ -4,6 +4,7 @@ import { PubSub } from 'graphql-subscriptions';
 
 import { ProtectTo } from '../auth/decorator/protect-to.decorator';
 
+import { CurrentUser } from './decorator/current-user.decorator';
 import { UserRole } from './definition/user-role.enum';
 import { ValidateUserConstraintsInput } from './dto/input/validate-user-constraints.input';
 import { UserEntity } from './user.entity';
@@ -26,6 +27,14 @@ export class UserResolver {
 		_input: ValidateUserConstraintsInput,
 	): boolean {
 		return true;
+	}
+
+	@ProtectTo()
+	@Query(() => UserEntity, {
+		name: 'getUserInfo',
+	})
+	getUserInfo(@CurrentUser() user: UserEntity): UserEntity {
+		return user;
 	}
 
 	@ProtectTo(UserRole.Admin)

@@ -27,14 +27,30 @@ export default class OnlinePage implements OnInit {
 				this.games.set(data.data.listGames);
 			},
 		});
+
+		const data = {
+			data: {
+				joinGame: {
+					participants: [],
+				},
+			},
+		};
+
+		this.games.mutate((games) => {
+			const game = games?.find((game) => game.uuid);
+
+			if (game && data.data?.joinGame.participants) {
+				game.participants = data.data?.joinGame.participants;
+			}
+		});
 	}
 
-	joinGame(game: ListGamesQuery['listGames'][0]): void {
-		console.log(game.uuid);
-		this.joinGameGQL.mutate({ input: { gameUuid: game.uuid } }).subscribe({
+	joinGame(gameToJoin: ListGamesQuery['listGames'][0]): void {
+		this.joinGameGQL.mutate({ input: { gameUuid: gameToJoin.uuid } }).subscribe({
 			next: (data) => {
 				this.games.mutate((games) => {
-					const game = games?.find((game) => game.uuid);
+					const game = games?.find((game) => game.uuid === gameToJoin.uuid);
+
 					if (game && data.data?.joinGame.participants) {
 						game.participants = data.data?.joinGame.participants;
 					}

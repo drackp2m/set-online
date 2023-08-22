@@ -57,10 +57,10 @@ CMD yarn start
 
 FROM deps AS build-api
 
-CMD yarn nx build api
+CMD yarn build:api
 
 
 
 FROM build-api AS run-api
 
-CMD yarn nx serve api --prod
+CMD yarn serve:api

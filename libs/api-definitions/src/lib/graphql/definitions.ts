@@ -46,6 +46,7 @@ export interface IMutation {
 }
 
 export interface IQuery {
+    getUserInfo(): UserEntity | Promise<UserEntity>;
     getUsers(): UserEntity[] | Promise<UserEntity[]>;
     listGames(): GameEntity[] | Promise<GameEntity[]>;
     validateUserConstraints(input: ValidateUserConstraintsInput): boolean | Promise<boolean>;
