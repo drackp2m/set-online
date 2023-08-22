@@ -13,10 +13,6 @@ export class RolesGuard implements CanActivate {
 	async canActivate(context: ExecutionContext): Promise<boolean> {
 		const roles = new Reflector().get<UserRole[]>('roles', context.getHandler());
 
-		if (!roles) {
-			return true;
-		}
-
 		const user = GqlExecutionContext.create(context).getContext<{
 			req: Request & { user: UserEntity };
 		}>().req.user;
@@ -25,12 +21,16 @@ export class RolesGuard implements CanActivate {
 			throw new UnauthorizedException('invalid bearer', 'authorization');
 		}
 
+		if (roles.length === 0) {
+			return true;
+		}
+
 		const hasRole = user.role === UserRole.Admin || roles.includes(user.role);
 
 		if (hasRole) {
 			return true;
 		}
 
-		throw new ForbiddenException();
+		throw new ForbiddenException('not allowed', 'role');
 	}
 }

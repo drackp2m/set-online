@@ -66,6 +66,7 @@ export type MutationjoinGameArgs = {
 
 export type Query = {
 	__typename?: 'Query';
+	getUserInfo: UserEntity;
 	getUsers: Array<UserEntity>;
 	listGames: Array<GameEntity>;
 	validateUserConstraints: Scalars['Boolean']['output'];
@@ -175,6 +176,31 @@ export type ListGamesQuery = {
 	}>;
 };
 
+export type UserFieldsFragment = {
+	__typename?: 'UserEntity';
+	uuid: string;
+	username: string;
+	email?: string | null;
+	role: UserRole;
+	createdAt: Date;
+	updatedAt: Date;
+};
+
+export type GetUserInfoQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetUserInfoQuery = {
+	__typename?: 'Query';
+	getUserInfo: {
+		__typename?: 'UserEntity';
+		uuid: string;
+		username: string;
+		email?: string | null;
+		role: UserRole;
+		createdAt: Date;
+		updatedAt: Date;
+	};
+};
+
 export type GetUsersQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetUsersQuery = {
@@ -214,6 +240,17 @@ export const GameFieldsFragmentDoc = gql`
 	}
 `;
 
+export const UserFieldsFragmentDoc = gql`
+	fragment UserFields on UserEntity {
+		uuid
+		username
+		email
+		role
+		createdAt
+		updatedAt
+	}
+`;
+
 export const JoinGameDocument = gql`
 	mutation JoinGame($input: JoinGameInput!) {
 		joinGame(input: $input) {
@@ -237,18 +274,10 @@ export class JoinGameGQL extends Apollo.Mutation<JoinGameMutation, JoinGameMutat
 export const NewGameDocument = gql`
 	mutation NewGame {
 		newGame {
-			uuid
-			tableCards
-			participants {
-				uuid
-				username
-			}
-			status
-			expiresOn
-			createdAt
-			updatedAt
+			...GameFields
 		}
 	}
+	${GameFieldsFragmentDoc}
 `;
 
 @Injectable({
@@ -265,18 +294,10 @@ export class NewGameGQL extends Apollo.Mutation<NewGameMutation, NewGameMutation
 export const ListGamesDocument = gql`
 	query ListGames {
 		listGames {
-			uuid
-			tableCards
-			participants {
-				uuid
-				username
-			}
-			status
-			expiresOn
-			createdAt
-			updatedAt
+			...GameFields
 		}
 	}
+	${GameFieldsFragmentDoc}
 `;
 
 @Injectable({
@@ -290,17 +311,33 @@ export class ListGamesGQL extends Apollo.Query<ListGamesQuery, ListGamesQueryVar
 	}
 }
 
+export const GetUserInfoDocument = gql`
+	query GetUserInfo {
+		getUserInfo {
+			...UserFields
+		}
+	}
+	${UserFieldsFragmentDoc}
+`;
+
+@Injectable({
+	providedIn: 'root',
+})
+export class GetUserInfoGQL extends Apollo.Query<GetUserInfoQuery, GetUserInfoQueryVariables> {
+	override document = GetUserInfoDocument;
+
+	constructor(apollo: Apollo.Apollo) {
+		super(apollo);
+	}
+}
+
 export const GetUsersDocument = gql`
 	query GetUsers {
 		getUsers {
-			uuid
-			username
-			email
-			role
-			createdAt
-			updatedAt
+			...UserFields
 		}
 	}
+	${UserFieldsFragmentDoc}
 `;
 
 @Injectable({

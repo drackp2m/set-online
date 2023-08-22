@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { PreconditionFailedException } from '../../../shared/exception/precondition-failed.execption';
+import { PreconditionFailedException } from '../../../shared/exception/precondition-failed.exception';
 import { UserEntity } from '../../user/user.entity';
 import { GameEntity } from '../game.entity';
 import { GameRepository } from '../game.repository';

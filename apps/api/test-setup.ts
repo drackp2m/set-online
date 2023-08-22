@@ -14,6 +14,8 @@ const dropDatabases = async () => {
 
 	const em: EntityManager = orm.em as EntityManager;
 
+	await em.execute('DROP TABLE IF EXISTS games_participants;');
+	await em.execute('DROP TABLE IF EXISTS games;');
 	await em.execute('DROP TABLE IF EXISTS users;');
 	await em.execute('DROP TABLE IF EXISTS migrations;');
 };

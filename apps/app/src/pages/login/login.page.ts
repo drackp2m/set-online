@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { ApiClient } from '../../shared/services/api-client.service';
+import { CurrentUserStore } from '../../stores/current-user.store';
 
 @Component({
 	templateUrl: './login.page.html',
@@ -14,11 +15,12 @@ export default class LoginPage {
 		password: new FormControl('', [Validators.required]),
 	});
 
-	error = signal('');
+	error = signal(undefined);
 
 	constructor(
 		private readonly apiClient: ApiClient,
 		private readonly router: Router,
+		private readonly currentUserStore: CurrentUserStore,
 	) {}
 
 	onSubmit() {
@@ -33,10 +35,12 @@ export default class LoginPage {
 			})
 			.subscribe({
 				next: () => {
+					this.currentUserStore.fetchData();
+
 					this.router.navigate(['/home']);
 				},
-				error: (error) => {
-					this.error.set(error.statusText);
+				error: ({ error }) => {
+					this.error.set(error.message);
 				},
 			});
 	}

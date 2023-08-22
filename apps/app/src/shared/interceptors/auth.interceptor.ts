@@ -16,6 +16,7 @@ import { catchError, switchMap } from 'rxjs/operators';
 export class AuthInterceptor implements HttpInterceptor {
 	private readonly API_REFRESH_SESSION_URL = '/api/auth/refresh-session';
 	private readonly API_LOGIN_URL = '/api/auth/login';
+	private readonly API_REGISTER_URL = '/api/auth/register';
 
 	private tokenIsValid = true;
 	private jwtTokensRefreshed$: Subject<void> = new Subject<void>();
@@ -26,9 +27,9 @@ export class AuthInterceptor implements HttpInterceptor {
 	) {}
 
 	intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-		const urlsToIgnore = [this.API_REFRESH_SESSION_URL, this.API_LOGIN_URL];
+		const urlsToIgnore = [this.API_REFRESH_SESSION_URL, this.API_LOGIN_URL, this.API_REGISTER_URL];
 
-		if (urlsToIgnore.includes(req.url)) return next.handle(req);
+		if (urlsToIgnore.some((url) => req.url.includes(url))) return next.handle(req);
 
 		if (!this.tokenIsValid) {
 			return this.jwtTokensRefreshed$.pipe(switchMap(() => next.handle(req)));
@@ -39,7 +40,7 @@ export class AuthInterceptor implements HttpInterceptor {
 				if (!(event instanceof HttpResponse)) return of(event);
 
 				const isUnauthorizedError =
-					event.body?.errors && event.body.errors[0].extensions.code === 'UNAUTHENTICATED';
+					event.body?.errors && event.body.errors[0].message === 'Unauthorized';
 
 				if (!isUnauthorizedError) return of(event);
 
