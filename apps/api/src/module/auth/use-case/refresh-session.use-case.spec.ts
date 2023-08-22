@@ -72,17 +72,19 @@ describe('RefreshSessionUseCase', () => {
 
 	describe('execute', () => {
 		it('throw UnauthorizedException when the request missing cookies', async () => {
-			const execution = useCase.execute();
+			const result = useCase.execute();
 
-			await expect(execution).rejects.toThrowError(UnauthorizedException);
+			expect(result).rejects.toThrowError(UnauthorizedException);
+			expect(result).rejects.toMatchObject({ response: { refreshToken: 'jwt must be provided' } });
 		});
 
 		it('throw UnauthorizedException when token is invalid', async () => {
 			request.signedCookies['x-jwt-refresh-token'] = 'wrong-refresh-token';
 
-			const execution = useCase.execute();
+			const result = useCase.execute();
 
-			await expect(execution).rejects.toThrowError(UnauthorizedException);
+			expect(result).rejects.toThrowError(UnauthorizedException);
+			expect(result).rejects.toMatchObject({ response: { refreshToken: 'jwt malformed' } });
 
 			expect(jwtServiceVerify).toBeCalledTimes(1);
 			expect(jwtServiceVerify).toBeCalledWith('wrong-refresh-token');
@@ -108,9 +110,9 @@ describe('RefreshSessionUseCase', () => {
 			createAccessToken.execute.mockReturnValueOnce('access-token');
 			createRefreshToken.execute.mockReturnValueOnce('refresh-token');
 
-			const execution = await useCase.execute();
+			const result = await useCase.execute();
 
-			expect(execution).toStrictEqual(undefined);
+			expect(result).toStrictEqual(undefined);
 
 			expect(jwtServiceVerify).toBeCalledTimes(1);
 			expect(jwtServiceVerify).toBeCalledWith(fakeRefreshToken);

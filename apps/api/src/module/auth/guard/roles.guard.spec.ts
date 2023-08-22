@@ -37,7 +37,8 @@ describe('RolesGuard', () => {
 
 			const result = guard.canActivate(executionContext as ExecutionContext);
 
-			await expect(result).rejects.toThrow(UnauthorizedException);
+			expect(result).rejects.toThrow(UnauthorizedException);
+			expect(result).rejects.toMatchObject({ response: { authorization: 'invalid bearer' } });
 		});
 
 		it('throw UnauthorizedException when context has UserRole but args does not have User', async () => {
@@ -48,7 +49,8 @@ describe('RolesGuard', () => {
 
 			const result = guard.canActivate(executionContext as ExecutionContext);
 
-			await expect(result).rejects.toThrow(UnauthorizedException);
+			expect(result).rejects.toThrow(UnauthorizedException);
+			expect(result).rejects.toMatchObject({ response: { authorization: 'invalid bearer' } });
 		});
 
 		it('throw ForbiddenException when context has UserRole but args User has no privileges', async () => {
@@ -61,7 +63,8 @@ describe('RolesGuard', () => {
 
 			const result = guard.canActivate(executionContext as ExecutionContext);
 
-			await expect(result).rejects.toThrow(ForbiddenException);
+			expect(result).rejects.toThrow(ForbiddenException);
+			expect(result).rejects.toMatchObject({ response: { role: 'not allowed' } });
 		});
 
 		it('should return True when context has UserRole and args User has privileges', async () => {
