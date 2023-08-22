@@ -114,6 +114,17 @@ const result: PossibleTypesResultData = {
 
 export default result;
 
+export type GameFieldsFragment = {
+	__typename?: 'GameEntity';
+	uuid: string;
+	tableCards: Array<string>;
+	status: GameStatus;
+	expiresOn: Date;
+	createdAt: Date;
+	updatedAt: Date;
+	participants: Array<{ __typename?: 'UserEntity'; uuid: string; username: string }>;
+};
+
 export type JoinGameMutationVariables = Exact<{
 	input: JoinGameInput;
 }>;
@@ -188,21 +199,28 @@ export type ValidateUserConstraintsQuery = {
 	validateUserConstraints: boolean;
 };
 
+export const GameFieldsFragmentDoc = gql`
+	fragment GameFields on GameEntity {
+		uuid
+		tableCards
+		participants {
+			uuid
+			username
+		}
+		status
+		expiresOn
+		createdAt
+		updatedAt
+	}
+`;
+
 export const JoinGameDocument = gql`
 	mutation JoinGame($input: JoinGameInput!) {
 		joinGame(input: $input) {
-			uuid
-			tableCards
-			participants {
-				uuid
-				username
-			}
-			status
-			expiresOn
-			createdAt
-			updatedAt
+			...GameFields
 		}
 	}
+	${GameFieldsFragmentDoc}
 `;
 
 @Injectable({

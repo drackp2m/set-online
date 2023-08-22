@@ -52,3 +52,15 @@ RUN mkdir -p ~/.local/share/zsh/plugins \
 			&& ln -s /usr/share/zsh/plugins/powerlevel10k ~/.local/share/zsh/plugins/
 
 CMD yarn start
+
+
+
+FROM deps AS build:api
+
+CMD nx build api
+
+
+
+FROM build:api AS run:api
+
+CMD nx serve api --prod

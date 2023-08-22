@@ -1,0 +1,5 @@
+mutation JoinGame($input: JoinGameInput!) {
+  joinGame(input: $input) {
+    ...GameFields
+	}
+}

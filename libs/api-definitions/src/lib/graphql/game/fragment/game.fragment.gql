@@ -1,5 +1,4 @@
-query ListGames {
-	listGames {
+fragment GameFields on GameEntity {
     uuid
     tableCards
     participants {
@@ -10,5 +9,4 @@ query ListGames {
     expiresOn
     createdAt
     updatedAt
-  }
 }
