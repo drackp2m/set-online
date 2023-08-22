@@ -1,0 +1,12 @@
+fragment GameFields on GameEntity {
+    uuid
+    tableCards
+    participants {
+      uuid
+      username
+    }
+    status
+    expiresOn
+    createdAt
+    updatedAt
+}

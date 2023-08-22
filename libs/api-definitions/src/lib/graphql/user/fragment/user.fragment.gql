@@ -1,0 +1,8 @@
+fragment UserFields on UserEntity {
+	uuid
+	username
+	email
+	role
+	createdAt
+	updatedAt
+}

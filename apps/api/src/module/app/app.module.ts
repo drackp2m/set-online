@@ -14,6 +14,8 @@ import { jwtConfig } from '../../shared/module/config/registers/jwt.config';
 import { GqlThrottlerModule } from '../../shared/module/gql-throttler/gql-throttler.module';
 import { PubSubModule } from '../../shared/module/pub-sub/pub-sub-module';
 import { AuthModule } from '../auth/auth.module';
+import { GameModule } from '../game/game.module';
+import { UserModule } from '../user/user.module';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -36,6 +38,8 @@ import { AppService } from './app.service';
 		PubSubModule,
 		GqlThrottlerModule,
 		AuthModule,
+		UserModule,
+		GameModule,
 	],
 	providers: [AppService],
 	controllers: [AppController],

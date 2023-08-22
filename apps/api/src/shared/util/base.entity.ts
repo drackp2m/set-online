@@ -12,15 +12,15 @@ export abstract class CustomBaseEntity<
 	P extends string = never,
 > extends BaseEntity<T, PK, P> {
 	@PrimaryKey()
-	@Field((_type) => ID)
+	@Field(() => ID)
 	uuid: string = GenerateUuidUseCase.execute();
 
 	@Property()
-	@Field((_type) => Date)
+	@Field(() => Date)
 	createdAt: Date = GenerateNowDateUseCase.execute();
 
 	@Property({ onUpdate: GenerateNowDateUseCase.execute })
-	@Field((_type) => Date)
+	@Field(() => Date)
 	updatedAt: Date = GenerateNowDateUseCase.execute();
 
 	constructor(entity?: EntityData<T>) {

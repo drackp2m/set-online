@@ -11,12 +11,12 @@ export class RegisterRequestDto implements RegisterRequest {
 	@IsNotEmpty()
 	@IsUniqueUserProp('username')
 	@Field()
-	username!: string;
+	username: string;
 
 	@IsString()
 	@IsNotEmpty()
 	@Field()
-	password!: string;
+	password: string;
 
 	@IsOptional()
 	@IsEmail()

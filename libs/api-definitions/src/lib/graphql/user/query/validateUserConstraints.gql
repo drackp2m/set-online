@@ -1,0 +1,3 @@
+query ValidateUserConstraints($input: ValidateUserConstraintsInput!) {
+	validateUserConstraints(input: $input)
+}

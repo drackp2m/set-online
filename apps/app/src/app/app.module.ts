@@ -42,11 +42,6 @@ import { APP_ROUTES } from './app.routes';
 				const ws = new GraphQLWsLink(
 					createClient({
 						url: `${environment.wsUrl}/graphql`,
-						// connectionParams: () => {
-						// 	return {
-						// 		Authorization: `caca ${22}`,
-						// 	};
-						// },
 					}),
 				);
 
@@ -65,11 +60,11 @@ import { APP_ROUTES } from './app.routes';
 					name: 'set-online',
 					link,
 					defaultOptions: {
-						query: {
+						watchQuery: {
 							fetchPolicy: 'network-only',
 							errorPolicy: 'none',
 						},
-						watchQuery: {
+						query: {
 							fetchPolicy: 'network-only',
 							errorPolicy: 'none',
 						},

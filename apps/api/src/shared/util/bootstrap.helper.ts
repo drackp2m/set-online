@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs';
+import { readFileSync } from 'node:fs';
 
 import { INestApplication, Logger, NestApplicationOptions, ValidationPipe } from '@nestjs/common';
 

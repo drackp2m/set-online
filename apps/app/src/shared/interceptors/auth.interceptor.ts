@@ -39,7 +39,7 @@ export class AuthInterceptor implements HttpInterceptor {
 				if (!(event instanceof HttpResponse)) return of(event);
 
 				const isUnauthorizedError =
-					event.body?.errors && event.body.errors[0].message === 'Unauthorized';
+					event.body?.errors && event.body.errors[0].extensions.code === 'UNAUTHENTICATED';
 
 				if (!isUnauthorizedError) return of(event);
 
