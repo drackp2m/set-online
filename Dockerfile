@@ -61,6 +61,6 @@ CMD nx build api
 
 
 
-FROM build:api AS run-api
+FROM build-api AS run-api
 
 CMD nx serve api --prod
