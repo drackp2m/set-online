@@ -22,9 +22,7 @@ export class UserResolver {
 		name: 'validateUserConstraints',
 	})
 	validateUserConstraints(
-		@Args('input', {
-			type: () => ValidateUserConstraintsInput,
-		})
+		@Args('input', { type: () => ValidateUserConstraintsInput })
 		_input: ValidateUserConstraintsInput,
 	): boolean {
 		return true;
@@ -55,15 +53,5 @@ export class UserResolver {
 		}, 5000);
 
 		return this.pubSub.asyncIterator('getManySubscription');
-
-		return {
-			async *[Symbol.asyncIterator]() {
-				while (true) {
-					await new Promise((resolve) => setTimeout(resolve, 1000));
-					const message = `Hello from event emitter at ${new Date().toISOString()}`;
-					yield message;
-				}
-			},
-		};
 	}
 }

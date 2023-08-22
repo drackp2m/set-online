@@ -37,7 +37,7 @@ $text-align: (
 }
 
 @function get-rules($name) {
-	@return (size-#{$name}: (font-size: var(--font-size-#{$name})));
+	@return (text-#{$name}: (font-size: var(--font-size-#{$name})));
 }
 
 @function get-weight-rules($name) {

@@ -31,9 +31,43 @@ export type Scalars = {
 	DateTime: { input: Date; output: Date };
 };
 
+/** games */
+export type GameEntity = {
+	__typename?: 'GameEntity';
+	createdAt: Scalars['DateTime']['output'];
+	expiresOn: Scalars['DateTime']['output'];
+	participants: Array<UserEntity>;
+	status: GameStatus;
+	tableCards: Array<Scalars['String']['output']>;
+	updatedAt: Scalars['DateTime']['output'];
+	uuid: Scalars['ID']['output'];
+};
+
+export enum GameStatus {
+	Completed = 'Completed',
+	Expired = 'Expired',
+	InProgress = 'InProgress',
+	WaitingOpponents = 'WaitingOpponents',
+}
+
+export type JoinGameInput = {
+	gameUuid: Scalars['String']['input'];
+};
+
+export type Mutation = {
+	__typename?: 'Mutation';
+	joinGame: GameEntity;
+	newGame: GameEntity;
+};
+
+export type MutationjoinGameArgs = {
+	input: JoinGameInput;
+};
+
 export type Query = {
 	__typename?: 'Query';
 	getUsers: Array<UserEntity>;
+	listGames: Array<GameEntity>;
 	validateUserConstraints: Scalars['Boolean']['output'];
 };
 
@@ -43,7 +77,7 @@ export type QueryvalidateUserConstraintsArgs = {
 
 export type Subscription = {
 	__typename?: 'Subscription';
-	getAllUsers: Scalars['String']['output'];
+	getManySubscription?: Maybe<Scalars['String']['output']>;
 };
 
 /** user */
@@ -51,6 +85,7 @@ export type UserEntity = {
 	__typename?: 'UserEntity';
 	createdAt: Scalars['DateTime']['output'];
 	email?: Maybe<Scalars['String']['output']>;
+	games: Array<GameEntity>;
 	role: UserRole;
 	updatedAt: Scalars['DateTime']['output'];
 	username: Scalars['String']['output'];
@@ -79,6 +114,67 @@ const result: PossibleTypesResultData = {
 
 export default result;
 
+export type GameFieldsFragment = {
+	__typename?: 'GameEntity';
+	uuid: string;
+	tableCards: Array<string>;
+	status: GameStatus;
+	expiresOn: Date;
+	createdAt: Date;
+	updatedAt: Date;
+	participants: Array<{ __typename?: 'UserEntity'; uuid: string; username: string }>;
+};
+
+export type JoinGameMutationVariables = Exact<{
+	input: JoinGameInput;
+}>;
+
+export type JoinGameMutation = {
+	__typename?: 'Mutation';
+	joinGame: {
+		__typename?: 'GameEntity';
+		uuid: string;
+		tableCards: Array<string>;
+		status: GameStatus;
+		expiresOn: Date;
+		createdAt: Date;
+		updatedAt: Date;
+		participants: Array<{ __typename?: 'UserEntity'; uuid: string; username: string }>;
+	};
+};
+
+export type NewGameMutationVariables = Exact<{ [key: string]: never }>;
+
+export type NewGameMutation = {
+	__typename?: 'Mutation';
+	newGame: {
+		__typename?: 'GameEntity';
+		uuid: string;
+		tableCards: Array<string>;
+		status: GameStatus;
+		expiresOn: Date;
+		createdAt: Date;
+		updatedAt: Date;
+		participants: Array<{ __typename?: 'UserEntity'; uuid: string; username: string }>;
+	};
+};
+
+export type ListGamesQueryVariables = Exact<{ [key: string]: never }>;
+
+export type ListGamesQuery = {
+	__typename?: 'Query';
+	listGames: Array<{
+		__typename?: 'GameEntity';
+		uuid: string;
+		tableCards: Array<string>;
+		status: GameStatus;
+		expiresOn: Date;
+		createdAt: Date;
+		updatedAt: Date;
+		participants: Array<{ __typename?: 'UserEntity'; uuid: string; username: string }>;
+	}>;
+};
+
 export type GetUsersQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetUsersQuery = {
@@ -93,6 +189,106 @@ export type GetUsersQuery = {
 		updatedAt: Date;
 	}>;
 };
+
+export type ValidateUserConstraintsQueryVariables = Exact<{
+	input: ValidateUserConstraintsInput;
+}>;
+
+export type ValidateUserConstraintsQuery = {
+	__typename?: 'Query';
+	validateUserConstraints: boolean;
+};
+
+export const GameFieldsFragmentDoc = gql`
+	fragment GameFields on GameEntity {
+		uuid
+		tableCards
+		participants {
+			uuid
+			username
+		}
+		status
+		expiresOn
+		createdAt
+		updatedAt
+	}
+`;
+
+export const JoinGameDocument = gql`
+	mutation JoinGame($input: JoinGameInput!) {
+		joinGame(input: $input) {
+			...GameFields
+		}
+	}
+	${GameFieldsFragmentDoc}
+`;
+
+@Injectable({
+	providedIn: 'root',
+})
+export class JoinGameGQL extends Apollo.Mutation<JoinGameMutation, JoinGameMutationVariables> {
+	override document = JoinGameDocument;
+
+	constructor(apollo: Apollo.Apollo) {
+		super(apollo);
+	}
+}
+
+export const NewGameDocument = gql`
+	mutation NewGame {
+		newGame {
+			uuid
+			tableCards
+			participants {
+				uuid
+				username
+			}
+			status
+			expiresOn
+			createdAt
+			updatedAt
+		}
+	}
+`;
+
+@Injectable({
+	providedIn: 'root',
+})
+export class NewGameGQL extends Apollo.Mutation<NewGameMutation, NewGameMutationVariables> {
+	override document = NewGameDocument;
+
+	constructor(apollo: Apollo.Apollo) {
+		super(apollo);
+	}
+}
+
+export const ListGamesDocument = gql`
+	query ListGames {
+		listGames {
+			uuid
+			tableCards
+			participants {
+				uuid
+				username
+			}
+			status
+			expiresOn
+			createdAt
+			updatedAt
+		}
+	}
+`;
+
+@Injectable({
+	providedIn: 'root',
+})
+export class ListGamesGQL extends Apollo.Query<ListGamesQuery, ListGamesQueryVariables> {
+	override document = ListGamesDocument;
+
+	constructor(apollo: Apollo.Apollo) {
+		super(apollo);
+	}
+}
 
 export const GetUsersDocument = gql`
 	query GetUsers {
@@ -112,6 +308,26 @@ export const GetUsersDocument = gql`
 })
 export class GetUsersGQL extends Apollo.Query<GetUsersQuery, GetUsersQueryVariables> {
 	override document = GetUsersDocument;
+
+	constructor(apollo: Apollo.Apollo) {
+		super(apollo);
+	}
+}
+
+export const ValidateUserConstraintsDocument = gql`
+	query ValidateUserConstraints($input: ValidateUserConstraintsInput!) {
+		validateUserConstraints(input: $input)
+	}
+`;
+
+@Injectable({
+	providedIn: 'root',
+})
+export class ValidateUserConstraintsGQL extends Apollo.Query<
+	ValidateUserConstraintsQuery,
+	ValidateUserConstraintsQueryVariables
+> {
+	override document = ValidateUserConstraintsDocument;
 
 	constructor(apollo: Apollo.Apollo) {
 		super(apollo);

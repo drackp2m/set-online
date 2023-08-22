@@ -31,7 +31,7 @@ services:
     working_dir: /usr/src/app
     build:
       context: .
-      target: dev
+      target: run:api
     networks:
       - set-network
     ports:
@@ -42,10 +42,10 @@ services:
       - .:/usr/src/app
       - /usr/src/app/node_modules
     environment:
-      MIKRO_ORM_CLI_USE_TS_NODE: 1
-      MIKRO_ORM_CLI_TS_CONFIG_PATH: apps/api/tsconfig.app.json
       MIKRO_ORM_CLI: apps/api/src/shared/module/config/mikro-orm.config.ts
-      NODE_TLS_REJECT_UNAUTHORIZED: 1
+      MIKRO_ORM_CLI_TS_CONFIG_PATH: apps/api/tsconfig.app.json
+      MIKRO_ORM_CLI_USE_TS_NODE: 1
+      NODE_TLS_REJECT_UNAUTHORIZED: 0
       PATH: $PATH:/usr/src/app/node_modules/.bin
       TZ: Europe/Madrid
     depends_on:
