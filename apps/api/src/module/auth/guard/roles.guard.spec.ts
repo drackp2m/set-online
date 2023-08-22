@@ -15,7 +15,7 @@ describe('RolesGuard', () => {
 
 	const executionContext = mock<ExecutionContext>();
 
-	const handler = () => 22;
+	const handler = () => [];
 	const userFaker = new UserFaker();
 
 	beforeAll(async () => {
@@ -31,17 +31,18 @@ describe('RolesGuard', () => {
 	});
 
 	describe('canActivate', () => {
-		it('should return True when context is empty', async () => {
-			Reflect.deleteMetadata('roles', handler);
+		it('throw UnauthorizedException when context is empty', async () => {
 			executionContext.getHandler.mockReturnValueOnce(handler);
+			executionContext.getArgs.mockReturnValueOnce(getExecutionContextArgsWith(undefined));
 
-			const result = await guard.canActivate(executionContext as ExecutionContext);
+			const result = guard.canActivate(executionContext as ExecutionContext);
 
-			expect(result).toStrictEqual(true);
+			await expect(result).rejects.toThrow(UnauthorizedException);
 		});
 
 		it('throw UnauthorizedException when context has UserRole but args does not have User', async () => {
-			Reflect.defineMetadata('roles', UserRole.Registered, handler);
+			Reflect.defineMetadata('roles', [UserRole.Registered], handler);
+
 			executionContext.getHandler.mockReturnValueOnce(handler);
 			executionContext.getArgs.mockReturnValueOnce(getExecutionContextArgsWith(undefined));
 
@@ -77,7 +78,7 @@ describe('RolesGuard', () => {
 		});
 	});
 
-	function getExecutionContextArgsWith(user: UserEntity): Record<string, unknown>[] {
+	function getExecutionContextArgsWith(user: UserEntity | undefined): Record<string, unknown>[] {
 		return [
 			{},
 			{},
