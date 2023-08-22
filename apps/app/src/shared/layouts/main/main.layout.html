@@ -41,6 +41,9 @@
 		</ng-template>
 
 		<p *ngIf="user()" class="text-sm text-right">Welcome {{ user()?.username }}</p>
+		<p *ngIf="userError()" class="text-sm text-right">
+			GetUserInfo error: {{ userError() | json }}
+		</p>
 	</section>
 
 	<div class="scroll">

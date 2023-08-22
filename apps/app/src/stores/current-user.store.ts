@@ -5,7 +5,9 @@ import { stateHistory } from '@ngneat/elf-state-history';
 import { GetUserInfoGQL, GetUserInfoQuery } from '../graphql/apollo-operations';
 import { BaseState, getInitialBaseState } from '../shared/stores/base-state.interface';
 
-interface StateProps extends BaseState<GetUserInfoQuery['getUserInfo']> {}
+type UserInfo = GetUserInfoQuery['getUserInfo'];
+
+interface StateProps extends BaseState<UserInfo> {}
 
 export const store = createStore(
 	{ name: 'currentUser' },
@@ -40,17 +42,19 @@ export class CurrentUserStore {
 			},
 			error: (error) => {
 				store.update((state) => {
-					const details = error.graphQLErrors[0].extensions.details;
-
-					console.log(details);
+					const details = error.graphQLErrors[0]?.extensions.details;
 
 					return {
 						...state,
 						loading: false,
-						// error: JSON.parse(details),
+						error: details,
 					};
 				});
 			},
 		});
+	}
+
+	reset(): void {
+		store.update(getInitialBaseState<UserInfo>);
 	}
 }

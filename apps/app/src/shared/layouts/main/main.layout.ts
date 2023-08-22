@@ -1,4 +1,4 @@
-import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { JsonPipe, NgIf, NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
@@ -12,10 +12,11 @@ import { ApiClient } from '../../services/api-client.service';
 	standalone: true,
 	templateUrl: './main.layout.html',
 	styleUrls: ['./main.layout.scss'],
-	imports: [RouterOutlet, RouterModule, NgTemplateOutlet, MediaDebugComponent, NgIf],
+	imports: [RouterOutlet, RouterModule, NgTemplateOutlet, MediaDebugComponent, NgIf, JsonPipe],
 })
 export default class MainLayout {
 	user = toSignal(this.currentUserStore.state$.pipe(map((state) => state.data)));
+	userError = toSignal(this.currentUserStore.state$.pipe(map((state) => state.error)));
 
 	constructor(
 		private readonly apiClient: ApiClient,
@@ -29,6 +30,8 @@ export default class MainLayout {
 		return () =>
 			this.apiClient.auth.get('/logout').subscribe({
 				next: () => {
+					this.currentUserStore.reset();
+
 					this.router.navigate(['/login']);
 				},
 			});

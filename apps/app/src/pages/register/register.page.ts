@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { UserEntity } from '../../graphql/apollo-operations';
 import { ApiClient } from '../../shared/services/api-client.service';
+import { CurrentUserStore } from '../../stores/current-user.store';
 
 @Component({
 	templateUrl: './register.page.html',
@@ -15,9 +16,12 @@ export default class RegisterPage {
 	});
 
 	user: WritableSignal<UserEntity | null> = signal(null);
-	error = signal('');
+	error = signal(undefined);
 
-	constructor(private readonly apiClient: ApiClient) {}
+	constructor(
+		private readonly apiClient: ApiClient,
+		private readonly currentUserStore: CurrentUserStore,
+	) {}
 
 	onSubmit() {
 		const controls = this.form.controls;
@@ -31,10 +35,12 @@ export default class RegisterPage {
 			})
 			.subscribe({
 				next: (data) => {
+					this.currentUserStore.fetchData();
+
 					this.user.set(data);
 				},
-				error: (error) => {
-					this.error.set(error.statusText);
+				error: ({ error }) => {
+					this.error.set(error.message);
 				},
 			});
 	}

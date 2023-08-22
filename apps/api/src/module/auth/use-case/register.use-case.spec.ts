@@ -8,6 +8,7 @@ import { RegisterRequestDto } from '../dto/register-request.dto';
 
 import { RegisterUseCase } from './register.use-case';
 
+// ToDo => update test with username / email checks
 describe('RegisterUseCase', () => {
 	let useCase: RegisterUseCase;
 	const userEntityRepository = mock<UserRepository>();
