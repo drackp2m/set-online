@@ -31,6 +31,6 @@ export class RolesGuard implements CanActivate {
 			return true;
 		}
 
-		throw new ForbiddenException();
+		throw new ForbiddenException('not allowed', 'role');
 	}
 }
