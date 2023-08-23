@@ -6,6 +6,7 @@ import { ConfigurationModule } from '../../shared/module/config/configuration.mo
 import { ConfigurationService } from '../../shared/module/config/configuration.service';
 import { JwtFactory } from '../../shared/module/config/factories/jwt.factory';
 import { CheckPasswordUseCase } from '../../shared/use-case/check-password.use-case';
+import { HashPasswordUseCase } from '../../shared/use-case/hash-password.use-case';
 import { UserModule } from '../user/user.module';
 
 import { AuthController } from './auth.controller';
@@ -36,13 +37,14 @@ import { SetJwtTokenUseCase } from './use-case/set-jwt-token.use-case';
 		},
 		JwtStrategyService,
 		RegisterUseCase,
+		HashPasswordUseCase,
 		LoginUseCase,
+		CheckPasswordUseCase,
 		LogoutUseCase,
 		RefreshSessionUseCase,
 		CreateJwtAccessTokenUseCase,
 		CreateJwtRefreshTokenUseCase,
 		SetJwtTokenUseCase,
-		CheckPasswordUseCase,
 	],
 	controllers: [AuthController],
 })
