@@ -1,20 +1,24 @@
 import { Injectable } from '@nestjs/common';
 
 import { PreconditionFailedException } from '../../../shared/exception/precondition-failed.exception';
+import { HashPasswordUseCase } from '../../../shared/use-case/hash-password.use-case';
 import { UserEntity } from '../../user/user.entity';
 import { UserRepository } from '../../user/user.repository';
 import { RegisterRequestDto } from '../dto/register-request.dto';
 
 @Injectable()
 export class RegisterUseCase {
-	constructor(private readonly userRepository: UserRepository) {}
+	constructor(
+		private readonly userRepository: UserRepository,
+		private readonly hashPasswordUseCase: HashPasswordUseCase,
+	) {}
 
 	async execute(registerRequest: RegisterRequestDto): Promise<UserEntity> {
 		const userExists = await this.userRepository.getMany({
 			$or: [
 				{ username: registerRequest.username },
 				{
-					email: registerRequest.email,
+					...(registerRequest.email ? { email: registerRequest.email } : {}),
 				},
 			],
 		});
@@ -24,6 +28,8 @@ export class RegisterUseCase {
 
 			throw new PreconditionFailedException('already exists', field);
 		}
+
+		registerRequest.password = await this.hashPasswordUseCase.execute(registerRequest.password);
 
 		const user = new UserEntity(registerRequest);
 
