@@ -44,7 +44,7 @@ export default class ExamplePage {
 		private readonly apollo: Apollo,
 	) {
 		effect(() => {
-			console.log(this.apolloSubscription()?.data);
+			// console.log(this.apolloSubscription()?.data);
 		});
 	}
 
