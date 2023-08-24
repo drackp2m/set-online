@@ -20,7 +20,7 @@ export const storeHistory = stateHistory(store, {
 
 @Injectable({ providedIn: 'root' })
 export class CurrentUserStore {
-	state$ = store.asObservable();
+	state$ = store;
 
 	constructor(private readonly getUserInfoGQL: GetUserInfoGQL) {}
 
@@ -41,6 +41,8 @@ export class CurrentUserStore {
 				}));
 			},
 			error: (error) => {
+				console.log(error);
+
 				store.update((state) => {
 					const details = error.graphQLErrors[0]?.extensions.details;
 

@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, WritableSignal, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { GetUsersGQL } from '../../graphql/apollo-operations';
 import { ApiClient } from '../../shared/services/api-client.service';
 import { CurrentUserStore } from '../../stores/current-user.store';
 
@@ -9,11 +10,13 @@ import { CurrentUserStore } from '../../stores/current-user.store';
 	templateUrl: './login.page.html',
 	styleUrls: ['./login.page.scss'],
 })
-export default class LoginPage {
+export default class LoginPage implements OnInit {
 	form = new FormGroup({
 		username: new FormControl<string>('', [Validators.required]),
 		password: new FormControl('', [Validators.required]),
 	});
+
+	usernames: WritableSignal<string[] | undefined> = signal(undefined);
 
 	error = signal(undefined);
 
@@ -21,7 +24,16 @@ export default class LoginPage {
 		private readonly apiClient: ApiClient,
 		private readonly router: Router,
 		private readonly currentUserStore: CurrentUserStore,
+		private readonly getUsersGQL: GetUsersGQL,
 	) {}
+
+	ngOnInit(): void {
+		this.getUsersGQL.fetch().subscribe({
+			next: (data) => {
+				this.usernames.set(data.data.getUsers.map((user) => user.username));
+			},
+		});
+	}
 
 	onSubmit() {
 		const controls = this.form.controls;
