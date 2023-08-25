@@ -1,6 +1,6 @@
 import { Migration } from '@mikro-orm/migrations';
 
-export class Migration20230818191117 extends Migration {
+export class Migration20230825181740 extends Migration {
 	async up(): Promise<void> {
 		this.addSql(
 			'create table "games" ("uuid" varchar(255) not null, "created_at" timestamptz(0) not null, "updated_at" timestamptz(0) not null, "table_cards" text[] not null, "deck_cards" text[] not null, "status" text check ("status" in (\'waiting_opponents\', \'in_progress\', \'completed\', \'expired\')) not null default \'waiting_opponents\', "expires_on" timestamptz(0) not null, constraint "games_pkey" primary key ("uuid"));',
