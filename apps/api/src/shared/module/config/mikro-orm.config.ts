@@ -1,6 +1,6 @@
 import { existsSync, readdirSync } from 'node:fs';
 
-import { AnyEntity, EntityClass } from '@mikro-orm/core';
+import { AnyEntity, EntityClass, NamingStrategy, UnderscoreNamingStrategy } from '@mikro-orm/core';
 import { MikroOrmModuleSyncOptions } from '@mikro-orm/nestjs';
 import { PostgreSqlDriver } from '@mikro-orm/postgresql';
 
@@ -13,6 +13,7 @@ export default async (): Promise<MikroOrmModuleSyncOptions> => ({
 	allowGlobalContext: true,
 	forceUtcTimezone: true,
 	entities: await getEntities(),
+	namingStrategy: MikroOrmNamingStrategy,
 	migrations: {
 		tableName: 'migrations',
 		pathTs: 'apps/api/migrations',
@@ -33,4 +34,14 @@ async function getEntities(): Promise<EntityClass<AnyEntity>[]> {
 	const modules = await Promise.all(promises);
 
 	return modules.flatMap((module) => Object.keys(module).map((className) => module[className]));
+}
+
+class MikroOrmNamingStrategy extends UnderscoreNamingStrategy implements NamingStrategy {
+	classToTableName(entityName: string): string {
+		return super.classToTableName(entityName).replace(/_entity$/, 's');
+	}
+
+	joinTableName(sourceEntity: string, _targetEntity: string, propertyName: string): string {
+		return [sourceEntity, propertyName].join('_');
+	}
 }
