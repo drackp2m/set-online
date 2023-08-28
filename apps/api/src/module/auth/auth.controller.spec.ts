@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { mock } from 'jest-mock-extended';
 
-import { UserEntity } from '../user/user.entity';
+import { User } from '../user/user.entity';
 
 import { AuthController } from './auth.controller';
 import { LoginRequestDto } from './dto/login-request.dto';
@@ -37,8 +37,8 @@ describe('AuthController', () => {
 	});
 
 	describe('register', () => {
-		it('should return UserEntity instance', async () => {
-			registerUseCase.execute.mockResolvedValueOnce(new UserEntity());
+		it('should return User instance', async () => {
+			registerUseCase.execute.mockResolvedValueOnce(new User());
 
 			const requestDto: RegisterRequestDto = {
 				username: 'drackp2m',
@@ -47,7 +47,7 @@ describe('AuthController', () => {
 
 			const result = await authController.register(requestDto);
 
-			expect(result).toBeInstanceOf(UserEntity);
+			expect(result).toBeInstanceOf(User);
 		});
 	});
 

@@ -6,7 +6,7 @@ import { GenerateNowDateUseCase } from '../../../shared/use-case/generate-now-da
 import { GenerateUuidUseCase } from '../../../shared/use-case/generate-uuid.use-case';
 import { HashPasswordUseCase } from '../../../shared/use-case/hash-password.use-case';
 import { UserFaker } from '../../user/factory/user.faker';
-import { UserEntity } from '../../user/user.entity';
+import { User } from '../../user/user.entity';
 import { UserRepository } from '../../user/user.repository';
 import { RegisterRequestDto } from '../dto/register-request.dto';
 
@@ -93,7 +93,7 @@ describe('RegisterUseCase', () => {
 
 			userEntityRepository.getMany.mockResolvedValueOnce([]);
 			userEntityRepository.insert.mockResolvedValueOnce(
-				new UserEntity({
+				new User({
 					...fakeUser,
 					password: 'H4$h3d_p@$$w0rd',
 				}),
@@ -108,11 +108,11 @@ describe('RegisterUseCase', () => {
 
 			const user = await useCase.execute(registerRequest);
 
-			expect(user).toBeInstanceOf(UserEntity);
+			expect(user).toBeInstanceOf(User);
 
 			expect(userEntityRepository.insert).toBeCalledTimes(1);
 			expect(userEntityRepository.insert).toBeCalledWith(
-				new UserEntity({
+				new User({
 					...registerRequest,
 					password: fakeUser.password,
 				}),

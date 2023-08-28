@@ -4,7 +4,7 @@ import { Request } from 'express';
 import { ExtractJwt, Strategy, StrategyOptions } from 'passport-jwt';
 
 import { ConfigurationService } from '../../../shared/module/config/configuration.service';
-import { UserEntity } from '../../user/user.entity';
+import { User } from '../../user/user.entity';
 import { UserRepository } from '../../user/user.repository';
 import { JsonWebToken } from '../definition/json-web-token.interface';
 import { JwtCookie } from '../definition/jwt-cookie.enum';
@@ -24,7 +24,7 @@ export class JwtStrategyService extends PassportStrategy(Strategy) {
 		} as StrategyOptions);
 	}
 
-	async validate(jwt: JsonWebToken): Promise<UserEntity> {
+	async validate(jwt: JsonWebToken): Promise<User> {
 		return await this.userRepository.getOne({ uuid: jwt.sub });
 	}
 }

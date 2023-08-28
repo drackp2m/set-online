@@ -31,12 +31,12 @@ export type Scalars = {
 	DateTime: { input: Date; output: Date };
 };
 
-/** games */
-export type GameEntity = {
-	__typename?: 'GameEntity';
+/** game */
+export type Game = {
+	__typename?: 'Game';
 	createdAt: Scalars['DateTime']['output'];
 	expiresOn: Scalars['DateTime']['output'];
-	participants: Array<UserEntity>;
+	participants: Array<User>;
 	status: GameStatus;
 	tableCards: Array<Scalars['String']['output']>;
 	updatedAt: Scalars['DateTime']['output'];
@@ -56,8 +56,8 @@ export type JoinGameInput = {
 
 export type Mutation = {
 	__typename?: 'Mutation';
-	joinGame: GameEntity;
-	newGame: GameEntity;
+	joinGame: Game;
+	newGame: Game;
 };
 
 export type MutationjoinGameArgs = {
@@ -66,9 +66,9 @@ export type MutationjoinGameArgs = {
 
 export type Query = {
 	__typename?: 'Query';
-	getUserInfo: UserEntity;
-	getUsers: Array<UserEntity>;
-	listGames: Array<GameEntity>;
+	getUserInfo: User;
+	getUsers: Array<User>;
+	listGames: Array<Game>;
 	validateUserConstraints: Scalars['Boolean']['output'];
 };
 
@@ -82,11 +82,11 @@ export type Subscription = {
 };
 
 /** user */
-export type UserEntity = {
-	__typename?: 'UserEntity';
+export type User = {
+	__typename?: 'User';
 	createdAt: Scalars['DateTime']['output'];
 	email?: Maybe<Scalars['String']['output']>;
-	games: Array<GameEntity>;
+	games: Array<Game>;
 	role: UserRole;
 	updatedAt: Scalars['DateTime']['output'];
 	username: Scalars['String']['output'];
@@ -116,14 +116,14 @@ const result: PossibleTypesResultData = {
 export default result;
 
 export type GameFieldsFragment = {
-	__typename?: 'GameEntity';
+	__typename?: 'Game';
 	uuid: string;
 	tableCards: Array<string>;
 	status: GameStatus;
 	expiresOn: Date;
 	createdAt: Date;
 	updatedAt: Date;
-	participants: Array<{ __typename?: 'UserEntity'; uuid: string; username: string }>;
+	participants: Array<{ __typename?: 'User'; uuid: string; username: string }>;
 };
 
 export type JoinGameMutationVariables = Exact<{
@@ -133,14 +133,14 @@ export type JoinGameMutationVariables = Exact<{
 export type JoinGameMutation = {
 	__typename?: 'Mutation';
 	joinGame: {
-		__typename?: 'GameEntity';
+		__typename?: 'Game';
 		uuid: string;
 		tableCards: Array<string>;
 		status: GameStatus;
 		expiresOn: Date;
 		createdAt: Date;
 		updatedAt: Date;
-		participants: Array<{ __typename?: 'UserEntity'; uuid: string; username: string }>;
+		participants: Array<{ __typename?: 'User'; uuid: string; username: string }>;
 	};
 };
 
@@ -149,14 +149,14 @@ export type NewGameMutationVariables = Exact<{ [key: string]: never }>;
 export type NewGameMutation = {
 	__typename?: 'Mutation';
 	newGame: {
-		__typename?: 'GameEntity';
+		__typename?: 'Game';
 		uuid: string;
 		tableCards: Array<string>;
 		status: GameStatus;
 		expiresOn: Date;
 		createdAt: Date;
 		updatedAt: Date;
-		participants: Array<{ __typename?: 'UserEntity'; uuid: string; username: string }>;
+		participants: Array<{ __typename?: 'User'; uuid: string; username: string }>;
 	};
 };
 
@@ -165,19 +165,19 @@ export type ListGamesQueryVariables = Exact<{ [key: string]: never }>;
 export type ListGamesQuery = {
 	__typename?: 'Query';
 	listGames: Array<{
-		__typename?: 'GameEntity';
+		__typename?: 'Game';
 		uuid: string;
 		tableCards: Array<string>;
 		status: GameStatus;
 		expiresOn: Date;
 		createdAt: Date;
 		updatedAt: Date;
-		participants: Array<{ __typename?: 'UserEntity'; uuid: string; username: string }>;
+		participants: Array<{ __typename?: 'User'; uuid: string; username: string }>;
 	}>;
 };
 
 export type UserFieldsFragment = {
-	__typename?: 'UserEntity';
+	__typename?: 'User';
 	uuid: string;
 	username: string;
 	email?: string | null;
@@ -191,7 +191,7 @@ export type GetUserInfoQueryVariables = Exact<{ [key: string]: never }>;
 export type GetUserInfoQuery = {
 	__typename?: 'Query';
 	getUserInfo: {
-		__typename?: 'UserEntity';
+		__typename?: 'User';
 		uuid: string;
 		username: string;
 		email?: string | null;
@@ -206,7 +206,7 @@ export type GetUsersQueryVariables = Exact<{ [key: string]: never }>;
 export type GetUsersQuery = {
 	__typename?: 'Query';
 	getUsers: Array<{
-		__typename?: 'UserEntity';
+		__typename?: 'User';
 		uuid: string;
 		username: string;
 		email?: string | null;
@@ -226,7 +226,7 @@ export type ValidateUserConstraintsQuery = {
 };
 
 export const GameFieldsFragmentDoc = gql`
-	fragment GameFields on GameEntity {
+	fragment GameFields on Game {
 		uuid
 		tableCards
 		participants {
@@ -241,7 +241,7 @@ export const GameFieldsFragmentDoc = gql`
 `;
 
 export const UserFieldsFragmentDoc = gql`
-	fragment UserFields on UserEntity {
+	fragment UserFields on User {
 		uuid
 		username
 		email

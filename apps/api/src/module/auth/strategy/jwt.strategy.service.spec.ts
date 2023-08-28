@@ -3,7 +3,7 @@ import { mock } from 'jest-mock-extended';
 
 import { NotFoundException } from '../../../shared/exception/not-found.exception';
 import { ConfigurationService } from '../../../shared/module/config/configuration.service';
-import { UserEntity } from '../../user/user.entity';
+import { User } from '../../user/user.entity';
 import { UserRepository } from '../../user/user.repository';
 import { JsonWebToken } from '../definition/json-web-token.interface';
 
@@ -43,12 +43,12 @@ describe('JwtStrategyService', () => {
 			expect(user).rejects.toThrow(NotFoundException);
 		});
 
-		it('should return UserEntity when EntityManager.getOneBy return UserEntity', async () => {
-			userEntityRepository.getOne.mockResolvedValueOnce(new UserEntity());
+		it('should return User when EntityManager.getOneBy return User', async () => {
+			userEntityRepository.getOne.mockResolvedValueOnce(new User());
 
 			const user = await service.validate(fakeJwt);
 
-			expect(user).toBeInstanceOf(UserEntity);
+			expect(user).toBeInstanceOf(User);
 		});
 	});
 });

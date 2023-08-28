@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { PreconditionFailedException } from '../../../shared/exception/precondition-failed.exception';
 import { HashPasswordUseCase } from '../../../shared/use-case/hash-password.use-case';
-import { UserEntity } from '../../user/user.entity';
+import { User } from '../../user/user.entity';
 import { UserRepository } from '../../user/user.repository';
 import { RegisterRequestDto } from '../dto/register-request.dto';
 
@@ -13,7 +13,7 @@ export class RegisterUseCase {
 		private readonly hashPasswordUseCase: HashPasswordUseCase,
 	) {}
 
-	async execute(registerRequest: RegisterRequestDto): Promise<UserEntity> {
+	async execute(registerRequest: RegisterRequestDto): Promise<User> {
 		const userExists = await this.userRepository.getMany({
 			$or: [
 				{ username: registerRequest.username },
@@ -31,7 +31,7 @@ export class RegisterUseCase {
 
 		registerRequest.password = await this.hashPasswordUseCase.execute(registerRequest.password);
 
-		const user = new UserEntity(registerRequest);
+		const user = new User(registerRequest);
 
 		return this.userRepository.insert(user);
 	}

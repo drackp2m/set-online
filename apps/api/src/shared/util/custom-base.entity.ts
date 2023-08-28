@@ -23,11 +23,11 @@ export abstract class CustomBaseEntity<
 	@Field(() => Date)
 	updatedAt: Date = GenerateNowDateUseCase.execute();
 
-	constructor(entity?: EntityData<T>) {
+	constructor(init?: EntityData<T>) {
 		super();
 
-		if (entity) {
-			Object.assign(this, entity);
+		if (init) {
+			Object.assign(this, init);
 		}
 	}
 }

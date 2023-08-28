@@ -1,6 +1,8 @@
 import { Component, OnInit, WritableSignal, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { select } from '@ngneat/elf';
+import { filter, take } from 'rxjs';
 
 import { GetUsersGQL } from '../../graphql/apollo-operations';
 import { ApiClient } from '../../shared/services/api-client.service';
@@ -49,7 +51,17 @@ export default class LoginPage implements OnInit {
 				next: () => {
 					this.currentUserStore.fetchData();
 
-					this.router.navigate(['/home']);
+					this.currentUserStore.state$
+						.pipe(
+							select((state) => state.loading),
+							filter((loading) => !loading),
+							take(1),
+						)
+						.subscribe({
+							next: () => {
+								this.router.navigate(['/home']);
+							},
+						});
 				},
 				error: ({ error }) => {
 					this.error.set(error.message);
