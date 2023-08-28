@@ -7,10 +7,10 @@ import { ProtectTo } from '../auth/decorator/protect-to.decorator';
 import { CurrentUser } from './decorator/current-user.decorator';
 import { UserRole } from './definition/user-role.enum';
 import { ValidateUserConstraintsInput } from './dto/input/validate-user-constraints.input';
-import { UserEntity } from './user.entity';
+import { User } from './user.entity';
 import { UserRepository } from './user.repository';
 
-@Resolver(() => UserEntity)
+@Resolver(() => User)
 export class UserResolver {
 	private interval: NodeJS.Timeout;
 
@@ -30,18 +30,18 @@ export class UserResolver {
 	}
 
 	@ProtectTo()
-	@Query(() => UserEntity, {
+	@Query(() => User, {
 		name: 'getUserInfo',
 	})
-	getUserInfo(@CurrentUser() user: UserEntity): UserEntity {
+	getUserInfo(@CurrentUser() user: User): User {
 		return user;
 	}
 
 	@ProtectTo(UserRole.Admin)
-	@Query(() => [UserEntity], {
+	@Query(() => [User], {
 		name: 'getUsers',
 	})
-	async getMany(): Promise<UserEntity[]> {
+	async getMany(): Promise<User[]> {
 		this.pubSub.publish('getManySubscription', 'Hello from getMany');
 
 		const users = await this.userRepository.getMany();

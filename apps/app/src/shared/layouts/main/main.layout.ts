@@ -2,7 +2,7 @@ import { JsonPipe, NgIf, NgTemplateOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
-import { map } from 'rxjs';
+import { select } from '@ngneat/elf';
 
 import { CurrentUserStore } from '../../../stores/current-user.store';
 import { MediaDebugComponent } from '../../components/media-debug/media-debug.component';
@@ -15,8 +15,8 @@ import { ApiClient } from '../../services/api-client.service';
 	imports: [RouterOutlet, RouterModule, NgTemplateOutlet, MediaDebugComponent, NgIf, JsonPipe],
 })
 export default class MainLayout {
-	user = toSignal(this.currentUserStore.state$.pipe(map((state) => state.data)));
-	userError = toSignal(this.currentUserStore.state$.pipe(map((state) => state.error)));
+	user = toSignal(this.currentUserStore.state$.pipe(select((state) => state.data)));
+	userError = toSignal(this.currentUserStore.state$.pipe(select((state) => state.error)));
 
 	constructor(
 		private readonly apiClient: ApiClient,

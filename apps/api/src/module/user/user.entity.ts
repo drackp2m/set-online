@@ -1,24 +1,15 @@
-import {
-	Collection,
-	Entity,
-	EntityRepositoryType,
-	Enum,
-	ManyToMany,
-	Property,
-} from '@mikro-orm/core';
+import { Collection, Entity, Enum, ManyToMany, Property } from '@mikro-orm/core';
 import { Field, ObjectType } from '@nestjs/graphql';
 
-import { CustomBaseEntity } from '../../shared/util/base.entity';
-import { GameEntity } from '../game/game.entity';
+import { CustomBaseEntity } from '../../shared/util/custom-base.entity';
+import { Game } from '../game/game.entity';
 
 import { UserRole } from './definition/user-role.enum';
 import { UserRepository } from './user.repository';
 
-@Entity({ tableName: 'users', customRepository: () => UserRepository })
+@Entity({ customRepository: () => UserRepository })
 @ObjectType({ description: 'user' })
-export class UserEntity extends CustomBaseEntity<UserEntity> {
-	[EntityRepositoryType]?: UserRepository;
-
+export class User extends CustomBaseEntity<User> {
 	@Property({ unique: true })
 	@Field()
 	username!: string;
@@ -34,7 +25,7 @@ export class UserEntity extends CustomBaseEntity<UserEntity> {
 	@Field(() => UserRole)
 	role!: UserRole;
 
-	@ManyToMany(() => GameEntity, (game) => game.participants)
-	@Field(() => [GameEntity])
-	games: Collection<GameEntity> = new Collection<GameEntity>(this);
+	@ManyToMany({ entity: () => Game, mappedBy: (game) => game.participants })
+	@Field(() => [Game])
+	games = new Collection<Game>(this);
 }

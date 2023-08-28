@@ -4,7 +4,7 @@ import { mock } from 'jest-mock-extended';
 import { NotFoundException } from '../../../shared/exception/not-found.exception';
 import { UnauthorizedException } from '../../../shared/exception/unauthorized-exception.exception';
 import { CheckPasswordUseCase } from '../../../shared/use-case/check-password.use-case';
-import { UserEntity } from '../../user/user.entity';
+import { User } from '../../user/user.entity';
 import { UserRepository } from '../../user/user.repository';
 import { JwtCookie } from '../definition/jwt-cookie.enum';
 
@@ -57,7 +57,7 @@ describe('LoginUseCase', () => {
 		});
 
 		it('throw UnauthorizedException when BcryptService.compare return False', async () => {
-			userEntityRepository.getOne.mockResolvedValueOnce(new UserEntity());
+			userEntityRepository.getOne.mockResolvedValueOnce(new User());
 			checkPassword.execute.mockResolvedValueOnce(false);
 
 			const tokenModel = useCase.execute({ username: 'bad', password: 'password' });
@@ -75,7 +75,7 @@ describe('LoginUseCase', () => {
 
 		it('should call two times to setJwtToken useCase', async () => {
 			userEntityRepository.getOne.mockResolvedValueOnce(
-				new UserEntity({ uuid: 'user-uuid', password: 'hashed-password' }),
+				new User({ uuid: 'user-uuid', password: 'hashed-password' }),
 			);
 			checkPassword.execute.mockResolvedValueOnce(true);
 			createAccessToken.execute.mockReturnValueOnce('access-token');

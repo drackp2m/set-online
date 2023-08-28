@@ -1,15 +1,21 @@
 import { Injectable } from '@nestjs/common';
 
+import { InternalServerErrorException } from '../../../shared/exception/internal-server-error.exception';
 import { PreconditionFailedException } from '../../../shared/exception/precondition-failed.exception';
-import { UserEntity } from '../../user/user.entity';
-import { GameEntity } from '../game.entity';
+import { User } from '../../user/user.entity';
+import { Game } from '../game.entity';
 import { GameRepository } from '../game.repository';
+import { GameParticipant } from '../relations/game-participant.entity';
+import { GameParticipantRepository } from '../relations/game-participant.repository';
 
 @Injectable()
 export class JoinGameUseCase {
-	constructor(private readonly gameRepository: GameRepository) {}
+	constructor(
+		private readonly gameRepository: GameRepository,
+		private readonly gameParticipantRepository: GameParticipantRepository,
+	) {}
 
-	async execute(gameUuid: string, participant: UserEntity): Promise<GameEntity> {
+	async execute(gameUuid: string, participant: User): Promise<Game> {
 		const currentGame = this.gameRepository.getOne({
 			participants: { uuid: participant.uuid },
 		});
@@ -18,7 +24,7 @@ export class JoinGameUseCase {
 			uuid: gameUuid,
 		});
 
-		return Promise.allSettled([currentGame, targetGame]).then(([currentGame, targetGame]) => {
+		return Promise.allSettled([currentGame, targetGame]).then(async ([currentGame, targetGame]) => {
 			if ('fulfilled' === currentGame.status) {
 				throw new PreconditionFailedException('already in a game', 'user');
 			}
@@ -27,11 +33,20 @@ export class JoinGameUseCase {
 				throw targetGame.reason;
 			}
 
-			const entity = targetGame.value;
+			try {
+				await this.gameParticipantRepository.insert(
+					new GameParticipant({
+						game: targetGame.value,
+						user: participant,
+					}),
+				);
 
-			entity.participants.add(participant);
+				targetGame.value.participants.add(participant);
 
-			return this.gameRepository.update(entity);
+				return targetGame.value;
+			} catch (error) {
+				throw new InternalServerErrorException(error.message);
+			}
 		});
 	}
 }

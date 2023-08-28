@@ -4,7 +4,7 @@ import { mock } from 'jest-mock-extended';
 
 import { UnauthorizedException } from '../../../shared/exception/unauthorized-exception.exception';
 import { UserFaker } from '../../user/factory/user.faker';
-import { UserEntity } from '../../user/user.entity';
+import { User } from '../../user/user.entity';
 
 import { JwtGuard } from './jwt.guard';
 
@@ -39,19 +39,19 @@ describe('JwtGuard', () => {
 
 	describe('handleRequest', () => {
 		it('throw UnauthorizedException when pass error', () => {
-			const execution = () => guard.handleRequest<UserEntity>(new Error(), undefined);
+			const execution = () => guard.handleRequest<User>(new Error(), undefined);
 
 			expect(execution).toThrow(UnauthorizedException);
 		});
 
 		it('should return Undefined when error is missing and payload is False', () => {
-			const payload = guard.handleRequest<UserEntity>(undefined, false);
+			const payload = guard.handleRequest<User>(undefined, false);
 
 			expect(payload).toStrictEqual(undefined);
 		});
 
-		it('should return UserEntity when error is missing and payload is an UserEntity', () => {
-			const payload = guard.handleRequest<UserEntity>(undefined, fakeUser);
+		it('should return User when error is missing and payload is an User', () => {
+			const payload = guard.handleRequest<User>(undefined, fakeUser);
 
 			expect(payload).toStrictEqual(fakeUser);
 		});

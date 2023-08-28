@@ -1,5 +1,4 @@
 import {
-	HttpClient,
 	HttpErrorResponse,
 	HttpEvent,
 	HttpHandler,
@@ -9,30 +8,33 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subject, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
+
+import { AuthStore } from '../../stores/auth.store';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 	private readonly API_REFRESH_SESSION_URL = '/api/auth/refresh-session';
-	private readonly API_LOGIN_URL = '/api/auth/login';
 	private readonly API_REGISTER_URL = '/api/auth/register';
-
-	private tokenIsValid = true;
-	private jwtTokensRefreshed$: Subject<void> = new Subject<void>();
+	private readonly API_LOGIN_URL = '/api/auth/login';
 
 	constructor(
-		private readonly httpClient: HttpClient,
+		private readonly authStore: AuthStore,
 		private readonly router: Router,
 	) {}
 
 	intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-		const urlsToIgnore = [this.API_REFRESH_SESSION_URL, this.API_LOGIN_URL, this.API_REGISTER_URL];
+		const urlsToIgnore = [this.API_REFRESH_SESSION_URL, this.API_REGISTER_URL, this.API_LOGIN_URL];
 
 		if (urlsToIgnore.some((url) => req.url.includes(url))) return next.handle(req);
 
-		if (!this.tokenIsValid) {
-			return this.jwtTokensRefreshed$.pipe(switchMap(() => next.handle(req)));
+		if (!this.authStore.tokensAreValid) {
+			if (!this.authStore.isLoading) {
+				return new Observable<HttpEvent<unknown>>();
+			}
+
+			return this.retryRequest(req, next);
 		}
 
 		return next.handle(req).pipe(
@@ -44,48 +46,42 @@ export class AuthInterceptor implements HttpInterceptor {
 
 				if (!isUnauthorizedError) return of(event);
 
-				this.tokenIsValid = false;
-
-				return this.tryToRefreshToken<HttpResponse<unknown>>(req, next, event);
+				return this.retryRequest(req, next, event);
 			}),
-			catchError((error) => {
+			catchError((error: HttpEvent<unknown>) => {
 				if (!(error instanceof HttpErrorResponse)) return of(error);
 
-				const isUnauthorizedError = 401 !== error.status;
+				const isUnauthorizedError = error.status === 401;
 
 				if (isUnauthorizedError) return of(error);
 
-				this.tokenIsValid = false;
-
-				return this.tryToRefreshToken(req, next, error);
+				return this.retryRequest(req, next, error);
 			}),
 		);
 	}
 
-	private tryToRefreshToken<T>(
+	private retryRequest(
 		req: HttpRequest<unknown>,
 		next: HttpHandler,
-		event: unknown,
-	): Observable<T> {
-		return this.refreshJwtTokens().pipe(
+		event?: HttpEvent<unknown>,
+		// redirectOnFailure = false,
+	): Observable<HttpEvent<unknown>> {
+		if (event) {
+			this.authStore.tryToRefreshTokens();
+		}
+
+		return this.authStore.loadingIsFinished$.pipe(
 			switchMap(() => {
-				this.tokenIsValid = true;
+				if (event && !this.authStore.tokensAreValid) {
+					this.router.navigate(['/login']);
 
-				this.jwtTokensRefreshed$.next();
+					return of(event);
 
-				return next.handle(req) as Observable<T>;
-			}),
-			catchError(() => {
-				this.tokenIsValid = true;
+					return new Observable<HttpEvent<unknown>>();
+				}
 
-				this.router.navigate(['/login']);
-
-				return of(event) as Observable<T>;
+				return next.handle(req);
 			}),
 		);
-	}
-
-	private refreshJwtTokens(): Observable<void> {
-		return this.httpClient.get<void>(this.API_REFRESH_SESSION_URL);
 	}
 }
