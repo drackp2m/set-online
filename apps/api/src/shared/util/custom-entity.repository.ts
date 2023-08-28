@@ -24,7 +24,7 @@ export class CustomEntityRepository<T extends CustomBaseEntity<T>> {
 		const user = await this.em.findOne(this.entityName, query, options);
 
 		if (!user) {
-			const entityName = this.em.toString().replace('Entity', '').toLocaleLowerCase();
+			const entityName = this.entityName.replace('Entity', '').toLocaleLowerCase();
 			throw new NotFoundException('not exists', entityName);
 		}
 
