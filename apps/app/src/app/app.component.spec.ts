@@ -2,13 +2,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterOutlet } from '@angular/router';
 
+import { CurrentUserStore } from '../stores/current-user.store';
+
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
 			declarations: [AppComponent],
-			imports: [RouterOutlet, HttpClientModule],
+			imports: [RouterOutlet, HttpClientModule, CurrentUserStore],
 		}).compileComponents();
 	}));
 
