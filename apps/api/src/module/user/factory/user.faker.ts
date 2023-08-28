@@ -4,7 +4,7 @@ import { EntityData } from '@mikro-orm/core';
 import { BasicFaker } from '../../../shared/faker/basic.faker';
 import { DateFaker } from '../../../shared/faker/date.faker';
 import { UserRole } from '../definition/user-role.enum';
-import { UserEntity } from '../user.entity';
+import { User } from '../user.entity';
 
 export interface UserFakerOptions {
 	createdFrom?: string;
@@ -16,22 +16,15 @@ export class UserFaker {
 
 	makeOne = this.makeEntity;
 
-	make(
-		amount: number,
-		overrideParameters?: EntityData<UserEntity>,
-		options?: UserFakerOptions,
-	): UserEntity[] {
+	make(amount: number, overrideParameters?: EntityData<User>, options?: UserFakerOptions): User[] {
 		return [...Array(amount)].map(() => this.makeEntity(overrideParameters, options));
 	}
 
-	private makeEntity(
-		overrideParameters?: EntityData<UserEntity>,
-		options?: UserFakerOptions,
-	): UserEntity {
+	private makeEntity(overrideParameters?: EntityData<User>, options?: UserFakerOptions): User {
 		const firstName = faker.name.firstName();
 		const lastName = faker.name.lastName();
 
-		return new UserEntity({
+		return new User({
 			uuid: faker.datatype.uuid(),
 			username: faker.internet.userName(firstName, lastName),
 			password: faker.internet.password(32, false, /[A-Z0-9_\-*?.]/),

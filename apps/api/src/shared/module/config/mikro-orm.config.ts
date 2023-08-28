@@ -8,7 +8,7 @@ export default async (): Promise<MikroOrmModuleSyncOptions> => ({
 	debug: false,
 	driver: PostgreSqlDriver,
 	...databaseConfig(),
-	allowGlobalContext: true,
+	allowGlobalContext: false,
 	forceUtcTimezone: true,
 	tsNode: true,
 	autoLoadEntities: true,
@@ -16,8 +16,8 @@ export default async (): Promise<MikroOrmModuleSyncOptions> => ({
 	namingStrategy: MikroOrmNamingStrategy,
 	migrations: {
 		tableName: 'migrations',
-		pathTs: 'apps/api/migrations',
-		snapshot: false,
+		path: 'apps/api/migrations',
+		// snapshot: false,
 		silent: true,
 	},
 });

@@ -1,12 +1,9 @@
-import { Injectable } from '@nestjs/common';
-
 import { CustomEntityRepository } from '../../shared/util/custom-entity.repository';
 
-import { UserEntity } from './user.entity';
+import { User } from './user.entity';
 
-@Injectable()
-export class UserRepository extends CustomEntityRepository<UserEntity> {
-	findActiveUsers(): UserEntity[] {
+export class UserRepository extends CustomEntityRepository<User> {
+	findActiveUsers(): User[] {
 		return [];
 	}
 }

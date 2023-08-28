@@ -5,7 +5,7 @@ import { NotFoundException } from '../../shared/exception/not-found.exception';
 import { AppModule } from '../app/app.module';
 import { AuthModule } from '../auth/auth.module';
 
-import { UserEntity } from './user.entity';
+import { User } from './user.entity';
 import { UserModule } from './user.module';
 import { UserRepository } from './user.repository';
 
@@ -47,7 +47,7 @@ describe('UserRepository', () => {
 
 		it('should return a user when user exists', async () => {
 			await userEntityRepository.insert(
-				new UserEntity({
+				new User({
 					username: 'drackp2m',
 					password: 'password',
 				}),
@@ -62,7 +62,7 @@ describe('UserRepository', () => {
 	describe('insertOne', () => {
 		it('should insert a user in the test database', async () => {
 			const insertedUser = await userEntityRepository.insert(
-				new UserEntity({
+				new User({
 					username: 'drackp2m',
 					password: 'password',
 				}),

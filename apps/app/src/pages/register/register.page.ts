@@ -1,7 +1,7 @@
 import { Component, WritableSignal, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { UserEntity } from '../../graphql/apollo-operations';
+import { User } from '../../graphql/apollo-operations';
 import { ApiClient } from '../../shared/services/api-client.service';
 import { CurrentUserStore } from '../../stores/current-user.store';
 
@@ -15,7 +15,7 @@ export default class RegisterPage {
 		password: new FormControl('', [Validators.required]),
 	});
 
-	user: WritableSignal<UserEntity | null> = signal(null);
+	user: WritableSignal<User | null> = signal(null);
 	error = signal(undefined);
 
 	constructor(

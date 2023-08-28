@@ -4,7 +4,7 @@
 	<div class="flex-col gap-md align-start mt-sm">
 		<ul class="flex-col gap-xs">
 			<li *ngFor="let game of games()" class="flex-row justify-between">
-				> Game of {{ listParticipants(game) }}
+				> [{{ game.uuid }}] Game of {{ listParticipants(game) }}
 				<button class="text-sm p-xs surface-serene round-sm ml-xl" (click)="joinGame(game)">
 					Join game
 				</button>

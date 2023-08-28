@@ -6,7 +6,7 @@ import { ForbiddenException } from '../../../shared/exception/forbidden.exceptio
 import { UnauthorizedException } from '../../../shared/exception/unauthorized-exception.exception';
 import { UserRole } from '../../user/definition/user-role.enum';
 import { UserFaker } from '../../user/factory/user.faker';
-import { UserEntity } from '../../user/user.entity';
+import { User } from '../../user/user.entity';
 
 import { RolesGuard } from './roles.guard';
 
@@ -81,7 +81,7 @@ describe('RolesGuard', () => {
 		});
 	});
 
-	function getExecutionContextArgsWith(user: UserEntity | undefined): Record<string, unknown>[] {
+	function getExecutionContextArgsWith(user: User | undefined): Record<string, unknown>[] {
 		return [
 			{},
 			{},

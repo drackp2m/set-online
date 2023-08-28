@@ -3,15 +3,15 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ProtectTo } from '../auth/decorator/protect-to.decorator';
 import { CurrentUser } from '../user/decorator/current-user.decorator';
 import { UserRole } from '../user/definition/user-role.enum';
-import { UserEntity } from '../user/user.entity';
+import { User } from '../user/user.entity';
 
 import { JoinGameInput } from './dto/input/join-game.input';
-import { GameEntity } from './game.entity';
+import { Game } from './game.entity';
 import { CreateGameUseCase } from './use-case/create-game.use-case';
 import { JoinGameUseCase } from './use-case/join-game.use-case';
 import { ListGamesUseCase } from './use-case/list-games.use-case';
 
-@Resolver(() => GameEntity)
+@Resolver(() => Game)
 export class GameResolver {
 	constructor(
 		private readonly createGameUseCase: CreateGameUseCase,
@@ -19,24 +19,24 @@ export class GameResolver {
 		private readonly joinGameUseCase: JoinGameUseCase,
 	) {}
 
-	@Query(() => [GameEntity], { name: 'listGames' })
-	async listGames(): Promise<GameEntity[]> {
+	@Query(() => [Game], { name: 'listGames' })
+	async listGames(): Promise<Game[]> {
 		return this.listGamesUseCase.execute();
 	}
 
 	@ProtectTo(UserRole.Registered)
-	@Mutation(() => GameEntity, { name: 'joinGame' })
+	@Mutation(() => Game, { name: 'joinGame' })
 	async joinGame(
-		@CurrentUser() user: UserEntity,
+		@CurrentUser() user: User,
 		@Args('input', { type: () => JoinGameInput })
 		input: JoinGameInput,
-	): Promise<GameEntity> {
+	): Promise<Game> {
 		return this.joinGameUseCase.execute(input.gameUuid, user);
 	}
 
 	@ProtectTo(UserRole.Registered)
-	@Mutation(() => GameEntity, { name: 'newGame' })
-	async newGame(@CurrentUser() user: UserEntity): Promise<GameEntity> {
+	@Mutation(() => Game, { name: 'newGame' })
+	async newGame(@CurrentUser() user: User): Promise<Game> {
 		return this.createGameUseCase.execute(user);
 	}
 }

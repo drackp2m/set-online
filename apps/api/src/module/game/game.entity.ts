@@ -1,44 +1,32 @@
-import {
-	Collection,
-	Entity,
-	EntityRepositoryType,
-	Enum,
-	ManyToMany,
-	Property,
-} from '@mikro-orm/core';
+import { Collection, Entity, Enum, ManyToMany, Property } from '@mikro-orm/core';
 import { Field, ObjectType } from '@nestjs/graphql';
 
-import { CustomBaseEntity } from '../../shared/util/base.entity';
-import { UserEntity } from '../user/user.entity';
+import { CustomBaseEntity } from '../../shared/util/custom-base.entity';
+import { User } from '../user/user.entity';
 
 import { GameStatus } from './definition/game-status.enum';
 import { GameRepository } from './game.repository';
+import { GameParticipant } from './relations/game-participant.entity';
 
 @Entity({ customRepository: () => GameRepository })
-@ObjectType({ description: 'games' })
-export class GameEntity extends CustomBaseEntity<GameEntity> {
-	[EntityRepositoryType]?: GameEntity;
-
+@ObjectType({ description: 'game' })
+export class Game extends CustomBaseEntity<Game> {
 	@Property()
-	@Field((_type) => [String])
+	@Field(() => [String])
 	tableCards!: string[];
 
 	@Property()
 	deckCards!: string[];
 
-	@Enum({ items: () => GameStatus, default: GameStatus.WaitingOpponents })
+	@Enum({ items: () => GameStatus })
 	@Field(() => GameStatus)
-	status!: GameStatus;
+	status = GameStatus.WaitingOpponents;
 
 	@Property()
-	@Field((_type) => Date)
+	@Field(() => Date)
 	expiresOn!: Date;
 
-	@ManyToMany(() => UserEntity, 'games', {
-		owner: true,
-		joinColumn: 'game_uuid',
-		inverseJoinColumn: 'user_uuid',
-	})
-	@Field((_type) => [UserEntity])
-	participants: Collection<UserEntity> = new Collection<UserEntity>(this);
+	@ManyToMany({ entity: () => User, pivotEntity: () => GameParticipant })
+	@Field(() => [User])
+	participants = new Collection<User>(this);
 }

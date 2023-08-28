@@ -6,7 +6,7 @@ import { Request } from 'express';
 import { ForbiddenException } from '../../../shared/exception/forbidden.exception';
 import { UnauthorizedException } from '../../../shared/exception/unauthorized-exception.exception';
 import { UserRole } from '../../user/definition/user-role.enum';
-import { UserEntity } from '../../user/user.entity';
+import { User } from '../../user/user.entity';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
@@ -14,7 +14,7 @@ export class RolesGuard implements CanActivate {
 		const roles = new Reflector().get<UserRole[]>('roles', context.getHandler());
 
 		const user = GqlExecutionContext.create(context).getContext<{
-			req: Request & { user: UserEntity };
+			req: Request & { user: User };
 		}>().req.user;
 
 		if (!user) {
