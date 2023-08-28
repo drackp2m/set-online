@@ -1,4 +1,4 @@
-fragment GameFields on GameEntity {
+fragment GameFields on Game {
     uuid
     tableCards
     participants {

@@ -20,18 +20,24 @@ export const storeHistory = stateHistory(store, {
 
 @Injectable({ providedIn: 'root' })
 export class CurrentUserStore {
-	state$ = store.asObservable();
+	state$ = store;
 
 	constructor(private readonly getUserInfoGQL: GetUserInfoGQL) {}
 
 	fetchData(): void {
+		console.log('init');
+
 		store.update((state) => ({
 			...state,
 			loading: true,
 		}));
 
+		console.log('first update');
+
 		this.getUserInfoGQL.fetch().subscribe({
 			next: ({ data }) => {
+				console.log(data);
+
 				store.update((state) => ({
 					...state,
 					data: data.getUserInfo,
@@ -41,6 +47,8 @@ export class CurrentUserStore {
 				}));
 			},
 			error: (error) => {
+				console.log(error);
+
 				store.update((state) => {
 					const details = error.graphQLErrors[0]?.extensions.details;
 

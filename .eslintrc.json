@@ -48,6 +48,7 @@
 						"caughtErrorsIgnorePattern": "^_"
 					}
 				],
+				"@typescript-eslint/no-inferrable-types": "warn",
 				"@typescript-eslint/member-ordering": [
 					"warn",
 					{

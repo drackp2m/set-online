@@ -20,8 +20,8 @@ services:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASS}
-      TZ: Europe/Madrid
-      PGTZ: Europe/Madrid
+      TZ: UTC
+      PGTZ: UTC
     restart: unless-stopped
     tty: true
 
@@ -47,7 +47,7 @@ services:
       MIKRO_ORM_CLI_USE_TS_NODE: 1
       NODE_TLS_REJECT_UNAUTHORIZED: 0
       PATH: $PATH:/usr/src/app/node_modules/.bin
-      TZ: Europe/Madrid
+      TZ: UTC
     depends_on:
       - set-db
     restart: unless-stopped

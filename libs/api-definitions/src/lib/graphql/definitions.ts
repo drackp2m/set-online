@@ -30,10 +30,10 @@ export interface ValidateUserConstraintsInput {
     username?: Nullable<string>;
 }
 
-export interface GameEntity {
+export interface Game {
     createdAt: DateTime;
     expiresOn: DateTime;
-    participants: UserEntity[];
+    participants: User[];
     status: GameStatus;
     tableCards: string[];
     updatedAt: DateTime;
@@ -41,14 +41,14 @@ export interface GameEntity {
 }
 
 export interface IMutation {
-    joinGame(input: JoinGameInput): GameEntity | Promise<GameEntity>;
-    newGame(): GameEntity | Promise<GameEntity>;
+    joinGame(input: JoinGameInput): Game | Promise<Game>;
+    newGame(): Game | Promise<Game>;
 }
 
 export interface IQuery {
-    getUserInfo(): UserEntity | Promise<UserEntity>;
-    getUsers(): UserEntity[] | Promise<UserEntity[]>;
-    listGames(): GameEntity[] | Promise<GameEntity[]>;
+    getUserInfo(): User | Promise<User>;
+    getUsers(): User[] | Promise<User[]>;
+    listGames(): Game[] | Promise<Game[]>;
     validateUserConstraints(input: ValidateUserConstraintsInput): boolean | Promise<boolean>;
 }
 
@@ -56,10 +56,10 @@ export interface ISubscription {
     getManySubscription(): Nullable<string> | Promise<Nullable<string>>;
 }
 
-export interface UserEntity {
+export interface User {
     createdAt: DateTime;
     email?: Nullable<string>;
-    games: GameEntity[];
+    games: Game[];
     role: UserRole;
     updatedAt: DateTime;
     username: string;

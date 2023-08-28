@@ -7,11 +7,11 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-"""games"""
-type GameEntity {
+"""game"""
+type Game {
   createdAt: DateTime!
   expiresOn: DateTime!
-  participants: [UserEntity!]!
+  participants: [User!]!
   status: GameStatus!
   tableCards: [String!]!
   updatedAt: DateTime!
@@ -30,14 +30,14 @@ input JoinGameInput {
 }
 
 type Mutation {
-  joinGame(input: JoinGameInput!): GameEntity!
-  newGame: GameEntity!
+  joinGame(input: JoinGameInput!): Game!
+  newGame: Game!
 }
 
 type Query {
-  getUserInfo: UserEntity!
-  getUsers: [UserEntity!]!
-  listGames: [GameEntity!]!
+  getUserInfo: User!
+  getUsers: [User!]!
+  listGames: [Game!]!
   validateUserConstraints(input: ValidateUserConstraintsInput!): Boolean!
 }
 
@@ -46,10 +46,10 @@ type Subscription {
 }
 
 """user"""
-type UserEntity {
+type User {
   createdAt: DateTime!
   email: String
-  games: [GameEntity!]!
+  games: [Game!]!
   role: UserRole!
   updatedAt: DateTime!
   username: String!

@@ -1,9 +1,9 @@
-import { LoginRequest, RegisterRequest, UserEntity } from '@set-online/api-definitions';
+import { LoginRequest, RegisterRequest, User } from '@set-online/api-definitions';
 
 export type AuthPost = {
 	'/register': {
 		payload: [RegisterRequest];
-		response: UserEntity;
+		response: User;
 	};
 	'/login': {
 		payload: [LoginRequest];
