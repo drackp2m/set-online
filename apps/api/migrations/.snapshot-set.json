@@ -1,0 +1,254 @@
+{
+	"namespaces": ["public"],
+	"name": "public",
+	"tables": [
+		{
+			"columns": {
+				"uuid": {
+					"name": "uuid",
+					"type": "varchar(255)",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"mappedType": "string"
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamptz(0)",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"length": 6,
+					"mappedType": "datetime"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamptz(0)",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"length": 6,
+					"mappedType": "datetime"
+				},
+				"table_cards": {
+					"name": "table_cards",
+					"type": "text[]",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"mappedType": "array"
+				},
+				"deck_cards": {
+					"name": "deck_cards",
+					"type": "text[]",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"mappedType": "array"
+				},
+				"status": {
+					"name": "status",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"default": "'waiting_opponents'",
+					"enumItems": ["waiting_opponents", "in_progress", "completed", "expired"],
+					"mappedType": "enum"
+				},
+				"expires_on": {
+					"name": "expires_on",
+					"type": "timestamptz(0)",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"length": 6,
+					"mappedType": "datetime"
+				}
+			},
+			"name": "game",
+			"schema": "public",
+			"indexes": [
+				{
+					"keyName": "game_pkey",
+					"columnNames": ["uuid"],
+					"composite": false,
+					"primary": true,
+					"unique": true
+				}
+			],
+			"checks": [],
+			"foreignKeys": {}
+		},
+		{
+			"columns": {
+				"uuid": {
+					"name": "uuid",
+					"type": "varchar(255)",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"mappedType": "string"
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamptz(0)",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"length": 6,
+					"mappedType": "datetime"
+				},
+				"updated_at": {
+					"name": "updated_at",
+					"type": "timestamptz(0)",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"length": 6,
+					"mappedType": "datetime"
+				},
+				"username": {
+					"name": "username",
+					"type": "varchar(255)",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"mappedType": "string"
+				},
+				"password": {
+					"name": "password",
+					"type": "varchar(255)",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"mappedType": "string"
+				},
+				"email": {
+					"name": "email",
+					"type": "varchar(255)",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": true,
+					"mappedType": "string"
+				},
+				"role": {
+					"name": "role",
+					"type": "text",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"default": "'registered'",
+					"enumItems": ["admin", "registered", "guest"],
+					"mappedType": "enum"
+				}
+			},
+			"name": "user",
+			"schema": "public",
+			"indexes": [
+				{
+					"columnNames": ["username"],
+					"composite": false,
+					"keyName": "user_username_unique",
+					"primary": false,
+					"unique": true
+				},
+				{
+					"columnNames": ["email"],
+					"composite": false,
+					"keyName": "user_email_unique",
+					"primary": false,
+					"unique": true
+				},
+				{
+					"keyName": "user_pkey",
+					"columnNames": ["uuid"],
+					"composite": false,
+					"primary": true,
+					"unique": true
+				}
+			],
+			"checks": [],
+			"foreignKeys": {}
+		},
+		{
+			"columns": {
+				"game_uuid": {
+					"name": "game_uuid",
+					"type": "varchar(255)",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"mappedType": "string"
+				},
+				"user_uuid": {
+					"name": "user_uuid",
+					"type": "varchar(255)",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"mappedType": "string"
+				},
+				"created_at": {
+					"name": "created_at",
+					"type": "timestamptz(0)",
+					"unsigned": false,
+					"autoincrement": false,
+					"primary": false,
+					"nullable": false,
+					"length": 6,
+					"default": "CURRENT_TIMESTAMP",
+					"mappedType": "datetime"
+				}
+			},
+			"name": "game_participant",
+			"schema": "public",
+			"indexes": [
+				{
+					"keyName": "game_participant_pkey",
+					"columnNames": ["game_uuid", "user_uuid"],
+					"composite": true,
+					"primary": true,
+					"unique": true
+				}
+			],
+			"checks": [],
+			"foreignKeys": {
+				"game_participant_game_uuid_foreign": {
+					"constraintName": "game_participant_game_uuid_foreign",
+					"columnNames": ["game_uuid"],
+					"localTableName": "public.game_participant",
+					"referencedColumnNames": ["uuid"],
+					"referencedTableName": "public.game",
+					"deleteRule": "cascade",
+					"updateRule": "cascade"
+				},
+				"game_participant_user_uuid_foreign": {
+					"constraintName": "game_participant_user_uuid_foreign",
+					"columnNames": ["user_uuid"],
+					"localTableName": "public.game_participant",
+					"referencedColumnNames": ["uuid"],
+					"referencedTableName": "public.user",
+					"deleteRule": "cascade",
+					"updateRule": "cascade"
+				}
+			}
+		}
+	]
+}
