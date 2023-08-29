@@ -6,22 +6,20 @@ import { NotFoundException } from '../exception/not-found.exception';
 import { CustomBaseEntity } from './custom-base.entity';
 
 export class CustomEntityRepository<T extends CustomBaseEntity<T>> {
-	em = this.entityManager.fork();
-
 	constructor(
 		private readonly entityManager: EntityManager,
 		private readonly entityName: string,
 	) {}
 
 	getReference(id: Primary<T>): T {
-		return this.em.getReference(this.entityName, id);
+		return this.entityManager.fork().getReference(this.entityName, id);
 	}
 
 	async getOne<Hint extends string = never>(
 		query: FilterQuery<T>,
 		options?: FindOptions<T, Hint>,
 	): Promise<T | null> {
-		const user = await this.em.findOne(this.entityName, query, options);
+		const user = await this.entityManager.fork().findOne(this.entityName, query, options);
 
 		if (!user) {
 			const entityName = this.entityName.replace('Entity', '').toLocaleLowerCase();
@@ -35,26 +33,26 @@ export class CustomEntityRepository<T extends CustomBaseEntity<T>> {
 		query?: FilterQuery<T>,
 		options?: FindOptions<T, Hint>,
 	): Promise<T[]> {
-		return this.em.find(this.entityName, query, options);
+		return this.entityManager.fork().find(this.entityName, query, options);
 	}
 
 	async insert(entity: T): Promise<T> {
-		await this.em.persistAndFlush(entity);
+		await this.entityManager.fork().persistAndFlush(entity);
 
 		return entity;
 	}
 
 	async update(entity: T): Promise<T> {
-		await this.em.persistAndFlush(entity);
+		await this.entityManager.fork().persistAndFlush(entity);
 
 		return entity;
 	}
 
 	async delete(entity: T): Promise<void> {
-		await this.em.nativeDelete(this.entityName, { uuid: entity.uuid });
+		await this.entityManager.fork().removeAndFlush(entity);
 	}
 
 	async deleteMany(query: FilterQuery<T>): Promise<void> {
-		await this.em.nativeDelete(this.entityName, query);
+		await this.entityManager.fork().nativeDelete(this.entityName, query);
 	}
 }
