@@ -29,12 +29,9 @@ export class CreateGameUseCase {
 				expiresOn: expiresOnDate,
 			});
 
-			await this.gameParticipantRepository.insert(
-				new GameParticipant({
-					game: newGame,
-					user: participant,
-				}),
-			);
+			const gameParticipant = new GameParticipant({ game: newGame, user: participant });
+
+			await this.gameParticipantRepository.insert(gameParticipant);
 
 			newGame.participants.add(participant);
 
