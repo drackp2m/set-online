@@ -22,7 +22,7 @@ module.exports = {
 		],
 		'subject-full-stop': [0],
 		'subject-min-length': [2, 'always', 10],
-		'subject-max-length': [2, 'always', 80],
+		'subject-max-length': [2, 'always', 70],
 	},
 	prompt: {
 		useEmoji: true,
