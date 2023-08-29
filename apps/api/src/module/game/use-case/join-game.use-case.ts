@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { InternalServerErrorException } from '../../../shared/exception/internal-server-error.exception';
 import { PreconditionFailedException } from '../../../shared/exception/precondition-failed.exception';
 import { User } from '../../user/user.entity';
+import { GameStatus } from '../definition/game-status.enum';
 import { Game } from '../game.entity';
 import { GameRepository } from '../game.repository';
 import { GameParticipant } from '../relations/game-participant.entity';
@@ -18,6 +19,7 @@ export class JoinGameUseCase {
 	async execute(gameUuid: string, participant: User): Promise<Game> {
 		const currentGame = this.gameRepository.getOne({
 			participants: { uuid: participant.uuid },
+			status: { $in: [GameStatus.WaitingOpponents, GameStatus.InProgress] },
 		});
 
 		const targetGame = this.gameRepository.getOne({
@@ -33,17 +35,14 @@ export class JoinGameUseCase {
 				throw targetGame.reason;
 			}
 
+			const gameParticipant = new GameParticipant({ game: targetGame.value, user: participant });
+
 			try {
-				await this.gameParticipantRepository.insert(
-					new GameParticipant({
-						game: targetGame.value,
-						user: participant,
-					}),
-				);
+				const { game } = await this.gameParticipantRepository.insert(gameParticipant);
 
-				targetGame.value.participants.add(participant);
+				await game.participants.init();
 
-				return targetGame.value;
+				return game;
 			} catch (error) {
 				throw new InternalServerErrorException(error.message);
 			}
