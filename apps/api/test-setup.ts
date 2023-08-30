@@ -21,7 +21,7 @@ const dropDatabases = async () => {
 };
 
 const executeMigrations = async () => {
-	log('Cheking migrations...\n');
+	log('Checking migrations...\n');
 
 	const config = await dbConfig();
 	const orm = await MikroORM.init(config);
