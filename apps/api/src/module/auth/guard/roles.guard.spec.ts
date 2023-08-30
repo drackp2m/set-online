@@ -16,7 +16,7 @@ describe('RolesGuard', () => {
 	const executionContext = mock<ExecutionContext>();
 
 	const handler = () => [];
-	const userFaker = new UserFaker();
+	const userFaker = UserFaker;
 
 	beforeAll(async () => {
 		const module: TestingModule = await Test.createTestingModule({
