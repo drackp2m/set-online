@@ -1,5 +1,4 @@
-import { FilterQuery, FindOptions, Primary } from '@mikro-orm/core';
-import { EntityManager } from '@mikro-orm/postgresql';
+import { EntityManager, FilterQuery, FindOptions, Primary } from '@mikro-orm/core';
 
 import { NotFoundException } from '../../../shared/exception/not-found.exception';
 
