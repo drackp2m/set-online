@@ -7,20 +7,23 @@ import { UserRole } from '../definition/user-role.enum';
 import { User } from '../user.entity';
 
 export interface UserFakerOptions {
-	createdFrom?: string;
+	createdSince?: string;
 }
 
 export class UserFaker {
-	private readonly basicFaker = new BasicFaker();
-	private readonly dateFaker = new DateFaker();
+	static makeOne = new UserFaker().makeEntity;
 
-	makeOne = this.makeEntity;
-
-	make(amount: number, overrideParameters?: EntityData<User>, options?: UserFakerOptions): User[] {
-		return [...Array(amount)].map(() => this.makeEntity(overrideParameters, options));
+	static make(
+		amount: number,
+		overrideParameters?: EntityData<User>,
+		options?: UserFakerOptions,
+	): User[] {
+		return [...Array(amount)].map(() => new UserFaker().makeEntity(overrideParameters, options));
 	}
 
 	private makeEntity(overrideParameters?: EntityData<User>, options?: UserFakerOptions): User {
+		const dateFaker = new DateFaker();
+
 		const firstName = faker.name.firstName();
 		const lastName = faker.name.lastName();
 
@@ -28,10 +31,10 @@ export class UserFaker {
 			uuid: faker.datatype.uuid(),
 			username: faker.internet.userName(firstName, lastName),
 			password: faker.internet.password(32, false, /[A-Z0-9_\-*?.]/),
-			email: this.basicFaker.boolean() ? faker.internet.email(firstName, lastName) : undefined,
-			role: this.basicFaker.randomEnum(UserRole),
-			createdAt: this.dateFaker.createdAt(options?.createdFrom),
-			updatedAt: this.dateFaker.modifiedAt(),
+			email: BasicFaker.boolean() ? faker.internet.email(firstName, lastName) : undefined,
+			role: BasicFaker.randomEnum(UserRole),
+			createdAt: dateFaker.createdAt(options?.createdSince),
+			updatedAt: dateFaker.modifiedAt(),
 			...overrideParameters,
 		});
 	}

@@ -83,7 +83,7 @@ describe('CreateJwtAccessTokenUseCase', () => {
 			);
 		});
 
-		it('should return valid jwt', () => {
+		it('should return valid Jwt', () => {
 			const jwtToken = useCase.execute('user-uuid');
 
 			const parts = jwtToken.split('.');

@@ -12,7 +12,7 @@ describe('JwtGuard', () => {
 	let guard: JwtGuard;
 	const executionContext = mock<ExecutionContext>();
 
-	const userFaker = new UserFaker();
+	const userFaker = UserFaker;
 	const fakeUser = userFaker.makeOne();
 
 	beforeAll(async () => {
@@ -28,7 +28,7 @@ describe('JwtGuard', () => {
 	});
 
 	describe('getRequest', () => {
-		it('should transform the context correctly from GraphQL executation context', () => {
+		it('should transform the context correctly from GraphQL execution context', () => {
 			executionContext.getArgs.mockReturnValueOnce([{}, {}, { req: { key: 'value' } }, {}]);
 
 			const result = guard.getRequest(executionContext as ExecutionContext);

@@ -15,7 +15,7 @@ import { SetJwtTokenUseCase } from './set-jwt-token.use-case';
 
 describe('LoginUseCase', () => {
 	let useCase: LoginUseCase;
-	const userEntityRepository = mock<UserRepository>();
+	const userRepository = mock<UserRepository>();
 	const checkPassword = mock<CheckPasswordUseCase>();
 	const createAccessToken = mock<CreateJwtAccessTokenUseCase>();
 	const createRefreshToken = mock<CreateJwtRefreshTokenUseCase>();
@@ -25,7 +25,7 @@ describe('LoginUseCase', () => {
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
 				LoginUseCase,
-				{ provide: UserRepository, useValue: userEntityRepository },
+				{ provide: UserRepository, useValue: userRepository },
 				{ provide: CheckPasswordUseCase, useValue: checkPassword },
 				{ provide: CreateJwtAccessTokenUseCase, useValue: createAccessToken },
 				{ provide: CreateJwtRefreshTokenUseCase, useValue: createRefreshToken },
@@ -42,7 +42,7 @@ describe('LoginUseCase', () => {
 
 	describe('execute', () => {
 		it('throw NotFoundException when UserService.getOne throw exception', async () => {
-			userEntityRepository.getOne.mockRejectedValueOnce(() => {
+			userRepository.getOne.mockRejectedValueOnce(() => {
 				throw new NotFoundException();
 			});
 
@@ -50,14 +50,14 @@ describe('LoginUseCase', () => {
 
 			expect(tokenModel).rejects.toThrow(NotFoundException);
 
-			expect(userEntityRepository.getOne).toBeCalledTimes(1);
-			expect(userEntityRepository.getOne).toBeCalledWith({ username: 'not' });
+			expect(userRepository.getOne).toBeCalledTimes(1);
+			expect(userRepository.getOne).toBeCalledWith({ username: 'not' });
 
 			expect(checkPassword.execute).toBeCalledTimes(0);
 		});
 
 		it('throw UnauthorizedException when BcryptService.compare return False', async () => {
-			userEntityRepository.getOne.mockResolvedValueOnce(new User());
+			userRepository.getOne.mockResolvedValueOnce(new User());
 			checkPassword.execute.mockResolvedValueOnce(false);
 
 			const tokenModel = useCase.execute({ username: 'bad', password: 'password' });
@@ -65,8 +65,8 @@ describe('LoginUseCase', () => {
 			await expect(tokenModel).rejects.toThrow(UnauthorizedException);
 			expect(tokenModel).rejects.toMatchObject({ response: { password: 'not match' } });
 
-			expect(userEntityRepository.getOne).toBeCalledTimes(1);
-			expect(userEntityRepository.getOne).toBeCalledWith({ username: 'bad' });
+			expect(userRepository.getOne).toBeCalledTimes(1);
+			expect(userRepository.getOne).toBeCalledWith({ username: 'bad' });
 
 			expect(checkPassword.execute).toBeCalledTimes(1);
 
@@ -74,7 +74,7 @@ describe('LoginUseCase', () => {
 		});
 
 		it('should call two times to setJwtToken useCase', async () => {
-			userEntityRepository.getOne.mockResolvedValueOnce(
+			userRepository.getOne.mockResolvedValueOnce(
 				new User({ uuid: 'user-uuid', password: 'hashed-password' }),
 			);
 			checkPassword.execute.mockResolvedValueOnce(true);
@@ -88,8 +88,8 @@ describe('LoginUseCase', () => {
 
 			expect(result).toStrictEqual(undefined);
 
-			expect(userEntityRepository.getOne).toBeCalledTimes(1);
-			expect(userEntityRepository.getOne).toBeCalledWith({ username: 'drackp2m' });
+			expect(userRepository.getOne).toBeCalledTimes(1);
+			expect(userRepository.getOne).toBeCalledWith({ username: 'drackp2m' });
 
 			expect(checkPassword.execute).toBeCalledTimes(1);
 			expect(checkPassword.execute).toBeCalledWith('plaintext-password', 'hashed-password');
