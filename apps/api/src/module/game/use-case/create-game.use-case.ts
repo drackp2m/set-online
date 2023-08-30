@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { PreconditionFailedException } from '../../../shared/exception/precondition-failed.exception';
+import { EditableDate } from '../../../shared/util/editable-date';
 import { User } from '../../user/user.entity';
 import { Game } from '../game.entity';
 import { GameRepository } from '../game.repository';
@@ -20,13 +21,13 @@ export class CreateGameUseCase {
 				participants: { uuid: participant.uuid },
 			});
 		} catch (error) {
-			const expiresOnDate = new Date();
-			expiresOnDate.setDate(expiresOnDate.getDate() + 1);
+			// FixMe => add try catch in current catch? Hmmm...
+			const expiresOn = new EditableDate().edit('day', 1);
 
 			const newGame = new Game({
 				tableCards: ['a', 'b', 'c'],
 				deckCards: ['d', 'e', 'f'],
-				expiresOn: expiresOnDate,
+				expiresOn,
 			});
 
 			const gameParticipant = new GameParticipant({ game: newGame, user: participant });
