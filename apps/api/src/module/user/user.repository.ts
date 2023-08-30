@@ -1,8 +1,8 @@
-import { CustomEntityRepository } from '../../shared/util/custom-entity.repository';
+import { CustomRepository } from '../../shared/util/custom-entity.repository';
 
 import { User } from './user.entity';
 
-export class UserRepository extends CustomEntityRepository<User> {
+export class UserRepository extends CustomRepository<User> {
 	findActiveUsers(): User[] {
 		return [];
 	}

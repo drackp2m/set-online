@@ -14,7 +14,7 @@ import { RegisterUseCase } from './register.use-case';
 
 describe('RegisterUseCase', () => {
 	let useCase: RegisterUseCase;
-	const userEntityRepository = mock<UserRepository>();
+	const userRepository = mock<UserRepository>();
 	const hashPasswordUseCase = mock<HashPasswordUseCase>();
 
 	jest
@@ -27,7 +27,7 @@ describe('RegisterUseCase', () => {
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
 				RegisterUseCase,
-				{ provide: UserRepository, useValue: userEntityRepository },
+				{ provide: UserRepository, useValue: userRepository },
 				{ provide: HashPasswordUseCase, useValue: hashPasswordUseCase },
 			],
 		}).compile();
@@ -41,9 +41,9 @@ describe('RegisterUseCase', () => {
 
 	describe('execute', () => {
 		it('throw PreconditionFailedException when UserService.getMany return user with same username', async () => {
-			const fakeUser = new UserFaker().makeOne();
+			const fakeUser = UserFaker.makeOne();
 
-			userEntityRepository.getMany.mockResolvedValueOnce([fakeUser]);
+			userRepository.getMany.mockResolvedValueOnce([fakeUser]);
 
 			const registerRequest: RegisterRequestDto = {
 				username: fakeUser.username,
@@ -57,9 +57,9 @@ describe('RegisterUseCase', () => {
 		});
 
 		it('throw PreconditionFailedException when UserService.getMany return user with same email', async () => {
-			const fakeUser = new UserFaker().makeOne();
+			const fakeUser = UserFaker.makeOne();
 
-			userEntityRepository.getMany.mockResolvedValueOnce([fakeUser]);
+			userRepository.getMany.mockResolvedValueOnce([fakeUser]);
 
 			const registerRequest: RegisterRequestDto = {
 				username: 'drackp2m',
@@ -74,8 +74,8 @@ describe('RegisterUseCase', () => {
 		});
 
 		it('throw Exception when UserService.insert throw exception', async () => {
-			userEntityRepository.getMany.mockResolvedValueOnce([]);
-			userEntityRepository.insert.mockRejectedValueOnce(new Error('database error'));
+			userRepository.getMany.mockResolvedValueOnce([]);
+			userRepository.insert.mockRejectedValueOnce(new Error('database error'));
 
 			const registerRequest: RegisterRequestDto = {
 				username: 'drackp2m',
@@ -88,11 +88,11 @@ describe('RegisterUseCase', () => {
 			expect(user).rejects.toMatchObject({});
 		});
 
-		it('should return user', async () => {
-			const fakeUser = new UserFaker().makeOne();
+		it('should return User instance', async () => {
+			const fakeUser = UserFaker.makeOne();
 
-			userEntityRepository.getMany.mockResolvedValueOnce([]);
-			userEntityRepository.insert.mockResolvedValueOnce(
+			userRepository.getMany.mockResolvedValueOnce([]);
+			userRepository.insert.mockResolvedValueOnce(
 				new User({
 					...fakeUser,
 					password: 'H4$h3d_p@$$w0rd',
@@ -110,8 +110,8 @@ describe('RegisterUseCase', () => {
 
 			expect(user).toBeInstanceOf(User);
 
-			expect(userEntityRepository.insert).toBeCalledTimes(1);
-			expect(userEntityRepository.insert).toBeCalledWith(
+			expect(userRepository.insert).toBeCalledTimes(1);
+			expect(userRepository.insert).toBeCalledWith(
 				new User({
 					...registerRequest,
 					password: fakeUser.password,

@@ -12,7 +12,7 @@ import { JwtStrategyService } from './jwt.strategy.service';
 describe('JwtStrategyService', () => {
 	let service: JwtStrategyService;
 	const configurationService = mock<ConfigurationService>({ jwt: { secret: '1234' } });
-	const userEntityRepository = mock<UserRepository>();
+	const userRepository = mock<UserRepository>();
 
 	const fakeJwt = { sub: 'user-uuid' } as JsonWebToken;
 
@@ -21,7 +21,7 @@ describe('JwtStrategyService', () => {
 			providers: [
 				JwtStrategyService,
 				{ provide: ConfigurationService, useValue: configurationService },
-				{ provide: UserRepository, useValue: userEntityRepository },
+				{ provide: UserRepository, useValue: userRepository },
 			],
 		}).compile();
 
@@ -34,7 +34,7 @@ describe('JwtStrategyService', () => {
 
 	describe('validate', () => {
 		it('throw NotFoundException when EntityManager.getOneBy throw NotFoundException', async () => {
-			userEntityRepository.getOne.mockRejectedValueOnce(() => {
+			userRepository.getOne.mockRejectedValueOnce(() => {
 				throw new NotFoundException();
 			});
 
@@ -44,7 +44,7 @@ describe('JwtStrategyService', () => {
 		});
 
 		it('should return User when EntityManager.getOneBy return User', async () => {
-			userEntityRepository.getOne.mockResolvedValueOnce(new User());
+			userRepository.getOne.mockResolvedValueOnce(new User());
 
 			const user = await service.validate(fakeJwt);
 

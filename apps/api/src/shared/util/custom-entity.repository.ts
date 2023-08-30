@@ -5,7 +5,7 @@ import { NotFoundException } from '../exception/not-found.exception';
 
 import { CustomBaseEntity } from './custom-base.entity';
 
-export class CustomEntityRepository<T extends CustomBaseEntity<T>> {
+export class CustomRepository<T extends CustomBaseEntity<T>> {
 	constructor(
 		private readonly entityManager: EntityManager,
 		private readonly entityName: string,

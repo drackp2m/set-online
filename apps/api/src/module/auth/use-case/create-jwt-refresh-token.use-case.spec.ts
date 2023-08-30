@@ -85,7 +85,7 @@ describe('CreateJwtRefreshTokenUseCase', () => {
 			);
 		});
 
-		it('should return valid jwt', async () => {
+		it('should return valid Jwt', async () => {
 			const jwtToken = useCase.execute('user-uuid');
 
 			const parts = jwtToken.split('.');

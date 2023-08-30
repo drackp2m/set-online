@@ -7,9 +7,8 @@ import { UserFaker } from './user.faker';
 
 export class UserFactory extends Factory<User> {
 	model: Constructor<User>;
-	faker: UserFaker = new UserFaker();
 
 	protected definition(): EntityData<User> {
-		return this.faker.makeOne();
+		return UserFaker.makeOne();
 	}
 }
