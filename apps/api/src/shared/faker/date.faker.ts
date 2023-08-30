@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import { GenerateNowDateUseCase } from '../use-case/generate-now-date.use-case';
+import { EditableDate } from '../util/editable-date';
 
 import { BasicFaker } from './basic.faker';
 
@@ -14,14 +14,11 @@ type ManipulationDateAttribute =
 	| 'millisecond';
 
 export class DateFaker {
-	private readonly now = GenerateNowDateUseCase.execute();
+	private readonly now = new EditableDate();
 	private created: Date;
 
 	constructor() {
-		this.now.setUTCHours(0);
-		this.now.setUTCMinutes(0);
-		this.now.setUTCSeconds(0);
-		this.now.setUTCMilliseconds(0);
+		this.now.set('hour', 0).set('minute', 0).set('second', 0).set('millisecond', 0);
 	}
 
 	createdAt(since?: string): Date {
