@@ -34,6 +34,8 @@ jobs:
       - name: Run tests
         env:
           MIKRO_ORM_CLI: apps/api/src/shared/module/config/mikro-orm.config.ts
+          MIKRO_ORM_CLI_TS_CONFIG_PATH: apps/api/tsconfig.app.json
+          MIKRO_ORM_CLI_USE_TS_NODE: 1
         run: yarn test
 
   build:
