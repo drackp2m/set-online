@@ -8,6 +8,7 @@ declare global {
 			DB_NAME: string;
 			DB_USER: string;
 			DB_PASS: string;
+			DB_NAME_TEST: string;
 
 			API_PROTOCOL: string;
 			API_DOMAIN: string;
