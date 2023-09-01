@@ -1,3 +1,10 @@
+# FROM postgres:15.4-alpine3.17 as database
+
+# COPY postgresql-test-database.sh /docker-entrypoint-initdb.d/
+
+# RUN chmod +x /docker-entrypoint-initdb.d/postgresql-test-database.sh
+
+
 FROM node:20.2-alpine3.17 AS deps
 
 RUN apk add --no-cache build-base python3
