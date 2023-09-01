@@ -5,9 +5,9 @@ declare global {
 
 			DB_HOST: string;
 			DB_PORT: string;
-			DB_NAME: string;
 			DB_USER: string;
 			DB_PASS: string;
+			DB_NAME: string;
 			DB_NAME_TEST: string;
 
 			API_PROTOCOL: string;
