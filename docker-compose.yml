@@ -6,7 +6,7 @@ networks:
 
 services:
   set-db:
-    image: postgres:15.3-alpine3.17
+    image: postgres:15.4-alpine3.17
     container_name: set-db
     hostname: set-db
     networks:
@@ -14,12 +14,12 @@ services:
     ports:
       - ${DB_PORT}:5432
     volumes:
-      - .pgdata:/var/lib/postgresql/data
+      - .pgdata:/var/lib/postgresql/data/pgdata
+      - ./tools/initdb.d:/docker-entrypoint-initdb.d:ro
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DATABASES: ${DB_NAME},${DB_NAME_TEST}
       TZ: UTC
       PGTZ: UTC
     restart: unless-stopped

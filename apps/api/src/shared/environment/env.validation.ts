@@ -31,6 +31,10 @@ class EnvironmentVariables {
 
 	@IsString()
 	@IsNotEmpty()
+	DB_NAME_TEST: string;
+
+	@IsString()
+	@IsNotEmpty()
 	API_PROTOCOL: ApiProtocol;
 
 	@IsString()

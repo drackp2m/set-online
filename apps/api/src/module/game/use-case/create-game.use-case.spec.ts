@@ -1,5 +1,5 @@
-import { EntityManager } from '@mikro-orm/core';
-import { MikroOrmModule } from '@mikro-orm/nestjs';
+import { MikroORM } from '@mikro-orm/core';
+import { defineConfig } from '@mikro-orm/postgresql';
 import { Test, TestingModule } from '@nestjs/testing';
 import { mock } from 'jest-mock-extended';
 
@@ -21,16 +21,21 @@ describe('CreateGameUseCase', () => {
 	let useCase: CreateGameUseCase;
 	const gameRepository = mock<GameRepository>();
 	const gameParticipantRepository = mock<GameParticipantRepository>();
-	const entityManager = mock<EntityManager>();
 
 	beforeAll(async () => {
+		await MikroORM.init(
+			defineConfig({
+				clientUrl: 'postgresql://user:pass@localhost/db_name',
+				entities: [Game],
+			}),
+			false,
+		);
+
 		const module: TestingModule = await Test.createTestingModule({
-			imports: [MikroOrmModule.forRoot()],
 			providers: [
 				CreateGameUseCase,
 				{ provide: GameRepository, useValue: gameRepository },
 				{ provide: GameParticipantRepository, useValue: gameParticipantRepository },
-				{ provide: EntityManager, useValue: entityManager },
 			],
 		}).compile();
 
