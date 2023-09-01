@@ -32,6 +32,8 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Run tests
+        env:
+          MIKRO_ORM_CLI: apps/api/src/shared/module/config/mikro-orm.config.ts
         run: yarn test
 
   build:
