@@ -257,7 +257,7 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/cli@~16.2.1":
+"@angular/cli@16.2.1":
   version "16.2.1"
   resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-16.2.1.tgz#1274b6ee8aef5131be1ae56f3db36b810c1e60fc"
   integrity sha512-nuCc0VOGjuUFQo1Pu9CyFQ4VTy7OuwTiwxOG9qbut4FSGz2CO9NeqoamPUuy6rpKVu5JxVe+L6Y4OFaNKv2n3Q==
@@ -3420,17 +3420,17 @@
   dependencies:
     md5 "^2.2.1"
 
-"@ngneat/elf-entities@^4.5.0":
+"@ngneat/elf-entities@4.5.0":
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/@ngneat/elf-entities/-/elf-entities-4.5.0.tgz#d20137f07408494716d13b1c3a65ad482def10a0"
   integrity sha512-G07vPNeZoe16GMPOPDMKaFQXN16aRG+EqQy7MNMHewoXGq1cHRpwKENEcKrF0lhjSX6EafdNWhTDQSCyWZyr6A==
 
-"@ngneat/elf-state-history@^1.4.0":
+"@ngneat/elf-state-history@1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@ngneat/elf-state-history/-/elf-state-history-1.4.0.tgz#b65c50a9f4a38d79d4df6a92d1fd75eb45e092ef"
   integrity sha512-tjKGVfd96npOyxQUgMSzfeybtRxSlvCcIWCeMTeWOfwYyPO2Z3FjGIzDupDUZdV0MY/6jWOiCxP4aNhj0z6YRQ==
 
-"@ngneat/elf@^2.3.2":
+"@ngneat/elf@2.3.2":
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/@ngneat/elf/-/elf-2.3.2.tgz#044e6f61312d3398495b9b5d0bc387107532f5e4"
   integrity sha512-BMVJos82l9/l00U4G+fjTb1k85SiNDnpn2TbfFq6AWssJO6TmU4Y8SptSEjoYDKIXCne9XW+Ou/jufV6IEINIQ==
@@ -9869,7 +9869,7 @@ jest-message-util@^29.6.3:
     slash "^3.0.0"
     stack-utils "^2.0.3"
 
-jest-mock-extended@^3.0.5:
+jest-mock-extended@3.0.5:
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/jest-mock-extended/-/jest-mock-extended-3.0.5.tgz#ebf208e363f4f1db603b81fb005c4055b7c1c8b7"
   integrity sha512-/eHdaNPUAXe7f65gHH5urc8SbRVWjYxBqmCgax2uqOBJy8UUcCBMN1upj1eZ8y/i+IqpyEm4Kq0VKss/GCCTdw==
