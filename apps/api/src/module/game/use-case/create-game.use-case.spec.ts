@@ -1,3 +1,5 @@
+import { MikroORM } from '@mikro-orm/core';
+import { defineConfig } from '@mikro-orm/postgresql';
 import { Test, TestingModule } from '@nestjs/testing';
 import { mock } from 'jest-mock-extended';
 
@@ -21,13 +23,13 @@ describe('CreateGameUseCase', () => {
 	const gameParticipantRepository = mock<GameParticipantRepository>();
 
 	beforeAll(async () => {
-		// await MikroORM.init(
-		// 	defineConfig({
-		// 		clientUrl: 'postgresql://user:pass@localhost/db_name',
-		// 		entities: [Game],
-		// 	}),
-		// 	false,
-		// );
+		await MikroORM.init(
+			defineConfig({
+				clientUrl: 'postgresql://user:pass@localhost/db_name',
+				entities: [Game],
+			}),
+			false,
+		);
 
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [
