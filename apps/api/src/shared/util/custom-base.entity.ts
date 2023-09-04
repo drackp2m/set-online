@@ -13,7 +13,7 @@ export abstract class CustomBaseEntity<
 > extends BaseEntity<T, PK, P> {
 	@PrimaryKey()
 	@Field(() => ID)
-	uuid: string = GenerateUuidUseCase.execute();
+	uuid: string = new GenerateUuidUseCase().execute();
 
 	@Property()
 	@Field(() => Date)

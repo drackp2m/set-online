@@ -66,7 +66,7 @@ describe('CreateGameUseCase', () => {
 
 		it('should return Game instance with specified Participant', async () => {
 			const fakeUuid = 'f858b7c7-a260-4760-b6e3-b90e66557d3c';
-			jest.spyOn(GenerateUuidUseCase, 'execute').mockReturnValue(fakeUuid);
+			jest.spyOn(GenerateUuidUseCase.prototype, 'execute').mockReturnValue(fakeUuid);
 
 			const fakeDate = new EditableDate();
 			jest.spyOn(GenerateNowDateUseCase, 'execute').mockReturnValue(fakeDate);
