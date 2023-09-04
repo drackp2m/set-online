@@ -1,126 +1,61 @@
-# SetNode
+# Welcome to **Set Online**
 
-## Steps to run the project
-
-1. 🐳 Create Docker containers
-
-> docker-compose up -d --build
-
-2. 📦 Install dependencies
-
-> docker exec -it set-node yarn install
-
-3. 🐘 Execute database migrations
-
-> docker exec -it set-node yarn migration:execute
-
-4. 🚦 Start the application
-
-> docker exec -it set-node yarn start
-
-5. 🙂 Enjoy [GraphQL Playground](http://localhost:3000/graphql) and [Angular App](http://localhost:4200)
-
----
-
-This project was generated using [Nx](https://nx.dev).
-
-<p style="text-align: center;">
-<picture>
-  <source srcset="https://raw.githubusercontent.com/drackp2m/set-online/dev/apps/app/src/assets/logos/nx-dark.svg" media="(prefers-color-scheme: light)">
-  <source srcset="https://raw.githubusercontent.com/drackp2m/set-online/dev/apps/app/src/assets/logos/nx-light.svg" media="(prefers-color-scheme: dark)">
-  <img width="450">
-</picture>
-</p>
-
-🔎 **Smart, Fast and Extensible Build System**
-
-## Quick Start & Documentation
-
-[Nx Documentation](https://nx.dev/angular)
-
-[10-minute video showing all Nx features](https://nx.dev/getting-started/intro)
-
-[Interactive Tutorial](https://nx.dev/react-tutorial/01-create-application)
-
-## Adding capabilities to your workspace
-
-Nx supports many plugins which add capabilities for developing different types of applications and different tools.
-
-These capabilities include generating applications, libraries, etc as well as the devtools to test, and build projects as well.
-
-Below are our core plugins:
-
-- [Angular](https://angular.io)
-  - `ng add @nx/angular`
-- [React](https://reactjs.org)
-  - `ng add @nrwl/react`
-- Web (no framework frontends)
-  - `ng add @nrwl/web`
-- [Nest](https://nestjs.com)
-  - `ng add @nx/nest`
-- [Express](https://expressjs.com)
-  - `ng add @nrwl/express`
-- [Node](https://nodejs.org)
-  - `ng add @nx/node`
-
-There are also many [community plugins](https://nx.dev/community) you could add.
-
-## Generate an application
-
-Run `ng g @nx/angular:app my-app` to generate an application.
-
-> You can use any of the plugins above to generate applications as well.
-
-When using Nx, you can create multiple applications and libraries in the same workspace.
-
-## Generate a library
-
-Run `ng g @nx/angular:lib my-lib` to generate a library.
-
-> You can also use any of the plugins above to generate libraries as well.
-
-Libraries are shareable across libraries and applications. They can be imported from `@set-online/mylib`.
+<img src="apps/app/src/assets/icon.svg" alt="Set Online Logo" width="200"/>
 
 ## Development server
 
-Run `ng serve my-app` for a dev server. Navigate to http://localhost:4200/. The app will automatically reload if you change any of the source files.
+- 📋 Copy `.env.example` and rename it to `.env` executing `cp .env.example .env`
 
-## Code scaffolding
+1. With DevContainer
 
-Run `ng g component my-component --project=my-app` to generate a new component.
+- 📋 Generate Dev Containers docker-compose with `cp .devcontainer/docker-compose.yml.example .devcontainer/docker-compose.yml`
+- 📝 Edit build arg with the result of the following command `echo 'USER_GID:' $(id -g) && echo 'USER_UID:' $(id -u)`
+- 🐋 Run VSCode Dev Container command `Reopen in Container`
 
-## Build
+You can also view node execution logs by running `docker logs set-nx -f -n 100` in a host terminal.
 
-Run `ng build my-app` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+2. In your machine
 
-## Running unit tests
+- ⚙️ Run `docker compose up -d` and wait for it to finish (be patient)
+- 📦 Install dependencies executing command `yarn`
+- 🛠️ Install extensions listed by running `Show recommended extensions` on VSCode
+- 🚀 Execute `yarn start`
 
-Run `ng test my-app` to execute the unit tests via [Jest](https://jestjs.io).
+You can now navigate to:
 
-Run `nx affected:test` to execute the unit tests affected by a change.
+- 👹 Apollo Studio on https://localhost:3000/graphql
+- 🧜🏻‍♀️ Frontend on https://localhost:4200
 
-## Running end-to-end tests
+## Migrations
 
-Run `ng e2e my-app` to execute the end-to-end tests via [Cypress](https://www.cypress.io).
+Using the mikro-orm migration system, three `yarn` commands are available:
 
-Run `nx affected:e2e` to execute the end-to-end tests affected by a change.
+- 🔍 Check if there are pending migrations using `yarn migration:check`
+- 📦 Create a migration that synchronizes all entities using `yarn migration:create`
+- 🏗️ Execute migrations to synchronize the database using `yarn migration:execute`
 
-## Understand your workspace
+## Library creation
 
-Run `nx graph` to see a diagram of the dependencies of your projects.
+If you miss having any specific purpose libraries, feel free to create them by running the command `nx generate @nx/workspace:lib new-library-name`.
+
+This will create all the necessary files and add a `path` to the `tsconfig.base.json` file, with the necessary settings so that it is accessible in all the projects in the monorepository.
+
+## Understand commitizen
+
+This project uses [commitizen](https://commitizen-tools.github.io/commitizen/) to help generate standardized confirmation messages. On top of this there is [cz-git](https://cz-git.qbb.sh) to improve the interactive commitizen command line tool. Finally, we have [commitlint](https://commitlint.js.org) to help us define the configuration, which together with the [@commitlint-config-nx-scopes](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-nx-scopes) shareable commitlint config enforcing to use `nx project and workspace` names as scopes.
+
+This means that there are now rules to follow when writing a commit message. These rules can be found in the file `.commitlintrc.js`.
+
+To learn the rules, you can start writing your first commits using the interactive `cz-git` command line tool by running the `cz` or `git cz` command. Happy commit!
+
+## Understand this workspace
+
+Run `nx graph` to see a diagram of the dependencies of the projects.
+
+## Remote caching
+
+Run `npx nx connect-to-nx-cloud` to enable [remote caching](https://nx.app) and make CI faster.
 
 ## Further help
 
-Visit the [Nx Documentation](https://nx.dev/angular) to learn more.
-
-## ☁️ Nx Cloud
-
-### Distributed Computation Caching & Distributed Task Execution
-
-<p style="text-align: center;"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-cloud-card.png"></p>
-
-Nx Cloud pairs with Nx in order to enable you to build and test code more rapidly, by up to 10 times. Even teams that are new to Nx can connect to Nx Cloud and start saving time instantly.
-
-Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
-
-Visit [Nx Cloud](https://nx.app/) to learn more.
+Visit the [Nx Documentation](https://nx.dev) to learn more.

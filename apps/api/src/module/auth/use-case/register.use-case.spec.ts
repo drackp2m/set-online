@@ -18,10 +18,10 @@ describe('RegisterUseCase', () => {
 	const hashPasswordUseCase = mock<HashPasswordUseCase>();
 
 	jest
-		.spyOn(GenerateUuidUseCase, 'execute')
+		.spyOn(GenerateUuidUseCase.prototype, 'execute')
 		.mockReturnValue('9aae5da0-82d1-4580-8b4d-c7ab52f09cc0');
 
-	jest.spyOn(GenerateNowDateUseCase, 'execute').mockReturnValue(new Date());
+	jest.spyOn(GenerateNowDateUseCase.prototype, 'execute').mockReturnValue(new Date());
 
 	beforeAll(async () => {
 		const module: TestingModule = await Test.createTestingModule({
