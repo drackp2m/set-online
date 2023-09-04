@@ -1,11 +1,4 @@
-# FROM postgres:15.4-alpine3.17 as database
-
-# COPY postgresql-test-database.sh /docker-entrypoint-initdb.d/
-
-# RUN chmod +x /docker-entrypoint-initdb.d/postgresql-test-database.sh
-
-
-FROM node:20.2-alpine3.17 AS deps
+FROM node:20.2-alpine3.17 AS base
 
 RUN apk add --no-cache build-base python3
 
@@ -21,20 +14,18 @@ RUN if [ -n "$USER_GID" ] && [ "$USER_GID" != "1000" ]; then \
 
 WORKDIR /usr/src/app
 
-COPY package.json yarn.lock* .
-
 RUN chown -R node:node /usr/src/app \
 			&& chown -R node:node /home/node
 
+
+
+FROM base AS deps
+
 USER node
 
+COPY package.json yarn.lock* .
+
 RUN yarn install
-
-
-
-FROM deps AS dev
-
-CMD yarn start
 
 
 

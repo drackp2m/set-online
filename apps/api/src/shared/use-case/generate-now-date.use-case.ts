@@ -1,5 +1,5 @@
 export class GenerateNowDateUseCase {
-	static execute(): Date {
+	execute(): Date {
 		return new Date();
 	}
 }

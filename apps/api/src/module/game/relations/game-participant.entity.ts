@@ -15,7 +15,7 @@ export class GameParticipant {
 	user: User;
 
 	@Property({ defaultRaw: 'CURRENT_TIMESTAMP' })
-	createdAt: Date = GenerateNowDateUseCase.execute();
+	createdAt: Date = new GenerateNowDateUseCase().execute();
 
 	constructor(init?: Partial<GameParticipant>) {
 		if (init) {
