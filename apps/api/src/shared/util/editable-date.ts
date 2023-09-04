@@ -10,7 +10,7 @@ type ManipulationDateAttribute =
 	| 'millisecond';
 
 export class EditableDate extends Date {
-	constructor(initialDate = GenerateNowDateUseCase.execute()) {
+	constructor(initialDate = new GenerateNowDateUseCase().execute()) {
 		super(initialDate);
 	}
 

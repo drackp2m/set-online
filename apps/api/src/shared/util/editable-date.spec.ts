@@ -9,7 +9,7 @@ describe('EditableDate', () => {
 
 	const fakeDate = new Date('2023-11-13T23:41:19.846Z');
 
-	jest.spyOn(GenerateNowDateUseCase, 'execute').mockReturnValue(fakeDate);
+	jest.spyOn(GenerateNowDateUseCase.prototype, 'execute').mockReturnValue(fakeDate);
 
 	beforeAll(async () => {
 		const module: TestingModule = await Test.createTestingModule({

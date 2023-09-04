@@ -17,11 +17,11 @@ export abstract class CustomBaseEntity<
 
 	@Property()
 	@Field(() => Date)
-	createdAt: Date = GenerateNowDateUseCase.execute();
+	createdAt: Date = new GenerateNowDateUseCase().execute();
 
-	@Property({ onUpdate: GenerateNowDateUseCase.execute })
+	@Property({ onUpdate: new GenerateNowDateUseCase().execute })
 	@Field(() => Date)
-	updatedAt: Date = GenerateNowDateUseCase.execute();
+	updatedAt: Date = new GenerateNowDateUseCase().execute();
 
 	constructor(init?: EntityData<T>) {
 		super();
