@@ -69,7 +69,7 @@ describe('CreateGameUseCase', () => {
 			jest.spyOn(GenerateUuidUseCase.prototype, 'execute').mockReturnValue(fakeUuid);
 
 			const fakeDate = new EditableDate();
-			jest.spyOn(GenerateNowDateUseCase, 'execute').mockReturnValue(fakeDate);
+			jest.spyOn(GenerateNowDateUseCase.prototype, 'execute').mockReturnValue(fakeDate);
 
 			const expiresOn = new EditableDate(fakeDate).edit('day', 1);
 
