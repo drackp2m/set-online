@@ -18,7 +18,7 @@ describe('HashPasswordUseCase', () => {
 	});
 
 	describe('execute', () => {
-		it('should return a long string', async () => {
+		it('should return a text of 60 characters in length starting with "$2a$12$"', async () => {
 			const hashedPassword = await useCase.execute('password');
 
 			expect(hashedPassword).toHaveLength(60);
