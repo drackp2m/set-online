@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { PreconditionFailedException } from '../../../shared/exception/precondition-failed.exception';
+import { ShuffleArrayUseCase } from '../../../shared/use-case/shuffle-array.use-case';
 import { EditableDate } from '../../../shared/util/editable-date';
 import { User } from '../../user/user.entity';
 import { Game } from '../game.entity';
@@ -8,9 +9,13 @@ import { GameRepository } from '../game.repository';
 import { GameParticipant } from '../relations/game-participant.entity';
 import { GameParticipantRepository } from '../relations/game-participant.repository';
 
+import { GenerateGameCardsUseCase } from './generate-game-cards.use-case';
+
 @Injectable()
 export class CreateGameUseCase {
 	constructor(
+		private readonly generateGameCardsUseCase: GenerateGameCardsUseCase,
+		private readonly shuffleArrayUseCase: ShuffleArrayUseCase,
 		private readonly gameRepository: GameRepository,
 		private readonly gameParticipantRepository: GameParticipantRepository,
 	) {}
@@ -23,6 +28,11 @@ export class CreateGameUseCase {
 		} catch (error) {
 			// FixMe => add try catch in current catch? Hmmm...
 			const expiresOn = new EditableDate().edit('day', 1);
+
+			const gameCards = this.generateGameCardsUseCase.execute();
+			const shuffledGameCards = this.shuffleArrayUseCase.execute(gameCards);
+
+			console.log(shuffledGameCards);
 
 			const newGame = new Game({
 				tableCards: ['a', 'b', 'c'],
