@@ -1,4 +1,5 @@
 import { MikroORM } from '@mikro-orm/core';
+import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { defineConfig } from '@mikro-orm/postgresql';
 import { Test, TestingModule } from '@nestjs/testing';
 import { mock } from 'jest-mock-extended';
@@ -16,6 +17,7 @@ import { GameParticipant } from '../relations/game-participant.entity';
 import { GameParticipantRepository } from '../relations/game-participant.repository';
 
 import { CreateGameUseCase } from './create-game.use-case';
+import { CreateGameUseCaseModule } from './create-game.use-case.module';
 
 describe('CreateGameUseCase', () => {
 	let useCase: CreateGameUseCase;
@@ -32,14 +34,19 @@ describe('CreateGameUseCase', () => {
 		);
 
 		const module: TestingModule = await Test.createTestingModule({
-			providers: [
-				CreateGameUseCase,
-				{ provide: GameRepository, useValue: gameRepository },
-				{ provide: GameParticipantRepository, useValue: gameParticipantRepository },
+			imports: [
+				MikroOrmModule.forRoot(),
+				{
+					module: CreateGameUseCaseModule,
+					providers: [
+						{ provide: GameRepository, useValue: gameRepository },
+						{ provide: GameParticipantRepository, useValue: gameParticipantRepository },
+					],
+				},
 			],
 		}).compile();
 
-		useCase = await module.resolve<CreateGameUseCase>(CreateGameUseCase);
+		useCase = module.get<CreateGameUseCase>(CreateGameUseCase);
 	});
 
 	it('should be defined', () => {
