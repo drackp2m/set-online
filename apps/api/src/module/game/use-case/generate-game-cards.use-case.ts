@@ -7,7 +7,7 @@ import { cardShapes } from '../definition/card-shape.enum';
 
 @Injectable()
 export class GenerateGameCardsUseCase {
-	async execute(): Promise<string[]> {
+	execute(): string[] {
 		const cards = [];
 
 		cardShapes.forEach((_shapeValue, shapeKey) => {

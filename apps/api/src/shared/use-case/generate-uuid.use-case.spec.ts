@@ -13,6 +13,10 @@ describe('GenerateUuidUseCase', () => {
 		useCase = await module.resolve<GenerateUuidUseCase>(GenerateUuidUseCase);
 	});
 
+	it('should be defined', () => {
+		expect(useCase).toBeDefined();
+	});
+
 	describe('execute', () => {
 		it('should return a valid v4 uuid', () => {
 			const uuid = useCase.execute();
