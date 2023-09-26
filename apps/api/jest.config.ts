@@ -3,6 +3,8 @@ export default {
 	displayName: 'api',
 	preset: '../../jest.preset.js',
 	testEnvironment: 'node',
+	globalSetup: '<rootDir>/global-setup.ts',
+	globalTeardown: '<rootDir>/global-teardown.ts',
 	maxWorkers: 2,
 	testPathIgnorePatterns: [".int.spec.ts$"],
 	transform: {

@@ -6,9 +6,10 @@ module.exports = async function () {
 
 	globalThis.__TEARDOWN_MESSAGE__ = '\nTearing down...\n';
 
-	globalThis.__MIKRO_ORM__ = await MikroORM.init(
+	await MikroORM.init(
 		defineConfig({
 			clientUrl: 'postgresql://user:pass@localhost/db_name',
+			entities: ['apps/api/src/module/**/*.entity.ts'],
 			connect: false,
 		}),
 	);
