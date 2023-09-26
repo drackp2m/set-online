@@ -1,7 +1,15 @@
+import { MikroORM } from '@mikro-orm/core';
+import { defineConfig } from '@mikro-orm/postgresql';
+
 module.exports = async function () {
-	// Start services that that the app needs to run (e.g. database, docker-compose, etc.).
 	console.log('\nSetting up...\n');
 
-	// Hint: Use `globalThis` to pass variables to global teardown.
 	globalThis.__TEARDOWN_MESSAGE__ = '\nTearing down...\n';
+
+	globalThis.__MIKRO_ORM__ = await MikroORM.init(
+		defineConfig({
+			clientUrl: 'postgresql://user:pass@localhost/db_name',
+			connect: false,
+		}),
+	);
 };

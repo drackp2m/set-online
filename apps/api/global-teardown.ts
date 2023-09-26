@@ -1,5 +1,8 @@
+import { MikroORM } from '@mikro-orm/core';
+import { PostgreSqlDriver } from '@mikro-orm/postgresql';
+
 module.exports = async function () {
-	// Put clean up logic here (e.g. stopping services, docker-compose, etc.).
-	// Hint: `globalThis` is shared between setup and teardown.
 	console.log(globalThis.__TEARDOWN_MESSAGE__);
+
+	await (globalThis.__MIKRO_ORM__ as MikroORM<PostgreSqlDriver>).close();
 };

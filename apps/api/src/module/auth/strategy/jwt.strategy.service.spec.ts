@@ -25,7 +25,7 @@ describe('JwtStrategyService', () => {
 			],
 		}).compile();
 
-		service = module.get<JwtStrategyService>(JwtStrategyService);
+		service = module.get(JwtStrategyService);
 	});
 
 	it('should be defined', () => {
