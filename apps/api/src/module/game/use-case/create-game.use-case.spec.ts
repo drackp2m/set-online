@@ -1,6 +1,4 @@
-import { MikroORM } from '@mikro-orm/core';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
-import { defineConfig } from '@mikro-orm/postgresql';
 import { Test, TestingModule } from '@nestjs/testing';
 import { mock } from 'jest-mock-extended';
 
@@ -25,28 +23,48 @@ describe('CreateGameUseCase', () => {
 	const gameParticipantRepository = mock<GameParticipantRepository>();
 
 	beforeAll(async () => {
-		await MikroORM.init(
-			defineConfig({
-				clientUrl: 'postgresql://user:pass@localhost/db_name',
-				entities: [Game],
-			}),
-			false,
-		);
+		// await MikroORM.init(
+		// 	defineConfig({
+		// 		clientUrl: 'postgresql://user:pass@localhost/db_name',
+		// 		entities: [Game, GameParticipant],
+		// 		connect: false,
+		// 	}),
+		// );
 
 		const module: TestingModule = await Test.createTestingModule({
 			imports: [
+				// CreateGameUseCaseModule,
 				MikroOrmModule.forRoot(),
 				{
 					module: CreateGameUseCaseModule,
 					providers: [
-						{ provide: GameRepository, useValue: gameRepository },
-						{ provide: GameParticipantRepository, useValue: gameParticipantRepository },
+						{
+							provide: GameRepository,
+							useValue: gameRepository,
+						},
+						{
+							provide: GameParticipantRepository,
+							useValue: gameParticipantRepository,
+						},
 					],
 				},
 			],
+			// providers: [
+			// 	CreateGameUseCase,
+			// 	GenerateGameCardsUseCase,
+			// 	ShuffleArrayUseCase,
+			// 	{
+			// 		provide: GameRepository,
+			// 		useValue: gameRepository,
+			// 	},
+			// 	{
+			// 		provide: GameParticipantRepository,
+			// 		useValue: gameParticipantRepository,
+			// 	},
+			// ],
 		}).compile();
 
-		useCase = module.get<CreateGameUseCase>(CreateGameUseCase);
+		useCase = module.get(CreateGameUseCase);
 	});
 
 	it('should be defined', () => {

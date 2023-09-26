@@ -17,7 +17,7 @@ export class CustomRepository<T extends CustomBaseEntity<T>> {
 	async getOne<Hint extends string = never>(
 		query: FilterQuery<T>,
 		options?: FindOptions<T, Hint>,
-	): Promise<T | null> {
+	): Promise<T> {
 		const user = await this.entityManager.fork().findOne(this.entityName, query, options);
 
 		if (!user) {

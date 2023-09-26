@@ -32,7 +32,7 @@ export class CreateGameUseCase {
 			const gameCards = this.generateGameCardsUseCase.execute();
 			const shuffledGameCards = this.shuffleArrayUseCase.execute(gameCards);
 
-			console.log(shuffledGameCards);
+			console.log(shuffledGameCards.length);
 
 			const newGame = new Game({
 				tableCards: ['a', 'b', 'c'],
