@@ -1,4 +1,3 @@
-/* eslint-disable */
 export default {
 	displayName: 'api',
 	preset: '../../jest.preset.js',
@@ -6,7 +5,7 @@ export default {
 	globalSetup: '<rootDir>/global-setup.ts',
 	globalTeardown: '<rootDir>/global-teardown.ts',
 	maxWorkers: 2,
-	testPathIgnorePatterns: [".int.spec.ts$"],
+	testPathIgnorePatterns: ['.int.spec.ts$'],
 	transform: {
 		'^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
 	},

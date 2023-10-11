@@ -1,3 +1,3 @@
-module.exports = async function () {
+export default async () => {
 	console.log(globalThis.__TEARDOWN_MESSAGE__);
 };

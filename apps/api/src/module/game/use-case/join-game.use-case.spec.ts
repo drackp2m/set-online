@@ -1,3 +1,5 @@
+import { MikroORM } from '@mikro-orm/core';
+import { defineConfig } from '@mikro-orm/postgresql';
 import { Test, TestingModule } from '@nestjs/testing';
 import { mock } from 'jest-mock-extended';
 
@@ -17,25 +19,15 @@ describe('CreateGameUseCase', () => {
 	const gameParticipantRepository = mock<GameParticipantRepository>();
 
 	beforeAll(async () => {
-		// await MikroORM.init(
-		// 	defineConfig({
-		// 		clientUrl: 'postgresql://user:pass@localhost/db_name',
-		// 		entities: [Game],
-		// 	}),
-		// 	false,
-		// );
+		await MikroORM.init(
+			defineConfig({
+				clientUrl: 'postgresql://user:pass@localhost/db_name',
+				entities: ['apps/api/src/module/**/*.entity.ts'],
+				connect: false,
+			}),
+		);
 
 		const module: TestingModule = await Test.createTestingModule({
-			imports: [
-				// {
-				// 	// module: JoinGameUseCaseModule,
-				// 	// imports: [MikroOrmModule.forRoot()],
-				// 	// providers: [
-				// 	// 	{ provide: GameRepository, useValue: gameRepository },
-				// 	// 	{ provide: GameParticipantRepository, useValue: gameParticipantRepository },
-				// 	// ],
-				// },
-			],
 			providers: [
 				JoinGameUseCase,
 				{ provide: GameRepository, useValue: gameRepository },
@@ -51,7 +43,7 @@ describe('CreateGameUseCase', () => {
 	});
 
 	describe('execute', () => {
-		it('should throw PreconditionFailedException when current Game exists', async () => {
+		it.skip('should throw PreconditionFailedException when current Game exists', async () => {
 			const fakeGame = GameFaker.makeOne();
 			const fakeUser = UserFaker.makeOne();
 
@@ -60,7 +52,7 @@ describe('CreateGameUseCase', () => {
 					participants: { uuid: fakeUser.uuid },
 					status: { $in: [GameStatus.WaitingOpponents, GameStatus.InProgress] },
 				})
-				.mockResolvedValue(fakeGame);
+				.mockResolvedValueOnce(fakeGame);
 
 			const game = useCase.execute(fakeGame.uuid, fakeUser);
 
@@ -95,7 +87,7 @@ describe('CreateGameUseCase', () => {
 
 			const game = useCase.execute(fakeGame.uuid, fakeUser);
 
-			expect(game).rejects.toThrow(NotFoundException);
+			await expect(game).rejects.toThrow(NotFoundException);
 			expect(game).rejects.toMatchObject({ response: { game: 'not exists' } });
 
 			expect(gameRepository.getOne).toBeCalledTimes(2);

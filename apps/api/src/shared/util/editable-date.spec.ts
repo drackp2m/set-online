@@ -16,7 +16,7 @@ describe('EditableDate', () => {
 			providers: [EditableDate],
 		}).compile();
 
-		util = module.get<EditableDate>(EditableDate);
+		util = await module.resolve(EditableDate);
 	});
 
 	it('should be defined', () => {

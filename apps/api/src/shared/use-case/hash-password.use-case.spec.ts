@@ -10,7 +10,7 @@ describe('HashPasswordUseCase', () => {
 			providers: [HashPasswordUseCase],
 		}).compile();
 
-		useCase = await module.resolve<HashPasswordUseCase>(HashPasswordUseCase);
+		useCase = await module.resolve(HashPasswordUseCase);
 	});
 
 	it('should be defined', () => {

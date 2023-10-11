@@ -47,7 +47,7 @@ describe('RefreshSessionUseCase', () => {
 			],
 		}).compile();
 
-		useCase = await module.resolve<RefreshSessionUseCase>(RefreshSessionUseCase);
+		useCase = await module.resolve(RefreshSessionUseCase);
 	};
 
 	beforeAll(async () => {

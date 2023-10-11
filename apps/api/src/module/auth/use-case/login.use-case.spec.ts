@@ -33,7 +33,7 @@ describe('LoginUseCase', () => {
 			],
 		}).compile();
 
-		useCase = await module.resolve<LoginUseCase>(LoginUseCase);
+		useCase = await module.resolve(LoginUseCase);
 	});
 
 	it('should be defined', () => {

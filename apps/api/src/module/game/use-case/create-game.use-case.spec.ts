@@ -1,4 +1,5 @@
-import { MikroOrmModule } from '@mikro-orm/nestjs';
+import { MikroORM } from '@mikro-orm/core';
+import { defineConfig } from '@mikro-orm/postgresql';
 import { Test, TestingModule } from '@nestjs/testing';
 import { mock } from 'jest-mock-extended';
 
@@ -6,6 +7,7 @@ import { NotFoundException } from '../../../shared/exception/not-found.exception
 import { PreconditionFailedException } from '../../../shared/exception/precondition-failed.exception';
 import { GenerateNowDateUseCase } from '../../../shared/use-case/generate-now-date.use-case';
 import { GenerateUuidUseCase } from '../../../shared/use-case/generate-uuid.use-case';
+import { ShuffleArrayUseCase } from '../../../shared/use-case/shuffle-array.use-case';
 import { EditableDate } from '../../../shared/util/editable-date';
 import { UserFaker } from '../../user/factory/user.faker';
 import { GameFaker } from '../factory/game.faker';
@@ -15,7 +17,7 @@ import { GameParticipant } from '../relations/game-participant.entity';
 import { GameParticipantRepository } from '../relations/game-participant.repository';
 
 import { CreateGameUseCase } from './create-game.use-case';
-import { CreateGameUseCaseModule } from './create-game.use-case.module';
+import { GenerateGameCardsUseCase } from './generate-game-cards.use-case';
 
 describe('CreateGameUseCase', () => {
 	let useCase: CreateGameUseCase;
@@ -23,48 +25,31 @@ describe('CreateGameUseCase', () => {
 	const gameParticipantRepository = mock<GameParticipantRepository>();
 
 	beforeAll(async () => {
-		// await MikroORM.init(
-		// 	defineConfig({
-		// 		clientUrl: 'postgresql://user:pass@localhost/db_name',
-		// 		entities: [Game, GameParticipant],
-		// 		connect: false,
-		// 	}),
-		// );
+		await MikroORM.init(
+			defineConfig({
+				clientUrl: 'postgresql://user:pass@localhost/db_name',
+				entities: ['apps/api/src/module/**/*.entity.ts'],
+				connect: false,
+			}),
+		);
 
 		const module: TestingModule = await Test.createTestingModule({
-			imports: [
-				// CreateGameUseCaseModule,
-				MikroOrmModule.forRoot(),
+			providers: [
+				CreateGameUseCase,
+				GenerateGameCardsUseCase,
+				ShuffleArrayUseCase,
 				{
-					module: CreateGameUseCaseModule,
-					providers: [
-						{
-							provide: GameRepository,
-							useValue: gameRepository,
-						},
-						{
-							provide: GameParticipantRepository,
-							useValue: gameParticipantRepository,
-						},
-					],
+					provide: GameRepository,
+					useValue: gameRepository,
+				},
+				{
+					provide: GameParticipantRepository,
+					useValue: gameParticipantRepository,
 				},
 			],
-			// providers: [
-			// 	CreateGameUseCase,
-			// 	GenerateGameCardsUseCase,
-			// 	ShuffleArrayUseCase,
-			// 	{
-			// 		provide: GameRepository,
-			// 		useValue: gameRepository,
-			// 	},
-			// 	{
-			// 		provide: GameParticipantRepository,
-			// 		useValue: gameParticipantRepository,
-			// 	},
-			// ],
 		}).compile();
 
-		useCase = module.get(CreateGameUseCase);
+		useCase = await module.resolve(CreateGameUseCase);
 	});
 
 	it('should be defined', () => {
