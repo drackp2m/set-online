@@ -29,7 +29,7 @@ describe('AuthController', () => {
 			],
 		}).compile();
 
-		authController = module.get<AuthController>(AuthController);
+		authController = await module.resolve(AuthController);
 	});
 
 	it('should be defined', () => {

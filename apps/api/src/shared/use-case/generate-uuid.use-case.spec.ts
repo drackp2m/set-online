@@ -10,7 +10,7 @@ describe('GenerateUuidUseCase', () => {
 			providers: [GenerateUuidUseCase],
 		}).compile();
 
-		useCase = await module.resolve<GenerateUuidUseCase>(GenerateUuidUseCase);
+		useCase = await module.resolve(GenerateUuidUseCase);
 	});
 
 	it('should be defined', () => {

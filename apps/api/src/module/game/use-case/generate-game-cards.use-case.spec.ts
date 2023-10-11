@@ -10,7 +10,7 @@ describe('GenerateGameCardsUseCase', () => {
 			providers: [GenerateGameCardsUseCase],
 		}).compile();
 
-		useCase = await module.resolve<GenerateGameCardsUseCase>(GenerateGameCardsUseCase);
+		useCase = await module.resolve(GenerateGameCardsUseCase);
 	});
 
 	it('should be defined', () => {
