@@ -10,7 +10,7 @@ describe('CheckPasswordUseCase', () => {
 			providers: [CheckPasswordUseCase],
 		}).compile();
 
-		useCase = await module.resolve<CheckPasswordUseCase>(CheckPasswordUseCase);
+		useCase = await module.resolve(CheckPasswordUseCase);
 	});
 
 	it('should be defined', () => {

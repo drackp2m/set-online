@@ -12,7 +12,7 @@ describe('ShuffleArrayUseCase', () => {
 			providers: [ShuffleArrayUseCase],
 		}).compile();
 
-		useCase = await module.resolve<ShuffleArrayUseCase>(ShuffleArrayUseCase);
+		useCase = await module.resolve(ShuffleArrayUseCase);
 	});
 
 	it('should be defined', () => {

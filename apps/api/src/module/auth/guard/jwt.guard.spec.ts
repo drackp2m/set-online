@@ -20,7 +20,7 @@ describe('JwtGuard', () => {
 			providers: [JwtGuard],
 		}).compile();
 
-		guard = module.get<JwtGuard>(JwtGuard);
+		guard = await module.resolve(JwtGuard);
 	});
 
 	it('should be defined', () => {

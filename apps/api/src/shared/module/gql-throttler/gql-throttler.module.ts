@@ -7,8 +7,12 @@ import { GqlThrottlerGuard } from './guards/gql-throttler.guard';
 @Module({
 	imports: [
 		ThrottlerModule.forRoot({
-			ttl: 60,
-			limit: 100,
+			throttlers: [
+				{
+					ttl: 60,
+					limit: 100,
+				},
+			],
 		}),
 	],
 	providers: [

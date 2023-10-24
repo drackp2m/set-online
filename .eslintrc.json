@@ -4,7 +4,25 @@
 	"plugins": ["@nx"],
 	"overrides": [
 		{
-			"files": ["*.ts"],
+			"files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+			"rules": {
+				"@nx/enforce-module-boundaries": [
+					"error",
+					{
+						"enforceBuildableLibDependency": true,
+						"allow": [],
+						"depConstraints": [
+							{
+								"sourceTag": "*",
+								"onlyDependOnLibsWithTags": ["*"]
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			"files": ["*.ts", "*.tsx"],
 			"parser": "@typescript-eslint/parser",
 			"plugins": ["@typescript-eslint", "import", "unused-imports"],
 			"extends": ["plugin:@nx/typescript"],
@@ -98,41 +116,23 @@
 			}
 		},
 		{
-			"files": ["*.js"],
+			"files": ["*.js", "*.jsx"],
 			"extends": ["plugin:@nx/javascript"],
 			"rules": {}
 		},
 		{
-			"files": ["*.ts", "*.js"],
-			"rules": {
-				"@nx/enforce-module-boundaries": [
-					"error",
-					{
-						"enforceBuildableLibDependency": true,
-						"allow": [],
-						"depConstraints": [
-							{
-								"sourceTag": "*",
-								"onlyDependOnLibsWithTags": ["*"]
-							}
-						]
-					}
-				]
-			}
-		},
-		{
-			"files": ["*.ts", "*.js", "*.html"],
+			"files": ["*.ts", "*.tsx", "*.js", "*.jsx", "*.html"],
 			"extends": ["plugin:prettier/recommended"],
 			"rules": {
 				"prettier/prettier": "warn"
 			}
 		},
 		{
-			"files": ["*.spec.ts"],
-			"rules": {
-				"max-lines": "off",
-				"max-lines-per-function": "off"
-			}
+			"files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
+			"env": {
+				"jest": true
+			},
+			"rules": {}
 		}
 	]
 }

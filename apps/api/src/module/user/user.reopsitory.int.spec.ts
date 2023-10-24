@@ -26,7 +26,7 @@ describe('UserRepository', () => {
 			],
 		}).compile();
 
-		userRepository = module.get<UserRepository>(UserRepository);
+		userRepository = await module.resolve(UserRepository);
 	});
 
 	beforeEach(async () => {

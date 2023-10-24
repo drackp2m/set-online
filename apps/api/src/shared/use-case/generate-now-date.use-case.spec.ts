@@ -10,7 +10,7 @@ describe('GenerateNowDateUseCase', () => {
 			providers: [GenerateNowDateUseCase],
 		}).compile();
 
-		useCase = await module.resolve<GenerateNowDateUseCase>(GenerateNowDateUseCase);
+		useCase = await module.resolve(GenerateNowDateUseCase);
 	});
 
 	it('should be defined', () => {
