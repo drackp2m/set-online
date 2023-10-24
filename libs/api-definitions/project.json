@@ -4,11 +4,35 @@
 	"sourceRoot": "libs/api-definitions/src",
 	"projectType": "library",
 	"targets": {
+		"build": {
+			"executor": "@nx/js:tsc",
+			"outputs": ["{options.outputPath}"],
+			"options": {
+				"outputPath": "dist/libs/api-definitions",
+				"main": "libs/api-definitions/src/index.ts",
+				"tsConfig": "libs/api-definitions/tsconfig.lib.json",
+				"assets": ["libs/api-definitions/*.md"]
+			}
+		},
 		"lint": {
-			"executor": "@nx/linter:eslint",
+			"executor": "@nx/eslint:lint",
 			"outputs": ["{options.outputFile}"],
 			"options": {
-				"lintFilePatterns": ["libs/api-definitions/**/*.ts"]
+				"lintFilePatterns": ["libs/api-definitions/**/*.ts", "libs/api-definitions/package.json"]
+			}
+		},
+		"test": {
+			"executor": "@nx/jest:jest",
+			"outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+			"options": {
+				"jestConfig": "libs/api-definitions/jest.config.ts",
+				"passWithNoTests": true
+			},
+			"configurations": {
+				"ci": {
+					"ci": true,
+					"codeCoverage": true
+				}
 			}
 		}
 	},

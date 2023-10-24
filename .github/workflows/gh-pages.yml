@@ -26,17 +26,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'yarn'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm install --force --frozen-lockfile
 
       - name: Run tests
         env:
           MIKRO_ORM_CLI: apps/api/src/shared/module/config/mikro-orm.config.ts
           MIKRO_ORM_CLI_TS_CONFIG_PATH: apps/api/tsconfig.app.json
           MIKRO_ORM_CLI_USE_TS_NODE: true
-        run: yarn test
+        run: npm test
 
   build:
     runs-on: ubuntu-latest
@@ -53,10 +53,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'yarn'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm install --force --frozen-lockfile
 
       - name: Build application
         run: ./node_modules/.bin/nx build app --prod --base-href ${{ steps.pages.outputs.base_url }}/

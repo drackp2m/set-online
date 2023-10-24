@@ -17,9 +17,9 @@ You can also view node execution logs by running `docker logs set-nx -f -n 100` 
 2. In your machine
 
 - ⚙️ Run `docker compose up -d` and wait for it to finish (be patient)
-- 📦 Install dependencies executing command `yarn`
+- 📦 Install dependencies executing command `npm`
 - 🛠️ Install extensions listed by running `Show recommended extensions` on VSCode
-- 🚀 Execute `yarn start`
+- 🚀 Execute `npm start`
 
 You can now navigate to:
 
@@ -28,11 +28,11 @@ You can now navigate to:
 
 ## Migrations
 
-Using the mikro-orm migration system, three `yarn` commands are available:
+Using the mikro-orm migration system, three `npm` commands are available:
 
-- 🔍 Check if there are pending migrations using `yarn migration:check`
-- 📦 Create a migration that synchronizes all entities using `yarn migration:create`
-- 🏗️ Execute migrations to synchronize the database using `yarn migration:execute`
+- 🔍 Check if there are pending migrations using `npm migration:check`
+- 📦 Create a migration that synchronizes all entities using `npm migration:create`
+- 🏗️ Execute migrations to synchronize the database using `npm migration:execute`
 
 ## Library creation
 

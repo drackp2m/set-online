@@ -1,8 +1,10 @@
 # Add files here to ignore them from prettier formatting
-
-/node_modules
 /dist
 /coverage
-.angular/cache
+.angular
+/node_modules
 .pgdata
 libs/api-definitions/src/lib/graphql/definitions.ts
+
+
+/.nx/cache

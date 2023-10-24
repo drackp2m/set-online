@@ -1,4 +1,4 @@
-FROM node:20.2-alpine3.17 AS base
+FROM node:20.8-alpine3.18 AS base
 
 RUN apk add --no-cache build-base python3
 
@@ -23,9 +23,9 @@ FROM base AS deps
 
 USER node
 
-COPY package.json yarn.lock* .
+COPY package.json package.lock* .
 
-RUN yarn install
+RUN npm install --force --frozen-lockfile
 
 
 
@@ -49,16 +49,16 @@ RUN mkdir /home/node/.gnupg \
 RUN mkdir -p ~/.local/share/zsh/plugins \
 			&& ln -s /usr/share/zsh/plugins/powerlevel10k ~/.local/share/zsh/plugins/
 
-CMD yarn start
+CMD npm start
 
 
 
 FROM deps AS build-api
 
-CMD yarn build:api
+CMD npm build:api
 
 
 
 FROM build-api AS run-api
 
-CMD yarn serve:api
+CMD npm serve:api

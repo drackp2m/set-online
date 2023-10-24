@@ -1,39 +1,36 @@
 {
-	"extends": ["../../.eslintrc"],
-	"ignorePatterns": ["!**/*"],
-	"overrides": [
-		{
-			"files": ["*.ts"],
-			"extends": ["plugin:@nx/angular", "plugin:@angular-eslint/template/process-inline-templates"],
-			"rules": {
-				"@angular-eslint/component-class-suffix": [
-					"error",
-					{
-						"suffixes": ["Component", "Page", "Layout"]
-					}
-				],
-				"@angular-eslint/directive-selector": [
-					"error",
-					{
-						"type": ["element", "attribute"],
-						"prefix": "set",
-						"style": "camelCase"
-					}
-				],
-				"@angular-eslint/component-selector": [
-					"error",
-					{
-						"type": "element",
-						"prefix": "set",
-						"style": "kebab-case"
-					}
-				]
-			}
-		},
-		{
-			"files": ["*.html"],
-			"extends": ["plugin:@nx/angular-template"],
-			"rules": {}
-		}
-	]
+  "extends": ["../../.eslintrc.json"],
+  "ignorePatterns": ["!**/*"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "extends": [
+        "plugin:@nx/angular",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "rules": {
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "setOnline",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "set-online",
+            "style": "kebab-case"
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.html"],
+      "extends": ["plugin:@nx/angular-template"],
+      "rules": {}
+    }
+  ]
 }

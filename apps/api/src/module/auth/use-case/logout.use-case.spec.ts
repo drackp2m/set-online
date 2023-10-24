@@ -17,7 +17,7 @@ describe('LogoutUseCase', () => {
 			providers: [LogoutUseCase, { provide: REQUEST, useValue: request }],
 		}).compile();
 
-		useCase = await module.resolve<LogoutUseCase>(LogoutUseCase);
+		useCase = await module.resolve(LogoutUseCase);
 	});
 
 	it('should be defined', () => {

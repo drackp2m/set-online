@@ -10,7 +10,7 @@ describe('GenerateGameCardsUseCase', () => {
 			providers: [GenerateGameCardsUseCase],
 		}).compile();
 
-		useCase = await module.resolve<GenerateGameCardsUseCase>(GenerateGameCardsUseCase);
+		useCase = await module.resolve(GenerateGameCardsUseCase);
 	});
 
 	it('should be defined', () => {
@@ -18,8 +18,8 @@ describe('GenerateGameCardsUseCase', () => {
 	});
 
 	describe('execute', () => {
-		it('should generate 81 cards', async () => {
-			const cards = await useCase.execute();
+		it('should generate 81 cards', () => {
+			const cards = useCase.execute();
 
 			expect(cards.length).toStrictEqual(81);
 			expect(cards).toStrictEqual([
