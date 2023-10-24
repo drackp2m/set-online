@@ -110,6 +110,7 @@
 		"@nx/workspace": "16.10.0",
 		"@schematics/angular": "16.2.6",
 		"@types/bcryptjs": "2.4.4",
+		"@types/cookie-parser": "^1.4.5",
 		"@types/jest": "29.5.5",
 		"@types/node": "20.8.6",
 		"@types/passport-jwt": "3.0.10",
