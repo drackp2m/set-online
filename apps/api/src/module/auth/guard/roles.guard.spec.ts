@@ -23,7 +23,7 @@ describe('RolesGuard', () => {
 			providers: [RolesGuard],
 		}).compile();
 
-		guard = module.get<RolesGuard>(RolesGuard);
+		guard = await module.resolve(RolesGuard);
 	});
 
 	it('should be defined', () => {

@@ -17,7 +17,7 @@ describe('SetJwtTokenUseCase', () => {
 			providers: [SetJwtTokenUseCase, { provide: REQUEST, useValue: request }],
 		}).compile();
 
-		useCase = await module.resolve<SetJwtTokenUseCase>(SetJwtTokenUseCase);
+		useCase = await module.resolve(SetJwtTokenUseCase);
 	});
 
 	it('should be defined', () => {

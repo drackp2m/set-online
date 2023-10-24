@@ -16,7 +16,7 @@ describe('ListGamesUseCase', () => {
 			providers: [ListGamesUseCase, { provide: GameRepository, useValue: gameRepository }],
 		}).compile();
 
-		useCase = await module.resolve<ListGamesUseCase>(ListGamesUseCase);
+		useCase = await module.resolve(ListGamesUseCase);
 	});
 
 	it('should be defined', () => {

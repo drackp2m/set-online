@@ -28,7 +28,7 @@ describe('CreateJwtAccessTokenUseCase', () => {
 			],
 		}).compile();
 
-		useCase = await module.resolve<CreateJwtAccessTokenUseCase>(CreateJwtAccessTokenUseCase);
+		useCase = await module.resolve(CreateJwtAccessTokenUseCase);
 	};
 
 	beforeEach(async () => {

@@ -15,7 +15,7 @@ describe('AppController', () => {
 			providers: [AppService],
 		}).compile();
 
-		appController = module.get<AppController>(AppController);
+		appController = await module.resolve(AppController);
 	});
 
 	describe('getData', () => {
