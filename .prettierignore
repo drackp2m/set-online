@@ -6,3 +6,5 @@
 .pgdata
 libs/api-definitions/src/lib/graphql/definitions.ts
 
+
+/.nx/cache
