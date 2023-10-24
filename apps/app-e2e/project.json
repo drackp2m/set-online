@@ -14,11 +14,14 @@
 			"configurations": {
 				"production": {
 					"devServerTarget": "app:serve:production"
+				},
+				"ci": {
+					"devServerTarget": "app:serve-static"
 				}
 			}
 		},
 		"lint": {
-			"executor": "@nx/linter:eslint",
+			"executor": "@nx/eslint:lint",
 			"outputs": ["{options.outputFile}"],
 			"options": {
 				"lintFilePatterns": ["apps/app-e2e/**/*.{js,ts}"]

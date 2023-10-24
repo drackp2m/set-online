@@ -28,7 +28,7 @@ describe('CreateJwtRefreshTokenUseCase', () => {
 			],
 		}).compile();
 
-		useCase = await module.resolve<CreateJwtRefreshTokenUseCase>(CreateJwtRefreshTokenUseCase);
+		useCase = await module.resolve(CreateJwtRefreshTokenUseCase);
 	};
 
 	beforeEach(async () => {

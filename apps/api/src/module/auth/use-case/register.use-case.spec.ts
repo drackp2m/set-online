@@ -32,7 +32,7 @@ describe('RegisterUseCase', () => {
 			],
 		}).compile();
 
-		useCase = await module.resolve<RegisterUseCase>(RegisterUseCase);
+		useCase = await module.resolve(RegisterUseCase);
 	});
 
 	it('should be defined', () => {

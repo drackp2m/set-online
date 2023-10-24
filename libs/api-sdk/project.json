@@ -4,11 +4,21 @@
 	"sourceRoot": "libs/api-sdk/src",
 	"projectType": "library",
 	"targets": {
+		"build": {
+			"executor": "@nx/js:tsc",
+			"outputs": ["{options.outputPath}"],
+			"options": {
+				"outputPath": "dist/libs/api-sdk",
+				"main": "libs/api-sdk/src/index.ts",
+				"tsConfig": "libs/api-sdk/tsconfig.lib.json",
+				"assets": ["libs/api-sdk/*.md"]
+			}
+		},
 		"lint": {
-			"executor": "@nx/linter:eslint",
+			"executor": "@nx/eslint:lint",
 			"outputs": ["{options.outputFile}"],
 			"options": {
-				"lintFilePatterns": ["libs/api-sdk/**/*.ts"]
+				"lintFilePatterns": ["libs/api-sdk/**/*.ts", "libs/api-sdk/package.json"]
 			}
 		},
 		"test": {
