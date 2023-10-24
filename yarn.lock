@@ -4164,6 +4164,13 @@
   dependencies:
     "@types/node" "*"
 
+"@types/cookie-parser@^1.4.5":
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/@types/cookie-parser/-/cookie-parser-1.4.5.tgz#b1a2091c089e44e8d027ebb890b4ead4ef910b00"
+  integrity sha512-cbpH1NldYslPt7WRHXZFm+G7DTfUg57dQSCf1qrHwT8wtGX41JHLYf3Cieiqg7waPWjorVgcSSllZov+A1PJbg==
+  dependencies:
+    "@types/express" "*"
+
 "@types/eslint-scope@^3.7.3":
   version "3.7.5"
   resolved "https://registry.yarnpkg.com/@types/eslint-scope/-/eslint-scope-3.7.5.tgz#e28b09dbb1d9d35fdfa8a884225f00440dfc5a3e"
