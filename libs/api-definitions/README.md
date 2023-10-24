@@ -2,6 +2,10 @@
 
 This library was generated with [Nx](https://nx.dev).
 
-## Running lint
+## Building
 
-Run `nx lint api-definitions` to execute the lint via [ESLint](https://eslint.org/).
+Run `nx build api-definitions` to build the library.
+
+## Running unit tests
+
+Run `nx test api-definitions` to execute the unit tests via [Jest](https://jestjs.io).
