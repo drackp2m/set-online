@@ -22,23 +22,11 @@ export class JoinGameUseCase {
 			status: { $in: [GameStatus.WaitingOpponents, GameStatus.InProgress] },
 		});
 
-		console.log({
-			currentGameReq: {
-				participants: { uuid: participant.uuid },
-				status: { $in: [GameStatus.WaitingOpponents, GameStatus.InProgress] },
-			},
-			targetGameReq: {
-				uuid: gameUuid,
-			},
-		});
-
 		const targetGame = this.gameRepository.getOne({
 			uuid: gameUuid,
 		});
 
 		return Promise.allSettled([currentGame, targetGame]).then(async ([currentGame, targetGame]) => {
-			console.log({ currentGame, targetGame });
-
 			if ('fulfilled' === currentGame.status) {
 				throw new PreconditionFailedException('already in a game', 'user');
 			}
