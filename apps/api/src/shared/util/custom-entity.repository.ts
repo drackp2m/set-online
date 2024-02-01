@@ -1,4 +1,4 @@
-import { EntityManager, FilterQuery, FindOptions, Primary } from '@mikro-orm/core';
+import { EntityManager, FilterQuery, FindOneOptions, FindOptions, Primary } from '@mikro-orm/core';
 
 import { NotFoundException } from '../exception/not-found.exception';
 
@@ -16,7 +16,7 @@ export class CustomRepository<T extends CustomBaseEntity<T>> {
 
 	async getOne<Hint extends string = never>(
 		query: FilterQuery<T>,
-		options?: FindOptions<T, Hint>,
+		options?: FindOneOptions<T, Hint>,
 	): Promise<T> {
 		const user = await this.entityManager.fork().findOne(this.entityName, query, options);
 

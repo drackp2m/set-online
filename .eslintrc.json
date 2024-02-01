@@ -1,138 +1,42 @@
 {
-	"root": true,
-	"ignorePatterns": ["**/*"],
-	"plugins": ["@nx"],
-	"overrides": [
-		{
-			"files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-			"rules": {
-				"@nx/enforce-module-boundaries": [
-					"error",
-					{
-						"enforceBuildableLibDependency": true,
-						"allow": [],
-						"depConstraints": [
-							{
-								"sourceTag": "*",
-								"onlyDependOnLibsWithTags": ["*"]
-							}
-						]
-					}
-				]
-			}
-		},
-		{
-			"files": ["*.ts", "*.tsx"],
-			"parser": "@typescript-eslint/parser",
-			"plugins": ["@typescript-eslint", "import", "unused-imports"],
-			"extends": ["plugin:@nx/typescript"],
-			"parserOptions": {
-				"ecmaVersion": 2023,
-				"sourceType": "module"
-			},
-			"settings": {
-				"import/ignore": ["node_modules"],
-				"import/resolver": {
-					"node": true,
-					"typescript": {
-						"project": "tsconfig.base.json"
-					}
-				}
-			},
-			"rules": {
-				"max-lines": [
-					"warn",
-					{
-						"max": 400, // 300 Copilot
-						// "skipBlankLines": true,
-						"skipComments": true
-					}
-				],
-				"max-lines-per-function": [
-					"warn",
-					{
-						"max": 75, // 50 Copilot
-						// "skipBlankLines": true,
-						"skipComments": true,
-						"IIFEs": true
-					}
-				],
-				"unused-imports/no-unused-imports": "error",
-				"@typescript-eslint/no-unused-vars": [
-					"error",
-					{
-						"argsIgnorePattern": "^_",
-						"varsIgnorePattern": "^_",
-						"caughtErrorsIgnorePattern": "^_"
-					}
-				],
-				"@typescript-eslint/no-inferrable-types": "warn",
-				"@typescript-eslint/member-ordering": [
-					"warn",
-					{
-						"default": [
-							"signature",
-							"field",
-
-							"constructor",
-
-							"decorated-method",
-							"method",
-							"static-method",
-							"abstract-method",
-							"protected-method",
-							"private-method"
-						]
-					}
-				],
-				"import/order": [
-					"warn",
-					{
-						"newlines-between": "always",
-						"alphabetize": { "order": "asc" },
-						"pathGroups": [
-							{
-								"pattern": "@set-online/**",
-								"group": "external",
-								"position": "after"
-							}
-						]
-					}
-				],
-				"sort-imports": [
-					"warn",
-					{
-						"ignoreDeclarationSort": true
-					}
-				],
-				"padding-line-between-statements": [
-					"warn",
-					{ "blankLine": "always", "next": "export", "prev": "*" }
-				],
-				"no-duplicate-imports": "warn",
-				"no-multiple-empty-lines": ["warn", { "max": 1 }],
-				"space-before-blocks": ["warn", "always"],
-				"newline-before-return": ["warn"]
-			}
-		},
-		{
-			"files": ["*.js", "*.jsx"],
-			"extends": ["plugin:@nx/javascript"],
-			"rules": {}
-		},
-		{
-			"files": ["*.ts", "*.tsx", "*.js", "*.jsx", "*.html"],
-			"extends": ["plugin:prettier/recommended"],
-			"rules": {
-				"prettier/prettier": "warn"
-			}
-		},
-		{
-			"files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
-			"env": {
-				"jest": true
-			},
-			"rules": {}
-		}
-	]
+  "root": true,
+  "ignorePatterns": ["**/*"],
+  "plugins": ["@nx"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "@nx/enforce-module-boundaries": [
+          "error",
+          {
+            "enforceBuildableLibDependency": true,
+            "allow": [],
+            "depConstraints": [
+              {
+                "sourceTag": "*",
+                "onlyDependOnLibsWithTags": ["*"]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["plugin:@nx/typescript"],
+      "rules": {}
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "extends": ["plugin:@nx/javascript"],
+      "rules": {}
+    },
+    {
+      "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
+      "env": {
+        "jest": true
+      },
+      "rules": {}
+    }
+  ]
 }

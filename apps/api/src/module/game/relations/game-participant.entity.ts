@@ -8,10 +8,10 @@ import { GameParticipantRepository } from './game-participant.repository';
 
 @Entity({ repository: () => GameParticipantRepository })
 export class GameParticipant {
-	@ManyToOne({ entity: () => Game, primary: true, onDelete: 'cascade' })
+	@ManyToOne({ entity: () => Game, primary: true, deleteRule: 'cascade' })
 	game: Game;
 
-	@ManyToOne({ entity: () => User, primary: true, onDelete: 'cascade' })
+	@ManyToOne({ entity: () => User, primary: true, deleteRule: 'cascade' })
 	user: User;
 
 	@Property({ defaultRaw: 'CURRENT_TIMESTAMP' })

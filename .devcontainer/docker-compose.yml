@@ -5,8 +5,8 @@ services:
     build:
       target: dev-attached
       args:
-        USER_GID: 20
         USER_UID: 501
+        USER_GID: 20
     volumes:
       - ~/.ssh:/home/node/.ssh:ro
       - ~/.gnupg/pubring.kbx:/home/node/.gnupg/pubring.kbx:ro
