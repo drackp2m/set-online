@@ -8,7 +8,7 @@ import { GameStatus } from './definition/game-status.enum';
 import { GameRepository } from './game.repository';
 import { GameParticipant } from './relations/game-participant.entity';
 
-@Entity({ customRepository: () => GameRepository })
+@Entity({ repository: () => GameRepository })
 @ObjectType({ description: 'game' })
 export class Game extends CustomBaseEntity<Game> {
 	@Property()

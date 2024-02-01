@@ -1,4 +1,4 @@
-FROM node:20.8-alpine3.18 AS base
+FROM node:20.11-alpine3.18 AS base
 
 RUN apk add --no-cache build-base python3
 
@@ -25,7 +25,7 @@ USER node
 
 COPY package.json package.lock* .
 
-RUN npm install --force --frozen-lockfile
+RUN npm install --frozen-lockfile
 
 
 
@@ -49,7 +49,7 @@ RUN mkdir /home/node/.gnupg \
 RUN mkdir -p ~/.local/share/zsh/plugins \
 			&& ln -s /usr/share/zsh/plugins/powerlevel10k ~/.local/share/zsh/plugins/
 
-CMD npm start
+CMD top
 
 
 

@@ -2,6 +2,7 @@ import { registerAs } from '@nestjs/config';
 
 import { validate } from '../../../environment/env.validation';
 import { DatabaseConfig } from '../types/database-config.type';
+import 'dotenv/config';
 
 const config = validate(process.env);
 

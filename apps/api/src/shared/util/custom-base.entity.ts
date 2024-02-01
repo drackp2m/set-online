@@ -7,10 +7,8 @@ import { GenerateUuidUseCase } from '../use-case/generate-uuid.use-case';
 @Entity({ abstract: true })
 @ObjectType()
 export abstract class CustomBaseEntity<
-	T extends CustomBaseEntity<T>,
-	PK extends keyof T = 'uuid',
-	P extends string = never,
-> extends BaseEntity<T, PK, P> {
+	T extends CustomBaseEntity<T>
+> extends BaseEntity {
 	@PrimaryKey()
 	@Field(() => ID)
 	uuid: string = new GenerateUuidUseCase().execute();

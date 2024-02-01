@@ -7,7 +7,7 @@ import { Game } from '../game/game.entity';
 import { UserRole } from './definition/user-role.enum';
 import { UserRepository } from './user.repository';
 
-@Entity({ customRepository: () => UserRepository })
+@Entity({ repository: () => UserRepository })
 @ObjectType({ description: 'user' })
 export class User extends CustomBaseEntity<User> {
 	@Property({ unique: true })
