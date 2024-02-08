@@ -24,14 +24,14 @@ export class UserFaker {
 	private makeEntity(overrideParameters?: EntityData<User>, options?: UserFakerOptions): User {
 		const dateFaker = new DateFaker();
 
-		const firstName = faker.name.firstName();
-		const lastName = faker.name.lastName();
+		const firstName = faker.person.firstName();
+		const lastName = faker.person.lastName();
 
 		return new User({
-			uuid: faker.datatype.uuid(),
-			username: faker.internet.userName(firstName, lastName),
-			password: faker.internet.password(32, false, /[A-Z0-9_\-*?.]/),
-			email: BasicFaker.boolean() ? faker.internet.email(firstName, lastName) : undefined,
+			uuid: faker.string.uuid(),
+			username: faker.internet.userName({ firstName, lastName }),
+			password: faker.internet.password({ length: 32, memorable: false, pattern: /[A-Z0-9_\-*?.]/ }),
+			email: BasicFaker.boolean() ? faker.internet.email({ firstName, lastName }) : undefined,
 			role: BasicFaker.randomEnum(UserRole),
 			createdAt: dateFaker.createdAt(options?.createdSince),
 			updatedAt: dateFaker.modifiedAt(),

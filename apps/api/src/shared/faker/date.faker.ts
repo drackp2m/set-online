@@ -25,20 +25,20 @@ export class DateFaker {
 		const limitOptions = new Map<ManipulationDateAttribute, number>([['year', -2]]);
 		const sinceLimit = this.manipulatedDate(limitOptions);
 
-		this.created = faker.date.between(since || sinceLimit, this.now);
+		this.created = faker.date.between({ from: since || sinceLimit, to: this.now});
 
 		return this.created;
 	}
 
 	modifiedAt(): Date {
-		return BasicFaker.boolean() ? this.created : faker.date.between(this.created, this.now);
+		return BasicFaker.boolean() ? this.created : faker.date.between({ from: this.created, to: this.now });
 	}
 
 	expiresOn(until: string): Date {
 		const limitOptions = new Map<ManipulationDateAttribute, number>([['day', 1]]);
 		const untilLimit = this.manipulatedDate(limitOptions);
 
-		this.created = faker.date.between(this.now, until || untilLimit);
+		this.created = faker.date.between({ from: this.now, to: until || untilLimit });
 
 		return this.created;
 	}

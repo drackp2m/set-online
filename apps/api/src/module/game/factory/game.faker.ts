@@ -26,7 +26,7 @@ export class GameFaker {
 		const dateFaker = new DateFaker();
 
 		return new Game({
-			uuid: faker.datatype.uuid(),
+			uuid: faker.string.uuid(),
 			deckCards: [],
 			tableCards: [],
 			participants: [],
