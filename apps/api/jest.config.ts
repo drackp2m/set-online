@@ -3,7 +3,6 @@ export default {
   displayName: 'api',
   preset: '../../jest.preset.js',
   testEnvironment: 'node',
-  setupFilesAfterEnv: ['<rootDir>/test-setup.ts'],
 	globalSetup: '<rootDir>/global-setup.ts',
 	globalTeardown: '<rootDir>/global-teardown.ts',
 	maxWorkers: 5,
