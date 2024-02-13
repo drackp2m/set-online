@@ -1,0 +1,6 @@
+<div [class]="'card ' + shape">
+	<div #basic [class]="'basic card-' + color" [style.-webkit-mask]="basicMask"></div>
+	<div #mask class="mask" *ngIf="this.stripedMask" [style.-webkit-mask]="solidMask">
+		<div #strip [class]="'strip card-' + color" [style.-webkit-mask]="stripedMask"></div>
+	</div>
+</div>

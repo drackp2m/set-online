@@ -1,0 +1,14 @@
+#main-layout {
+	height: 100vh;
+	background-color: pink;
+
+	#header {
+		background-color: white;
+		border-bottom: solid 1px pink;
+	}
+
+	.scroll {
+		overflow: scroll;
+		flex: 1 auto;
+	}
+}

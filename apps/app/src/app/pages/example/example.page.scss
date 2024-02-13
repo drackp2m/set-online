@@ -1,0 +1,22 @@
+main {
+	min-height: 100%;
+	background-color: #fff;
+
+	#logos {
+		a {
+			img {
+				height: 80px;
+				transition: transform 300ms cubic-bezier(0.6, -0.7, 0.3, 1.6);
+
+				&:hover {
+					transform: scale(1.2);
+				}
+			}
+		}
+	}
+}
+
+.test-gap {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+}

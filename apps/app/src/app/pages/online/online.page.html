@@ -1,0 +1,20 @@
+<main id="online" class="content-fixed py-sm px-md">
+	<h3>List of games</h3>
+
+	<div class="flex-col gap-md align-start mt-sm">
+		<ul class="flex-col gap-xs">
+			<li *ngFor="let game of games()" class="flex-row justify-between">
+				> [{{ game.uuid }}] Game of {{ listParticipants(game) }}
+				<button class="text-sm p-xs surface-serene round-sm ml-xl px-sm" (click)="joinGame(game)">
+					Join game
+				</button>
+			</li>
+		</ul>
+
+		<button class="p-sm surface-radiant round-md xl-o:surface-vivid" (click)="newGame()">
+			Create new online game
+		</button>
+
+		<p>{{ error() }}</p>
+	</div>
+</main>

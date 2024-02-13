@@ -1,0 +1,9 @@
+main {
+	min-height: 100%;
+	background-color: white;
+
+	#border-radius-sizes {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+	}
+}

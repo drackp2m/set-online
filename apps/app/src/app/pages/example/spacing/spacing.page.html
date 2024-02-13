@@ -1,0 +1,38 @@
+<main id="spacing" class="content-fixed pt-lg pb-xxl">
+	<set-example-menu></set-example-menu>
+
+	<h2 class="mt-xl">Welcome to Spacing!</h2>
+
+	<h3 class="mt-xl">Spacing on sizes</h3>
+
+	<section class="grid gap-xl my-md">
+		<div class="flex-col align-center justify-end gap-md" *ngFor="let space of spaces">
+			<div
+				class="surface-vivid"
+				[style]="{ width: getSpacing(space), height: getSpacing(space), borderRadius: '2px' }"
+			></div>
+
+			<h5>{{ space }}</h5>
+		</div>
+	</section>
+
+	<h3 class="mt-xl">Spacing on gaps</h3>
+
+	<section class="grid gap-xl my-md">
+		<div class="flex-col align-center justify-end gap-md" *ngFor="let space of spaces">
+			<div class="flex-row" [class]="'gap-' + space">
+				<div
+					class="surface-vivid"
+					[style]="{ width: getSpacing('lg'), height: getSpacing('lg'), borderRadius: '2px' }"
+				></div>
+
+				<div
+					class="surface-vivid"
+					[style]="{ width: getSpacing('lg'), height: getSpacing('lg'), borderRadius: '2px' }"
+				></div>
+			</div>
+
+			<h5>{{ space }}</h5>
+		</div>
+	</section>
+</main>
