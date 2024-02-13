@@ -1,0 +1,43 @@
+@use '../abstracts/variables' as var;
+
+:root {
+	@each $size, $value in var.$spacings {
+		--spacing-#{$size}: #{$value};
+	}
+
+	@each $size, $value in var.$borders-radius {
+		--border-radius-#{$size}: #{$value};
+	}
+
+	@each $name, $value in var.$colors {
+		--color-#{$name}: #{$value};
+	}
+
+	@each $name, $value in var.$card-colors {
+		--card-#{"" + $name}: #{$value};
+	}
+
+	@each $name, $value in var.$font-sizes {
+		--font-size-#{$name}: #{$value};
+	}
+
+	@each $name, $value in var.$font-weights {
+		--font-weight-#{$name}: #{$value};
+	}
+
+	@each $name, $value in var.$font-obliques {
+		--font-oblique-#{$name}: #{$value};
+	}
+
+	@each $name, $value in var.$font-monospaces {
+		--font-monospace-#{$name}: #{$value};
+	}
+
+	@each $name, $value in var.$font-casuals {
+		--font-casual-#{$name}: #{$value};
+	}
+
+	@each $name, $value in var.$shadows {
+		--shadow-#{$name}: #{$value};
+	}
+}
