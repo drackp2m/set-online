@@ -6,7 +6,7 @@ import ExampleMenuComponent from '../shared/components/menu/example-menu.compone
 @Component({
 	standalone: true,
 	templateUrl: './color.page.html',
-	styleUrls: ['./color.page.scss'],
+	styleUrl: './color.page.scss',
 	imports: [ExampleMenuComponent, NgFor],
 })
 export default class ColorPage {

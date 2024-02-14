@@ -121,7 +121,7 @@
 			"rules": {}
 		},
 		{
-			"files": ["*.ts", "*.tsx", "*.js", "*.jsx", "*.html", "*.json"],
+			"files": ["*.ts", "*.tsx", "*.js", "*.jsx", "*.json"],
 			"extends": ["plugin:prettier/recommended"],
 			"rules": {
 				"prettier/prettier": "warn"

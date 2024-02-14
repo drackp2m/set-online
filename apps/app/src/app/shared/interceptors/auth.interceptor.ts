@@ -6,7 +6,7 @@ import {
 	HttpRequest,
 	HttpResponse,
 } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
@@ -15,14 +15,12 @@ import { AuthStore } from '../../stores/auth.store';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+	private readonly authStore = inject(AuthStore);
+	private readonly router = inject(Router);
+
 	private readonly API_REFRESH_SESSION_URL = '/api/auth/refresh-session';
 	private readonly API_REGISTER_URL = '/api/auth/register';
 	private readonly API_LOGIN_URL = '/api/auth/login';
-
-	constructor(
-		private readonly authStore: AuthStore,
-		private readonly router: Router,
-	) {}
 
 	intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 		const urlsToIgnore = [this.API_REFRESH_SESSION_URL, this.API_REGISTER_URL, this.API_LOGIN_URL];
@@ -64,7 +62,6 @@ export class AuthInterceptor implements HttpInterceptor {
 		req: HttpRequest<unknown>,
 		next: HttpHandler,
 		event?: HttpEvent<unknown>,
-		// redirectOnFailure = false,
 	): Observable<HttpEvent<unknown>> {
 		if (event) {
 			this.authStore.tryToRefreshTokens();

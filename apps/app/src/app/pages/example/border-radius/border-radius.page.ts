@@ -6,7 +6,7 @@ import ExampleMenuComponent from '../shared/components/menu/example-menu.compone
 @Component({
 	standalone: true,
 	templateUrl: './border-radius.page.html',
-	styleUrls: ['./border-radius.page.scss'],
+	styleUrl: './border-radius.page.scss',
 	imports: [ExampleMenuComponent, NgFor],
 })
 export default class BorderRadiusPage {

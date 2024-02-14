@@ -10,7 +10,7 @@
 					"error",
 					{
 						"type": "attribute",
-						"prefix": "set-online",
+						"prefix": "set",
 						"style": "camelCase"
 					}
 				],
@@ -18,7 +18,7 @@
 					"error",
 					{
 						"type": "element",
-						"prefix": "set-online",
+						"prefix": "set",
 						"style": "kebab-case"
 					}
 				],

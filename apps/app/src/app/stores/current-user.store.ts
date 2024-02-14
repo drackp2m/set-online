@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { inject } from '@angular/core';
 import { createStore, withProps } from '@ngneat/elf';
 import { stateHistory } from '@ngneat/elf-state-history';
 
@@ -18,7 +18,6 @@ export const storeHistory = stateHistory(store, {
 	maxAge: 10,
 });
 
-@Injectable({ providedIn: 'root' })
 export class CurrentUserStore {
 	private readonly getUserInfoGQL = inject(GetUserInfoGQL);
 

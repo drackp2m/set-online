@@ -280,9 +280,7 @@ export const NewGameDocument = gql`
 	${GameFieldsFragmentDoc}
 `;
 
-@Injectable({
-	providedIn: 'root',
-})
+@Injectable()
 export class NewGameGQL extends Apollo.Mutation<NewGameMutation, NewGameMutationVariables> {
 	override document = NewGameDocument;
 

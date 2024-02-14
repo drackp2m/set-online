@@ -1,5 +1,5 @@
-import { CommonModule, NgIf, NgIfContext } from '@angular/common';
-import { Component, OnInit, WritableSignal, signal } from '@angular/core';
+import { JsonPipe, NgFor, NgIf } from '@angular/common';
+import { Component, OnInit, WritableSignal, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { select } from '@ngneat/elf';
@@ -13,10 +13,15 @@ import { CurrentUserStore } from '../../stores/current-user.store';
 	standalone: true,
 	templateUrl: './login.page.html',
 	styleUrl: './login.page.scss',
-	imports: [CommonModule, NgIf, ReactiveFormsModule],
-	providers: [ApiClient, Router, CurrentUserStore, GetUsersGQL, NgIfContext],
+	imports: [NgIf, NgFor, ReactiveFormsModule, JsonPipe],
+	providers: [GetUsersGQL],
 })
 export default class LoginPage implements OnInit {
+	private readonly apiClient = inject(ApiClient);
+	private readonly router = inject(Router);
+	private readonly currentUserStore = inject(CurrentUserStore);
+	private readonly getUsersGQL = inject(GetUsersGQL);
+
 	form = new FormGroup({
 		username: new FormControl<string>('', [Validators.required]),
 		password: new FormControl('', [Validators.required]),
@@ -25,13 +30,6 @@ export default class LoginPage implements OnInit {
 	usernames: WritableSignal<string[] | undefined> = signal(undefined);
 
 	error = signal(undefined);
-
-	constructor(
-		private readonly apiClient: ApiClient,
-		private readonly router: Router,
-		private readonly currentUserStore: CurrentUserStore,
-		private readonly getUsersGQL: GetUsersGQL,
-	) {}
 
 	ngOnInit(): void {
 		this.getUsersGQL.fetch().subscribe({

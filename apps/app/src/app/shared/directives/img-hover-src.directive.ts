@@ -1,6 +1,7 @@
 import { Directive, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 
 @Directive({
+	standalone: true,
 	selector: 'img[setHoverSrc]',
 })
 export class HoverSrcDirective implements OnInit {

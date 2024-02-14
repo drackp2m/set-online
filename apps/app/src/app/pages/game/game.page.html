@@ -19,24 +19,16 @@
 	<p class="info my-sm mb-md">{{ message() }}</p>
 
 	<section id="card-game" class="flex-row flex-wrap justify-center">
-		<ng-container *ngFor="let card of boardCards()">
-			<set-card
-				[shape]="card.shape"
-				[color]="card.color"
-				[shading]="card.shading"
-				[count]="card.number"
-				[rotate]="true"
-				[selected]="isSelected(card)"
-				[highlighted]="showSets() % 2 === 1 && imInSet(card)"
-				(click)="selectCard(card)"
-			></set-card>
-		</ng-container>
+		@for (card of boardCards(); track $index) {
+		<set-card [shape]="card.shape" [color]="card.color" [shading]="card.shading" [count]="card.number" [rotate]="true"
+			[selected]="isSelected(card)" [highlighted]="showSets() % 2 === 1 && imInSet(card)"
+			(click)="selectCard(card)"></set-card>
+		}
 	</section>
 
 	<div id="tsparticles"></div>
 
-	<set-you-won
-		*ngIf="remainingCardsCount() === 0 && cardsInSets().length === 0"
-		(playAgain)="newGame()"
-	></set-you-won>
+	@if (remainingCardsCount() === 0 && cardsInSets().length === 0) {
+	<set-you-won (playAgain)="newGame()"></set-you-won>
+	}
 </main>

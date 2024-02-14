@@ -7,7 +7,7 @@ import { CardColorEnum, CardShadingEnum, CardShapeEnum } from '@set-online/api-d
 	standalone: true,
 	selector: 'set-card-shape',
 	templateUrl: './card-shape.component.html',
-	styleUrls: ['./card-shape.component.scss'],
+	styleUrl: './card-shape.component.scss',
 	imports: [NgIf],
 })
 export class CardShapeComponent {
