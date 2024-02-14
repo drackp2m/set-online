@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { JsonPipe, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, WritableSignal, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -12,12 +12,14 @@ import { CurrentUserStore } from '../../stores/current-user.store';
 	standalone: true,
 	templateUrl: './register.page.html',
 	styleUrl: './register.page.scss',
-	imports: [CommonModule, ReactiveFormsModule, ApolloModule],
+	imports: [NgIf, ReactiveFormsModule, ApolloModule, JsonPipe],
 	providers: [ApiClient, CurrentUserStore, HttpClient, GetUserInfoGQL, Apollo],
 })
 export default class RegisterPage {
 	private readonly apiClient = inject(ApiClient);
 	private readonly currentUserStore = inject(CurrentUserStore);
+
+	caca = { esto: 'es una caca' };
 
 	form = new FormGroup({
 		username: new FormControl('', [Validators.required]),

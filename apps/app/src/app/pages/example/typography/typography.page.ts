@@ -6,7 +6,7 @@ import ExampleMenuComponent from '../shared/components/menu/example-menu.compone
 @Component({
 	standalone: true,
 	templateUrl: './typography.page.html',
-	styleUrls: ['./typography.page.scss'],
+	styleUrl: './typography.page.scss',
 	imports: [ExampleMenuComponent, NgFor],
 })
 export default class TypographyPage {

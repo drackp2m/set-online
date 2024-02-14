@@ -1,17 +1,28 @@
-import { Component, WritableSignal, effect, signal } from '@angular/core';
+import { NgIf } from '@angular/common';
+import { Component, WritableSignal, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Apollo, gql } from 'apollo-angular';
 import { map } from 'rxjs';
 
 import { GetUsersGQL } from '../../graphql/apollo-operations';
+import { HoverSrcDirective } from '../../shared/directives/img-hover-src.directive';
 import { ApiClient } from '../../shared/services/api-client.service';
 
+import ExampleMenuComponent from './shared/components/menu/example-menu.component';
+
 @Component({
+	standalone: true,
 	templateUrl: './example.page.html',
-	styleUrls: ['./example.page.scss'],
+	styleUrl: './example.page.scss',
+	imports: [ExampleMenuComponent, HoverSrcDirective, ReactiveFormsModule, NgIf],
+	providers: [ApiClient, GetUsersGQL, Apollo],
 })
 export default class ExamplePage {
+	private readonly apiClient = inject(ApiClient);
+	private readonly getUsersGQL = inject(GetUsersGQL);
+	private readonly apollo = inject(Apollo);
+
 	private readonly hello$ = this.apiClient.default.get('/hello');
 
 	hello = toSignal<string, string>(this.hello$.pipe(map((data) => data.message)), {
@@ -38,13 +49,9 @@ export default class ExamplePage {
 		password: new FormControl('', [Validators.required]),
 	});
 
-	constructor(
-		private readonly apiClient: ApiClient,
-		private readonly getUsersGQL: GetUsersGQL,
-		private readonly apollo: Apollo,
-	) {
+	constructor() {
 		effect(() => {
-			// console.log(this.apolloSubscription()?.data);
+			console.log(this.apolloSubscription()?.data);
 		});
 	}
 

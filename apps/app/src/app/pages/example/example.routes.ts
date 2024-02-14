@@ -1,6 +1,12 @@
 import { Routes } from '@angular/router';
 
+import BorderRadiusPage from './border-radius/border-radius.page';
+import CardPage from './card/card.page';
+import ColorPage from './color/color.page';
 import ExamplePage from './example.page';
+import ShadowPage from './shadow/shadow.page';
+import SpacingPage from './spacing/spacing.page';
+import TypographyPage from './typography/typography.page';
 
 export const EXAMPLE_ROUTES: Routes = [
 	{
@@ -9,26 +15,26 @@ export const EXAMPLE_ROUTES: Routes = [
 	},
 	{
 		path: 'typographies',
-		loadComponent: () => import('./typography/typography.page'),
+		component: TypographyPage,
 	},
 	{
 		path: 'shadows',
-		loadComponent: () => import('./shadow/shadow.page'),
+		component: ShadowPage,
 	},
 	{
 		path: 'colors',
-		loadComponent: () => import('./color/color.page'),
+		component: ColorPage,
 	},
 	{
 		path: 'border-radius',
-		loadComponent: () => import('./border-radius/border-radius.page'),
+		component: BorderRadiusPage,
 	},
 	{
 		path: 'spacings',
-		loadComponent: () => import('./spacing/spacing.page'),
+		component: SpacingPage,
 	},
 	{
 		path: 'cards',
-		loadComponent: () => import('./card/card.page'),
+		component: CardPage,
 	},
 ];

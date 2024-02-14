@@ -1,5 +1,13 @@
 import { NgFor, NgIf } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild } from '@angular/core';
+import {
+	AfterViewInit,
+	Component,
+	ElementRef,
+	Input,
+	OnDestroy,
+	ViewChild,
+	inject,
+} from '@angular/core';
 
 import { CardColorEnum, CardShadingEnum, CardShapeEnum } from '@set-online/api-definitions';
 
@@ -9,11 +17,13 @@ import { CardShapeComponent } from '../card-shape/card-shape.component';
 	standalone: true,
 	selector: 'set-card',
 	templateUrl: './card.component.html',
-	styleUrls: ['./card.component.scss'],
+	styleUrl: './card.component.scss',
 	imports: [NgIf, NgFor, CardShapeComponent],
 })
 export class CardComponent implements AfterViewInit, OnDestroy {
+	private readonly elementRef = inject(ElementRef);
 	private resizeObserver!: ResizeObserver;
+
 	@ViewChild('container') container!: ElementRef<HTMLDivElement>;
 
 	@Input({ required: true }) shape!: keyof typeof CardShapeEnum;
@@ -23,8 +33,6 @@ export class CardComponent implements AfterViewInit, OnDestroy {
 	@Input() rotate = false;
 	@Input() selected = false;
 	@Input() highlighted = false;
-
-	constructor(private elementRef: ElementRef) {}
 
 	ngAfterViewInit() {
 		if (this.rotate) {

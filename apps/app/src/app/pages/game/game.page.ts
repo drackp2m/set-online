@@ -1,25 +1,20 @@
+import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit, computed, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { confetti } from 'tsparticles-confetti';
 
 import { CardColorEnum, CardShadingEnum, CardShapeEnum } from '@set-online/api-definitions';
 
-import { CardInterface } from '../../shared/definitions/card.interface';
-import { NgFor, NgIf } from '@angular/common';
 import { CardComponent } from '../../shared/components/card/card.component';
+import { CardInterface } from '../../shared/definitions/card.interface';
+
 import { YouWonComponent } from './shared/components/you-won/you-won.component';
-import { RouterLink } from '@angular/router';
 
 @Component({
-  standalone: true,
+	standalone: true,
 	templateUrl: './game.page.html',
 	styleUrl: './game.page.scss',
-  imports: [
-		NgIf,
-    NgFor,
-		CardComponent,
-		YouWonComponent,
-    RouterLink,
-  ],
+	imports: [NgIf, NgFor, CardComponent, YouWonComponent, RouterLink],
 })
 export default class GamePage implements OnInit {
 	private readonly shapes: (keyof typeof CardShapeEnum)[] = ['oval', 'squiggle', 'diamond'];

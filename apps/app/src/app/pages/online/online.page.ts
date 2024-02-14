@@ -1,4 +1,5 @@
-import { Component, OnInit, WritableSignal, signal } from '@angular/core';
+import { NgFor } from '@angular/common';
+import { Component, OnInit, WritableSignal, inject, signal } from '@angular/core';
 
 import {
 	JoinGameGQL,
@@ -8,18 +9,19 @@ import {
 } from '../../graphql/apollo-operations';
 
 @Component({
+	standalone: true,
 	templateUrl: './online.page.html',
-	styleUrls: ['./online.page.scss'],
+	styleUrl: './online.page.scss',
+	imports: [NgFor],
+	providers: [NewGameGQL, ListGamesGQL, JoinGameGQL],
 })
 export default class OnlinePage implements OnInit {
+	private readonly newGameGQL = inject(NewGameGQL);
+	private readonly listGamesGQL = inject(ListGamesGQL);
+	private readonly joinGameGQL = inject(JoinGameGQL);
+
 	games: WritableSignal<ListGamesQuery['listGames'] | undefined> = signal(undefined);
 	error: WritableSignal<string | undefined> = signal(undefined);
-
-	constructor(
-		private readonly newGameGQL: NewGameGQL,
-		private readonly listGamesGQL: ListGamesGQL,
-		private readonly joinGameGQL: JoinGameGQL,
-	) {}
 
 	ngOnInit(): void {
 		this.listGamesGQL.fetch().subscribe({
@@ -43,7 +45,7 @@ export default class OnlinePage implements OnInit {
 				game.participants = data.data?.joinGame.participants;
 			}
 
-      return games;
+			return games;
 		});
 	}
 
@@ -57,7 +59,7 @@ export default class OnlinePage implements OnInit {
 						game.participants = data.data?.joinGame.participants;
 					}
 
-          return games;
+					return games;
 				});
 			},
 			error: (error) => {

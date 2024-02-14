@@ -10,7 +10,7 @@ import ExampleMenuComponent from '../shared/components/menu/example-menu.compone
 @Component({
 	standalone: true,
 	templateUrl: './card.page.html',
-	styleUrls: ['./card.page.scss'],
+	styleUrl: './card.page.scss',
 	imports: [ExampleMenuComponent, CardShapeComponent, CardComponent, NgFor, NgIf],
 })
 export default class CardPage {

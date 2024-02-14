@@ -6,7 +6,9 @@ import ExampleMenuComponent from '../shared/components/menu/example-menu.compone
 @Component({
 	standalone: true,
 	templateUrl: './shadow.page.html',
-	styleUrls: ['./shadow.page.scss'],
+	styleUrl: './shadow.page.scss',
 	imports: [ExampleMenuComponent, CardComponent],
 })
-export default class ShadowPage {}
+export default class ShadowPage {
+	shadows = ['sm', 'md', 'lg', 'xl', 'xxl'];
+}

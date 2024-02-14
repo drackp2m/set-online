@@ -16,7 +16,7 @@
         "polyfills": ["zone.js"],
         "tsConfig": "apps/app/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/app/src/favicon.ico", "apps/app/src/assets"],
+        "assets": ["apps/app/src/assets"],
         "styles": ["apps/app/src/styles.scss"],
         "scripts": []
       },
@@ -62,7 +62,8 @@
       },
       "defaultConfiguration": "development",
       "options": {
-        "proxyConfig": "apps/app/proxy.conf.json"
+        "proxyConfig": "apps/app/proxy.conf.json",
+				"port": 4200
       }
     },
     "extract-i18n": {

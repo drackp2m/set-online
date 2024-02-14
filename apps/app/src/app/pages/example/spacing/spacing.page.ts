@@ -6,7 +6,7 @@ import ExampleMenuComponent from '../shared/components/menu/example-menu.compone
 @Component({
 	standalone: true,
 	templateUrl: './spacing.page.html',
-	styleUrls: ['./spacing.page.scss'],
+	styleUrl: './spacing.page.scss',
 	imports: [ExampleMenuComponent, NgFor],
 })
 export default class SpacingPage {
