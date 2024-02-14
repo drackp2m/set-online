@@ -1,0 +1,35 @@
+<main id="color" class="content-fixed pt-lg pb-xxl">
+	<set-example-menu></set-example-menu>
+
+	<h2 class="mt-xl">Welcome to Colors!</h2>
+
+	<h3 class="mt-xl">Content colors</h3>
+
+	<section id="content-colors" class="flex-col gap-lg my-md">
+		<p>
+			<span class="surface-radiant round-sm px-xs">off</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+
+		@for (color of colors; track $index) {
+		<p [class]="'color-' + color">
+			<span class="surface-vivid color-cosmic round-sm px-xs">{{ color }}</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</p>
+		}
+	</section>
+
+	<h3 class="mt-xxl">Surface colors</h3>
+
+	<section id="content-colors" class="flex-col gap-lg my-md">
+		@for (color of colors; track $index) {
+		<div class="round-md p-md" [class]="'surface-' + color + ' color-' + color">
+			<span class="surface-vivid color-cosmic round-sm px-xs">{{ color }}</span>
+			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+			dolorum illum nobis mollitia.
+		</div>
+		}
+	</section>
+</main>

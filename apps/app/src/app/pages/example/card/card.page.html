@@ -1,0 +1,45 @@
+<main id="card" class="content-fixed pt-lg pb-xxl">
+	<set-example-menu></set-example-menu>
+
+	<h2 class="mt-xl">Welcome to Cards!</h2>
+
+	<h3 class="mt-xl">Card shapes</h3>
+
+	<section id="card-shapes" class="flex-row flex-wrap gap-x-xl gap-y-lg my-md">
+		@for (shape of shapes; track $index) {
+		@for (color of colors; track $index) {
+		@for (shading of shadings; track $index) {
+		<set-card-shape [shape]="shape" [color]="color" [shading]="shading"></set-card-shape>
+		}
+		}
+		}
+	</section>
+
+	<h3 class="mt-xl">Card list horizontal</h3>
+
+	<section id="card-list-horizontal" class="flex-row flex-wrap gap-md my-md">
+		@for (shape of shapes; track $index) {
+		@for (color of colors; track $index) {
+		@for (shading of shadings; track $index) {
+		@for (count of counts; track $index) {
+		<set-card [shape]="shape" [color]="color" [shading]="shading" [count]="count"></set-card>
+		}
+		}
+		}
+		}
+	</section>
+
+	<h3 class="mt-xl">Card list vertical</h3>
+
+	<section id="card-list-vertical" class="flex-row flex-wrap gap-sm lg:gap-md my-md">
+		@for (shape of shapes; track $index) {
+		@for (color of colors; track $index) {
+		@for (shading of shadings; track $index) {
+		@for (count of counts; track $index) {
+		<set-card [shape]="shape" [color]="color" [shading]="shading" [count]="count" [rotate]="true"></set-card>
+		}
+		}
+		}
+		}
+	</section>
+</main>
