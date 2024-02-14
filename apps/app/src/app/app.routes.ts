@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import MainLayout from './shared/layouts/main/main.layout';
 import GamePage from './pages/game/game.page';
 import LoginPage from './pages/login/login.page';
+import RegisterPage from './pages/register/register.page';
 
 export const APP_ROUTES: Routes = [
 	{
@@ -23,7 +24,7 @@ export const APP_ROUTES: Routes = [
 			},
 			{
 				path: 'register',
-				loadChildren: () => import('./pages/register/register.module'),
+        component: RegisterPage,
 			},
 			{
 				path: 'example',

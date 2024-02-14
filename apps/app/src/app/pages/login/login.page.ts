@@ -1,3 +1,4 @@
+import { CommonModule, NgIf, NgIfContext } from '@angular/common';
 import { Component, OnInit, WritableSignal, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -7,14 +8,13 @@ import { filter, take } from 'rxjs';
 import { GetUsersGQL } from '../../graphql/apollo-operations';
 import { ApiClient } from '../../shared/services/api-client.service';
 import { CurrentUserStore } from '../../stores/current-user.store';
-import { CommonModule, NgIf, NgIfContext } from '@angular/common';
 
 @Component({
-  standalone: true,
+	standalone: true,
 	templateUrl: './login.page.html',
 	styleUrl: './login.page.scss',
-  imports: [CommonModule, NgIf, ReactiveFormsModule],
-  providers: [ApiClient, Router, CurrentUserStore, GetUsersGQL, NgIfContext],
+	imports: [CommonModule, NgIf, ReactiveFormsModule],
+	providers: [ApiClient, Router, CurrentUserStore, GetUsersGQL, NgIfContext],
 })
 export default class LoginPage implements OnInit {
 	form = new FormGroup({
@@ -62,7 +62,8 @@ export default class LoginPage implements OnInit {
 							take(1),
 						)
 						.subscribe({
-							next: () => {
+							next: (asd) => {
+								console.log(asd);
 								this.router.navigate(['/home']);
 							},
 						});

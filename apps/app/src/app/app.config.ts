@@ -1,20 +1,21 @@
+import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
-import { HttpLink } from 'apollo-angular/http';
-import { APOLLO_OPTIONS } from 'apollo-angular';
-import { environment } from './environments/environment';
-import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
-import { createClient } from 'graphql-ws';
 import { InMemoryCache, split } from '@apollo/client/core';
+import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { getMainDefinition } from '@apollo/client/utilities';
+import { APOLLO_OPTIONS } from 'apollo-angular';
+import { HttpLink } from 'apollo-angular/http';
 import { OperationDefinitionNode } from 'graphql';
+import { createClient } from 'graphql-ws';
+
 import { APP_ROUTES } from './app.routes';
+import { environment } from './environments/environment';
+import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
-  providers: [
-
+	providers: [
+		provideHttpClient(),
 		{
 			provide: HTTP_INTERCEPTORS,
 			useClass: AuthInterceptor,
@@ -66,5 +67,7 @@ export const appConfig: ApplicationConfig = {
 					connectToDevTools: true,
 				};
 			},
-		},provideRouter(APP_ROUTES)],
+		},
+		provideRouter(APP_ROUTES),
+	],
 };
