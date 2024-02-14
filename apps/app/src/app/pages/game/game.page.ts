@@ -36,7 +36,7 @@ export default class GamePage implements OnInit {
 	ngOnInit(): void {
 		this.prepareNewGame();
 
-		// this.ultraCheats();
+		this.ultraCheats();
 	}
 
 	isSelected(card: CardInterface): boolean {
