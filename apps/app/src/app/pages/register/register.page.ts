@@ -1,15 +1,24 @@
-import { Component, WritableSignal, signal } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Component, WritableSignal, inject, signal } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Apollo, ApolloModule } from 'apollo-angular';
 
-import { User } from '../../graphql/apollo-operations';
+import { GetUserInfoGQL, User } from '../../graphql/apollo-operations';
 import { ApiClient } from '../../shared/services/api-client.service';
 import { CurrentUserStore } from '../../stores/current-user.store';
 
 @Component({
+	standalone: true,
 	templateUrl: './register.page.html',
-	styleUrls: ['./register.page.scss'],
+	styleUrl: './register.page.scss',
+	imports: [CommonModule, ReactiveFormsModule, ApolloModule],
+	providers: [ApiClient, CurrentUserStore, HttpClient, GetUserInfoGQL, Apollo],
 })
 export default class RegisterPage {
+	private readonly apiClient = inject(ApiClient);
+	private readonly currentUserStore = inject(CurrentUserStore);
+
 	form = new FormGroup({
 		username: new FormControl('', [Validators.required]),
 		password: new FormControl('', [Validators.required]),
@@ -17,11 +26,6 @@ export default class RegisterPage {
 
 	user: WritableSignal<User | null> = signal(null);
 	error = signal(undefined);
-
-	constructor(
-		private readonly apiClient: ApiClient,
-		private readonly currentUserStore: CurrentUserStore,
-	) {}
 
 	onSubmit() {
 		const controls = this.form.controls;
@@ -40,6 +44,7 @@ export default class RegisterPage {
 					this.user.set(data);
 				},
 				error: ({ error }) => {
+					console.log(error);
 					this.error.set(error.message);
 				},
 			});
