@@ -1,0 +1,55 @@
+<main id="example" class="content-fixed pt-lg pb-xxl">
+	<h2 class="tc">{{ hello() }}</h2>
+
+	<set-example-menu></set-example-menu>
+
+	<section id="media-query-indicator" class="mt-xxl">
+		<ul class="flex-row my-md gap-sm lg:gap-md">
+			<li class="round-sm p-xs px-sm surface-radiant color-vivid xs-o:surface-serene">xs</li>
+			<li class="round-sm p-xs px-sm surface-radiant color-vivid sm-o:surface-serene">sm</li>
+			<li class="round-sm p-xs px-sm surface-radiant color-vivid md-o:surface-serene">md</li>
+			<li class="round-sm p-xs px-sm surface-radiant color-vivid lg-o:surface-serene">lg</li>
+			<li class="round-sm p-xs px-sm surface-radiant color-vivid xl-o:surface-serene">xl</li>
+		</ul>
+	</section>
+
+	<section id="logos" class="flex-row flex-wrap justify-center gap-lg mt-lg">
+		<a href="https://nx.dev" target="_blank">
+			<img [src]="'assets/logos/nx-grayscale.svg'" alt="Nx - Smart, Fast and Extensible Build System"
+				[setHoverSrc]="'assets/logos/nx.svg'" /></a>
+
+		<a href="https://nestjs.com" target="_blank">
+			<img [src]="'assets/logos/nestjs-grayscale.svg'"
+				alt="A progressive Node.js framework for building efficient, reliable and scalable server-side applications"
+				[setHoverSrc]="'assets/logos/nestjs.svg'" /></a>
+
+		<a href="https://mikro-orm.io" target="_blank">
+			<img [src]="'assets/logos/mikro-orm-grayscale.svg'"
+				alt="TypeScript ORM for Node.js based on Data Mapper, Unit of Work and Identity Map patterns"
+				[setHoverSrc]="'assets/logos/mikro-orm.svg'" /></a>
+
+		<a href="https://graphql.org" target="_blank">
+			<img [src]="'assets/logos/graphql-grayscale.svg'" alt="A query language for your API"
+				[setHoverSrc]="'assets/logos/graphql.svg'" /></a>
+
+		<a href="https://angular.io" target="_blank">
+			<img [src]="'assets/logos/angular-grayscale.svg'" alt="The modern web developer's platform"
+				[setHoverSrc]="'assets/logos/angular.svg'" /></a>
+
+		<a href="https://ngneat.github.io/elf" target="_blank">
+			<img [src]="'assets/logos/elf-grayscale.svg'" alt="A Reactive Store with Magical Powers"
+				[setHoverSrc]="'assets/logos/elf.svg'" /></a>
+	</section>
+
+	<section class="flex-col gap-md align-center mt-lg">
+		{{ apolloSubscription()?.data?.getManySubscription }}
+
+		<button class="p-sm md:p-md surface-radiant round-md xl-o:surface-vivid" (click)="checkUsers()">
+			Check users
+		</button>
+
+		@if (users()) {
+		<p>Now: {{ users() }} users.</p>
+		}
+	</section>
+</main>

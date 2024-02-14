@@ -1,0 +1,33 @@
+.container {
+	background: white;
+	border: solid 0.1rem #e5e5e5;
+	border-radius: 3.3% / 5%;
+
+	.card {
+		gap: 6%;
+		aspect-ratio: 1 / 0.666;
+		padding: 9.5% 0;
+
+		set-card-shape {
+			display: contents;
+		}
+	}
+
+	&.highlighted {
+		border-color: #25b148;
+	}
+
+	&.selected {
+		border-color: #4d4d4d;
+	}
+
+	&.rotate {
+		border-radius: 5% / 3.3%;
+
+		.card {
+			translate: -16.7% 25.2%;
+			rotate: 90deg;
+			padding: 14.5% 0;
+		}
+	}
+}
