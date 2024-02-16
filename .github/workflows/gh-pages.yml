@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   tests:
-    runs-on: ubuntu-latest
+    runs-on: alpine-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -39,7 +39,7 @@ jobs:
         run: npm test
 
   build:
-    runs-on: ubuntu-latest
+    runs-on: alpine-latest
     needs: tests
     steps:
       - name: Setup Pages
@@ -70,7 +70,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+    runs-on: alpine-latest
     needs: build
     steps:
       - name: Deploy to GitHub Pages
