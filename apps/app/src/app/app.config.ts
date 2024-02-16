@@ -1,6 +1,6 @@
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withHashLocation } from '@angular/router';
 import { InMemoryCache, split } from '@apollo/client/core';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { getMainDefinition } from '@apollo/client/utilities';
@@ -68,6 +68,6 @@ export const appConfig: ApplicationConfig = {
 				};
 			},
 		},
-		provideRouter(APP_ROUTES),
+		provideRouter(APP_ROUTES, withHashLocation()),
 	],
 };
