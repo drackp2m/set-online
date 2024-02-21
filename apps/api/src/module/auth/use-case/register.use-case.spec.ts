@@ -110,8 +110,8 @@ describe('RegisterUseCase', () => {
 
 			expect(user).toBeInstanceOf(User);
 
-			expect(userRepository.insert).toBeCalledTimes(1);
-			expect(userRepository.insert).toBeCalledWith(
+			expect(userRepository.insert).toHaveBeenCalledTimes(1);
+			expect(userRepository.insert).toHaveBeenCalledWith(
 				new User({
 					...registerRequest,
 					password: fakeUser.password,

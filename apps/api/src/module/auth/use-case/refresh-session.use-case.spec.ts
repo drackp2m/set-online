@@ -86,8 +86,8 @@ describe('RefreshSessionUseCase', () => {
 			expect(result).rejects.toThrowError(UnauthorizedException);
 			expect(result).rejects.toMatchObject({ response: { refreshToken: 'jwt malformed' } });
 
-			expect(jwtServiceVerify).toBeCalledTimes(1);
-			expect(jwtServiceVerify).toBeCalledWith('wrong-refresh-token');
+			expect(jwtServiceVerify).toHaveBeenCalledTimes(1);
+			expect(jwtServiceVerify).toHaveBeenCalledWith('wrong-refresh-token');
 		});
 
 		it('should call two times to setJwtToken useCase', async () => {
@@ -114,18 +114,22 @@ describe('RefreshSessionUseCase', () => {
 
 			expect(result).toStrictEqual(undefined);
 
-			expect(jwtServiceVerify).toBeCalledTimes(1);
-			expect(jwtServiceVerify).toBeCalledWith(fakeRefreshToken);
+			expect(jwtServiceVerify).toHaveBeenCalledTimes(1);
+			expect(jwtServiceVerify).toHaveBeenCalledWith(fakeRefreshToken);
 
-			expect(createAccessToken.execute).toBeCalledTimes(1);
-			expect(createAccessToken.execute).toBeCalledWith('user-uuid');
+			expect(createAccessToken.execute).toHaveBeenCalledTimes(1);
+			expect(createAccessToken.execute).toHaveBeenCalledWith('user-uuid');
 
-			expect(createRefreshToken.execute).toBeCalledTimes(1);
-			expect(createRefreshToken.execute).toBeCalledWith('user-uuid');
+			expect(createRefreshToken.execute).toHaveBeenCalledTimes(1);
+			expect(createRefreshToken.execute).toHaveBeenCalledWith('user-uuid');
 
-			expect(setJwtToken.execute).toBeCalledTimes(2);
-			expect(setJwtToken.execute).nthCalledWith(1, 'x-jwt-access-token', 'access-token');
-			expect(setJwtToken.execute).nthCalledWith(2, 'x-jwt-refresh-token', 'refresh-token');
+			expect(setJwtToken.execute).toHaveBeenCalledTimes(2);
+			expect(setJwtToken.execute).toHaveBeenNthCalledWith(1, 'x-jwt-access-token', 'access-token');
+			expect(setJwtToken.execute).toHaveBeenNthCalledWith(
+				2,
+				'x-jwt-refresh-token',
+				'refresh-token',
+			);
 		});
 	});
 });

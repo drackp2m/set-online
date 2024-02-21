@@ -68,8 +68,8 @@ describe('CreateGameUseCase', () => {
 			expect(game).rejects.toThrow(PreconditionFailedException);
 			expect(game).rejects.toMatchObject({ response: { user: 'already in a game' } });
 
-			expect(gameRepository.getOne).toBeCalledTimes(1);
-			expect(gameRepository.getOne).toBeCalledWith({
+			expect(gameRepository.getOne).toHaveBeenCalledTimes(1);
+			expect(gameRepository.getOne).toHaveBeenCalledWith({
 				participants: { uuid: fakeUser.uuid },
 			});
 		});
@@ -105,13 +105,13 @@ describe('CreateGameUseCase', () => {
 			expect(game).toBeInstanceOf(Game);
 			expect(game.participants).toContain(fakeUser);
 
-			expect(gameRepository.getOne).toBeCalledTimes(1);
-			expect(gameRepository.getOne).toBeCalledWith({
+			expect(gameRepository.getOne).toHaveBeenCalledTimes(1);
+			expect(gameRepository.getOne).toHaveBeenCalledWith({
 				participants: { uuid: fakeUser.uuid },
 			});
 
-			expect(gameParticipantRepository.insert).toBeCalledTimes(1);
-			expect(gameParticipantRepository.insert).toBeCalledWith(participant);
+			expect(gameParticipantRepository.insert).toHaveBeenCalledTimes(1);
+			expect(gameParticipantRepository.insert).toHaveBeenCalledWith(participant);
 		});
 	});
 });

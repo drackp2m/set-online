@@ -43,7 +43,7 @@ describe('CreateGameUseCase', () => {
 	});
 
 	describe('execute', () => {
-		it.skip('should throw PreconditionFailedException when current Game exists', async () => {
+		it('should throw PreconditionFailedException when current Game exists', async () => {
 			const fakeGame = GameFaker.makeOne();
 			const fakeUser = UserFaker.makeOne();
 
@@ -59,14 +59,14 @@ describe('CreateGameUseCase', () => {
 			expect(game).rejects.toThrow(PreconditionFailedException);
 			expect(game).rejects.toMatchObject({ response: { user: 'already in a game' } });
 
-			expect(gameRepository.getOne).toBeCalledTimes(2);
-			expect(gameRepository.getOne).toBeCalledWith({
+			expect(gameRepository.getOne).toHaveBeenCalledTimes(2);
+			expect(gameRepository.getOne).toHaveBeenCalledWith({
 				participants: { uuid: fakeUser.uuid },
 				status: { $in: [GameStatus.WaitingOpponents, GameStatus.InProgress] },
 			});
 		});
 
-		it.skip('should throw NotFoundException when target Game not exists', async () => {
+		it('should throw NotFoundException when target Game not exists', async () => {
 			const fakeGame = GameFaker.makeOne();
 			const fakeUser = UserFaker.makeOne();
 
@@ -83,19 +83,19 @@ describe('CreateGameUseCase', () => {
 				})
 				.mockRejectedValue(new NotFoundException('not exists', 'game'));
 
-			// gameRepository.getOne.mockRejectedValue(new NotFoundException('not exists', 'game'));
+			gameRepository.getOne.mockRejectedValue(new NotFoundException('not exists', 'game'));
 
 			const game = useCase.execute(fakeGame.uuid, fakeUser);
 
 			await expect(game).rejects.toThrow(NotFoundException);
 			expect(game).rejects.toMatchObject({ response: { game: 'not exists' } });
 
-			expect(gameRepository.getOne).toBeCalledTimes(2);
-			expect(gameRepository.getOne).nthCalledWith(1, {
+			expect(gameRepository.getOne).toHaveBeenCalledTimes(2);
+			expect(gameRepository.getOne).toHaveBeenNthCalledWith(1, {
 				participants: { uuid: fakeUser.uuid },
 				status: { $in: [GameStatus.WaitingOpponents, GameStatus.InProgress] },
 			});
-			expect(gameRepository.getOne).nthCalledWith(2, {
+			expect(gameRepository.getOne).toHaveBeenNthCalledWith(2, {
 				uuid: fakeGame.uuid,
 			});
 		});
