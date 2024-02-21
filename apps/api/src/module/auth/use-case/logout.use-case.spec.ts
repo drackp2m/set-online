@@ -28,7 +28,7 @@ describe('LogoutUseCase', () => {
 		it('should call two times to clearCookie', async () => {
 			useCase.execute();
 
-			expect(requestResponseClearCookie).toBeCalledTimes(2);
+			expect(requestResponseClearCookie).toHaveBeenCalledTimes(2);
 
 			expect(requestResponseClearCookie).toHaveBeenNthCalledWith(1, 'x-jwt-access-token', {
 				signed: true,

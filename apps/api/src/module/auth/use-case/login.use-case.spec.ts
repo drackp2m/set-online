@@ -50,10 +50,10 @@ describe('LoginUseCase', () => {
 
 			expect(tokenModel).rejects.toThrow(NotFoundException);
 
-			expect(userRepository.getOne).toBeCalledTimes(1);
-			expect(userRepository.getOne).toBeCalledWith({ username: 'not' });
+			expect(userRepository.getOne).toHaveBeenCalledTimes(1);
+			expect(userRepository.getOne).toHaveBeenCalledWith({ username: 'not' });
 
-			expect(checkPassword.execute).toBeCalledTimes(0);
+			expect(checkPassword.execute).toHaveBeenCalledTimes(0);
 		});
 
 		it('throw UnauthorizedException when BcryptService.compare return False', async () => {
@@ -65,12 +65,12 @@ describe('LoginUseCase', () => {
 			await expect(tokenModel).rejects.toThrow(UnauthorizedException);
 			expect(tokenModel).rejects.toMatchObject({ response: { password: 'not match' } });
 
-			expect(userRepository.getOne).toBeCalledTimes(1);
-			expect(userRepository.getOne).toBeCalledWith({ username: 'bad' });
+			expect(userRepository.getOne).toHaveBeenCalledTimes(1);
+			expect(userRepository.getOne).toHaveBeenCalledWith({ username: 'bad' });
 
-			expect(checkPassword.execute).toBeCalledTimes(1);
+			expect(checkPassword.execute).toHaveBeenCalledTimes(1);
 
-			expect(createAccessToken.execute).toBeCalledTimes(0);
+			expect(createAccessToken.execute).toHaveBeenCalledTimes(0);
 		});
 
 		it('should call two times to setJwtToken useCase', async () => {
@@ -88,19 +88,19 @@ describe('LoginUseCase', () => {
 
 			expect(result).toStrictEqual(undefined);
 
-			expect(userRepository.getOne).toBeCalledTimes(1);
-			expect(userRepository.getOne).toBeCalledWith({ username: 'drackp2m' });
+			expect(userRepository.getOne).toHaveBeenCalledTimes(1);
+			expect(userRepository.getOne).toHaveBeenCalledWith({ username: 'drackp2m' });
 
-			expect(checkPassword.execute).toBeCalledTimes(1);
-			expect(checkPassword.execute).toBeCalledWith('plaintext-password', 'hashed-password');
+			expect(checkPassword.execute).toHaveBeenCalledTimes(1);
+			expect(checkPassword.execute).toHaveBeenCalledWith('plaintext-password', 'hashed-password');
 
-			expect(createAccessToken.execute).toBeCalledTimes(1);
-			expect(createAccessToken.execute).toBeCalledWith('user-uuid');
+			expect(createAccessToken.execute).toHaveBeenCalledTimes(1);
+			expect(createAccessToken.execute).toHaveBeenCalledWith('user-uuid');
 
-			expect(createRefreshToken.execute).toBeCalledTimes(1);
-			expect(createRefreshToken.execute).toBeCalledWith('user-uuid');
+			expect(createRefreshToken.execute).toHaveBeenCalledTimes(1);
+			expect(createRefreshToken.execute).toHaveBeenCalledWith('user-uuid');
 
-			expect(setJwtToken.execute).toBeCalledTimes(2);
+			expect(setJwtToken.execute).toHaveBeenCalledTimes(2);
 			expect(setJwtToken.execute).toHaveBeenNthCalledWith(1, JwtCookie.access, 'access-token');
 			expect(setJwtToken.execute).toHaveBeenNthCalledWith(2, JwtCookie.refresh, 'refresh-token');
 		});
