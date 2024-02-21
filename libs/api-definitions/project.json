@@ -16,9 +16,8 @@
 		},
 		"lint": {
 			"executor": "@nx/eslint:lint",
-			"outputs": ["{options.outputFile}"],
 			"options": {
-				"lintFilePatterns": ["libs/api-definitions/**/*.ts", "libs/api-definitions/package.json"]
+				"lintFilePatterns": ["{projectRoot}/**/*.ts", "{projectRoot}/package.json"]
 			}
 		},
 		"test": {
