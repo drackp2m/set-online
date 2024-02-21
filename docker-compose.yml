@@ -31,7 +31,7 @@ services:
     working_dir: /usr/src/app
     build:
       context: .
-      target: base
+      target: run-api
     networks:
       - set-network
     ports:
