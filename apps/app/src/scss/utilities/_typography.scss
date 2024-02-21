@@ -4,7 +4,7 @@
 @use '../abstracts/mixins' as mix;
 @use '../abstracts/variables' as var;
 
-$recursive-font-path: '/assets/fonts/recursive/latin_basic.woff2';
+$recursive-font-path: 'assets/fonts/recursive/latin_basic.woff2';
 
 @font-face {
 	font-family: Recursive;
