@@ -55,10 +55,10 @@ CMD top
 
 FROM deps AS build-api
 
-CMD npm build:api
+CMD npm run build:api
 
 
 
 FROM build-api AS run-api
 
-CMD npm serve:api
+CMD npm run serve:api
