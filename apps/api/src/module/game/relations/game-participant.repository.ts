@@ -33,7 +33,7 @@ export class GameParticipantRepository {
 	}
 
 	async insert(entity: GameParticipant): Promise<GameParticipant> {
-		await this.entityManager.fork().persistAndFlush(entity);
+		await this.entityManager.fork().insert(entity);
 
 		return entity;
 	}
