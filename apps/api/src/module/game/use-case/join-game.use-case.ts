@@ -40,10 +40,10 @@ export class JoinGameUseCase {
 			try {
 				const { game } = await this.gameParticipantRepository.insert(gameParticipant);
 
-				await game.participants.init();
-
 				return game;
 			} catch (error) {
+				console.log(error);
+
 				throw new InternalServerErrorException(error.message);
 			}
 		});
