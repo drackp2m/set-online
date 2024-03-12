@@ -42,8 +42,6 @@ export class JoinGameUseCase {
 
 				return game;
 			} catch (error) {
-				console.log(error);
-
 				throw new InternalServerErrorException(error.message);
 			}
 		});
