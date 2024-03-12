@@ -7,11 +7,9 @@ import { BaseState, getInitialBaseState } from '../shared/stores/base-state.inte
 
 type UserInfo = GetUserInfoQuery['getUserInfo'];
 
-interface StateProps extends BaseState<UserInfo> {}
-
 export const store = createStore(
 	{ name: 'currentUser' },
-	withProps<StateProps>(getInitialBaseState()),
+	withProps<BaseState<UserInfo>>(getInitialBaseState()),
 );
 
 export const storeHistory = stateHistory(store, {
