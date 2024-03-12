@@ -19,7 +19,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 				width: 100%;
 				height: 100%;
 				background-color: #fff9;
-				z-index: 100;
+				z-index: 80;
 				display: flex;
 				align-items: center;
 				justify-content: center;

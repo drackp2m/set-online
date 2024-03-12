@@ -1,7 +1,7 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit, computed, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { confetti } from 'tsparticles-confetti';
+import { confetti } from '@tsparticles/confetti';
 
 import { CardColorEnum, CardShadingEnum, CardShapeEnum } from '@set-online/api-definitions';
 
@@ -32,6 +32,10 @@ export default class GamePage implements OnInit {
 	wrongSetsCount = signal<number>(0);
 	showSets = signal<number>(0);
 	message = signal<string>('');
+
+	constructor() {
+		this.startConfetti();
+	}
 
 	ngOnInit(): void {
 		this.prepareNewGame();
@@ -273,7 +277,7 @@ export default class GamePage implements OnInit {
 	}
 
 	private startConfetti(): void {
-		confetti({
+		confetti('confetti', {
 			count: 500, // number of confetti particles; default: 50
 			angle: 90, // angle of the burst; default: 90
 			spread: 180, // spread of confetti particles in degrees; default 45, try 360 for fun

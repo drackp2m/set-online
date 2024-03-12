@@ -1,4 +1,3 @@
-import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { Module } from '@nestjs/common';
 
 import { GameResolver } from './game.resolver';
@@ -7,7 +6,7 @@ import { JoinGameUseCaseModule } from './use-case/join-game.use-case.module';
 import { ListGamesUseCaseModule } from './use-case/list-games.use-case.module';
 
 @Module({
-	imports: [MikroOrmModule, CreateGameUseCaseModule, ListGamesUseCaseModule, JoinGameUseCaseModule],
+	imports: [CreateGameUseCaseModule, ListGamesUseCaseModule, JoinGameUseCaseModule],
 	providers: [GameResolver],
 })
 export class GameModule {}

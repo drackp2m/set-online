@@ -1,3 +1,4 @@
+import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { Module } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
@@ -7,7 +8,7 @@ import { ConfigurationService } from '../../shared/module/config/configuration.s
 import { JwtFactory } from '../../shared/module/config/factories/jwt.factory';
 import { CheckPasswordUseCase } from '../../shared/use-case/check-password.use-case';
 import { HashPasswordUseCase } from '../../shared/use-case/hash-password.use-case';
-import { UserModule } from '../user/user.module';
+import { User } from '../user/user.entity';
 
 import { AuthController } from './auth.controller';
 import { JwtGuard } from './guard/jwt.guard';
@@ -22,29 +23,29 @@ import { SetJwtTokenUseCase } from './use-case/set-jwt-token.use-case';
 
 @Module({
 	imports: [
+		MikroOrmModule.forFeature([User]),
 		ConfigurationModule,
 		JwtModule.registerAsync({
 			imports: [ConfigurationModule],
 			inject: [ConfigurationService],
 			useClass: JwtFactory,
 		}),
-		UserModule,
 	],
 	providers: [
 		{
 			provide: APP_GUARD,
 			useClass: JwtGuard,
 		},
-		JwtStrategyService,
 		RegisterUseCase,
-		HashPasswordUseCase,
 		LoginUseCase,
-		CheckPasswordUseCase,
 		LogoutUseCase,
-		RefreshSessionUseCase,
+		JwtStrategyService,
+		HashPasswordUseCase,
+		CheckPasswordUseCase,
 		CreateJwtAccessTokenUseCase,
 		CreateJwtRefreshTokenUseCase,
 		SetJwtTokenUseCase,
+		RefreshSessionUseCase,
 	],
 	controllers: [AuthController],
 })
