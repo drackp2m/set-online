@@ -59,6 +59,6 @@ CMD npm run build:api
 
 
 
-FROM build-api AS run-api
+FROM build-api AS serve-api
 
 CMD npm run serve:api
