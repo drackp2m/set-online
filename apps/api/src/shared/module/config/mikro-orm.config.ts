@@ -1,5 +1,5 @@
-import { MikroOrmModuleSyncOptions } from '@mikro-orm/nestjs';
 import { Migrator } from '@mikro-orm/migrations';
+import { MikroOrmModuleSyncOptions } from '@mikro-orm/nestjs';
 import { PostgreSqlDriver } from '@mikro-orm/postgresql';
 
 import { MikroOrmNamingStrategy } from './mikro-orm.naming-strategy';
@@ -13,7 +13,7 @@ export default async (): Promise<MikroOrmModuleSyncOptions> => ({
 	forceUtcTimezone: true,
 	tsNode: true,
 	autoLoadEntities: true,
-  extensions: [Migrator],
+	extensions: [Migrator],
 	entities: ['apps/api/src/module/**/*.entity.ts'],
 	namingStrategy: MikroOrmNamingStrategy,
 	migrations: {
