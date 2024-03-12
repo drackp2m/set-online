@@ -14,7 +14,7 @@ export class GameParticipant {
 	@ManyToOne({ entity: () => User, primary: true, deleteRule: 'cascade' })
 	user: User;
 
-	@Property({ defaultRaw: 'CURRENT_TIMESTAMP' })
+	@Property()
 	createdAt: Date = new GenerateNowDateUseCase().execute();
 
 	constructor(init?: Partial<GameParticipant>) {
