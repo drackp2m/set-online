@@ -33,10 +33,6 @@ export default class GamePage implements OnInit {
 	showSets = signal<number>(0);
 	message = signal<string>('');
 
-	constructor() {
-		this.startConfetti();
-	}
-
 	ngOnInit(): void {
 		this.prepareNewGame();
 
@@ -70,7 +66,7 @@ export default class GamePage implements OnInit {
 			for (let j = i + 1; j < cards.length - 1; j++) {
 				for (let k = j + 1; k < cards.length; k++) {
 					if (this.isSet(cards[i], cards[j], cards[k])) {
-						// this.cardsInSets.update((cards) => [...cards, cards[i], cards[j], cards[k]]);
+						this.cardsInSets.update((cards) => [...cards, cards[i], cards[j], cards[k]]);
 						this.cardsInSets.set([cards[i], cards[j], cards[k]]);
 					}
 				}
@@ -278,6 +274,20 @@ export default class GamePage implements OnInit {
 
 	private startConfetti(): void {
 		confetti('confetti', {
+			shapes: ['image'],
+			shapeOptions: {
+				image: [
+					this.getConfettiShapeConfig('oval', 'red'),
+					this.getConfettiShapeConfig('oval', 'purple'),
+					this.getConfettiShapeConfig('oval', 'green'),
+					this.getConfettiShapeConfig('squiggle', 'red'),
+					this.getConfettiShapeConfig('squiggle', 'purple'),
+					this.getConfettiShapeConfig('squiggle', 'green'),
+					this.getConfettiShapeConfig('diamond', 'red'),
+					this.getConfettiShapeConfig('diamond', 'purple'),
+					this.getConfettiShapeConfig('diamond', 'green'),
+				],
+			},
 			count: 500, // number of confetti particles; default: 50
 			angle: 90, // angle of the burst; default: 90
 			spread: 180, // spread of confetti particles in degrees; default 45, try 360 for fun
@@ -289,5 +299,39 @@ export default class GamePage implements OnInit {
 				y: 0,
 			},
 		});
+	}
+
+	private getConfettiShapeConfig(
+		shape: keyof typeof CardShapeEnum,
+		color: keyof typeof CardColorEnum,
+	) {
+		let width;
+		let height;
+
+		switch (shape) {
+			case 'oval':
+				width = 54;
+				height = 111;
+				break;
+			case 'diamond':
+				width = 57;
+				height = 116;
+				break;
+			case 'squiggle':
+				width = 52;
+				height = 105;
+				break;
+		}
+
+		return {
+			src: `/assets/icons/${shape}-solid-${color}.png`,
+			width,
+			height,
+			particles: {
+				size: {
+					value: 4,
+				},
+			},
+		};
 	}
 }
