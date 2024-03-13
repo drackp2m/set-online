@@ -112,7 +112,8 @@
 				"no-duplicate-imports": "warn",
 				"no-multiple-empty-lines": ["warn", { "max": 1 }],
 				"space-before-blocks": ["warn", "always"],
-				"newline-before-return": ["warn"]
+				"newline-before-return": ["warn"],
+				"curly": ["warn"]
 			}
 		},
 		{

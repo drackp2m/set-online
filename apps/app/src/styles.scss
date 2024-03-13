@@ -42,3 +42,8 @@ h5 {
 h6 {
 	font-size: var(--font-size-sm);
 }
+
+#confetti {
+	position: relative;
+	z-index: 100;
+}
