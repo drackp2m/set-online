@@ -33,9 +33,7 @@
 		}
 	</section>
 
-	<!-- @if (remainingCardsCount() === 0 && cardsInSets().length === 0) { -->
+	@if (remainingCardsCount() === 0 && cardsInSets().length === 0) {
 	<set-you-won (playAgain)="newGame()"></set-you-won>
-	<!-- } -->
-
-	<div id="confetti"></div>
+	}
 </main>
