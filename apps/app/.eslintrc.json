@@ -34,7 +34,7 @@
 			"files": ["*.html"],
 			"extends": ["plugin:prettier/recommended", "plugin:@nx/angular-template"],
 			"rules": {
-				"prettier/prettier": "warn"
+				"prettier/prettier": "off"
 			}
 		}
 	]
