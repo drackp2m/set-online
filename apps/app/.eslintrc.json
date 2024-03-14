@@ -32,7 +32,7 @@
 		},
 		{
 			"files": ["*.html"],
-			"extends": ["plugin:@nx/angular-template"],
+			"extends": ["plugin:prettier/recommended", "plugin:@nx/angular-template"],
 			"rules": {
 				"prettier/prettier": "warn"
 			}
