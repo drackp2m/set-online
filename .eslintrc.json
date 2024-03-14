@@ -4,7 +4,7 @@
 	"plugins": ["@nx"],
 	"overrides": [
 		{
-			"files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+			"files": ["*.ts", "*.js"],
 			"rules": {
 				"@nx/enforce-module-boundaries": [
 					"error",
@@ -22,7 +22,7 @@
 			}
 		},
 		{
-			"files": ["*.ts", "*.tsx"],
+			"files": ["*.ts"],
 			"parser": "@typescript-eslint/parser",
 			"plugins": ["@typescript-eslint", "import", "unused-imports"],
 			"extends": ["plugin:@nx/typescript"],
@@ -117,12 +117,12 @@
 			}
 		},
 		{
-			"files": ["*.js", "*.jsx"],
+			"files": ["*.js"],
 			"extends": ["plugin:@nx/javascript"],
 			"rules": {}
 		},
 		{
-			"files": ["*.ts", "*.tsx", "*.js", "*.jsx", "*.json"],
+			"files": ["*.ts", "*.js", "*.json"],
 			"extends": ["plugin:prettier/recommended"],
 			"rules": {
 				"prettier/prettier": "warn"

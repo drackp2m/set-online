@@ -50,7 +50,7 @@
 				"javascript.preferences.importModuleSpecifier": "project-relative",
 				"typescript.updateImportsOnFileMove.enabled": "always",
 				"typescript.preferences.importModuleSpecifier": "project-relative",
-				"eslint.validate": ["javascript", "typescript"],
+				"eslint.validate": ["javascript", "typescript", "html"],
 				"eslint.format.enable": true,
 				"eslint.useESLintClass": true,
 				"eslint.lintTask.enable": true,
@@ -61,6 +61,9 @@
 				"stylelint.validate": ["css", "scss"],
 				"prettier.prettierPath": "/usr/src/app/node_modules/prettier",
 				"editor.defaultFormatter": "esbenp.prettier-vscode",
+				"[html]": {
+					"editor.defaultFormatter": "dbaeumer.vscode-eslint"
+				},
 				"[javascript]": {
 					"editor.defaultFormatter": "dbaeumer.vscode-eslint"
 				},
