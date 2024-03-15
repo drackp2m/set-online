@@ -12,10 +12,10 @@ const removeIgnoredFiles = async (files) => {
 };
 
 export default {
-	'*.{html,json,yml,yaml,md}': 'npm run prettier:fix',
+	'*.{html,json,yml,yaml,md}': 'npm run prettier',
 	'*.{js,ts}': async (files) => {
 		const filesToLint = await removeIgnoredFiles(files);
-		return `npm run eslint:fix ${filesToLint}`;
+		return `npm run eslint ${filesToLint}`;
 	},
-	'*.{css,scss}': 'npm run stylelint:fix',
+	'*.{css,scss}': 'npm run stylelint',
 };

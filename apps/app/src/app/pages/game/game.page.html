@@ -20,20 +20,20 @@
 
 	<section id="card-game" class="flex-row flex-wrap justify-center">
 		@for (card of boardCards(); track $index) {
-		<set-card
-			[shape]="card.shape"
-			[color]="card.color"
-			[shading]="card.shading"
-			[count]="card.number"
-			[rotate]="true"
-			[selected]="isSelected(card)"
-			[highlighted]="showSets() % 2 === 1 && imInSet(card)"
-			(click)="selectCard(card)"
-		></set-card>
+			<set-card
+				[shape]="card.shape"
+				[color]="card.color"
+				[shading]="card.shading"
+				[count]="card.number"
+				[rotate]="true"
+				[selected]="isSelected(card)"
+				[highlighted]="showSets() % 2 === 1 && imInSet(card)"
+				(click)="selectCard(card)"
+			></set-card>
 		}
 	</section>
 
 	@if (remainingCardsCount() === 0 && cardsInSets().length === 0) {
-	<set-you-won (playAgain)="newGame()"></set-you-won>
+		<set-you-won (playAgain)="newGame()"></set-you-won>
 	}
 </main>

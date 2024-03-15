@@ -7,11 +7,11 @@
 
 	<section id="card-shapes" class="flex-row flex-wrap gap-x-xl gap-y-lg my-md">
 		@for (shape of shapes; track $index) {
-		@for (color of colors; track $index) {
-		@for (shading of shadings; track $index) {
-		<set-card-shape [shape]="shape" [color]="color" [shading]="shading"></set-card-shape>
-		}
-		}
+			@for (color of colors; track $index) {
+				@for (shading of shadings; track $index) {
+					<set-card-shape [shape]="shape" [color]="color" [shading]="shading"></set-card-shape>
+				}
+			}
 		}
 	</section>
 
@@ -19,13 +19,18 @@
 
 	<section id="card-list-horizontal" class="flex-row flex-wrap gap-md my-md">
 		@for (shape of shapes; track $index) {
-		@for (color of colors; track $index) {
-		@for (shading of shadings; track $index) {
-		@for (count of counts; track $index) {
-		<set-card [shape]="shape" [color]="color" [shading]="shading" [count]="count"></set-card>
-		}
-		}
-		}
+			@for (color of colors; track $index) {
+				@for (shading of shadings; track $index) {
+					@for (count of counts; track $index) {
+						<set-card
+							[shape]="shape"
+							[color]="color"
+							[shading]="shading"
+							[count]="count"
+						></set-card>
+					}
+				}
+			}
 		}
 	</section>
 
@@ -33,13 +38,19 @@
 
 	<section id="card-list-vertical" class="flex-row flex-wrap gap-sm lg:gap-md my-md">
 		@for (shape of shapes; track $index) {
-		@for (color of colors; track $index) {
-		@for (shading of shadings; track $index) {
-		@for (count of counts; track $index) {
-		<set-card [shape]="shape" [color]="color" [shading]="shading" [count]="count" [rotate]="true"></set-card>
-		}
-		}
-		}
+			@for (color of colors; track $index) {
+				@for (shading of shadings; track $index) {
+					@for (count of counts; track $index) {
+						<set-card
+							[shape]="shape"
+							[color]="color"
+							[shading]="shading"
+							[count]="count"
+							[rotate]="true"
+						></set-card>
+					}
+				}
+			}
 		}
 	</section>
 </main>

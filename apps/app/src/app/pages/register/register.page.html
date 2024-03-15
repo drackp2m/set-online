@@ -1,21 +1,29 @@
 <section class="content-fixed pt-lg pb-xxl">
 	<h4>Register form</h4>
 
-	@if(user()) {
-	<div class="round-lg surface-serene color-vivid p-md mt-sm">
-		<h5>Welcome</h5>
-		{{ user() | json }}
-	</div>
+	@if (user()) {
+		<div class="round-lg surface-serene color-vivid p-md mt-sm">
+			<h5>Welcome</h5>
+			{{ user() | json }}
+		</div>
 	}
 
 	<form class="flex-row gap-sm mt-md" [formGroup]="form" (submit)="onSubmit()">
-		<input class="p-sm round-sm surface-vivid color-cosmic" type="text" formControlName="username" />
-		<input class="p-sm round-sm surface-vivid color-cosmic" type="password" formControlName="password" />
+		<input
+			class="p-sm round-sm surface-vivid color-cosmic"
+			type="text"
+			formControlName="username"
+		/>
+		<input
+			class="p-sm round-sm surface-vivid color-cosmic"
+			type="password"
+			formControlName="password"
+		/>
 
 		<button class="p-sm round-sm surface-serene color-vivid" type="submit">Send</button>
 	</form>
 
 	@if (error()) {
-	<p class="color-radiant mt-sm">Error: {{ error() | json }}</p>
+		<p class="color-radiant mt-sm">Error: {{ error() | json }}</p>
 	}
 </section>
