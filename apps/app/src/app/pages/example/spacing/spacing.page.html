@@ -7,29 +7,36 @@
 
 	<section class="grid gap-xl my-md">
 		@for (space of spaces; track $index) {
-		<div class="flex-col align-center justify-end gap-md">
-			<div class="surface-vivid" [style]="{ width: getSpacing(space), height: getSpacing(space), borderRadius: '2px' }">
-			</div>
+			<div class="flex-col align-center justify-end gap-md">
+				<div
+					class="surface-vivid"
+					[style]="{ width: getSpacing(space), height: getSpacing(space), borderRadius: '2px' }"
+				></div>
 
-			<h5>{{ space }}</h5>
-		</div>}
+				<h5>{{ space }}</h5>
+			</div>
+		}
 	</section>
 
 	<h3 class="mt-xl">Spacing on gaps</h3>
 
 	<section class="grid gap-xl my-md">
 		@for (space of spaces; track $index) {
-		<div class="flex-col align-center justify-end gap-md">
-			<div class="flex-row" [class]="'gap-' + space">
-				<div class="surface-vivid" [style]="{ width: getSpacing('lg'), height: getSpacing('lg'), borderRadius: '2px' }">
+			<div class="flex-col align-center justify-end gap-md">
+				<div class="flex-row" [class]="'gap-' + space">
+					<div
+						class="surface-vivid"
+						[style]="{ width: getSpacing('lg'), height: getSpacing('lg'), borderRadius: '2px' }"
+					></div>
+
+					<div
+						class="surface-vivid"
+						[style]="{ width: getSpacing('lg'), height: getSpacing('lg'), borderRadius: '2px' }"
+					></div>
 				</div>
 
-				<div class="surface-vivid" [style]="{ width: getSpacing('lg'), height: getSpacing('lg'), borderRadius: '2px' }">
-				</div>
+				<h5>{{ space }}</h5>
 			</div>
-
-			<h5>{{ space }}</h5>
-		</div>
-	}
+		}
 	</section>
 </main>
