@@ -28,6 +28,14 @@ jobs:
           node-version: 20.11
           cache: 'npm'
 
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.OS }}-npm-cache-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache-
+
       - name: Install dependencies
         run: npm install --frozen-lockfile
 
@@ -54,6 +62,14 @@ jobs:
         with:
           node-version: 20.11
           cache: 'npm'
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.OS }}-npm-cache-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-npm-cache-
 
       - name: Install dependencies
         run: npm install --frozen-lockfile

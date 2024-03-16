@@ -13,11 +13,11 @@
 		</p>
 
 		@for (color of colors; track $index) {
-		<p [class]="'color-' + color">
-			<span class="surface-vivid color-cosmic round-sm px-xs">{{ color }}</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
+			<p [class]="'color-' + color">
+				<span class="surface-vivid color-cosmic round-sm px-xs">{{ color }}</span>
+				Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+				dolorum illum nobis mollitia.
+			</p>
 		}
 	</section>
 
@@ -25,11 +25,11 @@
 
 	<section id="content-colors" class="flex-col gap-lg my-md">
 		@for (color of colors; track $index) {
-		<div class="round-md p-md" [class]="'surface-' + color + ' color-' + color">
-			<span class="surface-vivid color-cosmic round-sm px-xs">{{ color }}</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</div>
+			<div class="round-md p-md" [class]="'surface-' + color + ' color-' + color">
+				<span class="surface-vivid color-cosmic round-sm px-xs">{{ color }}</span>
+				Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
+				dolorum illum nobis mollitia.
+			</div>
 		}
 	</section>
 </main>
