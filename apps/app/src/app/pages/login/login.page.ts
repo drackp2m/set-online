@@ -51,8 +51,6 @@ export default class LoginPage implements OnInit {
 			})
 			.subscribe({
 				next: () => {
-					this.currentUserStore.fetchData();
-
 					this.currentUserStore.state$
 						.pipe(
 							select((state) => state.loading),
@@ -60,11 +58,12 @@ export default class LoginPage implements OnInit {
 							take(1),
 						)
 						.subscribe({
-							next: (asd) => {
-								console.log(asd);
+							next: () => {
 								this.router.navigate(['/home']);
 							},
 						});
+
+					this.currentUserStore.fetchData();
 				},
 				error: ({ error }) => {
 					this.error.set(error.message);
