@@ -20,7 +20,7 @@ const config: CodegenConfig = {
 				}
 			},
       hooks: {
-        afterOneFileWrite: ['npm eslint:fix apps/app/src/graphql/apollo-operations.ts']
+        afterOneFileWrite: ['npm run eslint apps/app/src/graphql/apollo-operations.ts']
       }
 		},
 	},

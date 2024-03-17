@@ -1,13 +1,23 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Apollo } from 'apollo-angular';
 
 import { AppComponent } from './app.component';
+import { GetUserInfoGQL } from './graphql/apollo-operations';
 import { NxWelcomeComponent } from './nx-welcome.component';
+import { CurrentUserStore } from './stores/current-user.store';
 
 describe('AppComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [AppComponent, NxWelcomeComponent, RouterTestingModule],
+			imports: [
+				AppComponent,
+				NxWelcomeComponent,
+				RouterTestingModule,
+				CurrentUserStore,
+				GetUserInfoGQL,
+				Apollo,
+			],
 		}).compileComponents();
 	});
 
