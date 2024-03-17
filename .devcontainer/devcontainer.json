@@ -51,6 +51,7 @@
 				"typescript.updateImportsOnFileMove.enabled": "always",
 				"typescript.preferences.importModuleSpecifier": "project-relative",
 				"eslint.validate": ["javascript", "typescript", "html"],
+				"eslint.probe": ["json"],
 				"eslint.format.enable": true,
 				"eslint.useESLintClass": true,
 				"eslint.lintTask.enable": true,

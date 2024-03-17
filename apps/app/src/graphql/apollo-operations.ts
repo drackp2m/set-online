@@ -280,7 +280,9 @@ export const NewGameDocument = gql`
 	${GameFieldsFragmentDoc}
 `;
 
-@Injectable()
+@Injectable({
+	providedIn: 'root',
+})
 export class NewGameGQL extends Apollo.Mutation<NewGameMutation, NewGameMutationVariables> {
 	override document = NewGameDocument;
 
@@ -302,7 +304,11 @@ export const ListGamesDocument = gql`
 	providedIn: 'root',
 })
 export class ListGamesGQL extends Apollo.Query<ListGamesQuery, ListGamesQueryVariables> {
-	override readonly document = ListGamesDocument;
+	override document = ListGamesDocument;
+
+	constructor(apollo: Apollo.Apollo) {
+		super(apollo);
+	}
 }
 
 export const GetUserInfoDocument = gql`
@@ -319,6 +325,10 @@ export const GetUserInfoDocument = gql`
 })
 export class GetUserInfoGQL extends Apollo.Query<GetUserInfoQuery, GetUserInfoQueryVariables> {
 	override document = GetUserInfoDocument;
+
+	constructor(apollo: Apollo.Apollo) {
+		super(apollo);
+	}
 }
 
 export const GetUsersDocument = gql`
@@ -354,5 +364,9 @@ export class ValidateUserConstraintsGQL extends Apollo.Query<
 	ValidateUserConstraintsQuery,
 	ValidateUserConstraintsQueryVariables
 > {
-	override readonly document = ValidateUserConstraintsDocument;
+	override document = ValidateUserConstraintsDocument;
+
+	constructor(apollo: Apollo.Apollo) {
+		super(apollo);
+	}
 }

@@ -1,6 +1,6 @@
-import { JsonPipe, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, JsonPipe, NgIf, NgTemplateOutlet } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Router, RouterModule } from '@angular/router';
 import { select } from '@ngneat/elf';
@@ -16,20 +16,24 @@ import { ApiClient } from '../../services/api-client.service';
 	standalone: true,
 	templateUrl: './main.layout.html',
 	styleUrl: './main.layout.scss',
-	imports: [RouterModule, NgTemplateOutlet, MediaDebugComponent, NgIf, JsonPipe, HttpClientModule],
+	imports: [
+		RouterModule,
+		NgTemplateOutlet,
+		MediaDebugComponent,
+		NgIf,
+		JsonPipe,
+		HttpClientModule,
+		AsyncPipe,
+	],
 	providers: [CurrentUserStore, GetUserInfoGQL, Apollo, ApiClient, HttpLink],
 })
 export default class MainLayout {
+	private readonly apiClient = inject(ApiClient);
+	private readonly router = inject(Router);
+	private readonly currentUserStore = inject(CurrentUserStore);
+
 	user = toSignal(this.currentUserStore.state$.pipe(select((state) => state.data)));
 	userError = toSignal(this.currentUserStore.state$.pipe(select((state) => state.error)));
-
-	constructor(
-		private readonly apiClient: ApiClient,
-		private readonly router: Router,
-		private readonly currentUserStore: CurrentUserStore,
-	) {
-		this.currentUserStore.fetchData();
-	}
 
 	logout() {
 		return () =>

@@ -22,7 +22,7 @@
 		"migration:create": "mikro-orm migration:create",
 		"migration:execute": "mikro-orm migration:up",
 		"lint": "lint-staged",
-		"prettier": "prettier -w --loglevel warn",
+		"prettier": "prettier -w --log-level warn",
 		"eslint": "eslint --max-warnings 0 --fix",
 		"stylelint": "stylelint --max-warnings 0 --fix",
 		"prepare": "husky"
