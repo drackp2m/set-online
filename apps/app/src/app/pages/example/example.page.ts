@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, WritableSignal, effect, inject, signal } from '@angular/core';
+import { Component, WritableSignal, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Apollo, gql } from 'apollo-angular';
@@ -48,12 +48,6 @@ export default class ExamplePage {
 		username: new FormControl('', [Validators.required]),
 		password: new FormControl('', [Validators.required]),
 	});
-
-	constructor() {
-		effect(() => {
-			console.log(this.apolloSubscription()?.data);
-		});
-	}
 
 	checkUsers(): void {
 		this.getUsersGQL.fetch().subscribe({
