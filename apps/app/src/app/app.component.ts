@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 
@@ -12,12 +12,12 @@ import { CurrentUserStore } from './stores/current-user.store';
 	imports: [RouterOutlet],
 	providers: [CurrentUserStore, GetUserInfoGQL, Apollo],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 	private readonly currentUserStore = inject(CurrentUserStore);
 
 	title = 'app';
 
-	constructor() {
+	ngOnInit() {
 		this.currentUserStore.fetchData();
 	}
 }

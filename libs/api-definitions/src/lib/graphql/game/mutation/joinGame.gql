@@ -1,5 +1,5 @@
 mutation JoinGame($input: JoinGameInput!) {
-  joinGame(input: $input) {
-    ...GameFields
+	joinGame(input: $input) {
+		...GameFields
 	}
 }

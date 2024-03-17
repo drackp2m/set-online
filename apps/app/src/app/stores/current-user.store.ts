@@ -1,4 +1,4 @@
-import { inject } from '@angular/core';
+import { NgModule, inject } from '@angular/core';
 import { createStore, withProps } from '@ngneat/elf';
 import { stateHistory } from '@ngneat/elf-state-history';
 import { take } from 'rxjs';
@@ -17,6 +17,7 @@ export const storeHistory = stateHistory(store, {
 	maxAge: 10,
 });
 
+@NgModule({})
 export class CurrentUserStore {
 	private readonly getUserInfoGQL = inject(GetUserInfoGQL);
 
