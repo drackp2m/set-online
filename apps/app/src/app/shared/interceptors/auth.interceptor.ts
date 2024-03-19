@@ -64,6 +64,7 @@ export class AuthInterceptor implements HttpInterceptor {
 		event?: HttpEvent<unknown>,
 	): Observable<HttpEvent<unknown>> {
 		if (event) {
+			console.log('intento refrescar');
 			this.authStore.tryToRefreshTokens();
 		}
 
@@ -72,12 +73,12 @@ export class AuthInterceptor implements HttpInterceptor {
 				if (event && !this.authStore.tokensAreValid) {
 					this.router.navigate(['/login']);
 
-					return of(event);
+					// return of(event);
 
 					return new Observable<HttpEvent<unknown>>();
+				} else {
+					return next.handle(req);
 				}
-
-				return next.handle(req);
 			}),
 		);
 	}

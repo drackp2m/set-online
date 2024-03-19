@@ -10,7 +10,7 @@ import { CurrentUserStore } from './stores/current-user.store';
 	selector: 'set-root',
 	template: `<router-outlet></router-outlet>`,
 	imports: [RouterOutlet],
-	providers: [CurrentUserStore, GetUserInfoGQL, Apollo],
+	providers: [CurrentUserStore, Apollo, GetUserInfoGQL],
 })
 export class AppComponent implements OnInit {
 	private readonly currentUserStore = inject(CurrentUserStore);
@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
 	title = 'app';
 
 	ngOnInit() {
+		console.log('app init');
 		this.currentUserStore.fetchData();
 	}
 }
