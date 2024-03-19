@@ -6,18 +6,18 @@ import { Apollo, ApolloModule } from 'apollo-angular';
 
 import { GetUserInfoGQL, User } from '../../graphql/apollo-operations';
 import { ApiClient } from '../../shared/services/api-client.service';
-import { CurrentUserStore } from '../../stores/current-user.store';
+import { XCurrentUserStore } from '../../stores/x-current-user.store';
 
 @Component({
 	standalone: true,
 	templateUrl: './register.page.html',
 	styleUrl: './register.page.scss',
 	imports: [NgIf, ReactiveFormsModule, ApolloModule, JsonPipe],
-	providers: [ApiClient, CurrentUserStore, HttpClient, GetUserInfoGQL, Apollo],
+	providers: [ApiClient, XCurrentUserStore, HttpClient, GetUserInfoGQL, Apollo],
 })
 export default class RegisterPage {
 	private readonly apiClient = inject(ApiClient);
-	private readonly currentUserStore = inject(CurrentUserStore);
+	private readonly currentUserStore = inject(XCurrentUserStore);
 
 	caca = { esto: 'es una caca' };
 
