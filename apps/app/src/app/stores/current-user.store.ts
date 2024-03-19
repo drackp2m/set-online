@@ -1,62 +1,47 @@
-import { NgModule, inject } from '@angular/core';
-import { createStore, withProps } from '@ngneat/elf';
-import { stateHistory } from '@ngneat/elf-state-history';
-import { take } from 'rxjs';
+import { inject } from '@angular/core';
+import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import { firstValueFrom, take } from 'rxjs';
 
 import { GetUserInfoGQL, GetUserInfoQuery } from '../graphql/apollo-operations';
-import { BaseState, getInitialBaseState } from '../shared/stores/base-state.interface';
 
 type UserInfo = GetUserInfoQuery['getUserInfo'];
 
-export const store = createStore(
-	{ name: 'currentUser' },
-	withProps<BaseState<UserInfo>>(getInitialBaseState()),
+type CurrentUserState = {
+	data: UserInfo | null;
+	isLoading: boolean;
+	error: unknown | null;
+};
+
+const initialState: CurrentUserState = {
+	data: null,
+	isLoading: false,
+	error: null,
+};
+
+export const CurrentUserStore = signalStore(
+	{ providedIn: 'root' },
+	withState(initialState),
+	withMethods((store, getUserInfoGQL = inject(GetUserInfoGQL)) => ({
+		reset(): void {
+			patchState(store, initialState);
+		},
+		async fetchData(): Promise<void> {
+			console.log('no me jodas');
+			patchState(store, { isLoading: true });
+			console.log('vamos va');
+
+			setTimeout(async () => {
+				console.log('me espero');
+				try {
+					console.log('e intento esto');
+					const { data } = await firstValueFrom(getUserInfoGQL.fetch().pipe(take(1)));
+					console.log(data);
+					patchState(store, { data: data.getUserInfo, isLoading: false });
+				} catch (error) {
+					console.log(error);
+					patchState(store, { error, isLoading: false });
+				}
+			}, 300);
+		},
+	})),
 );
-
-export const storeHistory = stateHistory(store, {
-	maxAge: 10,
-});
-
-@NgModule({})
-export class CurrentUserStore {
-	private readonly getUserInfoGQL = inject(GetUserInfoGQL);
-
-	state$ = store;
-
-	fetchData(): void {
-		store.update((state) => ({
-			...state,
-			loading: true,
-		}));
-
-		this.getUserInfoGQL
-			.fetch()
-			.pipe(take(1))
-			.subscribe({
-				next: ({ data }) => {
-					store.update((state) => ({
-						...state,
-						data: data.getUserInfo,
-						loading: false,
-						error: null,
-						lastFetch: new Date(),
-					}));
-				},
-				error: (error) => {
-					store.update((state) => {
-						const details = error.graphQLErrors[0]?.extensions.details;
-
-						return {
-							...state,
-							loading: false,
-							error: details,
-						};
-					});
-				},
-			});
-	}
-
-	reset(): void {
-		store.update(getInitialBaseState<UserInfo>);
-	}
-}

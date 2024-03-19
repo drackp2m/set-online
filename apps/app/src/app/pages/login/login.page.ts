@@ -1,9 +1,7 @@
 import { JsonPipe, NgFor, NgIf } from '@angular/common';
-import { Component, OnInit, WritableSignal, inject, signal } from '@angular/core';
+import { Component, OnInit, WritableSignal, effect, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { select } from '@ngneat/elf';
-import { filter, take } from 'rxjs';
 
 import { GetUsersGQL } from '../../graphql/apollo-operations';
 import { ApiClient } from '../../shared/services/api-client.service';
@@ -22,6 +20,8 @@ export default class LoginPage implements OnInit {
 	private readonly currentUserStore = inject(CurrentUserStore);
 	private readonly getUsersGQL = inject(GetUsersGQL);
 
+	loginFinished = signal(false);
+
 	form = new FormGroup({
 		username: new FormControl<string>('', [Validators.required]),
 		password: new FormControl('', [Validators.required]),
@@ -31,12 +31,25 @@ export default class LoginPage implements OnInit {
 
 	error = signal(undefined);
 
-	ngOnInit(): void {
-		this.getUsersGQL.fetch().subscribe({
-			next: (data) => {
-				this.usernames.set(data.data.getUsers.map((user) => user.username));
+	constructor() {
+		effect(
+			() => {
+				if (this.loginFinished()) {
+					this.currentUserStore.fetchData();
+					this.router.navigate(['/home']);
+				}
 			},
-		});
+			{ allowSignalWrites: true },
+		);
+	}
+
+	ngOnInit(): void {
+		console.log('login init');
+		// this.getUsersGQL.fetch().subscribe({
+		// 	next: (data) => {
+		// 		this.usernames.set(data.data.getUsers.map((user) => user.username));
+		// 	},
+		// });
 	}
 
 	onSubmit() {
@@ -51,19 +64,7 @@ export default class LoginPage implements OnInit {
 			})
 			.subscribe({
 				next: () => {
-					this.currentUserStore.state$
-						.pipe(
-							select((state) => state.loading),
-							filter((loading) => !loading),
-							take(1),
-						)
-						.subscribe({
-							next: () => {
-								this.router.navigate(['/home']);
-							},
-						});
-
-					this.currentUserStore.fetchData();
+					this.loginFinished.set(true);
 				},
 				error: ({ error }) => {
 					this.error.set(error.message);

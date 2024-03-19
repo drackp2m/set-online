@@ -11,7 +11,7 @@ describe('EditableDate', () => {
 
 	jest.spyOn(GenerateNowDateUseCase.prototype, 'execute').mockReturnValue(fakeDate);
 
-	beforeAll(async () => {
+	beforeEach(async () => {
 		const module: TestingModule = await Test.createTestingModule({
 			providers: [EditableDate],
 		}).compile();
@@ -23,76 +23,13 @@ describe('EditableDate', () => {
 		expect(util).toBeDefined();
 	});
 
+	// ToDo => check why manipulationDateAttributeMethod switch case is not fully covered
+
 	describe('initialization', () => {
 		it('should return now date when the constructor is called without parameters', async () => {
-			const result = new EditableDate().toISOString();
+			const result = util.toISOString();
 
 			expect(result).toStrictEqual('2023-11-13T23:41:19.846Z');
-		});
-
-		it('should replace year when call set method', async () => {
-			const result = new EditableDate().set('year', 2019).toISOString();
-
-			expect(result).toStrictEqual('2019-11-13T23:41:19.846Z');
-		});
-
-		it('should replace month when call set method', async () => {
-			const result = new EditableDate().set('month', 6).toISOString();
-
-			expect(result).toStrictEqual('2023-06-13T23:41:19.846Z');
-		});
-
-		it('should replace day when call set method', async () => {
-			const result = new EditableDate().set('day', 12).toISOString();
-
-			expect(result).toStrictEqual('2023-11-12T23:41:19.846Z');
-		});
-
-		it('should replace hour when call set method', async () => {
-			const result = new EditableDate().set('hour', 21).toISOString();
-
-			expect(result).toStrictEqual('2023-11-13T21:41:19.846Z');
-		});
-
-		it('should replace minute when call set method', async () => {
-			const result = new EditableDate().set('minute', 66).toISOString();
-
-			expect(result).toStrictEqual('2023-11-14T00:06:19.846Z');
-		});
-
-		it('should replace second when call set method', async () => {
-			const result = new EditableDate().set('second', 42).toISOString();
-
-			expect(result).toStrictEqual('2023-11-13T23:41:42.846Z');
-		});
-
-		it('should replace millisecond when call set method', async () => {
-			const result = new EditableDate().set('millisecond', 360).toISOString();
-
-			expect(result).toStrictEqual('2023-11-13T23:41:19.360Z');
-		});
-
-		it('should replace several values when calling the set method multiple times', async () => {
-			const result = new EditableDate().set('year', 1999).set('hour', 9).toISOString();
-
-			expect(result).toStrictEqual('1999-11-13T09:41:19.846Z');
-		});
-
-		it('should edit several values when calling the set method multiple times', async () => {
-			const result = new EditableDate().edit('month', -1).edit('second', 14).toISOString();
-
-			expect(result).toStrictEqual('2023-10-13T23:41:33.846Z');
-		});
-
-		it('should set and edit several values when calling methods multiple times', async () => {
-			const result = new EditableDate()
-				.set('year', 2048)
-				.edit('month', -1)
-				.set('second', 14)
-				.edit('second', 14)
-				.toISOString();
-
-			expect(result).toStrictEqual('2048-10-13T23:41:28.846Z');
 		});
 
 		it('should return the date specified in the constructor', async () => {
@@ -109,6 +46,71 @@ describe('EditableDate', () => {
 			const result = new EditableDate(fakeDate).set('hour', 48).edit('day', -1).toISOString();
 
 			expect(result).toStrictEqual('2023-01-02T00:00:00.000Z');
+		});
+
+		it('should replace year when call set method', async () => {
+			const result = util.set('year', 2019).toISOString();
+
+			expect(result).toStrictEqual('2019-11-13T23:41:19.846Z');
+		});
+
+		it('should replace month when call set method', async () => {
+			const result = util.set('month', 6).toISOString();
+
+			expect(result).toStrictEqual('2023-06-13T23:41:19.846Z');
+		});
+
+		it('should replace day when call set method', async () => {
+			const result = util.set('day', 12).toISOString();
+
+			expect(result).toStrictEqual('2023-11-12T23:41:19.846Z');
+		});
+
+		it('should replace hour when call set method', async () => {
+			const result = util.set('hour', 21).toISOString();
+
+			expect(result).toStrictEqual('2023-11-13T21:41:19.846Z');
+		});
+
+		it('should replace minute when call set method', async () => {
+			const result = util.set('minute', 66).toISOString();
+
+			expect(result).toStrictEqual('2023-11-14T00:06:19.846Z');
+		});
+
+		it('should replace second when call set method', async () => {
+			const result = util.set('second', 42).toISOString();
+
+			expect(result).toStrictEqual('2023-11-13T23:41:42.846Z');
+		});
+
+		it('should replace millisecond when call set method', async () => {
+			const result = util.set('millisecond', 360).toISOString();
+
+			expect(result).toStrictEqual('2023-11-13T23:41:19.360Z');
+		});
+
+		it('should replace several values when calling the set method multiple times', async () => {
+			const result = util.set('year', 1999).set('hour', 9).toISOString();
+
+			expect(result).toStrictEqual('1999-11-13T09:41:19.846Z');
+		});
+
+		it('should edit several values when calling the set method multiple times', async () => {
+			const result = util.edit('month', -1).edit('second', 14).toISOString();
+
+			expect(result).toStrictEqual('2023-10-13T23:41:33.846Z');
+		});
+
+		it('should set and edit several values when calling methods multiple times', async () => {
+			const result = util
+				.set('year', 2048)
+				.edit('month', -1)
+				.set('second', 14)
+				.edit('second', 14)
+				.toISOString();
+
+			expect(result).toStrictEqual('2048-10-13T23:41:28.846Z');
 		});
 	});
 });

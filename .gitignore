@@ -38,6 +38,9 @@ testem.log
 .DS_Store
 Thumbs.db
 
+#docker
+.devcontainer/docker-compose.yml
+
 .nx/cache
 .angular
 .pgdata*

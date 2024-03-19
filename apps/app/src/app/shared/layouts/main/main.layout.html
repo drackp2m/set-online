@@ -41,11 +41,11 @@
 		</ng-template>
 
 		@if (user()) {
-			<p class="text-sm text-right">Welcome {{ user()!.username }}</p>
+			<p class="text-sm text-right">Welcome {{ user()?.username }}</p>
 		}
-		@if (userError()) {
+		<!-- @if (userError()) {
 			<p class="text-sm text-right">GetUserInfo error: {{ userError() | json }}</p>
-		}
+		} -->
 	</section>
 
 	<div class="scroll">
