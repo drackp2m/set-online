@@ -88,6 +88,8 @@ describe('CreateJwtRefreshTokenUseCase', () => {
 		it('should return valid Jwt', async () => {
 			const jwtToken = useCase.execute('user-uuid');
 
+			console.log({ jwtToken });
+
 			const parts = jwtToken.split('.');
 
 			expect(jwtServiceSign).toHaveBeenCalledTimes(1);

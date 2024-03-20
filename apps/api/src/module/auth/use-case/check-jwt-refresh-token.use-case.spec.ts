@@ -6,14 +6,16 @@ import { ConfigurationService } from '../../../shared/module/config/configuratio
 import { JwtFactory } from '../../../shared/module/config/factories/jwt.factory';
 import { EditableDate } from '../../../shared/util/editable-date';
 
-import { CheckJwtAccessTokenUseCase } from './check-jwt-access-token.use-case';
+import { CheckJwtRefreshTokenUseCase } from './check-jwt-refresh-token.use-case';
 
-describe('CheckJwtAccessTokenUseCase', () => {
+describe('CheckJwtRefreshTokenUseCase', () => {
 	let module: TestingModule;
-	let useCase: CheckJwtAccessTokenUseCase;
+	let useCase: CheckJwtRefreshTokenUseCase;
 
 	const jwtServiceVerify = jest.spyOn(JwtService.prototype, 'verify');
-	const validJwtDate = new Date('2024-03-20T14:30:30.000Z');
+	const validJwtDate = new Date('2024-03-20T22:10:42.000Z');
+	const fakeJwtRefreshToken =
+		'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTA5NzE1NjgsIm5iZiI6MTcxMDk3MjQ2OCwiZXhwIjoxNzEyMjY3NTY4LCJhdWQiOiJ0ZXN0LXJ1bm5lci1yZWZyZXNoLXRva2VuIiwiaXNzIjoidGVzdCIsInN1YiI6InVzZXItdXVpZCIsImp0aSI6InV1aWQifQ.2hP7NbBjKGpUJ3rPLFo3qIhpTeSAVwl7uTW1gd4n1lutBpEwxIcSmi_WALMENNq9yl4Lkf2vjbhGxsLhx7WJJQ';
 
 	const prepareTestingModule = async (
 		configurationService: ConfigurationService,
@@ -25,12 +27,12 @@ describe('CheckJwtAccessTokenUseCase', () => {
 				}),
 			],
 			providers: [
-				CheckJwtAccessTokenUseCase,
+				CheckJwtRefreshTokenUseCase,
 				{ provide: ConfigurationService, useValue: configurationService },
 			],
 		}).compile();
 
-		useCase = await module.resolve(CheckJwtAccessTokenUseCase);
+		useCase = await module.resolve(CheckJwtRefreshTokenUseCase);
 	};
 
 	beforeEach(async () => {
@@ -63,15 +65,14 @@ describe('CheckJwtAccessTokenUseCase', () => {
 
 			await prepareTestingModule(configurationService);
 
-			const fakeJwt =
-				'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTA5NDQ0ODgsIm5iZiI6MTcxMDk0NDQ4OCwiZXhwIjoxNzEwOTQ1Mzg4LCJhdWQiOiJ0ZXN0LXJ1bm5lci1hY2Nlc3MtdG9rZW4iLCJpc3MiOiJ0ZXN0Iiwic3ViIjoidXNlci11dWlkIiwianRpIjoidXVpZCJ9.Yj_vgfAsPA3dgbAUkP_BvpS9W7oRBVvcVyv75vB7fMreSb0jIDwzdFgbM2K7Mgu5NsRpoa9Xh94eICaSiL769w';
-
-			expect(() => useCase.execute(fakeJwt)).toThrow(new JsonWebTokenError('invalid signature'));
+			expect(() => useCase.execute(fakeJwtRefreshToken)).toThrow(
+				new JsonWebTokenError('invalid signature'),
+			);
 
 			expect(jwtServiceVerify).toHaveBeenCalledTimes(1);
-			expect(jwtServiceVerify).toHaveBeenCalledWith(fakeJwt, {
+			expect(jwtServiceVerify).toHaveBeenCalledWith(fakeJwtRefreshToken, {
 				jwtid: 'uuid',
-				audience: 'test-runner-access-token',
+				audience: 'test-runner-refresh-token',
 				issuer: 'test',
 			});
 		});
@@ -90,17 +91,14 @@ describe('CheckJwtAccessTokenUseCase', () => {
 
 			await prepareTestingModule(configurationService);
 
-			const fakeJwt =
-				'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTA5NDQ0ODgsIm5iZiI6MTcxMDk0NDQ4OCwiZXhwIjoxNzEwOTQ1Mzg4LCJhdWQiOiJ0ZXN0LXJ1bm5lci1hY2Nlc3MtdG9rZW4iLCJpc3MiOiJ0ZXN0Iiwic3ViIjoidXNlci11dWlkIiwianRpIjoidXVpZCJ9.Yj_vgfAsPA3dgbAUkP_BvpS9W7oRBVvcVyv75vB7fMreSb0jIDwzdFgbM2K7Mgu5NsRpoa9Xh94eICaSiL769w';
-
-			expect(() => useCase.execute(fakeJwt)).toThrow(
+			expect(() => useCase.execute(fakeJwtRefreshToken)).toThrow(
 				new JsonWebTokenError('jwt jwtid invalid. expected: iduu'),
 			);
 
 			expect(jwtServiceVerify).toHaveBeenCalledTimes(1);
-			expect(jwtServiceVerify).toHaveBeenCalledWith(fakeJwt, {
+			expect(jwtServiceVerify).toHaveBeenCalledWith(fakeJwtRefreshToken, {
 				jwtid: 'iduu',
-				audience: 'test-runner-access-token',
+				audience: 'test-runner-refresh-token',
 				issuer: 'test',
 			});
 		});
@@ -119,17 +117,14 @@ describe('CheckJwtAccessTokenUseCase', () => {
 
 			await prepareTestingModule(configurationService);
 
-			const fakeJwt =
-				'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTA5NDQ0ODgsIm5iZiI6MTcxMDk0NDQ4OCwiZXhwIjoxNzEwOTQ1Mzg4LCJhdWQiOiJ0ZXN0LXJ1bm5lci1hY2Nlc3MtdG9rZW4iLCJpc3MiOiJ0ZXN0Iiwic3ViIjoidXNlci11dWlkIiwianRpIjoidXVpZCJ9.Yj_vgfAsPA3dgbAUkP_BvpS9W7oRBVvcVyv75vB7fMreSb0jIDwzdFgbM2K7Mgu5NsRpoa9Xh94eICaSiL769w';
-
-			expect(() => useCase.execute(fakeJwt)).toThrow(
-				new JsonWebTokenError('jwt audience invalid. expected: test-mock-access-token'),
+			expect(() => useCase.execute(fakeJwtRefreshToken)).toThrow(
+				new JsonWebTokenError('jwt audience invalid. expected: test-mock-refresh-token'),
 			);
 
 			expect(jwtServiceVerify).toHaveBeenCalledTimes(1);
-			expect(jwtServiceVerify).toHaveBeenCalledWith(fakeJwt, {
+			expect(jwtServiceVerify).toHaveBeenCalledWith(fakeJwtRefreshToken, {
 				jwtid: 'uuid',
-				audience: 'test-mock-access-token',
+				audience: 'test-mock-refresh-token',
 				issuer: 'test',
 			});
 		});
@@ -148,17 +143,14 @@ describe('CheckJwtAccessTokenUseCase', () => {
 
 			await prepareTestingModule(configurationService);
 
-			const fakeJwt =
-				'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTA5NDQ0ODgsIm5iZiI6MTcxMDk0NDQ4OCwiZXhwIjoxNzEwOTQ1Mzg4LCJhdWQiOiJ0ZXN0LXJ1bm5lci1hY2Nlc3MtdG9rZW4iLCJpc3MiOiJ0ZXN0Iiwic3ViIjoidXNlci11dWlkIiwianRpIjoidXVpZCJ9.Yj_vgfAsPA3dgbAUkP_BvpS9W7oRBVvcVyv75vB7fMreSb0jIDwzdFgbM2K7Mgu5NsRpoa9Xh94eICaSiL769w';
-
-			expect(() => useCase.execute(fakeJwt)).toThrow(
+			expect(() => useCase.execute(fakeJwtRefreshToken)).toThrow(
 				new JsonWebTokenError('jwt issuer invalid. expected: spec'),
 			);
 
 			expect(jwtServiceVerify).toHaveBeenCalledTimes(1);
-			expect(jwtServiceVerify).toHaveBeenCalledWith(fakeJwt, {
+			expect(jwtServiceVerify).toHaveBeenCalledWith(fakeJwtRefreshToken, {
 				jwtid: 'uuid',
-				audience: 'test-runner-access-token',
+				audience: 'test-runner-refresh-token',
 				issuer: 'spec',
 			});
 		});
@@ -166,31 +158,29 @@ describe('CheckJwtAccessTokenUseCase', () => {
 		it('throw JsonWebTokenError with "jwt not active" when system date is below jwt notBefore time', async () => {
 			jest.useFakeTimers().setSystemTime(new EditableDate(validJwtDate).edit('day', -1));
 
-			const fakeJwt =
-				'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTA5NDQ0ODgsIm5iZiI6MTcxMDk0NDQ4OCwiZXhwIjoxNzEwOTQ1Mzg4LCJhdWQiOiJ0ZXN0LXJ1bm5lci1hY2Nlc3MtdG9rZW4iLCJpc3MiOiJ0ZXN0Iiwic3ViIjoidXNlci11dWlkIiwianRpIjoidXVpZCJ9.Yj_vgfAsPA3dgbAUkP_BvpS9W7oRBVvcVyv75vB7fMreSb0jIDwzdFgbM2K7Mgu5NsRpoa9Xh94eICaSiL769w';
-
-			expect(() => useCase.execute(fakeJwt)).toThrow(new JsonWebTokenError('jwt not active'));
+			expect(() => useCase.execute(fakeJwtRefreshToken)).toThrow(
+				new JsonWebTokenError('jwt not active'),
+			);
 
 			expect(jwtServiceVerify).toHaveBeenCalledTimes(1);
-			expect(jwtServiceVerify).toHaveBeenCalledWith(fakeJwt, {
+			expect(jwtServiceVerify).toHaveBeenCalledWith(fakeJwtRefreshToken, {
 				jwtid: 'uuid',
-				audience: 'test-runner-access-token',
+				audience: 'test-runner-refresh-token',
 				issuer: 'test',
 			});
 		});
 
 		it('throw JsonWebTokenError with "jwt not active" when system date is above jwt expiration time', async () => {
-			jest.useFakeTimers().setSystemTime(new EditableDate(validJwtDate).edit('day', 1));
+			jest.useFakeTimers().setSystemTime(new EditableDate(validJwtDate).edit('month', 1));
 
-			const fakeJwt =
-				'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTA5NDQ0ODgsIm5iZiI6MTcxMDk0NDQ4OCwiZXhwIjoxNzEwOTQ1Mzg4LCJhdWQiOiJ0ZXN0LXJ1bm5lci1hY2Nlc3MtdG9rZW4iLCJpc3MiOiJ0ZXN0Iiwic3ViIjoidXNlci11dWlkIiwianRpIjoidXVpZCJ9.Yj_vgfAsPA3dgbAUkP_BvpS9W7oRBVvcVyv75vB7fMreSb0jIDwzdFgbM2K7Mgu5NsRpoa9Xh94eICaSiL769w';
-
-			expect(() => useCase.execute(fakeJwt)).toThrow(new JsonWebTokenError('jwt expired'));
+			expect(() => useCase.execute(fakeJwtRefreshToken)).toThrow(
+				new JsonWebTokenError('jwt expired'),
+			);
 
 			expect(jwtServiceVerify).toHaveBeenCalledTimes(1);
-			expect(jwtServiceVerify).toHaveBeenCalledWith(fakeJwt, {
+			expect(jwtServiceVerify).toHaveBeenCalledWith(fakeJwtRefreshToken, {
 				jwtid: 'uuid',
-				audience: 'test-runner-access-token',
+				audience: 'test-runner-refresh-token',
 				issuer: 'test',
 			});
 		});
