@@ -23,7 +23,7 @@ You can also view node execution logs by running `docker logs set-nx -f -n 100` 
 
 You can now navigate to:
 
-- 👹 Apollo Studio on https://localhost:3000/graphql
+- 👹 Apollo Studio on https://localhost:4200/graphql
 - 🧜🏻‍♀️ Frontend on https://localhost:4200
 
 ## Migrations
