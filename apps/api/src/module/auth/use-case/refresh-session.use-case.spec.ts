@@ -1,5 +1,5 @@
 import { REQUEST } from '@nestjs/core';
-import { JwtModule, JwtService } from '@nestjs/jwt';
+import { JwtModule } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Request } from 'express';
 import { mock } from 'jest-mock-extended';
@@ -8,6 +8,7 @@ import { UnauthorizedException } from '../../../shared/exception/unauthorized-ex
 import { ConfigurationService } from '../../../shared/module/config/configuration.service';
 import { JwtFactory } from '../../../shared/module/config/factories/jwt.factory';
 
+import { CheckJwtRefreshTokenUseCase } from './check-jwt-refresh-token.use-case';
 import { CreateJwtAccessTokenUseCase } from './create-jwt-access-token.use-case';
 import { CreateJwtRefreshTokenUseCase } from './create-jwt-refresh-token.use-case';
 import { RefreshSessionUseCase } from './refresh-session.use-case';
@@ -21,7 +22,7 @@ describe('RefreshSessionUseCase', () => {
 	let module: TestingModule;
 	let useCase: RefreshSessionUseCase;
 
-	const jwtServiceVerify = jest.spyOn(JwtService.prototype, 'verify');
+	const checkJwtRefreshTokenExecute = jest.spyOn(CheckJwtRefreshTokenUseCase.prototype, 'execute');
 
 	const createAccessToken = mock<CreateJwtAccessTokenUseCase>();
 	const createRefreshToken = mock<CreateJwtRefreshTokenUseCase>();
@@ -40,7 +41,9 @@ describe('RefreshSessionUseCase', () => {
 			],
 			providers: [
 				RefreshSessionUseCase,
+				CheckJwtRefreshTokenUseCase,
 				{ provide: REQUEST, useValue: request },
+				{ provide: ConfigurationService, useValue: configurationService },
 				{ provide: CreateJwtAccessTokenUseCase, useValue: createAccessToken },
 				{ provide: CreateJwtRefreshTokenUseCase, useValue: createRefreshToken },
 				{ provide: SetJwtTokenUseCase, useValue: setJwtToken },
@@ -74,7 +77,7 @@ describe('RefreshSessionUseCase', () => {
 		it('throw UnauthorizedException when the request missing cookies', async () => {
 			const result = useCase.execute();
 
-			expect(result).rejects.toThrowError(UnauthorizedException);
+			expect(result).rejects.toThrow(UnauthorizedException);
 			expect(result).rejects.toMatchObject({ response: { refreshToken: 'jwt must be provided' } });
 		});
 
@@ -83,11 +86,11 @@ describe('RefreshSessionUseCase', () => {
 
 			const result = useCase.execute();
 
-			expect(result).rejects.toThrowError(UnauthorizedException);
+			expect(result).rejects.toThrow(UnauthorizedException);
 			expect(result).rejects.toMatchObject({ response: { refreshToken: 'jwt malformed' } });
 
-			expect(jwtServiceVerify).toHaveBeenCalledTimes(1);
-			expect(jwtServiceVerify).toHaveBeenCalledWith('wrong-refresh-token');
+			expect(checkJwtRefreshTokenExecute).toHaveBeenCalledTimes(1);
+			expect(checkJwtRefreshTokenExecute).toHaveBeenCalledWith('wrong-refresh-token');
 		});
 
 		it('should call two times to setJwtToken useCase', async () => {
@@ -114,8 +117,8 @@ describe('RefreshSessionUseCase', () => {
 
 			expect(result).toStrictEqual(undefined);
 
-			expect(jwtServiceVerify).toHaveBeenCalledTimes(1);
-			expect(jwtServiceVerify).toHaveBeenCalledWith(fakeRefreshToken);
+			expect(checkJwtRefreshTokenExecute).toHaveBeenCalledTimes(1);
+			expect(checkJwtRefreshTokenExecute).toHaveBeenCalledWith(fakeRefreshToken);
 
 			expect(createAccessToken.execute).toHaveBeenCalledTimes(1);
 			expect(createAccessToken.execute).toHaveBeenCalledWith('user-uuid');
