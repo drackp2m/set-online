@@ -11,7 +11,7 @@ export class CustomRepository<T extends CustomBaseEntity<T>> {
 	) {}
 
 	getReference(id: Primary<T>): T {
-		return this.entityManager.fork().getReference(this.entityName, id);
+		return this.entityManager.fork().getReference<T>(this.entityName, id);
 	}
 
 	async getOne<Hint extends string = never>(
