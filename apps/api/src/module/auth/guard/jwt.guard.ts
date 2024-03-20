@@ -14,7 +14,7 @@ export class JwtGuard extends AuthGuard('jwt') {
 
 	handleRequest<T>(error: Error, payload: T | false): T | undefined {
 		if (error) {
-			throw new UnauthorizedException('invalid bearer', 'authorization');
+			throw new UnauthorizedException('invalid access token', 'jwt');
 		}
 
 		return payload || undefined;

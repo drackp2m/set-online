@@ -2,7 +2,7 @@ import type { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
 	overwrite: true,
-	schema: 'https://localhost:3000/graphql',
+	schema: 'https://localhost:4200/graphql',
 	documents: 'libs/api-definitions/src/lib/graphql/**/*.gql',
 	generates: {
 		'apps/app/src/graphql/apollo-operations.ts': {

@@ -38,7 +38,9 @@ describe('RolesGuard', () => {
 			const result = guard.canActivate(executionContext as ExecutionContext);
 
 			expect(result).rejects.toThrow(UnauthorizedException);
-			expect(result).rejects.toMatchObject({ response: { authorization: 'invalid bearer' } });
+			expect(result).rejects.toMatchObject({
+				response: { authorization: 'x-jwt-access-token invalid' },
+			});
 		});
 
 		it('throw UnauthorizedException when context has UserRole but args does not have User', async () => {
@@ -50,7 +52,9 @@ describe('RolesGuard', () => {
 			const result = guard.canActivate(executionContext as ExecutionContext);
 
 			expect(result).rejects.toThrow(UnauthorizedException);
-			expect(result).rejects.toMatchObject({ response: { authorization: 'invalid bearer' } });
+			expect(result).rejects.toMatchObject({
+				response: { authorization: 'x-jwt-access-token invalid' },
+			});
 		});
 
 		it('throw ForbiddenException when context has UserRole but args User has no privileges', async () => {

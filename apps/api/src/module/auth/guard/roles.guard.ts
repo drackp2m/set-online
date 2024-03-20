@@ -18,7 +18,7 @@ export class RolesGuard implements CanActivate {
 		}>().req.user;
 
 		if (!user) {
-			throw new UnauthorizedException('invalid bearer', 'authorization');
+			throw new UnauthorizedException('x-jwt-access-token invalid', 'authorization');
 		}
 
 		if (roles.length === 0) {
