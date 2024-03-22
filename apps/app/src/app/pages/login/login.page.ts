@@ -44,12 +44,11 @@ export default class LoginPage implements OnInit {
 	}
 
 	ngOnInit(): void {
-		console.log('login init');
-		// this.getUsersGQL.fetch().subscribe({
-		// 	next: (data) => {
-		// 		this.usernames.set(data.data.getUsers.map((user) => user.username));
-		// 	},
-		// });
+		this.getUsersGQL.fetch().subscribe({
+			next: (data) => {
+				this.usernames.set(data.data.getUsers.map((user) => user.username));
+			},
+		});
 	}
 
 	onSubmit() {

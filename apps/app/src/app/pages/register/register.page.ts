@@ -46,7 +46,7 @@ export default class RegisterPage {
 					this.user.set(data);
 				},
 				error: ({ error }) => {
-					console.log(error);
+					console.error(error);
 					this.error.set(error.message);
 				},
 			});

@@ -26,22 +26,15 @@ export const CurrentUserStore = signalStore(
 			patchState(store, initialState);
 		},
 		async fetchData(): Promise<void> {
-			console.log('no me jodas');
 			patchState(store, { isLoading: true });
-			console.log('vamos va');
 
-			setTimeout(async () => {
-				console.log('me espero');
-				try {
-					console.log('e intento esto');
-					const { data } = await firstValueFrom(getUserInfoGQL.fetch().pipe(take(1)));
-					console.log(data);
-					patchState(store, { data: data.getUserInfo, isLoading: false });
-				} catch (error) {
-					console.log(error);
-					patchState(store, { error, isLoading: false });
-				}
-			}, 300);
+			try {
+				const { data } = await firstValueFrom(getUserInfoGQL.fetch().pipe(take(1)));
+				patchState(store, { data: data.getUserInfo, isLoading: false });
+			} catch (error) {
+				console.log(error);
+				patchState(store, { error, isLoading: false });
+			}
 		},
 	})),
 );
