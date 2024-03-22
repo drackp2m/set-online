@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
 	title = 'app';
 
 	ngOnInit() {
-		console.log('app init');
 		this.currentUserStore.fetchData();
 	}
 }

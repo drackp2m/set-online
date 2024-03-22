@@ -3,7 +3,10 @@ import { HttpClient as HttpClientType } from './definitions/http-client.type';
 export class HttpClient {
 	private static instance: HttpClient;
 
-	private constructor(private readonly apiURL: string, private readonly client: HttpClientType) {
+	private constructor(
+		private readonly apiURL: string,
+		private readonly client: HttpClientType,
+	) {
 		console.log(`Set Online SDK is running on ${apiURL}.`);
 	}
 

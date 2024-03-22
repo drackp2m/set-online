@@ -64,7 +64,6 @@ export class AuthInterceptor implements HttpInterceptor {
 		event?: HttpEvent<unknown>,
 	): Observable<HttpEvent<unknown>> {
 		if (event) {
-			console.log('intento refrescar');
 			this.authStore.tryToRefreshTokens();
 		}
 
