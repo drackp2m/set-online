@@ -49,7 +49,7 @@ RUN mkdir /home/node/.gnupg \
 RUN mkdir -p ~/.local/share/zsh/plugins \
 			&& ln -s /usr/share/zsh/plugins/powerlevel10k ~/.local/share/zsh/plugins/
 
-CMD top
+CMD npm run start
 
 
 
