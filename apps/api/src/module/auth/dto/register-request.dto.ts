@@ -3,10 +3,13 @@ import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 import { RegisterRequest } from '@set-online/api-definitions';
 
+import { IsUniqueUserProp } from '../../user/decorator/is-unique-user-prop.decorator';
+
 @InputType()
 export class RegisterRequestDto implements RegisterRequest {
 	@IsString()
 	@IsNotEmpty()
+	@IsUniqueUserProp('username')
 	@Field()
 	username: string;
 
@@ -17,6 +20,7 @@ export class RegisterRequestDto implements RegisterRequest {
 
 	@IsOptional()
 	@IsEmail()
+	@IsUniqueUserProp('email')
 	@Field({ nullable: true })
 	email?: string;
 }
