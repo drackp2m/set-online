@@ -44,7 +44,7 @@ export class UserResolver {
 	async getMany(): Promise<User[]> {
 		this.pubSub.publish('getManySubscription', 'Hello from getMany');
 
-		const users = await this.userRepository.getMany();
+		const users = await this.userRepository.getMany({}, {});
 
 		return users;
 	}
