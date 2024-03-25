@@ -5,7 +5,6 @@ import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 
 import { ConfigurationModule } from '../../shared/module/config/configuration.module';
-import { ConfigurationService } from '../../shared/module/config/configuration.service';
 import { GqlFactory } from '../../shared/module/config/factories/gql.factory';
 import { MikroOrmFactory } from '../../shared/module/config/factories/mikro-orm.factory';
 import { appConfig } from '../../shared/module/config/registers/app.config';
@@ -30,8 +29,7 @@ import { AppService } from './app.service';
 			useClass: MikroOrmFactory,
 		}),
 		GraphQLModule.forRootAsync<ApolloDriverConfig>({
-			imports: [ConfigurationModule],
-			inject: [ConfigurationService],
+			imports: [ConfigurationModule, AuthModule],
 			useClass: GqlFactory,
 			driver: ApolloDriver,
 		}),
