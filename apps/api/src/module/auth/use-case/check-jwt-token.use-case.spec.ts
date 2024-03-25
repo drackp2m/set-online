@@ -6,11 +6,11 @@ import { ConfigurationService } from '../../../shared/module/config/configuratio
 import { JwtFactory } from '../../../shared/module/config/factories/jwt.factory';
 import { EditableDate } from '../../../shared/util/editable-date';
 
-import { CheckJwtRefreshTokenUseCase } from './check-jwt-refresh-token.use-case';
+import { CheckJwtTokenUseCase } from './check-jwt-token.use-case';
 
 describe('CheckJwtRefreshTokenUseCase', () => {
 	let module: TestingModule;
-	let useCase: CheckJwtRefreshTokenUseCase;
+	let useCase: CheckJwtTokenUseCase;
 
 	const jwtServiceVerify = jest.spyOn(JwtService.prototype, 'verify');
 	const validJwtDate = new Date('2024-03-20T22:10:42.000Z');
@@ -27,12 +27,12 @@ describe('CheckJwtRefreshTokenUseCase', () => {
 				}),
 			],
 			providers: [
-				CheckJwtRefreshTokenUseCase,
+				CheckJwtTokenUseCase,
 				{ provide: ConfigurationService, useValue: configurationService },
 			],
 		}).compile();
 
-		useCase = await module.resolve(CheckJwtRefreshTokenUseCase);
+		useCase = await module.resolve(CheckJwtTokenUseCase);
 	};
 
 	beforeEach(async () => {
@@ -52,6 +52,8 @@ describe('CheckJwtRefreshTokenUseCase', () => {
 		expect(useCase).toBeDefined();
 	});
 
+	// ToDo => add tests for accessToken
+
 	describe('execute', () => {
 		it('throw JsonWebTokenError with "invalid signature" when secret is not valid', async () => {
 			const configurationService = mock<ConfigurationService>({
@@ -65,7 +67,7 @@ describe('CheckJwtRefreshTokenUseCase', () => {
 
 			await prepareTestingModule(configurationService);
 
-			expect(() => useCase.execute(fakeJwtRefreshToken)).toThrow(
+			expect(() => useCase.execute(fakeJwtRefreshToken, 'refresh')).toThrow(
 				new JsonWebTokenError('invalid signature'),
 			);
 
@@ -91,7 +93,7 @@ describe('CheckJwtRefreshTokenUseCase', () => {
 
 			await prepareTestingModule(configurationService);
 
-			expect(() => useCase.execute(fakeJwtRefreshToken)).toThrow(
+			expect(() => useCase.execute(fakeJwtRefreshToken, 'refresh')).toThrow(
 				new JsonWebTokenError('jwt jwtid invalid. expected: iduu'),
 			);
 
@@ -117,7 +119,7 @@ describe('CheckJwtRefreshTokenUseCase', () => {
 
 			await prepareTestingModule(configurationService);
 
-			expect(() => useCase.execute(fakeJwtRefreshToken)).toThrow(
+			expect(() => useCase.execute(fakeJwtRefreshToken, 'refresh')).toThrow(
 				new JsonWebTokenError('jwt audience invalid. expected: test-mock-refresh-token'),
 			);
 
@@ -143,7 +145,7 @@ describe('CheckJwtRefreshTokenUseCase', () => {
 
 			await prepareTestingModule(configurationService);
 
-			expect(() => useCase.execute(fakeJwtRefreshToken)).toThrow(
+			expect(() => useCase.execute(fakeJwtRefreshToken, 'refresh')).toThrow(
 				new JsonWebTokenError('jwt issuer invalid. expected: spec'),
 			);
 
@@ -158,7 +160,7 @@ describe('CheckJwtRefreshTokenUseCase', () => {
 		it('throw JsonWebTokenError with "jwt not active" when system date is below jwt notBefore time', async () => {
 			jest.useFakeTimers().setSystemTime(new EditableDate(validJwtDate).edit('day', -1));
 
-			expect(() => useCase.execute(fakeJwtRefreshToken)).toThrow(
+			expect(() => useCase.execute(fakeJwtRefreshToken, 'refresh')).toThrow(
 				new JsonWebTokenError('jwt not active'),
 			);
 
@@ -173,7 +175,7 @@ describe('CheckJwtRefreshTokenUseCase', () => {
 		it('throw JsonWebTokenError with "jwt not active" when system date is above jwt expiration time', async () => {
 			jest.useFakeTimers().setSystemTime(new EditableDate(validJwtDate).edit('month', 1));
 
-			expect(() => useCase.execute(fakeJwtRefreshToken)).toThrow(
+			expect(() => useCase.execute(fakeJwtRefreshToken, 'refresh')).toThrow(
 				new JsonWebTokenError('jwt expired'),
 			);
 

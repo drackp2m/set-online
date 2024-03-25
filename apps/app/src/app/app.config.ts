@@ -32,6 +32,7 @@ export const appConfig: ApplicationConfig = {
 				const ws = new GraphQLWsLink(
 					createClient({
 						url: `${environment.wsUrl}/graphql`,
+						connectionAckWaitTimeout: 1000,
 					}),
 				);
 

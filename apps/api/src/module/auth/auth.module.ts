@@ -13,7 +13,7 @@ import { User } from '../user/user.entity';
 import { AuthController } from './auth.controller';
 import { JwtGuard } from './guard/jwt.guard';
 import { JwtStrategyService } from './strategy/jwt.strategy.service';
-import { CheckJwtRefreshTokenUseCase } from './use-case/check-jwt-refresh-token.use-case';
+import { CheckJwtTokenUseCase } from './use-case/check-jwt-token.use-case';
 import { CreateJwtAccessTokenUseCase } from './use-case/create-jwt-access-token.use-case';
 import { CreateJwtRefreshTokenUseCase } from './use-case/create-jwt-refresh-token.use-case';
 import { LoginUseCase } from './use-case/login.use-case';
@@ -43,12 +43,13 @@ import { SetJwtTokenUseCase } from './use-case/set-jwt-token.use-case';
 		JwtStrategyService,
 		HashPasswordUseCase,
 		CheckPasswordUseCase,
-		CheckJwtRefreshTokenUseCase,
+		CheckJwtTokenUseCase,
 		CreateJwtAccessTokenUseCase,
 		CreateJwtRefreshTokenUseCase,
 		SetJwtTokenUseCase,
 		RefreshSessionUseCase,
 	],
+	exports: [CheckJwtTokenUseCase],
 	controllers: [AuthController],
 })
 export class AuthModule {}

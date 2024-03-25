@@ -8,7 +8,7 @@ import { UnauthorizedException } from '../../../shared/exception/unauthorized-ex
 import { ConfigurationService } from '../../../shared/module/config/configuration.service';
 import { JwtFactory } from '../../../shared/module/config/factories/jwt.factory';
 
-import { CheckJwtRefreshTokenUseCase } from './check-jwt-refresh-token.use-case';
+import { CheckJwtTokenUseCase } from './check-jwt-token.use-case';
 import { CreateJwtAccessTokenUseCase } from './create-jwt-access-token.use-case';
 import { CreateJwtRefreshTokenUseCase } from './create-jwt-refresh-token.use-case';
 import { RefreshSessionUseCase } from './refresh-session.use-case';
@@ -22,7 +22,7 @@ describe('RefreshSessionUseCase', () => {
 	let module: TestingModule;
 	let useCase: RefreshSessionUseCase;
 
-	const checkJwtRefreshTokenExecute = jest.spyOn(CheckJwtRefreshTokenUseCase.prototype, 'execute');
+	const checkJwtRefreshTokenExecute = jest.spyOn(CheckJwtTokenUseCase.prototype, 'execute');
 
 	const createAccessToken = mock<CreateJwtAccessTokenUseCase>();
 	const createRefreshToken = mock<CreateJwtRefreshTokenUseCase>();
@@ -41,7 +41,7 @@ describe('RefreshSessionUseCase', () => {
 			],
 			providers: [
 				RefreshSessionUseCase,
-				CheckJwtRefreshTokenUseCase,
+				CheckJwtTokenUseCase,
 				{ provide: REQUEST, useValue: request },
 				{ provide: ConfigurationService, useValue: configurationService },
 				{ provide: CreateJwtAccessTokenUseCase, useValue: createAccessToken },
@@ -90,7 +90,7 @@ describe('RefreshSessionUseCase', () => {
 			expect(result).rejects.toMatchObject({ response: { refreshToken: 'jwt malformed' } });
 
 			expect(checkJwtRefreshTokenExecute).toHaveBeenCalledTimes(1);
-			expect(checkJwtRefreshTokenExecute).toHaveBeenCalledWith('wrong-refresh-token');
+			expect(checkJwtRefreshTokenExecute).toHaveBeenCalledWith('wrong-refresh-token', 'refresh');
 		});
 
 		it('should call two times to setJwtToken useCase', async () => {
@@ -118,7 +118,7 @@ describe('RefreshSessionUseCase', () => {
 			expect(result).toStrictEqual(undefined);
 
 			expect(checkJwtRefreshTokenExecute).toHaveBeenCalledTimes(1);
-			expect(checkJwtRefreshTokenExecute).toHaveBeenCalledWith(fakeRefreshToken);
+			expect(checkJwtRefreshTokenExecute).toHaveBeenCalledWith(fakeRefreshToken, 'refresh');
 
 			expect(createAccessToken.execute).toHaveBeenCalledTimes(1);
 			expect(createAccessToken.execute).toHaveBeenCalledWith('user-uuid');

@@ -23,7 +23,7 @@ FROM base AS deps
 
 USER node
 
-COPY package.json package.lock* .
+COPY package.json package.lock* ./
 
 RUN npm install --frozen-lockfile
 
