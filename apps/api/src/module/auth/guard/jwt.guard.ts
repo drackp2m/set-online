@@ -12,11 +12,11 @@ export class JwtGuard extends AuthGuard('jwt') {
 		return gqlContext.getContext<{ req: T }>().req;
 	}
 
-	handleRequest<T>(error: Error, payload: T | false): T | undefined {
+	handleRequest<T>(error?: Error, payload?: T): T | undefined {
 		if (error) {
 			throw new UnauthorizedException('invalid access token', 'jwt');
 		}
 
-		return payload || undefined;
+		return payload;
 	}
 }

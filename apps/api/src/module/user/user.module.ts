@@ -10,5 +10,6 @@ import { IsUniqueUserPropRule } from './validator/is-unique-user-prop';
 @Module({
 	imports: [MikroOrmModule.forFeature([User]), PubSubModule],
 	providers: [UserResolver, IsUniqueUserPropRule],
+	exports: [MikroOrmModule],
 })
 export class UserModule {}

@@ -1,8 +1,8 @@
 import { HttpException } from '@nestjs/common';
 
 export class BaseException extends HttpException {
-	constructor(message: string, httpCode: number, response?: string, dtoKey?: string) {
-		const responseWithDtoKey = dtoKey ? { [dtoKey]: response } : response ?? message;
+	constructor(message: string, httpCode: number, details?: string, origin?: string) {
+		const responseWithDtoKey = origin ? { [origin]: details } : details ?? message;
 
 		super(responseWithDtoKey, httpCode);
 

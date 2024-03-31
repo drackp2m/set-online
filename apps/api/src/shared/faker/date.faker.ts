@@ -15,32 +15,41 @@ type ManipulationDateAttribute =
 
 export class DateFaker {
 	private readonly now = new EditableDate();
-	private created: Date;
+	private created?: Date;
 
 	constructor() {
 		this.now.set('hour', 0).set('minute', 0).set('second', 0).set('millisecond', 0);
 	}
 
 	createdAt(since?: string): Date {
-		const limitOptions = new Map<ManipulationDateAttribute, number>([['year', -2]]);
-		const sinceLimit = this.manipulatedDate(limitOptions);
+		const twoYearsAgo = this.twoYearsAgo();
 
-		this.created = faker.date.between({ from: since || sinceLimit, to: this.now});
+		this.created = faker.date.between({ from: since || twoYearsAgo, to: this.now });
 
 		return this.created;
 	}
 
 	modifiedAt(): Date {
-		return BasicFaker.boolean() ? this.created : faker.date.between({ from: this.created, to: this.now });
+		const twoYearsAgo = this.twoYearsAgo();
+
+		return this.created && BasicFaker.boolean()
+			? this.created
+			: faker.date.between({ from: this.created ?? twoYearsAgo, to: this.now });
 	}
 
-	expiresOn(until: string): Date {
+	expiresOn(until?: string): Date {
 		const limitOptions = new Map<ManipulationDateAttribute, number>([['day', 1]]);
 		const untilLimit = this.manipulatedDate(limitOptions);
 
-		this.created = faker.date.between({ from: this.now, to: until || untilLimit });
+		this.created = faker.date.between({ from: this.now, to: until ?? untilLimit });
 
 		return this.created;
+	}
+
+	private twoYearsAgo(): Date {
+		const limitOptions = new Map<ManipulationDateAttribute, number>([['year', -2]]);
+
+		return this.manipulatedDate(limitOptions);
 	}
 
 	private manipulatedDate(options: Map<ManipulationDateAttribute, number>): Date {
@@ -55,7 +64,9 @@ export class DateFaker {
 		return date;
 	}
 
-	private manipulationDateAttributeMethod(attribute: ManipulationDateAttribute): string {
+	private manipulationDateAttributeMethod(
+		attribute: ManipulationDateAttribute,
+	): 'FullYear' | 'Month' | 'Date' | 'Hours' | 'Minutes' | 'Seconds' | 'Milliseconds' {
 		switch (attribute) {
 			case 'year':
 				return 'FullYear';
@@ -63,8 +74,14 @@ export class DateFaker {
 				return 'Month';
 			case 'day':
 				return 'Date';
-			default:
-				return `${attribute.charAt(0).toUpperCase() + attribute.slice(1)}s`;
+			case 'hour':
+				return 'Hours';
+			case 'minute':
+				return 'Minutes';
+			case 'second':
+				return 'Seconds';
+			case 'millisecond':
+				return 'Milliseconds';
 		}
 	}
 }

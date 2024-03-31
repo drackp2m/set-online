@@ -39,13 +39,13 @@ describe('JwtGuard', () => {
 
 	describe('handleRequest', () => {
 		it('throw UnauthorizedException when pass error', () => {
-			const execution = () => guard.handleRequest<User>(new Error(), undefined);
+			const execution = () => guard.handleRequest<User>(new Error());
 
 			expect(execution).toThrow(UnauthorizedException);
 		});
 
-		it('should return Undefined when error is missing and payload is False', () => {
-			const payload = guard.handleRequest<User>(undefined, false);
+		it('should return Undefined when error and payload are missing', () => {
+			const payload = guard.handleRequest<User>();
 
 			expect(payload).toStrictEqual(undefined);
 		});

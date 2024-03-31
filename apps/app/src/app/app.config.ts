@@ -33,6 +33,17 @@ export const appConfig: ApplicationConfig = {
 					createClient({
 						url: `${environment.wsUrl}/graphql`,
 						connectionAckWaitTimeout: 1000,
+						on: {
+							connected: (x, y, z) => {
+								console.log({ x, y, z });
+							},
+							ping: (a, b) => {
+								console.log({ a, b });
+							},
+							pong: (c, d) => {
+								console.log({ c, d });
+							},
+						},
 					}),
 				);
 

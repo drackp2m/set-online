@@ -64,6 +64,13 @@
 			Check users
 		</button>
 
+		<button
+			class="p-sm md:p-md surface-radiant round-md xl-o:surface-vivid"
+			(click)="initSubscription()"
+		>
+			Init subscription
+		</button>
+
 		@if (users()) {
 			<p>Now: {{ users() }} users.</p>
 		}

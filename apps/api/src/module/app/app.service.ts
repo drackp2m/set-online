@@ -4,7 +4,7 @@ import { Message } from '@set-online/api-definitions';
 
 @Injectable()
 export class AppService {
-	getData(): Message {
+	welcomeMessage(): Message {
 		return { message: 'Welcome to set-online!' };
 	}
 }
