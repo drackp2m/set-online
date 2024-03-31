@@ -6,5 +6,5 @@ export class JoinGameInput {
 	@IsString()
 	@IsNotEmpty()
 	@Field()
-	gameUuid: string;
+	gameUuid!: string;
 }

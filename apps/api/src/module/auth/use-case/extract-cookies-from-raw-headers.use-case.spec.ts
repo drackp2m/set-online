@@ -18,27 +18,34 @@ describe('ExtractCookiesFromRawHeadersUseCaseFromRawHeaders', () => {
 	});
 
 	describe('execute', () => {
-		it('calls with empty string should returns empty object ', async () => {
-			const cookies = useCase.execute('');
+		it('should returns empty object when is called with empty array', async () => {
+			const cookies = useCase.execute([]);
 
 			expect(cookies).toEqual({});
 		});
+
+		it('should returns empty object when is called with array that does not contain Cookies', async () => {
+			const cookies = useCase.execute(['NotCookie', 'no-data']);
+
+			expect(cookies).toEqual({});
+		});
+
+		it('should returns object with one header when is called with array contains Cookie with one header', async () => {
+			const cookies = useCase.execute(['Cookie', 'x-jwt-access-token=fake-access-token']);
+
+			expect(cookies).toEqual({ 'x-jwt-access-token': 'fake-access-token' });
+		});
+
+		it('should returns object with two header when is called with array contains Cookie with two header', async () => {
+			const cookies = useCase.execute([
+				'Cookie',
+				'x-jwt-access-token=fake-access-token; x-jwt-refresh-token=fake-refresh-token',
+			]);
+
+			expect(cookies).toEqual({
+				'x-jwt-access-token': 'fake-access-token',
+				'x-jwt-refresh-token': 'fake-refresh-token',
+			});
+		});
 	});
-
-	// it('calls once to cookie when called with type refresh ', async () => {
-	// 	const tokenType: JwtCookie = JwtCookie.refresh;
-	// 	const tokenValue = 'fake-refresh-token';
-
-	// 	useCase.execute(tokenType, tokenValue);
-
-	// 	expect(request.res.cookie).toHaveBeenCalledTimes(1);
-	// 	expect(request.res.cookie).toHaveBeenCalledWith(tokenType, tokenValue, {
-	// 		signed: true,
-	// 		secure: true,
-	// 		httpOnly: true,
-	// 		sameSite: true,
-	// 		path: '/api/auth/refresh-session',
-	// 		domain: 'localhost',
-	// 	});
-	// });
 });
