@@ -1,9 +1,9 @@
 import { Controller, Get, Inject } from '@nestjs/common';
 import { PubSub } from 'graphql-subscriptions';
 
-import { AppService } from './app.service';
-
 import { Message } from '@set-online/api-definitions';
+
+import { AppService } from './app.service';
 
 @Controller('app')
 export class AppController {
@@ -16,6 +16,6 @@ export class AppController {
 	getData(): Message {
 		this.pubSub.publish('getManySubscription', 'Hello from hello');
 
-		return this.appService.getData();
+		return this.appService.welcomeMessage();
 	}
 }

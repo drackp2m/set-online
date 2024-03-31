@@ -32,7 +32,9 @@ export class RefreshSessionUseCase {
 			this.setJwtToken.execute(JwtCookie.access, accessToken);
 			this.setJwtToken.execute(JwtCookie.refresh, refreshToken);
 		} catch (error) {
-			throw new UnauthorizedException(error.message, 'refreshToken');
+			const errorMessage = error instanceof Error ? error.message : 'unknown error';
+
+			throw new UnauthorizedException(errorMessage, 'refreshToken');
 		}
 	}
 }

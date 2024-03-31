@@ -10,7 +10,10 @@ describe('LogoutUseCase', () => {
 
 	const request = mock<Request>({ res: {} });
 
-	const requestResponseClearCookie = jest.spyOn(request.res, 'clearCookie');
+	const requestResponseClearCookie = jest.spyOn(
+		request.res ?? { clearCookie: Function },
+		'clearCookie',
+	);
 
 	beforeAll(async () => {
 		const module: TestingModule = await Test.createTestingModule({

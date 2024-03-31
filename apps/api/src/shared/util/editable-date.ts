@@ -9,6 +9,15 @@ type ManipulationDateAttribute =
 	| 'second'
 	| 'millisecond';
 
+type ManipulationDateKeys =
+	| 'FullYear'
+	| 'Month'
+	| 'Date'
+	| 'Hours'
+	| 'Minutes'
+	| 'Seconds'
+	| 'Milliseconds';
+
 export class EditableDate extends Date {
 	constructor(initialDate = new GenerateNowDateUseCase().execute()) {
 		super(initialDate);
@@ -38,7 +47,10 @@ export class EditableDate extends Date {
 		);
 	}
 
-	private manipulationDateAttributeMethod(attribute: ManipulationDateAttribute): string {
+	// FixMe => duplicated code on apps/api/src/shared/faker/date.faker.ts
+	private manipulationDateAttributeMethod(
+		attribute: ManipulationDateAttribute,
+	): ManipulationDateKeys {
 		switch (attribute) {
 			case 'year':
 				return 'FullYear';
@@ -46,8 +58,14 @@ export class EditableDate extends Date {
 				return 'Month';
 			case 'day':
 				return 'Date';
-			default:
-				return `${attribute.charAt(0).toUpperCase() + attribute.slice(1)}s`;
+			case 'hour':
+				return 'Hours';
+			case 'minute':
+				return 'Minutes';
+			case 'second':
+				return 'Seconds';
+			case 'millisecond':
+				return 'Milliseconds';
 		}
 	}
 

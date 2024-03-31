@@ -4,8 +4,9 @@ import { Injectable } from '@nestjs/common';
 import { GqlOptionsFactory } from '@nestjs/graphql';
 import { Context } from 'graphql-ws';
 
-import { JwtCookie } from '../../../../module/auth/definition/jwt-cookie.enum';
 import { CheckJwtTokenUseCase } from '../../../../module/auth/use-case/check-jwt-token.use-case';
+import { User } from '../../../../module/user/user.entity';
+import { UserRepository } from '../../../../module/user/user.repository';
 import { GraphqlWsConnectionExtraInterface } from '../../../interface/graphql-ws-connection-extra.interface';
 import { ConfigurationService } from '../configuration.service';
 
@@ -14,6 +15,7 @@ export class GqlFactory implements GqlOptionsFactory {
 	constructor(
 		private readonly configurationService: ConfigurationService,
 		private readonly checkJwtToken: CheckJwtTokenUseCase,
+		private readonly userRepository: UserRepository,
 	) {}
 
 	createGqlOptions(): ApolloDriverConfig {
@@ -23,7 +25,7 @@ export class GqlFactory implements GqlOptionsFactory {
 			driver: ApolloDriver,
 			autoSchemaFile: 'apps/api/src/schema.gql',
 			sortSchema: true,
-			context: ({ req, res }) => ({ req, res }),
+			context: ({ req, res }: { req: unknown; res: unknown }) => ({ req, res }),
 			includeStacktraceInErrorResponses: !isProduction,
 			buildSchemaOptions: {
 				dateScalarMode: 'isoDate',
@@ -34,32 +36,44 @@ export class GqlFactory implements GqlOptionsFactory {
 				path: 'libs/api-definitions/src/lib/graphql/definitions.ts',
 			},
 			subscriptions: {
+				'subscriptions-transport-ws': false,
 				'graphql-ws': {
 					path: '/graphql',
-					onConnect: (
-						context: Context<Record<string, unknown>, GraphqlWsConnectionExtraInterface>,
-					) => {
+					onConnect: async (context: Context<Record<string, unknown>, unknown>) => {
+						console.log('on connect');
 						// ToDo => move this to help function
 
-						const accessTokenParts = context.extra.request.rawHeaders
-							.find((header) => header.includes(JwtCookie.access))
-							?.split('=')[1]
-							.replace('s%3A', '')
-							.split('.');
+						const extra = context.extra as GraphqlWsConnectionExtraInterface & {
+							user: { user: User };
+						};
 
-						accessTokenParts.pop();
-
-						const accessToken = accessTokenParts?.join('.');
-
-						if (accessToken) {
-							try {
-								this.checkJwtToken.execute(accessToken, 'access');
-							} catch (error) {
-								return false;
-							}
-						}
+						console.log(extra.request.rawHeaders);
 
 						return true;
+
+						// const accessTokenParts = context.extra.request.rawHeaders
+						// 	.find((header) => header.includes(JwtCookie.access))
+						// 	?.split('=')[1]
+						// 	.replace('s%3A', '')
+						// 	.split('.');
+
+						// accessTokenParts?.pop();
+
+						// const accessToken = accessTokenParts?.join('.');
+
+						// if (!accessToken) {
+						// 	throw new UnauthorizedException('Unauthorized');
+						// }
+
+						// try {
+						// 	const checkedAccessToken = this.checkJwtToken.execute(accessToken, 'access');
+
+						// 	const user = await this.userRepository.getOne({ uuid: checkedAccessToken.sub });
+
+						// 	context.extra.user = { user };
+						// } catch (error) {
+						// 	throw new UnauthorizedException('Unauthorized');
+						// }
 					},
 				},
 			},

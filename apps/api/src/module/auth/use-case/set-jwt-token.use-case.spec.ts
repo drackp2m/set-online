@@ -31,8 +31,8 @@ describe('SetJwtTokenUseCase', () => {
 
 			useCase.execute(tokenType, tokenValue);
 
-			expect(request.res.cookie).toHaveBeenCalledTimes(1);
-			expect(request.res.cookie).toHaveBeenCalledWith(tokenType, tokenValue, {
+			expect(request.res?.cookie).toHaveBeenCalledTimes(1);
+			expect(request.res?.cookie).toHaveBeenCalledWith(tokenType, tokenValue, {
 				signed: true,
 				secure: true,
 				httpOnly: true,
@@ -49,8 +49,8 @@ describe('SetJwtTokenUseCase', () => {
 
 		useCase.execute(tokenType, tokenValue);
 
-		expect(request.res.cookie).toHaveBeenCalledTimes(1);
-		expect(request.res.cookie).toHaveBeenCalledWith(tokenType, tokenValue, {
+		expect(request.res?.cookie).toHaveBeenCalledTimes(1);
+		expect(request.res?.cookie).toHaveBeenCalledWith(tokenType, tokenValue, {
 			signed: true,
 			secure: true,
 			httpOnly: true,
