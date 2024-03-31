@@ -5,8 +5,8 @@ import { User } from '../user.entity';
 
 import { UserFaker } from './user.faker';
 
-export class UserFactory extends Factory<User> {
-	model: Constructor<User>;
+export abstract class UserFactory extends Factory<User> {
+	abstract readonly model: Constructor<User>;
 
 	protected definition(): EntityData<User> {
 		return UserFaker.makeOne();

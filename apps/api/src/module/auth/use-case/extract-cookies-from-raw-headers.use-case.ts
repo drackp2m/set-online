@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ExtractCookiesFromRawHeadersUseCase {
-	execute(rawHeaders: string): object {
+	execute(rawHeaders: string[]): object {
 		const headers: Map<string, string> = new Map();
 
 		for (let i = 0; i < rawHeaders.length; i += 2) {
