@@ -2,27 +2,41 @@ import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ExtractCookiesFromRawHeadersUseCase {
-	execute(rawHeaders: string[]): object {
+	execute(rawHeaders: string[]): Record<string, string> {
+		const headers = this.getHeadersFromPlainArray(rawHeaders);
+
+		const plainHeaderCookies = headers.get('Cookie');
+
+		return plainHeaderCookies ? this.getCookiesFromCookieHeader(plainHeaderCookies) : {};
+	}
+
+	private getHeadersFromPlainArray(rawHeaders: string[]): Map<string, string> {
 		const headers: Map<string, string> = new Map();
 
 		for (let i = 0; i < rawHeaders.length; i += 2) {
 			const key = rawHeaders[i];
 			const value = rawHeaders[i + 1];
 
-			headers.set(key, value);
+			if (key && value) {
+				headers.set(key, value);
+			}
 		}
 
-		return (
-			headers
-				.get('Cookie')
-				?.toString()
-				.split(';')
-				.reduce((obj, item) => {
-					const [key, value] = item.trim().split('=');
-					Object.assign(obj, { [key]: value });
+		return headers;
+	}
 
-					return obj;
-				}, {}) ?? {}
-		);
+	private getCookiesFromCookieHeader(cookieHeader: string): Record<string, string> {
+		const cookiesArray = cookieHeader.split(';');
+
+		const cookiesAsObject =
+			cookiesArray.reduce((obj, item) => {
+				const [key, value] = item.trim().split('=');
+
+				if (key && value) Object.assign(obj, { [key]: value });
+
+				return obj;
+			}, {}) ?? {};
+
+		return cookiesAsObject;
 	}
 }

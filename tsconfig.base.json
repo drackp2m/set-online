@@ -1,6 +1,7 @@
 {
 	"compileOnSave": false,
 	"compilerOptions": {
+		"baseUrl": ".",
 		"rootDir": ".",
 		"sourceMap": true,
 		"declaration": false,
@@ -12,9 +13,14 @@
 		"module": "esnext",
 		"lib": ["es2020", "dom"],
 		"strict": true,
+		"noUncheckedIndexedAccess": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"forceConsistentCasingInFileNames": true,
+		// "noUnusedLocals": true,
+		"noUnusedParameters": true,
 		"skipLibCheck": true,
 		"skipDefaultLibCheck": true,
-		"baseUrl": ".",
 		"paths": {
 			"@set-online/api-definitions": ["libs/api-definitions/src/index.ts"],
 			"@set-online/api-sdk": ["libs/api-sdk/src/index.ts"]

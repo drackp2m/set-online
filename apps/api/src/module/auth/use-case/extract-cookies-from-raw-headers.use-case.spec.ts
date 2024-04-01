@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 
 import { ExtractCookiesFromRawHeadersUseCase } from './extract-cookies-from-raw-headers.use-case';
 
-describe('ExtractCookiesFromRawHeadersUseCaseFromRawHeaders', () => {
+describe('ExtractCookiesFromRawHeadersUseCase', () => {
 	let useCase: ExtractCookiesFromRawHeadersUseCase;
 
 	beforeAll(async () => {

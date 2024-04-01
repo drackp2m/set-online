@@ -78,7 +78,8 @@ export type QueryvalidateUserConstraintsArgs = {
 
 export type Subscription = {
 	__typename?: 'Subscription';
-	getManySubscription?: Maybe<Scalars['String']['output']>;
+	getManySubscription: Scalars['String']['output'];
+	xxx: Scalars['String']['output'];
 };
 
 /** user */

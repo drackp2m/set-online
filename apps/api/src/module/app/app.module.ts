@@ -30,7 +30,7 @@ import { AppService } from './app.service';
 			useClass: MikroOrmFactory,
 		}),
 		GraphQLModule.forRootAsync<ApolloDriverConfig>({
-			imports: [ConfigurationModule, AuthModule, UserModule],
+			imports: [ConfigurationModule],
 			useClass: GqlFactory,
 			driver: ApolloDriver,
 		}),
