@@ -360,7 +360,7 @@ export default class GamePage implements OnInit {
 		}
 
 		return {
-			src: `/assets/icons/${shape}-solid-${color}.png`,
+			src: `assets/icons/${shape}-solid-${color}.png`,
 			width,
 			height,
 			particles: {
