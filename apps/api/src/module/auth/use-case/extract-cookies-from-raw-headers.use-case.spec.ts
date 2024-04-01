@@ -18,31 +18,31 @@ describe('ExtractCookiesFromRawHeadersUseCase', () => {
 	});
 
 	describe('execute', () => {
-		it('should returns empty object when is called with empty array', async () => {
+		it('should returns empty object when is called with empty array', () => {
 			const cookies = useCase.execute([]);
 
-			expect(cookies).toEqual({});
+			expect(cookies).toStrictEqual({});
 		});
 
-		it('should returns empty object when is called with array that does not contain Cookies', async () => {
+		it('should returns empty object when is called with array that does not contain Cookies', () => {
 			const cookies = useCase.execute(['NotCookie', 'no-data']);
 
-			expect(cookies).toEqual({});
+			expect(cookies).toStrictEqual({});
 		});
 
-		it('should returns object with one header when is called with array contains Cookie with one header', async () => {
+		it('should returns object with one header when is called with array contains Cookie with one header', () => {
 			const cookies = useCase.execute(['Cookie', 'x-jwt-access-token=fake-access-token']);
 
-			expect(cookies).toEqual({ 'x-jwt-access-token': 'fake-access-token' });
+			expect(cookies).toStrictEqual({ 'x-jwt-access-token': 'fake-access-token' });
 		});
 
-		it('should returns object with two header when is called with array contains Cookie with two header', async () => {
+		it('should returns object with two header when is called with array contains Cookie with two header', () => {
 			const cookies = useCase.execute([
 				'Cookie',
 				'x-jwt-access-token=fake-access-token; x-jwt-refresh-token=fake-refresh-token',
 			]);
 
-			expect(cookies).toEqual({
+			expect(cookies).toStrictEqual({
 				'x-jwt-access-token': 'fake-access-token',
 				'x-jwt-refresh-token': 'fake-refresh-token',
 			});

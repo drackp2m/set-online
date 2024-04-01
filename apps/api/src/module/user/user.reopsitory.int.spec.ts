@@ -34,7 +34,7 @@ describe('UserRepository', () => {
 	});
 
 	it('should be defined', () => {
-		expect(1).toEqual(1);
+		expect(userRepository).toBeDefined();
 	});
 
 	describe('getOne', () => {
@@ -56,7 +56,7 @@ describe('UserRepository', () => {
 			const searchedUser = await userRepository.getOne({ username: 'drackp2m' });
 
 			expect(searchedUser).toBeInstanceOf(User);
-			expect(searchedUser.username).toEqual('drackp2m');
+			expect(searchedUser.username).toStrictEqual('drackp2m');
 		});
 	});
 
@@ -71,8 +71,8 @@ describe('UserRepository', () => {
 
 			const list = await userRepository.getMany();
 
-			expect(list.length).toEqual(1);
-			expect(insertedUser.username).toEqual('drackp2m');
+			expect(list.length).toStrictEqual(1);
+			expect(insertedUser.username).toStrictEqual('drackp2m');
 		});
 	});
 });

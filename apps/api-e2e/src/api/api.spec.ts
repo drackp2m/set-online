@@ -5,6 +5,6 @@ describe('GET /api/app/hello', () => {
 		const res = await axios.get(`/api/app/hello`);
 
 		expect(res.status).toBe(200);
-		expect(res.data).toEqual({ message: 'Welcome to set-online!' });
+		expect(res.data).toStrictEqual({ message: 'Welcome to set-online!' });
 	});
 });
