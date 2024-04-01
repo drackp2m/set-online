@@ -12,7 +12,7 @@ import { UserRepository } from './user.repository';
 
 @Resolver(() => User)
 export class UserResolver {
-	private interval: NodeJS.Timeout;
+	private interval?: NodeJS.Timeout;
 
 	constructor(
 		@Inject('PUB_SUB') private readonly pubSub: PubSub,
@@ -49,9 +49,17 @@ export class UserResolver {
 		return users;
 	}
 
+	@ProtectTo()
 	@Subscription(() => String, {
-		nullable: true,
-		resolve: (value) => value,
+		name: 'getManySubscription',
+		resolve: (payload: string) => payload,
+		filter(_payload, _variables, _context) {
+			console.log(_context.req.user);
+
+			console.log({ isAuthenticated: _context.req.isAuthenticated() });
+
+			return true;
+		},
 	})
 	getManySubscription() {
 		clearInterval(this.interval);

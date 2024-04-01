@@ -1,6 +1,6 @@
 import { AsyncPipe, JsonPipe, NgIf, NgTemplateOutlet } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Component, effect, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 
 import { CurrentUserStore } from '../../../stores/current-user.store';
@@ -28,13 +28,6 @@ export default class MainLayout {
 
 	user = this.currentUserStore.data;
 	// userError = toSignal(this.currentUserStore.state$.pipe(select((state) => state.error)));
-
-	constructor() {
-		effect(() => {
-			const user = this.currentUserStore.data();
-			console.log(user);
-		});
-	}
 
 	logout() {
 		return () =>

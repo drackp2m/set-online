@@ -5,9 +5,9 @@ import { LoginRequest } from '@set-online/api-definitions';
 export class LoginRequestDto implements LoginRequest {
 	@IsString()
 	@IsNotEmpty()
-	username: string;
+	username!: string;
 
 	@IsString()
 	@IsNotEmpty()
-	password: string;
+	password!: string;
 }

@@ -4,7 +4,13 @@ export class ShuffleArrayUseCase {
 
 		for (let i = shuffledArray.length - 1; i > 0; i--) {
 			const j = Math.floor(Math.random() * (i + 1));
-			[shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+
+			const valueAtPositionI = shuffledArray[i];
+			const valueAtPositionJ = shuffledArray[j];
+
+			if (valueAtPositionI !== undefined && valueAtPositionJ !== undefined) {
+				[shuffledArray[i], shuffledArray[j]] = [valueAtPositionJ, valueAtPositionI];
+			}
 		}
 
 		return shuffledArray;

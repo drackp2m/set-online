@@ -11,16 +11,20 @@ export class SetJwtTokenUseCase {
 	constructor(@Inject(REQUEST) private readonly request: Request) {}
 
 	execute(tokenType: JwtCookie, tokenValue: string): void {
-		const path = JwtEndpoints[getEnumKey(JwtCookie, tokenType)];
+		const enumKey = getEnumKey(JwtCookie, tokenType);
 
-		// ToDo => add expiration time to cookies
-		this.request.res.cookie(tokenType, tokenValue, {
-			signed: true,
-			secure: true,
-			httpOnly: true,
-			sameSite: true,
-			path,
-			domain: 'localhost',
-		});
+		if (enumKey) {
+			const path = JwtEndpoints[enumKey];
+
+			// ToDo => add expiration time to cookies
+			this.request.res?.cookie(tokenType, tokenValue, {
+				signed: true,
+				secure: true,
+				httpOnly: true,
+				sameSite: true,
+				path,
+				domain: 'localhost',
+			});
+		}
 	}
 }

@@ -1,6 +1,9 @@
-export interface GraphqlWsConnectionExtraInterface {
+import { User } from '../../user/user.entity';
+
+export interface GraphqlWsConnectionExtra {
 	socket: Socket;
 	request: Request;
+	user: User;
 }
 
 interface Request {
@@ -10,6 +13,7 @@ interface Request {
 	httpVersion: string;
 	complete: boolean;
 	rawHeaders: string[];
+	signedCookies: object;
 	rawTrailers: unknown[];
 	joinDuplicateHeaders: null;
 	aborted: boolean;

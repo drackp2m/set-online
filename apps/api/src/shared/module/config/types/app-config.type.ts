@@ -6,6 +6,6 @@ export type AppConfig = {
 	protocol: ApiProtocol;
 	domain: string;
 	prefix: string;
-	port: number;
-	cookieSecret: string;
+	port?: number;
+	cookieSecret?: string;
 };

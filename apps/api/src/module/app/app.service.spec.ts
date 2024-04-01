@@ -15,7 +15,7 @@ describe('AppService', () => {
 
 	describe('getData', () => {
 		it('should return "Welcome to set-online!"', () => {
-			const result = service.getData();
+			const result = service.welcomeMessage();
 
 			expect(result).toEqual({ message: 'Welcome to set-online!' });
 		});

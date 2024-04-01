@@ -8,7 +8,7 @@ import { cardShapes } from '../definition/card-shape.enum';
 @Injectable()
 export class GenerateGameCardsUseCase {
 	execute(): string[] {
-		const cards = [];
+		const cards: string[] = [];
 
 		cardShapes.forEach((_shapeValue, shapeKey) => {
 			const shape = `:${CardPropertiesEnum['shape']}${shapeKey}:`;

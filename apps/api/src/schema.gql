@@ -42,7 +42,7 @@ type Query {
 }
 
 type Subscription {
-  getManySubscription: String
+  getManySubscription: String!
 }
 
 """user"""

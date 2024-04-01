@@ -13,9 +13,15 @@ export class RolesGuard implements CanActivate {
 	async canActivate(context: ExecutionContext): Promise<boolean> {
 		const roles = new Reflector().get<UserRole[]>('roles', context.getHandler());
 
+		// const req = GqlExecutionContext.create(context).getContext().req;
+
+		// console.log({ req });
+
 		const user = GqlExecutionContext.create(context).getContext<{
 			req: Request & { user: User };
 		}>().req.user;
+
+		// console.log(user);
 
 		if (!user) {
 			throw new UnauthorizedException('x-jwt-access-token invalid', 'authorization');

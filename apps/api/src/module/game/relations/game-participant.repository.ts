@@ -26,7 +26,7 @@ export class GameParticipantRepository {
 	}
 
 	async getMany<Hint extends string = never>(
-		query?: FilterQuery<GameParticipant>,
+		query: FilterQuery<GameParticipant> = {},
 		options?: FindOptions<GameParticipant, Hint>,
 	): Promise<GameParticipant[]> {
 		return this.entityManager.fork().find(this.entityName, query, options);

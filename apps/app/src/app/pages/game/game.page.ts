@@ -65,9 +65,15 @@ export default class GamePage implements OnInit {
 		for (let i = 0; i < cards.length - 2; i++) {
 			for (let j = i + 1; j < cards.length - 1; j++) {
 				for (let k = j + 1; k < cards.length; k++) {
-					if (this.isSet(cards[i], cards[j], cards[k])) {
-						this.cardsInSets.update((cards) => [...cards, cards[i], cards[j], cards[k]]);
-						this.cardsInSets.set([cards[i], cards[j], cards[k]]);
+					const firstCard = cards[i];
+					const secondCard = cards[j];
+					const thirdCard = cards[k];
+
+					const allCardsAreDefined = firstCard && secondCard && thirdCard;
+
+					if (allCardsAreDefined && this.isSet(firstCard, secondCard, thirdCard)) {
+						this.cardsInSets.update((cards) => [...cards, firstCard, secondCard, thirdCard]);
+						this.cardsInSets.set([firstCard, secondCard, thirdCard]);
 					}
 				}
 			}
@@ -149,9 +155,14 @@ export default class GamePage implements OnInit {
 			if (!this.cardsInSets().length) {
 				this.addExtraCards();
 			}
-			this.selectCard(this.cardsInSets()[0]);
-			this.selectCard(this.cardsInSets()[1]);
-			this.selectCard(this.cardsInSets()[2]);
+			const [firstCard, secondCard, thirdCard] = this.cardsInSets();
+			const allCardsAreDefined = firstCard && secondCard && thirdCard;
+
+			if (allCardsAreDefined) {
+				this.selectCard(firstCard);
+				this.selectCard(secondCard);
+				this.selectCard(thirdCard);
+			}
 		}
 	}
 
@@ -178,19 +189,43 @@ export default class GamePage implements OnInit {
 	}
 
 	private getRandomShape(): keyof typeof CardShapeEnum {
-		return this.shapes[Math.floor(Math.random() * this.shapes.length)];
+		const randomShape = this.shapes[Math.floor(Math.random() * this.shapes.length)];
+
+		if (!randomShape) {
+			throw new Error('Random shape is not defined');
+		}
+
+		return randomShape;
 	}
 
 	private getRandomColor(): keyof typeof CardColorEnum {
-		return this.colors[Math.floor(Math.random() * this.colors.length)];
+		const randomColor = this.colors[Math.floor(Math.random() * this.colors.length)];
+
+		if (!randomColor) {
+			throw new Error('Random color is not defined');
+		}
+
+		return randomColor;
 	}
 
 	private getRandomShading(): keyof typeof CardShadingEnum {
-		return this.shadings[Math.floor(Math.random() * this.shadings.length)];
+		const randomShading = this.shadings[Math.floor(Math.random() * this.shadings.length)];
+
+		if (!randomShading) {
+			throw new Error('Random shading is not defined');
+		}
+
+		return randomShading;
 	}
 
 	private getRandomNumber(): number {
-		return this.counts[Math.floor(Math.random() * this.counts.length)];
+		const randomNumber = this.counts[Math.floor(Math.random() * this.counts.length)];
+
+		if (!randomNumber) {
+			throw new Error('Random number is not defined');
+		}
+
+		return randomNumber;
 	}
 
 	private checkSet(): void {
@@ -198,9 +233,10 @@ export default class GamePage implements OnInit {
 			return;
 		}
 
-		const [first, second, third] = this.selectedCards();
+		const [firstCard, secondCard, thirdCard] = this.selectedCards();
+		const allCardAreDefined = firstCard && secondCard && thirdCard;
 
-		if (this.isSet(first, second, third)) {
+		if (allCardAreDefined && this.isSet(firstCard, secondCard, thirdCard)) {
 			this.clearHighlightInterval();
 
 			this.sets.update((cards) => [...cards, ...this.selectedCards()]);

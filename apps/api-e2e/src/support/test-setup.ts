@@ -11,4 +11,4 @@ module.exports = async function () {
 	axios.defaults.httpsAgent = new https.Agent({
 		rejectUnauthorized: false,
 	});
-}
+};

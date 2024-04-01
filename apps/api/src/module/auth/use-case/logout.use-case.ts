@@ -16,15 +16,19 @@ export class LogoutUseCase {
 	}
 
 	private clearCookie(tokenType: JwtCookie): void {
-		const path = JwtEndpoints[getEnumKey(JwtCookie, tokenType)];
+		const enumKey = getEnumKey(JwtCookie, tokenType);
 
-		this.request.res.clearCookie(tokenType, {
-			signed: true,
-			secure: true,
-			httpOnly: true,
-			sameSite: true,
-			path,
-			domain: 'localhost',
-		});
+		if (enumKey) {
+			const path = JwtEndpoints[enumKey];
+
+			this.request.res?.clearCookie(tokenType, {
+				signed: true,
+				secure: true,
+				httpOnly: true,
+				sameSite: true,
+				path,
+				domain: 'localhost',
+			});
+		}
 	}
 }

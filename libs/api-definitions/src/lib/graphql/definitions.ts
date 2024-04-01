@@ -1,4 +1,3 @@
-
 /*
  * -------------------------------------------------------
  * THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
@@ -53,7 +52,7 @@ export interface IQuery {
 }
 
 export interface ISubscription {
-    getManySubscription(): Nullable<string> | Promise<Nullable<string>>;
+    getManySubscription(): string | Promise<string>;
 }
 
 export interface User {

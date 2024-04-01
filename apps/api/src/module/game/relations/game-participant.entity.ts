@@ -9,10 +9,10 @@ import { GameParticipantRepository } from './game-participant.repository';
 @Entity({ repository: () => GameParticipantRepository })
 export class GameParticipant {
 	@ManyToOne({ entity: () => Game, primary: true, deleteRule: 'cascade' })
-	game: Game;
+	game?: Game;
 
 	@ManyToOne({ entity: () => User, primary: true, deleteRule: 'cascade' })
-	user: User;
+	user?: User;
 
 	@Property()
 	createdAt: Date = new GenerateNowDateUseCase().execute();

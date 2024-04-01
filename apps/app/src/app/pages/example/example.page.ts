@@ -31,15 +31,7 @@ export default class ExamplePage {
 
 	users: WritableSignal<number | undefined> = signal(undefined);
 
-	apolloSubscription = toSignal(
-		this.apollo.subscribe<{ getManySubscription: string }>({
-			query: gql`
-				subscription Subscription {
-					getManySubscription
-				}
-			`,
-		}),
-	);
+	apolloSubscription = signal<{ getManySubscription: string }>({ getManySubscription: '' });
 
 	response!: string;
 	error!: string;
@@ -58,6 +50,22 @@ export default class ExamplePage {
 				this.show(error.message, true);
 			},
 		});
+	}
+
+	initSubscription(): void {
+		this.apollo
+			.subscribe<{ getManySubscription: string }>({
+				query: gql`
+					subscription Subscription {
+						getManySubscription
+					}
+				`,
+			})
+			.subscribe((data) => {
+				if (data.data) {
+					this.apolloSubscription.set(data.data);
+				}
+			});
 	}
 
 	private show(message: string, error = false) {

@@ -40,9 +40,15 @@ export class JoinGameUseCase {
 			try {
 				const { game } = await this.gameParticipantRepository.insert(gameParticipant);
 
+				if (!game) {
+					throw new InternalServerErrorException('failed to join game', 'insert');
+				}
+
 				return game;
 			} catch (error) {
-				throw new InternalServerErrorException(error.message);
+				const errorMessage = error instanceof Error ? error.message : 'unknown error';
+
+				throw new InternalServerErrorException(errorMessage);
 			}
 		});
 	}

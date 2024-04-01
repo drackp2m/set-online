@@ -29,7 +29,7 @@ export class CustomRepository<T extends CustomBaseEntity<T>> {
 	}
 
 	async getMany<Hint extends string = never>(
-		query?: FilterQuery<T>,
+		query: FilterQuery<T> = {},
 		options?: FindOptions<T, Hint>,
 	): Promise<T[]> {
 		return this.entityManager.fork().find(this.entityName, query, options);

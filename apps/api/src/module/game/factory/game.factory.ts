@@ -5,8 +5,9 @@ import { Game } from '../game.entity';
 
 import { GameFaker } from './game.faker';
 
-export class GameFactory extends Factory<Game> {
-	model: Constructor<Game>;
+// ToDo => make this abstract?
+export abstract class GameFactory extends Factory<Game> {
+	abstract readonly model: Constructor<Game>;
 
 	protected definition(): EntityData<Game> {
 		return GameFaker.makeOne();

@@ -30,7 +30,11 @@ export class UserFaker {
 		return new User({
 			uuid: faker.string.uuid(),
 			username: faker.internet.userName({ firstName, lastName }),
-			password: faker.internet.password({ length: 32, memorable: false, pattern: /[A-Z0-9_\-*?.]/ }),
+			password: faker.internet.password({
+				length: 32,
+				memorable: false,
+				pattern: /[A-Z0-9_\-*?.]/,
+			}),
 			email: BasicFaker.boolean() ? faker.internet.email({ firstName, lastName }) : undefined,
 			role: BasicFaker.randomEnum(UserRole),
 			createdAt: dateFaker.createdAt(options?.createdSince),

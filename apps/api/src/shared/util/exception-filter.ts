@@ -17,7 +17,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
 			if (exception instanceof BaseException) {
 				response.status(status).json({
 					message: exception.getResponse(),
-					error: exception.stack.substring(
+					error: exception.stack?.substring(
 						exception.stack.indexOf(': ') + 2,
 						exception.stack.indexOf('\n'),
 					),
