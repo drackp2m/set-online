@@ -4,18 +4,18 @@ import { Injectable } from '@nestjs/common';
 import { GqlOptionsFactory } from '@nestjs/graphql';
 import { Context } from 'graphql-ws';
 
-import { CheckJwtTokenUseCase } from '../../../../module/auth/use-case/check-jwt-token.use-case';
-import { User } from '../../../../module/user/user.entity';
-import { UserRepository } from '../../../../module/user/user.repository';
-import { GraphqlWsConnectionExtraInterface } from '../../../interface/graphql-ws-connection-extra.interface';
+import { GraphqlWsConnectionExtra } from '../../../../module/auth/definition/graphql-ws-connection-extra.interface';
+import { JwtCookie } from '../../../../module/auth/definition/jwt-cookie.enum';
+import { CleanJwtAccessTokenCookieUseCase } from '../../../../module/auth/use-case/clean-jwt-access-token-cookie.use-case';
+import { ExtractCookiesFromRawHeadersUseCase } from '../../../../module/auth/use-case/extract-cookies-from-raw-headers.use-case';
 import { ConfigurationService } from '../configuration.service';
 
 @Injectable()
 export class GqlFactory implements GqlOptionsFactory {
 	constructor(
 		private readonly configurationService: ConfigurationService,
-		private readonly checkJwtToken: CheckJwtTokenUseCase,
-		private readonly userRepository: UserRepository,
+		private readonly extractCookiesFromRawHeadersUseCase: ExtractCookiesFromRawHeadersUseCase,
+		private readonly cleanJwtAccessTokenCookieUseCase: CleanJwtAccessTokenCookieUseCase,
 	) {}
 
 	createGqlOptions(): ApolloDriverConfig {
@@ -40,45 +40,32 @@ export class GqlFactory implements GqlOptionsFactory {
 				'graphql-ws': {
 					path: '/graphql',
 					onConnect: async (context: Context<Record<string, unknown>, unknown>) => {
-						console.log('on connect');
-						// ToDo => move this to help function
+						const extra = context.extra as GraphqlWsConnectionExtra;
 
-						const extra = context.extra as GraphqlWsConnectionExtraInterface & {
-							user: { user: User };
-						};
-
-						console.log(extra.request.rawHeaders);
+						extra.request.signedCookies = this.getSignedCookiesFromGQLContextExtra(extra);
 
 						return true;
-
-						// const accessTokenParts = context.extra.request.rawHeaders
-						// 	.find((header) => header.includes(JwtCookie.access))
-						// 	?.split('=')[1]
-						// 	.replace('s%3A', '')
-						// 	.split('.');
-
-						// accessTokenParts?.pop();
-
-						// const accessToken = accessTokenParts?.join('.');
-
-						// if (!accessToken) {
-						// 	throw new UnauthorizedException('Unauthorized');
-						// }
-
-						// try {
-						// 	const checkedAccessToken = this.checkJwtToken.execute(accessToken, 'access');
-
-						// 	const user = await this.userRepository.getOne({ uuid: checkedAccessToken.sub });
-
-						// 	context.extra.user = { user };
-						// } catch (error) {
-						// 	throw new UnauthorizedException('Unauthorized');
-						// }
 					},
 				},
 			},
 			playground: false,
 			plugins: [...(isProduction ? [] : [ApolloServerPluginLandingPageLocalDefault()])],
 		};
+	}
+
+	private getSignedCookiesFromGQLContextExtra(extra: GraphqlWsConnectionExtra): object {
+		const cookies = this.extractCookiesFromRawHeadersUseCase.execute(extra.request.rawHeaders);
+
+		const accessTokenCookieKey = JwtCookie.access;
+
+		if (cookies[accessTokenCookieKey]) {
+			const cleanCookie = this.cleanJwtAccessTokenCookieUseCase.execute(
+				cookies[accessTokenCookieKey],
+			);
+
+			Object.assign(cookies, { [accessTokenCookieKey]: cleanCookie });
+		}
+
+		return cookies;
 	}
 }

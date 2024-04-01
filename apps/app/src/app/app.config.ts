@@ -33,6 +33,7 @@ export const appConfig: ApplicationConfig = {
 					createClient({
 						url: `${environment.wsUrl}/graphql`,
 						connectionAckWaitTimeout: 1000,
+						keepAlive: 5000,
 						on: {
 							connected: (x, y, z) => {
 								console.log({ x, y, z });
@@ -42,6 +43,12 @@ export const appConfig: ApplicationConfig = {
 							},
 							pong: (c, d) => {
 								console.log({ c, d });
+
+								const items: string[] = [];
+
+								const notExist = items[99];
+
+								console.log(notExist);
 							},
 						},
 					}),

@@ -23,7 +23,7 @@ export class RegisterUseCase {
 			],
 		});
 
-		if (userExists.length > 0) {
+		if (userExists[0]) {
 			const field = userExists[0].username === registerRequest.username ? 'username' : 'email';
 
 			throw new PreconditionFailedException('already exists', field);

@@ -51,16 +51,12 @@ export class UserResolver {
 
 	@ProtectTo()
 	@Subscription(() => String, {
-		nullable: true,
-		resolve: (x: string, value) => {
-			console.log(x, value);
+		name: 'getManySubscription',
+		resolve: (payload: string) => payload,
+		filter(_payload, _variables, _context) {
+			console.log(_context.req.user);
 
-			return x;
-		},
-		filter: (_payload, _variables, _context) => {
-			// console.log(_context.req);
-
-			// console.log(_context.req.isAuthenticated());
+			console.log({ isAuthenticated: _context.req.isAuthenticated() });
 
 			return true;
 		},
