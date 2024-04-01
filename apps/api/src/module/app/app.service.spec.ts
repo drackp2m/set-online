@@ -13,11 +13,15 @@ describe('AppService', () => {
 		service = app.get<AppService>(AppService);
 	});
 
+	it('should be defined', () => {
+		expect(service).toBeDefined();
+	});
+
 	describe('getData', () => {
 		it('should return "Welcome to set-online!"', () => {
 			const result = service.welcomeMessage();
 
-			expect(result).toEqual({ message: 'Welcome to set-online!' });
+			expect(result).toStrictEqual({ message: 'Welcome to set-online!' });
 		});
 	});
 });
