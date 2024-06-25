@@ -41,7 +41,7 @@ Thumbs.db
 #docker
 .devcontainer/docker-compose.yml
 
-.nx/cache
+.nx
 .angular
 .pgdata*
 .docker
