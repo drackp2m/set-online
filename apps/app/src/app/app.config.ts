@@ -76,15 +76,15 @@ export const appConfig: ApplicationConfig = {
 					link,
 					defaultOptions: {
 						watchQuery: {
-							fetchPolicy: 'network-only',
-							errorPolicy: 'none',
+							fetchPolicy: 'no-cache',
+							errorPolicy: 'none', // none | ignore | all
 						},
 						query: {
-							fetchPolicy: 'network-only',
+							fetchPolicy: 'no-cache',
 							errorPolicy: 'none',
 						},
 						mutate: {
-							fetchPolicy: 'network-only',
+							fetchPolicy: 'no-cache',
 							errorPolicy: 'none',
 						},
 					},

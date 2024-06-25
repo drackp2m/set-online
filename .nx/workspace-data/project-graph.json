@@ -20316,17 +20316,17 @@
 			},
 			{
 				"source": "app",
+				"target": "npm:@ngrx/signals",
+				"type": "static"
+			},
+			{
+				"source": "app",
 				"target": "npm:@ngneat/elf",
 				"type": "static"
 			},
 			{
 				"source": "app",
 				"target": "npm:@ngneat/elf-state-history",
-				"type": "static"
-			},
-			{
-				"source": "app",
-				"target": "npm:@ngrx/signals",
 				"type": "static"
 			},
 			{

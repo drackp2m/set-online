@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
-import { firstValueFrom, take } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 
 import { ApiClient } from '../shared/services/api-client.service';
 
@@ -29,7 +29,8 @@ export const AuthStore = signalStore(
 			patchState(store, { isLoading: true });
 
 			try {
-				await firstValueFrom(apiClient.auth.get('/refresh-session').pipe(take(1)));
+				await firstValueFrom(apiClient.auth.get('/refresh-session'));
+
 				patchState(store, { data: { tokensAreValid: true }, isLoading: false });
 			} catch (error) {
 				patchState(store, { error, data: { tokensAreValid: false }, isLoading: false });
