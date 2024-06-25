@@ -6,10 +6,34 @@ import { GetUserInfoGQL, GetUserInfoQuery } from '../graphql/apollo-operations';
 
 type UserInfo = GetUserInfoQuery['getUserInfo'];
 
+type UserInfoError = {
+	name: string;
+	graphQLErrors: {
+		message: string;
+		locations: {
+			line: number;
+			column: number;
+		}[];
+		path: string[];
+		extensions: {
+			name: string;
+			code: number;
+			details: {
+				authorization: string;
+			};
+			stacktrace: string[];
+		};
+	}[];
+	protocolErrors: unknown[];
+	clientErrors: unknown[];
+	networkError: null;
+	message: string;
+};
+
 type CurrentUserState = {
 	data: UserInfo | null;
 	isLoading: boolean;
-	error: unknown | null;
+	error: UserInfoError | null;
 };
 
 const initialState: CurrentUserState = {
@@ -32,8 +56,7 @@ export const CurrentUserStore = signalStore(
 				const { data } = await firstValueFrom(getUserInfoGQL.fetch().pipe(take(1)));
 				patchState(store, { data: data.getUserInfo, isLoading: false });
 			} catch (error) {
-				console.log(error);
-				patchState(store, { error, isLoading: false });
+				patchState(store, { error: error as UserInfoError, isLoading: false });
 			}
 		},
 	})),

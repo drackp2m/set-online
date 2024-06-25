@@ -8,7 +8,7 @@ import { CurrentUserStore } from './stores/current-user.store';
 @Component({
 	standalone: true,
 	selector: 'set-root',
-	template: `<router-outlet></router-outlet>`,
+	template: `<router-outlet />`,
 	imports: [RouterOutlet],
 	providers: [CurrentUserStore, Apollo, GetUserInfoGQL],
 })
@@ -18,6 +18,6 @@ export class AppComponent implements OnInit {
 	title = 'app';
 
 	ngOnInit() {
-		this.currentUserStore.fetchData();
+		void this.currentUserStore.fetchData();
 	}
 }

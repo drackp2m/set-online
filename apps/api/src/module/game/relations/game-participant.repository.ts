@@ -17,12 +17,14 @@ export class GameParticipantRepository {
 	async getOne(query: FilterQuery<GameParticipant>): Promise<GameParticipant | null> {
 		const user = await this.entityManager.fork().findOne(this.entityName, query);
 
-		if (!user) {
+		if (user === null) {
 			const entityName = this.entityName.replace('Entity', '').toLocaleLowerCase();
 			throw new NotFoundException('not exists', entityName);
 		}
 
-		return user;
+		console.log({ user });
+
+		return user as GameParticipant;
 	}
 
 	async getMany<Hint extends string = never>(

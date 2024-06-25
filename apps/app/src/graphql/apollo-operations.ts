@@ -58,10 +58,19 @@ export type Mutation = {
 	__typename?: 'Mutation';
 	joinGame: Game;
 	newGame: Game;
+	sendPing: Scalars['String']['output'];
 };
 
 export type MutationjoinGameArgs = {
 	input: JoinGameInput;
+};
+
+export type MutationsendPingArgs = {
+	input: PingRequestDto;
+};
+
+export type PingRequestDto = {
+	pingValue?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type Query = {
@@ -79,7 +88,6 @@ export type QueryvalidateUserConstraintsArgs = {
 export type Subscription = {
 	__typename?: 'Subscription';
 	getManySubscription: Scalars['String']['output'];
-	xxx: Scalars['String']['output'];
 };
 
 /** user */

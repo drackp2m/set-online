@@ -7,7 +7,7 @@ import { getMainDefinition } from '@apollo/client/utilities';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { OperationDefinitionNode } from 'graphql';
-import { createClient } from 'graphql-ws';
+import { Client, createClient } from 'graphql-ws';
 
 import { APP_ROUTES } from './app.routes';
 import { environment } from './environments/environment';
@@ -25,12 +25,14 @@ export const appConfig: ApplicationConfig = {
 			deps: [HttpLink],
 			provide: APOLLO_OPTIONS,
 			useFactory(httpLink: HttpLink) {
+				let client: Client;
+
 				const http = httpLink.create({
 					uri: `${environment.apiUrl}/graphql`,
 				});
 
 				const ws = new GraphQLWsLink(
-					createClient({
+					(client = createClient({
 						url: `${environment.wsUrl}/graphql`,
 						connectionAckWaitTimeout: 1000,
 						keepAlive: 5000,
@@ -42,6 +44,10 @@ export const appConfig: ApplicationConfig = {
 								console.log({ a, b });
 							},
 							pong: (c, d) => {
+								// console.log(apollo);
+
+								sendPingToServer(client);
+
 								console.log({ c, d });
 
 								const items: string[] = [];
@@ -51,7 +57,7 @@ export const appConfig: ApplicationConfig = {
 								console.log(notExist);
 							},
 						},
-					}),
+					})),
 				);
 
 				const link = split(
@@ -70,15 +76,15 @@ export const appConfig: ApplicationConfig = {
 					link,
 					defaultOptions: {
 						watchQuery: {
-							fetchPolicy: 'network-only',
-							errorPolicy: 'none',
+							fetchPolicy: 'no-cache',
+							errorPolicy: 'none', // none | ignore | all
 						},
 						query: {
-							fetchPolicy: 'network-only',
+							fetchPolicy: 'no-cache',
 							errorPolicy: 'none',
 						},
 						mutate: {
-							fetchPolicy: 'network-only',
+							fetchPolicy: 'no-cache',
 							errorPolicy: 'none',
 						},
 					},
@@ -90,3 +96,21 @@ export const appConfig: ApplicationConfig = {
 		provideRouter(APP_ROUTES, withHashLocation()),
 	],
 };
+
+function sendPingToServer(client: Client): void {
+	console.log('Sending ping from client...');
+
+	client.subscribe(
+		{
+			query: `mutation {
+				sendPing(input: { pingValue: 22 }) {
+				}
+			}`,
+		},
+		{
+			next: (data) => console.log(data),
+			error: (error) => console.error(error),
+			complete: () => console.log('done'),
+		},
+	);
+}
