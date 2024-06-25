@@ -7,6 +7,7 @@ import {
 	HttpResponse,
 } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
@@ -22,12 +23,14 @@ export class AuthInterceptor implements HttpInterceptor {
 	private readonly API_REGISTER_URL = '/api/auth/register';
 	private readonly API_LOGIN_URL = '/api/auth/login';
 
+	private readonly authStoreLoadingFinished$ = toObservable(this.authStore.isLoading);
+
 	intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 		const urlsToIgnore = [this.API_REFRESH_SESSION_URL, this.API_REGISTER_URL, this.API_LOGIN_URL];
 
 		if (urlsToIgnore.some((url) => req.url.includes(url))) return next.handle(req);
 
-		if (!this.authStore.tokensAreValid) {
+		if (!this.authStore.data()?.tokensAreValid) {
 			if (!this.authStore.isLoading) {
 				return new Observable<HttpEvent<unknown>>();
 			}
@@ -67,9 +70,9 @@ export class AuthInterceptor implements HttpInterceptor {
 			this.authStore.tryToRefreshTokens();
 		}
 
-		return this.authStore.loadingIsFinished$.pipe(
+		return this.authStoreLoadingFinished$.pipe(
 			switchMap(() => {
-				if (event && !this.authStore.tokensAreValid) {
+				if (event && this.authStore.data()?.tokensAreValid === false) {
 					this.router.navigate(['/login']);
 
 					// return of(event);

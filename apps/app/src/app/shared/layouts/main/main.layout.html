@@ -1,31 +1,26 @@
 <div id="main-layout" class="flex-col">
 	<section id="header" class="content-fixed flex-col py-md">
 		<nav class="flex-row flex-wrap justify-center gap-sm my-md">
-			<set-media-debug></set-media-debug>
-			<ng-container
-				*ngTemplateOutlet="button; context: { text: 'Register', link: '/register' }"
-			></ng-container>
-			<ng-container
-				*ngTemplateOutlet="button; context: { text: 'Login', link: '/login' }"
-			></ng-container>
+			<set-media-debug />
+
+			<ng-container *ngTemplateOutlet="button; context: { text: 'Register', link: '/register' }" />
+
+			<ng-container *ngTemplateOutlet="button; context: { text: 'Login', link: '/login' }" />
+
 			<ng-container
 				*ngTemplateOutlet="
 					button;
 					context: { text: 'Logout', link: '/login', click: logout(), surface: 'radiant' }
 				"
-			></ng-container>
-			<ng-container
-				*ngTemplateOutlet="button; context: { text: 'Home', link: '/home' }"
-			></ng-container>
-			<ng-container
-				*ngTemplateOutlet="button; context: { text: 'Example', link: '/example' }"
-			></ng-container>
-			<ng-container
-				*ngTemplateOutlet="button; context: { text: 'Game', link: '/game' }"
-			></ng-container>
-			<ng-container
-				*ngTemplateOutlet="button; context: { text: 'Online', link: '/online' }"
-			></ng-container>
+			/>
+
+			<ng-container *ngTemplateOutlet="button; context: { text: 'Home', link: '/home' }" />
+
+			<ng-container *ngTemplateOutlet="button; context: { text: 'Example', link: '/example' }" />
+
+			<ng-container *ngTemplateOutlet="button; context: { text: 'Game', link: '/game' }" />
+
+			<ng-container *ngTemplateOutlet="button; context: { text: 'Online', link: '/online' }" />
 		</nav>
 
 		<ng-template #button let-text="text" let-link="link" let-click="click" let-surface="surface">
@@ -43,9 +38,10 @@
 		@if (user()) {
 			<p class="text-sm text-right">Welcome {{ user()?.username }}</p>
 		}
-		<!-- @if (userError()) {
-			<p class="text-sm text-right">GetUserInfo error: {{ userError() | json }}</p>
-		} -->
+
+		@if (userError()) {
+			<p class="text-sm text-right">GetUserInfo error: {{ userError()?.message }}</p>
+		}
 	</section>
 
 	<div class="scroll">

@@ -1,0 +1,1960 @@
+{
+	"version": "6.0",
+	"nxVersion": "19.3.1",
+	"deps": {
+		"@angular/animations": "18.0.4",
+		"@angular/common": "18.0.4",
+		"@angular/compiler": "18.0.4",
+		"@angular/core": "18.0.4",
+		"@angular/forms": "18.0.4",
+		"@angular/platform-browser": "18.0.4",
+		"@angular/platform-browser-dynamic": "18.0.4",
+		"@angular/router": "18.0.4",
+		"@apollo/client": "3.10.6",
+		"@apollo/server": "4.10.4",
+		"@mikro-orm/cli": "6.2.9",
+		"@mikro-orm/core": "6.2.9",
+		"@mikro-orm/entity-generator": "6.2.9",
+		"@mikro-orm/migrations": "6.2.9",
+		"@mikro-orm/nestjs": "6.0.2",
+		"@mikro-orm/postgresql": "6.2.9",
+		"@mikro-orm/reflection": "6.2.9",
+		"@mikro-orm/seeder": "6.2.9",
+		"@nestjs/apollo": "12.1.0",
+		"@nestjs/common": "10.3.9",
+		"@nestjs/config": "3.2.2",
+		"@nestjs/core": "10.3.9",
+		"@nestjs/graphql": "12.1.1",
+		"@nestjs/jwt": "10.2.0",
+		"@nestjs/passport": "10.0.3",
+		"@nestjs/platform-express": "10.3.9",
+		"@nestjs/throttler": "5.2.0",
+		"@ngneat/elf": "2.5.1",
+		"@ngneat/elf-entities": "5.0.2",
+		"@ngneat/elf-state-history": "1.4.0",
+		"@ngrx/signals": "18.0.0-rc.1",
+		"@tsparticles/confetti": "3.4.0",
+		"apollo-angular": "7.0.2",
+		"axios": "1.7.2",
+		"bcryptjs": "2.4.3",
+		"class-transformer": "0.5.1",
+		"class-validator": "0.14.1",
+		"cookie-parser": "1.4.6",
+		"graphql": "16.9.0",
+		"graphql-subscriptions": "2.0.0",
+		"mikro-orm": "6.2.9",
+		"node-cache": "5.1.2",
+		"passport": "0.7.0",
+		"passport-jwt": "4.0.1",
+		"reflect-metadata": "0.2.2",
+		"rxjs": "7.8.1",
+		"the-new-css-reset": "1.11.2",
+		"ts-morph": "21.0.1",
+		"tslib": "2.6.3",
+		"zone.js": "0.14.7",
+		"@angular-devkit/build-angular": "18.0.5",
+		"@angular-devkit/core": "18.0.5",
+		"@angular-devkit/schematics": "18.0.5",
+		"@angular-eslint/eslint-plugin": "18.0.1",
+		"@angular-eslint/eslint-plugin-template": "18.0.1",
+		"@angular-eslint/template-parser": "18.0.1",
+		"@angular/cli": "18.0.5",
+		"@angular/compiler-cli": "18.0.4",
+		"@angular/language-service": "18.0.4",
+		"@commitlint/config-nx-scopes": "19.3.1",
+		"@faker-js/faker": "8.4.1",
+		"@graphql-codegen/cli": "5.0.2",
+		"@graphql-codegen/fragment-matcher": "5.0.2",
+		"@graphql-codegen/introspection": "4.0.3",
+		"@graphql-codegen/typescript": "4.0.7",
+		"@graphql-codegen/typescript-apollo-angular": "4.0.0",
+		"@graphql-codegen/typescript-operations": "4.2.1",
+		"@nestjs/cli": "10.3.2",
+		"@nestjs/schematics": "10.1.1",
+		"@nestjs/testing": "10.3.9",
+		"@nx/angular": "19.3.1",
+		"@nx/cypress": "19.3.1",
+		"@nx/eslint": "19.3.1",
+		"@nx/eslint-plugin": "19.3.1",
+		"@nx/jest": "19.3.1",
+		"@nx/js": "19.3.1",
+		"@nx/nest": "19.3.1",
+		"@nx/node": "19.3.1",
+		"@nx/web": "19.3.1",
+		"@nx/webpack": "19.3.1",
+		"@nx/workspace": "19.3.1",
+		"@pmmmwh/react-refresh-webpack-plugin": "0.5.15",
+		"@schematics/angular": "18.0.5",
+		"@svgr/webpack": "8.1.0",
+		"@swc-node/register": "1.9.2",
+		"@swc/core": "1.6.5",
+		"@types/bcryptjs": "2.4.6",
+		"@types/cookie-parser": "1.4.7",
+		"@types/jest": "29.5.12",
+		"@types/node": "20.14.8",
+		"@types/passport-jwt": "4.0.1",
+		"@typescript-eslint/eslint-plugin": "7.14.1",
+		"@typescript-eslint/parser": "7.14.1",
+		"commitizen": "4.3.0",
+		"commitlint": "19.3.0",
+		"cypress": "13.12.0",
+		"cz-git": "1.9.3",
+		"eslint": "8.57.0",
+		"eslint-config-prettier": "9.1.0",
+		"eslint-import-resolver-typescript": "3.6.1",
+		"eslint-plugin-cypress": "3.3.0",
+		"eslint-plugin-import": "2.29.1",
+		"eslint-plugin-prettier": "5.1.3",
+		"eslint-plugin-unused-imports": "3.2.0",
+		"husky": "9.0.11",
+		"jest": "29.7.0",
+		"jest-environment-jsdom": "29.7.0",
+		"jest-environment-node": "29.7.0",
+		"jest-mock-extended": "3.0.7",
+		"jest-preset-angular": "14.1.1",
+		"jsonc-eslint-parser": "2.4.0",
+		"lint-staged": "15.2.7",
+		"npm-check-updates": "16.14.20",
+		"nx": "19.3.1",
+		"prettier": "3.3.2",
+		"react-refresh": "0.14.2",
+		"stylelint": "16.6.1",
+		"stylelint-config-clean-order": "6.0.0",
+		"stylelint-config-standard-scss": "13.1.0",
+		"stylelint-prettier": "5.0.0",
+		"ts-jest": "29.1.5",
+		"ts-node": "10.9.2",
+		"typescript": "5.4.4",
+		"url-loader": "4.1.1"
+	},
+	"pathMappings": {
+		"@set-online/api-definitions": ["libs/api-definitions/src/index.ts"],
+		"@set-online/api-sdk": ["libs/api-sdk/src/index.ts"]
+	},
+	"nxJsonPlugins": [],
+	"fileMap": {
+		"projectFileMap": {
+			"app-e2e": [
+				{
+					"file": "apps/app-e2e/.eslintrc.json",
+					"hash": "17325385559275175681"
+				},
+				{
+					"file": "apps/app-e2e/cypress.config.ts",
+					"hash": "10282742379397649623",
+					"deps": ["npm:@nx/cypress", "npm:cypress"]
+				},
+				{
+					"file": "apps/app-e2e/project.json",
+					"hash": "6368455426018914282"
+				},
+				{
+					"file": "apps/app-e2e/src/e2e/app.cy.ts",
+					"hash": "7071985747896009524"
+				},
+				{
+					"file": "apps/app-e2e/src/fixtures/example.json",
+					"hash": "6950778556131045369"
+				},
+				{
+					"file": "apps/app-e2e/src/support/app.po.ts",
+					"hash": "11157016311132186162"
+				},
+				{
+					"file": "apps/app-e2e/src/support/commands.ts",
+					"hash": "7702314073611385872"
+				},
+				{
+					"file": "apps/app-e2e/src/support/e2e.ts",
+					"hash": "1054106023200826784"
+				},
+				{
+					"file": "apps/app-e2e/tsconfig.json",
+					"hash": "15361593316270112695"
+				}
+			],
+			"app": [
+				{
+					"file": "apps/app/.eslintrc.json",
+					"hash": "7657889263762580472"
+				},
+				{
+					"file": "apps/app/jest.config.ts",
+					"hash": "7524383570640153910"
+				},
+				{
+					"file": "apps/app/project.json",
+					"hash": "14915467739533135076"
+				},
+				{
+					"file": "apps/app/proxy.conf.json",
+					"hash": "16334061713264442669"
+				},
+				{
+					"file": "apps/app/src/app/app.component.scss",
+					"hash": "3244421341483603138"
+				},
+				{
+					"file": "apps/app/src/app/app.component.spec.ts",
+					"hash": "17456163359984934088",
+					"deps": ["npm:@angular/core"]
+				},
+				{
+					"file": "apps/app/src/app/app.component.ts",
+					"hash": "6266994703893287318",
+					"deps": ["npm:@angular/core", "npm:@angular/router", "npm:apollo-angular"]
+				},
+				{
+					"file": "apps/app/src/app/app.config.ts",
+					"hash": "3981304351025403142",
+					"deps": [
+						"npm:@angular/common",
+						"npm:@angular/core",
+						"npm:@angular/router",
+						"npm:@apollo/client",
+						"npm:apollo-angular",
+						"npm:graphql",
+						"npm:graphql-ws"
+					]
+				},
+				{
+					"file": "apps/app/src/app/app.routes.ts",
+					"hash": "16694457165716131416",
+					"deps": ["npm:@angular/router"]
+				},
+				{
+					"file": "apps/app/src/app/environments/environment.prod.ts",
+					"hash": "8066179829268337099"
+				},
+				{
+					"file": "apps/app/src/app/environments/environment.ts",
+					"hash": "15982143232923416142"
+				},
+				{
+					"file": "apps/app/src/app/graphql/apollo-operations.ts",
+					"hash": "1485491273758746799",
+					"deps": ["npm:@angular/core", "npm:apollo-angular"]
+				},
+				{
+					"file": "apps/app/src/app/nx-welcome.component.ts",
+					"hash": "1292776884612788164",
+					"deps": ["npm:@angular/common", "npm:@angular/core"]
+				},
+				{
+					"file": "apps/app/src/app/pages/example/border-radius/border-radius.page.html",
+					"hash": "1162560510898708325"
+				},
+				{
+					"file": "apps/app/src/app/pages/example/border-radius/border-radius.page.scss",
+					"hash": "18139947295228475342"
+				},
+				{
+					"file": "apps/app/src/app/pages/example/border-radius/border-radius.page.ts",
+					"hash": "4701314119956195756",
+					"deps": ["npm:@angular/common", "npm:@angular/core"]
+				},
+				{
+					"file": "apps/app/src/app/pages/example/card/card.page.html",
+					"hash": "6949009078526751335"
+				},
+				{
+					"file": "apps/app/src/app/pages/example/card/card.page.scss",
+					"hash": "15307957125481067874"
+				},
+				{
+					"file": "apps/app/src/app/pages/example/card/card.page.ts",
+					"hash": "5249210480877053688",
+					"deps": ["api-definitions"]
+				},
+				{
+					"file": "apps/app/src/app/pages/example/color/color.page.html",
+					"hash": "1114234930579042124"
+				},
+				{
+					"file": "apps/app/src/app/pages/example/color/color.page.scss",
+					"hash": "13908313038508246074"
+				},
+				{
+					"file": "apps/app/src/app/pages/example/color/color.page.ts",
+					"hash": "2392722328752386140",
+					"deps": ["npm:@angular/common", "npm:@angular/core"]
+				},
+				{
+					"file": "apps/app/src/app/pages/example/example.page.html",
+					"hash": "12987238213585317430"
+				},
+				{
+					"file": "apps/app/src/app/pages/example/example.page.scss",
+					"hash": "8459696897734045179"
+				},
+				{
+					"file": "apps/app/src/app/pages/example/example.page.ts",
+					"hash": "1188581196671658105",
+					"deps": [
+						"npm:@angular/common",
+						"npm:@angular/core",
+						"npm:@angular/forms",
+						"npm:apollo-angular",
+						"npm:rxjs"
+					]
+				},
+				{
+					"file": "apps/app/src/app/pages/example/example.routes.ts",
+					"hash": "17913813125524077885",
+					"deps": ["npm:@angular/router"]
+				},
+				{
+					"file": "apps/app/src/app/pages/example/shadow/shadow.page.html",
+					"hash": "2451169309659927925"
+				},
+				{
+					"file": "apps/app/src/app/pages/example/shadow/shadow.page.scss",
+					"hash": "8417124608974868417"
+				},
+				{
+					"file": "apps/app/src/app/pages/example/shadow/shadow.page.ts",
+					"hash": "3197094526446731109",
+					"deps": ["npm:@angular/core"]
+				},
+				{
+					"file": "apps/app/src/app/pages/example/shared/components/menu/example-menu.component.ts",
+					"hash": "321718045380266526",
+					"deps": ["npm:@angular/common", "npm:@angular/core", "npm:@angular/router"]
+				},
+				{
+					"file": "apps/app/src/app/pages/example/spacing/spacing.page.html",
+					"hash": "16390053087228973957"
+				},
+				{
+					"file": "apps/app/src/app/pages/example/spacing/spacing.page.scss",
+					"hash": "11945281374854414834"
+				},
+				{
+					"file": "apps/app/src/app/pages/example/spacing/spacing.page.ts",
+					"hash": "15129349212438921920",
+					"deps": ["npm:@angular/common", "npm:@angular/core"]
+				},
+				{
+					"file": "apps/app/src/app/pages/example/typography/typography.page.html",
+					"hash": "8204883576493012921"
+				},
+				{
+					"file": "apps/app/src/app/pages/example/typography/typography.page.scss",
+					"hash": "13908313038508246074"
+				},
+				{
+					"file": "apps/app/src/app/pages/example/typography/typography.page.ts",
+					"hash": "12445649427978414771",
+					"deps": ["npm:@angular/common", "npm:@angular/core"]
+				},
+				{
+					"file": "apps/app/src/app/pages/game/game.page.html",
+					"hash": "9105584202073548324"
+				},
+				{
+					"file": "apps/app/src/app/pages/game/game.page.scss",
+					"hash": "7601214226854727390"
+				},
+				{
+					"file": "apps/app/src/app/pages/game/game.page.ts",
+					"hash": "4440051911166554205",
+					"deps": ["api-definitions"]
+				},
+				{
+					"file": "apps/app/src/app/pages/game/login.routes.ts",
+					"hash": "9943787408319354637",
+					"deps": ["npm:@angular/router"]
+				},
+				{
+					"file": "apps/app/src/app/pages/game/shared/components/you-won/you-won.component.ts",
+					"hash": "490409356787259045",
+					"deps": ["npm:@angular/core"]
+				},
+				{
+					"file": "apps/app/src/app/pages/home/home.page.html",
+					"hash": "10797134038970080074"
+				},
+				{
+					"file": "apps/app/src/app/pages/home/home.page.scss",
+					"hash": "12866419249795023217"
+				},
+				{
+					"file": "apps/app/src/app/pages/home/home.page.ts",
+					"hash": "13418164039981131821",
+					"deps": ["npm:@angular/core"]
+				},
+				{
+					"file": "apps/app/src/app/pages/home/home.routes.ts",
+					"hash": "14005966782870888910",
+					"deps": ["npm:@angular/router"]
+				},
+				{
+					"file": "apps/app/src/app/pages/login/login.page.html",
+					"hash": "16810301636042337558"
+				},
+				{
+					"file": "apps/app/src/app/pages/login/login.page.scss",
+					"hash": "16808380191077951996"
+				},
+				{
+					"file": "apps/app/src/app/pages/login/login.page.ts",
+					"hash": "4784142267331550724",
+					"deps": [
+						"npm:@angular/common",
+						"npm:@angular/core",
+						"npm:@angular/forms",
+						"npm:@angular/router"
+					]
+				},
+				{
+					"file": "apps/app/src/app/pages/login/login.routes.ts",
+					"hash": "7734322970326119551",
+					"deps": ["npm:@angular/router"]
+				},
+				{
+					"file": "apps/app/src/app/pages/online/online.page.html",
+					"hash": "7680298395686320599"
+				},
+				{
+					"file": "apps/app/src/app/pages/online/online.page.scss",
+					"hash": "7601214226854727390"
+				},
+				{
+					"file": "apps/app/src/app/pages/online/online.page.ts",
+					"hash": "3778029569525118183",
+					"deps": ["npm:@angular/common", "npm:@angular/core"]
+				},
+				{
+					"file": "apps/app/src/app/pages/online/online.routes.ts",
+					"hash": "9862049374850618762",
+					"deps": ["npm:@angular/router"]
+				},
+				{
+					"file": "apps/app/src/app/pages/register/register.page.html",
+					"hash": "14459548734155133033"
+				},
+				{
+					"file": "apps/app/src/app/pages/register/register.page.scss",
+					"hash": "16808380191077951996"
+				},
+				{
+					"file": "apps/app/src/app/pages/register/register.page.ts",
+					"hash": "16513107046227684857",
+					"deps": [
+						"npm:@angular/common",
+						"npm:@angular/core",
+						"npm:@angular/forms",
+						"npm:apollo-angular"
+					]
+				},
+				{
+					"file": "apps/app/src/app/pages/register/register.routes.ts",
+					"hash": "5902516637934834163",
+					"deps": ["npm:@angular/router"]
+				},
+				{
+					"file": "apps/app/src/app/shared/components/card-shape/card-shape.component.html",
+					"hash": "15242352239390269788"
+				},
+				{
+					"file": "apps/app/src/app/shared/components/card-shape/card-shape.component.scss",
+					"hash": "16930309133465564434"
+				},
+				{
+					"file": "apps/app/src/app/shared/components/card-shape/card-shape.component.ts",
+					"hash": "5712926952413642216",
+					"deps": ["api-definitions"]
+				},
+				{
+					"file": "apps/app/src/app/shared/components/card/card.component.html",
+					"hash": "864839608734887685"
+				},
+				{
+					"file": "apps/app/src/app/shared/components/card/card.component.scss",
+					"hash": "17584324356632094561"
+				},
+				{
+					"file": "apps/app/src/app/shared/components/card/card.component.ts",
+					"hash": "2197815505713412081",
+					"deps": ["api-definitions"]
+				},
+				{
+					"file": "apps/app/src/app/shared/components/media-debug/media-debug.component.ts",
+					"hash": "1659515662421342492",
+					"deps": ["npm:@angular/core"]
+				},
+				{
+					"file": "apps/app/src/app/shared/definitions/card.interface.ts",
+					"hash": "11675796911422760015",
+					"deps": ["api-definitions"]
+				},
+				{
+					"file": "apps/app/src/app/shared/directives/img-hover-src.directive.ts",
+					"hash": "18022076747691440280",
+					"deps": ["npm:@angular/core"]
+				},
+				{
+					"file": "apps/app/src/app/shared/directives/img-src.directive.ts",
+					"hash": "12087030794402506238",
+					"deps": ["npm:@angular/core"]
+				},
+				{
+					"file": "apps/app/src/app/shared/interceptors/auth.interceptor.ts",
+					"hash": "12486975813480450825",
+					"deps": ["npm:@angular/common", "npm:@angular/core", "npm:@angular/router", "npm:rxjs"]
+				},
+				{
+					"file": "apps/app/src/app/shared/layouts/main/main.layout.html",
+					"hash": "4111648231608017630"
+				},
+				{
+					"file": "apps/app/src/app/shared/layouts/main/main.layout.scss",
+					"hash": "4805382840756211803"
+				},
+				{
+					"file": "apps/app/src/app/shared/layouts/main/main.layout.ts",
+					"hash": "10273238339686414489",
+					"deps": ["npm:@angular/common", "npm:@angular/core", "npm:@angular/router"]
+				},
+				{
+					"file": "apps/app/src/app/shared/services/api-client.service.ts",
+					"hash": "5444545398230553131",
+					"deps": ["api-sdk"]
+				},
+				{
+					"file": "apps/app/src/app/shared/stores/base-state.interface.ts",
+					"hash": "172217871725210455"
+				},
+				{
+					"file": "apps/app/src/app/stores/auth.store.ts",
+					"hash": "5920185168584150254",
+					"deps": [
+						"npm:@angular/core",
+						"npm:@ngneat/elf",
+						"npm:@ngneat/elf-state-history",
+						"npm:rxjs"
+					]
+				},
+				{
+					"file": "apps/app/src/app/stores/current-user.store.ts",
+					"hash": "4550160499985202330",
+					"deps": ["npm:@angular/core", "npm:@ngrx/signals", "npm:rxjs"]
+				},
+				{
+					"file": "apps/app/src/app/stores/x-current-user.store.ts",
+					"hash": "16809731706799287934",
+					"deps": [
+						"npm:@angular/core",
+						"npm:@ngneat/elf",
+						"npm:@ngneat/elf-state-history",
+						"npm:rxjs"
+					]
+				},
+				{
+					"file": "apps/app/src/assets/fonts/helvetica-now/italic.woff2",
+					"hash": "4775466484116069360"
+				},
+				{
+					"file": "apps/app/src/assets/fonts/helvetica-now/regular.woff2",
+					"hash": "4925948775854370762"
+				},
+				{
+					"file": "apps/app/src/assets/fonts/recursive/latin_basic.woff2",
+					"hash": "18281553924047188061"
+				},
+				{
+					"file": "apps/app/src/assets/icon-1024.png",
+					"hash": "13303931205988500244"
+				},
+				{
+					"file": "apps/app/src/assets/icon-180.png",
+					"hash": "2654128191061091342"
+				},
+				{
+					"file": "apps/app/src/assets/icon-512.png",
+					"hash": "4729010588960887501"
+				},
+				{
+					"file": "apps/app/src/assets/icon.svg",
+					"hash": "6242250096453228458"
+				},
+				{
+					"file": "apps/app/src/assets/icons/diamond-outlined.svg",
+					"hash": "8069491084744355757"
+				},
+				{
+					"file": "apps/app/src/assets/icons/diamond-solid-green.png",
+					"hash": "628116220517747137"
+				},
+				{
+					"file": "apps/app/src/assets/icons/diamond-solid-purple.png",
+					"hash": "6654019170506082162"
+				},
+				{
+					"file": "apps/app/src/assets/icons/diamond-solid-red.png",
+					"hash": "15373484751982150450"
+				},
+				{
+					"file": "apps/app/src/assets/icons/diamond-solid.svg",
+					"hash": "8350259472620665963"
+				},
+				{
+					"file": "apps/app/src/assets/icons/oval-outlined.svg",
+					"hash": "16863005907805039273"
+				},
+				{
+					"file": "apps/app/src/assets/icons/oval-solid-green.png",
+					"hash": "3685200577254319580"
+				},
+				{
+					"file": "apps/app/src/assets/icons/oval-solid-purple.png",
+					"hash": "14550935490937910718"
+				},
+				{
+					"file": "apps/app/src/assets/icons/oval-solid-red.png",
+					"hash": "9915866733103216640"
+				},
+				{
+					"file": "apps/app/src/assets/icons/oval-solid.svg",
+					"hash": "13604936481382452896"
+				},
+				{
+					"file": "apps/app/src/assets/icons/polka-dot.svg",
+					"hash": "3045730001537688731"
+				},
+				{
+					"file": "apps/app/src/assets/icons/squiggle-outlined.svg",
+					"hash": "258848600236614805"
+				},
+				{
+					"file": "apps/app/src/assets/icons/squiggle-solid-green.png",
+					"hash": "17942317708931557516"
+				},
+				{
+					"file": "apps/app/src/assets/icons/squiggle-solid-purple.png",
+					"hash": "7891446654164418899"
+				},
+				{
+					"file": "apps/app/src/assets/icons/squiggle-solid-red.png",
+					"hash": "2416943517884633273"
+				},
+				{
+					"file": "apps/app/src/assets/icons/squiggle-solid.svg",
+					"hash": "8578996896987416212"
+				},
+				{
+					"file": "apps/app/src/assets/icons/strips.svg",
+					"hash": "3165231858810786245"
+				},
+				{
+					"file": "apps/app/src/assets/logos/angular-grayscale.svg",
+					"hash": "9778841138605025456"
+				},
+				{
+					"file": "apps/app/src/assets/logos/angular.svg",
+					"hash": "16221894829235323814"
+				},
+				{
+					"file": "apps/app/src/assets/logos/graphql-grayscale.svg",
+					"hash": "11182197261260771278"
+				},
+				{
+					"file": "apps/app/src/assets/logos/graphql.svg",
+					"hash": "16019913320044070863"
+				},
+				{
+					"file": "apps/app/src/assets/logos/mikro-orm-full-grayscale.svg",
+					"hash": "3599466523406995855"
+				},
+				{
+					"file": "apps/app/src/assets/logos/mikro-orm-full.svg",
+					"hash": "1519599529580873118"
+				},
+				{
+					"file": "apps/app/src/assets/logos/mikro-orm-grayscale.svg",
+					"hash": "17056745940658679780"
+				},
+				{
+					"file": "apps/app/src/assets/logos/mikro-orm.svg",
+					"hash": "14941326680002383702"
+				},
+				{
+					"file": "apps/app/src/assets/logos/nestjs-grayscale.svg",
+					"hash": "4204706737201304356"
+				},
+				{
+					"file": "apps/app/src/assets/logos/nestjs.svg",
+					"hash": "10978678553341606955"
+				},
+				{
+					"file": "apps/app/src/assets/logos/ngrx-grayscale.svg",
+					"hash": "9388730390613436474"
+				},
+				{
+					"file": "apps/app/src/assets/logos/ngrx.svg",
+					"hash": "10162499338795299885"
+				},
+				{
+					"file": "apps/app/src/assets/logos/nx-dark.svg",
+					"hash": "15436801713678549459"
+				},
+				{
+					"file": "apps/app/src/assets/logos/nx-grayscale.svg",
+					"hash": "4105183493702355835"
+				},
+				{
+					"file": "apps/app/src/assets/logos/nx-light.svg",
+					"hash": "6920945814588998065"
+				},
+				{
+					"file": "apps/app/src/assets/logos/nx.svg",
+					"hash": "9804601550119319124"
+				},
+				{
+					"file": "apps/app/src/favicon.ico",
+					"hash": "3110655030048094227"
+				},
+				{
+					"file": "apps/app/src/favicon.svg",
+					"hash": "4519590294458058892"
+				},
+				{
+					"file": "apps/app/src/graphql/apollo-operations.ts",
+					"hash": "13790546157291479110",
+					"deps": ["npm:@angular/core", "npm:apollo-angular"]
+				},
+				{
+					"file": "apps/app/src/index.html",
+					"hash": "17283207232812969849"
+				},
+				{
+					"file": "apps/app/src/main.ts",
+					"hash": "76370986642580627",
+					"deps": ["npm:@angular/platform-browser"]
+				},
+				{
+					"file": "apps/app/src/manifest.json",
+					"hash": "515105056229336923"
+				},
+				{
+					"file": "apps/app/src/scss/abstracts/_generate-variables.scss",
+					"hash": "10472401797426569230"
+				},
+				{
+					"file": "apps/app/src/scss/abstracts/_mixins.scss",
+					"hash": "15192697210549236849"
+				},
+				{
+					"file": "apps/app/src/scss/abstracts/_variables.scss",
+					"hash": "17620539057147891594"
+				},
+				{
+					"file": "apps/app/src/scss/main.scss",
+					"hash": "4776877115478612363"
+				},
+				{
+					"file": "apps/app/src/scss/utilities/_color.scss",
+					"hash": "13851410866546635639"
+				},
+				{
+					"file": "apps/app/src/scss/utilities/_layout.scss",
+					"hash": "4240110154038489718"
+				},
+				{
+					"file": "apps/app/src/scss/utilities/_rounded.scss",
+					"hash": "4339202986173390006"
+				},
+				{
+					"file": "apps/app/src/scss/utilities/_shadow.scss",
+					"hash": "6255139044195720505"
+				},
+				{
+					"file": "apps/app/src/scss/utilities/_spacing.scss",
+					"hash": "16851298942310680789"
+				},
+				{
+					"file": "apps/app/src/scss/utilities/_typography.scss",
+					"hash": "8524255889898195312"
+				},
+				{
+					"file": "apps/app/src/scss/utilities/_visibility.scss",
+					"hash": "7553695092764215711"
+				},
+				{
+					"file": "apps/app/src/styles.scss",
+					"hash": "12277458936740722072"
+				},
+				{
+					"file": "apps/app/src/test-setup.ts",
+					"hash": "6737875390675737258",
+					"deps": ["npm:jest-preset-angular"]
+				},
+				{
+					"file": "apps/app/tsconfig.app.json",
+					"hash": "11795995879911801785"
+				},
+				{
+					"file": "apps/app/tsconfig.editor.json",
+					"hash": "5432951212168770151"
+				},
+				{
+					"file": "apps/app/tsconfig.json",
+					"hash": "16681417794109363045"
+				},
+				{
+					"file": "apps/app/tsconfig.spec.json",
+					"hash": "13145403073381813060"
+				}
+			],
+			"api-definitions": [
+				{
+					"file": "libs/api-definitions/.eslintrc.json",
+					"hash": "5750691403146042869"
+				},
+				{
+					"file": "libs/api-definitions/README.md",
+					"hash": "7720391171915493877"
+				},
+				{
+					"file": "libs/api-definitions/jest.config.ts",
+					"hash": "16339736012062953428"
+				},
+				{
+					"file": "libs/api-definitions/package.json",
+					"hash": "1744814641274559077"
+				},
+				{
+					"file": "libs/api-definitions/project.json",
+					"hash": "17153618735997722763"
+				},
+				{
+					"file": "libs/api-definitions/src/index.ts",
+					"hash": "9801215203999621150"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/api-definitions.ts",
+					"hash": "5703443700764331654"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/graphql/definitions.ts",
+					"hash": "15714015451474112106"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/graphql/game/fragment/game.fragment.gql",
+					"hash": "10666635093849360192"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/graphql/game/mutation/joinGame.gql",
+					"hash": "15401399267448194297"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/graphql/game/mutation/newGame.gql",
+					"hash": "15372348122112695429"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/graphql/game/query/listGames.gql",
+					"hash": "3107699481517537724"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/graphql/user/fragment/user.fragment.gql",
+					"hash": "2678543936499381633"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/graphql/user/query/getUserInfo.gql",
+					"hash": "7306654257069768940"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/graphql/user/query/getUsers.gql",
+					"hash": "10679531891654194735"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/graphql/user/query/validateUserConstraints.gql",
+					"hash": "15318247702566615154"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/rest/auth/index.ts",
+					"hash": "3419388755912062063"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/rest/auth/request/login.interface.ts",
+					"hash": "4340067187820862015"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/rest/auth/request/register.interface.ts",
+					"hash": "14700471397685629391"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/rest/index.ts",
+					"hash": "16287680189997594639"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/shared/card/card-color.enum.ts",
+					"hash": "11062856728450824877"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/shared/card/card-properties.enum.ts",
+					"hash": "1943530703353431155"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/shared/card/card-shading.enum.ts",
+					"hash": "4980330967125944505"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/shared/card/card-shape.enum.ts",
+					"hash": "15378990516337075642"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/shared/card/index.ts",
+					"hash": "15673510928444263309"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/shared/index.ts",
+					"hash": "15070519349704388910"
+				},
+				{
+					"file": "libs/api-definitions/tsconfig.json",
+					"hash": "5840880287502376438"
+				},
+				{
+					"file": "libs/api-definitions/tsconfig.lib.json",
+					"hash": "3632393694954060084"
+				},
+				{
+					"file": "libs/api-definitions/tsconfig.spec.json",
+					"hash": "11550347367511341917"
+				}
+			],
+			"api-e2e": [
+				{
+					"file": "apps/api-e2e/.eslintrc.json",
+					"hash": "7390128441860019074"
+				},
+				{
+					"file": "apps/api-e2e/jest.config.ts",
+					"hash": "5451374175158945661"
+				},
+				{
+					"file": "apps/api-e2e/project.json",
+					"hash": "6289912400767736474"
+				},
+				{
+					"file": "apps/api-e2e/src/api/api.spec.ts",
+					"hash": "9265542822596803509",
+					"deps": ["npm:axios"]
+				},
+				{
+					"file": "apps/api-e2e/src/support/global-setup.ts",
+					"hash": "2568409276037275290"
+				},
+				{
+					"file": "apps/api-e2e/src/support/global-teardown.ts",
+					"hash": "5275447082211835490"
+				},
+				{
+					"file": "apps/api-e2e/src/support/test-setup.ts",
+					"hash": "8459234751713656095",
+					"deps": ["npm:axios"]
+				},
+				{
+					"file": "apps/api-e2e/tsconfig.json",
+					"hash": "6891393119390796046"
+				},
+				{
+					"file": "apps/api-e2e/tsconfig.spec.json",
+					"hash": "1260127805776156549"
+				}
+			],
+			"api-sdk": [
+				{
+					"file": "libs/api-sdk/.eslintrc.json",
+					"hash": "5750691403146042869"
+				},
+				{
+					"file": "libs/api-sdk/README.md",
+					"hash": "17152903568423752691"
+				},
+				{
+					"file": "libs/api-sdk/jest.config.ts",
+					"hash": "3841633007478316693"
+				},
+				{
+					"file": "libs/api-sdk/package.json",
+					"hash": "13240743951796997391"
+				},
+				{
+					"file": "libs/api-sdk/project.json",
+					"hash": "13126482941007953523"
+				},
+				{
+					"file": "libs/api-sdk/src/index.ts",
+					"hash": "17190327418877663508"
+				},
+				{
+					"file": "libs/api-sdk/src/lib/api-sdk.spec.ts",
+					"hash": "3970126327915198780"
+				},
+				{
+					"file": "libs/api-sdk/src/lib/api-sdk.ts",
+					"hash": "1808189623378669638"
+				},
+				{
+					"file": "libs/api-sdk/src/lib/definitions/http-client.type.ts",
+					"hash": "7300490401625393098",
+					"deps": ["npm:rxjs"]
+				},
+				{
+					"file": "libs/api-sdk/src/lib/definitions/request.type.ts",
+					"hash": "1353472195877237833"
+				},
+				{
+					"file": "libs/api-sdk/src/lib/http-client.ts",
+					"hash": "8628961399489631946"
+				},
+				{
+					"file": "libs/api-sdk/src/lib/models/auth/auth-get.type.ts",
+					"hash": "9671094039854435818"
+				},
+				{
+					"file": "libs/api-sdk/src/lib/models/auth/auth-post.type.ts",
+					"hash": "11608594975234366459",
+					"deps": ["api-definitions"]
+				},
+				{
+					"file": "libs/api-sdk/src/lib/models/auth/auth.sdk.ts",
+					"hash": "13988563738833104194"
+				},
+				{
+					"file": "libs/api-sdk/src/lib/models/default/default-get.type.ts",
+					"hash": "12757504940325333793",
+					"deps": ["api-definitions"]
+				},
+				{
+					"file": "libs/api-sdk/src/lib/models/default/default.sdk.ts",
+					"hash": "2619105063012160513"
+				},
+				{
+					"file": "libs/api-sdk/src/lib/requesters/get-execute.ts",
+					"hash": "16989589006690871487",
+					"deps": ["npm:rxjs"]
+				},
+				{
+					"file": "libs/api-sdk/src/lib/requesters/post-execute.ts",
+					"hash": "13063192987801176273",
+					"deps": ["npm:rxjs"]
+				},
+				{
+					"file": "libs/api-sdk/tsconfig.json",
+					"hash": "5840880287502376438"
+				},
+				{
+					"file": "libs/api-sdk/tsconfig.lib.json",
+					"hash": "3632393694954060084"
+				},
+				{
+					"file": "libs/api-sdk/tsconfig.spec.json",
+					"hash": "11550347367511341917"
+				}
+			],
+			"api": [
+				{
+					"file": "apps/api/.eslintrc.json",
+					"hash": "13341366273172981638"
+				},
+				{
+					"file": "apps/api/global-setup.ts",
+					"hash": "7403101288835109058"
+				},
+				{
+					"file": "apps/api/global-teardown.ts",
+					"hash": "7417106866597805731"
+				},
+				{
+					"file": "apps/api/jest.config.ts",
+					"hash": "9422246200538178162",
+					"deps": ["npm:jest"]
+				},
+				{
+					"file": "apps/api/migrations/.snapshot-set.json",
+					"hash": "1751547972963697662"
+				},
+				{
+					"file": "apps/api/migrations/Migration20230828204019.ts",
+					"hash": "16299989462321178770",
+					"deps": ["npm:@mikro-orm/migrations"]
+				},
+				{
+					"file": "apps/api/migrations/Migration20230829222038.ts",
+					"hash": "615517609259321093",
+					"deps": ["npm:@mikro-orm/migrations"]
+				},
+				{
+					"file": "apps/api/project.json",
+					"hash": "10771489178832180182"
+				},
+				{
+					"file": "apps/api/src/assets/.gitkeep",
+					"hash": "3244421341483603138"
+				},
+				{
+					"file": "apps/api/src/main.ts",
+					"hash": "14631063640604566562",
+					"deps": [
+						"npm:@nestjs/common",
+						"npm:@nestjs/core",
+						"npm:class-validator",
+						"npm:cookie-parser"
+					]
+				},
+				{
+					"file": "apps/api/src/module/app/app.controller.spec.ts",
+					"hash": "10451274179696179054",
+					"deps": ["npm:@nestjs/testing"]
+				},
+				{
+					"file": "apps/api/src/module/app/app.controller.ts",
+					"hash": "689102221861418176",
+					"deps": ["api-definitions"]
+				},
+				{
+					"file": "apps/api/src/module/app/app.module.ts",
+					"hash": "10393881943652899004",
+					"deps": [
+						"npm:@mikro-orm/nestjs",
+						"npm:@nestjs/apollo",
+						"npm:@nestjs/common",
+						"npm:@nestjs/config",
+						"npm:@nestjs/graphql"
+					]
+				},
+				{
+					"file": "apps/api/src/module/app/app.service.spec.ts",
+					"hash": "6826926366577007337",
+					"deps": ["npm:@nestjs/testing"]
+				},
+				{
+					"file": "apps/api/src/module/app/app.service.ts",
+					"hash": "8433571973070851868",
+					"deps": ["api-definitions"]
+				},
+				{
+					"file": "apps/api/src/module/auth/auth.controller.spec.ts",
+					"hash": "10158086057064058285",
+					"deps": ["npm:@nestjs/testing", "npm:jest-mock-extended"]
+				},
+				{
+					"file": "apps/api/src/module/auth/auth.controller.ts",
+					"hash": "10215499162914364853",
+					"deps": ["npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/module/auth/auth.module.ts",
+					"hash": "7481478924549579313",
+					"deps": [
+						"npm:@mikro-orm/nestjs",
+						"npm:@nestjs/common",
+						"npm:@nestjs/core",
+						"npm:@nestjs/jwt"
+					]
+				},
+				{
+					"file": "apps/api/src/module/auth/decorator/protect-to.decorator.ts",
+					"hash": "1824471483791850202",
+					"deps": ["npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/module/auth/decorator/roles.decorator.ts",
+					"hash": "8589706303862755159",
+					"deps": ["npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/module/auth/definition/graphql-ws-connection-extra.interface.ts",
+					"hash": "14280348903072147718"
+				},
+				{
+					"file": "apps/api/src/module/auth/definition/json-web-token.interface.ts",
+					"hash": "5485624664462159797"
+				},
+				{
+					"file": "apps/api/src/module/auth/definition/jwt-cookie.enum.ts",
+					"hash": "14657202325832173855"
+				},
+				{
+					"file": "apps/api/src/module/auth/definition/jwt-endpoints.enum.ts",
+					"hash": "17054857499248956962"
+				},
+				{
+					"file": "apps/api/src/module/auth/dto/login-request.dto.ts",
+					"hash": "8428890764127244937",
+					"deps": ["api-definitions"]
+				},
+				{
+					"file": "apps/api/src/module/auth/dto/register-request.dto.ts",
+					"hash": "8072705065075516677",
+					"deps": ["api-definitions"]
+				},
+				{
+					"file": "apps/api/src/module/auth/guard/jwt.guard.spec.ts",
+					"hash": "15842168976544468796",
+					"deps": ["npm:@nestjs/common", "npm:@nestjs/testing", "npm:jest-mock-extended"]
+				},
+				{
+					"file": "apps/api/src/module/auth/guard/jwt.guard.ts",
+					"hash": "16048236692706000435",
+					"deps": ["npm:@nestjs/common", "npm:@nestjs/graphql", "npm:@nestjs/passport"]
+				},
+				{
+					"file": "apps/api/src/module/auth/guard/roles.guard.spec.ts",
+					"hash": "1343617395535216524",
+					"deps": ["npm:@nestjs/common", "npm:@nestjs/testing", "npm:jest-mock-extended"]
+				},
+				{
+					"file": "apps/api/src/module/auth/guard/roles.guard.ts",
+					"hash": "5672135669760064471",
+					"deps": ["npm:@nestjs/common", "npm:@nestjs/core", "npm:@nestjs/graphql", "npm:express"]
+				},
+				{
+					"file": "apps/api/src/module/auth/strategy/jwt.strategy.service.spec.ts",
+					"hash": "5013046423895317119",
+					"deps": ["npm:@nestjs/testing", "npm:jest-mock-extended"]
+				},
+				{
+					"file": "apps/api/src/module/auth/strategy/jwt.strategy.service.ts",
+					"hash": "2139450254969696987",
+					"deps": [
+						"npm:@nestjs/common",
+						"npm:@nestjs/passport",
+						"npm:express",
+						"npm:graphql-ws",
+						"npm:passport-jwt"
+					]
+				},
+				{
+					"file": "apps/api/src/module/auth/use-case/check-jwt-token.use-case.spec.ts",
+					"hash": "14798047850614623558",
+					"deps": ["npm:@nestjs/jwt", "npm:@nestjs/testing", "npm:jest-mock-extended"]
+				},
+				{
+					"file": "apps/api/src/module/auth/use-case/check-jwt-token.use-case.ts",
+					"hash": "15174016215995575799",
+					"deps": ["npm:@nestjs/common", "npm:@nestjs/jwt"]
+				},
+				{
+					"file": "apps/api/src/module/auth/use-case/clean-jwt-access-token-cookie.use-case.spec.ts",
+					"hash": "5951603277257744454",
+					"deps": ["npm:@nestjs/testing"]
+				},
+				{
+					"file": "apps/api/src/module/auth/use-case/clean-jwt-access-token-cookie.use-case.ts",
+					"hash": "15136060333493527321",
+					"deps": ["npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/module/auth/use-case/create-jwt-access-token.use-case.spec.ts",
+					"hash": "14880542766134545929",
+					"deps": ["npm:@nestjs/jwt", "npm:@nestjs/testing", "npm:jest-mock-extended"]
+				},
+				{
+					"file": "apps/api/src/module/auth/use-case/create-jwt-access-token.use-case.ts",
+					"hash": "2076713031568537129",
+					"deps": ["npm:@nestjs/common", "npm:@nestjs/jwt"]
+				},
+				{
+					"file": "apps/api/src/module/auth/use-case/create-jwt-refresh-token.use-case.spec.ts",
+					"hash": "5719075375742579920",
+					"deps": ["npm:@nestjs/jwt", "npm:@nestjs/testing", "npm:jest-mock-extended"]
+				},
+				{
+					"file": "apps/api/src/module/auth/use-case/create-jwt-refresh-token.use-case.ts",
+					"hash": "9230779647918226454",
+					"deps": ["npm:@nestjs/common", "npm:@nestjs/jwt"]
+				},
+				{
+					"file": "apps/api/src/module/auth/use-case/extract-cookies-from-raw-headers.use-case.spec.ts",
+					"hash": "9264053524801605446",
+					"deps": ["npm:@nestjs/testing"]
+				},
+				{
+					"file": "apps/api/src/module/auth/use-case/extract-cookies-from-raw-headers.use-case.ts",
+					"hash": "7216874376740548241",
+					"deps": ["npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/module/auth/use-case/login.use-case.spec.ts",
+					"hash": "17902363928171799982",
+					"deps": ["npm:@nestjs/testing", "npm:jest-mock-extended"]
+				},
+				{
+					"file": "apps/api/src/module/auth/use-case/login.use-case.ts",
+					"hash": "5732219498411397807",
+					"deps": ["npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/module/auth/use-case/logout.use-case.spec.ts",
+					"hash": "4848860370323401540",
+					"deps": [
+						"npm:@nestjs/core",
+						"npm:@nestjs/testing",
+						"npm:express",
+						"npm:jest-mock-extended"
+					]
+				},
+				{
+					"file": "apps/api/src/module/auth/use-case/logout.use-case.ts",
+					"hash": "2933318192377359896",
+					"deps": ["npm:@nestjs/common", "npm:@nestjs/core", "npm:express"]
+				},
+				{
+					"file": "apps/api/src/module/auth/use-case/refresh-session.use-case.spec.ts",
+					"hash": "13318842942833679891",
+					"deps": [
+						"npm:@nestjs/core",
+						"npm:@nestjs/jwt",
+						"npm:@nestjs/testing",
+						"npm:express",
+						"npm:jest-mock-extended"
+					]
+				},
+				{
+					"file": "apps/api/src/module/auth/use-case/refresh-session.use-case.ts",
+					"hash": "6182465062709861736",
+					"deps": ["npm:@nestjs/common", "npm:@nestjs/core", "npm:express"]
+				},
+				{
+					"file": "apps/api/src/module/auth/use-case/register.use-case.spec.ts",
+					"hash": "3673570553478115931",
+					"deps": ["npm:@nestjs/testing", "npm:jest-mock-extended"]
+				},
+				{
+					"file": "apps/api/src/module/auth/use-case/register.use-case.ts",
+					"hash": "5275263384908671764",
+					"deps": ["npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/module/auth/use-case/set-jwt-token.use-case.spec.ts",
+					"hash": "14059597273789882961",
+					"deps": [
+						"npm:@nestjs/core",
+						"npm:@nestjs/testing",
+						"npm:express",
+						"npm:jest-mock-extended"
+					]
+				},
+				{
+					"file": "apps/api/src/module/auth/use-case/set-jwt-token.use-case.ts",
+					"hash": "5124710701172715223",
+					"deps": ["npm:@nestjs/common", "npm:@nestjs/core", "npm:express"]
+				},
+				{
+					"file": "apps/api/src/module/game/definition/card-color.enum.ts",
+					"hash": "2382629973232007148"
+				},
+				{
+					"file": "apps/api/src/module/game/definition/card-properties.enum.ts",
+					"hash": "6264658758321010194"
+				},
+				{
+					"file": "apps/api/src/module/game/definition/card-shading.enum.ts",
+					"hash": "6820322620501975436"
+				},
+				{
+					"file": "apps/api/src/module/game/definition/card-shape.enum.ts",
+					"hash": "2203771036464094173"
+				},
+				{
+					"file": "apps/api/src/module/game/definition/game-status.enum.ts",
+					"hash": "18233535986087419306",
+					"deps": ["npm:@nestjs/graphql"]
+				},
+				{
+					"file": "apps/api/src/module/game/dto/input/join-game.input.ts",
+					"hash": "12012493559136405892",
+					"deps": ["npm:@nestjs/graphql", "npm:class-validator"]
+				},
+				{
+					"file": "apps/api/src/module/game/factory/game.factory.ts",
+					"hash": "10948186481823008440",
+					"deps": ["npm:@mikro-orm/core", "npm:@mikro-orm/seeder"]
+				},
+				{
+					"file": "apps/api/src/module/game/factory/game.faker.ts",
+					"hash": "15378986934477817887",
+					"deps": ["npm:@faker-js/faker", "npm:@mikro-orm/core"]
+				},
+				{
+					"file": "apps/api/src/module/game/game.entity.ts",
+					"hash": "3265702339570415863",
+					"deps": ["npm:@mikro-orm/core", "npm:@nestjs/graphql"]
+				},
+				{
+					"file": "apps/api/src/module/game/game.module.ts",
+					"hash": "867051866945614731",
+					"deps": ["npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/module/game/game.repository.ts",
+					"hash": "14796210653929877264"
+				},
+				{
+					"file": "apps/api/src/module/game/game.resolver.ts",
+					"hash": "8698110900196561609",
+					"deps": ["npm:@nestjs/graphql"]
+				},
+				{
+					"file": "apps/api/src/module/game/relations/game-participant.entity.ts",
+					"hash": "5812119359697488214",
+					"deps": ["npm:@mikro-orm/core"]
+				},
+				{
+					"file": "apps/api/src/module/game/relations/game-participant.repository.ts",
+					"hash": "816967585038118805",
+					"deps": ["npm:@mikro-orm/core"]
+				},
+				{
+					"file": "apps/api/src/module/game/use-case/create-game.use-case.module.ts",
+					"hash": "8024555726673496400",
+					"deps": ["npm:@mikro-orm/nestjs", "npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/module/game/use-case/create-game.use-case.spec.ts",
+					"hash": "13522036291649776203",
+					"deps": [
+						"npm:@mikro-orm/core",
+						"npm:@mikro-orm/postgresql",
+						"npm:@nestjs/testing",
+						"npm:jest-mock-extended"
+					]
+				},
+				{
+					"file": "apps/api/src/module/game/use-case/create-game.use-case.ts",
+					"hash": "10874176922911182372",
+					"deps": ["npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/module/game/use-case/generate-game-cards.use-case.spec.ts",
+					"hash": "4191642406368711291",
+					"deps": ["npm:@nestjs/testing"]
+				},
+				{
+					"file": "apps/api/src/module/game/use-case/generate-game-cards.use-case.ts",
+					"hash": "9051077173486092969",
+					"deps": ["npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/module/game/use-case/join-game.use-case.module.ts",
+					"hash": "15315640620849034642",
+					"deps": ["npm:@mikro-orm/nestjs", "npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/module/game/use-case/join-game.use-case.spec.ts",
+					"hash": "1946257086481807324",
+					"deps": [
+						"npm:@mikro-orm/core",
+						"npm:@mikro-orm/postgresql",
+						"npm:@nestjs/testing",
+						"npm:jest-mock-extended"
+					]
+				},
+				{
+					"file": "apps/api/src/module/game/use-case/join-game.use-case.ts",
+					"hash": "15612721637378324402",
+					"deps": ["npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/module/game/use-case/list-games.use-case.module.ts",
+					"hash": "2119376605874042083",
+					"deps": ["npm:@mikro-orm/nestjs", "npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/module/game/use-case/list-games.use-case.spec.ts",
+					"hash": "6396232437323745990",
+					"deps": ["npm:@nestjs/testing", "npm:jest-mock-extended"]
+				},
+				{
+					"file": "apps/api/src/module/game/use-case/list-games.use-case.ts",
+					"hash": "12800101218198561070",
+					"deps": ["npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/module/ping/dto/request/ping-request.dto.ts",
+					"hash": "15356450511125992306",
+					"deps": ["npm:@nestjs/graphql", "npm:class-validator"]
+				},
+				{
+					"file": "apps/api/src/module/ping/ping.module.ts",
+					"hash": "835001325225021278",
+					"deps": ["npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/module/ping/ping.resolver.ts",
+					"hash": "4347015003388113822",
+					"deps": ["npm:@nestjs/graphql"]
+				},
+				{
+					"file": "apps/api/src/module/user/decorator/current-user.decorator.ts",
+					"hash": "8141459614083951337",
+					"deps": ["npm:@nestjs/common", "npm:@nestjs/graphql", "npm:express"]
+				},
+				{
+					"file": "apps/api/src/module/user/decorator/is-unique-user-prop.decorator.ts",
+					"hash": "2099999404224692991",
+					"deps": ["npm:@mikro-orm/core", "npm:class-validator"]
+				},
+				{
+					"file": "apps/api/src/module/user/definition/user-role.enum.ts",
+					"hash": "770491107633662172",
+					"deps": ["npm:@nestjs/graphql"]
+				},
+				{
+					"file": "apps/api/src/module/user/dto/input/validate-user-constraints.input.ts",
+					"hash": "7315438136552333323",
+					"deps": ["npm:@nestjs/graphql"]
+				},
+				{
+					"file": "apps/api/src/module/user/factory/user.factory.ts",
+					"hash": "7433806330218107229",
+					"deps": ["npm:@mikro-orm/core", "npm:@mikro-orm/seeder"]
+				},
+				{
+					"file": "apps/api/src/module/user/factory/user.faker.ts",
+					"hash": "6812843772855275080",
+					"deps": ["npm:@faker-js/faker", "npm:@mikro-orm/core"]
+				},
+				{
+					"file": "apps/api/src/module/user/user.entity.ts",
+					"hash": "17022860366616820976",
+					"deps": ["npm:@mikro-orm/core", "npm:@nestjs/graphql"]
+				},
+				{
+					"file": "apps/api/src/module/user/user.module.ts",
+					"hash": "2312865724815249888",
+					"deps": ["npm:@mikro-orm/nestjs", "npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/module/user/user.reopsitory.int.spec.ts",
+					"hash": "11711321784797766798",
+					"deps": ["npm:@nestjs/testing", "npm:jest-mock-extended"]
+				},
+				{
+					"file": "apps/api/src/module/user/user.repository.ts",
+					"hash": "321231501072657032"
+				},
+				{
+					"file": "apps/api/src/module/user/user.resolver.ts",
+					"hash": "4994851325352430634",
+					"deps": ["npm:@nestjs/common", "npm:@nestjs/graphql", "npm:graphql-subscriptions"]
+				},
+				{
+					"file": "apps/api/src/module/user/validator/is-unique-user-prop.spec.ts",
+					"hash": "17692641653278654107",
+					"deps": ["npm:@nestjs/testing", "npm:class-validator", "npm:jest-mock-extended"]
+				},
+				{
+					"file": "apps/api/src/module/user/validator/is-unique-user-prop.ts",
+					"hash": "7057660124446917151",
+					"deps": ["npm:@mikro-orm/core", "npm:@nestjs/common", "npm:class-validator"]
+				},
+				{
+					"file": "apps/api/src/schema.gql",
+					"hash": "17150660116465280991"
+				},
+				{
+					"file": "apps/api/src/shared/environment/api-protocol.type.ts",
+					"hash": "13704927135541093316"
+				},
+				{
+					"file": "apps/api/src/shared/environment/env.validation.ts",
+					"hash": "15142846433831099048",
+					"deps": ["npm:class-transformer", "npm:class-validator"]
+				},
+				{
+					"file": "apps/api/src/shared/environment/jwt-algorithm.type.ts",
+					"hash": "7505831755098437635"
+				},
+				{
+					"file": "apps/api/src/shared/environment/node-env.type.ts",
+					"hash": "17452171039673541233"
+				},
+				{
+					"file": "apps/api/src/shared/exception/bad-request.exception.ts",
+					"hash": "4878466339277615493",
+					"deps": ["npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/shared/exception/base.exception.ts",
+					"hash": "7684295688780923366",
+					"deps": ["npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/shared/exception/forbidden.exception.ts",
+					"hash": "5877011066785683151",
+					"deps": ["npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/shared/exception/internal-server-error.exception.ts",
+					"hash": "14960321204665331714",
+					"deps": ["npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/shared/exception/not-found.exception.ts",
+					"hash": "12537338627960337831",
+					"deps": ["npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/shared/exception/precondition-failed.exception.ts",
+					"hash": "4177428340008462833",
+					"deps": ["npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/shared/exception/too-many-requests.exception.ts",
+					"hash": "8675474739476041230",
+					"deps": ["npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/shared/exception/unauthorized-exception.exception.ts",
+					"hash": "2103143989883610999",
+					"deps": ["npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/shared/faker/basic.faker.ts",
+					"hash": "7703341049315910092"
+				},
+				{
+					"file": "apps/api/src/shared/faker/date.faker.ts",
+					"hash": "5227335971763876720",
+					"deps": ["npm:@faker-js/faker"]
+				},
+				{
+					"file": "apps/api/src/shared/module/config/configuration.module.ts",
+					"hash": "8436346051152661514",
+					"deps": ["npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/shared/module/config/configuration.service.ts",
+					"hash": "5695649111646320801",
+					"deps": ["npm:@nestjs/common", "npm:@nestjs/config"]
+				},
+				{
+					"file": "apps/api/src/shared/module/config/factories/gql.factory.ts",
+					"hash": "15493640466256912762",
+					"deps": [
+						"npm:@apollo/server",
+						"npm:@nestjs/apollo",
+						"npm:@nestjs/common",
+						"npm:@nestjs/graphql",
+						"npm:graphql-ws"
+					]
+				},
+				{
+					"file": "apps/api/src/shared/module/config/factories/jwt.factory.ts",
+					"hash": "15684644957771239547",
+					"deps": ["npm:@nestjs/common", "npm:@nestjs/jwt"]
+				},
+				{
+					"file": "apps/api/src/shared/module/config/factories/mikro-orm.factory.ts",
+					"hash": "17002083970043906104",
+					"deps": ["npm:@mikro-orm/core", "npm:@mikro-orm/nestjs", "npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/shared/module/config/mikro-orm.config.ts",
+					"hash": "2695449325208928502",
+					"deps": [
+						"npm:@mikro-orm/migrations",
+						"npm:@mikro-orm/nestjs",
+						"npm:@mikro-orm/postgresql"
+					]
+				},
+				{
+					"file": "apps/api/src/shared/module/config/mikro-orm.naming-strategy.ts",
+					"hash": "6921423793667936353",
+					"deps": ["npm:@mikro-orm/core"]
+				},
+				{
+					"file": "apps/api/src/shared/module/config/registers/app.config.ts",
+					"hash": "2430915298080893918",
+					"deps": ["npm:@nestjs/config"]
+				},
+				{
+					"file": "apps/api/src/shared/module/config/registers/database.config.ts",
+					"hash": "3575084575012257361",
+					"deps": ["npm:@nestjs/config", "npm:dotenv"]
+				},
+				{
+					"file": "apps/api/src/shared/module/config/registers/jwt.config.ts",
+					"hash": "10874026862649843653",
+					"deps": ["npm:@nestjs/config"]
+				},
+				{
+					"file": "apps/api/src/shared/module/config/types/app-config.type.ts",
+					"hash": "3025141757064325087"
+				},
+				{
+					"file": "apps/api/src/shared/module/config/types/database-config.type.ts",
+					"hash": "15178342413946192461"
+				},
+				{
+					"file": "apps/api/src/shared/module/config/types/jwt-config.type.ts",
+					"hash": "475346417744387083"
+				},
+				{
+					"file": "apps/api/src/shared/module/gql-throttler/gql-throttler.module.ts",
+					"hash": "1822687336224393109",
+					"deps": ["npm:@nestjs/common", "npm:@nestjs/core", "npm:@nestjs/throttler"]
+				},
+				{
+					"file": "apps/api/src/shared/module/gql-throttler/guards/gql-throttler.guard.ts",
+					"hash": "13461924863500305501",
+					"deps": ["npm:@nestjs/common", "npm:@nestjs/graphql", "npm:@nestjs/throttler"]
+				},
+				{
+					"file": "apps/api/src/shared/module/pub-sub/pub-sub-module.ts",
+					"hash": "3179175338716907656",
+					"deps": ["npm:@nestjs/common", "npm:graphql-subscriptions"]
+				},
+				{
+					"file": "apps/api/src/shared/service/node-cache.service.ts",
+					"hash": "983871162690228788",
+					"deps": ["npm:@nestjs/common", "npm:node-cache"]
+				},
+				{
+					"file": "apps/api/src/shared/use-case/check-password.use-case.spec.ts",
+					"hash": "4719347713290019057",
+					"deps": ["npm:@nestjs/testing"]
+				},
+				{
+					"file": "apps/api/src/shared/use-case/check-password.use-case.ts",
+					"hash": "18106478211347805765",
+					"deps": ["npm:bcryptjs"]
+				},
+				{
+					"file": "apps/api/src/shared/use-case/generate-now-date.use-case.spec.ts",
+					"hash": "5097621576929546932",
+					"deps": ["npm:@nestjs/testing"]
+				},
+				{
+					"file": "apps/api/src/shared/use-case/generate-now-date.use-case.ts",
+					"hash": "7974666632549629901"
+				},
+				{
+					"file": "apps/api/src/shared/use-case/generate-uuid.use-case.spec.ts",
+					"hash": "4128616094886420613",
+					"deps": ["npm:@nestjs/testing"]
+				},
+				{
+					"file": "apps/api/src/shared/use-case/generate-uuid.use-case.ts",
+					"hash": "8971656937852807243"
+				},
+				{
+					"file": "apps/api/src/shared/use-case/hash-password.use-case.spec.ts",
+					"hash": "13909215672309018503",
+					"deps": ["npm:@nestjs/testing"]
+				},
+				{
+					"file": "apps/api/src/shared/use-case/hash-password.use-case.ts",
+					"hash": "2169122135931801838",
+					"deps": ["npm:bcryptjs"]
+				},
+				{
+					"file": "apps/api/src/shared/use-case/shuffle-array.use-case.spec.ts",
+					"hash": "2823157992033603952",
+					"deps": ["npm:@nestjs/testing"]
+				},
+				{
+					"file": "apps/api/src/shared/use-case/shuffle-array.use-case.ts",
+					"hash": "2597620020785885043"
+				},
+				{
+					"file": "apps/api/src/shared/util/bootstrap.helper.ts",
+					"hash": "17660131605102435644",
+					"deps": ["npm:@nestjs/common"]
+				},
+				{
+					"file": "apps/api/src/shared/util/custom-base.entity.ts",
+					"hash": "940807717741581516",
+					"deps": ["npm:@mikro-orm/core", "npm:@nestjs/graphql"]
+				},
+				{
+					"file": "apps/api/src/shared/util/custom-entity.repository.ts",
+					"hash": "5291570042449089798",
+					"deps": ["npm:@mikro-orm/core"]
+				},
+				{
+					"file": "apps/api/src/shared/util/editable-date.spec.ts",
+					"hash": "3286096520625638480",
+					"deps": ["npm:@nestjs/testing"]
+				},
+				{
+					"file": "apps/api/src/shared/util/editable-date.ts",
+					"hash": "2612701705159927306"
+				},
+				{
+					"file": "apps/api/src/shared/util/exception-filter.ts",
+					"hash": "9711723577165272348",
+					"deps": ["npm:@nestjs/common", "npm:express", "npm:graphql"]
+				},
+				{
+					"file": "apps/api/src/shared/util/get-enum-key.util.ts",
+					"hash": "14928091998748186136"
+				},
+				{
+					"file": "apps/api/src/typings/.env.d.ts",
+					"hash": "1415293014202698414"
+				},
+				{
+					"file": "apps/api/tsconfig.app.json",
+					"hash": "10162555565703152044"
+				},
+				{
+					"file": "apps/api/tsconfig.json",
+					"hash": "9559804013589536214"
+				},
+				{
+					"file": "apps/api/tsconfig.spec.json",
+					"hash": "11874298614184341825"
+				},
+				{
+					"file": "apps/api/webpack.config.js",
+					"hash": "7970474584122525470",
+					"deps": ["npm:@nx/webpack"]
+				}
+			]
+		},
+		"nonProjectFiles": [
+			{
+				"file": ".commitlintrc.js",
+				"hash": "12215990941587924495"
+			},
+			{
+				"file": ".czrc",
+				"hash": "13721520889004322617"
+			},
+			{
+				"file": ".devcontainer/devcontainer.json",
+				"hash": "15143048779871428101"
+			},
+			{
+				"file": ".devcontainer/docker-compose.yml.example",
+				"hash": "13630739350117035613"
+			},
+			{
+				"file": ".editorconfig",
+				"hash": "6001788348531449635"
+			},
+			{
+				"file": ".env.example",
+				"hash": "6629426124350924354"
+			},
+			{
+				"file": ".eslintignore",
+				"hash": "7663861978715868291"
+			},
+			{
+				"file": ".eslintrc.json",
+				"hash": "13044099773817339544"
+			},
+			{
+				"file": ".github/workflows/gh-pages.yml",
+				"hash": "5052984741049431323"
+			},
+			{
+				"file": ".gitignore",
+				"hash": "7621468358806245773"
+			},
+			{
+				"file": ".graphqlrc.json",
+				"hash": "1582216183286924183"
+			},
+			{
+				"file": ".husky/pre-commit",
+				"hash": "12274910935662366440"
+			},
+			{
+				"file": ".husky/pre-push",
+				"hash": "2709651665630928378"
+			},
+			{
+				"file": ".husky/prepare-commit-msg",
+				"hash": "14140974530702344198"
+			},
+			{
+				"file": ".prettierignore",
+				"hash": "11764963100129885908"
+			},
+			{
+				"file": ".prettierrc",
+				"hash": "13468061421592677855"
+			},
+			{
+				"file": ".stylelintrc",
+				"hash": "5601606136160290776"
+			},
+			{
+				"file": ".vscode/extensions.json",
+				"hash": "235626400633494639"
+			},
+			{
+				"file": ".vscode/settings.json",
+				"hash": "13360050074497691232"
+			},
+			{
+				"file": "Dockerfile",
+				"hash": "15331283552963965342"
+			},
+			{
+				"file": "README.md",
+				"hash": "14041702182128209000"
+			},
+			{
+				"file": "certs/set-self-signed.crt",
+				"hash": "10981565273382702368"
+			},
+			{
+				"file": "certs/set-self-signed.key",
+				"hash": "2932152941960628376"
+			},
+			{
+				"file": "codegen.ts",
+				"hash": "13835268296657916843"
+			},
+			{
+				"file": "docker-compose.yml",
+				"hash": "17243791781244769807"
+			},
+			{
+				"file": "jest.config.ts",
+				"hash": "12333515226966617182"
+			},
+			{
+				"file": "jest.preset.js",
+				"hash": "2772139696069860212"
+			},
+			{
+				"file": "lint-staged.config.mjs",
+				"hash": "3656799023583066562"
+			},
+			{
+				"file": "migrations.json",
+				"hash": "10713412833692439391"
+			},
+			{
+				"file": "nx.json",
+				"hash": "15559201377198679538"
+			},
+			{
+				"file": "package-lock.json",
+				"hash": "7864720369046571270"
+			},
+			{
+				"file": "package.json",
+				"hash": "7547788755515944380"
+			},
+			{
+				"file": "tools/initdb.d/postgresql-multiple-databases.sh",
+				"hash": "9951107776421637606"
+			},
+			{
+				"file": "tsconfig.base.json",
+				"hash": "10740002811353400517"
+			}
+		]
+	}
+}
