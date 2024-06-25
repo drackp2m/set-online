@@ -134,45 +134,6 @@
 	"nxJsonPlugins": [],
 	"fileMap": {
 		"projectFileMap": {
-			"app-e2e": [
-				{
-					"file": "apps/app-e2e/.eslintrc.json",
-					"hash": "17325385559275175681"
-				},
-				{
-					"file": "apps/app-e2e/cypress.config.ts",
-					"hash": "10282742379397649623",
-					"deps": ["npm:@nx/cypress", "npm:cypress"]
-				},
-				{
-					"file": "apps/app-e2e/project.json",
-					"hash": "6368455426018914282"
-				},
-				{
-					"file": "apps/app-e2e/src/e2e/app.cy.ts",
-					"hash": "7071985747896009524"
-				},
-				{
-					"file": "apps/app-e2e/src/fixtures/example.json",
-					"hash": "6950778556131045369"
-				},
-				{
-					"file": "apps/app-e2e/src/support/app.po.ts",
-					"hash": "11157016311132186162"
-				},
-				{
-					"file": "apps/app-e2e/src/support/commands.ts",
-					"hash": "7702314073611385872"
-				},
-				{
-					"file": "apps/app-e2e/src/support/e2e.ts",
-					"hash": "1054106023200826784"
-				},
-				{
-					"file": "apps/app-e2e/tsconfig.json",
-					"hash": "15361593316270112695"
-				}
-			],
 			"app": [
 				{
 					"file": "apps/app/.eslintrc.json",
@@ -201,7 +162,7 @@
 				},
 				{
 					"file": "apps/app/src/app/app.component.ts",
-					"hash": "6266994703893287318",
+					"hash": "4358637022615174648",
 					"deps": ["npm:@angular/core", "npm:@angular/router", "npm:apollo-angular"]
 				},
 				{
@@ -281,7 +242,7 @@
 				},
 				{
 					"file": "apps/app/src/app/pages/example/example.page.html",
-					"hash": "12987238213585317430"
+					"hash": "5683430453492863910"
 				},
 				{
 					"file": "apps/app/src/app/pages/example/example.page.scss",
@@ -500,12 +461,12 @@
 				},
 				{
 					"file": "apps/app/src/app/shared/interceptors/auth.interceptor.ts",
-					"hash": "12486975813480450825",
+					"hash": "10495102894702199850",
 					"deps": ["npm:@angular/common", "npm:@angular/core", "npm:@angular/router", "npm:rxjs"]
 				},
 				{
 					"file": "apps/app/src/app/shared/layouts/main/main.layout.html",
-					"hash": "4111648231608017630"
+					"hash": "18242889921277444793"
 				},
 				{
 					"file": "apps/app/src/app/shared/layouts/main/main.layout.scss",
@@ -513,7 +474,7 @@
 				},
 				{
 					"file": "apps/app/src/app/shared/layouts/main/main.layout.ts",
-					"hash": "10273238339686414489",
+					"hash": "11884529030933941474",
 					"deps": ["npm:@angular/common", "npm:@angular/core", "npm:@angular/router"]
 				},
 				{
@@ -527,28 +488,18 @@
 				},
 				{
 					"file": "apps/app/src/app/stores/auth.store.ts",
-					"hash": "5920185168584150254",
-					"deps": [
-						"npm:@angular/core",
-						"npm:@ngneat/elf",
-						"npm:@ngneat/elf-state-history",
-						"npm:rxjs"
-					]
+					"hash": "5334312452183584794",
+					"deps": ["npm:@angular/core", "npm:@ngrx/signals", "npm:rxjs"]
 				},
 				{
 					"file": "apps/app/src/app/stores/current-user.store.ts",
-					"hash": "4550160499985202330",
+					"hash": "17938796792562455860",
 					"deps": ["npm:@angular/core", "npm:@ngrx/signals", "npm:rxjs"]
 				},
 				{
 					"file": "apps/app/src/app/stores/x-current-user.store.ts",
-					"hash": "16809731706799287934",
-					"deps": [
-						"npm:@angular/core",
-						"npm:@ngneat/elf",
-						"npm:@ngneat/elf-state-history",
-						"npm:rxjs"
-					]
+					"hash": "3954192626350078056",
+					"deps": ["npm:@angular/core", "npm:@ngneat/elf", "npm:@ngneat/elf-state-history"]
 				},
 				{
 					"file": "apps/app/src/assets/fonts/helvetica-now/italic.woff2",
@@ -774,7 +725,7 @@
 				},
 				{
 					"file": "apps/app/src/scss/utilities/_typography.scss",
-					"hash": "8524255889898195312"
+					"hash": "6784343969019902635"
 				},
 				{
 					"file": "apps/app/src/scss/utilities/_visibility.scss",
@@ -806,162 +757,43 @@
 					"hash": "13145403073381813060"
 				}
 			],
-			"api-definitions": [
+			"app-e2e": [
 				{
-					"file": "libs/api-definitions/.eslintrc.json",
-					"hash": "5750691403146042869"
+					"file": "apps/app-e2e/.eslintrc.json",
+					"hash": "17325385559275175681"
 				},
 				{
-					"file": "libs/api-definitions/README.md",
-					"hash": "7720391171915493877"
+					"file": "apps/app-e2e/cypress.config.ts",
+					"hash": "10282742379397649623",
+					"deps": ["npm:@nx/cypress", "npm:cypress"]
 				},
 				{
-					"file": "libs/api-definitions/jest.config.ts",
-					"hash": "16339736012062953428"
+					"file": "apps/app-e2e/project.json",
+					"hash": "6368455426018914282"
 				},
 				{
-					"file": "libs/api-definitions/package.json",
-					"hash": "1744814641274559077"
+					"file": "apps/app-e2e/src/e2e/app.cy.ts",
+					"hash": "7071985747896009524"
 				},
 				{
-					"file": "libs/api-definitions/project.json",
-					"hash": "17153618735997722763"
+					"file": "apps/app-e2e/src/fixtures/example.json",
+					"hash": "6950778556131045369"
 				},
 				{
-					"file": "libs/api-definitions/src/index.ts",
-					"hash": "9801215203999621150"
+					"file": "apps/app-e2e/src/support/app.po.ts",
+					"hash": "11157016311132186162"
 				},
 				{
-					"file": "libs/api-definitions/src/lib/api-definitions.ts",
-					"hash": "5703443700764331654"
+					"file": "apps/app-e2e/src/support/commands.ts",
+					"hash": "7702314073611385872"
 				},
 				{
-					"file": "libs/api-definitions/src/lib/graphql/definitions.ts",
-					"hash": "15714015451474112106"
+					"file": "apps/app-e2e/src/support/e2e.ts",
+					"hash": "1054106023200826784"
 				},
 				{
-					"file": "libs/api-definitions/src/lib/graphql/game/fragment/game.fragment.gql",
-					"hash": "10666635093849360192"
-				},
-				{
-					"file": "libs/api-definitions/src/lib/graphql/game/mutation/joinGame.gql",
-					"hash": "15401399267448194297"
-				},
-				{
-					"file": "libs/api-definitions/src/lib/graphql/game/mutation/newGame.gql",
-					"hash": "15372348122112695429"
-				},
-				{
-					"file": "libs/api-definitions/src/lib/graphql/game/query/listGames.gql",
-					"hash": "3107699481517537724"
-				},
-				{
-					"file": "libs/api-definitions/src/lib/graphql/user/fragment/user.fragment.gql",
-					"hash": "2678543936499381633"
-				},
-				{
-					"file": "libs/api-definitions/src/lib/graphql/user/query/getUserInfo.gql",
-					"hash": "7306654257069768940"
-				},
-				{
-					"file": "libs/api-definitions/src/lib/graphql/user/query/getUsers.gql",
-					"hash": "10679531891654194735"
-				},
-				{
-					"file": "libs/api-definitions/src/lib/graphql/user/query/validateUserConstraints.gql",
-					"hash": "15318247702566615154"
-				},
-				{
-					"file": "libs/api-definitions/src/lib/rest/auth/index.ts",
-					"hash": "3419388755912062063"
-				},
-				{
-					"file": "libs/api-definitions/src/lib/rest/auth/request/login.interface.ts",
-					"hash": "4340067187820862015"
-				},
-				{
-					"file": "libs/api-definitions/src/lib/rest/auth/request/register.interface.ts",
-					"hash": "14700471397685629391"
-				},
-				{
-					"file": "libs/api-definitions/src/lib/rest/index.ts",
-					"hash": "16287680189997594639"
-				},
-				{
-					"file": "libs/api-definitions/src/lib/shared/card/card-color.enum.ts",
-					"hash": "11062856728450824877"
-				},
-				{
-					"file": "libs/api-definitions/src/lib/shared/card/card-properties.enum.ts",
-					"hash": "1943530703353431155"
-				},
-				{
-					"file": "libs/api-definitions/src/lib/shared/card/card-shading.enum.ts",
-					"hash": "4980330967125944505"
-				},
-				{
-					"file": "libs/api-definitions/src/lib/shared/card/card-shape.enum.ts",
-					"hash": "15378990516337075642"
-				},
-				{
-					"file": "libs/api-definitions/src/lib/shared/card/index.ts",
-					"hash": "15673510928444263309"
-				},
-				{
-					"file": "libs/api-definitions/src/lib/shared/index.ts",
-					"hash": "15070519349704388910"
-				},
-				{
-					"file": "libs/api-definitions/tsconfig.json",
-					"hash": "5840880287502376438"
-				},
-				{
-					"file": "libs/api-definitions/tsconfig.lib.json",
-					"hash": "3632393694954060084"
-				},
-				{
-					"file": "libs/api-definitions/tsconfig.spec.json",
-					"hash": "11550347367511341917"
-				}
-			],
-			"api-e2e": [
-				{
-					"file": "apps/api-e2e/.eslintrc.json",
-					"hash": "7390128441860019074"
-				},
-				{
-					"file": "apps/api-e2e/jest.config.ts",
-					"hash": "5451374175158945661"
-				},
-				{
-					"file": "apps/api-e2e/project.json",
-					"hash": "6289912400767736474"
-				},
-				{
-					"file": "apps/api-e2e/src/api/api.spec.ts",
-					"hash": "9265542822596803509",
-					"deps": ["npm:axios"]
-				},
-				{
-					"file": "apps/api-e2e/src/support/global-setup.ts",
-					"hash": "2568409276037275290"
-				},
-				{
-					"file": "apps/api-e2e/src/support/global-teardown.ts",
-					"hash": "5275447082211835490"
-				},
-				{
-					"file": "apps/api-e2e/src/support/test-setup.ts",
-					"hash": "8459234751713656095",
-					"deps": ["npm:axios"]
-				},
-				{
-					"file": "apps/api-e2e/tsconfig.json",
-					"hash": "6891393119390796046"
-				},
-				{
-					"file": "apps/api-e2e/tsconfig.spec.json",
-					"hash": "1260127805776156549"
+					"file": "apps/app-e2e/tsconfig.json",
+					"hash": "15361593316270112695"
 				}
 			],
 			"api-sdk": [
@@ -1406,7 +1238,7 @@
 				},
 				{
 					"file": "apps/api/src/module/game/relations/game-participant.repository.ts",
-					"hash": "816967585038118805",
+					"hash": "8234494185964603790",
 					"deps": ["npm:@mikro-orm/core"]
 				},
 				{
@@ -1816,6 +1648,164 @@
 					"hash": "7970474584122525470",
 					"deps": ["npm:@nx/webpack"]
 				}
+			],
+			"api-e2e": [
+				{
+					"file": "apps/api-e2e/.eslintrc.json",
+					"hash": "7390128441860019074"
+				},
+				{
+					"file": "apps/api-e2e/jest.config.ts",
+					"hash": "5451374175158945661"
+				},
+				{
+					"file": "apps/api-e2e/project.json",
+					"hash": "6289912400767736474"
+				},
+				{
+					"file": "apps/api-e2e/src/api/api.spec.ts",
+					"hash": "9265542822596803509",
+					"deps": ["npm:axios"]
+				},
+				{
+					"file": "apps/api-e2e/src/support/global-setup.ts",
+					"hash": "2568409276037275290"
+				},
+				{
+					"file": "apps/api-e2e/src/support/global-teardown.ts",
+					"hash": "5275447082211835490"
+				},
+				{
+					"file": "apps/api-e2e/src/support/test-setup.ts",
+					"hash": "8459234751713656095",
+					"deps": ["npm:axios"]
+				},
+				{
+					"file": "apps/api-e2e/tsconfig.json",
+					"hash": "6891393119390796046"
+				},
+				{
+					"file": "apps/api-e2e/tsconfig.spec.json",
+					"hash": "1260127805776156549"
+				}
+			],
+			"api-definitions": [
+				{
+					"file": "libs/api-definitions/.eslintrc.json",
+					"hash": "5750691403146042869"
+				},
+				{
+					"file": "libs/api-definitions/README.md",
+					"hash": "7720391171915493877"
+				},
+				{
+					"file": "libs/api-definitions/jest.config.ts",
+					"hash": "16339736012062953428"
+				},
+				{
+					"file": "libs/api-definitions/package.json",
+					"hash": "1744814641274559077"
+				},
+				{
+					"file": "libs/api-definitions/project.json",
+					"hash": "17153618735997722763"
+				},
+				{
+					"file": "libs/api-definitions/src/index.ts",
+					"hash": "9801215203999621150"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/api-definitions.ts",
+					"hash": "5703443700764331654"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/graphql/definitions.ts",
+					"hash": "15714015451474112106"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/graphql/game/fragment/game.fragment.gql",
+					"hash": "10666635093849360192"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/graphql/game/mutation/joinGame.gql",
+					"hash": "15401399267448194297"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/graphql/game/mutation/newGame.gql",
+					"hash": "15372348122112695429"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/graphql/game/query/listGames.gql",
+					"hash": "3107699481517537724"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/graphql/user/fragment/user.fragment.gql",
+					"hash": "2678543936499381633"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/graphql/user/query/getUserInfo.gql",
+					"hash": "7306654257069768940"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/graphql/user/query/getUsers.gql",
+					"hash": "10679531891654194735"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/graphql/user/query/validateUserConstraints.gql",
+					"hash": "15318247702566615154"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/rest/auth/index.ts",
+					"hash": "3419388755912062063"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/rest/auth/request/login.interface.ts",
+					"hash": "4340067187820862015"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/rest/auth/request/register.interface.ts",
+					"hash": "14700471397685629391"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/rest/index.ts",
+					"hash": "16287680189997594639"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/shared/card/card-color.enum.ts",
+					"hash": "11062856728450824877"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/shared/card/card-properties.enum.ts",
+					"hash": "1943530703353431155"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/shared/card/card-shading.enum.ts",
+					"hash": "4980330967125944505"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/shared/card/card-shape.enum.ts",
+					"hash": "15378990516337075642"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/shared/card/index.ts",
+					"hash": "15673510928444263309"
+				},
+				{
+					"file": "libs/api-definitions/src/lib/shared/index.ts",
+					"hash": "15070519349704388910"
+				},
+				{
+					"file": "libs/api-definitions/tsconfig.json",
+					"hash": "5840880287502376438"
+				},
+				{
+					"file": "libs/api-definitions/tsconfig.lib.json",
+					"hash": "3632393694954060084"
+				},
+				{
+					"file": "libs/api-definitions/tsconfig.spec.json",
+					"hash": "11550347367511341917"
+				}
 			]
 		},
 		"nonProjectFiles": [
@@ -1933,7 +1923,7 @@
 			},
 			{
 				"file": "migrations.json",
-				"hash": "10713412833692439391"
+				"hash": "15751301189020887947"
 			},
 			{
 				"file": "nx.json",

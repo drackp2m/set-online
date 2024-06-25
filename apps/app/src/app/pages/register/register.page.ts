@@ -6,24 +6,22 @@ import { Apollo, ApolloModule } from 'apollo-angular';
 
 import { GetUserInfoGQL, User } from '../../graphql/apollo-operations';
 import { ApiClient } from '../../shared/services/api-client.service';
-import { XCurrentUserStore } from '../../stores/x-current-user.store';
+import { CurrentUserStore } from '../../stores/current-user.store';
 
 @Component({
 	standalone: true,
 	templateUrl: './register.page.html',
 	styleUrl: './register.page.scss',
 	imports: [NgIf, ReactiveFormsModule, ApolloModule, JsonPipe],
-	providers: [ApiClient, XCurrentUserStore, HttpClient, GetUserInfoGQL, Apollo],
+	providers: [ApiClient, CurrentUserStore, HttpClient, GetUserInfoGQL, Apollo],
 })
 export default class RegisterPage {
 	private readonly apiClient = inject(ApiClient);
-	private readonly currentUserStore = inject(XCurrentUserStore);
-
-	caca = { esto: 'es una caca' };
+	private readonly currentUserStore = inject(CurrentUserStore);
 
 	form = new FormGroup({
-		username: new FormControl('', [Validators.required]),
-		password: new FormControl('', [Validators.required]),
+		username: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+		password: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
 	});
 
 	user: WritableSignal<User | null> = signal(null);
@@ -46,7 +44,6 @@ export default class RegisterPage {
 					this.user.set(data);
 				},
 				error: ({ error }) => {
-					console.error(error);
 					this.error.set(error.message);
 				},
 			});
