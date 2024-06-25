@@ -27,7 +27,7 @@ export default class MainLayout {
 	private readonly currentUserStore = inject(CurrentUserStore);
 
 	user = this.currentUserStore.data;
-	// userError = toSignal(this.currentUserStore.state$.pipe(select((state) => state.error)));
+	userError = this.currentUserStore.error;
 
 	logout() {
 		return () =>
