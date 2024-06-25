@@ -1,6 +1,10 @@
-import { IsOptional } from 'class-validator';
+import { Field, InputType } from '@nestjs/graphql';
+import { IsNotEmpty, IsNumber } from 'class-validator';
 
-export class PingRequestdto {
-	@IsOptional()
-	previousPing?: number;
+@InputType()
+export class PingRequestDto {
+	@IsNumber()
+	@IsNotEmpty()
+	@Field({ nullable: true })
+	pingValue?: number;
 }

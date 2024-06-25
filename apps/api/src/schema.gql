@@ -32,6 +32,11 @@ input JoinGameInput {
 type Mutation {
   joinGame(input: JoinGameInput!): Game!
   newGame: Game!
+  sendPing(input: PingRequestDto!): String!
+}
+
+input PingRequestDto {
+  pingValue: Float
 }
 
 type Query {
