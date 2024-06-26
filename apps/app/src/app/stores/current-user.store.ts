@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
-import { firstValueFrom, take } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 
 import { GetUserInfoGQL, GetUserInfoQuery } from '../graphql/apollo-operations';
 
@@ -31,15 +31,15 @@ type UserInfoError = {
 };
 
 type CurrentUserState = {
-	data: UserInfo | null;
+	data: UserInfo | undefined;
 	isLoading: boolean;
-	error: UserInfoError | null;
+	error: UserInfoError | undefined;
 };
 
 const initialState: CurrentUserState = {
-	data: null,
+	data: undefined,
 	isLoading: false,
-	error: null,
+	error: undefined,
 };
 
 export const CurrentUserStore = signalStore(
@@ -53,8 +53,9 @@ export const CurrentUserStore = signalStore(
 			patchState(store, { isLoading: true });
 
 			try {
-				const { data } = await firstValueFrom(getUserInfoGQL.fetch().pipe(take(1)));
-				patchState(store, { data: data.getUserInfo, isLoading: false });
+				const { data } = await firstValueFrom(getUserInfoGQL.fetch());
+
+				patchState(store, { data: data.getUserInfo, isLoading: false, error: undefined });
 			} catch (error) {
 				patchState(store, { error: error as UserInfoError, isLoading: false });
 			}
