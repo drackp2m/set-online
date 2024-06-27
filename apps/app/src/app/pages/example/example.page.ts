@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, WritableSignal, inject, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Apollo, gql } from 'apollo-angular';
@@ -29,12 +29,9 @@ export default class ExamplePage {
 		initialValue: 'An error ocurred',
 	});
 
-	users: WritableSignal<number | undefined> = signal(undefined);
+	data = signal<string | undefined>(undefined);
 
-	apolloSubscription = signal<{ getManySubscription: string }>({ getManySubscription: '' });
-
-	response!: string;
-	error!: string;
+	getManySubscription = signal<string | undefined>(undefined);
 
 	form = new FormGroup({
 		username: new FormControl('', [Validators.required]),
@@ -44,10 +41,10 @@ export default class ExamplePage {
 	checkUsers(): void {
 		this.getUsersGQL.fetch().subscribe({
 			next: (data) => {
-				this.users.set(data.data.getUsers.length);
+				this.data.set(`Now: ${data.data.getUsers.length} users.`);
 			},
 			error: (error) => {
-				this.show(error.message, true);
+				this.data.set(error.message);
 			},
 		});
 	}
@@ -61,15 +58,15 @@ export default class ExamplePage {
 					}
 				`,
 			})
-			.subscribe((data) => {
-				if (data.data) {
-					this.apolloSubscription.set(data.data);
-				}
+			.subscribe({
+				next: (data) => {
+					if (data.data) {
+						this.getManySubscription.set(data.data.getManySubscription);
+					}
+				},
+				error: (error) => {
+					this.getManySubscription.set(error.message);
+				},
 			});
-	}
-
-	private show(message: string, error = false) {
-		this.response = error ? '' : message;
-		this.error = error ? message : '';
 	}
 }
