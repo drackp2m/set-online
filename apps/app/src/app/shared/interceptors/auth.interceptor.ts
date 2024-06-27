@@ -36,32 +36,58 @@ export class AuthInterceptor implements HttpInterceptor {
 
 		return next.handle(req).pipe(
 			catchError((error: HttpEvent<unknown>) => {
-				if (error instanceof HttpErrorResponse === false) {
-					return of(error);
-				}
+				return this.handleErrorOrEvent(req, next, error);
+				// if (error instanceof HttpErrorResponse === false) {
+				// 	return of(error);
+				// }
 
-				const isUnauthorizedError = error.status === 401;
+				// const isUnauthorizedError = error.status === 401;
 
-				if (isUnauthorizedError === true && this.authStore.data()?.tokensAreValid === undefined) {
-					return this.retryRequest(req, next, error);
-				}
+				// if (isUnauthorizedError === true && this.authStore.data()?.tokensAreValid === undefined) {
+				// 	return this.retryRequest(req, next, error);
+				// }
 
-				return of(error);
+				// return of(error);
 			}),
 			switchMap((event) => {
-				if (event instanceof HttpResponse === false) {
-					return of(event);
-				}
+				return this.handleErrorOrEvent(req, next, event);
+				// console.log('map');
+				// if (event instanceof HttpResponse === false) {
+				// 	return of(event);
+				// }
 
-				const isUnauthorizedError = event.body?.errors?.[0]?.message === 'Unauthorized';
+				// const isUnauthorizedError = event.body?.errors?.[0]?.message === 'Unauthorized';
 
-				if (isUnauthorizedError === true && this.authStore.data()?.tokensAreValid === undefined) {
-					return this.retryRequest(req, next, event);
-				}
+				// if (isUnauthorizedError === true && this.authStore.data()?.tokensAreValid === undefined) {
+				// 	return this.retryRequest(req, next, event);
+				// }
 
-				return of(event);
+				// return of(event);
 			}),
 		);
+	}
+
+	handleErrorOrEvent(
+		req: HttpRequest<unknown>,
+		next: HttpHandler,
+		event?: unknown,
+	): Observable<HttpEvent<unknown>> {
+		const isHttpErrorResponse = event instanceof HttpErrorResponse;
+		const isHttpResponse = event instanceof HttpResponse;
+
+		if (isHttpErrorResponse === false && isHttpResponse === false) {
+			return of(event as HttpResponse<unknown>);
+		}
+
+		const isUnauthorizedError = isHttpErrorResponse
+			? event.status === 401
+			: event.body?.errors?.[0]?.message === 'Unauthorized';
+
+		if (isUnauthorizedError && this.authStore.data()?.tokensAreValid === undefined) {
+			return this.retryRequest(req, next, event as HttpResponse<unknown>);
+		}
+
+		return of(event as HttpResponse<unknown>);
 	}
 
 	private retryRequest(
