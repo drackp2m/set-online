@@ -23,12 +23,16 @@ export const APP_ROUTES: Routes = [
 				children: HOME_ROUTES,
 			},
 			{
+				path: 'register',
+				children: REGISTER_ROUTES,
+			},
+			{
 				path: 'login',
 				children: LOGIN_ROUTES,
 			},
 			{
-				path: 'register',
-				children: REGISTER_ROUTES,
+				path: 'logout',
+				children: LOGIN_ROUTES,
 			},
 			{
 				path: 'example',

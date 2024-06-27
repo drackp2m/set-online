@@ -10,7 +10,7 @@ import { Injectable, inject } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { catchError, filter, switchMap, take } from 'rxjs/operators';
+import { catchError, filter, skip, switchMap, take } from 'rxjs/operators';
 
 import { AuthStore } from '../../stores/auth.store';
 
@@ -24,43 +24,51 @@ export class AuthInterceptor implements HttpInterceptor {
 	private readonly API_LOGIN_URL = '/api/auth/login';
 
 	private readonly authStoreLoadingFinished$ = toObservable(this.authStore.isLoading).pipe(
+		skip(1),
 		filter((value) => value === false),
 	);
 
 	intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-		const urlsToIgnore = [this.API_REFRESH_SESSION_URL, this.API_REGISTER_URL, this.API_LOGIN_URL];
+		const tokensAreValid = this.authStore.data()?.tokensAreValid;
 
-		if (urlsToIgnore.some((url) => req.url.includes(url))) return next.handle(req);
+		const urlsToIgnore = [this.API_REGISTER_URL, this.API_LOGIN_URL, this.API_REFRESH_SESSION_URL];
 
-		if (this.authStore.data()?.tokensAreValid === false) {
-			if (this.authStore.isLoading() === false) {
-				return new Observable<HttpEvent<unknown>>();
-			}
-
-			return this.retryRequest(req, next);
+		if (tokensAreValid === false || urlsToIgnore.some((url) => req.url.includes(url))) {
+			return next.handle(req);
 		}
 
 		return next.handle(req).pipe(
-			switchMap((event) => {
-				if (!(event instanceof HttpResponse)) return of(event);
-
-				const isUnauthorizedError =
-					event.body?.errors && event.body.errors[0].message === 'Unauthorized';
-
-				if (!isUnauthorizedError) return of(event);
-
-				return this.retryRequest(req, next, event);
-			}),
 			catchError((error: HttpEvent<unknown>) => {
-				if (!(error instanceof HttpErrorResponse)) return of(error);
-
-				const isUnauthorizedError = error.status === 401;
-
-				if (isUnauthorizedError) return of(error);
-
-				return this.retryRequest(req, next, error);
+				return this.handleErrorOrEvent(req, next, error);
+			}),
+			switchMap((event) => {
+				return this.handleErrorOrEvent(req, next, event);
 			}),
 		);
+	}
+
+	// ToDo => improve types of this method
+	handleErrorOrEvent(
+		req: HttpRequest<unknown>,
+		next: HttpHandler,
+		event?: unknown,
+	): Observable<HttpEvent<unknown>> {
+		const isHttpErrorResponse = event instanceof HttpErrorResponse;
+		const isHttpResponse = event instanceof HttpResponse;
+
+		if (isHttpErrorResponse === false && isHttpResponse === false) {
+			return of(event as HttpResponse<unknown>);
+		}
+
+		const isUnauthorizedError = isHttpErrorResponse
+			? event.status === 401
+			: event.body?.errors?.[0]?.message === 'Unauthorized';
+
+		if (isUnauthorizedError && this.authStore.data()?.tokensAreValid !== false) {
+			return this.retryRequest(req, next, event as HttpResponse<unknown>);
+		}
+
+		return of(event as HttpResponse<unknown>);
 	}
 
 	private retryRequest(
@@ -75,13 +83,11 @@ export class AuthInterceptor implements HttpInterceptor {
 		return this.authStoreLoadingFinished$.pipe(
 			take(1),
 			switchMap(() => {
-				if (event && this.authStore.data()?.tokensAreValid === false) {
-					this.router.navigate(['/login']);
-
-					return next.handle(req);
-				} else {
-					return next.handle(req);
+				if (this.authStore.data()?.tokensAreValid === false) {
+					void this.router.navigate(['/login']);
 				}
+
+				return next.handle(req);
 			}),
 		);
 	}

@@ -10,7 +10,7 @@
 			<ng-container
 				*ngTemplateOutlet="
 					button;
-					context: { text: 'Logout', link: '/login', click: logout(), surface: 'radiant' }
+					context: { text: 'Logout', link: 'logout', click: logout(), surface: 'radiant' }
 				"
 			/>
 
@@ -25,14 +25,14 @@
 
 		<ng-template #button let-text="text" let-link="link" let-click="click" let-surface="surface">
 			<a
-				class="round-sm p-xs px-sm"
-				[class]="active.isActive ? 'weight-xxl surface-serene' : 'surface-' + (surface || 'vivid')"
 				routerLinkActive
 				#active="routerLinkActive"
+				class="round-sm p-xs px-sm"
+				[class]="active.isActive ? 'weight-xxl surface-serene' : 'surface-' + (surface || 'vivid')"
 				[routerLink]="link"
 				(click)="click ? click() : null"
-				>{{ text }}</a
-			>
+				>{{ text }}
+			</a>
 		</ng-template>
 
 		@if (user()) {

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 
 import { GetUsersGQL } from '../../graphql/apollo-operations';
 import { ApiClient } from '../../shared/services/api-client.service';
+import { AuthStore } from '../../stores/auth.store';
 import { CurrentUserStore } from '../../stores/current-user.store';
 
 @Component({
@@ -17,6 +18,7 @@ import { CurrentUserStore } from '../../stores/current-user.store';
 export default class LoginPage implements OnInit {
 	private readonly apiClient = inject(ApiClient);
 	private readonly router = inject(Router);
+	private readonly authStore = inject(AuthStore);
 	private readonly currentUserStore = inject(CurrentUserStore);
 	private readonly getUsersGQL = inject(GetUsersGQL);
 
@@ -64,6 +66,7 @@ export default class LoginPage implements OnInit {
 			.subscribe({
 				next: () => {
 					this.loginFinished.set(true);
+					this.authStore.markTokensAsValid();
 				},
 				error: ({ error }) => {
 					this.error.set(error.message);
