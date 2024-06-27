@@ -39,6 +39,8 @@ export const appConfig: ApplicationConfig = {
 						on: {
 							connected: (x, y, z) => {
 								console.log({ x, y, z });
+
+								console.log({ client });
 							},
 							ping: (a, b) => {
 								console.log({ a, b });
@@ -46,7 +48,7 @@ export const appConfig: ApplicationConfig = {
 							pong: (c, d) => {
 								// console.log(apollo);
 
-								sendPingToServer(client);
+								// sendPingToServer(client);
 
 								console.log({ c, d });
 
@@ -97,7 +99,7 @@ export const appConfig: ApplicationConfig = {
 	],
 };
 
-function sendPingToServer(client: Client): void {
+function _sendPingToServer(client: Client): void {
 	console.log('Sending ping from client...');
 
 	client.subscribe(
