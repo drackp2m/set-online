@@ -10,7 +10,7 @@ import { Injectable, inject } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { catchError, filter, skip, switchMap, take } from 'rxjs/operators';
+import { catchError, filter, skip, switchMap, take, tap } from 'rxjs/operators';
 
 import { AuthStore } from '../../stores/auth.store';
 
@@ -26,6 +26,7 @@ export class AuthInterceptor implements HttpInterceptor {
 	private readonly authStoreLoadingFinished$ = toObservable(this.authStore.isLoading).pipe(
 		skip(1),
 		filter((value) => value === false),
+		tap(() => console.log('emitting load finish')),
 	);
 
 	intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
@@ -76,7 +77,9 @@ export class AuthInterceptor implements HttpInterceptor {
 		next: HttpHandler,
 		event?: HttpEvent<unknown>,
 	): Observable<HttpEvent<unknown>> {
-		if (event !== undefined) {
+		const isAuthStoreLoading = this.authStore.isLoading();
+
+		if (event !== undefined && isAuthStoreLoading === false) {
 			void this.authStore.tryToRefreshTokens();
 		}
 
