@@ -1,0 +1,3 @@
+mutation SendPing($input: SendPingInput!) {
+	sendPing(input: $input)
+}

@@ -1,12 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 
+import { SendPingGQL } from '../graphql/apollo-operations';
+
 import { AppComponent } from './app.component';
 import { NxWelcomeComponent } from './nx-welcome.component';
 
 describe('AppComponent', () => {
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			imports: [AppComponent, NxWelcomeComponent],
+			imports: [AppComponent, NxWelcomeComponent, SendPingGQL],
 		}).compileComponents();
 	});
 

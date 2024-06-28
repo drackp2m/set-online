@@ -25,7 +25,7 @@ export interface JoinGameInput {
     gameUuid: string;
 }
 
-export interface PingRequestDto {
+export interface SendPingInput {
     pingValue?: Nullable<number>;
 }
 
@@ -47,7 +47,7 @@ export interface Game {
 export interface IMutation {
     joinGame(input: JoinGameInput): Game | Promise<Game>;
     newGame(): Game | Promise<Game>;
-    sendPing(input: PingRequestDto): string | Promise<string>;
+    sendPing(input: SendPingInput): string | Promise<string>;
 }
 
 export interface IQuery {
