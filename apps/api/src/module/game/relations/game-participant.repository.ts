@@ -22,8 +22,6 @@ export class GameParticipantRepository {
 			throw new NotFoundException('not exists', entityName);
 		}
 
-		console.log({ user });
-
 		return user as GameParticipant;
 	}
 
