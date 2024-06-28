@@ -1,5 +1,5 @@
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, computed, signal } from '@angular/core';
 import { provideRouter, withHashLocation } from '@angular/router';
 import { InMemoryCache, split } from '@apollo/client/core';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
@@ -7,11 +7,30 @@ import { getMainDefinition } from '@apollo/client/utilities';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { OperationDefinitionNode } from 'graphql';
-import { Client, createClient } from 'graphql-ws';
+import { createClient } from 'graphql-ws';
 
 import { APP_ROUTES } from './app.routes';
 import { environment } from './environments/environment';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
+
+const pingTimestamp = signal<number | undefined>(undefined);
+
+const pongTimestamp = signal<number | undefined>(undefined);
+
+export const pingValue = computed(() => {
+	const pingTimestampValue = pingTimestamp();
+	const pongTimestampValue = pongTimestamp();
+
+	if (
+		pingTimestampValue === undefined ||
+		pongTimestampValue === undefined ||
+		pongTimestampValue - pingTimestampValue < 0
+	) {
+		return undefined;
+	}
+
+	return pongTimestampValue - pingTimestampValue;
+});
 
 export const appConfig: ApplicationConfig = {
 	providers: [
@@ -25,41 +44,32 @@ export const appConfig: ApplicationConfig = {
 			deps: [HttpLink],
 			provide: APOLLO_OPTIONS,
 			useFactory(httpLink: HttpLink) {
-				let client: Client;
-
 				const http = httpLink.create({
 					uri: `${environment.apiUrl}/graphql`,
 				});
 
 				const ws = new GraphQLWsLink(
-					(client = createClient({
+					createClient({
 						url: `${environment.wsUrl}/graphql`,
 						connectionAckWaitTimeout: 1000,
 						keepAlive: 5000,
 						on: {
 							connected: (x, y, z) => {
 								console.log({ x, y, z });
-
-								console.log({ client });
 							},
 							ping: (a, b) => {
+								pingTimestamp.set(new Date().getTime());
+
 								console.log({ a, b });
 							},
 							pong: (c, d) => {
-								// console.log(apollo);
-
-								// sendPingToServer(client);
+								pongTimestamp.set(new Date().getTime());
+								console.log('pong received...');
 
 								console.log({ c, d });
-
-								const items: string[] = [];
-
-								const notExist = items[99];
-
-								console.log(notExist);
 							},
 						},
-					})),
+					}),
 				);
 
 				const link = split(
@@ -98,21 +108,3 @@ export const appConfig: ApplicationConfig = {
 		provideRouter(APP_ROUTES, withHashLocation()),
 	],
 };
-
-function _sendPingToServer(client: Client): void {
-	console.log('Sending ping from client...');
-
-	client.subscribe(
-		{
-			query: `mutation {
-				sendPing(input: { pingValue: 22 }) {
-				}
-			}`,
-		},
-		{
-			next: (data) => console.log(data),
-			error: (error) => console.error(error),
-			complete: () => console.log('done'),
-		},
-	);
-}

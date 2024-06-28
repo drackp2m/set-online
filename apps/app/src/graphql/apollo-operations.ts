@@ -66,11 +66,7 @@ export type MutationjoinGameArgs = {
 };
 
 export type MutationsendPingArgs = {
-	input: PingRequestDto;
-};
-
-export type PingRequestDto = {
-	pingValue?: InputMaybe<Scalars['Float']['input']>;
+	input: SendPingInput;
 };
 
 export type Query = {
@@ -83,6 +79,10 @@ export type Query = {
 
 export type QueryvalidateUserConstraintsArgs = {
 	input: ValidateUserConstraintsInput;
+};
+
+export type SendPingInput = {
+	pingValue?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type Subscription = {
@@ -184,6 +184,12 @@ export type ListGamesQuery = {
 		participants: Array<{ __typename?: 'User'; uuid: string; username: string }>;
 	}>;
 };
+
+export type SendPingMutationVariables = Exact<{
+	input: SendPingInput;
+}>;
+
+export type SendPingMutation = { __typename?: 'Mutation'; sendPing: string };
 
 export type UserFieldsFragment = {
 	__typename?: 'User';
@@ -314,6 +320,23 @@ export const ListGamesDocument = gql`
 })
 export class ListGamesGQL extends Apollo.Query<ListGamesQuery, ListGamesQueryVariables> {
 	override document = ListGamesDocument;
+
+	constructor(apollo: Apollo.Apollo) {
+		super(apollo);
+	}
+}
+
+export const SendPingDocument = gql`
+	mutation SendPing($input: SendPingInput!) {
+		sendPing(input: $input)
+	}
+`;
+
+@Injectable({
+	providedIn: 'root',
+})
+export class SendPingGQL extends Apollo.Mutation<SendPingMutation, SendPingMutationVariables> {
+	override document = SendPingDocument;
 
 	constructor(apollo: Apollo.Apollo) {
 		super(apollo);

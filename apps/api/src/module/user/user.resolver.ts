@@ -54,9 +54,9 @@ export class UserResolver {
 		name: 'getManySubscription',
 		resolve: (payload: string) => payload,
 		filter(_payload, _variables, _context) {
-			console.log(_context.req.user);
+			// console.log(_context.req.user);
 
-			console.log({ isAuthenticated: _context.req.isAuthenticated() });
+			// console.log({ isAuthenticated: _context.req.isAuthenticated() });
 
 			return true;
 		},
