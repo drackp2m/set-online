@@ -2,10 +2,9 @@ import { Component, OnInit, effect, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 
-import { SendPingGQL } from '../graphql/apollo-operations';
+import { GetUserInfoGQL, SendPingGQL } from '@set-online/apollo-definitions';
 
 import { pingValue } from './app.config';
-import { GetUserInfoGQL } from './graphql/apollo-operations';
 import { CurrentUserStore } from './stores/current-user.store';
 
 @Component({
@@ -13,7 +12,7 @@ import { CurrentUserStore } from './stores/current-user.store';
 	selector: 'set-root',
 	template: `<router-outlet />`,
 	imports: [RouterOutlet],
-	providers: [CurrentUserStore, Apollo, GetUserInfoGQL, SendPingGQL],
+	providers: [Apollo, CurrentUserStore, GetUserInfoGQL, SendPingGQL],
 })
 export class AppComponent implements OnInit {
 	private readonly currentUserStore = inject(CurrentUserStore);

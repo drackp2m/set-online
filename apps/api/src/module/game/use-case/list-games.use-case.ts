@@ -11,7 +11,7 @@ export class ListGamesUseCase {
 	async execute(): Promise<Game[]> {
 		return await this.gameRepository.getMany(
 			{
-				status: GameStatus.WaitingOpponents,
+				status: GameStatus.waitingOpponents,
 			},
 			{ populate: ['participants'] },
 		);

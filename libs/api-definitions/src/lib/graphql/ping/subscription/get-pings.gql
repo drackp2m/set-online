@@ -1,0 +1,4 @@
+
+subscription GetPings {
+  getPings
+}

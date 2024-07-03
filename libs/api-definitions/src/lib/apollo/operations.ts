@@ -44,10 +44,10 @@ export type Game = {
 };
 
 export enum GameStatus {
-	Completed = 'Completed',
-	Expired = 'Expired',
-	InProgress = 'InProgress',
-	WaitingOpponents = 'WaitingOpponents',
+	completed = 'completed',
+	expired = 'expired',
+	inProgress = 'inProgress',
+	waitingOpponents = 'waitingOpponents',
 }
 
 export type JoinGameInput = {
@@ -58,10 +58,15 @@ export type Mutation = {
 	__typename?: 'Mutation';
 	joinGame: Game;
 	newGame: Game;
+	sendPing: Scalars['Boolean']['output'];
 };
 
 export type MutationjoinGameArgs = {
 	input: JoinGameInput;
+};
+
+export type MutationsendPingArgs = {
+	input: SendPingInput;
 };
 
 export type Query = {
@@ -76,9 +81,14 @@ export type QueryvalidateUserConstraintsArgs = {
 	input: ValidateUserConstraintsInput;
 };
 
+export type SendPingInput = {
+	pingValue: Scalars['Float']['input'];
+};
+
 export type Subscription = {
 	__typename?: 'Subscription';
-	getManySubscription?: Maybe<Scalars['String']['output']>;
+	getManySubscription: Scalars['String']['output'];
+	getPings: Scalars['Float']['output'];
 };
 
 /** user */
@@ -175,6 +185,23 @@ export type ListGamesQuery = {
 		participants: Array<{ __typename?: 'User'; uuid: string; username: string }>;
 	}>;
 };
+
+export type SendPingMutationVariables = Exact<{
+	input: SendPingInput;
+}>;
+
+export type SendPingMutation = { __typename?: 'Mutation'; sendPing: boolean };
+
+export type GetManySubscriptionSubscriptionVariables = Exact<{ [key: string]: never }>;
+
+export type GetManySubscriptionSubscription = {
+	__typename?: 'Subscription';
+	getManySubscription: string;
+};
+
+export type GetPingsSubscriptionVariables = Exact<{ [key: string]: never }>;
+
+export type GetPingsSubscription = { __typename?: 'Subscription'; getPings: number };
 
 export type UserFieldsFragment = {
 	__typename?: 'User';
@@ -280,7 +307,9 @@ export const NewGameDocument = gql`
 	${GameFieldsFragmentDoc}
 `;
 
-@Injectable()
+@Injectable({
+	providedIn: 'root',
+})
 export class NewGameGQL extends Apollo.Mutation<NewGameMutation, NewGameMutationVariables> {
 	override document = NewGameDocument;
 
@@ -302,7 +331,68 @@ export const ListGamesDocument = gql`
 	providedIn: 'root',
 })
 export class ListGamesGQL extends Apollo.Query<ListGamesQuery, ListGamesQueryVariables> {
-	override readonly document = ListGamesDocument;
+	override document = ListGamesDocument;
+
+	constructor(apollo: Apollo.Apollo) {
+		super(apollo);
+	}
+}
+
+export const SendPingDocument = gql`
+	mutation SendPing($input: SendPingInput!) {
+		sendPing(input: $input)
+	}
+`;
+
+@Injectable({
+	providedIn: 'root',
+})
+export class SendPingGQL extends Apollo.Mutation<SendPingMutation, SendPingMutationVariables> {
+	override document = SendPingDocument;
+
+	constructor(apollo: Apollo.Apollo) {
+		super(apollo);
+	}
+}
+
+export const GetManySubscriptionDocument = gql`
+	subscription GetManySubscription {
+		getManySubscription
+	}
+`;
+
+@Injectable({
+	providedIn: 'root',
+})
+export class GetManySubscriptionGQL extends Apollo.Subscription<
+	GetManySubscriptionSubscription,
+	GetManySubscriptionSubscriptionVariables
+> {
+	override document = GetManySubscriptionDocument;
+
+	constructor(apollo: Apollo.Apollo) {
+		super(apollo);
+	}
+}
+
+export const GetPingsDocument = gql`
+	subscription GetPings {
+		getPings
+	}
+`;
+
+@Injectable({
+	providedIn: 'root',
+})
+export class GetPingsGQL extends Apollo.Subscription<
+	GetPingsSubscription,
+	GetPingsSubscriptionVariables
+> {
+	override document = GetPingsDocument;
+
+	constructor(apollo: Apollo.Apollo) {
+		super(apollo);
+	}
 }
 
 export const GetUserInfoDocument = gql`
@@ -319,6 +409,10 @@ export const GetUserInfoDocument = gql`
 })
 export class GetUserInfoGQL extends Apollo.Query<GetUserInfoQuery, GetUserInfoQueryVariables> {
 	override document = GetUserInfoDocument;
+
+	constructor(apollo: Apollo.Apollo) {
+		super(apollo);
+	}
 }
 
 export const GetUsersDocument = gql`
@@ -354,5 +448,9 @@ export class ValidateUserConstraintsGQL extends Apollo.Query<
 	ValidateUserConstraintsQuery,
 	ValidateUserConstraintsQueryVariables
 > {
-	override readonly document = ValidateUserConstraintsDocument;
+	override document = ValidateUserConstraintsDocument;
+
+	constructor(apollo: Apollo.Apollo) {
+		super(apollo);
+	}
 }

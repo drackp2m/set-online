@@ -5,6 +5,6 @@ import { IsNotEmpty, IsNumber } from 'class-validator';
 export class SendPingInput {
 	@IsNumber()
 	@IsNotEmpty()
-	@Field({ nullable: true })
-	pingValue?: number;
+	@Field()
+	pingValue!: number;
 }

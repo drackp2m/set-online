@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
 
 import { PreconditionFailedException } from '../../../shared/exception/precondition-failed.exception';
-import { HashPasswordUseCase } from '../../../shared/use-case/hash-password.use-case';
 import { User } from '../../user/user.entity';
 import { UserRepository } from '../../user/user.repository';
 import { RegisterRequestDto } from '../dto/register-request.dto';
+
+import { HashPasswordUseCase } from './hash-password.use-case';
 
 @Injectable()
 export class RegisterUseCase {

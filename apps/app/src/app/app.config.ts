@@ -21,15 +21,13 @@ export const pingValue = computed(() => {
 	const pingTimestampValue = pingTimestamp();
 	const pongTimestampValue = pongTimestamp();
 
-	if (
-		pingTimestampValue === undefined ||
-		pongTimestampValue === undefined ||
-		pongTimestampValue - pingTimestampValue < 0
-	) {
+	if (pongTimestampValue === undefined || pingTimestampValue === undefined) {
 		return undefined;
 	}
 
-	return pongTimestampValue - pingTimestampValue;
+	const ping = pongTimestampValue - pingTimestampValue;
+
+	return ping > 0 ? ping : undefined;
 });
 
 export const appConfig: ApplicationConfig = {

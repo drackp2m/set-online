@@ -2,10 +2,10 @@ import { NgIf } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Apollo, gql } from 'apollo-angular';
 import { map } from 'rxjs';
 
-import { GetUsersGQL } from '../../graphql/apollo-operations';
+import { GetManySubscriptionGQL, GetPingsGQL, GetUsersGQL } from '@set-online/apollo-definitions';
+
 import { HoverSrcDirective } from '../../shared/directives/img-hover-src.directive';
 import { ApiClient } from '../../shared/services/api-client.service';
 
@@ -16,12 +16,13 @@ import ExampleMenuComponent from './shared/components/menu/example-menu.componen
 	templateUrl: './example.page.html',
 	styleUrl: './example.page.scss',
 	imports: [ExampleMenuComponent, HoverSrcDirective, ReactiveFormsModule, NgIf],
-	providers: [ApiClient, GetUsersGQL, Apollo],
+	providers: [ApiClient, GetUsersGQL, GetManySubscriptionGQL, GetPingsGQL],
 })
 export default class ExamplePage {
 	private readonly apiClient = inject(ApiClient);
 	private readonly getUsersGQL = inject(GetUsersGQL);
-	private readonly apollo = inject(Apollo);
+	private readonly getManySubscriptionGQL = inject(GetManySubscriptionGQL);
+	private readonly getPingsGQL = inject(GetPingsGQL);
 
 	private readonly hello$ = this.apiClient.default.get('/hello');
 
@@ -30,8 +31,8 @@ export default class ExamplePage {
 	});
 
 	data = signal<string | undefined>(undefined);
-
 	getManySubscription = signal<string | undefined>(undefined);
+	getPings = signal<string | undefined>(undefined);
 
 	form = new FormGroup({
 		username: new FormControl('', [Validators.required]),
@@ -50,23 +51,29 @@ export default class ExamplePage {
 	}
 
 	initSubscription(): void {
-		this.apollo
-			.subscribe<{ getManySubscription: string }>({
-				query: gql`
-					subscription Subscription {
-						getManySubscription
-					}
-				`,
-			})
-			.subscribe({
-				next: (data) => {
-					if (data.data) {
-						this.getManySubscription.set(data.data.getManySubscription);
-					}
-				},
-				error: (error) => {
-					this.getManySubscription.set(error.message);
-				},
-			});
+		// this.getManySubscriptionGQL.subscribe().subscribe({
+		// 	next: (data) => {
+		// 		if (data.data) {
+		// 			this.getManySubscription.set(data.data.getManySubscription);
+		// 		}
+		// 	},
+		// 	error: (error) => {
+		// 		this.getManySubscription.set(error.message);
+		// 	},
+		// });
+
+		this.getPingsGQL.subscribe().subscribe({
+			next: (data) => {
+				console.log({ xxx: data });
+				if (data.data) {
+					this.getPings.set(data.data.getPings.toString());
+				}
+			},
+			error: (error) => {
+				console.log({ xxx: error });
+
+				this.getPings.set(error.message);
+			},
+		});
 	}
 }

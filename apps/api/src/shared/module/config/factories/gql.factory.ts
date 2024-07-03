@@ -19,7 +19,7 @@ export class GqlFactory implements GqlOptionsFactory {
 	) {}
 
 	createGqlOptions(): ApolloDriverConfig {
-		const isProduction = this.configurationService.app.environment === 'production';
+		const isProduction = this.configurationService.api.environment === 'production';
 
 		return {
 			driver: ApolloDriver,

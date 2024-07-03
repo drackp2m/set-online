@@ -3,11 +3,11 @@ import { mock } from 'jest-mock-extended';
 
 import { NotFoundException } from '../../../shared/exception/not-found.exception';
 import { UnauthorizedException } from '../../../shared/exception/unauthorized-exception.exception';
-import { CheckPasswordUseCase } from '../../../shared/use-case/check-password.use-case';
 import { User } from '../../user/user.entity';
 import { UserRepository } from '../../user/user.repository';
 import { JwtCookie } from '../definition/jwt-cookie.enum';
 
+import { CheckPasswordUseCase } from './check-password.use-case';
 import { CreateJwtAccessTokenUseCase } from './create-jwt-access-token.use-case';
 import { CreateJwtRefreshTokenUseCase } from './create-jwt-refresh-token.use-case';
 import { LoginUseCase } from './login.use-case';

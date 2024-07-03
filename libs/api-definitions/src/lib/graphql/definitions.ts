@@ -9,10 +9,10 @@
 /* eslint-disable */
 
 export enum GameStatus {
-    Completed = "Completed",
-    Expired = "Expired",
-    InProgress = "InProgress",
-    WaitingOpponents = "WaitingOpponents"
+    completed = "completed",
+    expired = "expired",
+    inProgress = "inProgress",
+    waitingOpponents = "waitingOpponents"
 }
 
 export enum UserRole {
@@ -26,7 +26,7 @@ export interface JoinGameInput {
 }
 
 export interface SendPingInput {
-    pingValue?: Nullable<number>;
+    pingValue: number;
 }
 
 export interface ValidateUserConstraintsInput {
@@ -47,7 +47,7 @@ export interface Game {
 export interface IMutation {
     joinGame(input: JoinGameInput): Game | Promise<Game>;
     newGame(): Game | Promise<Game>;
-    sendPing(input: SendPingInput): string | Promise<string>;
+    sendPing(input: SendPingInput): boolean | Promise<boolean>;
 }
 
 export interface IQuery {
@@ -59,6 +59,7 @@ export interface IQuery {
 
 export interface ISubscription {
     getManySubscription(): string | Promise<string>;
+    getPings(): number | Promise<number>;
 }
 
 export interface User {

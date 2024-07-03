@@ -6,7 +6,7 @@ import {
 	ListGamesGQL,
 	ListGamesQuery,
 	NewGameGQL,
-} from '../../graphql/apollo-operations';
+} from '@set-online/apollo-definitions';
 
 @Component({
 	standalone: true,

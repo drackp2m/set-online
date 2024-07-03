@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { INestApplication, Logger, NestApplicationOptions, ValidationPipe } from '@nestjs/common';
 
 import { ConfigurationService } from '../module/config/configuration.service';
-import { AppConfig } from '../module/config/types/app-config.type';
+import { ApiConfig } from '../module/config/types/api-config.type';
 
 import { HttpExceptionFilter } from './exception-filter';
 
@@ -22,10 +22,10 @@ export class BootstrapHelper {
 
 	static exceptionsFilter = new HttpExceptionFilter();
 
-	static appConfig = (app: INestApplication): AppConfig => {
+	static appConfig = (app: INestApplication): ApiConfig => {
 		const configService = app.get(ConfigurationService);
 
-		return configService.app;
+		return configService.api;
 	};
 
 	static logAppBootstrap = (app: INestApplication): void => {

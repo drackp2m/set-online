@@ -7,9 +7,10 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigurationModule } from '../../shared/module/config/configuration.module';
 import { GqlFactory } from '../../shared/module/config/factories/gql.factory';
 import { MikroOrmFactory } from '../../shared/module/config/factories/mikro-orm.factory';
-import { appConfig } from '../../shared/module/config/registers/app.config';
+import { apiConfig } from '../../shared/module/config/registers/api.config';
 import { databaseConfig } from '../../shared/module/config/registers/database.config';
 import { jwtConfig } from '../../shared/module/config/registers/jwt.config';
+import { nodeCacheConfig } from '../../shared/module/config/registers/node-cache.config';
 import { GqlThrottlerModule } from '../../shared/module/gql-throttler/gql-throttler.module';
 import { PubSubModule } from '../../shared/module/pub-sub/pub-sub-module';
 import { AuthModule } from '../auth/auth.module';
@@ -24,7 +25,7 @@ import { AppService } from './app.service';
 	imports: [
 		ConfigModule.forRoot({
 			isGlobal: true,
-			load: [appConfig, databaseConfig, jwtConfig],
+			load: [databaseConfig, apiConfig, jwtConfig, nodeCacheConfig],
 		}),
 		MikroOrmModule.forRootAsync({
 			useClass: MikroOrmFactory,
