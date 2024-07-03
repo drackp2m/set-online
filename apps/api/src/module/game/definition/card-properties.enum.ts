@@ -1,13 +1,13 @@
-export enum CardPropertiesEnum {
+export enum CardProperties {
 	shape = 'a',
 	color = 'b',
 	number = 'c',
 	shading = 'd',
 }
 
-export const cardProperties = new Map<CardPropertiesEnum, string>([
-	[CardPropertiesEnum.shape, 'shape'],
-	[CardPropertiesEnum.color, 'color'],
-	[CardPropertiesEnum.number, 'number'],
-	[CardPropertiesEnum.shading, 'shading'],
+export const cardProperties = new Map<CardProperties, string>([
+	[CardProperties.shape, 'shape'],
+	[CardProperties.color, 'color'],
+	[CardProperties.number, 'number'],
+	[CardProperties.shading, 'shading'],
 ]);

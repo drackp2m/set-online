@@ -5,7 +5,7 @@ const config: CodegenConfig = {
 	schema: 'https://localhost:4200/graphql',
 	documents: 'libs/api-definitions/src/lib/graphql/**/*.gql',
 	generates: {
-		'apps/app/src/graphql/apollo-operations.ts': {
+		'libs/api-definitions/src/lib/apollo/operations.ts': {
 			plugins: [
 				'typescript',
 				'fragment-matcher',
@@ -19,9 +19,9 @@ const config: CodegenConfig = {
 					DateTime: 'Date',
 				}
 			},
-      hooks: {
-        afterOneFileWrite: ['npm run eslint apps/app/src/graphql/apollo-operations.ts']
-      }
+      // hooks: {
+      //   afterOneFileWrite: ['npm run eslint libs/api-definitions/src/lib/apollo/operations.ts']
+      // }
 		},
 	},
 };

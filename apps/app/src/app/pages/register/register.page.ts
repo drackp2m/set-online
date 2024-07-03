@@ -4,7 +4,8 @@ import { Component, WritableSignal, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Apollo, ApolloModule } from 'apollo-angular';
 
-import { GetUserInfoGQL, User } from '../../graphql/apollo-operations';
+import { GetUserInfoGQL, User } from '@set-online/apollo-definitions';
+
 import { ApiClient } from '../../shared/services/api-client.service';
 import { CurrentUserStore } from '../../stores/current-user.store';
 

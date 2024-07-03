@@ -19,7 +19,7 @@ export class JoinGameUseCase {
 	async execute(gameUuid: string, participant: User): Promise<Game> {
 		const currentGame = this.gameRepository.getOne({
 			participants: { uuid: participant.uuid },
-			status: { $in: [GameStatus.WaitingOpponents, GameStatus.InProgress] },
+			status: { $in: [GameStatus.waitingOpponents, GameStatus.inProgress] },
 		});
 
 		const targetGame = this.gameRepository.getOne({

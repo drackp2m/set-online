@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { cardColors } from '../definition/card-color.enum';
-import { CardPropertiesEnum } from '../definition/card-properties.enum';
+import { CardProperties } from '../definition/card-properties.enum';
 import { cardShadings } from '../definition/card-shading.enum';
 import { cardShapes } from '../definition/card-shape.enum';
 
@@ -11,22 +11,22 @@ export class GenerateGameCardsUseCase {
 		const cards: string[] = [];
 
 		cardShapes.forEach((_shapeValue, shapeKey) => {
-			const shape = `:${CardPropertiesEnum['shape']}${shapeKey}:`;
+			const shape = `:${CardProperties['shape']}${shapeKey}:`;
 
 			cardColors.forEach((_colorValue, colorKey) => {
 				let color = shape;
 
-				color += `:${CardPropertiesEnum['color']}${colorKey}:`;
+				color += `:${CardProperties['color']}${colorKey}:`;
 
 				[1, 2, 3].forEach((numberKey) => {
 					let number = color;
 
-					number += `:${CardPropertiesEnum['number']}${numberKey}:`;
+					number += `:${CardProperties['number']}${numberKey}:`;
 
 					cardShadings.forEach((_shadingValue, shadingKey) => {
 						let shading = number;
 
-						shading += `:${CardPropertiesEnum['shading']}${shadingKey}:`;
+						shading += `:${CardProperties['shading']}${shadingKey}:`;
 
 						cards.push(shading);
 					});

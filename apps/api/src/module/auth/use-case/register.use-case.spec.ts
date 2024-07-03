@@ -4,12 +4,12 @@ import { mock } from 'jest-mock-extended';
 import { PreconditionFailedException } from '../../../shared/exception/precondition-failed.exception';
 import { GenerateNowDateUseCase } from '../../../shared/use-case/generate-now-date.use-case';
 import { GenerateUuidUseCase } from '../../../shared/use-case/generate-uuid.use-case';
-import { HashPasswordUseCase } from '../../../shared/use-case/hash-password.use-case';
 import { UserFaker } from '../../user/factory/user.faker';
 import { User } from '../../user/user.entity';
 import { UserRepository } from '../../user/user.repository';
 import { RegisterRequestDto } from '../dto/register-request.dto';
 
+import { HashPasswordUseCase } from './hash-password.use-case';
 import { RegisterUseCase } from './register.use-case';
 
 describe('RegisterUseCase', () => {

@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { firstValueFrom } from 'rxjs';
 
-import { GetUserInfoGQL, GetUserInfoQuery } from '../graphql/apollo-operations';
+import { GetUserInfoGQL, GetUserInfoQuery } from '@set-online/apollo-definitions';
 
 type UserInfo = GetUserInfoQuery['getUserInfo'];
 

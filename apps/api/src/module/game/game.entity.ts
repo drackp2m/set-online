@@ -20,7 +20,7 @@ export class Game extends CustomBaseEntity<Game> {
 
 	@Enum({ items: () => GameStatus })
 	@Field(() => GameStatus)
-	status = GameStatus.WaitingOpponents;
+	status = GameStatus.waitingOpponents;
 
 	@Property()
 	@Field(() => Date)

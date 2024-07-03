@@ -54,6 +54,9 @@ class EnvironmentVariables {
 	@IsString()
 	API_COOKIE_SECRET?: string;
 
+	@IsString()
+	API_NODE_CACHE_PING_PREFIX!: string;
+
 	@IsNumber()
 	APP_PORT?: number;
 

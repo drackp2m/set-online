@@ -57,7 +57,7 @@ describe('JoinGameUseCase', () => {
 				.calledWith(
 					expect.objectContaining({
 						participants: { uuid: fakeUser.uuid },
-						status: { $in: [GameStatus.WaitingOpponents, GameStatus.InProgress] },
+						status: { $in: [GameStatus.waitingOpponents, GameStatus.inProgress] },
 					}),
 				)
 				.mockResolvedValueOnce(fakeGame);
@@ -70,7 +70,7 @@ describe('JoinGameUseCase', () => {
 			expect(gameRepository.getOne).toHaveBeenCalledTimes(2);
 			expect(gameRepository.getOne).toHaveBeenNthCalledWith(1, {
 				participants: { uuid: fakeUser.uuid },
-				status: { $in: [GameStatus.WaitingOpponents, GameStatus.InProgress] },
+				status: { $in: [GameStatus.waitingOpponents, GameStatus.inProgress] },
 			});
 			expect(gameRepository.getOne).toHaveBeenNthCalledWith(2, {
 				uuid: fakeGame.uuid,
@@ -85,7 +85,7 @@ describe('JoinGameUseCase', () => {
 				.calledWith(
 					expect.objectContaining({
 						participants: { uuid: fakeUser.uuid },
-						status: { $in: [GameStatus.WaitingOpponents, GameStatus.InProgress] },
+						status: { $in: [GameStatus.waitingOpponents, GameStatus.inProgress] },
 					}),
 				)
 				.mockRejectedValueOnce(new NotFoundException('not exists', 'game'));
@@ -106,7 +106,7 @@ describe('JoinGameUseCase', () => {
 			expect(gameRepository.getOne).toHaveBeenCalledTimes(2);
 			expect(gameRepository.getOne).toHaveBeenNthCalledWith(1, {
 				participants: { uuid: fakeUser.uuid },
-				status: { $in: [GameStatus.WaitingOpponents, GameStatus.InProgress] },
+				status: { $in: [GameStatus.waitingOpponents, GameStatus.inProgress] },
 			});
 			expect(gameRepository.getOne).toHaveBeenNthCalledWith(2, {
 				uuid: fakeGame.uuid,
@@ -125,7 +125,7 @@ describe('JoinGameUseCase', () => {
 				.calledWith(
 					expect.objectContaining({
 						participants: { uuid: fakeUser.uuid },
-						status: { $in: [GameStatus.WaitingOpponents, GameStatus.InProgress] },
+						status: { $in: [GameStatus.waitingOpponents, GameStatus.inProgress] },
 					}),
 				)
 				.mockRejectedValueOnce(new NotFoundException('not exists', 'game'));
@@ -148,7 +148,7 @@ describe('JoinGameUseCase', () => {
 			expect(gameRepository.getOne).toHaveBeenCalledTimes(2);
 			expect(gameRepository.getOne).toHaveBeenNthCalledWith(1, {
 				participants: { uuid: fakeUser.uuid },
-				status: { $in: [GameStatus.WaitingOpponents, GameStatus.InProgress] },
+				status: { $in: [GameStatus.waitingOpponents, GameStatus.inProgress] },
 			});
 			expect(gameRepository.getOne).toHaveBeenNthCalledWith(2, {
 				uuid: fakeGame.uuid,
@@ -170,7 +170,7 @@ describe('JoinGameUseCase', () => {
 				.calledWith(
 					expect.objectContaining({
 						participants: { uuid: fakeUser.uuid },
-						status: { $in: [GameStatus.WaitingOpponents, GameStatus.InProgress] },
+						status: { $in: [GameStatus.waitingOpponents, GameStatus.inProgress] },
 					}),
 				)
 				.mockRejectedValueOnce(new NotFoundException('not exists', 'game'));
@@ -193,7 +193,7 @@ describe('JoinGameUseCase', () => {
 			expect(gameRepository.getOne).toHaveBeenCalledTimes(2);
 			expect(gameRepository.getOne).toHaveBeenNthCalledWith(1, {
 				participants: { uuid: fakeUser.uuid },
-				status: { $in: [GameStatus.WaitingOpponents, GameStatus.InProgress] },
+				status: { $in: [GameStatus.waitingOpponents, GameStatus.inProgress] },
 			});
 			expect(gameRepository.getOne).toHaveBeenNthCalledWith(2, {
 				uuid: fakeGame.uuid,
