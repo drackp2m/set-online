@@ -1,7 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
-import { CardColorEnum, CardShadingEnum, CardShapeEnum } from '@set-online/api-definitions';
+import { CardColor, CardShading, CardShape } from '@set-online/api-definitions';
 
 @Component({
 	standalone: true,
@@ -11,9 +11,9 @@ import { CardColorEnum, CardShadingEnum, CardShapeEnum } from '@set-online/api-d
 	imports: [NgIf],
 })
 export class CardShapeComponent {
-	@Input({ required: true }) shape!: keyof typeof CardShapeEnum;
-	@Input({ required: true }) color!: keyof typeof CardColorEnum;
-	@Input({ required: true }) shading!: keyof typeof CardShadingEnum;
+	@Input({ required: true }) shape!: keyof typeof CardShape;
+	@Input({ required: true }) color!: keyof typeof CardColor;
+	@Input({ required: true }) shading!: keyof typeof CardShading;
 
 	get basicMask(): string {
 		const shading = this.shading === 'striped' ? 'outlined' : this.shading;

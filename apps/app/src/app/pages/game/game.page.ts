@@ -3,7 +3,7 @@ import { Component, OnInit, computed, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { confetti } from '@tsparticles/confetti';
 
-import { CardColorEnum, CardShadingEnum, CardShapeEnum } from '@set-online/api-definitions';
+import { CardColor, CardShading, CardShape } from '@set-online/api-definitions';
 
 import { CardComponent } from '../../shared/components/card/card.component';
 import { CardInterface } from '../../shared/definitions/card.interface';
@@ -17,9 +17,9 @@ import { YouWonComponent } from './shared/components/you-won/you-won.component';
 	imports: [NgIf, NgFor, CardComponent, YouWonComponent, RouterLink],
 })
 export default class GamePage implements OnInit {
-	private readonly shapes: (keyof typeof CardShapeEnum)[] = ['oval', 'squiggle', 'diamond'];
-	private readonly colors: (keyof typeof CardColorEnum)[] = ['red', 'purple', 'green'];
-	private readonly shadings: (keyof typeof CardShadingEnum)[] = ['solid', 'striped', 'outlined'];
+	private readonly shapes: (keyof typeof CardShape)[] = ['oval', 'squiggle', 'diamond'];
+	private readonly colors: (keyof typeof CardColor)[] = ['red', 'purple', 'green'];
+	private readonly shadings: (keyof typeof CardShading)[] = ['solid', 'striped', 'outlined'];
 	private readonly counts: number[] = [1, 2, 3];
 
 	private highlightInterval!: number;
@@ -183,12 +183,12 @@ export default class GamePage implements OnInit {
 		const color = this.getRandomColor();
 		const shading = this.getRandomShading();
 		const number = this.getRandomNumber();
-		const id = `${CardShadingEnum[shading]}${CardColorEnum[color]}${CardShapeEnum[shape]}${number}`;
+		const id = `${CardShading[shading]}${CardColor[color]}${CardShape[shape]}${number}`;
 
 		return { id, shape, color, shading, number };
 	}
 
-	private getRandomShape(): keyof typeof CardShapeEnum {
+	private getRandomShape(): keyof typeof CardShape {
 		const randomShape = this.shapes[Math.floor(Math.random() * this.shapes.length)];
 
 		if (!randomShape) {
@@ -198,7 +198,7 @@ export default class GamePage implements OnInit {
 		return randomShape;
 	}
 
-	private getRandomColor(): keyof typeof CardColorEnum {
+	private getRandomColor(): keyof typeof CardColor {
 		const randomColor = this.colors[Math.floor(Math.random() * this.colors.length)];
 
 		if (!randomColor) {
@@ -208,7 +208,7 @@ export default class GamePage implements OnInit {
 		return randomColor;
 	}
 
-	private getRandomShading(): keyof typeof CardShadingEnum {
+	private getRandomShading(): keyof typeof CardShading {
 		const randomShading = this.shadings[Math.floor(Math.random() * this.shadings.length)];
 
 		if (!randomShading) {
@@ -263,9 +263,9 @@ export default class GamePage implements OnInit {
 
 	private isSet(first: CardInterface, second: CardInterface, third: CardInterface): boolean {
 		return (
-			this.isSameOrDifferent<keyof typeof CardShapeEnum>(first.shape, second.shape, third.shape) &&
-			this.isSameOrDifferent<keyof typeof CardColorEnum>(first.color, second.color, third.color) &&
-			this.isSameOrDifferent<keyof typeof CardShadingEnum>(
+			this.isSameOrDifferent<keyof typeof CardShape>(first.shape, second.shape, third.shape) &&
+			this.isSameOrDifferent<keyof typeof CardColor>(first.color, second.color, third.color) &&
+			this.isSameOrDifferent<keyof typeof CardShading>(
 				first.shading,
 				second.shading,
 				third.shading,
@@ -337,10 +337,7 @@ export default class GamePage implements OnInit {
 		});
 	}
 
-	private getConfettiShapeConfig(
-		shape: keyof typeof CardShapeEnum,
-		color: keyof typeof CardColorEnum,
-	) {
+	private getConfettiShapeConfig(shape: keyof typeof CardShape, color: keyof typeof CardColor) {
 		let width;
 		let height;
 

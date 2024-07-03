@@ -9,7 +9,7 @@ import {
 	inject,
 } from '@angular/core';
 
-import { CardColorEnum, CardShadingEnum, CardShapeEnum } from '@set-online/api-definitions';
+import { CardColor, CardShading, CardShape } from '@set-online/api-definitions';
 
 import { CardShapeComponent } from '../card-shape/card-shape.component';
 
@@ -26,9 +26,9 @@ export class CardComponent implements AfterViewInit, OnDestroy {
 
 	@ViewChild('container') container!: ElementRef<HTMLDivElement>;
 
-	@Input({ required: true }) shape!: keyof typeof CardShapeEnum;
-	@Input({ required: true }) color!: keyof typeof CardColorEnum;
-	@Input({ required: true }) shading!: keyof typeof CardShadingEnum;
+	@Input({ required: true }) shape!: keyof typeof CardShape;
+	@Input({ required: true }) color!: keyof typeof CardColor;
+	@Input({ required: true }) shading!: keyof typeof CardShading;
 	@Input({ required: true }) count!: number;
 	@Input() rotate = false;
 	@Input() selected = false;
