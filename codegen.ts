@@ -20,7 +20,7 @@ const config: CodegenConfig = {
 				}
 			},
       // hooks: {
-      //   afterOneFileWrite: ['npm run eslint libs/api-definitions/src/lib/apollo/operations.ts']
+      //   afterOneFileWrite: ['node --run eslint libs/api-definitions/src/lib/apollo/operations.ts']
       // }
 		},
 	},

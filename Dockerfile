@@ -25,7 +25,7 @@ USER node
 
 COPY package.json package.lock* ./
 
-RUN npm install --frozen-lockfile
+RUN npm ci
 
 
 
@@ -49,16 +49,16 @@ RUN mkdir /home/node/.gnupg \
 RUN mkdir -p ~/.local/share/zsh/plugins \
 			&& ln -s /usr/share/zsh/plugins/powerlevel10k ~/.local/share/zsh/plugins/
 
-CMD npm run start
+CMD node --run start
 
 
 
 FROM deps AS build-api
 
-CMD npm run build:api
+CMD node --run build:api
 
 
 
 FROM build-api AS serve-api
 
-CMD npm run serve:api
+CMD node --run serve:api

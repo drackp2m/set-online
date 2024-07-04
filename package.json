@@ -11,7 +11,7 @@
 		"build:api": "nx build api",
 		"serve:api": "nx serve api --prod",
 		"codegen": "graphql-codegen",
-		"codegen:watch": "npm run codegen codegen --watch",
+		"codegen:watch": "node --run codegen codegen --watch",
 		"test": "nx run-many -t test",
 		"test-int": "nx run api:test-int -i",
 		"test-e2e": "nx run api-e2e:e2e",

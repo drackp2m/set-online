@@ -36,7 +36,7 @@ jobs:
           MIKRO_ORM_CLI: apps/api/src/shared/module/config/mikro-orm.config.ts
           MIKRO_ORM_CLI_TS_CONFIG_PATH: apps/api/tsconfig.app.json
           MIKRO_ORM_CLI_USE_TS_NODE: true
-        run: npm test
+        run: node --run test
 
   build:
     runs-on: ubuntu-latest
