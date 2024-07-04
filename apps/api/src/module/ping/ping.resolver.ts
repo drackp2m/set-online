@@ -6,8 +6,8 @@ import { ProtectTo } from '../auth/decorator/protect-to.decorator';
 import { CurrentUser } from '../user/decorator/current-user.decorator';
 import { User } from '../user/user.entity';
 
-import { CachedPing } from './definition/cached-ping.interface';
 import { SendPingInput } from './dto/input/send-ping.input';
+import { GetPingsOutput } from './dto/output/get-pings.output';
 import { GetPingsFromCacheUseCase } from './use-case/get-ping-from-cache.use-case';
 import { PersistAndUpdateUserPingUseCase } from './use-case/persist-and-update-user-ping.use-case';
 
@@ -22,9 +22,9 @@ export class PingResolver {
 		private readonly getPingsFromCacheUseCase: GetPingsFromCacheUseCase,
 	) {
 		this.intervalUseCase.on(this.SEND_PING_TOPIC, async () => {
-			const value = await this.getPingsFromCacheUseCase.execute();
+			const pingsFromCache: GetPingsOutput[] = await this.getPingsFromCacheUseCase.execute();
 
-			this.pubSub.publish(this.SEND_PING_TOPIC, value);
+			this.pubSub.publish(this.SEND_PING_TOPIC, pingsFromCache);
 		});
 
 		this.intervalUseCase.startInterval(5, this.SEND_PING_TOPIC);
@@ -44,7 +44,7 @@ export class PingResolver {
 	}
 
 	@ProtectTo()
-	@Subscription(() => Number, {
+	@Subscription(() => [GetPingsOutput], {
 		name: 'getPings',
 		resolve: (payload, _variables, _context) => {
 			const userUuid = _context.req.user.uuid;
@@ -55,9 +55,7 @@ export class PingResolver {
 			return true;
 		},
 	})
-	getPings(): AsyncIterator<unknown> {
-		return this.pubSub.asyncIterator<{
-			[key: string]: CachedPing;
-		}>(this.SEND_PING_TOPIC);
+	getPings(): AsyncIterator<GetPingsOutput[]> {
+		return this.pubSub.asyncIterator<GetPingsOutput[]>(this.SEND_PING_TOPIC);
 	}
 }
