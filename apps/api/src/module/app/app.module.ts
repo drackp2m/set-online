@@ -15,6 +15,7 @@ import { GqlThrottlerModule } from '../../shared/module/gql-throttler/gql-thrott
 import { PubSubModule } from '../../shared/module/pub-sub/pub-sub-module';
 import { AuthModule } from '../auth/auth.module';
 import { GameModule } from '../game/game.module';
+import { PingModule } from '../ping/ping.module';
 import { UserModule } from '../user/user.module';
 
 import { AppController } from './app.controller';
@@ -39,7 +40,7 @@ import { AppService } from './app.service';
 		AuthModule,
 		UserModule,
 		GameModule,
-		// PingModule,
+		PingModule,
 	],
 	providers: [AppService],
 	controllers: [AppController],

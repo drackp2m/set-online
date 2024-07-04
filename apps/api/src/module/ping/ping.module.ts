@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 
 import { ConfigurationService } from '../../shared/module/config/configuration.service';
-import { SemaphoreService } from '../../shared/service/_semaphore-service';
 import { CacheManagerService } from '../../shared/service/cache-manager.service';
 import { GenerateNowDateUseCase } from '../../shared/use-case/generate-now-date.use-case';
 import { IntervalUseCase } from '../../shared/use-case/interval.use-case';
@@ -14,7 +13,6 @@ import { PersistAndUpdateUserPingUseCase } from './use-case/persist-and-update-u
 @Module({
 	providers: [
 		ConfigurationService,
-		SemaphoreService,
 		CacheManagerService,
 		PingResolver,
 		IntervalUseCase,

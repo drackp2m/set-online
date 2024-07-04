@@ -2,6 +2,18 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+"""cachedPing"""
+type CachedPing {
+  average: UserPing!
+  values: [UserPingValue!]!
+}
+
+enum CachedPingStatus {
+  bad
+  fair
+  good
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -25,6 +37,12 @@ enum GameStatus {
   waitingOpponents
 }
 
+"""getPings"""
+type GetPingsOutput {
+  ping: [CachedPing!]!
+  userUuid: ID!
+}
+
 input JoinGameInput {
   gameUuid: String!
 }
@@ -32,6 +50,7 @@ input JoinGameInput {
 type Mutation {
   joinGame(input: JoinGameInput!): Game!
   newGame: Game!
+  sendPing(input: SendPingInput!): Boolean!
 }
 
 type Query {
@@ -41,8 +60,13 @@ type Query {
   validateUserConstraints(input: ValidateUserConstraintsInput!): Boolean!
 }
 
+input SendPingInput {
+  pingValue: Float!
+}
+
 type Subscription {
   getManySubscription: String!
+  getPings: [GetPingsOutput!]!
 }
 
 """user"""
@@ -54,6 +78,18 @@ type User {
   updatedAt: DateTime!
   username: String!
   uuid: ID!
+}
+
+"""userPing"""
+type UserPing {
+  status: CachedPingStatus!
+  value: Float!
+}
+
+"""userPing"""
+type UserPingValue {
+  timestamp: Float!
+  value: Float!
 }
 
 enum UserRole {
