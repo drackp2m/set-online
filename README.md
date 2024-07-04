@@ -17,9 +17,9 @@ You can also view node execution logs by running `docker logs set-node -f -n 100
 2. In your machine
 
 - ⚙️ Run `docker compose up -d` and wait for it to finish (be patient)
-- 📦 Install dependencies executing command `npm`
+- 📦 Install dependencies executing command `npm ci`
 - 🛠️ Install extensions listed by running `Show recommended extensions` on VSCode
-- 🚀 Execute `npm start`
+- 🚀 Execute `node --run start`
 
 You can now navigate to:
 
@@ -30,9 +30,9 @@ You can now navigate to:
 
 Using the mikro-orm migration system, three `npm` commands are available:
 
-- 🔍 Check if there are pending migrations using `npm migration:check`
-- 📦 Create a migration that synchronizes all entities using `npm migration:create`
-- 🏗️ Execute migrations to synchronize the database using `npm migration:execute`
+- 🔍 Check if there are pending migrations using `node --run migration:check`
+- 📦 Create a migration that synchronizes all entities using `node --run migration:create`
+- 🏗️ Execute migrations to synchronize the database using `node --run migration:execute`
 
 ## Library creation
 
