@@ -12,7 +12,7 @@
 - 📝 Edit build arg with the result of the following command `echo 'USER_GID:' $(id -g) && echo 'USER_UID:' $(id -u)`
 - 🐋 Run VSCode Dev Container command `Reopen in Container`
 
-You can also view node execution logs by running `docker logs set-nx -f -n 100` in a host terminal.
+You can also view node execution logs by running `docker logs set-node -f -n 100` in a host terminal.
 
 2. In your machine
 

@@ -5,10 +5,10 @@ networks:
     name: set-network
 
 services:
-  set-db:
+  set-database:
     image: postgres:15.4-alpine3.17
-    container_name: set-db
-    hostname: set-db
+    container_name: set-database
+    hostname: set-database
     networks:
       - set-network
     ports:
@@ -25,9 +25,9 @@ services:
     restart: unless-stopped
     tty: true
 
-  set-nx:
-    container_name: set-nx
-    hostname: set-nx
+  set-node:
+    container_name: set-node
+    hostname: set-node
     working_dir: /usr/src/app
     build:
       context: .
@@ -50,7 +50,7 @@ services:
       PATH: $PATH:/usr/src/app/node_modules/.bin
       TZ: UTC
     depends_on:
-      - set-db
+      - set-database
     restart: unless-stopped
     stdin_open: true
     tty: true
