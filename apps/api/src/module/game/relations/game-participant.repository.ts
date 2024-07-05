@@ -1,4 +1,4 @@
-import { EntityManager, FilterQuery, FindOptions, Primary } from '@mikro-orm/core';
+import { EntityManager, FilterQuery, FindOneOptions, FindOptions, Primary } from '@mikro-orm/core';
 
 import { NotFoundException } from '../../../shared/exception/not-found.exception';
 
@@ -14,15 +14,18 @@ export class GameParticipantRepository {
 		return this.entityManager.fork().getReference(this.entityName, id);
 	}
 
-	async getOne(query: FilterQuery<GameParticipant>): Promise<GameParticipant | null> {
-		const user = await this.entityManager.fork().findOne(this.entityName, query);
+	async getOne<Hint extends string = never>(
+		query: FilterQuery<GameParticipant>,
+		options?: FindOneOptions<GameParticipant, Hint>,
+	): Promise<GameParticipant | null> {
+		const user = await this.entityManager.fork().findOne(GameParticipant, query, options);
 
 		if (user === null) {
 			const entityName = this.entityName.replace('Entity', '').toLocaleLowerCase();
 			throw new NotFoundException('not exists', entityName);
 		}
 
-		return user as GameParticipant;
+		return user;
 	}
 
 	async getMany<Hint extends string = never>(
