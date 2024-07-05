@@ -46,10 +46,12 @@ export class PingResolver {
 	@ProtectTo()
 	@Subscription(() => [GetPingsOutput], {
 		name: 'getPings',
-		resolve: (payload, _variables, _context) => {
+		resolve: (payload: GetPingsOutput[], _variables, _context): GetPingsOutput[] => {
 			const userUuid = _context.req.user.uuid;
 
-			return payload[userUuid]?.average.value ?? 0;
+			payload.filter((ping) => ping.userUuid === userUuid);
+
+			return payload;
 		},
 		filter(_payload, _variables, _context) {
 			return true;

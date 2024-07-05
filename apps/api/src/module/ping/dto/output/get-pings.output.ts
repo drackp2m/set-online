@@ -32,12 +32,12 @@ class CachedPing implements CachedPingInterface {
 	values!: UserPingValue[];
 }
 
-@ObjectType({ description: 'getPings' })
+@ObjectType({ description: 'getPingsOutput' })
 export class GetPingsOutput {
 	@Field(() => ID)
 	userUuid!: string;
 
-	@Field(() => [CachedPing])
+	@Field(() => CachedPing)
 	ping!: CachedPing;
 
 	constructor(data: GetPingsOutput) {

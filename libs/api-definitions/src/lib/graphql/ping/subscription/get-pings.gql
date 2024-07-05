@@ -1,4 +1,12 @@
 
 subscription GetPings {
-  getPings
+  getPings {
+		userUuid
+		ping {
+			average {
+				value
+				status
+			}
+		}
+	}
 }

@@ -8,6 +8,7 @@ import { GameRepository } from '../game.repository';
 export class ListGamesUseCase {
 	constructor(private readonly gameRepository: GameRepository) {}
 
+	// ToDo => add filter
 	async execute(): Promise<Game[]> {
 		return await this.gameRepository.getMany(
 			{

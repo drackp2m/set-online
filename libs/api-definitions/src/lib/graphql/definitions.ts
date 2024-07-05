@@ -56,7 +56,7 @@ export interface Game {
 }
 
 export interface GetPingsOutput {
-    ping: CachedPing[];
+    ping: CachedPing;
     userUuid: string;
 }
 
