@@ -1,5 +1,5 @@
 <main id="example" class="content-fixed pt-lg pb-xxl">
-	<h2 class="tc">{{ hello() }}</h2>
+	<h2>{{ hello() }}</h2>
 
 	<set-example-menu />
 
@@ -79,7 +79,7 @@
 
 		@if (getPings()) {
 			<p>
-				{{ getPings() }}
+				{{ getPings() | json }}
 			</p>
 		}
 

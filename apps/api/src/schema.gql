@@ -37,9 +37,9 @@ enum GameStatus {
   waitingOpponents
 }
 
-"""getPings"""
+"""getPingsOutput"""
 type GetPingsOutput {
-  ping: [CachedPing!]!
+  ping: CachedPing!
   userUuid: ID!
 }
 

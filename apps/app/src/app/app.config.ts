@@ -52,19 +52,18 @@ export const appConfig: ApplicationConfig = {
 						connectionAckWaitTimeout: 1000,
 						keepAlive: 5000,
 						on: {
-							connected: (x, y, z) => {
-								console.log({ x, y, z });
+							connected: (_x, _y, _z) => {
+								// console.log({ _x, _y, _z });
 							},
-							ping: (a, b) => {
+							ping: (_a, _b) => {
 								pingTimestamp.set(new Date().getTime());
 
-								console.log({ a, b });
+								// console.log({ _a, _b });
 							},
-							pong: (c, d) => {
+							pong: (_c, _d) => {
 								pongTimestamp.set(new Date().getTime());
-								console.log('pong received...');
 
-								console.log({ c, d });
+								// console.log({ _c, _d });
 							},
 						},
 					}),

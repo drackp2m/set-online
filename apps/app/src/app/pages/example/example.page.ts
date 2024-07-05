@@ -1,10 +1,15 @@
-import { NgIf } from '@angular/common';
+import { JsonPipe, NgIf } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { map } from 'rxjs';
 
-import { GetManySubscriptionGQL, GetPingsGQL, GetUsersGQL } from '@set-online/apollo-definitions';
+import {
+	GetManySubscriptionGQL,
+	GetPingsGQL,
+	GetPingsSubscription,
+	GetUsersGQL,
+} from '@set-online/apollo-definitions';
 
 import { HoverSrcDirective } from '../../shared/directives/img-hover-src.directive';
 import { ApiClient } from '../../shared/services/api-client.service';
@@ -15,7 +20,7 @@ import ExampleMenuComponent from './shared/components/menu/example-menu.componen
 	standalone: true,
 	templateUrl: './example.page.html',
 	styleUrl: './example.page.scss',
-	imports: [ExampleMenuComponent, HoverSrcDirective, ReactiveFormsModule, NgIf],
+	imports: [ExampleMenuComponent, HoverSrcDirective, ReactiveFormsModule, NgIf, JsonPipe],
 	providers: [ApiClient, GetUsersGQL, GetManySubscriptionGQL, GetPingsGQL],
 })
 export default class ExamplePage {
@@ -32,7 +37,7 @@ export default class ExamplePage {
 
 	data = signal<string | undefined>(undefined);
 	getManySubscription = signal<string | undefined>(undefined);
-	getPings = signal<string | undefined>(undefined);
+	getPings = signal<GetPingsSubscription['getPings'] | undefined>(undefined);
 
 	form = new FormGroup({
 		username: new FormControl('', [Validators.required]),
@@ -51,22 +56,21 @@ export default class ExamplePage {
 	}
 
 	initSubscription(): void {
-		// this.getManySubscriptionGQL.subscribe().subscribe({
-		// 	next: (data) => {
-		// 		if (data.data) {
-		// 			this.getManySubscription.set(data.data.getManySubscription);
-		// 		}
-		// 	},
-		// 	error: (error) => {
-		// 		this.getManySubscription.set(error.message);
-		// 	},
-		// });
+		this.getManySubscriptionGQL.subscribe().subscribe({
+			next: (data) => {
+				if (data.data) {
+					this.getManySubscription.set(data.data.getManySubscription);
+				}
+			},
+			error: (error) => {
+				this.getManySubscription.set(error.message);
+			},
+		});
 
 		this.getPingsGQL.subscribe().subscribe({
 			next: (data) => {
-				console.log({ xxx: data });
 				if (data.data) {
-					this.getPings.set(data.data.getPings.toString());
+					this.getPings.set(data.data.getPings);
 				}
 			},
 			error: (error) => {

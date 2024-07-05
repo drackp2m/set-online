@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @use 'the-new-css-reset/css/reset';
+@use 'sass:math';
 
 @use './scss/main';
 
@@ -46,4 +47,76 @@ h6 {
 #confetti {
 	position: relative;
 	z-index: 100;
+}
+
+button {
+	&:hover {
+		opacity: 0.9;
+	}
+}
+
+.glitch {
+	position: relative;
+	margin: 0 auto;
+}
+
+@keyframes noise-anim {
+	$steps: 20;
+
+	@for $i from 0 through $steps {
+		#{percentage($i * calc(1 / $steps))} {
+			$top: math.random(100);
+			$bottom: math.random(101 - $top);
+			$top-with-percent: $top * 1%;
+			$bottom-with-percent: $bottom * 1%;
+
+			clip-path: inset(#{$top-with-percent} 0 #{$bottom-with-percent} 0);
+		}
+	}
+}
+
+.glitch::after {
+	content: attr(data-text);
+
+	position: absolute;
+	top: 0;
+	left: 2px;
+
+	overflow: hidden;
+
+	color: pink;
+	text-shadow: -1px 0 red;
+
+	animation: noise-anim 2s infinite linear alternate-reverse;
+}
+
+@keyframes noise-anim-2 {
+	$steps: 20;
+
+	@for $i from 0 through $steps {
+		#{math.percentage($i * calc(1 / $steps))} {
+			$top: math.random(100);
+			$bottom: math.random(101 - $top);
+			$top-with-percent: $top * 1%;
+			$bottom-with-percent: $bottom * 1%;
+
+			clip-path: inset(#{$top-with-percent} 0 #{$bottom-with-percent} 0);
+		}
+	}
+}
+
+.glitch::before {
+	content: attr(data-text);
+
+	position: absolute;
+	top: 0;
+	left: -2px;
+
+	overflow: hidden;
+
+	text-shadow: 1px 0 blue;
+
+	background: black;
+
+	animation: noise-anim-2 15s infinite linear alternate-reverse;
 }

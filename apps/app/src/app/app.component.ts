@@ -27,10 +27,8 @@ export class AppComponent implements OnInit {
 		effect(() => {
 			const pingValue = this.pingValue();
 
-			console.log({ pingValue });
-
 			if (pingValue !== undefined) {
-				this.sendPing.mutate({ input: { pingValue } }).subscribe((val) => console.log(val));
+				this.sendPing.mutate({ input: { pingValue } }).subscribe();
 			}
 		});
 	}

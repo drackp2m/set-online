@@ -35,13 +35,17 @@
 			</a>
 		</ng-template>
 
-		@if (user()) {
-			<p class="text-sm text-right">Welcome {{ user()?.username }}</p>
-		}
+		<p class="flex-row justify-between text-sm">
+			<span>{{ getPings()?.[0]?.ping?.average?.value }}</span>
 
-		@if (userError()) {
-			<p class="text-sm text-right">GetUserInfo error: {{ userError()?.message }}</p>
-		}
+			@if (user()) {
+				<span>Welcome {{ user()?.username }}</span>
+			}
+
+			@if (userError()) {
+				<span>GetUserInfo error: {{ userError()?.message }}</span>
+			}
+		</p>
 	</section>
 
 	<div class="scroll">
