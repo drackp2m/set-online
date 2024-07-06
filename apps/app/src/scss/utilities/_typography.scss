@@ -48,7 +48,7 @@ $text-align: (
 	@return (oblique-#{$name}: (font-style: oblique calc(var(--font-oblique-#{$name}) * 1deg)));
 }
 
-@function get-monospace-rules($name) {
+@function get-mono-space-rules($name) {
 	@return (mono-#{$name}: (font-variation-settings: 'MONO' var(--font-monospace-#{$name})));
 }
 
@@ -64,6 +64,6 @@ $text-align: (
 
 @include mix.generate-responsive(get-list(var.$font-obliques, get-oblique-rules));
 
-@include mix.generate-responsive(get-list(var.$font-monospaces, get-monospace-rules));
+@include mix.generate-responsive(get-list(var.$font-mono-spaces, get-mono-space-rules));
 
 @include mix.generate-responsive(get-list(var.$font-casuals, get-casual-rules));
