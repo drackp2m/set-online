@@ -74,8 +74,6 @@ export default class ExamplePage {
 				}
 			},
 			error: (error) => {
-				console.log({ xxx: error });
-
 				this.getPings.set(error.message);
 			},
 		});
