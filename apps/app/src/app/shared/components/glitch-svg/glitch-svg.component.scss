@@ -111,11 +111,9 @@ $glitch-duration: calc(var(--glitch-duration) * 1s);
 		}
 	}
 
-	&:not(:hover) {
+	&:not(:hover, :active) {
 		.left,
-		.right,
-		.outside,
-		.inside {
+		.right {
 			display: none;
 		}
 	}

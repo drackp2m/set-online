@@ -4,7 +4,10 @@
 @use './scss/main';
 
 html {
+	cursor: default;
+
 	overflow: hidden;
+
 	font-family: Recursive, sans-serif;
 	font-size: 16px;
 	font-weight: var(--font-weight-md);
@@ -48,8 +51,12 @@ h6 {
 	z-index: 100;
 }
 
-button {
+button,
+.btn,
+a {
+	cursor: default;
+
 	&:hover {
-		opacity: 0.9;
+		opacity: 0.8;
 	}
 }

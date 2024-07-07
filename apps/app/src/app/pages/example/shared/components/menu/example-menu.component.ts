@@ -10,30 +10,35 @@ import { RouterModule } from '@angular/router';
 		<nav class="flex-row flex-wrap my-md gap-sm">
 			<ng-container
 				*ngTemplateOutlet="button; context: { text: 'Typographies', link: '/example/typographies' }"
-			></ng-container>
+			/>
+
 			<ng-container
 				*ngTemplateOutlet="button; context: { text: 'Colors', link: '/example/colors' }"
-			></ng-container>
+			/>
+
 			<ng-container
 				*ngTemplateOutlet="button; context: { text: 'Spacings', link: '/example/spacings' }"
-			></ng-container>
+			/>
+
 			<ng-container
 				*ngTemplateOutlet="
 					button;
 					context: { text: 'Border radius', link: '/example/border-radius' }
 				"
-			></ng-container>
+			/>
+
 			<ng-container
 				*ngTemplateOutlet="button; context: { text: 'Shadows', link: '/example/shadows' }"
-			></ng-container>
+			/>
+
 			<ng-container
 				*ngTemplateOutlet="button; context: { text: 'Cards', link: '/example/cards' }"
-			></ng-container>
+			/>
 		</nav>
 
 		<ng-template #button let-text="text" let-link="link">
 			<a
-				class="round-sm p-xs px-sm"
+				class="btn round-sm p-xs px-sm"
 				[class]="active.isActive ? 'weight-xxl surface-serene' : 'surface-vivid'"
 				routerLinkActive
 				#active="routerLinkActive"

@@ -16,7 +16,7 @@ export default class TypographyPage {
 
 	obliques = ['none', 'sm', 'md', 'lg'];
 
-	monos = ['none', 'xs', 'sm', 'md', 'lg', 'xl'];
+	monos = ['none', 'sm', 'md', 'lg', 'xl', 'xxl'];
 
-	casuals = ['none', 'xs', 'sm', 'md', 'lg', 'xl'];
+	casuals = ['none', 'sm', 'md', 'lg', 'xl', 'xxl'];
 }
