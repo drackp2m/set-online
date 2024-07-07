@@ -23,7 +23,7 @@ FROM base AS deps
 
 USER node
 
-COPY package.json package.lock* ./
+COPY package.json package-lock* ./
 
 RUN npm ci
 
@@ -33,13 +33,14 @@ FROM deps AS dev-attached
 
 USER root
 
-RUN apk add --no-cache sudo git openssh-client gnupg \
-			vim zsh zsh-vcs alpine-zsh-config zsh-theme-powerlevel10k
+RUN apk add --no-cache sudo git openssh-client gnupg vim
 
 RUN addgroup node root \
 			&& echo "%root ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers
 
 USER node
+
+RUN sudo apk add --no-cache zsh zsh-vcs alpine-zsh-config zsh-theme-powerlevel10k
 
 RUN git config --global --add safe.directory /usr/src/app
 

@@ -1,13 +1,13 @@
 export class SemaphoreService {
-	private semaphore = false;
+	private busy = false;
 	private queue: (() => void)[] = [];
 
 	async acquire(): Promise<void> {
-		if (this.semaphore === true) {
+		if (this.busy === true) {
 			return new Promise((resolve) => this.queue.push(resolve));
 		}
 
-		this.semaphore = true;
+		this.busy = true;
 	}
 
 	release(): void {
@@ -16,7 +16,7 @@ export class SemaphoreService {
 		if (nextResolve !== undefined) {
 			nextResolve();
 		} else {
-			this.semaphore = false;
+			this.busy = false;
 		}
 	}
 }
