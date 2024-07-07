@@ -6,20 +6,9 @@ main {
 		a {
 			transition: transform 300ms cubic-bezier(0.6, -0.7, 0.3, 1.6);
 
-			img,
 			set-glitch-svg {
 				display: block;
 				height: 80px;
-
-				// filter: brightness(1.2) saturate(0);
-			}
-
-			&:hover {
-				transform: scale(1.2);
-
-				img {
-					filter: saturate(1);
-				}
 			}
 		}
 	}

@@ -9,22 +9,26 @@ import { Component, OnInit, computed, input } from '@angular/core';
 	imports: [NgStyle],
 })
 export class GlitchSvgComponent implements OnInit {
-	svgPath = input.required<string>();
-	imgAlt = input.required<string>();
-	effectOffset = input<number>(3);
-	fps = input<number>(10);
+	readonly svgPath = input.required<string>();
+	readonly imgAlt = input.required<string>();
+	readonly maskPath = input<string>();
+	readonly offset = input<number>(2);
+	readonly duration = input<number>(2);
 
-	maskUrl = computed(() => {
-		const svgPath = this.svgPath();
+	readonly maskUrl = computed(() => {
+		const svgUrl = this.svgPath();
+		const maskUrl = this.maskPath();
 
-		return `url(${svgPath})`;
+		return `url(${maskUrl ?? svgUrl})`;
 	});
 
-	framesCssVariables: { [key: string]: number } = {};
+	private readonly glitchSteps = 20;
+	readonly framesCssVariables = new Map<string, number>();
 
 	ngOnInit(): void {
-		this.addPaddingCssVariable();
-
+		this.addOffsetCssVariable();
+		this.addDurationCssVariable();
+		this.addFpsCssVariable();
 		this.addGlitchEffectCssVariables();
 	}
 
@@ -33,19 +37,29 @@ export class GlitchSvgComponent implements OnInit {
 	}
 
 	private addCssVariable(name: string, value: number): void {
-		this.framesCssVariables[`--${name}`] = value;
+		this.framesCssVariables.set(`--${name}`, value);
 	}
 
-	private addPaddingCssVariable(): void {
-		const offset = this.effectOffset();
+	private addOffsetCssVariable(): void {
+		const offset = this.offset();
 
-		this.addCssVariable('glitch-padding', offset);
+		this.addCssVariable('glitch-offset', offset);
+	}
+
+	private addDurationCssVariable(): void {
+		const duration = this.duration();
+
+		this.addCssVariable('glitch-duration', duration);
+	}
+
+	private addFpsCssVariable(): void {
+		const fps = this.duration();
+
+		this.addCssVariable('glitch-fps', fps);
 	}
 
 	private addGlitchEffectCssVariables(): void {
-		const iterations = this.fps() * 2;
-
-		for (let i = 0; i <= iterations; i++) {
+		for (let i = 0; i <= this.glitchSteps; i++) {
 			const leftTopRandom = this.getRandomNumber(100);
 			const leftBottomRandom = this.getRandomNumber(100 - leftTopRandom);
 
