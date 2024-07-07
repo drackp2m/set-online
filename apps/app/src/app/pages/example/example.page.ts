@@ -11,7 +11,7 @@ import {
 	GetUsersGQL,
 } from '@set-online/apollo-definitions';
 
-import { HoverSrcDirective } from '../../shared/directives/img-hover-src.directive';
+import { GlitchSvgComponent } from '../../shared/components/glitch-svg/glitch-svg.component';
 import { ApiClient } from '../../shared/services/api-client.service';
 
 import ExampleMenuComponent from './shared/components/menu/example-menu.component';
@@ -20,7 +20,7 @@ import ExampleMenuComponent from './shared/components/menu/example-menu.componen
 	standalone: true,
 	templateUrl: './example.page.html',
 	styleUrl: './example.page.scss',
-	imports: [ExampleMenuComponent, HoverSrcDirective, ReactiveFormsModule, NgIf, JsonPipe],
+	imports: [ExampleMenuComponent, ReactiveFormsModule, NgIf, JsonPipe, GlitchSvgComponent],
 	providers: [ApiClient, GetUsersGQL, GetManySubscriptionGQL, GetPingsGQL],
 })
 export default class ExamplePage {

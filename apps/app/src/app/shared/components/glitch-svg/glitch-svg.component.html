@@ -1,0 +1,27 @@
+<div class="glitch">
+	<img [src]="svgPath()" [alt]="imgAlt()" />
+
+	<div class="left">
+		<div class="outside">
+			<img [src]="svgPath()" [alt]="imgAlt()" />
+			<img [src]="svgPath()" [alt]="imgAlt()" />
+		</div>
+
+		<div class="inside">
+			<img [src]="svgPath()" [alt]="imgAlt()" />
+			<img [src]="svgPath()" [alt]="imgAlt()" [style.mask-image]="maskUrl()" />
+		</div>
+	</div>
+
+	<div class="right">
+		<div class="outside">
+			<img [src]="svgPath()" [alt]="imgAlt()" />
+			<img [src]="svgPath()" [alt]="imgAlt()" />
+		</div>
+
+		<div class="inside">
+			<img [src]="svgPath()" [alt]="imgAlt()" />
+			<img [src]="svgPath()" [alt]="imgAlt()" />
+		</div>
+	</div>
+</div>

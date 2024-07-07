@@ -29,8 +29,8 @@
 		--font-oblique-#{$name}: #{$value};
 	}
 
-	@each $name, $value in var.$font-monospaces {
-		--font-monospace-#{$name}: #{$value};
+	@each $name, $value in var.$font-mono-spaces {
+		--font-mono-space-#{$name}: #{$value};
 	}
 
 	@each $name, $value in var.$font-casuals {

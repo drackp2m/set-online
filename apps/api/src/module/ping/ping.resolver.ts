@@ -47,6 +47,8 @@ export class PingResolver {
 	@Subscription(() => [GetPingsOutput], {
 		name: 'getPings',
 		resolve: (payload: GetPingsOutput[], _variables, _context): GetPingsOutput[] => {
+			// FixMe => prevent to reconnect multiple times.
+
 			const userUuid = _context.req.user.uuid;
 
 			payload.filter((ping) => ping.userUuid === userUuid);

@@ -1,0 +1,79 @@
+@use 'sass:math';
+
+@function get-random($number) {
+	@return math.random($number);
+}
+
+@keyframes noise-left {
+	$steps: 20;
+
+	@for $i from 0 through $steps {
+		#{percentage($i * calc(1 / $steps))} {
+			$top: get-random(100);
+			$bottom: get-random(100 - $top);
+
+			$top-with-percent: $top * 1%;
+			$bottom-with-percent: $bottom * 1%;
+
+			clip-path: inset(#{$top-with-percent} 0 #{$bottom-with-percent} 0);
+		}
+	}
+}
+
+.glitch {
+	$offset: 4px;
+
+	position: relative;
+	height: 100%;
+
+	> img {
+		height: 100%;
+	}
+
+	.left,
+	.right,
+	.outside,
+	.inside {
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		width: 100%;
+		height: 100%;
+
+		img {
+			position: absolute;
+			top: 0;
+			left: 0;
+
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	.left {
+		animation: noise-left 2s infinite linear alternate-reverse;
+
+		.outside {
+			img:first-child {
+				left: calc($offset * -1);
+				filter: hue-rotate(100deg) brightness(200%) !important;
+			}
+		}
+
+		.inside {
+			img:first-child {
+				filter: hue-rotate(200deg) brightness(200%) !important;
+			}
+
+			img:last-child {
+				mask-position: calc($offset * -1) center;
+				mask-repeat: no-repeat;
+			}
+		}
+	}
+
+	.right {
+		display: none;
+	}
+}
