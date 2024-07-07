@@ -1,8 +1,9 @@
 @use 'sass:math';
 
-@keyframes glitch-left {
-	$glitch-steps: 20;
+$glitch-steps: 20;
+$glitch-duration: calc(var(--glitch-duration) * 1s);
 
+@keyframes glitch-left {
 	@for $i from 0 through $glitch-steps {
 		#{percentage($i * calc(1 / $glitch-steps))} {
 			$top: var(--random-left-top-frame-#{$i});
@@ -18,8 +19,6 @@
 }
 
 @keyframes glitch-right {
-	$glitch-steps: 20;
-
 	@for $i from 0 through $glitch-steps {
 		#{percentage($i * calc(1 / $glitch-steps))} {
 			$top: var(--random-right-top-frame-#{$i});
@@ -34,7 +33,7 @@
 }
 
 .glitch {
-	$offset: calc(var(--glitch-padding) * 1px);
+	$offset: calc(var(--glitch-offset) * 1px);
 	$left-filter: hue-rotate(calc(360 / 3) * 1deg) brightness(140%);
 	$right-filter: hue-rotate(calc(360 / 3) * 2deg) brightness(140%);
 
@@ -66,7 +65,7 @@
 	}
 
 	.left {
-		animation: glitch-left 2s infinite linear alternate-reverse;
+		animation: glitch-left $glitch-duration infinite linear alternate-reverse;
 
 		.outside {
 			left: calc($offset * -1);
@@ -90,7 +89,7 @@
 
 	.right {
 		z-index: 1;
-		animation: glitch-right 2s infinite linear alternate-reverse;
+		animation: glitch-right $glitch-duration infinite linear alternate-reverse;
 
 		.outside {
 			left: calc($offset);
@@ -109,6 +108,15 @@
 				mask-position: calc($offset) center;
 				mask-repeat: no-repeat;
 			}
+		}
+	}
+
+	&:not(:hover) {
+		.left,
+		.right,
+		.outside,
+		.inside {
+			display: none;
 		}
 	}
 }
