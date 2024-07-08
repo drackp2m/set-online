@@ -1,4 +1,7 @@
+// import { readFileSync } from 'fs';
+
 import type { Config } from 'jest';
+// const swcConfig = JSON.parse(readFileSync(`${__dirname}/.swcrc`, 'utf-8'));
 
 const config: Config = {
 	displayName: 'api',
@@ -10,6 +13,7 @@ const config: Config = {
 	maxWorkers: 4,
 	testPathIgnorePatterns: ['.int.spec.ts$'],
 	transform: {
+		// '^.+\\.(t|j)s$': ['@swc/jest', { ...swcConfig }],
 		'^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],
 	},
 	moduleFileExtensions: ['ts', 'js', 'html'],
