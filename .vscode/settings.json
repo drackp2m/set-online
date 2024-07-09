@@ -1,4 +1,14 @@
 {
 	"typescript.tsdk": "node_modules/typescript/lib",
-	"cSpell.words": ["devkit", "mikro", "nestjs", "ngneat", "stylelint"]
+	"cSpell.words": [
+		"codegen",
+		"commitlint",
+		"devkit",
+		"mikro",
+		"nestjs",
+		"ngneat",
+		"ngrx",
+		"stylelint",
+		"tsparticles"
+	]
 }
