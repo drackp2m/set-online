@@ -13,10 +13,10 @@ export class SemaphoreService {
 	release(): void {
 		const nextResolve = this.queue.shift();
 
-		if (nextResolve !== undefined) {
-			nextResolve();
-		} else {
+		if (nextResolve === undefined) {
 			this.busy = false;
+		} else {
+			nextResolve();
 		}
 	}
 }

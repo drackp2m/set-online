@@ -7,11 +7,12 @@
 			"decorators": true,
 			"dynamicImport": true
 		},
-		"baseUrl": "./",
-		"target": "es2022",
 		"transform": {
+			"legacyDecorator": true,
 			"decoratorMetadata": true
-		}
+		},
+		"baseUrl": "./",
+		"target": "es5"
 	},
 	"minify": false
 }
