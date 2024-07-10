@@ -62,12 +62,11 @@ describe('NodeCacheService', () => {
 
 			const initialValueResult = util['nodeCache'].get('key');
 
-			expect(initialValueResult).toStrictEqual('initial value');
-
 			await util.set('key', 'overwritten value');
 
 			const resultAfterExpire = util['nodeCache'].get('key');
 
+			expect(initialValueResult).toStrictEqual('initial value');
 			expect(resultAfterExpire).toStrictEqual('overwritten value');
 		});
 	});
@@ -92,14 +91,14 @@ describe('NodeCacheService', () => {
 
 			util['nodeCache'].set('expires', 'super fast', 10);
 
-			const existentResult = await util.get('expires');
+			const currentResult = await util.get('expires');
 
 			jest.advanceTimersByTime(11 * 1000);
 
-			const result = await util.get('expires');
+			const resultAfterExpire = await util.get('expires');
 
-			expect(existentResult).toStrictEqual('super fast');
-			expect(result).toStrictEqual(undefined);
+			expect(currentResult).toStrictEqual('super fast');
+			expect(resultAfterExpire).toStrictEqual(undefined);
 		});
 	});
 
@@ -202,12 +201,11 @@ describe('NodeCacheService', () => {
 
 			const currentTtl = util['nodeCache'].getTtl('foo');
 
-			expect(currentTtl).toStrictEqual(now + 10 * 1000);
-
-			const result = await util.updateTtl('foo', 42);
+			const updateTtlResult = await util.updateTtl('foo', 42);
 			const updatedTtl = util['nodeCache'].getTtl('foo');
 
-			expect(result).toStrictEqual(true);
+			expect(currentTtl).toStrictEqual(now + 10 * 1000);
+			expect(updateTtlResult).toStrictEqual(true);
 			expect(updatedTtl).toStrictEqual(now + 42 * 1000);
 		});
 
@@ -218,12 +216,11 @@ describe('NodeCacheService', () => {
 
 			const currentTtl = util['nodeCache'].getTtl('foo');
 
-			expect(currentTtl).toStrictEqual(now + 100 * 1000);
-
-			const result = await util.updateTtl('foo', 42);
+			const updateTtlResult = await util.updateTtl('foo', 42);
 			const updatedTtl = util['nodeCache'].getTtl('foo');
 
-			expect(result).toStrictEqual(true);
+			expect(currentTtl).toStrictEqual(now + 100 * 1000);
+			expect(updateTtlResult).toStrictEqual(true);
 			expect(updatedTtl).toStrictEqual(now + 42 * 1000);
 		});
 
@@ -235,12 +232,11 @@ describe('NodeCacheService', () => {
 
 			const currentTtl = util['nodeCache'].getTtl('foo');
 
-			expect(currentTtl).toStrictEqual(now + 100 * 1000);
-
 			const result = await util.updateTtl('foo');
 
 			const updatedTtl = util['nodeCache'].getTtl('foo');
 
+			expect(currentTtl).toStrictEqual(now + 100 * 1000);
 			expect(result).toStrictEqual(true);
 			expect(updatedTtl).toStrictEqual(now + 60 * 1000);
 		});
