@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { CacheNamespace } from '../definition/cache-namespace.enum';
+import { SemaphoreNamespace } from '../definition/semaphore-namespace.enum';
 
 import { SemaphoreService } from './semaphore.service';
 
@@ -9,7 +9,7 @@ export class SemaphoreManagerService {
 	private readonly defaultInstance = new SemaphoreService();
 	private readonly instances: Map<string, SemaphoreService> = new Map();
 
-	getInstance(config?: { name: CacheNamespace }): SemaphoreService {
+	getInstance(config?: { name: SemaphoreNamespace }): SemaphoreService {
 		if (config?.name === undefined) {
 			return this.defaultInstance;
 		}
