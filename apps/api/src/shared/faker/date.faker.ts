@@ -1,30 +1,47 @@
 import { faker } from '@faker-js/faker';
+import { Logger } from '@nestjs/common';
 
+import { DateSetterMethods } from '../definition/date-setter-methods.type';
+import { ManipulationDateAttribute } from '../definition/manipulation-date-attribute.type';
+import { ManipulationDate } from '../definition/manipulation-date.type';
 import { EditableDate } from '../util/editable-date';
 
 import { BasicFaker } from './basic.faker';
-
-type ManipulationDateAttribute =
-	| 'year'
-	| 'month'
-	| 'day'
-	| 'hour'
-	| 'minute'
-	| 'second'
-	| 'millisecond';
 
 export class DateFaker {
 	private readonly now = new EditableDate();
 	private created?: Date;
 
+	private readonly logger = new Logger();
+
 	constructor() {
 		this.now.set('hour', 0).set('minute', 0).set('second', 0).set('millisecond', 0);
 	}
 
-	createdAt(since?: string): Date {
+	createdAt(since?: string | Date | number): Date | null {
 		const twoYearsAgo = this.twoYearsAgo();
+		const sinceAsDate = since !== undefined && new Date(since);
 
-		this.created = faker.date.between({ from: since || twoYearsAgo, to: this.now });
+		if (sinceAsDate !== false && this.checkValidDate(sinceAsDate) === false) {
+			this.logger.error('DateFaker.createdAt(); `since` is not a valid Date');
+
+			return null;
+		} else if (sinceAsDate !== false && sinceAsDate > twoYearsAgo) {
+			this.logger.error(
+				`DateFaker.createdAt(); \`since\` must be greater that ${twoYearsAgo.toLocaleString()}`,
+			);
+
+			return null;
+		}
+
+		try {
+			this.created = faker.date.between({ from: since || twoYearsAgo, to: this.now });
+		} catch (error) {
+			console.log(error);
+			this.logger.error('DateFaker.createdAt(); `since is not a valid Date');
+
+			return null;
+		}
 
 		return this.created;
 	}
@@ -38,7 +55,7 @@ export class DateFaker {
 	}
 
 	expiresOn(until?: string): Date {
-		const limitOptions = new Map<ManipulationDateAttribute, number>([['day', 1]]);
+		const limitOptions: ManipulationDate = new Map([['day', 1]]);
 		const untilLimit = this.manipulatedDate(limitOptions);
 
 		this.created = faker.date.between({ from: this.now, to: until ?? untilLimit });
@@ -46,13 +63,17 @@ export class DateFaker {
 		return this.created;
 	}
 
+	private checkValidDate(date: Date): boolean {
+		return date.toString() !== 'Invalid Date';
+	}
+
 	private twoYearsAgo(): Date {
-		const limitOptions = new Map<ManipulationDateAttribute, number>([['year', -2]]);
+		const limitOptions: ManipulationDate = new Map([['year', -2]]);
 
 		return this.manipulatedDate(limitOptions);
 	}
 
-	private manipulatedDate(options: Map<ManipulationDateAttribute, number>): Date {
+	private manipulatedDate(options: ManipulationDate): Date {
 		const date = new Date(this.now);
 
 		options.forEach((value, key) => {
@@ -64,9 +85,7 @@ export class DateFaker {
 		return date;
 	}
 
-	private manipulationDateAttributeMethod(
-		attribute: ManipulationDateAttribute,
-	): 'FullYear' | 'Month' | 'Date' | 'Hours' | 'Minutes' | 'Seconds' | 'Milliseconds' {
+	private manipulationDateAttributeMethod(attribute: ManipulationDateAttribute): DateSetterMethods {
 		switch (attribute) {
 			case 'year':
 				return 'FullYear';

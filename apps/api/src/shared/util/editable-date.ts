@@ -1,22 +1,6 @@
+import { DateSetterMethods } from '../definition/date-setter-methods.type';
+import { ManipulationDateAttribute } from '../definition/manipulation-date-attribute.type';
 import { GenerateNowDateUseCase } from '../use-case/generate-now-date.use-case';
-
-type ManipulationDateAttribute =
-	| 'year'
-	| 'month'
-	| 'day'
-	| 'hour'
-	| 'minute'
-	| 'second'
-	| 'millisecond';
-
-type ManipulationDateKeys =
-	| 'FullYear'
-	| 'Month'
-	| 'Date'
-	| 'Hours'
-	| 'Minutes'
-	| 'Seconds'
-	| 'Milliseconds';
 
 export class EditableDate extends Date {
 	constructor(initialDate = new GenerateNowDateUseCase().execute()) {
@@ -48,9 +32,7 @@ export class EditableDate extends Date {
 	}
 
 	// FixMe => duplicated code on apps/api/src/shared/faker/date.faker.ts
-	private manipulationDateAttributeMethod(
-		attribute: ManipulationDateAttribute,
-	): ManipulationDateKeys {
+	private manipulationDateAttributeMethod(attribute: ManipulationDateAttribute): DateSetterMethods {
 		switch (attribute) {
 			case 'year':
 				return 'FullYear';
