@@ -61,6 +61,7 @@ describe('CacheManagerService', () => {
 			const barFromDefaultInstance = defaultNodeCacheService['nodeCache'].get('bar');
 			const barFromPingInstance = pingNodeCacheService['nodeCache'].get('bar');
 
+			expect(defaultNodeCacheService).toBeInstanceOf(NodeCacheService);
 			expect(pingNodeCacheService).toBeInstanceOf(NodeCacheService);
 			expect(defaultNodeCacheService).not.toEqual(pingNodeCacheService);
 

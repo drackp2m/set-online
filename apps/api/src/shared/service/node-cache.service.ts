@@ -1,13 +1,13 @@
 import NodeCache from 'node-cache';
 
-import { CacheNamespace } from '../definition/cache-namespace.enum';
+import { SemaphoreNamespace } from '../definition/semaphore-namespace.enum';
 
 import { SemaphoreManagerService } from './semaphore-manager.service';
 
 export class NodeCacheService {
 	private readonly nodeCache = new NodeCache({ stdTTL: this.stdTtl });
 	private readonly semaphore = new SemaphoreManagerService().getInstance({
-		name: CacheNamespace.ping,
+		name: SemaphoreNamespace.ping,
 	});
 
 	constructor(private readonly stdTtl = 60) {}
