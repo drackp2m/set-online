@@ -32,7 +32,7 @@ describe('DateFaker', () => {
 		});
 
 		it('should return null when `since` date above now is passed', () => {
-			const since = new Date('2048-10-20');
+			const since = new Date('8050-10-20');
 
 			const result = util.createdAt(since.getTime());
 
@@ -47,6 +47,56 @@ describe('DateFaker', () => {
 
 			expect(result?.getTime()).toBeGreaterThanOrEqual(since.getTime());
 			expect(result?.getTime()).toBeLessThanOrEqual(now.getTime());
+		});
+	});
+
+	describe('modifiedAt', () => {
+		it('should return a valid Date', () => {
+			const result = util.modifiedAt();
+
+			expect(result).toBeInstanceOf(Date);
+		});
+
+		it('should return a date above the creation date', () => {
+			const now = new Date();
+
+			const createdAt = util['createdAt']();
+			const result = util.modifiedAt();
+
+			expect(result.getTime()).toBeGreaterThanOrEqual(createdAt?.getTime() ?? 0);
+			expect(result.getTime()).toBeLessThanOrEqual(now.getTime());
+		});
+	});
+
+	describe('expiresOn', () => {
+		it('should return a valid Date', () => {
+			const result = util.expiresOn();
+
+			expect(result).toBeInstanceOf(Date);
+		});
+
+		it('should return null when invalid `until` date is passed', () => {
+			const result = util.expiresOn('invalid');
+
+			expect(result).toStrictEqual(null);
+		});
+
+		it('should return null when `until` date below now is passed', () => {
+			const since = new Date('2002-10-20');
+
+			const result = util.expiresOn(since.getTime());
+
+			expect(result).toStrictEqual(null);
+		});
+
+		it('should return a date between now and specified date', () => {
+			const now = new Date();
+
+			const until = new Date('8050-10-20');
+			const result = util.expiresOn(until);
+
+			expect(result?.getTime()).toBeGreaterThanOrEqual(now.getTime());
+			expect(result?.getTime()).toBeLessThanOrEqual(until.getTime());
 		});
 	});
 });

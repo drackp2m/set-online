@@ -33,14 +33,15 @@ FROM deps AS dev-attached
 
 USER root
 
-RUN apk add --no-cache sudo git openssh-client gnupg vim
+RUN apk add --no-cache sudo
 
 RUN addgroup node root \
 			&& echo "%root ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers
 
 USER node
 
-RUN sudo apk add --no-cache zsh zsh-vcs alpine-zsh-config \
+RUN sudo apk add --no-cache git openssh-client gnupg vim \
+			zsh zsh-vcs alpine-zsh-config \
 			zsh-theme-powerlevel10k zsh-syntax-highlighting
 
 RUN git config --global --add safe.directory /usr/src/app
