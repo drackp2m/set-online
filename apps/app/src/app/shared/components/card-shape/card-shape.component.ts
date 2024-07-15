@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 
 import { CardColor, CardShading, CardShape } from '@set-online/api-definitions';
 
@@ -11,23 +11,31 @@ import { CardColor, CardShading, CardShape } from '@set-online/api-definitions';
 	imports: [NgIf],
 })
 export class CardShapeComponent {
-	@Input({ required: true }) shape!: keyof typeof CardShape;
-	@Input({ required: true }) color!: keyof typeof CardColor;
-	@Input({ required: true }) shading!: keyof typeof CardShading;
+	shape = input.required<keyof typeof CardShape>();
+	color = input.required<keyof typeof CardColor>();
+	shading = input.required<keyof typeof CardShading>();
 
-	get basicMask(): string {
-		const shading = this.shading === 'striped' ? 'outlined' : this.shading;
+	basicMask = computed(() => {
+		const shape = this.shape();
+		let shading = this.shading();
 
-		return this.getUrl(`${this.shape}-${shading}`);
-	}
+		shading = shading === 'striped' ? 'outlined' : shading;
 
-	get solidMask(): string | undefined {
-		return this.shading === 'striped' ? this.getUrl(`${this.shape}-solid`) : undefined;
-	}
+		return this.getUrl(`${shape}-${shading}`);
+	});
 
-	get stripedMask(): string | undefined {
-		return this.shading === 'striped' ? this.getUrl('strips') : undefined;
-	}
+	solidMask = computed(() => {
+		const shading = this.shading();
+		const shape = this.shape();
+
+		return shading === 'striped' ? this.getUrl(`${shape}-solid`) : undefined;
+	});
+
+	stripedMask = computed(() => {
+		const shading = this.shading();
+
+		return shading === 'striped' ? this.getUrl('strips') : undefined;
+	});
 
 	private getUrl(iconName: string): string {
 		return `url(assets/icons/${iconName}.svg) no-repeat center`;
