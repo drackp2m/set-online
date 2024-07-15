@@ -8,10 +8,33 @@
 .card {
 	position: relative;
 	height: 100%;
-}
 
-.mask {
-	position: absolute;
-	top: 0;
-	width: 100%;
+	.mask {
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
+
+	&.horizontal {
+		display: flex;
+		place-content: center center;
+		aspect-ratio: 1 / 0.48;
+
+		.basic,
+		.mask,
+		.strip {
+			rotate: 90deg;
+			scale: 208.3333%;
+			height: 100%;
+		}
+
+		.mask {
+			width: auto;
+
+			.strip {
+				rotate: none;
+				scale: none;
+			}
+		}
+	}
 }

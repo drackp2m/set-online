@@ -11,6 +11,8 @@ import { CardColor, CardShading, CardShape } from '@set-online/api-definitions';
 	imports: [NgIf],
 })
 export class CardShapeComponent {
+	horizontal = input(false);
+
 	shape = input.required<keyof typeof CardShape>();
 	color = input.required<keyof typeof CardColor>();
 	shading = input.required<keyof typeof CardShading>();

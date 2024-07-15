@@ -1,4 +1,4 @@
-<div [class]="'card ' + shape()">
+<div [class]="'card ' + shape()" [class.horizontal]="horizontal()">
 	<div #basic [class]="'basic card-' + color()" [style.-webkit-mask]="basicMask()"></div>
 	@if (stripedMask()) {
 		<div #mask class="mask" [style.-webkit-mask]="solidMask()">
