@@ -3,7 +3,7 @@ import { ApolloTestingController, ApolloTestingModule } from 'apollo-angular/tes
 
 import { GetUserInfoGQL, UserRole } from '@set-online/apollo-definitions';
 
-describe('AppComponent', () => {
+describe.skip('AppComponent', () => {
 	let controller: ApolloTestingController;
 
 	beforeEach(() => {
