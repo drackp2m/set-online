@@ -1,11 +1,12 @@
 .container {
+	aspect-ratio: 1 / 0.6666;
 	background: white;
 	border: solid 0.1rem #e5e5e5;
 	border-radius: 3.3% / 5%;
 
 	.card {
 		gap: 6%;
-		aspect-ratio: 1 / 0.666;
+		height: 100%;
 		padding: 9.5% 0;
 
 		set-card-shape {
@@ -21,13 +22,17 @@
 		border-color: #4d4d4d;
 	}
 
-	&.rotate {
+	&.vertical {
+		aspect-ratio: 0.6666 / 1;
 		border-radius: 5% / 3.3%;
 
 		.card {
-			translate: -16.7% 25.2%;
-			rotate: 90deg;
-			padding: 14.5% 0;
+			padding: 0 14.3%;
+
+			set-card-shape {
+				display: block;
+				width: 100%;
+			}
 		}
 	}
 }

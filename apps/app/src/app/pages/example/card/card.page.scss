@@ -3,20 +3,18 @@ main {
 	background-color: white;
 
 	set-card-shape {
-		width: 85px;
+		width: 76px;
 	}
 
 	#card-list-horizontal {
 		set-card {
-			// width: 373px;
-			width: 30%;
+			width: 342px;
 		}
 	}
 
 	#card-list-vertical {
 		set-card {
-			// width: 178px;
-			width: 15%;
+			width: 228px;
 		}
 	}
 }
