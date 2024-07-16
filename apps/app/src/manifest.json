@@ -34,8 +34,9 @@
 	"shortcuts": [
 		{
 			"name": "New game",
-			"url": "/",
-			"description": "Play new game with friends"
+			"short_name": "Play",
+			"description": "Play new game with friends",
+			"url": "/game"
 		}
 	]
 }

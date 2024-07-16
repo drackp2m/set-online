@@ -26,7 +26,12 @@ export default class GamePage implements OnInit {
 
 	boardCards = signal<CardInterface[]>([]);
 	sets = signal<CardInterface[]>([]);
-	remainingCardsCount = computed(() => 81 - this.boardCards().length - this.sets().length);
+	remainingCardsCount = computed(() => {
+		const boardCards = this.boardCards();
+		const sets = this.sets();
+
+		return 81 - boardCards.length - sets.length;
+	});
 	cardsInSets = signal<CardInterface[]>([]);
 	selectedCards = signal<CardInterface[]>([]);
 	wrongSetsCount = signal<number>(0);

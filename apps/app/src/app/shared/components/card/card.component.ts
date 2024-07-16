@@ -18,11 +18,11 @@ export class CardComponent {
 	shading = input.required<keyof typeof CardShading>();
 	count = input.required<number>();
 
+	selected = input(false);
+	highlighted = input(false);
 	vertical = input(false, {
 		transform: (value: boolean | string) => (typeof value === 'string' ? value === '' : value),
 	});
-	selected = input(false);
-	highlighted = input(false);
 
 	repetitions = computed(() => {
 		const count = this.count();
