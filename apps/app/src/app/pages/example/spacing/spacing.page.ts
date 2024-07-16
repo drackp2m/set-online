@@ -11,8 +11,4 @@ import ExampleMenuComponent from '../shared/components/menu/example-menu.compone
 })
 export default class SpacingPage {
 	spaces = ['none', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'];
-
-	getSpacing(name: string): string {
-		return `var(--spacing-${name})`;
-	}
 }

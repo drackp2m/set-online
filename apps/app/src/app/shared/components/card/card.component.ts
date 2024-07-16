@@ -1,4 +1,4 @@
-import { NgClass, NgFor, NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
 
 import { CardColor, CardShading, CardShape } from '@set-online/api-definitions';
@@ -10,7 +10,7 @@ import { CardShapeComponent } from '../card-shape/card-shape.component';
 	selector: 'set-card',
 	templateUrl: './card.component.html',
 	styleUrl: './card.component.scss',
-	imports: [NgIf, NgFor, NgClass, CardShapeComponent],
+	imports: [NgIf, NgFor, CardShapeComponent],
 })
 export class CardComponent {
 	shape = input.required<keyof typeof CardShape>();

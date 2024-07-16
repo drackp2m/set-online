@@ -9,8 +9,9 @@
 		@for (space of spaces; track $index) {
 			<div class="flex-col align-center justify-end gap-md">
 				<div
-					class="surface-vivid"
-					[style]="{ width: getSpacing(space), height: getSpacing(space), borderRadius: '2px' }"
+					class="surface-vivid round"
+					[style.height]="'var(--spacing-' + space + ')'"
+					[style.width]="'var(--spacing-' + space + ')'"
 				></div>
 
 				<h5>{{ space }}</h5>
@@ -25,13 +26,15 @@
 			<div class="flex-col align-center justify-end gap-md">
 				<div class="flex-row" [class]="'gap-' + space">
 					<div
-						class="surface-vivid"
-						[style]="{ width: getSpacing('lg'), height: getSpacing('lg'), borderRadius: '2px' }"
+						class="surface-vivid round"
+						[style.height]="'var(--spacing-' + space + ')'"
+						[style.width]="'var(--spacing-' + space + ')'"
 					></div>
 
 					<div
-						class="surface-vivid"
-						[style]="{ width: getSpacing('lg'), height: getSpacing('lg'), borderRadius: '2px' }"
+						class="surface-vivid round"
+						[style.height]="'var(--spacing-' + space + ')'"
+						[style.width]="'var(--spacing-' + space + ')'"
 					></div>
 				</div>
 
