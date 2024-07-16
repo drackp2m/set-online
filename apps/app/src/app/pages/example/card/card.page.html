@@ -37,12 +37,12 @@
 				@for (shading of shadings; track $index) {
 					@for (count of counts; track $index) {
 						<set-card
+							vertical
 							[shape]="shape"
 							[color]="color"
 							[shading]="shading"
 							[count]="count"
-							[vertical]="true"
-						></set-card>
+						/>
 					}
 				}
 			}

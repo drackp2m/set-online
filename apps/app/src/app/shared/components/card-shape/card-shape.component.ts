@@ -15,7 +15,9 @@ export class CardShapeComponent {
 	color = input.required<keyof typeof CardColor>();
 	shading = input.required<keyof typeof CardShading>();
 
-	horizontal = input(false);
+	horizontal = input(false, {
+		transform: (value: boolean | string) => (typeof value === 'string' ? value === '' : value),
+	});
 
 	basicMask = computed(() => {
 		const shape = this.shape();
