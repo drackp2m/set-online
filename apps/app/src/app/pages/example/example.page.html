@@ -5,11 +5,11 @@
 
 	<section id="media-query-indicator" class="mt-xxl">
 		<ul class="flex-row my-md gap-sm lg:gap-md">
-			<li class="round-sm p-xs px-sm surface-radiant color-vivid xs-o:surface-serene">xs</li>
-			<li class="round-sm p-xs px-sm surface-radiant color-vivid sm-o:surface-serene">sm</li>
-			<li class="round-sm p-xs px-sm surface-radiant color-vivid md-o:surface-serene">md</li>
-			<li class="round-sm p-xs px-sm surface-radiant color-vivid lg-o:surface-serene">lg</li>
-			<li class="round-sm p-xs px-sm surface-radiant color-vivid xl-o:surface-serene">xl</li>
+			<li class="round-sm p-xs px-sm color-vivid surface-radiant xs-o:surface-serene">xs</li>
+			<li class="round-sm p-xs px-sm color-vivid surface-radiant sm-o:surface-serene">sm</li>
+			<li class="round-sm p-xs px-sm color-vivid surface-radiant md-o:surface-serene">md</li>
+			<li class="round-sm p-xs px-sm color-vivid surface-radiant lg-o:surface-serene">lg</li>
+			<li class="round-sm p-xs px-sm color-vivid surface-radiant xl-o:surface-serene">xl</li>
 		</ul>
 	</section>
 
@@ -64,13 +64,13 @@
 			Init subscription
 		</button>
 
-		@if (getManySubscription()) {
+		@if (getManySubscription() !== undefined) {
 			<p>
 				{{ getManySubscription() }}
 			</p>
 		}
 
-		@if (getPings()) {
+		@if (getPings() !== undefined) {
 			<p>
 				{{ getPings() | json }}
 			</p>
@@ -80,7 +80,7 @@
 			Check users
 		</button>
 
-		@if (data()) {
+		@if (data() !== undefined) {
 			<p>{{ data() }}</p>
 		}
 	</section>

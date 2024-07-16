@@ -10,5 +10,6 @@
 		"ngrx",
 		"stylelint",
 		"tsparticles"
-	]
+	],
+	"svg.preview.background": "editor"
 }

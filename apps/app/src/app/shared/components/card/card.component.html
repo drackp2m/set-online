@@ -1,14 +1,21 @@
 <div
 	class="container shadow-sm"
-	[class]="{ vertical: vertical(), selected: selected(), highlighted: highlighted() }"
+	[class.vertical]="vertical()"
+	[class.selected]="selected()"
+	[class.highlighted]="highlighted()"
 >
 	<div
 		class="card justify-center align-center"
-		[class.flex-row]="!vertical()"
 		[class.flex-col]="vertical()"
+		[class.flex-row]="!vertical()"
 	>
 		@for (count of repetitions(); track $index) {
-			<set-card-shape horizontal [shape]="shape()" [color]="color()" [shading]="shading()" />
+			<set-card-shape
+				[horizontal]="vertical()"
+				[shape]="shape()"
+				[color]="color()"
+				[shading]="shading()"
+			/>
 		}
 	</div>
 </div>
