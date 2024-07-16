@@ -8,12 +8,7 @@
 		[class.flex-col]="vertical()"
 	>
 		@for (count of repetitions(); track $index) {
-			<set-card-shape
-				[shape]="shape()"
-				[color]="color()"
-				[shading]="shading()"
-				[horizontal]="vertical()"
-			/>
+			<set-card-shape horizontal [shape]="shape()" [color]="color()" [shading]="shading()" />
 		}
 	</div>
 </div>
