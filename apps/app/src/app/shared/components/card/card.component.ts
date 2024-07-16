@@ -1,13 +1,5 @@
-import { NgFor, NgIf } from '@angular/common';
-import {
-	AfterViewInit,
-	Component,
-	ElementRef,
-	Input,
-	OnDestroy,
-	ViewChild,
-	inject,
-} from '@angular/core';
+import { NgClass, NgFor, NgIf } from '@angular/common';
+import { Component, computed, input } from '@angular/core';
 
 import { CardColor, CardShading, CardShape } from '@set-online/api-definitions';
 
@@ -18,61 +10,21 @@ import { CardShapeComponent } from '../card-shape/card-shape.component';
 	selector: 'set-card',
 	templateUrl: './card.component.html',
 	styleUrl: './card.component.scss',
-	imports: [NgIf, NgFor, CardShapeComponent],
+	imports: [NgIf, NgFor, NgClass, CardShapeComponent],
 })
-export class CardComponent implements AfterViewInit, OnDestroy {
-	private readonly elementRef = inject(ElementRef);
-	private resizeObserver!: ResizeObserver;
+export class CardComponent {
+	shape = input.required<keyof typeof CardShape>();
+	color = input.required<keyof typeof CardColor>();
+	shading = input.required<keyof typeof CardShading>();
+	count = input.required<number>();
 
-	@ViewChild('container') container!: ElementRef<HTMLDivElement>;
+	vertical = input(false);
+	selected = input(false);
+	highlighted = input(false);
 
-	@Input({ required: true }) shape!: keyof typeof CardShape;
-	@Input({ required: true }) color!: keyof typeof CardColor;
-	@Input({ required: true }) shading!: keyof typeof CardShading;
-	@Input({ required: true }) count!: number;
-	@Input() rotate = false;
-	@Input() selected = false;
-	@Input() highlighted = false;
+	repetitions = computed(() => {
+		const count = this.count();
 
-	ngAfterViewInit() {
-		if (this.rotate) {
-			this.initResizeObserver();
-		}
-	}
-
-	ngOnDestroy() {
-		if (this.resizeObserver) {
-			this.resizeObserver.unobserve(this.elementRef.nativeElement);
-			this.resizeObserver.disconnect();
-		}
-	}
-
-	get repetitions(): number[] {
-		return Array.from({ length: this.count });
-	}
-
-	private initResizeObserver() {
-		this.resizeObserver = new ResizeObserver((entries) => {
-			entries.forEach((entry) => {
-				if (entry.target === this.elementRef.nativeElement) {
-					this.recalculateSize();
-				}
-			});
-		});
-
-		this.resizeObserver.observe(this.elementRef.nativeElement);
-	}
-
-	private recalculateSize() {
-		const containerWidth = this.elementRef.nativeElement.offsetWidth;
-
-		this.container.nativeElement.style.height = `${containerWidth / 0.666}px`;
-
-		const card = this.container.nativeElement.querySelector<HTMLDivElement>('.card');
-
-		if (card) {
-			card.style.width = `${containerWidth / 0.666}px`;
-			card.style.height = `${containerWidth}px`;
-		}
-	}
+		return Array.from({ length: count });
+	});
 }

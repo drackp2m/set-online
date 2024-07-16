@@ -1,7 +1,19 @@
-<div #container class="container shadow-sm" [class]="{ selected, rotate, highlighted }">
-	<div class="card flex-row justify-center">
-		@for (count of repetitions; track $index) {
-			<set-card-shape [shape]="shape" [color]="color" [shading]="shading"></set-card-shape>
+<div
+	class="container shadow-sm"
+	[ngClass]="{ vertical: vertical(), selected: selected(), highlighted: highlighted() }"
+>
+	<div
+		class="card justify-center align-center"
+		[class.flex-row]="!vertical()"
+		[class.flex-col]="vertical()"
+	>
+		@for (count of repetitions(); track $index) {
+			<set-card-shape
+				[shape]="shape()"
+				[color]="color()"
+				[shading]="shading()"
+				[horizontal]="vertical()"
+			/>
 		}
 	</div>
 </div>

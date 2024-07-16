@@ -4,19 +4,38 @@ export class BasicFaker {
 	}
 
 	static randomEnum<T extends object>(enumInstance: T): T[keyof T] {
-		const enumValues = Object.keys(enumInstance) as Array<keyof T>;
+		const enumKeys = new BasicFaker().getEnumKeys(enumInstance);
 
-		if (!enumValues[0]) {
+		const firstEnumKey = enumKeys[0];
+
+		if (firstEnumKey === undefined) {
 			throw new Error('Enum is empty');
 		}
 
-		const randomIndex = Math.floor(Math.random() * enumValues.length);
-		const randomEnumKey = enumValues[randomIndex];
+		const randomIndex = Math.floor(Math.random() * enumKeys.length);
+		const randomEnumKey = enumKeys[randomIndex];
 
-		if (!randomEnumKey) {
-			return enumInstance[enumValues[0]];
+		const enumKey = randomEnumKey ?? firstEnumKey;
+
+		return enumInstance[enumKey];
+	}
+
+	private getEnumKeys<T extends object>(enumInstance: T): Array<keyof T> {
+		const enumKeys = Object.keys(enumInstance) as Array<keyof T>;
+
+		if (enumKeys.length % 2 !== 0) {
+			return enumKeys;
 		}
 
-		return enumInstance[randomEnumKey];
+		let isBasicEnum = true;
+		const enumValues = Object.values(enumInstance) as string[];
+
+		for (let index = 0; index < enumKeys.length / 2; index++) {
+			if (enumKeys[enumKeys.length / 2 + index] !== enumValues[index]) {
+				isBasicEnum = false;
+			}
+		}
+
+		return isBasicEnum ? enumKeys.slice(enumKeys.length / 2) : enumKeys;
 	}
 }

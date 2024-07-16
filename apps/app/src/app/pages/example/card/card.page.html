@@ -1,5 +1,5 @@
 <main id="card" class="content-fixed pt-lg pb-xxl">
-	<set-example-menu></set-example-menu>
+	<set-example-menu />
 
 	<h2 class="mt-xl">Welcome to Cards!</h2>
 
@@ -9,7 +9,7 @@
 		@for (shape of shapes; track $index) {
 			@for (color of colors; track $index) {
 				@for (shading of shadings; track $index) {
-					<set-card-shape [shape]="shape" [color]="color" [shading]="shading"></set-card-shape>
+					<set-card-shape [shape]="shape" [color]="color" [shading]="shading" />
 				}
 			}
 		}
@@ -22,12 +22,7 @@
 			@for (color of colors; track $index) {
 				@for (shading of shadings; track $index) {
 					@for (count of counts; track $index) {
-						<set-card
-							[shape]="shape"
-							[color]="color"
-							[shading]="shading"
-							[count]="count"
-						></set-card>
+						<set-card [shape]="shape" [color]="color" [shading]="shading" [count]="count" />
 					}
 				}
 			}
@@ -36,7 +31,7 @@
 
 	<h3 class="mt-xl">Card list vertical</h3>
 
-	<section id="card-list-vertical" class="flex-row flex-wrap gap-sm lg:gap-md my-md">
+	<section id="card-list-vertical" class="flex-row flex-wrap gap-md my-md">
 		@for (shape of shapes; track $index) {
 			@for (color of colors; track $index) {
 				@for (shading of shadings; track $index) {
@@ -46,7 +41,7 @@
 							[color]="color"
 							[shading]="shading"
 							[count]="count"
-							[rotate]="true"
+							[vertical]="true"
 						></set-card>
 					}
 				}
