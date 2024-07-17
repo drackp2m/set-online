@@ -1,12 +1,11 @@
 import { Routes } from '@angular/router';
 
-import GamePage from './pages/game/game.page';
 import MainLayout from './shared/layouts/main/main.layout';
 
 export const APP_ROUTES: Routes = [
 	{
 		path: '',
-		component: GamePage,
+		loadChildren: () => import('./pages/game/game.routes'),
 	},
 	{
 		path: '',

@@ -15,7 +15,7 @@ import {
 	imports: [NgFor],
 	providers: [NewGameGQL, ListGamesGQL, JoinGameGQL],
 })
-export default class OnlinePage implements OnInit {
+export class OnlinePage implements OnInit {
 	private readonly newGameGQL = inject(NewGameGQL);
 	private readonly listGamesGQL = inject(ListGamesGQL);
 	private readonly joinGameGQL = inject(JoinGameGQL);

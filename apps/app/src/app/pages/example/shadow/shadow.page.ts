@@ -9,6 +9,6 @@ import ExampleMenuComponent from '../shared/components/menu/example-menu.compone
 	styleUrl: './shadow.page.scss',
 	imports: [ExampleMenuComponent, CardComponent],
 })
-export default class ShadowPage {
+export class ShadowPage {
 	shadows = ['sm', 'md', 'lg', 'xl', 'xxl'];
 }

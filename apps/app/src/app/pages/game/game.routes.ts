@@ -1,10 +1,8 @@
 import { Routes } from '@angular/router';
 
-import GamePage from './game.page';
-
 export default [
 	{
 		path: '',
-		component: GamePage,
+		loadComponent: () => import('./game.page').then((mod) => mod.GamePage),
 	},
 ] satisfies Routes;

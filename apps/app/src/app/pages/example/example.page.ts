@@ -23,7 +23,7 @@ import ExampleMenuComponent from './shared/components/menu/example-menu.componen
 	imports: [ExampleMenuComponent, ReactiveFormsModule, NgIf, JsonPipe, GlitchSvgComponent],
 	providers: [ApiClient, GetUsersGQL, GetManySubscriptionGQL, GetPingsGQL],
 })
-export default class ExamplePage {
+export class ExamplePage {
 	private readonly apiClient = inject(ApiClient);
 	private readonly getUsersGQL = inject(GetUsersGQL);
 	private readonly getManySubscriptionGQL = inject(GetManySubscriptionGQL);

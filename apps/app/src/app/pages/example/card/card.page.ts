@@ -13,7 +13,7 @@ import ExampleMenuComponent from '../shared/components/menu/example-menu.compone
 	styleUrl: './card.page.scss',
 	imports: [ExampleMenuComponent, CardShapeComponent, CardComponent, NgFor, NgIf],
 })
-export default class CardPage {
+export class CardPage {
 	shapes: (keyof typeof CardShape)[] = ['oval', 'squiggle', 'diamond'];
 	colors: (keyof typeof CardColor)[] = ['red', 'purple', 'green'];
 	shadings: (keyof typeof CardShading)[] = ['solid', 'striped', 'outlined'];

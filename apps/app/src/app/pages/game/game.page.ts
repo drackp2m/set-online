@@ -16,7 +16,7 @@ import { YouWonComponent } from './shared/components/you-won/you-won.component';
 	styleUrl: './game.page.scss',
 	imports: [NgIf, NgFor, CardComponent, YouWonComponent, RouterLink],
 })
-export default class GamePage implements OnInit {
+export class GamePage implements OnInit {
 	private readonly shapes: (keyof typeof CardShape)[] = ['oval', 'squiggle', 'diamond'];
 	private readonly colors: (keyof typeof CardColor)[] = ['red', 'purple', 'green'];
 	private readonly shadings: (keyof typeof CardShading)[] = ['solid', 'striped', 'outlined'];

@@ -1,40 +1,33 @@
 import { Routes } from '@angular/router';
 
-import BorderRadiusPage from './border-radius/border-radius.page';
-import CardPage from './card/card.page';
-import ColorPage from './color/color.page';
-import ExamplePage from './example.page';
-import ShadowPage from './shadow/shadow.page';
-import SpacingPage from './spacing/spacing.page';
-import TypographyPage from './typography/typography.page';
-
 export default [
 	{
 		path: '',
-		component: ExamplePage,
+		loadComponent: () => import('./example.page').then((mod) => mod.ExamplePage),
 	},
 	{
 		path: 'typographies',
-		component: TypographyPage,
+		loadComponent: () => import('./typography/typography.page').then((mod) => mod.TypographyPage),
 	},
 	{
 		path: 'shadows',
-		component: ShadowPage,
+		loadComponent: () => import('./shadow/shadow.page').then((mod) => mod.ShadowPage),
 	},
 	{
 		path: 'colors',
-		component: ColorPage,
+		loadComponent: () => import('./color/color.page').then((mod) => mod.ColorPage),
 	},
 	{
 		path: 'border-radius',
-		component: BorderRadiusPage,
+		loadComponent: () =>
+			import('./border-radius/border-radius.page').then((mod) => mod.BorderRadiusPage),
 	},
 	{
 		path: 'spacings',
-		component: SpacingPage,
+		loadComponent: () => import('./spacing/spacing.page').then((mod) => mod.SpacingPage),
 	},
 	{
 		path: 'cards',
-		component: CardPage,
+		loadComponent: () => import('./card/card.page').then((mod) => mod.CardPage),
 	},
 ] satisfies Routes;
