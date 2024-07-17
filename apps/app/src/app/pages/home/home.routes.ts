@@ -1,10 +1,8 @@
 import { Routes } from '@angular/router';
 
-import { HomePage } from './home.page';
-
-export const HOME_ROUTES: Routes = [
+export default [
 	{
 		path: '',
-		component: HomePage,
+		loadComponent: () => import('./home.page').then((mod) => mod.HomePage),
 	},
-];
+] satisfies Routes;

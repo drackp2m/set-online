@@ -1,5 +1,11 @@
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { ApplicationConfig, computed, signal } from '@angular/core';
+import {
+	ApplicationConfig,
+	computed,
+	provideExperimentalCheckNoChangesForDebug,
+	provideExperimentalZonelessChangeDetection,
+	signal,
+} from '@angular/core';
 import { provideRouter, withHashLocation } from '@angular/router';
 import { InMemoryCache, split } from '@apollo/client/core';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
@@ -32,6 +38,12 @@ export const pingValue = computed(() => {
 
 export const appConfig: ApplicationConfig = {
 	providers: [
+		provideExperimentalCheckNoChangesForDebug({
+			exhaustive: true,
+			interval: 500,
+		}),
+		provideExperimentalZonelessChangeDetection(),
+		provideRouter(APP_ROUTES, withHashLocation()),
 		provideHttpClient(withInterceptorsFromDi()),
 		{
 			provide: HTTP_INTERCEPTORS,
@@ -102,6 +114,5 @@ export const appConfig: ApplicationConfig = {
 				};
 			},
 		},
-		provideRouter(APP_ROUTES, withHashLocation()),
 	],
 };

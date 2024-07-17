@@ -2,9 +2,9 @@ import { Routes } from '@angular/router';
 
 import RegisterPage from './register.page';
 
-export const REGISTER_ROUTES: Routes = [
+export default [
 	{
 		path: '',
 		component: RegisterPage,
 	},
-];
+] satisfies Routes;

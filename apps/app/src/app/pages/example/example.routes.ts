@@ -8,7 +8,7 @@ import ShadowPage from './shadow/shadow.page';
 import SpacingPage from './spacing/spacing.page';
 import TypographyPage from './typography/typography.page';
 
-export const EXAMPLE_ROUTES: Routes = [
+export default [
 	{
 		path: '',
 		component: ExamplePage,
@@ -37,4 +37,4 @@ export const EXAMPLE_ROUTES: Routes = [
 		path: 'cards',
 		component: CardPage,
 	},
-];
+] satisfies Routes;
