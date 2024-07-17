@@ -1,8 +1,8 @@
 <section class="content-fixed pt-lg pb-xxl">
 	<h4>Login form</h4>
 
-	<div class="flex-col gap-md align-start mt-md">
-		<form class="flex-row gap-sm" [formGroup]="form" (submit)="onSubmit()">
+	<div class="flex-col gap-sm">
+		<form class="flex-col gap-sm mt-md" [formGroup]="form" (submit)="onSubmit()">
 			<input
 				class="p-sm round-sm surface-vivid color-cosmic"
 				type="text"
@@ -14,7 +14,9 @@
 				formControlName="password"
 			/>
 
-			<button class="p-sm round-sm surface-serene color-vivid" type="submit">Send</button>
+			<button class="text-center p-sm round-sm surface-serene color-vivid" type="submit">
+				Send
+			</button>
 		</form>
 
 		@if (error()) {

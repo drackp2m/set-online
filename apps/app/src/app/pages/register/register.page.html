@@ -8,22 +8,26 @@
 		</div>
 	}
 
-	<form class="flex-row gap-sm mt-md" [formGroup]="form" (submit)="onSubmit()">
-		<input
-			class="p-sm round-sm surface-vivid color-cosmic"
-			type="text"
-			formControlName="username"
-		/>
-		<input
-			class="p-sm round-sm surface-vivid color-cosmic"
-			type="password"
-			formControlName="password"
-		/>
+	<div class="flex-col gap-sm">
+		<form class="flex-col gap-sm mt-md" [formGroup]="form" (submit)="onSubmit()">
+			<input
+				class="p-sm round-sm surface-vivid color-cosmic"
+				type="text"
+				formControlName="username"
+			/>
+			<input
+				class="p-sm round-sm surface-vivid color-cosmic"
+				type="password"
+				formControlName="password"
+			/>
 
-		<button class="p-sm round-sm surface-serene color-vivid" type="submit">Send</button>
-	</form>
+			<button class="text-center p-sm round-sm surface-serene color-vivid" type="submit">
+				Send
+			</button>
+		</form>
 
-	@if (error()) {
-		<p class="color-radiant text-sm mt-sm">Error: {{ error() | json }}</p>
-	}
+		@if (error()) {
+			<p class="color-radiant text-sm mt-sm">Error: {{ error() | json }}</p>
+		}
+	</div>
 </section>
