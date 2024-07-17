@@ -5,7 +5,7 @@
 
 	<h3 class="mt-xl">Spacing on sizes</h3>
 
-	<section class="grid gap-xl my-md">
+	<section class="flex-row flex-wrap gap-xl my-md">
 		@for (space of spaces; track $index) {
 			<div class="flex-col align-center justify-end gap-md">
 				<div
@@ -21,7 +21,7 @@
 
 	<h3 class="mt-xl">Spacing on gaps</h3>
 
-	<section class="grid gap-xl my-md">
+	<section class="flex-row flex-wrap gap-xl my-md">
 		@for (space of spaces; track $index) {
 			<div class="flex-col align-center justify-end gap-md">
 				<div class="flex-row" [class]="'gap-' + space">

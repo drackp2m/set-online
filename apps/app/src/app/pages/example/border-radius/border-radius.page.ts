@@ -10,11 +10,6 @@ import ExampleMenuComponent from '../shared/components/menu/example-menu.compone
 		main {
 			min-height: 100%;
 			background-color: white;
-
-			#border-radius-sizes {
-				display: grid;
-				grid-template-columns: repeat(2, 1fr);
-			}
 		}
 	`,
 	template: `<main id="border-radius" class="content-fixed pt-lg pb-xxl">
@@ -24,7 +19,7 @@ import ExampleMenuComponent from '../shared/components/menu/example-menu.compone
 
 		<h3 class="mt-xl">Border radius sizes</h3>
 
-		<section id="border-radius-sizes" class="flex-col gap-xl my-md">
+		<section class="flex-row flex-wrap gap-xl my-md">
 			@for (round of rounds; track $index) {
 				<div class="flex-col align-center justify-end gap-md">
 					<div class="surface-vivid px-xxxl py-xl" [class]="'round-' + round"></div>

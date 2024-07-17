@@ -2,8 +2,7 @@ main {
 	min-height: 100%;
 	background-color: white;
 
-	#shadow-sizes {
-		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+	.example {
+		width: 360px;
 	}
 }
