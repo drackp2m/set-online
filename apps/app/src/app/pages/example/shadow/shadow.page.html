@@ -5,15 +5,15 @@
 
 	<h3 class="mt-xl">Shadow sizes</h3>
 
-	<section id="shadow-sizes" class="gap-xxl my-md">
-		<div class="round-lg p-md">
+	<section class="flex-row flex-wrap gap-xxl my-md">
+		<div class="example round-lg p-md">
 			<span class="surface-radiant round-sm px-xs">off</span>
 			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
 			dolorum illum nobis mollitia.
 		</div>
 
 		@for (shadow of shadows; track $index) {
-			<div class="round-lg p-md" [class]="'shadow-' + shadow">
+			<div class="example round-lg p-md" [class]="'shadow-' + shadow">
 				<span class="surface-vivid round-sm px-xs">{{ shadow }}</span>
 				Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
 				dolorum illum nobis mollitia.
