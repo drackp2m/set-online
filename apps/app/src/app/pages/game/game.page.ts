@@ -40,8 +40,6 @@ export class GamePage implements OnInit {
 
 	ngOnInit(): void {
 		this.prepareNewGame();
-
-		this.ultraCheats();
 	}
 
 	isSelected(card: CardInterface): boolean {
@@ -103,7 +101,7 @@ export class GamePage implements OnInit {
 		}
 
 		if (this.cardsInSets().length > 0) {
-			this.showMessages('Yes there is, keep looking.');
+			this.showMessages('Nope, there are still sets on the table, look for them!');
 
 			return;
 		}
@@ -116,6 +114,8 @@ export class GamePage implements OnInit {
 	}
 
 	highlightSet(): void {
+		this.wrongSetsCount.update((value) => value + 3);
+
 		if (this.showSets() !== 0) return;
 
 		if (this.cardsInSets().length === 0) {
@@ -145,15 +145,8 @@ export class GamePage implements OnInit {
 		this.prepareNewGame();
 	}
 
-	private prepareNewGame(): void {
-		for (let i = 0; i < 12; i++) {
-			this.boardCards.update((cards) => [...cards, this.getValidCard()]);
-		}
-
-		this.checkIfSetExists();
-	}
-
-	private ultraCheats(): void {
+	cheatGame(): void {
+		this.newGame();
 		const remainingCardsInDeck = 3;
 
 		for (let i = 0; i < (81 - this.boardCards().length - remainingCardsInDeck) / 3; i++) {
@@ -169,6 +162,14 @@ export class GamePage implements OnInit {
 				this.selectCard(thirdCard);
 			}
 		}
+	}
+
+	private prepareNewGame(): void {
+		for (let i = 0; i < 12; i++) {
+			this.boardCards.update((cards) => [...cards, this.getValidCard()]);
+		}
+
+		this.checkIfSetExists();
 	}
 
 	private getValidCard(): CardInterface {
