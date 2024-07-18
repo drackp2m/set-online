@@ -283,20 +283,20 @@ export class GamePage implements OnInit {
 	private isSameOrDifferent<T>(first: T, second: T, third: T): boolean {
 		return (
 			(first === second && second === third) ||
-			(first !== second && second !== third && first !== third)
+			(first !== second && second !== third && third !== first)
 		);
 	}
 
-	private replaceCard(card: CardInterface, replace: CardInterface | null): void {
+	private replaceCard(currentCard: CardInterface, newCard: CardInterface | null): void {
 		this.boardCards.update(
 			(cards) =>
 				cards
-					.map((c) => {
-						if (c.id === card.id) {
-							return replace;
+					.map((card) => {
+						if (card.id === currentCard.id) {
+							return newCard;
 						}
 
-						return c;
+						return card;
 					})
 					.filter((c) => c !== null) as CardInterface[],
 		);
@@ -304,11 +304,13 @@ export class GamePage implements OnInit {
 
 	private clearHighlightInterval(): void {
 		this.showSets.set(0);
+
 		clearInterval(this.highlightInterval);
 	}
 
 	private showMessages(text: string): void {
 		this.message.set(text);
+
 		setTimeout(() => {
 			this.message.set('');
 		}, text.length * 100);
