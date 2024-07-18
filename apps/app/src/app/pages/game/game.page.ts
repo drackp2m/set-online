@@ -40,8 +40,6 @@ export class GamePage implements OnInit {
 
 	ngOnInit(): void {
 		this.prepareNewGame();
-
-		this.ultraCheats();
 	}
 
 	isSelected(card: CardInterface): boolean {
@@ -145,15 +143,8 @@ export class GamePage implements OnInit {
 		this.prepareNewGame();
 	}
 
-	private prepareNewGame(): void {
-		for (let i = 0; i < 12; i++) {
-			this.boardCards.update((cards) => [...cards, this.getValidCard()]);
-		}
-
-		this.checkIfSetExists();
-	}
-
-	private ultraCheats(): void {
+	cheatGame(): void {
+		this.newGame();
 		const remainingCardsInDeck = 3;
 
 		for (let i = 0; i < (81 - this.boardCards().length - remainingCardsInDeck) / 3; i++) {
@@ -169,6 +160,14 @@ export class GamePage implements OnInit {
 				this.selectCard(thirdCard);
 			}
 		}
+	}
+
+	private prepareNewGame(): void {
+		for (let i = 0; i < 12; i++) {
+			this.boardCards.update((cards) => [...cards, this.getValidCard()]);
+		}
+
+		this.checkIfSetExists();
 	}
 
 	private getValidCard(): CardInterface {
