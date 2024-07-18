@@ -114,6 +114,8 @@ export class GamePage implements OnInit {
 	}
 
 	highlightSet(): void {
+		this.wrongSetsCount.update((value) => value + 3);
+
 		if (this.showSets() !== 0) return;
 
 		if (this.cardsInSets().length === 0) {
