@@ -30,6 +30,6 @@ import ExampleMenuComponent from '../shared/components/menu/example-menu.compone
 		</section>
 	</main> `,
 })
-export default class BorderRadiusPage {
+export class BorderRadiusPage {
 	rounds = ['none', 'sm', 'md', 'lg'];
 }

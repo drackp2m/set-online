@@ -9,6 +9,6 @@ import ExampleMenuComponent from '../shared/components/menu/example-menu.compone
 	styleUrl: './color.page.scss',
 	imports: [NgFor, ExampleMenuComponent],
 })
-export default class ColorPage {
+export class ColorPage {
 	colors = ['cosmic', 'radiant', 'harmony', 'vivid', 'serene'];
 }

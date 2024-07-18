@@ -9,7 +9,7 @@ import ExampleMenuComponent from '../shared/components/menu/example-menu.compone
 	styleUrl: './typography.page.scss',
 	imports: [ExampleMenuComponent, NgFor],
 })
-export default class TypographyPage {
+export class TypographyPage {
 	sizes = ['sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'];
 
 	weights = ['sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'];

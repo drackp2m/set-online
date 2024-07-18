@@ -3,6 +3,6 @@ import { Routes } from '@angular/router';
 export default [
 	{
 		path: '',
-		loadComponent: () => import('./home.page').then((mod) => mod.HomePage),
+		loadComponent: () => import('./game.page').then((mod) => mod.GamePage),
 	},
 ] satisfies Routes;

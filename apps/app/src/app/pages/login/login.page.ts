@@ -16,7 +16,7 @@ import { CurrentUserStore } from '../../stores/current-user.store';
 	imports: [NgIf, NgFor, ReactiveFormsModule, JsonPipe],
 	providers: [GetUsersGQL],
 })
-export default class LoginPage implements OnInit {
+export class LoginPage implements OnInit {
 	private readonly apiClient = inject(ApiClient);
 	private readonly router = inject(Router);
 	private readonly authStore = inject(AuthStore);

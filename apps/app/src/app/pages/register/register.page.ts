@@ -16,7 +16,7 @@ import { CurrentUserStore } from '../../stores/current-user.store';
 	imports: [NgIf, ReactiveFormsModule, ApolloModule, JsonPipe],
 	providers: [ApiClient, CurrentUserStore, HttpClient, GetUserInfoGQL, Apollo],
 })
-export default class RegisterPage {
+export class RegisterPage {
 	private readonly apiClient = inject(ApiClient);
 	private readonly currentUserStore = inject(CurrentUserStore);
 

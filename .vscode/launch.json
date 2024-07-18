@@ -8,20 +8,14 @@
 			"name": "NestJS on WS Attach",
 			"type": "node",
 			"request": "attach",
-			"restart": true,
-			"remoteRoot": "/usr/src/app"
+			"restart": true
 		},
 		{
 			"name": "Angular on Firefox",
 			"type": "firefox",
 			"request": "launch",
 			"url": "https://localhost:4200",
-			"pathMappings": [
-				{
-					"url": "webpack:///apps/app",
-					"path": "${workspaceFolder}/apps/app"
-				}
-			]
+			"skipFiles": ["**${workspaceFolder}/node_modules/**/*.js"]
 		},
 		{
 			"name": "Angular on Edge",

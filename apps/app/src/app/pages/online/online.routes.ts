@@ -1,10 +1,8 @@
 import { Routes } from '@angular/router';
 
-import GamePage from './online.page';
-
-export const ONLINE_ROUTES: Routes = [
+export default [
 	{
 		path: '',
-		component: GamePage,
+		loadComponent: () => import('./online.page').then((mod) => mod.OnlinePage),
 	},
-];
+] satisfies Routes;

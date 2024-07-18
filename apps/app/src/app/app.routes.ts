@@ -1,18 +1,11 @@
 import { Routes } from '@angular/router';
 
-import { EXAMPLE_ROUTES } from './pages/example/example.routes';
-import GamePage from './pages/game/game.page';
-import { GAME_ROUTES } from './pages/game/login.routes';
-import { HOME_ROUTES } from './pages/home/home.routes';
-import { LOGIN_ROUTES } from './pages/login/login.routes';
-import { ONLINE_ROUTES } from './pages/online/online.routes';
-import { REGISTER_ROUTES } from './pages/register/register.routes';
 import MainLayout from './shared/layouts/main/main.layout';
 
 export const APP_ROUTES: Routes = [
 	{
 		path: '',
-		component: GamePage,
+		loadChildren: () => import('./pages/game/game.routes'),
 	},
 	{
 		path: '',
@@ -20,31 +13,31 @@ export const APP_ROUTES: Routes = [
 		children: [
 			{
 				path: 'home',
-				children: HOME_ROUTES,
+				loadChildren: () => import('./pages/home/home.routes'),
 			},
 			{
 				path: 'register',
-				children: REGISTER_ROUTES,
+				loadChildren: () => import('./pages/register/register.routes'),
 			},
 			{
 				path: 'login',
-				children: LOGIN_ROUTES,
+				loadChildren: () => import('./pages/login/login.routes'),
 			},
 			{
 				path: 'logout',
-				children: LOGIN_ROUTES,
+				loadChildren: () => import('./pages/login/login.routes'),
 			},
 			{
 				path: 'example',
-				children: EXAMPLE_ROUTES,
+				loadChildren: () => import('./pages/example/example.routes'),
 			},
 			{
 				path: 'game',
-				children: GAME_ROUTES,
+				loadChildren: () => import('./pages/game/game.routes'),
 			},
 			{
 				path: 'online',
-				children: ONLINE_ROUTES,
+				loadChildren: () => import('./pages/online/online.routes'),
 			},
 		],
 	},
