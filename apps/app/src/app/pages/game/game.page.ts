@@ -101,7 +101,7 @@ export class GamePage implements OnInit {
 		}
 
 		if (this.cardsInSets().length > 0) {
-			this.showMessages('Yes there is, keep looking.');
+			this.showMessages('Nope, there are still sets on the table, look for them!');
 
 			return;
 		}
