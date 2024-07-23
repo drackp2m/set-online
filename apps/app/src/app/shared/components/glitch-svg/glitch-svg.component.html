@@ -7,8 +7,8 @@
 		</div>
 
 		<div class="inside">
-			<img [src]="svgPath()" [alt]="imgAlt()" />
-			<img [src]="svgPath()" [alt]="imgAlt()" [style.mask-image]="maskUrl()" />
+			<img class="filter" [src]="svgPath()" [alt]="imgAlt()" />
+			<img class="mask" [src]="svgPath()" [alt]="imgAlt()" [style.mask-image]="maskUrl()" />
 		</div>
 	</div>
 
@@ -18,8 +18,13 @@
 		</div>
 
 		<div class="inside">
-			<img [src]="svgPath()" [alt]="imgAlt()" />
-			<img [src]="svgPath()" [alt]="imgAlt()" [style.mask-image]="maskUrl()" />
+			<img class="filter" [src]="svgPath()" [alt]="imgAlt()" />
+			<img class="mask" [src]="svgPath()" [alt]="imgAlt()" [style.mask-image]="maskUrl()" />
 		</div>
+	</div>
+
+	<div class="overlap">
+		<img class="mask filter" [src]="svgPath()" [alt]="imgAlt()" [style.mask-image]="maskUrl()" />
+		<img class="mask" [src]="svgPath()" [alt]="imgAlt()" [style.mask-image]="maskUrl()" />
 	</div>
 </div>

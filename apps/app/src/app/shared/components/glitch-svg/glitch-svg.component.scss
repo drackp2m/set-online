@@ -1,18 +1,17 @@
 @use 'sass:math';
 
-$glitch-steps: 20;
+$glitch-steps: 14;
 $glitch-duration: calc(var(--glitch-duration) * 1s);
 
 @keyframes glitch-left {
 	@for $i from 0 through $glitch-steps {
 		#{percentage($i * calc(1 / $glitch-steps))} {
-			$top: var(--random-left-top-frame-#{$i});
-			$bottom: var(--random-left-bottom-frame-#{$i});
+			$top: var(--left-top-frame-#{$i});
+			$bottom: var(--left-bottom-frame-#{$i});
 
 			$top-with-percent: calc($top * 1%);
-			$bottom-with-percent: calc($bottom * 1%);
+			$bottom-with-percent: calc((100 - $bottom) * 1%);
 
-			z-index: math.random(2);
 			clip-path: inset(#{$top-with-percent} 0 #{$bottom-with-percent} 0);
 		}
 	}
@@ -21,11 +20,25 @@ $glitch-duration: calc(var(--glitch-duration) * 1s);
 @keyframes glitch-right {
 	@for $i from 0 through $glitch-steps {
 		#{percentage($i * calc(1 / $glitch-steps))} {
-			$top: var(--random-right-top-frame-#{$i});
-			$bottom: var(--random-right-bottom-frame-#{$i});
+			$top: var(--right-top-frame-#{$i});
+			$bottom: var(--right-bottom-frame-#{$i});
 
 			$top-with-percent: calc($top * 1%);
-			$bottom-with-percent: calc($bottom * 1%);
+			$bottom-with-percent: calc((100 - $bottom) * 1%);
+
+			clip-path: inset(#{$top-with-percent} 0 #{$bottom-with-percent} 0);
+		}
+	}
+}
+
+@keyframes glitch-overlap {
+	@for $i from 0 through $glitch-steps {
+		#{percentage($i * calc(1 / $glitch-steps))} {
+			$top: var(--overlap-top-frame-#{$i});
+			$bottom: var(--overlap-bottom-frame-#{$i});
+
+			$top-with-percent: calc($top * 1%);
+			$bottom-with-percent: calc((100 - $bottom) * 1%);
 
 			clip-path: inset(#{$top-with-percent} 0 #{$bottom-with-percent} 0);
 		}
@@ -47,15 +60,11 @@ $glitch-duration: calc(var(--glitch-duration) * 1s);
 
 	.left,
 	.right,
+	.overlap,
 	.outside,
 	.inside {
 		position: absolute;
 		top: 0;
-		left: 0;
-
-		display: flex;
-		justify-content: center;
-
 		width: 100%;
 		height: 100%;
 
@@ -64,56 +73,88 @@ $glitch-duration: calc(var(--glitch-duration) * 1s);
 		}
 	}
 
+	.mask {
+		mask-repeat: no-repeat;
+	}
+
+	.overlap {
+		z-index: 3;
+		left: $offset;
+		animation: glitch-overlap $glitch-duration infinite linear alternate-reverse;
+
+		img {
+			&.mask {
+				left: $offset;
+
+				mask-position: calc($offset * -2) center;
+			}
+
+			&.filter {
+				left: 0;
+				filter: $right-filter;
+
+				mask-position: $offset center;
+			}
+		}
+	}
+
 	.left {
+		z-index: 1;
+		left: 0;
 		animation: glitch-left $glitch-duration infinite linear alternate-reverse;
 
 		.outside {
-			left: calc($offset * -1);
-
-			img:first-child {
+			img {
 				filter: $left-filter !important;
 			}
 		}
 
 		.inside {
-			img:first-child {
-				filter: $right-filter !important;
-			}
+			left: calc($offset);
 
-			img:last-child {
-				mask-position: calc($offset * -1) center;
-				mask-repeat: no-repeat;
+			img {
+				&.mask {
+					mask-position: calc($offset * -1) center;
+				}
+
+				&.filter {
+					filter: $right-filter !important;
+				}
 			}
 		}
 	}
 
 	.right {
-		z-index: 1;
+		z-index: 2;
 		animation: glitch-right $glitch-duration infinite linear alternate-reverse;
 
 		.outside {
-			left: calc($offset);
+			left: $offset;
 
-			img:first-child {
+			img {
 				filter: $right-filter !important;
 			}
 		}
 
 		.inside {
-			img:first-child {
-				filter: $left-filter !important;
-			}
+			img {
+				&.mask {
+					right: $offset;
 
-			img:last-child {
-				mask-position: calc($offset) center;
-				mask-repeat: no-repeat;
+					mask-position: calc($offset * -1) center;
+				}
+
+				&.filter {
+					filter: $left-filter !important;
+				}
 			}
 		}
 	}
 
 	&:not(:hover, :active) {
 		.left,
-		.right {
+		.right,
+		.overlap {
 			display: none;
 		}
 	}
