@@ -7,6 +7,7 @@ const config: Config = {
 	displayName: 'api',
 	preset: '../../jest.preset.js',
 	coverageProvider: 'v8',
+	coveragePathIgnorePatterns: [],
 	testEnvironment: 'node',
 	globalSetup: '<rootDir>/global-setup.ts',
 	globalTeardown: '<rootDir>/global-teardown.ts',
