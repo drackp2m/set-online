@@ -1,4 +1,4 @@
-FROM node:22.4-alpine3.19 AS base
+FROM node:22.5-alpine3.19 AS base
 
 RUN apk add --no-cache build-base python3
 
@@ -55,10 +55,22 @@ CMD node --run start
 
 FROM deps AS build-api
 
+USER node
+
+COPY . .
+
 CMD node --run build:api
 
 
 
 FROM build-api AS serve-api
 
-CMD node --run serve:api
+USER node
+
+COPY --from=build-api /usr/src/app/dist ./dist
+COPY --from=build-api /usr/src/app/package.json ./package.json
+COPY --from=deps /usr/src/app/node_modules ./node_modules
+
+EXPOSE 3000
+
+CMD node dist/apps/api/main.js
