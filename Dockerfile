@@ -61,10 +61,6 @@ COPY . .
 
 RUN node --run build:api
 
-RUN ls -la /usr/src/app/dist
-
-RUN chown -R node:node /usr/src/app
-
 
 
 FROM build-api AS serve-api
