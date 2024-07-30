@@ -61,6 +61,8 @@ COPY . .
 
 RUN node --run build:api
 
+RUN chmod 644 /usr/src/app/.env
+
 
 
 FROM build-api AS serve-api
