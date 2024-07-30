@@ -59,7 +59,7 @@ USER node
 
 COPY . .
 
-CMD node --run build:api
+RUN node --run build:api
 
 
 
