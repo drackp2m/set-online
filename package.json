@@ -26,8 +26,7 @@
 		"lint": "lint-staged",
 		"prettier": "prettier -w --log-level warn",
 		"eslint": "eslint --max-warnings 0 --fix",
-		"stylelint": "stylelint --max-warnings 0 --fix",
-		"prepare": "husky"
+		"stylelint": "stylelint --max-warnings 0 --fix"
 	},
 	"dependencies": {
 		"@angular/animations": "18.1.1",
