@@ -30,8 +30,9 @@ export class BootstrapHelper {
 
 	static logAppBootstrap = (app: INestApplication): void => {
 		const appConfig = BootstrapHelper.appConfig(app);
+		const port = appConfig.environment === 'production' ? '' : `:${appConfig.port}`;
 
-		const playgroundUrl = `${appConfig.protocol}://${appConfig.domain}:${appConfig.port}/graphql`;
+		const playgroundUrl = `${appConfig.protocol}://${appConfig.domain}${port}/graphql`;
 
 		Logger.log(
 			`🚀 GraphQL Playground ready at ${playgroundUrl}, started in ${process.uptime().toFixed(3)}s`,
