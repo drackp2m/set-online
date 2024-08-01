@@ -65,10 +65,6 @@ RUN node --run build:api
 
 FROM build-api AS serve-api
 
-USER sudo
-
-RUN chmod 644 /usr/src/app/.env
-
 USER node
 
 COPY --from=build-api /usr/src/app/dist ./dist
