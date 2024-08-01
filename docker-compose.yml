@@ -31,7 +31,12 @@ services:
     working_dir: /usr/src/app
     build:
       context: .
+      dockerfile: Dockerfile
       target: serve-api
+      args:
+        - API_PORT=${API_PORT}
+    env_file:
+      - .env
     networks:
       - set-network
     ports:
