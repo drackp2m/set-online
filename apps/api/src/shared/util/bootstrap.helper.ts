@@ -35,7 +35,7 @@ export class BootstrapHelper {
 
 		const playgroundUrl = `${appConfig.protocol}://${appConfig.domain}${port}/graphql`;
 		const uptime = process.uptime().toFixed(3);
-		const exposedPortInfo = isProduction ? ` and exposed on port ${port}` : '';
+		const exposedPortInfo = isProduction ? ` and exposed on port ${appConfig.port}` : '';
 
 		Logger.log(
 			`🚀 GraphQL Playground ready at ${playgroundUrl} in ${uptime}s` + exposedPortInfo,

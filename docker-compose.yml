@@ -34,7 +34,7 @@ services:
       dockerfile: Dockerfile
       target: serve-api
       args:
-        - PORT=${PORT}
+        - API_PORT=${API_PORT}
     env_file:
       - .env
     networks:
