@@ -20,4 +20,4 @@
 	@return (shadow-#{$name}: (box-shadow: var(--shadow-#{$name})));
 }
 
-@include mix.generate-responsive(get-list(var.$shadows));
+@include mix.generate-responsive(get-list(var.$shadow));

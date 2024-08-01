@@ -4,88 +4,88 @@
 @use 'variables' as var;
 
 @mixin sm {
-	@media screen and (map.get(var.$breakpoints, sm) <= width) {
+	@media screen and (map.get(var.$breakpoint, sm) <= width) {
 		@content;
 	}
 }
 
 @mixin md {
-	@media screen and (map.get(var.$breakpoints, md) <= width) {
+	@media screen and (map.get(var.$breakpoint, md) <= width) {
 		@content;
 	}
 }
 
 @mixin lg {
-	@media screen and (map.get(var.$breakpoints, lg) <= width) {
+	@media screen and (map.get(var.$breakpoint, lg) <= width) {
 		@content;
 	}
 }
 
 @mixin xl {
-	@media screen and (map.get(var.$breakpoints, xl) <= width) {
+	@media screen and (map.get(var.$breakpoint, xl) <= width) {
 		@content;
 	}
 }
 
 @mixin xs-o {
-	@media screen and (map.get(var.$breakpoints, sm) > width) {
+	@media screen and (map.get(var.$breakpoint, sm) > width) {
 		@content;
 	}
 }
 
 @mixin sm-o {
-	@media screen and (map.get(var.$breakpoints, sm) <= width) and (map.get(var.$breakpoints, md) > width) {
+	@media screen and (map.get(var.$breakpoint, sm) <= width) and (map.get(var.$breakpoint, md) > width) {
 		@content;
 	}
 }
 
 @mixin md-o {
-	@media screen and (map.get(var.$breakpoints, md) <= width) and (map.get(var.$breakpoints, lg) > width) {
+	@media screen and (map.get(var.$breakpoint, md) <= width) and (map.get(var.$breakpoint, lg) > width) {
 		@content;
 	}
 }
 
 @mixin lg-o {
-	@media screen and (map.get(var.$breakpoints, lg) <= width) and (map.get(var.$breakpoints, xl) > width) {
+	@media screen and (map.get(var.$breakpoint, lg) <= width) and (map.get(var.$breakpoint, xl) > width) {
 		@content;
 	}
 }
 
 @mixin xl-o {
-	@media screen and (map.get(var.$breakpoints, xl) <= width) {
+	@media screen and (map.get(var.$breakpoint, xl) <= width) {
 		@content;
 	}
 }
 
 @mixin xs-e {
-	@media screen and (map.get(var.$breakpoints, sm) <= width) {
+	@media screen and (map.get(var.$breakpoint, sm) <= width) {
 		@content;
 	}
 }
 
 @mixin sm-e {
-	@media screen and (map.get(var.$breakpoints, sm) > width),
-		screen and (map.get(var.$breakpoints, md) <= width) {
+	@media screen and (map.get(var.$breakpoint, sm) > width),
+		screen and (map.get(var.$breakpoint, md) <= width) {
 		@content;
 	}
 }
 
 @mixin md-e {
-	@media screen and (map.get(var.$breakpoints, md) > width),
-		screen and (map.get(var.$breakpoints, lg) <= width) {
+	@media screen and (map.get(var.$breakpoint, md) > width),
+		screen and (map.get(var.$breakpoint, lg) <= width) {
 		@content;
 	}
 }
 
 @mixin lg-e {
-	@media screen and (map.get(var.$breakpoints, lg) > width),
-		screen and (map.get(var.$breakpoints, xl) <= width) {
+	@media screen and (map.get(var.$breakpoint, lg) > width),
+		screen and (map.get(var.$breakpoint, xl) <= width) {
 		@content;
 	}
 }
 
 @mixin xl-e {
-	@media screen and (map.get(var.$breakpoints, xl) > width) {
+	@media screen and (map.get(var.$breakpoint, xl) > width) {
 		@content;
 	}
 }

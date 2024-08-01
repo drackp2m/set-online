@@ -1,5 +1,6 @@
 {
 	"typescript.tsdk": "node_modules/typescript/lib",
+	"cSpell.maxNumberOfProblems": 1000,
 	"cSpell.words": [
 		"codegen",
 		"commitlint",

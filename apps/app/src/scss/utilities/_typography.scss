@@ -49,7 +49,7 @@ $text-align: (
 }
 
 @function get-mono-space-rules($name) {
-	@return (mono-#{$name}: (font-variation-settings: 'MONO' var(--font-monospace-#{$name})));
+	@return (mono-#{$name}: (font-variation-settings: 'MONO' var(--font-mono-space-#{$name})));
 }
 
 @function get-casual-rules($name) {
@@ -58,12 +58,12 @@ $text-align: (
 
 @include mix.generate-responsive($text-align);
 
-@include mix.generate-responsive(get-list(var.$font-sizes));
+@include mix.generate-responsive(get-list(var.$font-size));
 
-@include mix.generate-responsive(get-list(var.$font-weights, get-weight-rules));
+@include mix.generate-responsive(get-list(var.$font-weight, get-weight-rules));
 
-@include mix.generate-responsive(get-list(var.$font-obliques, get-oblique-rules));
+@include mix.generate-responsive(get-list(var.$font-oblique, get-oblique-rules));
 
-@include mix.generate-responsive(get-list(var.$font-mono-spaces, get-mono-space-rules));
+@include mix.generate-responsive(get-list(var.$font-monospace, get-mono-space-rules));
 
-@include mix.generate-responsive(get-list(var.$font-casuals, get-casual-rules));
+@include mix.generate-responsive(get-list(var.$font-casual, get-casual-rules));

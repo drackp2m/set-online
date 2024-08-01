@@ -27,10 +27,10 @@
 	@return (card-#{$name}: (background-color: var(--card-#{$name})));
 }
 
-@include mix.generate-responsive(get-list(var.$colors));
+@include mix.generate-responsive(get-list(var.$color));
 
 .dark-mode {
-	@include mix.generate-responsive(get-list(var.$dark-colors));
+	@include mix.generate-responsive(get-list(var.$dark-color));
 }
 
-@include mix.generate-responsive(get-list(var.$card-colors, get-card-rules));
+@include mix.generate-responsive(get-list(var.$card-color, get-card-rules));
