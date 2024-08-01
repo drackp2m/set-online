@@ -9,7 +9,9 @@
 		"start:app": "nx run app:serve",
 		"build": "nx build",
 		"build:api": "nx build api",
+		"build:app": "nx build app",
 		"serve:api": "nx serve api --prod",
+		"serve:app": "nx serve app --prod",
 		"codegen": "graphql-codegen",
 		"codegen:watch": "node --run codegen codegen --watch",
 		"test": "nx run-many -t test",
@@ -26,7 +28,8 @@
 		"lint": "lint-staged",
 		"prettier": "prettier -w --log-level warn",
 		"eslint": "eslint --max-warnings 0 --fix",
-		"stylelint": "stylelint --max-warnings 0 --fix"
+		"stylelint": "stylelint --max-warnings 0 --fix",
+		"prepare": "husky"
 	},
 	"dependencies": {
 		"@angular/animations": "18.1.1",
