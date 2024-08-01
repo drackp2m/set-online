@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { ApiSDK } from '@set-online/api-sdk';
 
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
 	providedIn: 'root',

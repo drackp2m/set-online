@@ -15,8 +15,9 @@ import { HttpLink } from 'apollo-angular/http';
 import { OperationDefinitionNode } from 'graphql';
 import { createClient } from 'graphql-ws';
 
+import { environment } from '../environments/environment';
+
 import { APP_ROUTES } from './app.routes';
-import { environment } from './environments/environment';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 
 const pingTimestamp = signal<number | undefined>(undefined);
