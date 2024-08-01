@@ -21,7 +21,7 @@ async function bootstrap(): Promise<void> {
 
 	const port = appConfig.port ?? 3000;
 
-	await app.listen(port, 'localhost', () => BootstrapHelper.logAppBootstrap(app));
+	await app.listen(port, () => BootstrapHelper.logAppBootstrap(app));
 }
 
 bootstrap().catch((e) => Logger.error(e.message, e));
