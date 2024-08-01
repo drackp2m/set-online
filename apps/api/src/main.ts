@@ -19,7 +19,7 @@ async function bootstrap(): Promise<void> {
 	app.enableCors({ credentials: true, origin: true, methods: 'GET,POST' });
 	app.use(cookieParser(appConfig.cookieSecret));
 
-	const port = appConfig.port ?? 3000;
+	const port = 10000; // appConfig.port ?? 3000;
 
 	await app.listen(port, '0.0.0.0', () => BootstrapHelper.logAppBootstrap(app));
 }
