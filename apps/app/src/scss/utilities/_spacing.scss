@@ -65,7 +65,7 @@ $rules: (
 @function get-rules($rule, $properties) {
 	$rules: ();
 
-	@each $spacing in map.keys(var.$spacings) {
+	@each $spacing in map.keys(var.$spacing) {
 		$properties-with-values: ();
 
 		@each $property, $value in $properties {

@@ -1,7 +1,7 @@
 @use '../abstracts/variables' as var;
 
 :root {
-	@each $size, $value in var.$spacings {
+	@each $size, $value in var.$spacing {
 		--spacing-#{$size}: #{$value};
 	}
 
@@ -9,35 +9,35 @@
 		--border-radius-#{$size}: #{$value};
 	}
 
-	@each $name, $value in var.$colors {
+	@each $name, $value in var.$color {
 		--color-#{$name}: #{$value};
 	}
 
-	@each $name, $value in var.$card-colors {
+	@each $name, $value in var.$card-color {
 		--card-#{"" + $name}: #{$value};
 	}
 
-	@each $name, $value in var.$font-sizes {
+	@each $name, $value in var.$font-size {
 		--font-size-#{$name}: #{$value};
 	}
 
-	@each $name, $value in var.$font-weights {
+	@each $name, $value in var.$font-weight {
 		--font-weight-#{$name}: #{$value};
 	}
 
-	@each $name, $value in var.$font-obliques {
+	@each $name, $value in var.$font-oblique {
 		--font-oblique-#{$name}: #{$value};
 	}
 
-	@each $name, $value in var.$font-mono-spaces {
+	@each $name, $value in var.$font-monospace {
 		--font-mono-space-#{$name}: #{$value};
 	}
 
-	@each $name, $value in var.$font-casuals {
+	@each $name, $value in var.$font-casual {
 		--font-casual-#{$name}: #{$value};
 	}
 
-	@each $name, $value in var.$shadows {
+	@each $name, $value in var.$shadow {
 		--shadow-#{$name}: #{$value};
 	}
 }

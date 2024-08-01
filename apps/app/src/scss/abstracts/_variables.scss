@@ -1,11 +1,11 @@
-$breakpoints: (
+$breakpoint: (
 	sm: 480px,
 	md: 768px,
 	lg: 1024px,
 	xl: 1280px,
 ) !default;
 
-$font-sizes: (
+$font-size: (
 	sm: 0.8rem,
 	md: 1rem,
 	lg: 1.25rem,
@@ -14,7 +14,7 @@ $font-sizes: (
 	xxxl: 2.75rem,
 ) !default;
 
-$font-weights: (
+$font-weight: (
 	sm: 300,
 	md: 400,
 	lg: 500,
@@ -23,14 +23,14 @@ $font-weights: (
 	xxxl: 900,
 ) !default;
 
-$font-obliques: (
+$font-oblique: (
 	none: 0,
 	sm: 5,
 	md: 10,
 	lg: 15,
 ) !default;
 
-$font-mono-spaces: (
+$font-monospace: (
 	none: 0,
 	sm: 0.2,
 	md: 0.4,
@@ -39,7 +39,7 @@ $font-mono-spaces: (
 	xxl: 1,
 ) !default;
 
-$font-casuals: (
+$font-casual: (
 	none: 0,
 	sm: 0.2,
 	md: 0.4,
@@ -48,13 +48,13 @@ $font-casuals: (
 	xxl: 1,
 ) !default;
 
-$card-colors: (
+$card-color: (
 	red: #ef3d44,
 	purple: #492f93,
 	green: #00b458,
 ) !default;
 
-$colors: (
+$color: (
 	cosmic: #341f97,
 	radiant: #fd5e53,
 	harmony: #00adb5,
@@ -62,7 +62,7 @@ $colors: (
 	serene: #41aa1b,
 ) !default;
 
-$dark-colors: (
+$dark-color: (
 	cosmic: #341f97,
 	radiant: #fd5e53,
 	harmony: #00adb5,
@@ -70,7 +70,7 @@ $dark-colors: (
 	serene: #41aa1b,
 ) !default;
 
-$spacings: (
+$spacing: (
 	none: 0,
 	xs: 0.25rem,
 	sm: 0.5rem,
@@ -88,7 +88,7 @@ $borders-radius: (
 	lg: 1rem,
 ) !default;
 
-$shadows: (
+$shadow: (
 	none: none,
 	sm: 0 4px 8px 2px rgb(0 0 0 / 5%),
 	md: 0 6px 12px 1px rgb(0 0 0 / 10%),
