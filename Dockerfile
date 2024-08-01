@@ -65,12 +65,14 @@ RUN node --run build:api
 
 FROM build-api AS serve-api
 
+ARG API_PORT
+
+EXPOSE $API_PORT
+
 USER node
 
 COPY --from=build-api /usr/src/app/dist ./dist
 COPY --from=build-api /usr/src/app/package.json ./package.json
 COPY --from=deps /usr/src/app/node_modules ./node_modules
-
-EXPOSE 3000
 
 CMD node dist/apps/api/main.js

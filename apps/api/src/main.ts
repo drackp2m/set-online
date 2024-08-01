@@ -11,7 +11,7 @@ async function bootstrap(): Promise<void> {
 
 	useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
-	const appConfig = BootstrapHelper.appConfig(app);
+	const appConfig = BootstrapHelper.apiConfig(app);
 
 	app.setGlobalPrefix(appConfig.prefix);
 	app.useGlobalPipes(BootstrapHelper.validationPipe);
