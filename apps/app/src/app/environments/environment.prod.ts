@@ -1,5 +1,5 @@
 export const environment = {
 	production: true,
-	apiUrl: 'https://localhost:4200',
-	wsUrl: 'wss://localhost:3000',
+	apiUrl: 'https://set-online.onrender.com',
+	wsUrl: 'wss://set-online.onrender.com',
 };
