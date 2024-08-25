@@ -4,18 +4,18 @@
 	"dockerComposeFile": ["../docker-compose.yml", "docker-compose.yml"],
 	"workspaceFolder": "/usr/src/app",
 	// "forwardPorts": [3000, 4200, 9229],
-	"portsAttributes": {
-		"3000": {
-			"label": "Api",
-			"protocol": "https",
-			"onAutoForward": "notify"
-		},
-		"4200": {
-			"label": "App",
-			"protocol": "https",
-			"onAutoForward": "notify"
-		}
-	},
+	// "portsAttributes": {
+	// 	"3000": {
+	// 		"label": "Api",
+	// 		"protocol": "https",
+	// 		"onAutoForward": "notify"
+	// 	},
+	// 	"4200": {
+	// 		"label": "App",
+	// 		"protocol": "https",
+	// 		"onAutoForward": "notify"
+	// 	}
+	// },
 	"overrideCommand": false,
 	"customizations": {
 		"vscode": {
