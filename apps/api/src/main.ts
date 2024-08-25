@@ -7,11 +7,13 @@ import { AppModule } from './module/app/app.module';
 import { BootstrapHelper } from './shared/util/bootstrap.helper';
 
 async function bootstrap(): Promise<void> {
-	const app = await NestFactory.create(AppModule, BootstrapHelper.nestApplicationOptions);
-
-	useContainer(app.select(AppModule), { fallbackOnErrors: true });
+	let app = await NestFactory.create(AppModule);
 
 	const appConfig = BootstrapHelper.apiConfig(app);
+
+	app = await NestFactory.create(AppModule, BootstrapHelper.nestApplicationOptions(appConfig));
+
+	useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
 	app.setGlobalPrefix(appConfig.prefix);
 	app.useGlobalPipes(BootstrapHelper.validationPipe);
@@ -21,7 +23,7 @@ async function bootstrap(): Promise<void> {
 
 	const port = appConfig.port ?? 3000;
 
-	await app.listen(port, () => BootstrapHelper.logAppBootstrap(app));
+	await app.listen(port, () => BootstrapHelper.logAppBootstrap(appConfig));
 }
 
 bootstrap().catch((e) => Logger.error(e.message, e));

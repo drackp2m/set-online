@@ -8,13 +8,6 @@ import { ApiConfig } from '../module/config/types/api-config.type';
 import { HttpExceptionFilter } from './exception-filter';
 
 export class BootstrapHelper {
-	static nestApplicationOptions: NestApplicationOptions = {
-		httpsOptions: {
-			key: readFileSync('certs/set-self-signed.key'),
-			cert: readFileSync('certs/set-self-signed.crt'),
-		},
-	};
-
 	static validationPipe = new ValidationPipe({
 		whitelist: true,
 		transform: true,
@@ -22,14 +15,26 @@ export class BootstrapHelper {
 
 	static exceptionsFilter = new HttpExceptionFilter();
 
+	static nestApplicationOptions = (appConfig: ApiConfig): NestApplicationOptions => {
+		let httpsOptions;
+
+		if (appConfig.protocol === 'https') {
+			httpsOptions = {
+				key: readFileSync('certs/set-self-signed.key'),
+				cert: readFileSync('certs/set-self-signed.crt'),
+			};
+		}
+
+		return { httpsOptions };
+	};
+
 	static apiConfig = (app: INestApplication): ApiConfig => {
 		const configService = app.get(ConfigurationService);
 
 		return configService.api;
 	};
 
-	static logAppBootstrap = (app: INestApplication): void => {
-		const appConfig = BootstrapHelper.apiConfig(app);
+	static logAppBootstrap = (appConfig: ApiConfig): void => {
 		const isProduction = appConfig.environment === 'production';
 		const port = isProduction ? '' : `:${appConfig.port}`;
 
