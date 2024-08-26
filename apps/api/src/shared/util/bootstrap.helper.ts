@@ -18,7 +18,7 @@ export class BootstrapHelper {
 	static nestApplicationOptions = (appConfig: ApiConfig): NestApplicationOptions => {
 		let httpsOptions;
 
-		if (appConfig.protocol === 'https') {
+		if (appConfig.environment !== 'production') {
 			httpsOptions = {
 				key: readFileSync('certs/set-self-signed.key'),
 				cert: readFileSync('certs/set-self-signed.crt'),
