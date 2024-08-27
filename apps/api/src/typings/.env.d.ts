@@ -18,8 +18,6 @@ declare global {
 			API_COOKIE_SECRET: string;
 			API_NODE_CACHE_PING_PREFIX: string;
 
-			APP_PORT: string;
-
 			JWT_ID: string;
 			JWT_ALGORITHM: string;
 			JWT_ISSUER: string;

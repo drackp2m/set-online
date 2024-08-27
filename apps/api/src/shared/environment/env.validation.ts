@@ -52,13 +52,15 @@ class EnvironmentVariables {
 	API_DEBUG_PORT?: number;
 
 	@IsString()
-	API_COOKIE_SECRET?: string;
+	@IsNotEmpty()
+	API_COOKIE_SECRET!: string;
+
+	@IsString()
+	@IsNotEmpty()
+	API_COOKIE_DOMAIN!: string;
 
 	@IsString()
 	API_NODE_CACHE_PING_PREFIX!: string;
-
-	@IsNumber()
-	APP_PORT?: number;
 
 	@IsString()
 	@IsNotEmpty()

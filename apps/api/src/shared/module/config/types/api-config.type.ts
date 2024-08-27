@@ -7,5 +7,6 @@ export type ApiConfig = {
 	domain: string;
 	prefix: string;
 	port?: number;
-	cookieSecret?: string;
+	cookieSecret: string;
+	cookieDomain: string;
 };

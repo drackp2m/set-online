@@ -14,5 +14,6 @@ export const apiConfig = registerAs(
 		prefix: config.API_PREFIX,
 		port: config.API_PORT,
 		cookieSecret: config.API_COOKIE_SECRET,
+		cookieDomain: config.API_COOKIE_DOMAIN,
 	}),
 );
