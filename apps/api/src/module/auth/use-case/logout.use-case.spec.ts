@@ -19,7 +19,7 @@ describe('LogoutUseCase', () => {
 			issuer: 'test',
 		},
 		api: {
-			domain: 'localhost',
+			cookieDomain: 'localhost',
 		},
 	});
 

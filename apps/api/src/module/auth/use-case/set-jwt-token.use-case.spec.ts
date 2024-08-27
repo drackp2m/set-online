@@ -20,7 +20,7 @@ describe('SetJwtTokenUseCase', () => {
 			issuer: 'test',
 		},
 		api: {
-			domain: 'localhost',
+			cookieDomain: 'localhost',
 		},
 	});
 
