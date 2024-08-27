@@ -3,6 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { Request } from 'express';
 import { mock } from 'jest-mock-extended';
 
+import { ConfigurationService } from '../../../shared/module/config/configuration.service';
 import { JwtCookie } from '../definition/jwt-cookie.enum';
 
 import { SetJwtTokenUseCase } from './set-jwt-token.use-case';
@@ -11,10 +12,25 @@ describe('SetJwtTokenUseCase', () => {
 	let useCase: SetJwtTokenUseCase;
 
 	const request = mock<Request>({ res: {} });
+	const configurationService = mock<ConfigurationService>({
+		jwt: {
+			secret: 'secret',
+			id: 'uuid',
+			audience: 'test-runner',
+			issuer: 'test',
+		},
+		api: {
+			domain: 'localhost',
+		},
+	});
 
 	beforeAll(async () => {
 		const module: TestingModule = await Test.createTestingModule({
-			providers: [SetJwtTokenUseCase, { provide: REQUEST, useValue: request }],
+			providers: [
+				SetJwtTokenUseCase,
+				{ provide: REQUEST, useValue: request },
+				{ provide: ConfigurationService, useValue: configurationService },
+			],
 		}).compile();
 
 		useCase = await module.resolve(SetJwtTokenUseCase);
@@ -36,7 +52,7 @@ describe('SetJwtTokenUseCase', () => {
 				signed: true,
 				secure: true,
 				httpOnly: true,
-				sameSite: true,
+				sameSite: 'none',
 				path: '/graphql',
 				domain: 'localhost',
 			});
@@ -54,7 +70,7 @@ describe('SetJwtTokenUseCase', () => {
 			signed: true,
 			secure: true,
 			httpOnly: true,
-			sameSite: true,
+			sameSite: 'none',
 			path: '/api/auth/refresh-session',
 			domain: 'localhost',
 		});

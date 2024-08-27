@@ -24,6 +24,7 @@ export class GqlFactory implements GqlOptionsFactory {
 		return {
 			driver: ApolloDriver,
 			autoSchemaFile: 'apps/api/src/schema.gql',
+			csrfPrevention: false,
 			sortSchema: true,
 			context: ({ req, res }: { req: unknown; res: unknown }) => ({ req, res }),
 			includeStacktraceInErrorResponses: !isProduction,
