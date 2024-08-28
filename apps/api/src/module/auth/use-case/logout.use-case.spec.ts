@@ -54,7 +54,7 @@ describe('LogoutUseCase', () => {
 				signed: true,
 				secure: true,
 				httpOnly: true,
-				sameSite: 'none',
+				sameSite: true,
 				path: '/graphql',
 				domain: 'localhost',
 			});
@@ -62,7 +62,7 @@ describe('LogoutUseCase', () => {
 				signed: true,
 				secure: true,
 				httpOnly: true,
-				sameSite: 'none',
+				sameSite: true,
 				path: '/api/auth/refresh-session',
 				domain: 'localhost',
 			});
