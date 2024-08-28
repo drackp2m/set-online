@@ -25,9 +25,9 @@ export class SetJwtTokenUseCase {
 				signed: true,
 				secure: true,
 				httpOnly: true,
-				sameSite: true,
-				path,
+				sameSite: 'none',
 				domain: this.configService.api.cookieDomain,
+				path,
 			});
 		}
 	}

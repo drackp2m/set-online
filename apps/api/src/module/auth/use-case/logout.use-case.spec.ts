@@ -54,17 +54,17 @@ describe('LogoutUseCase', () => {
 				signed: true,
 				secure: true,
 				httpOnly: true,
-				sameSite: true,
-				path: '/graphql',
+				sameSite: 'none',
 				domain: 'localhost',
+				path: '/graphql',
 			});
 			expect(requestResponseClearCookie).toHaveBeenNthCalledWith(2, 'x-jwt-refresh-token', {
 				signed: true,
 				secure: true,
 				httpOnly: true,
-				sameSite: true,
-				path: '/api/auth/refresh-session',
+				sameSite: 'none',
 				domain: 'localhost',
+				path: '/api/auth/refresh-session',
 			});
 		});
 	});

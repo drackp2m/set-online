@@ -29,9 +29,9 @@ export class LogoutUseCase {
 				signed: true,
 				secure: true,
 				httpOnly: true,
-				sameSite: true,
-				path,
+				sameSite: 'none',
 				domain: this.configService.api.cookieDomain,
+				path,
 			});
 		}
 	}
