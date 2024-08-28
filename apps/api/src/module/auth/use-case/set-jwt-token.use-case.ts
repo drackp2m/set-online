@@ -27,6 +27,7 @@ export class SetJwtTokenUseCase {
 				httpOnly: true,
 				sameSite: 'none',
 				domain: this.configService.api.cookieDomain,
+				expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
 				path,
 			});
 		}
