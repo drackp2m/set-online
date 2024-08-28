@@ -52,7 +52,7 @@ describe('SetJwtTokenUseCase', () => {
 				signed: true,
 				secure: true,
 				httpOnly: true,
-				sameSite: 'none',
+				sameSite: true,
 				path: '/graphql',
 				domain: 'localhost',
 			});
