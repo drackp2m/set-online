@@ -18,7 +18,7 @@ async function bootstrap(): Promise<void> {
 	app.setGlobalPrefix(appConfig.prefix);
 	app.useGlobalPipes(BootstrapHelper.validationPipe);
 	app.useGlobalFilters(BootstrapHelper.exceptionsFilter);
-	app.enableCors({ credentials: true, origin: true, methods: 'GET,POST' });
+	app.enableCors({ credentials: true, origin: 'https://playsetonline.com', methods: 'GET,POST' });
 	app.use(cookieParser(appConfig.cookieSecret));
 
 	const port = appConfig.port ?? 3000;
