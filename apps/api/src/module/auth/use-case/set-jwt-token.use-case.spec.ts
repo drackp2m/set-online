@@ -70,7 +70,7 @@ describe('SetJwtTokenUseCase', () => {
 			signed: true,
 			secure: true,
 			httpOnly: true,
-			sameSite: 'none',
+			sameSite: true,
 			path: '/api/auth/refresh-session',
 			domain: 'localhost',
 		});
