@@ -29,7 +29,7 @@ export class LogoutUseCase {
 				signed: true,
 				secure: true,
 				httpOnly: true,
-				sameSite: 'none',
+				sameSite: true,
 				path,
 				domain: this.configService.api.cookieDomain,
 			});
