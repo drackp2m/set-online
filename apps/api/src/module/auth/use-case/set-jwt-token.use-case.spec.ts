@@ -52,9 +52,9 @@ describe('SetJwtTokenUseCase', () => {
 				signed: true,
 				secure: true,
 				httpOnly: true,
-				sameSite: true,
-				path: '/graphql',
+				sameSite: 'none',
 				domain: 'localhost',
+				path: '/graphql',
 			});
 		});
 	});
@@ -70,9 +70,9 @@ describe('SetJwtTokenUseCase', () => {
 			signed: true,
 			secure: true,
 			httpOnly: true,
-			sameSite: true,
-			path: '/api/auth/refresh-session',
+			sameSite: 'none',
 			domain: 'localhost',
+			path: '/api/auth/refresh-session',
 		});
 	});
 });
