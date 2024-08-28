@@ -4,6 +4,7 @@ import { Request } from 'express';
 import { mock } from 'jest-mock-extended';
 
 import { ConfigurationService } from '../../../shared/module/config/configuration.service';
+import { GenerateNowDateUseCase } from '../../../shared/use-case/generate-now-date.use-case';
 import { JwtCookie } from '../definition/jwt-cookie.enum';
 
 import { SetJwtTokenUseCase } from './set-jwt-token.use-case';
@@ -12,6 +13,8 @@ describe('SetJwtTokenUseCase', () => {
 	let useCase: SetJwtTokenUseCase;
 
 	const request = mock<Request>({ res: {} });
+	const generateNowDateUseCase = mock<GenerateNowDateUseCase>();
+	generateNowDateUseCase.execute.mockReturnValue(new Date('2021-10-10T10:00:00.000Z'));
 	const configurationService = mock<ConfigurationService>({
 		jwt: {
 			secret: 'secret',
@@ -30,6 +33,7 @@ describe('SetJwtTokenUseCase', () => {
 				SetJwtTokenUseCase,
 				{ provide: REQUEST, useValue: request },
 				{ provide: ConfigurationService, useValue: configurationService },
+				{ provide: GenerateNowDateUseCase, useValue: generateNowDateUseCase },
 			],
 		}).compile();
 
@@ -42,6 +46,8 @@ describe('SetJwtTokenUseCase', () => {
 
 	describe('execute', () => {
 		it('calls once to cookie when called with type access ', async () => {
+			jest.useFakeTimers();
+
 			const tokenType: JwtCookie = JwtCookie.access;
 			const tokenValue = 'fake-access-token';
 
@@ -54,12 +60,15 @@ describe('SetJwtTokenUseCase', () => {
 				httpOnly: true,
 				sameSite: 'none',
 				domain: 'localhost',
+				expires: new Date(new Date().getTime() + 1000 * 60 * 60 * 24),
 				path: '/graphql',
 			});
 		});
 	});
 
 	it('calls once to cookie when called with type refresh ', async () => {
+		jest.useFakeTimers();
+
 		const tokenType: JwtCookie = JwtCookie.refresh;
 		const tokenValue = 'fake-refresh-token';
 
@@ -72,6 +81,7 @@ describe('SetJwtTokenUseCase', () => {
 			httpOnly: true,
 			sameSite: 'none',
 			domain: 'localhost',
+			expires: new Date(new Date().getTime() + 1000 * 60 * 60 * 24),
 			path: '/api/auth/refresh-session',
 		});
 	});
