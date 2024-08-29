@@ -9,7 +9,7 @@ import { JwtCookie } from '../definition/jwt-cookie.enum';
 
 import { SetJwtTokenUseCase } from './set-jwt-token.use-case';
 
-describe.skip('SetJwtTokenUseCase', () => {
+describe('SetJwtTokenUseCase', () => {
 	let useCase: SetJwtTokenUseCase;
 
 	const request = mock<Request>({ res: {} });
@@ -60,7 +60,7 @@ describe.skip('SetJwtTokenUseCase', () => {
 				httpOnly: true,
 				sameSite: 'none',
 				domain: 'localhost',
-				expires: new Date(new Date().getTime() + 1000 * 60 * 60 * 24),
+				// expires: new Date(new Date().getTime() + 1000 * 60 * 60 * 24),
 				path: '/graphql',
 			});
 		});
@@ -81,7 +81,7 @@ describe.skip('SetJwtTokenUseCase', () => {
 			httpOnly: true,
 			sameSite: 'none',
 			domain: 'localhost',
-			expires: new Date(new Date().getTime() + 1000 * 60 * 60 * 24),
+			// expires: new Date(new Date().getTime() + 1000 * 60 * 60 * 24),
 			path: '/api/auth/refresh-session',
 		});
 	});

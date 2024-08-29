@@ -19,6 +19,7 @@ import { environment } from '../environments/environment';
 
 import { APP_ROUTES } from './app.routes';
 import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
+import { WithCredentialsInterceptor } from './shared/interceptors/with-credentials.interceptor';
 
 const pingTimestamp = signal<number | undefined>(undefined);
 
@@ -49,6 +50,11 @@ export const appConfig: ApplicationConfig = {
 		{
 			provide: HTTP_INTERCEPTORS,
 			useClass: AuthInterceptor,
+			multi: true,
+		},
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: WithCredentialsInterceptor,
 			multi: true,
 		},
 		{
