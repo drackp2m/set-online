@@ -26,7 +26,7 @@ async function bootstrap(): Promise<void> {
 			if (allowedDomains.includes(origin)) {
 				callback(null, origin);
 			} else {
-				callback(new Error('Not allowed by CORS'));
+				callback(new Error(`Domain ${origin} not allowed by CORS`));
 			}
 		},
 		methods: 'GET,POST',
