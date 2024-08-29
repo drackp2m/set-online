@@ -26,11 +26,11 @@ export class LogoutUseCase {
 			const path = JwtEndpoints[enumKey];
 
 			this.request.res?.clearCookie(tokenType, {
-				signed: true,
-				secure: true,
+				// signed: true,
+				// secure: true,
 				httpOnly: true,
-				sameSite: 'none',
-				domain: this.configService.api.cookieDomain,
+				// sameSite: 'none',
+				// domain: this.configService.api.cookieDomain,
 				path,
 			});
 		}

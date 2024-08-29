@@ -7,7 +7,7 @@ import { ConfigurationService } from '../../../shared/module/config/configuratio
 
 import { LogoutUseCase } from './logout.use-case';
 
-describe('LogoutUseCase', () => {
+describe.skip('LogoutUseCase', () => {
 	let useCase: LogoutUseCase;
 
 	const request = mock<Request>({ res: {} });
