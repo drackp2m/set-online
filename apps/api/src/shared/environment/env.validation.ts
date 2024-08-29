@@ -53,6 +53,10 @@ class EnvironmentVariables {
 
 	@IsString()
 	@IsNotEmpty()
+	API_CORS_ALLOWED_DOMAINS!: string;
+
+	@IsString()
+	@IsNotEmpty()
 	API_COOKIE_SECRET!: string;
 
 	@IsString()

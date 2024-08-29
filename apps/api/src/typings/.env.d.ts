@@ -15,6 +15,7 @@ declare global {
 			API_PORT: string;
 			API_PREFIX: string;
 			API_DEBUG_PORT: string;
+			API_CORS_ALLOWED_DOMAINS: string;
 			API_COOKIE_SECRET: string;
 			API_NODE_CACHE_PING_PREFIX: string;
 

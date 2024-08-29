@@ -11,6 +11,8 @@ async function bootstrap(): Promise<void> {
 
 	const appConfig = BootstrapHelper.apiConfig(app);
 
+	const allowedDomains = appConfig.corsAllowedDomains;
+
 	app = await NestFactory.create(AppModule, BootstrapHelper.nestApplicationOptions(appConfig));
 
 	useContainer(app.select(AppModule), { fallbackOnErrors: true });
@@ -20,7 +22,13 @@ async function bootstrap(): Promise<void> {
 	app.useGlobalFilters(BootstrapHelper.exceptionsFilter);
 	app.enableCors({
 		credentials: true,
-		origin: `https://${appConfig.cookieDomain}`,
+		origin: (origin, callback) => {
+			if (allowedDomains.includes(origin)) {
+				callback(null, origin);
+			} else {
+				callback(new Error('Not allowed by CORS'));
+			}
+		},
 		methods: 'GET,POST',
 	});
 	app.use(cookieParser(appConfig.cookieSecret));
