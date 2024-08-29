@@ -16,16 +16,16 @@ export class BootstrapHelper {
 	static exceptionsFilter = new HttpExceptionFilter();
 
 	static nestApplicationOptions = (appConfig: ApiConfig): NestApplicationOptions => {
-		let httpsOptions;
+		const nestApplicationOptions: NestApplicationOptions = {};
 
 		if (appConfig.environment !== 'production') {
-			httpsOptions = {
+			nestApplicationOptions.httpsOptions = {
 				key: readFileSync('certs/set-self-signed.key'),
 				cert: readFileSync('certs/set-self-signed.crt'),
 			};
 		}
 
-		return { httpsOptions };
+		return nestApplicationOptions;
 	};
 
 	static apiConfig = (app: INestApplication): ApiConfig => {

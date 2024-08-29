@@ -7,6 +7,7 @@ export type ApiConfig = {
 	domain: string;
 	prefix: string;
 	port?: number;
+	corsAllowedDomains: string[];
 	cookieSecret: string;
 	cookieDomain: string;
 };

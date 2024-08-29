@@ -13,6 +13,7 @@ export const apiConfig = registerAs(
 		domain: config.API_DOMAIN,
 		prefix: config.API_PREFIX,
 		port: config.API_PORT,
+		corsAllowedDomains: config.API_CORS_ALLOWED_DOMAINS.split(','),
 		cookieSecret: config.API_COOKIE_SECRET,
 		cookieDomain: config.API_COOKIE_DOMAIN,
 	}),
