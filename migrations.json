@@ -2,6 +2,14 @@
 	"migrations": [
 		{
 			"cli": "nx",
+			"version": "19.6.3-beta.0",
+			"description": "Migrate proxy config files to match new format from webpack-dev-server v5.",
+			"implementation": "./src/migrations/update-19-6-3/proxy-config",
+			"package": "@nx/webpack",
+			"name": "update-19-6-3-proxy-config"
+		},
+		{
+			"cli": "nx",
 			"version": "19.6.0-beta.4",
 			"description": "Ensure Module Federation DTS is turned off by default.",
 			"factory": "./src/migrations/update-19-6-0/turn-off-dts-by-default",
