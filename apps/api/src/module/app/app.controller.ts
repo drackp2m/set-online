@@ -5,12 +5,19 @@ import { Message } from '@set-online/api-definitions';
 
 import { AppService } from './app.service';
 
-@Controller('app')
+@Controller('')
 export class AppController {
 	constructor(
 		@Inject('PUB_SUB') private readonly pubSub: PubSub,
 		private readonly appService: AppService,
 	) {}
+
+	@Get('')
+	plain(): string {
+		const now = new Date().toISOString();
+
+		return `Api online at ${now}`;
+	}
 
 	@Get('hello')
 	getData(): Message {

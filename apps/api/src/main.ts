@@ -9,15 +9,15 @@ import { BootstrapHelper } from './shared/util/bootstrap.helper';
 async function bootstrap(): Promise<void> {
 	let app = await NestFactory.create(AppModule);
 
-	const appConfig = BootstrapHelper.apiConfig(app);
+	const apiConfig = BootstrapHelper.apiConfig(app);
 
-	const allowedDomains = appConfig.corsAllowedDomains;
+	const allowedDomains = apiConfig.corsAllowedDomains;
 
-	app = await NestFactory.create(AppModule, BootstrapHelper.nestApplicationOptions(appConfig));
+	app = await NestFactory.create(AppModule, BootstrapHelper.nestApplicationOptions(apiConfig));
 
 	useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
-	app.setGlobalPrefix(appConfig.prefix);
+	app.setGlobalPrefix(...BootstrapHelper.globalPrefix(apiConfig));
 	app.useGlobalPipes(BootstrapHelper.validationPipe);
 	app.useGlobalFilters(BootstrapHelper.exceptionsFilter);
 	app.enableCors({
@@ -31,11 +31,11 @@ async function bootstrap(): Promise<void> {
 		},
 		methods: 'GET,POST',
 	});
-	app.use(cookieParser(appConfig.cookieSecret));
+	app.use(cookieParser(apiConfig.cookieSecret));
 
-	const port = appConfig.port ?? 3000;
+	const port = apiConfig.port ?? 3000;
 
-	await app.listen(port, () => BootstrapHelper.logAppBootstrap(appConfig));
+	await app.listen(port, () => BootstrapHelper.logAppBootstrap(apiConfig));
 }
 
 bootstrap().catch((e) => Logger.error(e.message, e));
