@@ -3,6 +3,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
+import { ScheduleModule } from '@nestjs/schedule';
 
 import { ConfigurationModule } from '../../shared/module/config/configuration.module';
 import { GqlFactory } from '../../shared/module/config/factories/gql.factory';
@@ -27,6 +28,7 @@ import { AppService } from './app.service';
 			isGlobal: true,
 			load: [databaseConfig, apiConfig, jwtConfig, nodeCacheConfig],
 		}),
+		ScheduleModule.forRoot(),
 		MikroOrmModule.forRootAsync({
 			useClass: MikroOrmFactory,
 		}),

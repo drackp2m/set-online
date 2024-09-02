@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 
 import { INestApplication, Logger, NestApplicationOptions, ValidationPipe } from '@nestjs/common';
+import { GlobalPrefixOptions } from '@nestjs/common/interfaces';
 
 import { ConfigurationService } from '../module/config/configuration.service';
 import { ApiConfig } from '../module/config/types/api-config.type';
@@ -14,6 +15,10 @@ export class BootstrapHelper {
 	});
 
 	static exceptionsFilter = new HttpExceptionFilter();
+
+	static globalPrefix = (appConfig: ApiConfig): [prefix: string, options?: GlobalPrefixOptions] => {
+		return [appConfig.prefix, { exclude: [''] }];
+	};
 
 	static nestApplicationOptions = (appConfig: ApiConfig): NestApplicationOptions => {
 		const nestApplicationOptions: NestApplicationOptions = {};
