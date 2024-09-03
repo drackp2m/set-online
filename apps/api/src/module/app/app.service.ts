@@ -13,7 +13,7 @@ export class AppService {
 	async handleCron() {
 		const apiConfig = this.configService.api;
 		const port =
-			apiConfig.environment === 'production' && apiConfig.port ? `:${apiConfig.port}` : '';
+			apiConfig.environment !== 'production' && apiConfig.port ? `:${apiConfig.port}` : '';
 		const apiBaseUrl = `${apiConfig.protocol}://${apiConfig.domain}${port}`;
 
 		const response = await fetch(apiBaseUrl);
