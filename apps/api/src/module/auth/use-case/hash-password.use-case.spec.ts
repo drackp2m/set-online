@@ -18,13 +18,11 @@ describe('HashPasswordUseCase', () => {
 	});
 
 	describe('execute', () => {
-		it('should return a text of 60 characters in length starting with "$2a$11$"', async () => {
+		it('should return a text of 60 characters in length starting with "$2a$12$"', async () => {
 			const hashedPassword = await useCase.execute('password');
 
-			console.log({ hashedPassword });
-
 			expect(hashedPassword).toHaveLength(60);
-			expect(hashedPassword.substring(0, 7)).toStrictEqual('$2a$11$');
+			expect(hashedPassword.substring(0, 7)).toStrictEqual('$2a$12$');
 		});
 	});
 });

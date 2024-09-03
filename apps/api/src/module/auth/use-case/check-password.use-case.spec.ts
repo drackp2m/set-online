@@ -21,7 +21,7 @@ describe('CheckPasswordUseCase', () => {
 		it('should return false when password not match', async () => {
 			const passwordMatch = await useCase.execute(
 				'password',
-				'$2a$11$zQOT4wlF6dbzcRJMmmUsHeVw7J2JszWek8OQjoy.BgdlhdMq2FiaX',
+				'$2a$12$iOm3t8Z8HeY1didYbQdbnuYepl1zCaDB6linWecn8HKpwPaZ/CMum',
 			);
 
 			expect(passwordMatch).toStrictEqual(false);
@@ -30,7 +30,7 @@ describe('CheckPasswordUseCase', () => {
 		it('should return true when password match', async () => {
 			const passwordMatch = await useCase.execute(
 				'password',
-				'$2a$11$PLgxt3KSescTNC9xhmzeWu9OKNKZhi2WA29a4suuemdHWm2oHnikS',
+				'$2a$12$iOm3t8Z8HeY1didYbQdbnuYegl1zCaDB6linWecn8HKpwPaZ/CMum',
 			);
 
 			expect(passwordMatch).toStrictEqual(true);

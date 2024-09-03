@@ -37,7 +37,6 @@ import { AppService } from './app.service';
 			useClass: GqlFactory,
 			driver: ApolloDriver,
 		}),
-		ConfigurationModule,
 		PubSubModule,
 		GqlThrottlerModule,
 		AuthModule,
