@@ -74,7 +74,6 @@
 			},
 			"defaultConfiguration": "development",
 			"options": {
-				"proxyConfig": "apps/app/proxy.conf.json",
 				"port": 4200
 			}
 		},
