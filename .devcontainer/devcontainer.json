@@ -3,45 +3,22 @@
 	"service": "set-node",
 	"dockerComposeFile": ["../docker-compose.yml", "docker-compose.yml"],
 	"workspaceFolder": "/usr/src/app",
-	// "forwardPorts": [3000, 4200, 9229],
-	// "portsAttributes": {
-	// 	"3000": {
-	// 		"label": "Api",
-	// 		"protocol": "https",
-	// 		"onAutoForward": "notify"
-	// 	},
-	// 	"4200": {
-	// 		"label": "App",
-	// 		"protocol": "https",
-	// 		"onAutoForward": "notify"
-	// 	}
-	// },
+	"forwardPorts": [3000, 4200, 9229],
+	"portsAttributes": {
+		"3000": {
+			"label": "Api",
+			"protocol": "https",
+			"onAutoForward": "notify"
+		},
+		"4200": {
+			"label": "App",
+			"protocol": "https",
+			"onAutoForward": "notify"
+		}
+	},
 	"overrideCommand": false,
 	"customizations": {
 		"vscode": {
-			"extensions": [
-				"GitHub.copilot",
-				"GitHub.copilot-chat",
-				"nrwl.angular-console",
-				"editorconfig.editorconfig",
-				"mrmlnc.vscode-scss",
-				"esbenp.prettier-vscode",
-				"dbaeumer.vscode-eslint",
-				"stylelint.vscode-stylelint",
-				"angular.ng-template",
-				"gruntfuggly.todo-tree",
-				"cyrilletuzi.angular-schematics",
-				"firsttris.vscode-jest-runner",
-				"ryanluker.vscode-coverage-gutters",
-				"GraphQL.vscode-graphql",
-				"orsenkucher.vscode-graphql",
-				"eamodio.gitlens",
-				"usernamehw.errorlens",
-				"streetsidesoftware.code-spell-checker",
-				"tomoki1207.selectline-statusbar",
-				"chamboug.js-auto-backticks",
-				"firefox-devtools.vscode-firefox-debug"
-			],
 			"settings": {
 				"editor.rulers": [100],
 				"editor.linkedEditing": true,
@@ -98,7 +75,30 @@
 						"opacity": 100
 					}
 				}
-			}
+			},
+			"extensions": [
+				"GitHub.copilot",
+				"GitHub.copilot-chat",
+				"nrwl.angular-console",
+				"editorconfig.editorconfig",
+				"mrmlnc.vscode-scss",
+				"esbenp.prettier-vscode",
+				"dbaeumer.vscode-eslint",
+				"stylelint.vscode-stylelint",
+				"angular.ng-template",
+				"gruntfuggly.todo-tree",
+				"cyrilletuzi.angular-schematics",
+				"firsttris.vscode-jest-runner",
+				"ryanluker.vscode-coverage-gutters",
+				"GraphQL.vscode-graphql",
+				"orsenkucher.vscode-graphql",
+				"eamodio.gitlens",
+				"usernamehw.errorlens",
+				"streetsidesoftware.code-spell-checker",
+				"tomoki1207.selectline-statusbar",
+				"chamboug.js-auto-backticks",
+				"firefox-devtools.vscode-firefox-debug"
+			]
 		}
 	}
 }

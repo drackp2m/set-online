@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
 
 import { Message } from '@set-online/api-definitions';
@@ -12,13 +12,13 @@ export class AppService {
 	@Cron('42 * * * * *')
 	async handleCron() {
 		const apiConfig = this.configService.api;
-		const port =
-			apiConfig.environment !== 'production' && apiConfig.port ? `:${apiConfig.port}` : '';
+		const showPort = apiConfig.environment !== 'production' && apiConfig.port;
+		const port = showPort ? `:${apiConfig.port}` : '';
 		const apiBaseUrl = `${apiConfig.protocol}://${apiConfig.domain}${port}`;
 
 		const response = await fetch(apiBaseUrl);
 
-		console.log(await response.text());
+		Logger.log(`${await response.text()} from ${apiBaseUrl}`);
 	}
 
 	welcomeMessage(): Message {

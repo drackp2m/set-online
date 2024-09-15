@@ -1,4 +1,4 @@
-import { inject } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { firstValueFrom } from 'rxjs';
 
@@ -42,7 +42,9 @@ const initialState: CurrentUserState = {
 	error: undefined,
 };
 
-export const CurrentUserStore = signalStore(
+export type CurrentUserStorex = InstanceType<typeof CurrentUserStorex>;
+
+export const CurrentUserStorex = signalStore(
 	{ providedIn: 'root' },
 	withState(initialState),
 	withMethods((store, getUserInfoGQL = inject(GetUserInfoGQL)) => ({
@@ -62,3 +64,25 @@ export const CurrentUserStore = signalStore(
 		},
 	})),
 );
+
+@Injectable({ providedIn: 'root' })
+export class CurrentUserStore extends signalStore(
+	{ protectedState: false },
+	withState(initialState),
+) {
+	reset(): void {
+		patchState(this, initialState);
+	}
+
+	async fetchData(getUserInfoGQL = inject(GetUserInfoGQL)): Promise<void> {
+		patchState(this, { isLoading: true });
+
+		try {
+			const { data } = await firstValueFrom(getUserInfoGQL.fetch());
+
+			patchState(this, { data: data.getUserInfo, isLoading: false, error: undefined });
+		} catch (error) {
+			patchState(this, { error: error as UserInfoError, isLoading: false });
+		}
+	}
+}
