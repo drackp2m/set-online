@@ -38,7 +38,6 @@ export class LoginPage implements OnInit {
 		effect(
 			() => {
 				if (this.loginFinished()) {
-					this.currentUserStore.fetchData();
 					this.router.navigate(['/home']);
 				}
 			},
@@ -68,6 +67,7 @@ export class LoginPage implements OnInit {
 				next: () => {
 					this.loginFinished.set(true);
 					this.authStore.markTokensAsValid();
+					this.currentUserStore.fetchData();
 				},
 				error: ({ error }) => {
 					this.error.set(error.message);

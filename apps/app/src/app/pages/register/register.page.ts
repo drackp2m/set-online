@@ -2,7 +2,6 @@ import { JsonPipe, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, WritableSignal, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Apollo, ApolloModule } from 'apollo-angular';
 
 import { GetUserInfoGQL, User } from '@set-online/apollo-definitions';
 
@@ -13,8 +12,8 @@ import { CurrentUserStore } from '../../stores/current-user.store';
 	standalone: true,
 	templateUrl: './register.page.html',
 	styleUrl: './register.page.scss',
-	imports: [NgIf, ReactiveFormsModule, ApolloModule, JsonPipe],
-	providers: [ApiClient, CurrentUserStore, HttpClient, GetUserInfoGQL, Apollo],
+	imports: [NgIf, ReactiveFormsModule, JsonPipe],
+	providers: [ApiClient, HttpClient, GetUserInfoGQL],
 })
 export class RegisterPage {
 	private readonly apiClient = inject(ApiClient);

@@ -2,7 +2,7 @@ import { AsyncPipe, JsonPipe, NgIf, NgTemplateOutlet } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 
-import { GetPingsGQL, GetPingsSubscription } from '@set-online/apollo-definitions';
+import { GetPingsGQL, GetPingsSubscription, GetUserInfoGQL } from '@set-online/apollo-definitions';
 
 import { AuthStore } from '../../../stores/auth.store';
 import { CurrentUserStore } from '../../../stores/current-user.store';
@@ -14,7 +14,7 @@ import { ApiClient } from '../../services/api-client.service';
 	templateUrl: './main.layout.html',
 	styleUrl: './main.layout.scss',
 	imports: [RouterModule, NgTemplateOutlet, MediaDebugComponent, NgIf, JsonPipe, AsyncPipe],
-	providers: [GetPingsGQL],
+	providers: [GetPingsGQL, GetUserInfoGQL],
 })
 export default class MainLayout implements OnInit {
 	private readonly apiClient = inject(ApiClient);
