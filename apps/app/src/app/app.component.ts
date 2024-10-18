@@ -1,6 +1,5 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Apollo } from 'apollo-angular';
 
 import { SendPingGQL } from '@set-online/apollo-definitions';
 
@@ -12,9 +11,9 @@ import { CurrentUserStore } from './stores/current-user.store';
 	selector: 'set-root',
 	template: `<router-outlet />`,
 	imports: [RouterOutlet],
-	providers: [SendPingGQL, Apollo],
+	providers: [SendPingGQL],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 	private readonly currentUserStore = inject(CurrentUserStore);
 
 	private readonly sendPing = inject(SendPingGQL);
@@ -23,17 +22,13 @@ export class AppComponent implements OnInit {
 
 	title = 'app';
 
-	// constructor() {
-	// 	effect(() => {
-	// 		const pingValue = this.pingValue();
+	constructor() {
+		effect(() => {
+			const pingValue = this.pingValue();
 
-	// 		if (pingValue !== undefined) {
-	// 			this.sendPing.mutate({ input: { pingValue } }).subscribe();
-	// 		}
-	// 	});
-	// }
-
-	ngOnInit() {
-		void this.currentUserStore.fetchData();
+			if (pingValue !== undefined) {
+				this.sendPing.mutate({ input: { pingValue } }).subscribe();
+			}
+		});
 	}
 }
