@@ -43,7 +43,9 @@ export class LoginPage implements OnInit {
 	onSubmit() {
 		const controls = this.form.controls;
 
-		if (!controls.username.value || !controls.password.value) return;
+		if (!controls.username.value || !controls.password.value) {
+			return;
+		}
 
 		this.loading.set(true);
 

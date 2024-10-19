@@ -32,7 +32,9 @@ export class ExtractCookiesFromRawHeadersUseCase {
 			cookiesArray.reduce((obj, item) => {
 				const [key, value] = item.trim().split('=');
 
-				if (key && value) Object.assign(obj, { [key]: value });
+				if (key && value) {
+					Object.assign(obj, { [key]: value });
+				}
 
 				return obj;
 			}, {}) ?? {};

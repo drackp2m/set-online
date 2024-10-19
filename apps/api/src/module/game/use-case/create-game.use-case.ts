@@ -25,7 +25,7 @@ export class CreateGameUseCase {
 			await this.gameRepository.getOne({
 				participants: { uuid: participant.uuid },
 			});
-		} catch (error) {
+		} catch (_error) {
 			// FixMe => add try catch in current catch? Hmmm...
 			const expiresOn = new EditableDate().edit('day', 1);
 
