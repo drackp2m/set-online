@@ -1,1 +1,1 @@
-npm run lint
+node --run lint

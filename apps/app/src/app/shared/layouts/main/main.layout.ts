@@ -5,7 +5,7 @@ import { Router, RouterModule } from '@angular/router';
 import { GetPingsGQL, GetPingsSubscription, GetUserInfoGQL } from '@set-online/apollo-definitions';
 
 import { AuthStore } from '../../../stores/auth.store';
-import { CurrentUserStore } from '../../../stores/current-user.store';
+import { UserStore } from '../../../stores/user.store';
 import { MediaDebugComponent } from '../../components/media-debug/media-debug.component';
 import { ApiClient } from '../../services/api-client.service';
 
@@ -20,11 +20,11 @@ export default class MainLayout implements OnInit {
 	private readonly apiClient = inject(ApiClient);
 	private readonly router = inject(Router);
 	private readonly authStore = inject(AuthStore);
-	private readonly currentUserStore = inject(CurrentUserStore);
+	private readonly userStore = inject(UserStore);
 	private readonly getPingsGQL = inject(GetPingsGQL);
 
-	user = this.currentUserStore.data;
-	userError = this.currentUserStore.error;
+	user = this.userStore.data;
+	userError = this.userStore.error;
 	getPings = signal<GetPingsSubscription['getPings'] | undefined>(undefined);
 
 	ngOnInit(): void {
@@ -47,8 +47,8 @@ export default class MainLayout implements OnInit {
 			this.apiClient.auth.get('/logout').subscribe({
 				next: () => {
 					this.authStore.markTokensAsInvalid();
-					this.currentUserStore.reset();
-					this.currentUserStore.fetchData();
+					this.userStore.reset();
+					this.userStore.fetchData();
 
 					this.router.navigate(['/login']);
 				},

@@ -30,21 +30,21 @@ type UserInfoError = {
 	message: string;
 };
 
-type CurrentUserState = {
+type UserState = {
 	data: UserInfo | undefined;
 	isLoading: boolean;
 	error: UserInfoError | undefined;
 };
 
-const initialState: CurrentUserState = {
+const initialState: UserState = {
 	data: undefined,
 	isLoading: false,
 	error: undefined,
 };
 
-export type CurrentUserStore = InstanceType<typeof CurrentUserStore>;
+export type UserStore = InstanceType<typeof UserStore>;
 
-export const CurrentUserStore = signalStore(
+export const UserStore = signalStore(
 	{ providedIn: 'root' },
 	withState(initialState),
 	withMethods((store, getUserInfoGQL = inject(GetUserInfoGQL)) => ({

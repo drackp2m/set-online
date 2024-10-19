@@ -1,21 +1,19 @@
 import { Component, effect, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ApolloModule } from 'apollo-angular';
 
 import { SendPingGQL } from '@set-online/apollo-definitions';
 
 import { pingValue } from './app.config';
-import { CurrentUserStore } from './stores/current-user.store';
 
 @Component({
 	standalone: true,
 	selector: 'set-root',
 	template: `<router-outlet />`,
-	imports: [RouterOutlet],
+	imports: [RouterOutlet, ApolloModule],
 	providers: [SendPingGQL],
 })
 export class AppComponent {
-	private readonly currentUserStore = inject(CurrentUserStore);
-
 	private readonly sendPing = inject(SendPingGQL);
 
 	private readonly pingValue = pingValue;

@@ -1,5 +1,5 @@
 import { JsonPipe, NgFor, NgIf } from '@angular/common';
-import { Component, OnInit, WritableSignal, effect, inject, signal } from '@angular/core';
+import { Component, OnInit, WritableSignal, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -7,7 +7,7 @@ import { GetUsersGQL } from '@set-online/apollo-definitions';
 
 import { ApiClient } from '../../shared/services/api-client.service';
 import { AuthStore } from '../../stores/auth.store';
-import { CurrentUserStore } from '../../stores/current-user.store';
+import { UserStore } from '../../stores/user.store';
 
 @Component({
 	standalone: true,
@@ -20,30 +20,17 @@ export class LoginPage implements OnInit {
 	private readonly apiClient = inject(ApiClient);
 	private readonly router = inject(Router);
 	private readonly authStore = inject(AuthStore);
-	private readonly currentUserStore = inject(CurrentUserStore);
+	private readonly userStore = inject(UserStore);
 	private readonly getUsersGQL = inject(GetUsersGQL);
-
-	loginFinished = signal(false);
 
 	form = new FormGroup({
 		username: new FormControl<string>('', [Validators.required]),
 		password: new FormControl('', [Validators.required]),
 	});
 
+	loading = signal(false);
 	usernames: WritableSignal<string[] | undefined> = signal(undefined);
-
 	error = signal(undefined);
-
-	constructor() {
-		effect(
-			() => {
-				if (this.loginFinished()) {
-					this.router.navigate(['/home']);
-				}
-			},
-			{ allowSignalWrites: true },
-		);
-	}
 
 	ngOnInit(): void {
 		this.getUsersGQL.fetch().subscribe({
@@ -58,6 +45,8 @@ export class LoginPage implements OnInit {
 
 		if (!controls.username.value || !controls.password.value) return;
 
+		this.loading.set(true);
+
 		this.apiClient.auth
 			.post('/login', {
 				username: controls.username.value,
@@ -65,11 +54,12 @@ export class LoginPage implements OnInit {
 			})
 			.subscribe({
 				next: () => {
-					this.loginFinished.set(true);
+					this.router.navigate(['/home']);
 					this.authStore.markTokensAsValid();
-					this.currentUserStore.fetchData();
+					this.userStore.fetchData();
 				},
 				error: ({ error }) => {
+					this.loading.set(false);
 					this.error.set(error.message);
 				},
 			});
