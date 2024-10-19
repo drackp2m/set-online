@@ -21,7 +21,11 @@
 				formControlName="password"
 			/>
 
-			<button class="text-center p-sm round-sm surface-serene color-vivid" type="submit">
+			<button
+				class="text-center p-sm round-sm surface-serene color-vivid"
+				type="submit"
+				[disabled]="loading()"
+			>
 				Send
 			</button>
 		</form>
