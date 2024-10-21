@@ -1,4 +1,4 @@
-FROM node:22.7-alpine3.19 AS base
+FROM node:22.9-alpine3.20 AS base
 
 RUN apk add --no-cache build-base python3
 
@@ -49,7 +49,7 @@ RUN git config --global --add safe.directory /usr/src/app
 RUN mkdir /home/node/.gnupg \
 			&& chmod 700 /home/node/.gnupg
 
-CMD node --run start
+CMD ["node", "--run", "start"]
 
 
 
@@ -75,4 +75,4 @@ COPY --from=build-api /usr/src/app/dist ./dist
 COPY --from=build-api /usr/src/app/package.json ./package.json
 COPY --from=deps /usr/src/app/node_modules ./node_modules
 
-CMD node dist/apps/api/main.js
+CMD ["node", "dist/apps/api/main.js"]

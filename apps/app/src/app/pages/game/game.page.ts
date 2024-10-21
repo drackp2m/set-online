@@ -1,6 +1,7 @@
 import { NgFor, NgIf } from '@angular/common';
-import { Component, OnInit, computed, signal } from '@angular/core';
+import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { SwUpdate } from '@angular/service-worker';
 import { confetti } from '@tsparticles/confetti';
 
 import { CardColor, CardShading, CardShape } from '@set-online/api-definitions';
@@ -17,6 +18,8 @@ import { YouWonComponent } from './shared/components/you-won/you-won.component';
 	imports: [NgIf, NgFor, CardComponent, YouWonComponent, RouterLink],
 })
 export class GamePage implements OnInit {
+	private readonly SwUpdate = inject(SwUpdate);
+
 	private readonly shapes: (keyof typeof CardShape)[] = ['oval', 'squiggle', 'diamond'];
 	private readonly colors: (keyof typeof CardColor)[] = ['red', 'purple', 'green'];
 	private readonly shadings: (keyof typeof CardShading)[] = ['solid', 'striped', 'outlined'];
@@ -116,7 +119,9 @@ export class GamePage implements OnInit {
 	highlightSet(): void {
 		this.wrongSetsCount.update((value) => value + 3);
 
-		if (this.showSets() !== 0) return;
+		if (this.showSets() !== 0) {
+			return;
+		}
 
 		if (this.cardsInSets().length === 0) {
 			this.showMessages('There are no sets on the board.');
@@ -162,6 +167,12 @@ export class GamePage implements OnInit {
 				this.selectCard(thirdCard);
 			}
 		}
+	}
+
+	async serviceWorkerCheckUpdates(): Promise<void> {
+		const haveUpdates = await this.SwUpdate.checkForUpdate();
+
+		console.log({ haveUpdates });
 	}
 
 	private prepareNewGame(): void {

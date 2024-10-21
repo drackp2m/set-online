@@ -3,11 +3,13 @@ import {
 	ApplicationConfig,
 	computed,
 	inject,
+	isDevMode,
 	provideExperimentalCheckNoChangesForDebug,
 	provideExperimentalZonelessChangeDetection,
 	signal,
 } from '@angular/core';
 import { provideRouter, withHashLocation } from '@angular/router';
+import { provideServiceWorker } from '@angular/service-worker';
 import { ApolloClientOptions, InMemoryCache, split } from '@apollo/client/core';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { getMainDefinition } from '@apollo/client/utilities';
@@ -104,13 +106,17 @@ const apolloConfig = (): ApolloClientOptions<unknown> => {
 
 export const appConfig: ApplicationConfig = {
 	providers: [
+		provideHttpClient(withInterceptorsFromDi()),
+		provideRouter(APP_ROUTES, withHashLocation()),
+		provideServiceWorker('ngsw-worker.js', {
+			enabled: !isDevMode(),
+			registrationStrategy: 'registerWhenStable:30000',
+		}),
+		provideExperimentalZonelessChangeDetection(),
 		provideExperimentalCheckNoChangesForDebug({
 			exhaustive: true,
 			interval: 500,
 		}),
-		provideExperimentalZonelessChangeDetection(),
-		provideRouter(APP_ROUTES, withHashLocation()),
-		provideHttpClient(withInterceptorsFromDi()),
 		provideApollo(apolloConfig),
 		{
 			provide: HTTP_INTERCEPTORS,

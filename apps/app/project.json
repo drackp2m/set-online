@@ -13,17 +13,16 @@
 				"outputPath": "dist/apps/app",
 				"index": "apps/app/src/index.html",
 				"browser": "apps/app/src/main.ts",
-				"polyfills": [],
 				"tsConfig": "apps/app/tsconfig.app.json",
 				"inlineStyleLanguage": "scss",
 				"assets": [
+					"apps/app/src/assets",
 					"apps/app/src/favicon.ico",
 					"apps/app/src/favicon.svg",
-					"apps/app/src/manifest.json",
-					"apps/app/src/assets"
+					"apps/app/src/manifest.webmanifest",
+					"apps/app/src/ngsw-config.json"
 				],
 				"styles": ["apps/app/src/styles.scss"],
-				"scripts": [],
 				"aot": true
 			},
 			"configurations": {
@@ -40,7 +39,8 @@
 							"maximumError": "8kb"
 						}
 					],
-					"outputHashing": "all"
+					"outputHashing": "all",
+					"serviceWorker": "apps/app/src/ngsw-config.json"
 				},
 				"development": {
 					"optimization": false,
@@ -67,6 +67,7 @@
 					"liveReload": false,
 					"host": "0.0.0.0",
 					"disableHostCheck": true,
+					"hmr": true,
 					"ssl": true,
 					"sslKey": "certs/set-self-signed.key",
 					"sslCert": "certs/set-self-signed.crt"

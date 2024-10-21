@@ -48,9 +48,6 @@ export default [
 	...compat.extends('plugin:@nx/typescript').map((config) => ({
 		...config,
 		files: ['**/*.ts'],
-	})),
-	{
-		files: ['**/*.ts'],
 		plugins: {
 			'@typescript-eslint': typescriptEslint,
 			import: fixupPluginRules(_import),
@@ -151,34 +148,26 @@ export default [
 			],
 			'space-before-blocks': ['warn', 'always'],
 			'newline-before-return': ['warn'],
-			curly: ['error', 'all'],
+			curly: ['warn', 'all'],
 		},
-	},
+	})),
 	...compat.extends('plugin:@nx/javascript').map((config) => ({
 		...config,
 		files: ['**/*.js'],
 	})),
-	{
-		files: ['**/*.js'],
-		rules: {},
-	},
 	...compat.extends('plugin:prettier/recommended').map((config) => ({
 		...config,
-		files: ['**/*.ts', '**/*.js', '**/*.mjs', '**/*.json'],
-	})),
-	{
 		files: ['**/*.ts', '**/*.js', '**/*.mjs', '**/*.json'],
 		rules: {
 			'prettier/prettier': 'warn',
 		},
-	},
+	})),
 	{
-		files: ['**/*.spec.ts', '**/*.spec.tsx', '**/*.spec.js', '**/*.spec.jsx'],
+		files: ['**/*.spec.ts', '**/*.spec.js'],
 		languageOptions: {
 			globals: {
 				...globals.jest,
 			},
 		},
-		rules: {},
 	},
 ];

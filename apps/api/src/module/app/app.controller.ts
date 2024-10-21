@@ -12,8 +12,13 @@ export class AppController {
 		private readonly appService: AppService,
 	) {}
 
+	@Get('api')
+	api(): string {
+		return this.root();
+	}
+
 	@Get('')
-	plain(): string {
+	root(): string {
 		const now = new Date().toISOString();
 
 		return `Api online at ${now}`;

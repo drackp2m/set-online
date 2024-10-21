@@ -39,6 +39,10 @@ export const APP_ROUTES: Routes = [
 				path: 'online',
 				loadChildren: () => import('./pages/online/online.routes'),
 			},
+			{
+				path: '**',
+				loadChildren: () => import('./pages/home/home.routes'),
+			},
 		],
 	},
 ];
