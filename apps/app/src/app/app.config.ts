@@ -8,6 +8,7 @@ import {
 	signal,
 } from '@angular/core';
 import { provideRouter, withHashLocation } from '@angular/router';
+import { provideServiceWorker } from '@angular/service-worker';
 import { ApolloClientOptions, InMemoryCache, split } from '@apollo/client/core';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { getMainDefinition } from '@apollo/client/utilities';
@@ -122,5 +123,10 @@ export const appConfig: ApplicationConfig = {
 			useClass: WithCredentialsInterceptor,
 			multi: true,
 		},
+		provideServiceWorker('ngsw-worker.js', {
+			// enabled: !isDevMode(),
+			enabled: true,
+			registrationStrategy: 'registerWhenStable:30000',
+		}),
 	],
 };

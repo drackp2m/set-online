@@ -5,6 +5,8 @@
 	"orientation": "portrait-primary",
 	"theme_color": "#ffffff",
 	"background_color": "#ffffff",
+  "scope": "./",
+  "start_url": "./",
 	"launch_handler": {
 		"client_mode": "focus-existing"
 	},
