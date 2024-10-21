@@ -5,6 +5,7 @@
 		{
 			"name": "app",
 			"installMode": "prefetch",
+			"updateMode": "prefetch",
 			"resources": {
 				"files": [
 					"/favicon.ico",
@@ -18,10 +19,22 @@
 		},
 		{
 			"name": "assets",
-			"installMode": "lazy",
-			"updateMode": "prefetch",
+			"installMode": "prefetch",
+			"updateMode": "lazy",
 			"resources": {
-				"files": ["/**/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"]
+				"files": ["/assets/**/*.(svg|png|woff2)"]
+			}
+		}
+	],
+	"dataGroups": [
+		{
+			"name": "api-call",
+			"urls": ["https://api.playsetonline.com"],
+			"cacheConfig": {
+				"maxAge": "12h",
+				"maxSize": 10,
+				"strategy": "freshness",
+				"timeout": "5s"
 			}
 		}
 	]

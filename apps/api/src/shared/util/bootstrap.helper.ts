@@ -17,7 +17,7 @@ export class BootstrapHelper {
 	static exceptionsFilter = new HttpExceptionFilter();
 
 	static globalPrefix = (appConfig: ApiConfig): [prefix: string, options?: GlobalPrefixOptions] => {
-		return [appConfig.prefix, { exclude: [''] }];
+		return [appConfig.prefix, { exclude: ['', 'api'] }];
 	};
 
 	static nestApplicationOptions = (appConfig: ApiConfig): NestApplicationOptions => {

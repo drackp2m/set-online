@@ -3,6 +3,7 @@ import {
 	ApplicationConfig,
 	computed,
 	inject,
+	isDevMode,
 	provideExperimentalCheckNoChangesForDebug,
 	provideExperimentalZonelessChangeDetection,
 	signal,
@@ -105,13 +106,17 @@ const apolloConfig = (): ApolloClientOptions<unknown> => {
 
 export const appConfig: ApplicationConfig = {
 	providers: [
+		provideHttpClient(withInterceptorsFromDi()),
+		provideRouter(APP_ROUTES, withHashLocation()),
+		provideServiceWorker('ngsw-worker.js', {
+			enabled: !isDevMode(),
+			registrationStrategy: 'registerWhenStable:30000',
+		}),
+		provideExperimentalZonelessChangeDetection(),
 		provideExperimentalCheckNoChangesForDebug({
 			exhaustive: true,
 			interval: 500,
 		}),
-		provideExperimentalZonelessChangeDetection(),
-		provideRouter(APP_ROUTES, withHashLocation()),
-		provideHttpClient(withInterceptorsFromDi()),
 		provideApollo(apolloConfig),
 		{
 			provide: HTTP_INTERCEPTORS,
@@ -123,10 +128,5 @@ export const appConfig: ApplicationConfig = {
 			useClass: WithCredentialsInterceptor,
 			multi: true,
 		},
-		provideServiceWorker('ngsw-worker.js', {
-			// enabled: !isDevMode(),
-			enabled: true,
-			registrationStrategy: 'registerWhenStable:30000',
-		}),
 	],
 };

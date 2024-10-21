@@ -13,7 +13,6 @@
 				"outputPath": "dist/apps/app",
 				"index": "apps/app/src/index.html",
 				"browser": "apps/app/src/main.ts",
-				"polyfills": [],
 				"tsConfig": "apps/app/tsconfig.app.json",
 				"inlineStyleLanguage": "scss",
 				"assets": [
@@ -24,7 +23,6 @@
 					"apps/app/src/ngsw-config.json"
 				],
 				"styles": ["apps/app/src/styles.scss"],
-				"scripts": [],
 				"aot": true
 			},
 			"configurations": {
@@ -42,7 +40,7 @@
 						}
 					],
 					"outputHashing": "all",
-					"serviceWorker": "apps/app/ngsw-config.json"
+					"serviceWorker": "apps/app/src/ngsw-config.json"
 				},
 				"development": {
 					"optimization": false,
@@ -66,7 +64,7 @@
 				},
 				"development": {
 					"buildTarget": "app:build:development",
-					"liveReload": true,
+					"liveReload": false,
 					"host": "0.0.0.0",
 					"disableHostCheck": true,
 					"hmr": true,
