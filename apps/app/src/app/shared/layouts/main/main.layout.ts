@@ -6,6 +6,7 @@ import { GetPingsGQL, GetPingsSubscription, GetUserInfoGQL } from '@set-online/a
 
 import { AuthStore } from '../../../stores/auth.store';
 import { UserStore } from '../../../stores/user.store';
+import { CardShapeComponent } from '../../components/card-shape/card-shape.component';
 import { MediaDebugComponent } from '../../components/media-debug/media-debug.component';
 import { ApiClient } from '../../services/api-client.service';
 
@@ -13,7 +14,15 @@ import { ApiClient } from '../../services/api-client.service';
 	standalone: true,
 	templateUrl: './main.layout.html',
 	styleUrl: './main.layout.scss',
-	imports: [RouterModule, NgTemplateOutlet, MediaDebugComponent, NgIf, JsonPipe, AsyncPipe],
+	imports: [
+		RouterModule,
+		NgTemplateOutlet,
+		MediaDebugComponent,
+		NgIf,
+		JsonPipe,
+		AsyncPipe,
+		CardShapeComponent,
+	],
 	providers: [GetPingsGQL, GetUserInfoGQL],
 })
 export default class MainLayout implements OnInit {
