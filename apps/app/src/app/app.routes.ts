@@ -5,6 +5,7 @@ import MainLayout from './shared/layouts/main/main.layout';
 export const APP_ROUTES: Routes = [
 	{
 		path: '',
+		data: { avoidStatusBar: true },
 		loadChildren: () => import('./pages/game/game.routes'),
 	},
 	{

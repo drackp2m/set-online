@@ -6,7 +6,7 @@
 html {
 	cursor: default;
 
-	overflow: hidden;
+	overscroll-behavior: none;
 
 	font-family: Recursive, sans-serif;
 	font-size: 16px;

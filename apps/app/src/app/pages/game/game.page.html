@@ -1,4 +1,8 @@
-<main id="game" class="content-fixed py-sm px-md">
+<main
+	id="game"
+	class="content-fixed py-sm px-md"
+	[class]="{ 'avoid-status-bar': avoidStatusBar() }"
+>
 	<div class="flex-row justify-between">
 		<div class="flex-col gap-sm">
 			<a routerLink="/">Sets found: {{ sets().length / 3 }}</a>
