@@ -4,13 +4,18 @@
 
 	#header {
 		position: relative;
-
-		// @supports (-webkit-touch-callout: none) {
-		padding-top: 50px;
 		background-color: white;
 		border-bottom: solid 1px pink;
 
+		@supports (-webkit-touch-callout: none) {
+			padding-top: 60px;
+		}
+
 		.background {
+			@supports not (-webkit-touch-callout: none) {
+				display: none;
+			}
+
 			position: absolute;
 			top: 0;
 			left: 0;
@@ -174,8 +179,6 @@
 		nav {
 			position: relative;
 		}
-
-		// }
 	}
 
 	.scroll {

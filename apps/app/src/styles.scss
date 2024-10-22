@@ -3,12 +3,11 @@
 
 @use './scss/main';
 
-* {
-	overscroll-behavior: none;
-}
-
 html {
 	cursor: default;
+
+	overscroll-behavior: none;
+
 	font-family: Recursive, sans-serif;
 	font-size: 16px;
 	font-weight: var(--font-weight-md);

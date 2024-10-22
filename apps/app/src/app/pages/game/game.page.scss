@@ -2,6 +2,12 @@ main {
 	min-height: 100%;
 	background-color: rgb(255 255 255 / 90%);
 
+	&.avoid-status-bar {
+		@supports (-webkit-touch-callout: none) {
+			padding-top: 60px;
+		}
+	}
+
 	.info {
 		min-height: 40px;
 	}

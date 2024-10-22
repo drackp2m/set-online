@@ -1,6 +1,7 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit, computed, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 import { confetti } from '@tsparticles/confetti';
 
@@ -19,6 +20,7 @@ import { YouWonComponent } from './shared/components/you-won/you-won.component';
 })
 export class GamePage implements OnInit {
 	private readonly SwUpdate = inject(SwUpdate);
+	private readonly activatedRoute = inject(ActivatedRoute);
 
 	private readonly shapes: (keyof typeof CardShape)[] = ['oval', 'squiggle', 'diamond'];
 	private readonly colors: (keyof typeof CardColor)[] = ['red', 'purple', 'green'];
@@ -27,19 +29,21 @@ export class GamePage implements OnInit {
 
 	private highlightInterval!: number;
 
-	boardCards = signal<CardInterface[]>([]);
-	sets = signal<CardInterface[]>([]);
-	remainingCardsCount = computed(() => {
+	readonly boardCards = signal<CardInterface[]>([]);
+	readonly sets = signal<CardInterface[]>([]);
+	readonly remainingCardsCount = computed(() => {
 		const boardCards = this.boardCards();
 		const sets = this.sets();
 
 		return 81 - boardCards.length - sets.length;
 	});
-	cardsInSets = signal<CardInterface[]>([]);
-	selectedCards = signal<CardInterface[]>([]);
-	wrongSetsCount = signal<number>(0);
-	showSets = signal<number>(0);
-	message = signal<string>('');
+	readonly cardsInSets = signal<CardInterface[]>([]);
+	readonly selectedCards = signal<CardInterface[]>([]);
+	readonly wrongSetsCount = signal<number>(0);
+	readonly showSets = signal<number>(0);
+	readonly message = signal<string>('');
+	private readonly activatedRouteData = toSignal(this.activatedRoute.data);
+	readonly avoidStatusBar = computed(() => this.activatedRouteData()?.['avoidStatusBar']);
 
 	ngOnInit(): void {
 		this.prepareNewGame();
