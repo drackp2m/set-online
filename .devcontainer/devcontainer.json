@@ -27,6 +27,7 @@
 				"javascript.preferences.importModuleSpecifier": "project-relative",
 				"typescript.updateImportsOnFileMove.enabled": "always",
 				"typescript.preferences.importModuleSpecifier": "project-relative",
+				"terminal.integrated.defaultProfile.linux": "zsh",
 				"eslint.validate": ["javascript", "typescript", "html"],
 				"eslint.probe": ["json"],
 				"eslint.format.enable": true,

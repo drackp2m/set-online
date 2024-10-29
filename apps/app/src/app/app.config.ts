@@ -21,8 +21,8 @@ import { createClient } from 'graphql-ws';
 import { environment } from '../environments/environment';
 
 import { APP_ROUTES } from './app.routes';
-import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
-import { WithCredentialsInterceptor } from './shared/interceptors/with-credentials.interceptor';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
+import { WithCredentialsInterceptor } from './interceptor/with-credentials.interceptor';
 
 const pingTimestamp = signal<number | undefined>(undefined);
 
