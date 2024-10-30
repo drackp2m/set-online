@@ -64,10 +64,10 @@
 				},
 				"development": {
 					"buildTarget": "app:build:development",
+					"hmr": true,
 					"liveReload": false,
 					"host": "0.0.0.0",
 					"disableHostCheck": true,
-					"hmr": true,
 					"ssl": true,
 					"sslKey": "certs/set-self-signed.key",
 					"sslCert": "certs/set-self-signed.crt"

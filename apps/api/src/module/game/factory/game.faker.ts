@@ -12,8 +12,7 @@ export interface GameFakerOptions {
 }
 
 export class GameFaker {
-	private readonly basicFaker = new BasicFaker();
-	static makeOne = new GameFaker().makeEntity;
+	static readonly makeOne = new GameFaker().makeEntity;
 
 	static make(
 		quantity: number,

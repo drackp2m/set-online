@@ -34,6 +34,14 @@ export default [
 		},
 	},
 	{
+		files: ['**/*.ts/1_inline-template-app.component.ts-1.component.html'],
+		rules: {
+			'sonarjs/no-element-overwrite': 'off',
+			'sonarjs/no-same-line-conditional': 'off',
+			'sonarjs/no-unenclosed-multiline-block': 'off',
+		},
+	},
+	{
 		files: ['**/*.html'],
 		rules: {
 			'prettier/prettier': 'warn',

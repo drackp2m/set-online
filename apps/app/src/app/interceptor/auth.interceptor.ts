@@ -80,14 +80,14 @@ export class AuthInterceptor implements HttpInterceptor {
 		const isAuthStoreLoading = this.authStore.isLoading();
 
 		if (event !== undefined && isAuthStoreLoading === false) {
-			void this.authStore.tryToRefreshTokens();
+			this.authStore.tryToRefreshTokens();
 		}
 
 		return this.authStoreLoadingFinished$.pipe(
 			take(1),
 			switchMap(() => {
 				if (this.authStore.tokensAreValid() === false) {
-					void this.router.navigate(['/login']);
+					this.router.navigate(['/login']);
 				}
 
 				return next.handle(req);

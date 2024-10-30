@@ -42,7 +42,7 @@ const initialState: UserState = {
 	error: undefined,
 };
 
-export type UserStore = InstanceType<typeof UserStore>;
+// export type UserStore = InstanceType<typeof UserStore>;
 
 export const UserStore = signalStore(
 	{ providedIn: 'root' },

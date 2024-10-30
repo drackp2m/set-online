@@ -1,16 +1,4 @@
 {
 	"typescript.tsdk": "node_modules/typescript/lib",
-	"cSpell.maxNumberOfProblems": 1000,
-	"cSpell.words": [
-		"codegen",
-		"commitlint",
-		"devkit",
-		"mikro",
-		"nestjs",
-		"ngneat",
-		"ngrx",
-		"stylelint",
-		"tsparticles"
-	],
 	"svg.preview.background": "editor"
 }

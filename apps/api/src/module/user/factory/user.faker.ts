@@ -11,7 +11,7 @@ export interface UserFakerOptions {
 }
 
 export class UserFaker {
-	static makeOne = new UserFaker().makeEntity;
+	static readonly makeOne = new UserFaker().makeEntity;
 
 	static make(
 		amount: number,

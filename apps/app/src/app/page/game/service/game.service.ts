@@ -34,7 +34,7 @@ export class GameService {
 		return allCardsAreDefined && this.isSet(firstCard, secondCard, thirdCard);
 	}
 
-	// FixMe => replace with fillBoardGaps (nulls)
+	// FixMe: replace with fillBoardGaps (nulls)
 	getUpdatedBoardCards(
 		boardCards: CardInterface[],
 		setCards: CardInterface[],
@@ -123,11 +123,15 @@ export class GameService {
 
 	// FixMe => move this to lib
 	private getRandomNumber(): number {
-		const randomNumber = Math.floor(Math.random() * 3) + 1;
+		const crypto = window.crypto;
+		const array = new Uint32Array(1);
+		crypto.getRandomValues(array);
 
-		if (!randomNumber) {
+		if (!array[0]) {
 			throw new Error('Random number is not defined');
 		}
+
+		const randomNumber = (array[0] % 3) + 1;
 
 		return randomNumber;
 	}
@@ -142,8 +146,8 @@ export class GameService {
 			throw new Error('Enum is empty');
 		}
 
-		const randomIndex = Math.floor(Math.random() * enumKeys.length);
-		const randomEnumKey = enumKeys[randomIndex];
+		const randomIndex = this.getRandomNumberInRange(0, enumKeys.length - 1);
+		const randomEnumKey = enumKeys[randomIndex ?? 0];
 
 		const enumKey = randomEnumKey ?? firstEnumKey;
 
@@ -168,5 +172,19 @@ export class GameService {
 		}
 
 		return isBasicEnum ? enumKeys.slice(enumKeys.length / 2) : enumKeys;
+	}
+
+	private getRandomNumberInRange(min: number, max: number): number | undefined {
+		const crypto = window.crypto;
+		const array = new Uint32Array(1);
+		crypto.getRandomValues(array);
+
+		if (!array[0]) {
+			return undefined;
+		}
+
+		const randomNumber = Math.floor((array[0] / (0xffffffff + 1)) * (max - min + 1)) + min;
+
+		return randomNumber;
 	}
 }

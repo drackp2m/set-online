@@ -9,18 +9,20 @@ import { ApiConfig } from '../module/config/types/api-config.type';
 import { HttpExceptionFilter } from './exception-filter';
 
 export class BootstrapHelper {
-	static validationPipe = new ValidationPipe({
+	static readonly validationPipe = new ValidationPipe({
 		whitelist: true,
 		transform: true,
 	});
 
-	static exceptionsFilter = new HttpExceptionFilter();
+	static readonly exceptionsFilter = new HttpExceptionFilter();
 
-	static globalPrefix = (appConfig: ApiConfig): [prefix: string, options?: GlobalPrefixOptions] => {
+	static readonly globalPrefix = (
+		appConfig: ApiConfig,
+	): [prefix: string, options?: GlobalPrefixOptions] => {
 		return [appConfig.prefix, { exclude: ['', 'api'] }];
 	};
 
-	static nestApplicationOptions = (appConfig: ApiConfig): NestApplicationOptions => {
+	static readonly nestApplicationOptions = (appConfig: ApiConfig): NestApplicationOptions => {
 		const nestApplicationOptions: NestApplicationOptions = {};
 
 		if (appConfig.environment !== 'production') {
@@ -33,13 +35,13 @@ export class BootstrapHelper {
 		return nestApplicationOptions;
 	};
 
-	static apiConfig = (app: INestApplication): ApiConfig => {
+	static readonly apiConfig = (app: INestApplication): ApiConfig => {
 		const configService = app.get(ConfigurationService);
 
 		return configService.api;
 	};
 
-	static logAppBootstrap = (appConfig: ApiConfig): void => {
+	static readonly logAppBootstrap = (appConfig: ApiConfig): void => {
 		const isProduction = appConfig.environment === 'production';
 		const port = isProduction ? '' : `:${appConfig.port}`;
 
