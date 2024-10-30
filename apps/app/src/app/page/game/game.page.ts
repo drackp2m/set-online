@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 import { NgFor, NgIf } from '@angular/common';
-import { Component, OnInit, computed, effect, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { confetti } from '@tsparticles/confetti';
@@ -19,7 +19,7 @@ import { GameStore } from './store/game.store';
 	styleUrl: './game.page.scss',
 	imports: [NgIf, NgFor, CardComponent, YouWonComponent, RouterLink],
 })
-export class GamePage implements OnInit {
+export class GamePage {
 	private readonly gameStore = inject(GameStore);
 	private readonly activatedRoute = inject(ActivatedRoute);
 
@@ -60,12 +60,6 @@ export class GamePage implements OnInit {
 			},
 			{ allowSignalWrites: true },
 		);
-	}
-
-	ngOnInit(): void {
-		if (this.boardCards().length === 0) {
-			this.gameStore.newGame();
-		}
 	}
 
 	newGame(): void {
