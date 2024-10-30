@@ -27,6 +27,7 @@ services:
     container_name: set-node
     hostname: set-node
     working_dir: /usr/src/app
+    image: set-node:latest
     build:
       context: .
       dockerfile: Dockerfile

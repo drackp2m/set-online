@@ -14,8 +14,7 @@ RUN if [ -n "$USER_GID" ] && [ "$USER_GID" != "1000" ]; then \
 
 WORKDIR /usr/src/app
 
-RUN chown -R node:node /usr/src/app \
-			&& chown -R node:node /home/node
+RUN chown -R node:node /usr/src/app /home/node /usr/local/lib/node_modules /usr/local/bin
 
 
 
@@ -49,7 +48,11 @@ RUN git config --global --add safe.directory /usr/src/app
 RUN mkdir /home/node/.gnupg \
 			&& chmod 700 /home/node/.gnupg
 
-CMD ["node", "--run", "start"]
+RUN npm install -g pm2
+
+COPY ecosystem.config.js ./
+
+CMD ["sh", "-c", "pm2-runtime start ecosystem.config.js && pm2 logs --raw --lines 100 app"]
 
 
 

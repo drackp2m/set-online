@@ -1,0 +1,20 @@
+{
+	"version": "0.2",
+	"ignorePaths": [],
+	"dictionaryDefinitions": [],
+	"dictionaries": [],
+	"words": [
+		"codegen",
+		"commitlint",
+		"devkit",
+		"mikro",
+		"nestjs",
+		"ngneat",
+		"ngrx",
+		"stylelint",
+		"tsparticles",
+		"sonarjs"
+	],
+	"ignoreWords": [],
+	"import": []
+}

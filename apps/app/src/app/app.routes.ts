@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
 
-import MainLayout from './shared/layouts/main/main.layout';
+import MainLayout from './layout/main/main.layout';
 
 export const APP_ROUTES: Routes = [
 	{
 		path: '',
 		data: { avoidStatusBar: true },
-		loadChildren: () => import('./pages/game/game.routes'),
+		loadChildren: () => import('./page/game/game.routes'),
 	},
 	{
 		path: '',
@@ -14,35 +14,35 @@ export const APP_ROUTES: Routes = [
 		children: [
 			{
 				path: 'home',
-				loadChildren: () => import('./pages/home/home.routes'),
+				loadChildren: () => import('./page/home/home.routes'),
 			},
 			{
 				path: 'register',
-				loadChildren: () => import('./pages/register/register.routes'),
+				loadChildren: () => import('./page/register/register.routes'),
 			},
 			{
 				path: 'login',
-				loadChildren: () => import('./pages/login/login.routes'),
+				loadChildren: () => import('./page/login/login.routes'),
 			},
 			{
 				path: 'logout',
-				loadChildren: () => import('./pages/login/login.routes'),
+				loadChildren: () => import('./page/login/login.routes'),
 			},
 			{
 				path: 'example',
-				loadChildren: () => import('./pages/example/example.routes'),
+				loadChildren: () => import('./page/example/example.routes'),
 			},
 			{
 				path: 'game',
-				loadChildren: () => import('./pages/game/game.routes'),
+				loadChildren: () => import('./page/game/game.routes'),
 			},
 			{
 				path: 'online',
-				loadChildren: () => import('./pages/online/online.routes'),
+				loadChildren: () => import('./page/online/online.routes'),
 			},
 			{
 				path: '**',
-				loadChildren: () => import('./pages/home/home.routes'),
+				loadChildren: () => import('./page/home/home.routes'),
 			},
 		],
 	},

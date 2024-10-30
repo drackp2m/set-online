@@ -42,9 +42,7 @@ export class CustomRepository<T extends CustomBaseEntity<T>> {
 	}
 
 	async update(entity: T): Promise<T> {
-		await this.entityManager.fork().persistAndFlush(entity);
-
-		return entity;
+		return this.insert(entity);
 	}
 
 	async delete(entity: T): Promise<void> {

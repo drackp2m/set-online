@@ -1,6 +1,6 @@
 {
-	"name": "Set Online (not today)",
-	"short_name": "Set",
+	"name": "Play Set Online (not today)",
+	"short_name": "Play Set Online",
 	"display": "standalone",
 	"orientation": "portrait-primary",
 	"scope": "/",
@@ -30,10 +30,16 @@
 	],
 	"shortcuts": [
 		{
-			"name": "New game",
+			"name": "Play solo",
 			"short_name": "Play",
-			"description": "Play new game with friends",
+			"description": "Play new game solo",
 			"url": "/game"
+		},
+		{
+			"name": "Play online",
+			"short_name": "Online",
+			"description": "Play new game with friends",
+			"url": "/online"
 		}
 	]
 }

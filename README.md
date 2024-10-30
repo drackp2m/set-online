@@ -6,24 +6,34 @@
 
 - 📋 Copy `.env.example` and rename it to `.env` executing `cp .env.example .env`
 
-1. With DevContainer
+#### 1. With DevContainer
 
 - 📋 Generate Dev Containers docker-compose with `cp .devcontainer/docker-compose.yml.example .devcontainer/docker-compose.yml`
 - 📝 Edit build arg with the result of the following command `echo 'USER_GID:' $(id -g) && echo 'USER_UID:' $(id -u)`
 - 🐋 Run VSCode Dev Container command `Reopen in Container`
 
-You can also view node execution logs by running `docker logs set-node -f -n 100` in a host terminal.
+You can also view node execution logs by running `logs app --out --raw --lines 100` inside the container.
 
-2. In your machine
+Or if you prefer to see them from a terminal on the host, execute `docker logs set-node -f -n 100`.
+
+To restart the Node service, run `pm2 kill` to stop it and `pm2-runtime start ecosystem.config.js` to start it again.
+
+The latter command shows the logs after startup (and they will still be output by `/dev/stdout` as well). But if you prefer to start the process "silently", you can run `pm2 start ecosystem.config.js`. This will still show the logs in both `Docker` and `pm2`.
+
+#### 2. In your machine
 
 - ⚙️ Run `docker compose up -d` and wait for it to finish (be patient)
 - 📦 Install dependencies executing command `npm ci`
 - 🛠️ Install extensions listed by running `Show recommended extensions` on VSCode
 - 🚀 Execute `node --run start`
 
-You can now navigate to:
+To view node process logs you can run `docker logs set-node -f -n 100`.
 
-- 👹 Apollo Studio on https://localhost:4200/graphql
+---
+
+At this point you should be able to navigate to:
+
+- 👹 Apollo Studio on https://localhost:3000/graphql
 - 🧜🏻‍♀️ Frontend on https://localhost:4200
 
 ## Migrations
@@ -51,10 +61,6 @@ To learn the rules, you can start writing your first commits using the interacti
 ## Understand this workspace
 
 Run `nx graph` to see a diagram of the dependencies of the projects.
-
-## Remote caching
-
-Run `npx nx connect-to-nx-cloud` to enable [remote caching](https://nx.app) and make CI faster.
 
 ## Further help
 

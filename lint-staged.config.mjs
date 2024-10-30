@@ -8,14 +8,12 @@ const removeIgnoredFiles = async (files) => {
 		}),
 	);
 	const filteredFiles = files.filter((_, i) => !isIgnored[i]);
+
 	return filteredFiles.join(' ');
 };
 
 export default {
-	'*.{html,json,yml,yaml,md}': 'npm run prettier',
-	'*.{js,ts}': async (files) => {
-		const filesToLint = await removeIgnoredFiles(files);
-		return `npm run eslint ${filesToLint}`;
-	},
+	'*.{json,yml,yaml,md}': 'npm run prettier',
+	'*.{html,js,ts}': 'npm run eslint -- --no-warn-ignored',
 	'*.{css,scss}': 'npm run stylelint',
 };

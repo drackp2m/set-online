@@ -1,0 +1,87 @@
+<div id="main-layout" class="flex-col">
+	<section id="header" class="content-fixed flex-col py-md">
+		<div class="background">
+			<set-card-shape [shape]="shape.squiggle" [color]="color.green" [shading]="shading.striped" />
+			<set-card-shape [shape]="shape.diamond" [color]="color.red" [shading]="shading.solid" />
+			<set-card-shape [shape]="shape.oval" [color]="color.purple" [shading]="shading.outlined" />
+			<set-card-shape [shape]="shape.oval" [color]="color.red" [shading]="shading.striped" />
+			<set-card-shape
+				[shape]="shape.squiggle"
+				[color]="color.purple"
+				[shading]="shading.outlined"
+			/>
+			<set-card-shape [shape]="shape.diamond" [color]="color.green" [shading]="shading.striped" />
+			<set-card-shape [shape]="shape.diamond" [color]="color.purple" [shading]="shading.solid" />
+			<set-card-shape [shape]="shape.squiggle" [color]="color.red" [shading]="shading.outlined" />
+			<set-card-shape [shape]="shape.squiggle" [color]="color.green" [shading]="shading.solid" />
+			<set-card-shape [shape]="shape.oval" [color]="color.purple" [shading]="shading.solid" />
+			<set-card-shape [shape]="shape.squiggle" [color]="color.green" [shading]="shading.striped" />
+			<set-card-shape [shape]="shape.diamond" [color]="color.red" [shading]="shading.outlined" />
+			<set-card-shape [shape]="shape.oval" [color]="color.red" [shading]="shading.solid" />
+			<set-card-shape [shape]="shape.diamond" [color]="color.purple" [shading]="shading.outlined" />
+			<set-card-shape [shape]="shape.diamond" [color]="color.purple" [shading]="shading.striped" />
+			<set-card-shape [shape]="shape.squiggle" [color]="color.red" [shading]="shading.outlined" />
+			<set-card-shape [shape]="shape.diamond" [color]="color.green" [shading]="shading.striped" />
+			<set-card-shape [shape]="shape.oval" [color]="color.green" [shading]="shading.solid" />
+			<set-card-shape [shape]="shape.squiggle" [color]="color.purple" [shading]="shading.striped" />
+			<set-card-shape [shape]="shape.diamond" [color]="color.green" [shading]="shading.outlined" />
+			<set-card-shape [shape]="shape.oval" [color]="color.green" [shading]="shading.outlined" />
+			<set-card-shape [shape]="shape.squiggle" [color]="color.red" [shading]="shading.solid" />
+			<set-card-shape [shape]="shape.oval" [color]="color.purple" [shading]="shading.striped" />
+			<set-card-shape [shape]="shape.diamond" [color]="color.red" [shading]="shading.striped" />
+		</div>
+
+		<nav class="flex-row flex-wrap justify-center gap-sm my-md">
+			<set-media-debug />
+
+			<ng-container *ngTemplateOutlet="button; context: { text: 'Register', link: '/register' }" />
+
+			<ng-container *ngTemplateOutlet="button; context: { text: 'Login', link: '/login' }" />
+
+			<ng-container
+				*ngTemplateOutlet="
+					button;
+					context: { text: 'Logout', link: 'logout', click: logout(), surface: 'radiant' }
+				"
+			/>
+
+			<ng-container *ngTemplateOutlet="button; context: { text: 'Home', link: '/home' }" />
+
+			<ng-container *ngTemplateOutlet="button; context: { text: 'Example', link: '/example' }" />
+
+			<ng-container *ngTemplateOutlet="button; context: { text: 'Game', link: '/game' }" />
+
+			<ng-container *ngTemplateOutlet="button; context: { text: 'Online', link: '/online' }" />
+		</nav>
+
+		<ng-template #button let-text="text" let-link="link" let-click="click" let-surface="surface">
+			<a
+				routerLinkActive
+				#active="routerLinkActive"
+				class="round-sm p-xs px-sm"
+				[class]="active.isActive ? 'weight-xxl surface-serene' : 'surface-' + (surface || 'vivid')"
+				[routerLink]="link"
+				(click)="click ? click() : null"
+				>{{ text }}
+			</a>
+		</ng-template>
+
+		<p class="flex-row justify-between text-sm">
+			<span>{{ getPings()?.[0]?.ping?.average?.value }}</span>
+
+			@if (user()) {
+				<button (click)="serviceWorkerCheckUpdates()">Welcome {{ user()?.username }}</button>
+			}
+
+			@if (userError()) {
+				<button (click)="serviceWorkerCheckUpdates()">
+					GetUserInfo error: {{ userError()?.message }}
+				</button>
+			}
+		</p>
+	</section>
+
+	<div class="scroll">
+		<router-outlet />
+	</div>
+</div>

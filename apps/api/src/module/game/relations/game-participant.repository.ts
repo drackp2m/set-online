@@ -42,9 +42,7 @@ export class GameParticipantRepository {
 	}
 
 	async update(entity: GameParticipant): Promise<GameParticipant> {
-		await this.entityManager.fork().persistAndFlush(entity);
-
-		return entity;
+		return this.insert(entity);
 	}
 
 	async delete(entity: GameParticipant): Promise<void> {

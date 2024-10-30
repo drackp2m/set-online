@@ -1,0 +1,42 @@
+<main
+	id="game"
+	class="content-fixed py-sm px-md"
+	[class]="{ 'avoid-status-bar': avoidStatusBar() }"
+>
+	<div class="flex-row justify-between">
+		<div class="flex-col gap-sm">
+			<a routerLink="/">Sets found: {{ setCards().length / 3 }}</a>
+			<button (click)="cheatGame()">Wrong sets: {{ wrongSetCards().length / 3 }}</button>
+			<a routerLink="/game">Card in deck: {{ remainingCardsCount() }}</a>
+		</div>
+
+		<div class="flex-col gap-sm">
+			<button class="p-sm surface-vivid round-md text-center" (click)="addCardsToBoard()">
+				Add cards
+			</button>
+
+			<button class="p-sm surface-vivid round-md" (click)="highlightSet()">Highlight set</button>
+		</div>
+	</div>
+
+	<p class="info my-sm mb-md">{{ message() }}</p>
+
+	<section id="card-game" class="flex-row flex-wrap justify-center">
+		@for (card of boardCards(); track $index) {
+			<set-card
+				[shape]="card.shape"
+				[color]="card.color"
+				[shading]="card.shading"
+				[count]="card.number"
+				[vertical]="true"
+				[selected]="this.selectedCards().includes(card)"
+				[highlighted]="showSets() % 2 === 1 && boardSet().includes(card)"
+				(click)="selectCard(card)"
+			></set-card>
+		}
+	</section>
+
+	@if (remainingCardsCount() === 0 && boardSet().length === 0) {
+		<set-you-won (playAgain)="newGame()"></set-you-won>
+	}
+</main>

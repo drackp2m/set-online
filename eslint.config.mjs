@@ -1,40 +1,41 @@
 import nx from '@nx/eslint-plugin';
-import typescriptEslint from '@typescript-eslint/eslint-plugin';
-import _import from 'eslint-plugin-import';
-import unusedImports from 'eslint-plugin-unused-imports';
-import { fixupPluginRules } from '@eslint/compat';
 import tsParser from '@typescript-eslint/parser';
+import eslintPluginImport from 'eslint-plugin-import';
+import prettier from 'eslint-plugin-prettier';
+import sonarjs from 'eslint-plugin-sonarjs';
+import unusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import js from '@eslint/js';
-import { FlatCompat } from '@eslint/eslintrc';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const compat = new FlatCompat({
-	baseDirectory: __dirname,
-	recommendedConfig: js.configs.recommended,
-	allConfig: js.configs.all,
-});
 
 export default [
-	{
-		ignores: ['node_modules', 'libs/api-definitions/src/lib/apollo/operations.ts'],
-	},
+	sonarjs.configs.recommended,
+	...nx.configs['flat/base'],
+	...nx.configs['flat/typescript'],
+	...nx.configs['flat/javascript'],
 	{
 		plugins: {
+			prettier,
 			'@nx': nx,
+			import: eslintPluginImport,
+			'unused-imports': unusedImports,
 		},
 	},
 	{
-		files: ['**/*.ts', '**/*.js'],
+		ignores: ['**/dist', 'node_modules', 'libs/api-definitions/src/lib/apollo/operations.ts'],
+	},
+	{
+		files: ['**/*.ts', '**/*.js', '**/*.mjs', '**/*.json'],
+		rules: {
+			'prettier/prettier': 'warn',
+		},
+	},
+	{
+		files: ['**/*.ts', '**/*.js', '**/*.mjs'],
 		rules: {
 			'@nx/enforce-module-boundaries': [
 				'error',
 				{
 					enforceBuildableLibDependency: true,
-					allow: [],
+					allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?js$'],
 					depConstraints: [
 						{
 							sourceTag: '*',
@@ -45,14 +46,29 @@ export default [
 			],
 		},
 	},
-	...compat.extends('plugin:@nx/typescript').map((config) => ({
-		...config,
-		files: ['**/*.ts'],
-		plugins: {
-			'@typescript-eslint': typescriptEslint,
-			import: fixupPluginRules(_import),
-			'unused-imports': unusedImports,
+	{
+		files: ['**/*.ts', '**/*.js', '**/*.mjs'],
+		ignores: ['**/*.spec.ts'],
+		rules: {
+			'max-lines': [
+				'warn',
+				{
+					max: 200,
+					skipComments: true,
+				},
+			],
+			'max-lines-per-function': [
+				'warn',
+				{
+					max: 75,
+					skipComments: true,
+					IIFEs: true,
+				},
+			],
 		},
+	},
+	{
+		files: ['**/*.ts', '**/*.mjs'],
 		languageOptions: {
 			parser: tsParser,
 			ecmaVersion: 2023,
@@ -68,22 +84,17 @@ export default [
 			},
 		},
 		rules: {
-			'max-lines': [
-				'warn',
-				{
-					max: 400,
-					skipComments: true,
-				},
-			],
-			'max-lines-per-function': [
-				'warn',
-				{
-					max: 75,
-					skipComments: true,
-					IIFEs: true,
-				},
-			],
-			'unused-imports/no-unused-imports': 'error',
+			...Object.fromEntries(
+				Object.entries(sonarjs.configs.recommended.rules).map(([ruleName, ruleValue]) => {
+					return [`${ruleName}`, ruleValue.replace('error', 'warn')];
+				}),
+			),
+			'sonarjs/todo-tag': 'off',
+			'sonarjs/fixme-tag': 'off',
+			'sonarjs/unused-import': 'off',
+			'sonarjs/pseudo-random': 'warn',
+			'unused-imports/no-unused-imports': 'warn',
+			'no-unused-private-class-members': 'warn',
 			'@typescript-eslint/no-unused-vars': [
 				'warn',
 				{
@@ -150,24 +161,17 @@ export default [
 			'newline-before-return': ['warn'],
 			curly: ['warn', 'all'],
 		},
-	})),
-	...compat.extends('plugin:@nx/javascript').map((config) => ({
-		...config,
-		files: ['**/*.js'],
-	})),
-	...compat.extends('plugin:prettier/recommended').map((config) => ({
-		...config,
-		files: ['**/*.ts', '**/*.js', '**/*.mjs', '**/*.json'],
-		rules: {
-			'prettier/prettier': 'warn',
-		},
-	})),
+	},
 	{
 		files: ['**/*.spec.ts', '**/*.spec.js'],
 		languageOptions: {
 			globals: {
 				...globals.jest,
 			},
+		},
+		rules: {
+			'sonarjs/no-skipped-test': 'off',
+			'sonarjs/no-hardcoded-credentials': 'off',
 		},
 	},
 ];

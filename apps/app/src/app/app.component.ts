@@ -1,6 +1,5 @@
 import { Component, effect, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ApolloModule } from 'apollo-angular';
 
 import { SendPingGQL } from '@set-online/apollo-definitions';
 
@@ -10,7 +9,7 @@ import { pingValue } from './app.config';
 	standalone: true,
 	selector: 'set-root',
 	template: `<router-outlet />`,
-	imports: [RouterOutlet, ApolloModule],
+	imports: [RouterOutlet],
 	providers: [SendPingGQL],
 })
 export class AppComponent {
