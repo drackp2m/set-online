@@ -28,9 +28,9 @@ export const GameStore = signalStore(
 			patchState(store, initialState);
 		},
 		newGame(): void {
-			const boardCards = gameService.getNewCards(store.boardCards(), 12);
+			const boardCards = gameService.getNewCards(store.boardCards(), 9);
 
-			patchState(store, { boardCards });
+			patchState(store, { ...initialState, boardCards });
 
 			this._searchSetOnBoard();
 		},
@@ -73,9 +73,13 @@ export const GameStore = signalStore(
 			patchState(store, { wrongSetCards: [...wrongSetCards, null, null, null] });
 		},
 		addCardsToBoard(): void {
-			for (let i = 0; i < 3; i++) {
-				// this.boardCards.update((cards) => [...cards, this.getValidCard()]);
-			}
+			const boardCards = store.boardCards();
+
+			const newCards = gameService.getNewCards(boardCards, 3);
+
+			patchState(store, { boardCards: [...boardCards, ...newCards] });
+
+			this._searchSetOnBoard();
 		},
 		_searchSetOnBoard(): void {
 			const boardCards = store.boardCards();

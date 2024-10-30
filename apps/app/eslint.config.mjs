@@ -44,6 +44,9 @@ export default [
 	{
 		files: ['**/*.html'],
 		rules: {
+			'sonarjs/no-element-overwrite': 'off',
+			'sonarjs/no-same-line-conditional': 'off',
+			'sonarjs/no-unenclosed-multiline-block': 'off',
 			'prettier/prettier': 'warn',
 			'@angular-eslint/template/click-events-have-key-events': 'warn',
 			'@angular-eslint/template/interactive-supports-focus': 'warn',
