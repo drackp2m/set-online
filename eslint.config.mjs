@@ -2,12 +2,10 @@ import nx from '@nx/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import eslintPluginImport from 'eslint-plugin-import';
 import prettier from 'eslint-plugin-prettier';
-import sonarjs from 'eslint-plugin-sonarjs';
 import unusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 
 export default [
-	sonarjs.configs.recommended,
 	...nx.configs['flat/base'],
 	...nx.configs['flat/typescript'],
 	...nx.configs['flat/javascript'],
@@ -84,15 +82,15 @@ export default [
 			},
 		},
 		rules: {
-			...Object.fromEntries(
-				Object.entries(sonarjs.configs.recommended.rules).map(([ruleName, ruleValue]) => {
-					return [`${ruleName}`, ruleValue.replace('error', 'warn')];
-				}),
-			),
-			'sonarjs/todo-tag': 'off',
-			'sonarjs/fixme-tag': 'off',
-			'sonarjs/unused-import': 'off',
-			'sonarjs/pseudo-random': 'warn',
+			// ...Object.fromEntries(
+			// 	Object.entries(sonarjs.configs.recommended.rules).map(([ruleName, ruleValue]) => {
+			// 		return [`${ruleName}`, ruleValue.replace('error', 'warn')];
+			// 	}),
+			// ),
+			// 'sonarjs/todo-tag': 'off',
+			// 'sonarjs/fixme-tag': 'off',
+			// 'sonarjs/unused-import': 'off',
+			// 'sonarjs/pseudo-random': 'warn',
 			'unused-imports/no-unused-imports': 'warn',
 			'no-unused-private-class-members': 'warn',
 			'@typescript-eslint/no-unused-vars': [

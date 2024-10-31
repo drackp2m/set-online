@@ -1,4 +1,4 @@
-name: Deploy SetOnline to Pages
+name: Deploy Play Set Online to Github Pages
 
 on:
   pull_request:
@@ -25,7 +25,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22.9
+          node-version: '22.9'
           cache: 'npm'
 
       - name: Install dependencies
@@ -52,7 +52,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22.9
+          node-version: '22.9'
           cache: 'npm'
 
       - name: Install dependencies
@@ -65,6 +65,26 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: './dist/apps/app/browser'
+
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.9'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install dependencies
+        run: node --run semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   deploy:
     environment:

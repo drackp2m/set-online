@@ -11,7 +11,7 @@ import { CardComponent } from '../../component/card/card.component';
 import { CardInterface } from '../../definition/card.interface';
 
 import { YouWonComponent } from './component/you-won/you-won.component';
-import { GameStore } from './store/game.store';
+import { GameOfflineStore } from './store/game-offline.store';
 
 @Component({
 	standalone: true,
@@ -20,23 +20,23 @@ import { GameStore } from './store/game.store';
 	imports: [NgIf, NgFor, CardComponent, YouWonComponent, RouterLink],
 })
 export class GamePage {
-	private readonly gameStore = inject(GameStore);
+	private readonly gameOfflineStore = inject(GameOfflineStore);
 	private readonly activatedRoute = inject(ActivatedRoute);
 
 	private highlightInterval?: number;
 
-	readonly boardCards = this.gameStore.boardCards;
-	readonly setCards = this.gameStore.setCards;
+	readonly boardCards = this.gameOfflineStore.boardCards;
+	readonly setCards = this.gameOfflineStore.setCards;
 	readonly remainingCardsCount = computed(() => {
 		const boardCards = this.boardCards();
 		const sets = this.setCards();
 
 		return 81 - boardCards.length - sets.length;
 	});
-	readonly selectedCards = this.gameStore.selectedCards;
-	readonly wrongSetCards = this.gameStore.wrongSetCards;
+	readonly selectedCards = this.gameOfflineStore.selectedCards;
+	readonly wrongSetCards = this.gameOfflineStore.wrongSetCards;
 
-	readonly boardSet = this.gameStore.boardSet;
+	readonly boardSet = this.gameOfflineStore.boardSet;
 	readonly showSets = signal<number>(0);
 	readonly message = signal<string>('');
 
@@ -46,7 +46,7 @@ export class GamePage {
 	constructor() {
 		effect(
 			() => {
-				this.gameStore.boardCards();
+				this.gameOfflineStore.boardCards();
 
 				const remainingCardsCount = this.remainingCardsCount();
 				const boardSet = this.boardSet();
@@ -63,7 +63,7 @@ export class GamePage {
 	}
 
 	newGame(): void {
-		this.gameStore.newGame();
+		this.gameOfflineStore.newGame();
 	}
 
 	cheatGame(): void {
@@ -90,14 +90,14 @@ export class GamePage {
 	}
 
 	selectCard(card: CardInterface): void {
-		this.gameStore.selectCard(card);
+		this.gameOfflineStore.selectCard(card);
 	}
 
 	highlightSet(): void {
 		const boardSet = this.boardSet();
 		const showSets = this.showSets();
 
-		this.gameStore.addFakeWrongSet();
+		this.gameOfflineStore.addFakeWrongSet();
 
 		if (showSets !== 0) {
 			return;
@@ -134,7 +134,7 @@ export class GamePage {
 		} else if (boardSet.length !== 0) {
 			this.showMessages('Nope, there are still sets on the table, look for them!');
 		} else {
-			this.gameStore.addCardsToBoard();
+			this.gameOfflineStore.addCardsToBoard();
 		}
 	}
 
