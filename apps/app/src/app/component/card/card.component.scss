@@ -11,7 +11,7 @@
 		height: 100%;
 		padding: 9.5% 0;
 
-		set-card-shape {
+		app-card-shape {
 			display: contents;
 		}
 	}
@@ -31,7 +31,7 @@
 		.card {
 			padding: 0 14.3%;
 
-			set-card-shape {
+			app-card-shape {
 				display: block;
 				width: 100%;
 			}

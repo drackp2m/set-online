@@ -3,9 +3,9 @@ import { Component, OnInit, computed, input } from '@angular/core';
 
 @Component({
 	standalone: true,
+	selector: 'app-glitch-svg',
 	templateUrl: './glitch-svg.component.html',
 	styleUrl: './glitch-svg.component.scss',
-	selector: 'app-glitch-svg',
 	imports: [NgStyle],
 })
 export class GlitchSvgComponent implements OnInit {
