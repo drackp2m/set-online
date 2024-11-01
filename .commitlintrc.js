@@ -1,6 +1,7 @@
 /** @type {import('cz-git').UserConfig} */
 module.exports = {
 	extends: ['@commitlint/config-nx-scopes'],
+	ignores: [(commit) => commit.includes('[skip ci]')],
 	rules: {
 		'type-empty': [2, 'always'],
 		'type-enum': [
@@ -33,7 +34,7 @@ module.exports = {
 		messages: {
 			type: "Select the type of change that you're committing",
 			scope: 'What is the scope of this change (e.g. app or api-e2e)',
-			subject: 'Type the subject'
+			subject: 'Type the subject',
 		},
 		types: [
 			{ value: 'feat', name: 'feat:     ✨ A new feature', emoji: '✨' },
