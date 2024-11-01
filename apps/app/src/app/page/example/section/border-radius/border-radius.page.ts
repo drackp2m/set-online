@@ -13,7 +13,7 @@ import ExampleMenuComponent from '../../component/menu/example-menu.component';
 		}
 	`,
 	template: `<main id="border-radius" class="content-fixed pt-lg pb-xxl">
-		<set-example-menu />
+		<app-example-menu />
 
 		<h2 class="mt-xl">Welcome to Border radius!</h2>
 
