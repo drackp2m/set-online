@@ -82,7 +82,7 @@ jobs:
         run: npm ci
 
       - name: Install dependencies
-        run: node --run semantic-release
+        run: node --run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
