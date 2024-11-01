@@ -2,18 +2,18 @@ main {
 	min-height: 100%;
 	background-color: white;
 
-	set-card-shape {
+	app-card-shape {
 		width: 76px;
 	}
 
 	#card-list-horizontal {
-		set-card {
+		app-card {
 			width: 342px;
 		}
 	}
 
 	#card-list-vertical {
-		set-card {
+		app-card {
 			width: 228px;
 		}
 	}
