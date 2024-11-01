@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsString } from 'class-validator';
 
-import { LoginRequest } from '@set-online/api-definitions';
+import { LoginRequest } from '@playsetonline/api-definitions';
 
 export class LoginRequestDto implements LoginRequest {
 	@IsString()

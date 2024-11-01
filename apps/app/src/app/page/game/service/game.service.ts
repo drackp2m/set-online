@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { CardColor, CardShading, CardShape } from '@set-online/api-definitions';
+import { CardColor, CardShading, CardShape } from '@playsetonline/api-definitions';
 
 import { CardInterface } from '../../../definition/card.interface';
 

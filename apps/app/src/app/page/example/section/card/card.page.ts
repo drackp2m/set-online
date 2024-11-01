@@ -1,7 +1,7 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 
-import { CardColor, CardShading, CardShape } from '@set-online/api-definitions';
+import { CardColor, CardShading, CardShape } from '@playsetonline/api-definitions';
 
 import { CardComponent } from '../../../../component/card/card.component';
 import { CardShapeComponent } from '../../../../component/card-shape/card-shape.component';

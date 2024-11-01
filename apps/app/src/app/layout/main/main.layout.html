@@ -1,38 +1,38 @@
 <div id="main-layout" class="flex-col">
 	<section id="header" class="content-fixed flex-col py-md">
 		<div class="background">
-			<set-card-shape [shape]="shape.squiggle" [color]="color.green" [shading]="shading.striped" />
-			<set-card-shape [shape]="shape.diamond" [color]="color.red" [shading]="shading.solid" />
-			<set-card-shape [shape]="shape.oval" [color]="color.purple" [shading]="shading.outlined" />
-			<set-card-shape [shape]="shape.oval" [color]="color.red" [shading]="shading.striped" />
-			<set-card-shape
+			<app-card-shape [shape]="shape.squiggle" [color]="color.green" [shading]="shading.striped" />
+			<app-card-shape [shape]="shape.diamond" [color]="color.red" [shading]="shading.solid" />
+			<app-card-shape [shape]="shape.oval" [color]="color.purple" [shading]="shading.outlined" />
+			<app-card-shape [shape]="shape.oval" [color]="color.red" [shading]="shading.striped" />
+			<app-card-shape
 				[shape]="shape.squiggle"
 				[color]="color.purple"
 				[shading]="shading.outlined"
 			/>
-			<set-card-shape [shape]="shape.diamond" [color]="color.green" [shading]="shading.striped" />
-			<set-card-shape [shape]="shape.diamond" [color]="color.purple" [shading]="shading.solid" />
-			<set-card-shape [shape]="shape.squiggle" [color]="color.red" [shading]="shading.outlined" />
-			<set-card-shape [shape]="shape.squiggle" [color]="color.green" [shading]="shading.solid" />
-			<set-card-shape [shape]="shape.oval" [color]="color.purple" [shading]="shading.solid" />
-			<set-card-shape [shape]="shape.squiggle" [color]="color.green" [shading]="shading.striped" />
-			<set-card-shape [shape]="shape.diamond" [color]="color.red" [shading]="shading.outlined" />
-			<set-card-shape [shape]="shape.oval" [color]="color.red" [shading]="shading.solid" />
-			<set-card-shape [shape]="shape.diamond" [color]="color.purple" [shading]="shading.outlined" />
-			<set-card-shape [shape]="shape.diamond" [color]="color.purple" [shading]="shading.striped" />
-			<set-card-shape [shape]="shape.squiggle" [color]="color.red" [shading]="shading.outlined" />
-			<set-card-shape [shape]="shape.diamond" [color]="color.green" [shading]="shading.striped" />
-			<set-card-shape [shape]="shape.oval" [color]="color.green" [shading]="shading.solid" />
-			<set-card-shape [shape]="shape.squiggle" [color]="color.purple" [shading]="shading.striped" />
-			<set-card-shape [shape]="shape.diamond" [color]="color.green" [shading]="shading.outlined" />
-			<set-card-shape [shape]="shape.oval" [color]="color.green" [shading]="shading.outlined" />
-			<set-card-shape [shape]="shape.squiggle" [color]="color.red" [shading]="shading.solid" />
-			<set-card-shape [shape]="shape.oval" [color]="color.purple" [shading]="shading.striped" />
-			<set-card-shape [shape]="shape.diamond" [color]="color.red" [shading]="shading.striped" />
+			<app-card-shape [shape]="shape.diamond" [color]="color.green" [shading]="shading.striped" />
+			<app-card-shape [shape]="shape.diamond" [color]="color.purple" [shading]="shading.solid" />
+			<app-card-shape [shape]="shape.squiggle" [color]="color.red" [shading]="shading.outlined" />
+			<app-card-shape [shape]="shape.squiggle" [color]="color.green" [shading]="shading.solid" />
+			<app-card-shape [shape]="shape.oval" [color]="color.purple" [shading]="shading.solid" />
+			<app-card-shape [shape]="shape.squiggle" [color]="color.green" [shading]="shading.striped" />
+			<app-card-shape [shape]="shape.diamond" [color]="color.red" [shading]="shading.outlined" />
+			<app-card-shape [shape]="shape.oval" [color]="color.red" [shading]="shading.solid" />
+			<app-card-shape [shape]="shape.diamond" [color]="color.purple" [shading]="shading.outlined" />
+			<app-card-shape [shape]="shape.diamond" [color]="color.purple" [shading]="shading.striped" />
+			<app-card-shape [shape]="shape.squiggle" [color]="color.red" [shading]="shading.outlined" />
+			<app-card-shape [shape]="shape.diamond" [color]="color.green" [shading]="shading.striped" />
+			<app-card-shape [shape]="shape.oval" [color]="color.green" [shading]="shading.solid" />
+			<app-card-shape [shape]="shape.squiggle" [color]="color.purple" [shading]="shading.striped" />
+			<app-card-shape [shape]="shape.diamond" [color]="color.green" [shading]="shading.outlined" />
+			<app-card-shape [shape]="shape.oval" [color]="color.green" [shading]="shading.outlined" />
+			<app-card-shape [shape]="shape.squiggle" [color]="color.red" [shading]="shading.solid" />
+			<app-card-shape [shape]="shape.oval" [color]="color.purple" [shading]="shading.striped" />
+			<app-card-shape [shape]="shape.diamond" [color]="color.red" [shading]="shading.striped" />
 		</div>
 
 		<nav class="flex-row flex-wrap justify-center gap-sm my-md">
-			<set-media-debug />
+			<app-media-debug />
 
 			<ng-container *ngTemplateOutlet="button; context: { text: 'Register', link: '/register' }" />
 

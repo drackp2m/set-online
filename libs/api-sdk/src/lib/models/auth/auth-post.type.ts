@@ -1,4 +1,4 @@
-import { LoginRequest, RegisterRequest, User } from '@set-online/api-definitions';
+import { LoginRequest, RegisterRequest, User } from '@playsetonline/api-definitions';
 
 export type AuthPost = {
 	'/register': {

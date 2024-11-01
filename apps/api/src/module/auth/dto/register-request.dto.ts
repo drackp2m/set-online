@@ -1,7 +1,7 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
-import { RegisterRequest } from '@set-online/api-definitions';
+import { RegisterRequest } from '@playsetonline/api-definitions';
 
 import { IsUniqueUserProp } from '../../user/decorator/is-unique-user-prop.decorator';
 

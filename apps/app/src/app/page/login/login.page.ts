@@ -3,7 +3,7 @@ import { Component, OnInit, WritableSignal, inject, signal } from '@angular/core
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { GetUsersGQL } from '@set-online/apollo-definitions';
+import { GetUsersGQL } from '@playsetonline/apollo-definitions';
 
 import { ApiClient } from '../../service/api-client.service';
 import { AuthStore } from '../../store/auth.store';

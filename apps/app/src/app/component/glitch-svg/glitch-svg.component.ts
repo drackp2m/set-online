@@ -5,7 +5,7 @@ import { Component, OnInit, computed, input } from '@angular/core';
 	standalone: true,
 	templateUrl: './glitch-svg.component.html',
 	styleUrl: './glitch-svg.component.scss',
-	selector: 'set-glitch-svg',
+	selector: 'app-glitch-svg',
 	imports: [NgStyle],
 })
 export class GlitchSvgComponent implements OnInit {

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, WritableSignal, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { GetUserInfoGQL, User } from '@set-online/apollo-definitions';
+import { GetUserInfoGQL, User } from '@playsetonline/apollo-definitions';
 
 import { ApiClient } from '../../service/api-client.service';
 import { AuthStore } from '../../store/auth.store';

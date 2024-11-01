@@ -21,9 +21,9 @@
 		"skipLibCheck": true,
 		"skipDefaultLibCheck": true,
 		"paths": {
-			"@set-online/api-definitions": ["libs/api-definitions/src/index.ts"],
-			"@set-online/api-sdk": ["libs/api-sdk/src/index.ts"],
-			"@set-online/apollo-definitions": ["libs/api-definitions/src/lib/apollo/operations.ts"]
+			"@playsetonline/api-definitions": ["libs/api-definitions/src/index.ts"],
+			"@playsetonline/api-sdk": ["libs/api-sdk/src/index.ts"],
+			"@playsetonline/apollo-definitions": ["libs/api-definitions/src/lib/apollo/operations.ts"]
 		}
 	},
 	"exclude": ["node_modules", "tmp"]

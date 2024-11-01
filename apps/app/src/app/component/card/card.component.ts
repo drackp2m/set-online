@@ -1,13 +1,13 @@
 import { NgFor, NgIf } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
 
-import { CardColor, CardShading, CardShape } from '@set-online/api-definitions';
+import { CardColor, CardShading, CardShape } from '@playsetonline/api-definitions';
 
 import { CardShapeComponent } from '../card-shape/card-shape.component';
 
 @Component({
 	standalone: true,
-	selector: 'set-card',
+	selector: 'app-card',
 	templateUrl: './card.component.html',
 	styleUrl: './card.component.scss',
 	imports: [NgIf, NgFor, CardShapeComponent],

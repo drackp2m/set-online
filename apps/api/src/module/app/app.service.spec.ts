@@ -24,10 +24,10 @@ describe('AppService', () => {
 	});
 
 	describe('getData', () => {
-		it('should return "Welcome to set-online!"', () => {
+		it('should return "Welcome to Play Set Online!"', () => {
 			const result = service.welcomeMessage();
 
-			expect(result).toStrictEqual({ message: 'Welcome to set-online!' });
+			expect(result).toStrictEqual({ message: 'Welcome to Play Set Online!' });
 		});
 	});
 });

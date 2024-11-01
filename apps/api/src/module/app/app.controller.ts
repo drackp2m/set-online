@@ -1,7 +1,7 @@
 import { Controller, Get, Inject } from '@nestjs/common';
 import { PubSub } from 'graphql-subscriptions';
 
-import { Message } from '@set-online/api-definitions';
+import { Message } from '@playsetonline/api-definitions';
 
 import { AppService } from './app.service';
 

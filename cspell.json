@@ -11,9 +11,10 @@
 		"nestjs",
 		"ngneat",
 		"ngrx",
+		"playsetonline",
+		"sonarjs",
 		"stylelint",
-		"tsparticles",
-		"sonarjs"
+		"tsparticles"
 	],
 	"ignoreWords": [],
 	"import": []

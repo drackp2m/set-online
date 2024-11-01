@@ -127,7 +127,7 @@ export default [
 					},
 					pathGroups: [
 						{
-							pattern: '@set-online/**',
+							pattern: '@playsetonline/**',
 							group: 'external',
 							position: 'after',
 						},

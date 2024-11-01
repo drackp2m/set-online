@@ -1,6 +1,6 @@
 {
 	"name": "Set Online Development",
-	"service": "set-node",
+	"service": "playsetonline-node",
 	"dockerComposeFile": ["../docker-compose.yml", "docker-compose.yml"],
 	"workspaceFolder": "/usr/src/app",
 	"forwardPorts": [3000, 4200, 9229],

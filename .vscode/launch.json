@@ -32,7 +32,7 @@
 			"program": "${workspaceFolder}/de",
 			"cwd": "${workspaceFolder}",
 			"args": [
-				"set-node",
+				"playsetonline",
 				"yarn",
 				"test",
 				"--runInBand",

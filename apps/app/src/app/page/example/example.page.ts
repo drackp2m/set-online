@@ -10,7 +10,7 @@ import {
 	GetPingsGQL,
 	GetPingsSubscription,
 	GetUsersGQL,
-} from '@set-online/apollo-definitions';
+} from '@playsetonline/apollo-definitions';
 
 import { GlitchSvgComponent } from '../../component/glitch-svg/glitch-svg.component';
 import { ApiClient } from '../../service/api-client.service';
