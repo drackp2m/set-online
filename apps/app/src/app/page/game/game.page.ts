@@ -5,7 +5,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { confetti } from '@tsparticles/confetti';
 
-import { CardColor, CardShape } from '@set-online/api-definitions';
+import { CardColor, CardShape } from '@playsetonline/api-definitions';
 
 import { CardComponent } from '../../component/card/card.component';
 import { CardInterface } from '../../definition/card.interface';

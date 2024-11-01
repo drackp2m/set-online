@@ -1,13 +1,13 @@
 import { Component, effect, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { SendPingGQL } from '@set-online/apollo-definitions';
+import { SendPingGQL } from '@playsetonline/apollo-definitions';
 
 import { pingValue } from './app.config';
 
 @Component({
 	standalone: true,
-	selector: 'set-root',
+	selector: 'app-root',
 	template: `<router-outlet />`,
 	imports: [RouterOutlet],
 	providers: [SendPingGQL],

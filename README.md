@@ -12,9 +12,9 @@
 - 📝 Edit build arg with the result of the following command `echo 'USER_GID:' $(id -g) && echo 'USER_UID:' $(id -u)`
 - 🐋 Run VSCode Dev Container command `Reopen in Container`
 
-You can also view node execution logs by running `logs app --out --raw --lines 100` inside the container.
+You can also view node execution logs by running `node --run logs` inside the container.
 
-Or if you prefer to see them from a terminal on the host, execute `docker logs set-node -f -n 100`.
+Or if you prefer to see them from a terminal on the host, execute `docker logs playsetonline -f -n 100`.
 
 To restart the Node service, run `pm2 kill` to stop it and `pm2-runtime start ecosystem.config.js` to start it again.
 
@@ -27,7 +27,7 @@ The latter command shows the logs after startup (and they will still be output b
 - 🛠️ Install extensions listed by running `Show recommended extensions` on VSCode
 - 🚀 Execute `node --run start`
 
-To view node process logs you can run `docker logs set-node -f -n 100`.
+To view node process logs you can run `docker logs playsetonline -f -n 100`.
 
 ---
 

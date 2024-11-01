@@ -23,7 +23,7 @@
 
 	<section id="card-game" class="flex-row flex-wrap justify-center">
 		@for (card of boardCards(); track $index) {
-			<set-card
+			<app-card
 				[shape]="card.shape"
 				[color]="card.color"
 				[shading]="card.shading"
@@ -32,11 +32,11 @@
 				[selected]="this.selectedCards().includes(card)"
 				[highlighted]="showSets() % 2 === 1 && boardSet().includes(card)"
 				(click)="selectCard(card)"
-			></set-card>
+			></app-card>
 		}
 	</section>
 
 	@if (remainingCardsCount() === 0 && boardSet().length === 0) {
-		<set-you-won (playAgain)="newGame()"></set-you-won>
+		<app-you-won (playAgain)="newGame()"></app-you-won>
 	}
 </main>

@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Cron } from '@nestjs/schedule';
 
-import { Message } from '@set-online/api-definitions';
+import { Message } from '@playsetonline/api-definitions';
 
 import { ConfigurationService } from '../../shared/module/config/configuration.service';
 
@@ -22,6 +22,6 @@ export class AppService {
 	}
 
 	welcomeMessage(): Message {
-		return { message: 'Welcome to set-online!' };
+		return { message: 'Welcome to Play Set Online!' };
 	}
 }

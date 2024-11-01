@@ -83,7 +83,7 @@ const apolloConfig = (): ApolloClientOptions<unknown> => {
 
 	// https://www.apollographql.com/docs/react/api/core/ApolloClient/
 	return {
-		name: 'set-online',
+		name: 'playsetonline',
 		link,
 		defaultOptions: {
 			watchQuery: {

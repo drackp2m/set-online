@@ -13,7 +13,7 @@ export default [
 				'warn',
 				{
 					type: 'attribute',
-					prefix: 'set',
+					prefix: 'app',
 					style: 'camelCase',
 				},
 			],
@@ -21,7 +21,7 @@ export default [
 				'warn',
 				{
 					type: 'element',
-					prefix: 'set',
+					prefix: 'app',
 					style: 'kebab-case',
 				},
 			],

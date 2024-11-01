@@ -1,5 +1,5 @@
 {
-	"name": "@set-online/source",
+	"name": "@playsetonline/source",
 	"version": "0.0.0",
 	"license": "MIT",
 	"private": true,
@@ -30,7 +30,7 @@
 		"eslint": "eslint --max-warnings 0 --fix --flag unstable_config_lookup_from_file",
 		"stylelint": "stylelint --max-warnings 0 --fix",
 		"logs": "pm2 logs --raw --lines 100 app",
-		"semantic-release": "semantic-release",
+		"release": "semantic-release",
 		"prepare": "husky"
 	},
 	"dependencies": {
@@ -121,6 +121,7 @@
 		"@schematics/angular": "18.2.9",
 		"@semantic-release/changelog": "^6.0.3",
 		"@semantic-release/git": "^10.0.1",
+		"@semantic-release/npm": "^12.0.1",
 		"@swc-node/register": "1.10.9",
 		"@swc/core": "1.7.36",
 		"@swc/jest": "0.2.36",
@@ -168,5 +169,17 @@
 		"typescript": "5.5.3",
 		"typescript-eslint": "^8.0.0",
 		"url-loader": "4.1.1"
+	},
+	"release": {
+		"branches": [
+			"main"
+		],
+		"plugins": [
+			"@semantic-release/commit-analyzer",
+			"@semantic-release/release-notes-generator",
+			"@semantic-release/changelog",
+			"@semantic-release/npm",
+			"@semantic-release/git"
+		]
 	}
 }

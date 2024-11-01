@@ -22,10 +22,10 @@ describe('AppController', () => {
 	});
 
 	describe('getData', () => {
-		it('should return "Welcome to set-online!"', () => {
+		it('should return "Welcome to Play Set Online!"', () => {
 			const result = appController.getData();
 
-			expect(result).toStrictEqual({ message: 'Welcome to set-online!' });
+			expect(result).toStrictEqual({ message: 'Welcome to Play Set Online!' });
 		});
 	});
 });

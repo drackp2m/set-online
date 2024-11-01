@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 
 @Component({
 	standalone: true,
-	selector: 'set-example-menu',
+	selector: 'app-example-menu',
 	imports: [NgTemplateOutlet, RouterModule],
 	template: `
 		<nav class="flex-row flex-wrap my-md gap-sm">

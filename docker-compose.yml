@@ -1,14 +1,14 @@
 networks:
-  set-network:
-    name: set-network
+  playsetonline:
+    name: playsetonline
 
 services:
-  set-database:
+  playsetonline-db:
     image: postgres:17.0-alpine3.20
-    container_name: set-database
-    hostname: set-database
+    container_name: playsetonline-db
+    hostname: playsetonline-db
     networks:
-      - set-network
+      - playsetonline
     ports:
       - ${DB_PORT}:5432
     volumes:
@@ -23,11 +23,11 @@ services:
     restart: unless-stopped
     tty: true
 
-  set-node:
-    container_name: set-node
-    hostname: set-node
+  playsetonline-node:
+    container_name: playsetonline-node
+    hostname: playsetonline-node
     working_dir: /usr/src/app
-    image: set-node:latest
+    image: playsetonline-node:latest
     build:
       context: .
       dockerfile: Dockerfile
@@ -37,7 +37,7 @@ services:
     env_file:
       - .env
     networks:
-      - set-network
+      - playsetonline
     ports:
       - ${API_PORT}:${API_PORT}
       - ${API_DEBUG_PORT}:9229
@@ -54,7 +54,7 @@ services:
       PATH: $PATH:/usr/src/app/node_modules/.bin
       TZ: UTC
     depends_on:
-      - set-database
+      - playsetonline-db
     restart: unless-stopped
     stdin_open: true
     tty: true

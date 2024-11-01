@@ -6,7 +6,7 @@ import {
 	ListGamesGQL,
 	ListGamesQuery,
 	NewGameGQL,
-} from '@set-online/apollo-definitions';
+} from '@playsetonline/apollo-definitions';
 
 @Component({
 	standalone: true,

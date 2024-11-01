@@ -1,4 +1,4 @@
-import { Message } from '@set-online/api-definitions';
+import { Message } from '@playsetonline/api-definitions';
 
 export type DefaultGet = {
 	'/hello': {
