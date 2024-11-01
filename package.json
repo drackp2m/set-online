@@ -3,6 +3,10 @@
 	"version": "0.0.0",
 	"license": "MIT",
 	"private": true,
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:drackp2m/playsetonline.git"
+	},
 	"scripts": {
 		"start": "nx run-many --t serve",
 		"start:api": "nx run api:serve",
