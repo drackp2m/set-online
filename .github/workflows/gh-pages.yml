@@ -1,7 +1,7 @@
 name: Deploy Play Set Online to Github Pages
 
 on:
-  push:
+  pull_request:
     branches:
       - main
 
