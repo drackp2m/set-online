@@ -81,8 +81,8 @@ module.exports = {
 			},
 			{
 				value: 'revert',
-				name: 'revert:   🗑️  Reverts a previous commit',
-				emoji: '🗑 ',
+				name: 'revert:   ⏪  Reverts a previous commit',
+				emoji: '⏪ ',
 			},
 		],
 	},
