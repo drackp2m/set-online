@@ -83,7 +83,7 @@ jobs:
 
       - name: Import GPG key
         env:
-          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          GPG_PRIVATE_KEY: ${{ secrets.SEMANTIC_RELEASE_GPG_PRIVATE_KEY }}
         run: |
           echo "$GPG_PRIVATE_KEY" > private.key
           gpg --batch --import private.key
