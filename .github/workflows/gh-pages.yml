@@ -82,19 +82,27 @@ jobs:
         run: npm ci
 
       - name: Import GPG key
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
         run: |
-          echo "${{ secrets.SEMANTIC_RELEASE_GPG_PRIVATE_KEY }}" | gpg --batch --import
-          git config --global user.signingkey $(gpg --list-secret-keys --keyid-format LONG | grep sec | awk '{print $2}' | cut -d'/' -f2)
+          echo "$GPG_PRIVATE_KEY" > private.key
+          gpg --batch --import private.key
+          git config --global user.name "semantic-release-bot"
+          git config --global user.email "12443324+drackp2m@users.noreply.github.com"
           git config --global commit.gpgSign true
+          git config --global user.signingkey 42247470C3E2A13A
+          echo "allow-loopback-pinentry" >> ~/.gnupg/gpg.conf
+          echo "pinentry-mode loopback" >> ~/.gnupg/gpg-agent.conf
+          gpgconf --kill gpg-agent
 
       - name: Run semantic-release
-        run: node --run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GIT_AUTHOR_NAME: semantic-release-bot
           GIT_AUTHOR_EMAIL: 12443324+drackp2m@users.noreply.github.com
           GIT_COMMITTER_NAME: semantic-release-bot
           GIT_COMMITTER_EMAIL: 12443324+drackp2m@users.noreply.github.com
+        run: node --run release
 
   deploy:
     environment:
