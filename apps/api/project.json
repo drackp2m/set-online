@@ -3,6 +3,7 @@
 	"$schema": "../../node_modules/nx/schemas/project-schema.json",
 	"sourceRoot": "apps/api/src",
 	"projectType": "application",
+	"tags": [],
 	"targets": {
 		"build": {
 			"executor": "@nx/webpack:webpack",
@@ -47,7 +48,15 @@
 			"options": {
 				"jestConfig": "apps/api/jest.config.ts"
 			}
+		},
+		"semantic-release": {
+			"executor": "@theunderscorer/nx-semantic-release:semantic-release",
+			"options": {
+				"github": true,
+				"changelog": true,
+				"npm": false,
+				"tagFormat": "api-v${VERSION}"
+			}
 		}
-	},
-	"tags": []
+	}
 }

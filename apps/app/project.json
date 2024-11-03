@@ -101,6 +101,15 @@
 				"buildTarget": "app:build",
 				"staticFilePath": "dist/apps/app/browser"
 			}
+		},
+		"semantic-release": {
+			"executor": "@theunderscorer/nx-semantic-release:semantic-release",
+			"options": {
+				"github": true,
+				"changelog": true,
+				"npm": false,
+				"tagFormat": "app-v${VERSION}"
+			}
 		}
 	}
 }
