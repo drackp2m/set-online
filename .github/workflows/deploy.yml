@@ -66,41 +66,6 @@ jobs:
         with:
           path: './dist/apps/app/browser'
 
-  release:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22.9'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Import GPG key
-        env:
-          GPG_PRIVATE_KEY: ${{ secrets.SEMANTIC_RELEASE_GPG_PRIVATE_KEY }}
-        run: |
-          echo "$GPG_PRIVATE_KEY" > private.key
-          gpg --batch --import private.key
-          git config --global user.name "drackp2m-semantic-release-bot"
-          git config --global user.email "187212958+drackp2m-semantic-release-bot@users.noreply.github.com"
-          git config --global commit.gpgSign true
-          git config --global user.signingkey 89AE9225AE159D89
-          echo "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
-          echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
-          gpgconf --kill gpg-agent
-
-      - name: Run semantic-release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node --run release
-
   deploy:
     environment:
       name: github-pages
