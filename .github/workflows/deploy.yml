@@ -1,4 +1,4 @@
-name: Deploy Play Set Online to Github Pages
+name: deploy
 
 on:
   pull_request:
