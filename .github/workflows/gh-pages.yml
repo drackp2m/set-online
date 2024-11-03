@@ -88,9 +88,9 @@ jobs:
           echo "$GPG_PRIVATE_KEY" > private.key
           gpg --batch --import private.key
           git config --global user.name "semantic-release-bot"
-          git config --global user.email "12443324+drackp2m@users.noreply.github.com"
+          git config --global user.email "semantic-release-bot@martynus.net"
           git config --global commit.gpgSign true
-          git config --global user.signingkey 42247470C3E2A13A
+          git config --global user.signingkey 6733A429C918F5E4
           echo "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
           echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
           gpgconf --kill gpg-agent
