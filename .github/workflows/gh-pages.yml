@@ -91,8 +91,8 @@ jobs:
           git config --global user.email "12443324+drackp2m@users.noreply.github.com"
           git config --global commit.gpgSign true
           git config --global user.signingkey 42247470C3E2A13A
-          echo "allow-loopback-pinentry" >> ~/.gnupg/gpg.conf
-          echo "pinentry-mode loopback" >> ~/.gnupg/gpg-agent.conf
+          echo "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
+          echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
           gpgconf --kill gpg-agent
 
       - name: Run semantic-release
