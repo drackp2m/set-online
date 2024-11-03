@@ -98,10 +98,6 @@ jobs:
       - name: Run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GIT_AUTHOR_NAME: semantic-release-bot
-          GIT_AUTHOR_EMAIL: 12443324+drackp2m@users.noreply.github.com
-          GIT_COMMITTER_NAME: semantic-release-bot
-          GIT_COMMITTER_EMAIL: 12443324+drackp2m@users.noreply.github.com
         run: node --run release
 
   deploy:
