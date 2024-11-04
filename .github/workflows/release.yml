@@ -46,8 +46,8 @@ jobs:
       - name: Run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GIT_AUTHOR_NAME: 'drackp2m-semantic-release-bot'
-          GIT_AUTHOR_EMAIL: '187212958+drackp2m-semantic-release-bot@users.noreply.github.com'
-          GIT_COMMITTER_NAME: 'drackp2m-semantic-release-bot'
-          GIT_COMMITTER_EMAIL: '187212958+drackp2m-semantic-release-bot@users.noreply.github.com'
+          GIT_AUTHOR_NAME: 'romantic-release-bot'
+          GIT_AUTHOR_EMAIL: '187212958+romantic-release-bot@users.noreply.github.com'
+          GIT_COMMITTER_NAME: 'romantic-release-bot'
+          GIT_COMMITTER_EMAIL: '187212958+romantic-release-bot@users.noreply.github.com'
         run: node --run release
