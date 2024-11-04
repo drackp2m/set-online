@@ -38,7 +38,7 @@ jobs:
           echo "$GPG_PRIVATE_KEY" > private.key
           gpg --batch --import private.key
           git config --global commit.gpgSign true
-          git config --global user.signingkey 89AE9225AE159D89
+          git config --global user.signingkey 8061777E7D988EE9
           echo "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
           echo "pinentry-mode loopback" >> ~/.gnupg/gpg.conf
           gpgconf --kill gpg-agent
