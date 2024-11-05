@@ -44,8 +44,7 @@ module.exports = {
 
 **Full Changelog**: {{host}}/{{owner}}/{{repository}}/compare/{{previousTag}}...{{currentTag}}
 `,
-					commitPartial: `* {{#if scope}}({{scope}}) {{/if}}{{subject}} by @{{owner}} ([{{shortHash}}]({{url}}))
-`,
+					commitPartial: `- {{#if scope}}({{scope}}) {{/if}}{{subject}} by @{{owner}} ([{{shortHash}}]({{url}}))`,
 					transform: (originalCommit, context, x) => {
 						console.log({ originalCommit, context, x });
 
