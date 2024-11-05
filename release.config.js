@@ -44,7 +44,7 @@ module.exports = {
 
 **Full Changelog**: {{host}}/{{owner}}/{{repository}}/compare/{{previousTag}}...{{currentTag}}
 `,
-					commitPartial: `* {{#if scope}}({{scope}}) {{/if}}{{subject}} by @{{owner}}
+					commitPartial: `* {{#if scope}}({{scope}}) {{/if}}{{subject}} by @{{owner}} ([{{shortHash}}]({{url}}))
 `,
 					transform: (originalCommit, context, x) => {
 						console.log({ originalCommit, context, x });
@@ -64,8 +64,12 @@ module.exports = {
 							return null;
 						}
 
-						commit.owner = context.owner;
+						const { host, owner, repository } = context;
+
+						commit.owner = owner;
 						commit.type = getCommitTypeWithEmoji(commit.type);
+						commit.url = `${host}/${owner}/${repository}commit/${commit.hash}`;
+						commit.shortHash = commit.commit.short;
 
 						return commit;
 					},
