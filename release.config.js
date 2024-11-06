@@ -1,3 +1,6 @@
+const fs = require('node:fs');
+const path = require('node:path');
+
 module.exports = {
 	branches: ['main', 'dev'],
 	plugins: [
@@ -45,73 +48,20 @@ module.exports = {
 					],
 				},
 				writerOpts: {
-					mainTemplate: `# {{date}}
-
-## What's Changed
-{{#each commitGroups}}
-### {{title}}
-
-{{#each commits}}
-{{> commit}}
-{{/each}}
-
-{{/each}}
-
-**Full Changelog**: {{host}}/{{owner}}/{{repository}}/compare/{{previousTag}}...{{currentTag}}
-`,
-					commitPartial: `\\* {{#if scope}}**{{scope}}**: {{/if}}{{subject}} ([{{shortHash}}]({{@root.host}}/{{@root.owner}}/{{@root.repository}}/commit/{{hash}})) by {{committer.name}}
-`,
-					// transform: (originalCommit, context) => {
-					// 	console.log({ originalCommit, context });
-
-					// 	const commit = { ...originalCommit };
-
-					// 	if (commit.emoji === null) {
-					// 		return null;
-					// 	}
-
-					// 	console.log(`${commit.type}\n\n`);
-
-					// 	getCommitTypeWithEmoji = (type) => {
-					// 		switch (type) {
-					// 			case 'feat':
-					// 				return '✨ Features';
-					// 			case 'style':
-					// 				return '🎨 Styles';
-					// 			case 'test':
-					// 				return '🧪 Tests';
-					// 			case 'refactor':
-					// 				return '♻️ Code Refactoring';
-					// 			case 'fix':
-					// 				return '🐛 Bug Fixes';
-					// 			case 'docs':
-					// 				return '📚 Documentation';
-					// 			case 'perf':
-					// 				return '🚀 Performance Improvements';
-					// 			case 'build':
-					// 				return '🏗️‍ Build System';
-					// 			case 'ci':
-					// 				return '💻 Continuous Integration';
-					// 			case 'chore':
-					// 				return '🎒 Chore';
-					// 			case 'revert':
-					// 				return '⏪ Reverts';
-					// 		}
-					// 	};
-
-					// 	const { host, owner, repository } = context;
-
-					// 	commit.owner = owner;
-					// 	commit.type = getCommitTypeWithEmoji(commit.type);
-					// 	commit.url = `${host}/${owner}/${repository}/commit/${commit.hash}`;
-					// 	commit.shortHash = commit.commit.short;
-
-					// 	return commit;
-					// },
+					mainTemplate: fs.readFileSync(
+						path.resolve(__dirname, '.github', 'release-notes', 'template.hbs'),
+						'utf8',
+					),
 				},
 			},
 		],
 		'@semantic-release/changelog',
+		[
+			'@semantic-release/npm',
+			{
+				npmPublish: false,
+			},
+		],
 		[
 			'@semantic-release/github',
 			{
