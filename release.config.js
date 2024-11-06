@@ -20,7 +20,6 @@ module.exports = {
 				},
 			},
 		],
-		// '@semantic-release/release-notes-generator',
 		[
 			'@semantic-release/release-notes-generator',
 			{
@@ -29,101 +28,88 @@ module.exports = {
 					headerPattern: /^(.+?)\s(?<type>\w+)(?:\((?<scope>[^)]*)\))?: (?<subject>.+)$/u,
 					headerCorrespondence: ['emoji', 'type', 'scope', 'subject'],
 				},
+				commitsSort: ['scope', 'subject'],
 				presetConfig: {
-					types: [{ type: 'feat', section: '✨ Features' }],
+					types: [
+						{ type: 'feat', section: '✨ Features' },
+						{ type: 'style', section: '🎨 Styles', hidden: false },
+						{ type: 'test', section: '🧪 Tests', hidden: false },
+						{ type: 'refactor', section: '♻️ Code Refactoring', hidden: false },
+						{ type: 'fix', section: '🐛 Bug Fixes' },
+						{ type: 'docs', section: '📚 Documentation' },
+						{ type: 'perf', section: '🚀 Performance Improvements', hidden: false },
+						{ type: 'build', section: '🏗️‍ Build System', hidden: false },
+						{ type: 'ci', section: '💻 Continuous Integration', hidden: false },
+						{ type: 'chore', section: '🎒 Chores', hidden: false },
+						{ type: 'revert', section: '⏪ Reverts', hidden: false },
+					],
 				},
 				writerOpts: {
-					mainTemplate: `# {{version}} ({{date}})
+					mainTemplate: `# {{date}}
 
+## What's Changed
 {{#each commitGroups}}
 ### {{title}}
+
 {{#each commits}}
 {{> commit}}
 {{/each}}
+
 {{/each}}
 
 **Full Changelog**: {{host}}/{{owner}}/{{repository}}/compare/{{previousTag}}...{{currentTag}}
 `,
-					commitPartial: `- {{#if scope}}({{scope}}) {{/if}}{{subject}} by @{{owner}} ([{{shortHash}}]({{url}}))`,
-					transform: (originalCommit, context, x) => {
-						console.log({ originalCommit, context, x });
+					commitPartial: `\\* {{#if scope}}**{{scope}}**: {{/if}}{{subject}} ([{{shortHash}}]({{@root.host}}/{{@root.owner}}/{{@root.repository}}/commit/{{hash}})) by {{committer.name}}
+`,
+					// transform: (originalCommit, context) => {
+					// 	console.log({ originalCommit, context });
 
-						getCommitTypeWithEmoji = (type) => {
-							switch (type) {
-								case 'feat':
-									return '✨ Features';
-								case 'style':
-									return '🎨 Styles';
-							}
-						};
+					// 	const commit = { ...originalCommit };
 
-						const commit = { ...originalCommit };
+					// 	if (commit.emoji === null) {
+					// 		return null;
+					// 	}
 
-						if (commit.emoji === null) {
-							return null;
-						}
+					// 	console.log(`${commit.type}\n\n`);
 
-						const { host, owner, repository } = context;
+					// 	getCommitTypeWithEmoji = (type) => {
+					// 		switch (type) {
+					// 			case 'feat':
+					// 				return '✨ Features';
+					// 			case 'style':
+					// 				return '🎨 Styles';
+					// 			case 'test':
+					// 				return '🧪 Tests';
+					// 			case 'refactor':
+					// 				return '♻️ Code Refactoring';
+					// 			case 'fix':
+					// 				return '🐛 Bug Fixes';
+					// 			case 'docs':
+					// 				return '📚 Documentation';
+					// 			case 'perf':
+					// 				return '🚀 Performance Improvements';
+					// 			case 'build':
+					// 				return '🏗️‍ Build System';
+					// 			case 'ci':
+					// 				return '💻 Continuous Integration';
+					// 			case 'chore':
+					// 				return '🎒 Chore';
+					// 			case 'revert':
+					// 				return '⏪ Reverts';
+					// 		}
+					// 	};
 
-						commit.owner = owner;
-						commit.type = getCommitTypeWithEmoji(commit.type);
-						commit.url = `${host}/${owner}/${repository}commit/${commit.hash}`;
-						commit.shortHash = commit.commit.short;
+					// 	const { host, owner, repository } = context;
 
-						return commit;
-					},
+					// 	commit.owner = owner;
+					// 	commit.type = getCommitTypeWithEmoji(commit.type);
+					// 	commit.url = `${host}/${owner}/${repository}/commit/${commit.hash}`;
+					// 	commit.shortHash = commit.commit.short;
+
+					// 	return commit;
+					// },
 				},
 			},
-			// 	{
-			// 		writerOpts: {
-			// 			commitsSort: ['subject', 'scope'],
-			// 			transform: (commit) => {
-			// 				const clonedCommit = { ...commit };
-
-			// 				clonedCommit.notes.forEach((note) => {
-			// 					note.title = 'BREAKING CHANGES';
-			// 				});
-
-			// 				if (clonedCommit.type === 'feat') {
-			// 					clonedCommit.type = '✨ Features';
-			// 				} else if (clonedCommit.type === 'style') {
-			// 					clonedCommit.type = '🎨 Styles';
-			// 				} else if (clonedCommit.type === 'test') {
-			// 					clonedCommit.type = '🧪 Tests';
-			// 				} else if (clonedCommit.type === 'refactor') {
-			// 					clonedCommit.type = '♻️ Code Refactoring';
-			// 				} else if (clonedCommit.type === 'fix') {
-			// 					clonedCommit.type = '🐛 Bug Fixes';
-			// 				} else if (clonedCommit.type === 'docs') {
-			// 					clonedCommit.type = '📚 Documentation';
-			// 				} else if (clonedCommit.type === 'perf') {
-			// 					clonedCommit.type = '🚀 Performance Improvements';
-			// 				} else if (clonedCommit.type === 'build') {
-			// 					clonedCommit.type = '🏗️‍ Build System';
-			// 				} else if (clonedCommit.type === 'ci') {
-			// 					clonedCommit.type = '💻 Continuous Integration';
-			// 				} else if (clonedCommit.type === 'Chore') {
-			// 					clonedCommit.type = '🎒 Continuous Integration';
-			// 				} else if (clonedCommit.type === 'revert') {
-			// 					clonedCommit.type = '⏪ Reverts';
-			// 				}
-
-			// 				if (clonedCommit.scope === '*') {
-			// 					clonedCommit.scope = '';
-			// 				}
-
-			// 				if (typeof clonedCommit.hash === 'string') {
-			// 					clonedCommit.shortHash = clonedCommit.hash.substring(0, 7);
-			// 				}
-
-			// 				if (typeof clonedCommit.subject === 'string') {
-			// 					clonedCommit.subject = clonedCommit.subject.substring(0, 72);
-			// 				}
-
-			// 				return commit;
-			// 			},
-			// 		},
-			// 	},
 		],
 		'@semantic-release/changelog',
 		[
@@ -140,8 +126,6 @@ module.exports = {
 			{
 				assets: ['package.json', 'CHANGELOG.md'],
 				message: '🎒 chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}',
-				authorName: 'drackp2m-semantic-release-bot',
-				authorEmail: '187212958+drackp2m-semantic-release-bot@users.noreply.github.com',
 			},
 		],
 	],
