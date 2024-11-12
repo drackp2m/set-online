@@ -22,9 +22,9 @@ FROM base AS deps
 
 USER node
 
-COPY package.json ./
+COPY package.json package-lock* ./
 
-RUN npm install
+RUN npm ci
 
 
 
@@ -74,8 +74,8 @@ EXPOSE $API_PORT
 
 USER node
 
-COPY --from=build-api /usr/src/app/dist ./dist
 COPY --from=build-api /usr/src/app/package.json ./package.json
 COPY --from=deps /usr/src/app/node_modules ./node_modules
+COPY --from=build-api /usr/src/app/dist/apps/api ./src
 
-CMD ["node", "dist/apps/api/main.js"]
+CMD ["node", "src/main.js"]
