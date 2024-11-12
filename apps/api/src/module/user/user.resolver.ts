@@ -69,6 +69,6 @@ export class UserResolver {
 			this.pubSub.publish('getManySubscription', message);
 		}, 5000);
 
-		return this.pubSub.asyncIterator('getManySubscription');
+		return this.pubSub.asyncIterableIterator('getManySubscription');
 	}
 }

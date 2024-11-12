@@ -60,6 +60,6 @@ export class PingResolver {
 		},
 	})
 	getPings(): AsyncIterator<GetPingsOutput[]> {
-		return this.pubSub.asyncIterator<GetPingsOutput[]>(this.SEND_PING_TOPIC);
+		return this.pubSub.asyncIterableIterator<GetPingsOutput[]>(this.SEND_PING_TOPIC);
 	}
 }

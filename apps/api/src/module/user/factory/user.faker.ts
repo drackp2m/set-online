@@ -29,7 +29,7 @@ export class UserFaker {
 
 		return new User({
 			uuid: faker.string.uuid(),
-			username: faker.internet.userName({ firstName, lastName }),
+			username: faker.internet.username({ firstName, lastName }),
 			password: faker.internet.password({
 				length: 32,
 				memorable: false,

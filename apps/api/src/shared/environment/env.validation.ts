@@ -19,10 +19,6 @@ class EnvironmentVariables {
 
 	@IsString()
 	@IsNotEmpty()
-	DB_NAME!: string;
-
-	@IsString()
-	@IsNotEmpty()
 	DB_USER!: string;
 
 	@IsString()
@@ -31,7 +27,15 @@ class EnvironmentVariables {
 
 	@IsString()
 	@IsNotEmpty()
+	DB_NAME!: string;
+
+	@IsString()
+	@IsNotEmpty()
 	DB_NAME_TEST!: string;
+
+	@IsString()
+	@IsNotEmpty()
+	DB_CERT!: string;
 
 	@IsString()
 	@IsNotEmpty()
