@@ -1,6 +1,6 @@
-import { AsyncPipe, JsonPipe, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 
 import { CardColor, CardShading, CardShape } from '@playsetonline/api-definitions';
@@ -21,12 +21,11 @@ import { UserStore } from '../../store/user.store';
 	templateUrl: './main.layout.html',
 	styleUrl: './main.layout.scss',
 	imports: [
-		RouterModule,
+		RouterOutlet,
+		RouterLink,
+		RouterLinkActive,
 		NgTemplateOutlet,
 		MediaDebugComponent,
-		NgIf,
-		JsonPipe,
-		AsyncPipe,
 		CardShapeComponent,
 	],
 	providers: [GetPingsGQL, GetUserInfoGQL],

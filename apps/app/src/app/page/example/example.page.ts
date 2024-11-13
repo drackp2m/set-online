@@ -1,8 +1,7 @@
-import { JsonPipe, NgIf } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterOutlet } from '@angular/router';
 import { map } from 'rxjs';
 
 import {
@@ -21,14 +20,7 @@ import ExampleMenuComponent from './component/menu/example-menu.component';
 	standalone: true,
 	templateUrl: './example.page.html',
 	styleUrl: './example.page.scss',
-	imports: [
-		ExampleMenuComponent,
-		ReactiveFormsModule,
-		NgIf,
-		JsonPipe,
-		GlitchSvgComponent,
-		RouterOutlet,
-	],
+	imports: [JsonPipe, ExampleMenuComponent, ReactiveFormsModule, GlitchSvgComponent],
 	providers: [ApiClient, GetUsersGQL, GetManySubscriptionGQL, GetPingsGQL],
 })
 export class ExamplePage {

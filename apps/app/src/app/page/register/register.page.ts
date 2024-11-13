@@ -1,4 +1,4 @@
-import { JsonPipe, NgIf } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, WritableSignal, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -12,8 +12,7 @@ import { UserStore } from '../../store/user.store';
 @Component({
 	standalone: true,
 	templateUrl: './register.page.html',
-	styleUrl: './register.page.scss',
-	imports: [NgIf, ReactiveFormsModule, JsonPipe],
+	imports: [ReactiveFormsModule, JsonPipe],
 	providers: [ApiClient, HttpClient, GetUserInfoGQL],
 })
 export class RegisterPage {
