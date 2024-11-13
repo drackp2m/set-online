@@ -1,3 +1,17 @@
+# v1.0.1 (2024-11-13)
+
+## What's Changed
+
+### 🎨 Styles
+
+- **app**: change theme-color meta attr (green color) to enable it on Safari ([beddebe](https://github.com/drackp2m/playsetonline/commit/beddebeae8ce4703859471347b973f265a62560d)) by Marc Jovaní González
+
+### 💻 Continuous Integration
+
+- try to deploy again from `dist/apps/api` ([1a688c0](https://github.com/drackp2m/playsetonline/commit/1a688c02c23ed58bd387815f1b90de70060f29f3)) by Marc Jovaní González
+
+**Full Changelog**: https://github.com/drackp2m/playsetonline/compare/v1.0.0...v1.0.1
+
 # v1.0.0 (2024-11-13)
 
 ## What's Changed
