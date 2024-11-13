@@ -5,6 +5,8 @@ import { ApiProtocol } from './api-protocol.type';
 import { JwtAlgorithm } from './jwt-algorithm.type';
 import { NodeEnv } from './node-env.type';
 
+import 'dotenv/config';
+
 class EnvironmentVariables {
 	@IsString()
 	@IsNotEmpty()
