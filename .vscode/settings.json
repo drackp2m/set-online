@@ -1,4 +1,21 @@
 {
 	"typescript.tsdk": "node_modules/typescript/lib",
-	"svg.preview.background": "editor"
+	"svg.preview.background": "editor",
+	"workbench.colorCustomizations": {
+		"activityBar.background": "#00b058",
+		"activityBar.foreground": "#ffffff",
+		"activityBar.activeBorder": "#FFFF00",
+		"activityBarBadge.background": "#FFFF00",
+		"activityBarBadge.foreground": "#008844",
+		"titleBar.activeBackground": "#008040",
+		"titleBar.activeForeground": "#FFFFFF",
+		"titleBar.inactiveBackground": "#00b058",
+		"titleBar.inactiveForeground": "#ffffff70",
+		"statusBar.background": "#008040",
+		"statusBar.foreground": "#FFFFFF",
+		"statusBar.noFolderBackground": "#68217A",
+		"statusBar.debuggingBackground": "#CC0000",
+		"statusBar.noFolderForeground": "#FFFFFF",
+		"statusBar.debuggingForeground": "#FFFFFF"
+	}
 }
