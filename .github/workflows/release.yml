@@ -2,7 +2,7 @@ name: release
 
 on:
   workflow_run:
-    workflows: ['deploy']
+    workflows: ['tests']
     types:
       - completed
 
@@ -25,7 +25,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '23.1'
+          node-version: '22.11'
           cache: 'npm'
 
       - name: Install dependencies
