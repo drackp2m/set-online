@@ -1,4 +1,4 @@
-FROM node:22.11-alpine3.20 AS base
+FROM node:23.1-alpine3.20 AS base
 
 RUN apk add --no-cache build-base python3
 
@@ -22,9 +22,13 @@ FROM base AS deps
 
 USER node
 
-COPY package.json package-lock* ./
+# COPY package.json package-lock.json* ./
 
-RUN npm ci
+# RUN npm ci
+
+COPY package.json ./
+
+RUN npm i --omit=optional
 
 
 

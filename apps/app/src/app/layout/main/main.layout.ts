@@ -76,6 +76,27 @@ export default class MainLayout implements OnInit {
 
 	async serviceWorkerCheckUpdates(): Promise<void> {
 		if (this.swUpdate.isEnabled) {
+			this.swUpdate.versionUpdates.subscribe({
+				next: (version) => {
+					switch (version.type) {
+						case 'VERSION_DETECTED':
+							alert('New version detected');
+							break;
+						case 'VERSION_READY':
+							if (confirm('New version of the app is ready. Do you want to reload?')) {
+								this.swUpdate.activateUpdate().then(() => {
+									if (confirm('New version installed. Do you want to reload?')) {
+										location.reload();
+									}
+								});
+							}
+							break;
+						case 'VERSION_INSTALLATION_FAILED':
+							alert('Failed to install new version');
+							break;
+					}
+				},
+			});
 			const haveUpdates = await this.swUpdate.checkForUpdate();
 
 			console.log({ haveUpdates });
