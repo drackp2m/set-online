@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 
 import { CardColor, CardShading, CardShape } from '@playsetonline/api-definitions';
@@ -11,7 +10,7 @@ import ExampleMenuComponent from '../../component/menu/example-menu.component';
 	standalone: true,
 	templateUrl: './card.page.html',
 	styleUrl: './card.page.scss',
-	imports: [ExampleMenuComponent, CardShapeComponent, CardComponent, NgFor, NgIf],
+	imports: [ExampleMenuComponent, CardShapeComponent, CardComponent],
 })
 export class CardPage {
 	shapes: CardShape[] = [CardShape.diamond, CardShape.oval, CardShape.squiggle];

@@ -1,11 +1,10 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 
 import ExampleMenuComponent from '../../component/menu/example-menu.component';
 
 @Component({
 	standalone: true,
-	imports: [ExampleMenuComponent, NgFor],
+	imports: [ExampleMenuComponent],
 	styles: `
 		main {
 			min-height: 100%;
