@@ -76,6 +76,6 @@ USER node
 
 COPY --from=build-api /usr/src/app/package.json ./package.json
 COPY --from=deps /usr/src/app/node_modules ./node_modules
-COPY --from=build-api /usr/src/app/dist/apps/api ./src
+COPY --from=build-api /usr/src/app/dist ./dist
 
-CMD ["node", "src/main.js"]
+CMD ["node", "dist/apps/api/main.js"]
