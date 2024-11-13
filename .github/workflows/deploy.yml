@@ -1,10 +1,10 @@
 name: deploy
 
 on:
-  pull_request:
-    branches:
-      - main
-    types: [closed]
+  workflow_run:
+    workflows: ['release']
+    types:
+      - completed
 
 permissions:
   contents: read
@@ -16,29 +16,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  tests:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '23.1'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run tests
-        env:
-          MIKRO_ORM_CLI: apps/api/src/shared/module/config/mikro-orm.config.ts
-          MIKRO_ORM_CLI_TS_CONFIG_PATH: apps/api/tsconfig.app.json
-          MIKRO_ORM_CLI_USE_TS_NODE: true
-        run: node --run test
-
   build:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     needs: tests
     steps:
@@ -52,7 +31,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '23.1'
+          node-version: '22.11'
           cache: 'npm'
 
       - name: Install dependencies
