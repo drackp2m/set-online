@@ -11,7 +11,7 @@ import { version } from '@package';
 	standalone: true,
 	selector: 'app-root',
 	template: `<router-outlet />
-		<span id="app-version" class="text-sm align-self-center mb-xs" [attr.data-text]="'v' + version">
+		<span id="app-version" class="text-sm align-self-center mb-md" [attr.data-text]="'v' + version">
 			v{{ version }}
 		</span>`,
 	styles: `
