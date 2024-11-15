@@ -21,6 +21,7 @@
 		"vscode": {
 			"settings": {
 				"editor.rulers": [100],
+				"clipboard-manager.maxClips": 1000,
 				"editor.linkedEditing": true,
 				"problems.showCurrentInStatus": true,
 				"javascript.updateImportsOnFileMove.enabled": "always",

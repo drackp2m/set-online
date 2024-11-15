@@ -1,5 +1,4 @@
 /* eslint-disable max-lines */
-import { NgFor, NgIf } from '@angular/common';
 import { Component, computed, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -17,7 +16,7 @@ import { GameOfflineStore } from './store/game-offline.store';
 	standalone: true,
 	templateUrl: './game.page.html',
 	styleUrl: './game.page.scss',
-	imports: [NgIf, NgFor, CardComponent, YouWonComponent, RouterLink],
+	imports: [CardComponent, YouWonComponent, RouterLink],
 })
 export class GamePage {
 	private readonly gameOfflineStore = inject(GameOfflineStore);

@@ -6,12 +6,12 @@ import { MikroOrmNamingStrategy } from './mikro-orm.naming-strategy';
 import { databaseConfig } from './registers/database.config';
 
 export default async (): Promise<MikroOrmModuleSyncOptions> => ({
-	debug: false,
 	driver: PostgreSqlDriver,
 	...databaseConfig(),
 	allowGlobalContext: false,
 	forceUtcTimezone: true,
 	tsNode: true,
+	preferTs: true,
 	autoLoadEntities: true,
 	extensions: [Migrator],
 	entities: ['apps/api/src/module/**/*.entity.ts'],

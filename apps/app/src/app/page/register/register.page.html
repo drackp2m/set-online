@@ -1,4 +1,4 @@
-<section class="content-fixed pt-lg pb-xxl">
+<main id="register" class="content-fixed flex-col gap-md pt-lg pb-xxl">
 	<h4>Register form</h4>
 
 	@if (user()) {
@@ -9,7 +9,7 @@
 	}
 
 	<div class="flex-col gap-sm">
-		<form class="flex-col gap-sm mt-md" [formGroup]="form" (submit)="onSubmit()">
+		<form class="flex-col gap-sm" [formGroup]="form" (submit)="onSubmit()">
 			<input
 				class="p-sm round-sm surface-vivid color-cosmic"
 				type="text"
@@ -34,4 +34,4 @@
 			<p class="color-radiant text-sm mt-sm">Error: {{ error() | json }}</p>
 		}
 	</div>
-</section>
+</main>

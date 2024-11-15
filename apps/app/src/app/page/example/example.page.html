@@ -1,9 +1,9 @@
-<main id="example" class="content-fixed pt-lg pb-xxl">
+<main id="example" class="content-fixed flex-col pt-lg pb-xxl gap-lg">
 	<app-example-menu />
 
-	<h2 class="mt-xl">{{ hello() }}</h2>
+	<h2>{{ hello() }}</h2>
 
-	<section id="media-query-indicator" class="mt-xl">
+	<section id="media-query-indicator">
 		<ul class="flex-row gap-sm lg:gap-md">
 			<li class="round-sm p-xs px-sm color-vivid surface-radiant xs-o:surface-serene">xs</li>
 			<li class="round-sm p-xs px-sm color-vivid surface-radiant sm-o:surface-serene">sm</li>
@@ -13,7 +13,7 @@
 		</ul>
 	</section>
 
-	<section id="logos" class="flex-row flex-wrap justify-center gap-lg mt-xl">
+	<section id="logos" class="flex-row flex-wrap justify-center gap-lg">
 		<a href="https://nx.dev" target="_blank">
 			<app-glitch-svg
 				svgPath="assets/logos/nx.svg"
@@ -56,7 +56,7 @@
 		</a>
 	</section>
 
-	<section class="flex-col gap-md align-center mt-lg">
+	<section class="flex-col gap-md align-center">
 		<button
 			class="p-sm md:p-md surface-radiant round-md xl-o:surface-vivid"
 			(click)="initSubscription()"

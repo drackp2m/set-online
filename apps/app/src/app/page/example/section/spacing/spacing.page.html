@@ -1,45 +1,49 @@
-<main id="spacing" class="content-fixed pt-lg pb-xxl">
+<main id="spacing" class="content-fixed flex-col gap-xl pt-lg pb-xxl">
 	<app-example-menu />
 
-	<h2 class="mt-xl">Welcome to Spacing!</h2>
+	<h2>Welcome to Spacing!</h2>
 
-	<h3 class="mt-xl">Spacing on sizes</h3>
+	<div class="flex-col gap-md">
+		<h3>Spacing on sizes</h3>
 
-	<section class="flex-row flex-wrap gap-xl my-md">
-		@for (space of spaces; track $index) {
-			<div class="flex-col align-center justify-end gap-md">
-				<div
-					class="surface-vivid round"
-					[style.height]="'var(--spacing-' + space + ')'"
-					[style.width]="'var(--spacing-' + space + ')'"
-				></div>
-
-				<h5>{{ space }}</h5>
-			</div>
-		}
-	</section>
-
-	<h3 class="mt-xl">Spacing on gaps</h3>
-
-	<section class="flex-row flex-wrap gap-xl my-md">
-		@for (space of spaces; track $index) {
-			<div class="flex-col align-center justify-end gap-md">
-				<div class="flex-row" [class]="'gap-' + space">
+		<section class="flex-row flex-wrap gap-xl">
+			@for (space of spaces; track $index) {
+				<div class="flex-col align-center justify-end gap-md">
 					<div
 						class="surface-vivid round"
 						[style.height]="'var(--spacing-' + space + ')'"
 						[style.width]="'var(--spacing-' + space + ')'"
 					></div>
 
-					<div
-						class="surface-vivid round"
-						[style.height]="'var(--spacing-' + space + ')'"
-						[style.width]="'var(--spacing-' + space + ')'"
-					></div>
+					<h5>{{ space }}</h5>
 				</div>
+			}
+		</section>
+	</div>
 
-				<h5>{{ space }}</h5>
-			</div>
-		}
-	</section>
+	<div class="flex-col gap-md">
+		<h3>Spacing on gaps</h3>
+
+		<section class="flex-row flex-wrap gap-xl">
+			@for (space of spaces; track $index) {
+				<div class="flex-col align-center justify-end gap-md">
+					<div class="flex-row" [class]="'gap-' + space">
+						<div
+							class="surface-vivid round"
+							[style.height]="'var(--spacing-' + space + ')'"
+							[style.width]="'var(--spacing-' + space + ')'"
+						></div>
+
+						<div
+							class="surface-vivid round"
+							[style.height]="'var(--spacing-' + space + ')'"
+							[style.width]="'var(--spacing-' + space + ')'"
+						></div>
+					</div>
+
+					<h5>{{ space }}</h5>
+				</div>
+			}
+		</section>
+	</div>
 </main>

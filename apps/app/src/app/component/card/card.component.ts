@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
 
 import { CardColor, CardShading, CardShape } from '@playsetonline/api-definitions';
@@ -10,7 +9,7 @@ import { CardShapeComponent } from '../card-shape/card-shape.component';
 	selector: 'app-card',
 	templateUrl: './card.component.html',
 	styleUrl: './card.component.scss',
-	imports: [NgIf, NgFor, CardShapeComponent],
+	imports: [CardShapeComponent],
 })
 export class CardComponent {
 	private readonly hello = 22;

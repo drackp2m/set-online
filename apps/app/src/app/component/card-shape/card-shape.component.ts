@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
 
 import { CardColor, CardShading, CardShape } from '@playsetonline/api-definitions';
@@ -8,7 +7,6 @@ import { CardColor, CardShading, CardShape } from '@playsetonline/api-definition
 	selector: 'app-card-shape',
 	templateUrl: './card-shape.component.html',
 	styleUrl: './card-shape.component.scss',
-	imports: [NgIf],
 })
 export class CardShapeComponent {
 	shape = input.required<string, CardShape>({
