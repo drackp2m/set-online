@@ -1,23 +1,25 @@
-<main id="shadow" class="content-fixed pt-lg pb-xxl">
+<main id="shadow" class="content-fixed flex-col gap-xl pt-lg pb-xxl">
 	<app-example-menu />
 
-	<h2 class="mt-xl">Welcome to Shadows!</h2>
+	<h2>Welcome to Shadows!</h2>
 
-	<h3 class="mt-xl">Shadow sizes</h3>
+	<div class="flex-col gap-md">
+		<h3>Shadow sizes</h3>
 
-	<section class="flex-row flex-wrap gap-xxl my-md">
-		<div class="example round-lg p-md">
-			<span class="surface-radiant round-sm px-xs">off</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</div>
-
-		@for (shadow of shadows; track $index) {
-			<div class="example round-lg p-md" [class]="'shadow-' + shadow">
-				<span class="surface-vivid round-sm px-xs">{{ shadow }}</span>
+		<section class="flex-row flex-wrap gap-xxl">
+			<div class="example round-lg p-md">
+				<span class="surface-radiant round-sm px-xs">off</span>
 				Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
 				dolorum illum nobis mollitia.
 			</div>
-		}
-	</section>
+
+			@for (shadow of shadows; track $index) {
+				<div class="example round-lg p-md" [class]="'shadow-' + shadow">
+					<span class="surface-vivid round-sm px-xs">{{ shadow }}</span>
+					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione
+					minus dolorum illum nobis mollitia.
+				</div>
+			}
+		</section>
+	</div>
 </main>

@@ -148,6 +148,7 @@ export default [
 					prev: '*',
 				},
 			],
+			'no-empty': 'warn',
 			'no-duplicate-imports': 'warn',
 			'no-multiple-empty-lines': [
 				'warn',

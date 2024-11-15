@@ -1,51 +1,57 @@
-<main id="card" class="content-fixed pt-lg pb-xxl">
+<main id="card" class="content-fixed flex-col gap-xl pt-lg pb-xxl">
 	<app-example-menu />
 
-	<h2 class="mt-xl">Welcome to Cards!</h2>
+	<h2>Welcome to Cards!</h2>
 
-	<h3 class="mt-xl">Card shapes</h3>
+	<div class="flex-col gap-md">
+		<h3>Card shapes</h3>
 
-	<section id="card-shapes" class="flex-row flex-wrap gap-x-xl gap-y-lg my-md">
-		@for (shape of shapes; track $index) {
-			@for (color of colors; track $index) {
-				@for (shading of shadings; track $index) {
-					<app-card-shape [shape]="shape" [color]="color" [shading]="shading" />
-				}
-			}
-		}
-	</section>
-
-	<h3 class="mt-xl">Card list horizontal</h3>
-
-	<section id="card-list-horizontal" class="flex-row flex-wrap gap-md my-md">
-		@for (shape of shapes; track $index) {
-			@for (color of colors; track $index) {
-				@for (shading of shadings; track $index) {
-					@for (count of counts; track $index) {
-						<app-card [shape]="shape" [color]="color" [shading]="shading" [count]="count" />
+		<section id="card-shapes" class="flex-row flex-wrap gap-x-xl gap-y-lg">
+			@for (shape of shapes; track $index) {
+				@for (color of colors; track $index) {
+					@for (shading of shadings; track $index) {
+						<app-card-shape [shape]="shape" [color]="color" [shading]="shading" />
 					}
 				}
 			}
-		}
-	</section>
+		</section>
+	</div>
 
-	<h3 class="mt-xl">Card list vertical</h3>
+	<div class="flex-col gap-md">
+		<h3>Card list horizontal</h3>
 
-	<section id="card-list-vertical" class="flex-row flex-wrap gap-md my-md">
-		@for (shape of shapes; track $index) {
-			@for (color of colors; track $index) {
-				@for (shading of shadings; track $index) {
-					@for (count of counts; track $index) {
-						<app-card
-							vertical
-							[shape]="shape"
-							[color]="color"
-							[shading]="shading"
-							[count]="count"
-						/>
+		<section id="card-list-horizontal" class="flex-row flex-wrap gap-md">
+			@for (shape of shapes; track $index) {
+				@for (color of colors; track $index) {
+					@for (shading of shadings; track $index) {
+						@for (count of counts; track $index) {
+							<app-card [shape]="shape" [color]="color" [shading]="shading" [count]="count" />
+						}
 					}
 				}
 			}
-		}
-	</section>
+		</section>
+	</div>
+
+	<div class="flex-col gap-md">
+		<h3>Card list vertical</h3>
+
+		<section id="card-list-vertical" class="flex-row flex-wrap gap-md">
+			@for (shape of shapes; track $index) {
+				@for (color of colors; track $index) {
+					@for (shading of shadings; track $index) {
+						@for (count of counts; track $index) {
+							<app-card
+								vertical
+								[shape]="shape"
+								[color]="color"
+								[shading]="shading"
+								[count]="count"
+							/>
+						}
+					}
+				}
+			}
+		</section>
+	</div>
 </main>

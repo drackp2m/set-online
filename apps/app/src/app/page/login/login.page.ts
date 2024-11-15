@@ -1,4 +1,4 @@
-import { JsonPipe, NgFor, NgIf } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { Component, OnInit, WritableSignal, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,8 +12,7 @@ import { UserStore } from '../../store/user.store';
 @Component({
 	standalone: true,
 	templateUrl: './login.page.html',
-	styleUrl: './login.page.scss',
-	imports: [NgIf, NgFor, ReactiveFormsModule, JsonPipe],
+	imports: [ReactiveFormsModule, JsonPipe],
 	providers: [GetUsersGQL],
 })
 export class LoginPage implements OnInit {

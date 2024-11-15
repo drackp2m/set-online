@@ -1,95 +1,105 @@
-<main id="typograpy" class="content-fixed pt-lg pb-xxl">
+<main id="typograpy" class="content-fixed flex-col gap-xl pt-lg pb-xxl">
 	<app-example-menu />
 
-	<h2 class="mt-xl">Welcome to Typographies!</h2>
+	<h2>Welcome to Typographies!</h2>
 
-	<h3 class="mt-xl">Font size (text-xx)</h3>
+	<div class="flex-col gap-md">
+		<h3>Font size (text-xx)</h3>
 
-	<section id="font-sizes" class="flex-col gap-lg my-md">
-		<p>
-			<span class="surface-radiant round-sm px-xs">off</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
-
-		@for (size of sizes; track $index) {
-			<p [class]="'text-' + size">
-				<span class="surface-vivid round-sm px-xs">{{ size }}</span>
+		<section id="font-sizes" class="flex-col gap-lg">
+			<p>
+				<span class="surface-radiant round-sm px-xs">off</span>
 				Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
 				dolorum illum nobis mollitia.
 			</p>
-		}
-	</section>
 
-	<h3 class="mt-xxl">Font weight (weight-xx)</h3>
+			@for (size of sizes; track $index) {
+				<p [class]="'text-' + size">
+					<span class="surface-vivid round-sm px-xs">{{ size }}</span>
+					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione
+					minus dolorum illum nobis mollitia.
+				</p>
+			}
+		</section>
+	</div>
 
-	<section id="font-weights" class="flex-col gap-lg mt-md">
-		<p>
-			<span class="surface-radiant round-sm px-xs">off</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
+	<div class="flex-col gap-md">
+		<h3>Font weight (weight-xx)</h3>
 
-		@for (weight of weights; track $index) {
-			<p [class]="'weight-' + weight">
-				<span class="surface-vivid round-sm px-sm mono-xl">{{ weight }}</span>
+		<section id="font-weights" class="flex-col gap-lg">
+			<p>
+				<span class="surface-radiant round-sm px-xs">off</span>
 				Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
 				dolorum illum nobis mollitia.
 			</p>
-		}
-	</section>
 
-	<h3 class="mt-xxl">Font oblique (oblique-xx)</h3>
+			@for (weight of weights; track $index) {
+				<p [class]="'weight-' + weight">
+					<span class="surface-vivid round-sm px-sm mono-xl">{{ weight }}</span>
+					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione
+					minus dolorum illum nobis mollitia.
+				</p>
+			}
+		</section>
+	</div>
 
-	<section id="font-obliques" class="flex-col gap-lg mt-md">
-		<p>
-			<span class="surface-radiant round-sm px-xs">off</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
+	<div class="flex-col gap-md">
+		<h3>Font oblique (oblique-xx)</h3>
 
-		@for (oblique of obliques; track $index) {
-			<p [class]="'oblique-' + oblique">
-				<span class="surface-vivid round-sm px-sm mono-xl">{{ oblique }}</span>
+		<section id="font-obliques" class="flex-col gap-lg">
+			<p>
+				<span class="surface-radiant round-sm px-xs">off</span>
 				Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
 				dolorum illum nobis mollitia.
 			</p>
-		}
-	</section>
 
-	<h3 class="mt-xxl">Font monospace (monospace-xx)</h3>
+			@for (oblique of obliques; track $index) {
+				<p [class]="'oblique-' + oblique">
+					<span class="surface-vivid round-sm px-sm mono-xl">{{ oblique }}</span>
+					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione
+					minus dolorum illum nobis mollitia.
+				</p>
+			}
+		</section>
+	</div>
 
-	<section id="font-monospaces" class="flex-col gap-lg mt-md">
-		<p>
-			<span class="surface-radiant round-sm px-xs">off</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
+	<div class="flex-col gap-md">
+		<h3>Font monospace (monospace-xx)</h3>
 
-		@for (mono of monos; track $index) {
-			<p [class]="'mono-' + mono">
-				<span class="surface-vivid round-sm px-sm mono-xl">{{ mono }}</span>
+		<section id="font-monospaces" class="flex-col gap-lg">
+			<p>
+				<span class="surface-radiant round-sm px-xs">off</span>
 				Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
 				dolorum illum nobis mollitia.
 			</p>
-		}
-	</section>
 
-	<h3 class="mt-xxl">Font casual (casual-xx)</h3>
+			@for (mono of monos; track $index) {
+				<p [class]="'mono-' + mono">
+					<span class="surface-vivid round-sm px-sm mono-xl">{{ mono }}</span>
+					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione
+					minus dolorum illum nobis mollitia.
+				</p>
+			}
+		</section>
+	</div>
 
-	<section id="font-casuals" class="flex-col gap-lg mt-md">
-		<p>
-			<span class="surface-radiant round-sm px-xs">off</span>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
-			dolorum illum nobis mollitia.
-		</p>
+	<div class="flex-col gap-md">
+		<h3>Font casual (casual-xx)</h3>
 
-		@for (casual of casuals; track $index) {
-			<p [class]="'casual-' + casual">
-				<span class="surface-vivid round-sm px-sm mono-xl">{{ casual }}</span>
+		<section id="font-casuals" class="flex-col gap-lg">
+			<p>
+				<span class="surface-radiant round-sm px-xs">off</span>
 				Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione minus
 				dolorum illum nobis mollitia.
 			</p>
-		}
-	</section>
+
+			@for (casual of casuals; track $index) {
+				<p [class]="'casual-' + casual">
+					<span class="surface-vivid round-sm px-sm mono-xl">{{ casual }}</span>
+					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur laborum ratione
+					minus dolorum illum nobis mollitia.
+				</p>
+			}
+		</section>
+	</div>
 </main>

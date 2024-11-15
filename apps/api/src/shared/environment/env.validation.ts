@@ -5,6 +5,8 @@ import { ApiProtocol } from './api-protocol.type';
 import { JwtAlgorithm } from './jwt-algorithm.type';
 import { NodeEnv } from './node-env.type';
 
+import 'dotenv/config';
+
 class EnvironmentVariables {
 	@IsString()
 	@IsNotEmpty()
@@ -19,10 +21,6 @@ class EnvironmentVariables {
 
 	@IsString()
 	@IsNotEmpty()
-	DB_NAME!: string;
-
-	@IsString()
-	@IsNotEmpty()
 	DB_USER!: string;
 
 	@IsString()
@@ -31,7 +29,15 @@ class EnvironmentVariables {
 
 	@IsString()
 	@IsNotEmpty()
+	DB_NAME!: string;
+
+	@IsString()
+	@IsNotEmpty()
 	DB_NAME_TEST!: string;
+
+	@IsString()
+	@IsNotEmpty()
+	DB_CERT!: string;
 
 	@IsString()
 	@IsNotEmpty()

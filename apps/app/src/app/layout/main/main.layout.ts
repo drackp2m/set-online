@@ -1,6 +1,6 @@
-import { AsyncPipe, JsonPipe, NgIf, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
 
 import { CardColor, CardShading, CardShape } from '@playsetonline/api-definitions';
@@ -21,12 +21,11 @@ import { UserStore } from '../../store/user.store';
 	templateUrl: './main.layout.html',
 	styleUrl: './main.layout.scss',
 	imports: [
-		RouterModule,
+		RouterOutlet,
+		RouterLink,
+		RouterLinkActive,
 		NgTemplateOutlet,
 		MediaDebugComponent,
-		NgIf,
-		JsonPipe,
-		AsyncPipe,
 		CardShapeComponent,
 	],
 	providers: [GetPingsGQL, GetUserInfoGQL],
@@ -77,6 +76,27 @@ export default class MainLayout implements OnInit {
 
 	async serviceWorkerCheckUpdates(): Promise<void> {
 		if (this.swUpdate.isEnabled) {
+			this.swUpdate.versionUpdates.subscribe({
+				next: (version) => {
+					switch (version.type) {
+						case 'VERSION_DETECTED':
+							alert('New version detected');
+							break;
+						case 'VERSION_READY':
+							if (confirm('New version of the app is ready. Do you want to reload?')) {
+								this.swUpdate.activateUpdate().then(() => {
+									if (confirm('New version installed. Do you want to reload?')) {
+										location.reload();
+									}
+								});
+							}
+							break;
+						case 'VERSION_INSTALLATION_FAILED':
+							alert('Failed to install new version');
+							break;
+					}
+				},
+			});
 			const haveUpdates = await this.swUpdate.checkForUpdate();
 
 			console.log({ haveUpdates });
