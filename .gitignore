@@ -46,4 +46,3 @@ Thumbs.db
 .pgdata*
 .docker
 .env
-certs
