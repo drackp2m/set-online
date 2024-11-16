@@ -43,7 +43,6 @@ Thumbs.db
 
 .nx
 .angular
-.pgdata*
+.pgdata
 .docker
 .env
-certs

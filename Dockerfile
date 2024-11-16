@@ -22,7 +22,7 @@ FROM base AS deps
 
 USER node
 
-COPY package.json package-lock.json* ./
+COPY package.json package-lock.json ./
 
 RUN npm ci --verbose
 
