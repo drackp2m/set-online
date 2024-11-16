@@ -1,3 +1,18 @@
+# v1.0.1 (2024-11-16)
+
+## What's Changed
+
+### 🐛 Bug Fixes
+
+- try to deploy with semantic-release changes (package version) ([221db40](https://github.com/drackp2m/playsetonline/commit/221db40df39dbdda5a10c8dae571b831cb50aaf8)) by Marc Jovaní González
+- try to deploy with semantic-release changes (package version) ([9ed37c8](https://github.com/drackp2m/playsetonline/commit/9ed37c8e06e6b76a89f87c0a9d21d662c17eb280)) by Marc Jovaní González
+
+### 🎒 Chores
+
+- restore folder with fake certificates ([63bc428](https://github.com/drackp2m/playsetonline/commit/63bc42838f56109e6a9d41490f18926cb670a427)) by Marc Jovaní González
+
+**Full Changelog**: https://github.com/drackp2m/playsetonline/compare/v1.0.0...v1.0.1
+
 # v1.0.0 (2024-11-15)
 
 ## What's Changed
