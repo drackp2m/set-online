@@ -1,6 +1,7 @@
 import { Inject, Injectable, Scope } from '@nestjs/common';
 import { REQUEST } from '@nestjs/core';
 import { Request } from 'express';
+import ms from 'ms';
 
 import { ConfigurationService } from '../../../shared/module/config/configuration.service';
 import { getEnumKey } from '../../../shared/util/get-enum-key.util';
@@ -19,6 +20,10 @@ export class SetJwtTokenUseCase {
 
 		if (enumKey) {
 			const path = JwtEndpoints[enumKey];
+			const maxAge =
+				tokenType === JwtCookie.access
+					? this.configService.jwt.accessTokenExpiresIn
+					: this.configService.jwt.refreshTokenExpiresIn;
 
 			// ToDo => add expiration time to cookies
 			this.request.res?.cookie(tokenType, tokenValue, {
@@ -28,6 +33,7 @@ export class SetJwtTokenUseCase {
 				sameSite: 'none',
 				domain: this.configService.api.cookieDomain,
 				path,
+				maxAge: ms(maxAge),
 			});
 		}
 	}

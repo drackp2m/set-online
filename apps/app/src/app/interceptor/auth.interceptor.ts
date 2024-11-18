@@ -10,7 +10,7 @@ import { Injectable, inject } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { catchError, filter, skip, switchMap, take, tap } from 'rxjs/operators';
+import { catchError, filter, skip, switchMap, take } from 'rxjs/operators';
 
 import { AuthStore } from '../store/auth.store';
 
@@ -26,7 +26,6 @@ export class AuthInterceptor implements HttpInterceptor {
 	private readonly authStoreLoadingFinished$ = toObservable(this.authStore.isLoading).pipe(
 		skip(1),
 		filter((value) => value === false),
-		tap(() => console.log('emitting load finish')),
 	);
 
 	intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
@@ -39,11 +38,11 @@ export class AuthInterceptor implements HttpInterceptor {
 		}
 
 		return next.handle(req).pipe(
-			catchError((error: HttpEvent<unknown>) => {
-				return this.handleErrorOrEvent(req, next, error);
-			}),
 			switchMap((event) => {
 				return this.handleErrorOrEvent(req, next, event);
+			}),
+			catchError((error: HttpEvent<unknown>) => {
+				return this.handleErrorOrEvent(req, next, error);
 			}),
 		);
 	}
@@ -65,7 +64,7 @@ export class AuthInterceptor implements HttpInterceptor {
 			? event.status === 401
 			: event.body?.errors?.[0]?.message === 'Unauthorized';
 
-		if (isUnauthorizedError && this.authStore.tokensAreValid() !== false) {
+		if (isUnauthorizedError && this.authStore.tokensAreValid() === true) {
 			return this.retryRequest(req, next, event as HttpResponse<unknown>);
 		}
 
@@ -79,19 +78,23 @@ export class AuthInterceptor implements HttpInterceptor {
 	): Observable<HttpEvent<unknown>> {
 		const isAuthStoreLoading = this.authStore.isLoading();
 
-		if (event !== undefined && isAuthStoreLoading === false) {
-			this.authStore.tryToRefreshTokens();
-		}
-
-		return this.authStoreLoadingFinished$.pipe(
+		const requestAfterRefresh = this.authStoreLoadingFinished$.pipe(
 			take(1),
 			switchMap(() => {
-				if (this.authStore.tokensAreValid() === false) {
+				const tokensAreValid = this.authStore.tokensAreValid();
+
+				if (tokensAreValid === false) {
 					this.router.navigate(['/login']);
 				}
 
 				return next.handle(req);
 			}),
 		);
+
+		if (event !== undefined && isAuthStoreLoading === false) {
+			this.authStore.tryToRefreshTokens();
+		}
+
+		return requestAfterRefresh;
 	}
 }

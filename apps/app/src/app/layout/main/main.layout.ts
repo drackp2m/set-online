@@ -47,6 +47,8 @@ export default class MainLayout implements OnInit {
 	readonly shading = CardShading;
 
 	ngOnInit(): void {
+		this.serviceWorkerCheckUpdates();
+
 		this.getPingsGQL.subscribe().subscribe({
 			next: (data) => {
 				if (data.data) {
@@ -54,8 +56,6 @@ export default class MainLayout implements OnInit {
 				}
 			},
 			error: (error) => {
-				console.log({ xxx: error });
-
 				this.getPings.set(error.message);
 			},
 		});
@@ -74,7 +74,7 @@ export default class MainLayout implements OnInit {
 			});
 	}
 
-	async serviceWorkerCheckUpdates(): Promise<void> {
+	private async serviceWorkerCheckUpdates(): Promise<void> {
 		if (this.swUpdate.isEnabled) {
 			this.swUpdate.versionUpdates.subscribe({
 				next: (version) => {

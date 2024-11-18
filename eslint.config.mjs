@@ -4,6 +4,7 @@ import eslintPluginImport from 'eslint-plugin-import';
 import prettier from 'eslint-plugin-prettier';
 import unusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
+import rxjs from 'eslint-plugin-rxjs-updated';
 
 export default [
 	...nx.configs['flat/base'],
@@ -13,6 +14,7 @@ export default [
 		plugins: {
 			prettier,
 			'@nx': nx,
+			rxjs: rxjs,
 			import: eslintPluginImport,
 			'unused-imports': unusedImports,
 		},
