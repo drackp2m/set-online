@@ -2,6 +2,7 @@ import { REQUEST } from '@nestjs/core';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Request } from 'express';
 import { mock } from 'jest-mock-extended';
+import ms from 'ms';
 
 import { ConfigurationService } from '../../../shared/module/config/configuration.service';
 import { GenerateNowDateUseCase } from '../../../shared/use-case/generate-now-date.use-case';
@@ -21,6 +22,8 @@ describe('SetJwtTokenUseCase', () => {
 			id: 'uuid',
 			audience: 'test-runner',
 			issuer: 'test',
+			accessTokenExpiresIn: '1d',
+			refreshTokenExpiresIn: '15d',
 		},
 		api: {
 			cookieDomain: 'localhost',
@@ -60,8 +63,8 @@ describe('SetJwtTokenUseCase', () => {
 				httpOnly: true,
 				sameSite: 'none',
 				domain: 'localhost',
-				// expires: new Date(new Date().getTime() + 1000 * 60 * 60 * 24),
 				path: '/graphql',
+				maxAge: ms('1d'),
 			});
 		});
 	});
@@ -81,8 +84,8 @@ describe('SetJwtTokenUseCase', () => {
 			httpOnly: true,
 			sameSite: 'none',
 			domain: 'localhost',
-			// expires: new Date(new Date().getTime() + 1000 * 60 * 60 * 24),
 			path: '/api/auth/refresh-session',
+			maxAge: ms('15d'),
 		});
 	});
 });

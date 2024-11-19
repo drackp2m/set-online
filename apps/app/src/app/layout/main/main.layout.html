@@ -70,13 +70,10 @@
 			<span>{{ getPings()?.[0]?.ping?.average?.value }}</span>
 
 			@if (user()) {
-				<button (click)="serviceWorkerCheckUpdates()">Welcome {{ user()?.username }}</button>
+				<p>Welcome {{ user()?.username }}</p>
 			}
-
 			@if (userError()) {
-				<button (click)="serviceWorkerCheckUpdates()">
-					GetUserInfo error: {{ userError()?.message }}
-				</button>
+				<p>GetUserInfo error: {{ userError()?.message }}</p>
 			}
 		</p>
 	</section>

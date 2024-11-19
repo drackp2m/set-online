@@ -1,5 +1,5 @@
-import { inject } from '@angular/core';
-import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import { Injectable, inject } from '@angular/core';
+import { patchState, signalStore, withState } from '@ngrx/signals';
 import { firstValueFrom } from 'rxjs';
 
 import { BaseState, getInitialBaseState } from '../definition/base-state.interface';
@@ -8,29 +8,38 @@ import { ApiClient } from '../service/api-client.service';
 type AuthInfo = { tokensAreValid: boolean };
 
 const initialState: BaseState<AuthInfo, unknown> = getInitialBaseState({
-	tokensAreValid: false,
+	tokensAreValid: true,
 });
 
-export const AuthStore = signalStore(
-	{ providedIn: 'root' },
+@Injectable({
+	providedIn: 'root',
+})
+export class AuthStore extends signalStore(
+	{
+		protectedState: false,
+	},
 	withState(initialState),
-	withMethods((store, apiClient = inject(ApiClient)) => ({
-		reset(): void {
-			patchState(store, initialState);
-		},
-		markTokensAs(status: 'valid' | 'invalid'): void {
-			patchState(store, { tokensAreValid: status === 'valid', isLoading: false });
-		},
-		async tryToRefreshTokens(): Promise<void> {
-			patchState(store, { isLoading: true });
+) {
+	private readonly apiClient = inject(ApiClient);
 
-			try {
-				await firstValueFrom(apiClient.auth.get('/refresh-session'));
+	reset(): void {
+		patchState(this, initialState);
+	}
 
-				patchState(store, { tokensAreValid: true, isLoading: false });
-			} catch (error) {
-				patchState(store, { error, tokensAreValid: false, isLoading: false });
-			}
-		},
-	})),
-);
+	markTokensAs(status: 'valid' | 'invalid'): void {
+		patchState(this, { tokensAreValid: status === 'valid', isLoading: false });
+	}
+
+	async tryToRefreshTokens(): Promise<void> {
+		patchState(this, { isLoading: true });
+
+		try {
+			await firstValueFrom(this.apiClient.auth.get('/refresh-session'));
+
+			patchState(this, { tokensAreValid: true, isLoading: false });
+		} catch (error) {
+			console.error('Error refreshing tokens');
+			patchState(this, { error, tokensAreValid: false, isLoading: false });
+		}
+	}
+}
