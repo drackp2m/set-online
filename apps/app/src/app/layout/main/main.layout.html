@@ -61,7 +61,7 @@
 				class="round-sm p-xs px-sm"
 				[class]="active.isActive ? 'weight-xxl surface-serene' : 'surface-' + (surface || 'vivid')"
 				[routerLink]="link"
-				(click)="click ? click() : null"
+				(click)="click && click()"
 				>{{ text }}
 			</a>
 		</ng-template>

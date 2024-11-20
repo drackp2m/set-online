@@ -51,7 +51,8 @@
 							"replace": "apps/app/src/environments/environment.ts",
 							"with": "apps/app/src/environments/environment.development.ts"
 						}
-					]
+					],
+					"serviceWorker": "apps/app/src/ngsw-config.json"
 				}
 			},
 			"defaultConfiguration": "production"

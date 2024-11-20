@@ -78,6 +78,8 @@ export default class MainLayout implements OnInit {
 		if (this.swUpdate.isEnabled) {
 			this.swUpdate.versionUpdates.subscribe({
 				next: (version) => {
+					console.log({ version });
+
 					switch (version.type) {
 						case 'VERSION_DETECTED':
 							alert('New version detected');
@@ -97,9 +99,10 @@ export default class MainLayout implements OnInit {
 					}
 				},
 			});
-			const haveUpdates = await this.swUpdate.checkForUpdate();
 
-			console.log({ haveUpdates });
+			// const haveUpdates = await this.swUpdate.checkForUpdate();
+
+			// console.log({ haveUpdates });
 		}
 	}
 }

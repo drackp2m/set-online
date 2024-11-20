@@ -22,7 +22,7 @@
 			"installMode": "prefetch",
 			"updateMode": "lazy",
 			"resources": {
-				"files": ["/assets/**/*.(svg|png|woff2)"]
+				"files": ["/assets/**"]
 			}
 		}
 	],
@@ -31,10 +31,10 @@
 			"name": "api-call",
 			"urls": ["https://api.playsetonline.com"],
 			"cacheConfig": {
-				"maxAge": "12h",
+				"maxAge": "5m",
 				"maxSize": 10,
 				"strategy": "freshness",
-				"timeout": "5s"
+				"timeout": "1s"
 			}
 		}
 	]
