@@ -2,9 +2,9 @@ import nx from '@nx/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import eslintPluginImport from 'eslint-plugin-import';
 import prettier from 'eslint-plugin-prettier';
+import rxjs from 'eslint-plugin-rxjs-updated';
 import unusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
-import rxjs from 'eslint-plugin-rxjs-updated';
 
 export default [
 	...nx.configs['flat/base'],
