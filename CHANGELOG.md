@@ -1,3 +1,22 @@
+# v1.2.0 (2024-11-21)
+
+## What's Changed
+
+### ✨ Features
+
+- **app**: add idb package, update indedex-db service ([f001d96](https://github.com/drackp2m/playsetonline/commit/f001d966ab005af7d4649dd703cde11c51628cf7)) by Marc Jovaní González
+
+### ♻️ Code Refactoring
+
+- **app**: update new versions detector of service workers ([c097fd8](https://github.com/drackp2m/playsetonline/commit/c097fd883ffc36557a6a2a8cdce86b0f8d4778f0)) by Marc Jovaní González
+
+### 💻 Continuous Integration
+
+- remove unnecessary `fetch-depth: 0`, and return `git pull` ([15b0e36](https://github.com/drackp2m/playsetonline/commit/15b0e363be0d6ba0b6ea09eb2a110a311f7eaa0c)) by Marc Jovaní González
+- remove unnecessary `fetch-depth: 0`, and return `git pull` ([#223](https://github.com/drackp2m/playsetonline/issues/223)) ([3c4e752](https://github.com/drackp2m/playsetonline/commit/3c4e75202fbb6cebf65f69833946b7b58d43d242)) by GitHub
+
+**Full Changelog**: https://github.com/drackp2m/playsetonline/compare/v1.1.0...v1.2.0
+
 # v1.1.0 (2024-11-21)
 
 ## What's Changed
