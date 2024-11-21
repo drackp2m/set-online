@@ -1,4 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
@@ -55,8 +56,10 @@ export default class MainLayout implements OnInit {
 					this.getPings.set(data.data.getPings);
 				}
 			},
-			error: (error) => {
-				this.getPings.set(error.message);
+			error: (error: unknown) => {
+				const typedError = error as HttpErrorResponse;
+
+				console.error(typedError.message);
 			},
 		});
 	}
@@ -78,31 +81,25 @@ export default class MainLayout implements OnInit {
 		if (this.swUpdate.isEnabled) {
 			this.swUpdate.versionUpdates.subscribe({
 				next: (version) => {
-					console.log({ version });
-
 					switch (version.type) {
 						case 'VERSION_DETECTED':
-							alert('New version detected');
+							console.log('New version detected. Downloading...');
 							break;
 						case 'VERSION_READY':
-							if (confirm('New version of the app is ready. Do you want to reload?')) {
+							if (confirm('New version of the app is ready. Do you want to install it?')) {
+								alert('Installing new version...');
+
 								this.swUpdate.activateUpdate().then(() => {
-									if (confirm('New version installed. Do you want to reload?')) {
-										location.reload();
-									}
+									location.reload();
 								});
 							}
 							break;
 						case 'VERSION_INSTALLATION_FAILED':
-							alert('Failed to install new version');
+							console.error('Failed to install new version.');
 							break;
 					}
 				},
 			});
-
-			// const haveUpdates = await this.swUpdate.checkForUpdate();
-
-			// console.log({ haveUpdates });
 		}
 	}
 }

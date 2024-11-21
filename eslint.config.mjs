@@ -1,3 +1,6 @@
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 import nx from '@nx/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 import eslintPluginImport from 'eslint-plugin-import';
@@ -5,6 +8,11 @@ import prettier from 'eslint-plugin-prettier';
 import rxjs from 'eslint-plugin-rxjs-updated';
 import unusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
+
+import eslintErrorsToWarnings from './tools/helpers/eslint-errors-to-warnings.mjs';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export default [
 	...nx.configs['flat/base'],
@@ -14,12 +22,10 @@ export default [
 		plugins: {
 			prettier,
 			'@nx': nx,
-			rxjs: rxjs,
+			rxjs,
 			import: eslintPluginImport,
 			'unused-imports': unusedImports,
 		},
-	},
-	{
 		ignores: ['**/dist', 'node_modules', 'libs/api-definitions/src/lib/apollo/operations.ts'],
 	},
 	{
@@ -73,6 +79,9 @@ export default [
 			parser: tsParser,
 			ecmaVersion: 2023,
 			sourceType: 'module',
+			parserOptions: {
+				project: join(__dirname, './tsconfig.base.json'),
+			},
 		},
 		settings: {
 			'import/ignore': ['node_modules'],
@@ -84,15 +93,12 @@ export default [
 			},
 		},
 		rules: {
-			// ...Object.fromEntries(
-			// 	Object.entries(sonarjs.configs.recommended.rules).map(([ruleName, ruleValue]) => {
-			// 		return [`${ruleName}`, ruleValue.replace('error', 'warn')];
-			// 	}),
-			// ),
+			// ...eslintErrorsToWarnings(sonarjs.configs.recommended.rules),
 			// 'sonarjs/todo-tag': 'off',
 			// 'sonarjs/fixme-tag': 'off',
 			// 'sonarjs/unused-import': 'off',
 			// 'sonarjs/pseudo-random': 'warn',
+			...eslintErrorsToWarnings(rxjs.configs.recommended.rules),
 			'unused-imports/no-unused-imports': 'warn',
 			'no-unused-private-class-members': 'warn',
 			'@typescript-eslint/no-unused-vars': [

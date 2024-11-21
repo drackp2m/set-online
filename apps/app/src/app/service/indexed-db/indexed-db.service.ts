@@ -1,112 +1,65 @@
 import { Injectable } from '@angular/core';
+import { DBSchema, IDBPDatabase, openDB } from 'idb';
 
 import { LocalStorageKey } from './definition/indexed-db-key.enum';
+
+interface KeyValueStoreSchema extends DBSchema {
+	KeyValueStore: {
+		key: LocalStorageKey;
+		value: unknown;
+	};
+}
 
 @Injectable({
 	providedIn: 'root',
 })
 export class IndexedDBService {
-	private dbName = 'PlaySetOnline';
-	private storeName = 'KeyValueStore';
-	private dbVersion = 1;
-	private dbPromise: Promise<IDBDatabase>;
+	private readonly dbName = 'PlaySetOnline';
+	private readonly storeName = 'KeyValueStore';
+	private readonly dbVersion = 1;
+	private readonly dbPromise: Promise<IDBPDatabase<KeyValueStoreSchema>>;
 
 	constructor() {
 		this.dbPromise = this.initDB();
 	}
 
-	async setItem<T>(key: LocalStorageKey, data: T): Promise<void> {
+	async setItem<T>(key: LocalStorageKey, value: T): Promise<void> {
 		const db = await this.dbPromise;
 
-		return new Promise((resolve, reject) => {
-			const transaction = db.transaction([this.storeName], 'readwrite');
-			const store = transaction.objectStore(this.storeName);
-			const request = store.put({ key, value: data });
-
-			request.onsuccess = () => {
-				resolve();
-			};
-
-			request.onerror = (event) => {
-				reject((event.target as IDBRequest).error);
-			};
-		});
+		await db.put(this.storeName, { key, value });
 	}
 
 	async getItem<T>(key: LocalStorageKey): Promise<T | undefined> {
 		const db = await this.dbPromise;
 
-		return new Promise((resolve, reject) => {
-			const transaction = db.transaction([this.storeName], 'readonly');
-			const store = transaction.objectStore(this.storeName);
-			const request = store.get(key);
+		const item = await db.get(this.storeName, key);
 
-			request.onsuccess = (event) => {
-				const result = (event.target as IDBRequest).result;
-				resolve(result ? (result.value as T) : undefined);
-			};
+		const typedItem = item as { value: T } | undefined;
 
-			request.onerror = (event) => {
-				reject((event.target as IDBRequest).error);
-			};
-		});
+		return typedItem?.value;
 	}
 
 	async deleteItem(key: LocalStorageKey): Promise<void> {
 		const db = await this.dbPromise;
 
-		return new Promise((resolve, reject) => {
-			const transaction = db.transaction([this.storeName], 'readwrite');
-			const store = transaction.objectStore(this.storeName);
-			const request = store.delete(key);
-
-			request.onsuccess = () => {
-				resolve();
-			};
-
-			request.onerror = (event) => {
-				reject((event.target as IDBRequest).error);
-			};
-		});
+		await db.delete(this.storeName, key);
 	}
 
 	async clearStore(): Promise<void> {
 		const db = await this.dbPromise;
 
-		return new Promise((resolve, reject) => {
-			const transaction = db.transaction([this.storeName], 'readwrite');
-			const store = transaction.objectStore(this.storeName);
-			const request = store.clear();
-
-			request.onsuccess = () => {
-				resolve();
-			};
-
-			request.onerror = (event) => {
-				reject((event.target as IDBRequest).error);
-			};
-		});
+		await db.clear(this.storeName);
 	}
 
-	private initDB(): Promise<IDBDatabase> {
-		return new Promise((resolve, reject) => {
-			const request = indexedDB.open(this.dbName, this.dbVersion);
+	private initDB(): Promise<IDBPDatabase<KeyValueStoreSchema>> {
+		const storeName = this.storeName;
 
-			request.onupgradeneeded = (event) => {
-				const db = (event.target as IDBOpenDBRequest).result;
-				if (!db.objectStoreNames.contains(this.storeName)) {
-					db.createObjectStore(this.storeName, { keyPath: 'key' });
+		return openDB<KeyValueStoreSchema>(this.dbName, this.dbVersion, {
+			upgrade(db) {
+				if (!db.objectStoreNames.contains(storeName)) {
+					db.createObjectStore(storeName, { keyPath: 'key' });
 				}
-			};
-
-			request.onsuccess = (event) => {
-				const db = (event.target as IDBOpenDBRequest).result;
-				resolve(db);
-			};
-
-			request.onerror = (event) => {
-				reject((event.target as IDBOpenDBRequest).error);
-			};
+			},
 		});
 	}
 }
