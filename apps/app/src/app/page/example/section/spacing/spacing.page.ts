@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 
 import ExampleMenuComponent from '../../component/menu/example-menu.component';
@@ -7,7 +6,7 @@ import ExampleMenuComponent from '../../component/menu/example-menu.component';
 	standalone: true,
 	templateUrl: './spacing.page.html',
 	styleUrl: './spacing.page.scss',
-	imports: [ExampleMenuComponent, NgFor],
+	imports: [ExampleMenuComponent],
 })
 export class SpacingPage {
 	spaces = ['none', 'xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'];

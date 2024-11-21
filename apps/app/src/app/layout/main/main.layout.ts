@@ -82,19 +82,19 @@ export default class MainLayout implements OnInit {
 
 					switch (version.type) {
 						case 'VERSION_DETECTED':
-							alert('New version detected');
+							console.log('New version detected. Downloading...');
 							break;
 						case 'VERSION_READY':
-							if (confirm('New version of the app is ready. Do you want to reload?')) {
+							if (confirm('New version of the app is ready. Do you want to install it?')) {
+								alert('Installing new version...');
+
 								this.swUpdate.activateUpdate().then(() => {
-									if (confirm('New version installed. Do you want to reload?')) {
-										location.reload();
-									}
+									location.reload();
 								});
 							}
 							break;
 						case 'VERSION_INSTALLATION_FAILED':
-							alert('Failed to install new version');
+							console.error('Failed to install new version.');
 							break;
 					}
 				},
