@@ -1,3 +1,34 @@
+# v1.1.0 (2024-11-21)
+
+## What's Changed
+
+### ✨ Features
+
+- **app**: add ServiceWorker on development environment ([5314017](https://github.com/drackp2m/playsetonline/commit/53140174f141f2a2f4c2db006afbf1b141ef5c3c)) by Marc Jovaní González
+
+### 🧪 Tests
+
+- **api**: fix SetJwtToken UseCase tests ([7aaf94f](https://github.com/drackp2m/playsetonline/commit/7aaf94fcc23f39593a9f1b8a2af4bb1cd3f55c8a)) by Marc Jovaní González
+
+### 🐛 Bug Fixes
+
+- **api,app**: fix jwt cooki maxAge, adapt auth interceptor ([fc21cf5](https://github.com/drackp2m/playsetonline/commit/fc21cf507d344f12a4bad401b421842262953243)) by Marc Jovaní González
+
+### 💻 Continuous Integration
+
+- remove semantic-release from dev branch, add --verbose to script ([382fd19](https://github.com/drackp2m/playsetonline/commit/382fd19e4d45a5135d20759430e166bd6a3c6808)) by Marc Jovaní González
+- use `fetch-depth: 0` instead `git pull origin main` ([bc5cec5](https://github.com/drackp2m/playsetonline/commit/bc5cec57712dfc32f2b266c522cfabb3f13e2efe)) by Marc Jovaní González
+
+### 🎒 Chores
+
+- update (again) package-lock ([49a924c](https://github.com/drackp2m/playsetonline/commit/49a924ce7266c83554c21f7f8bcfe3e7613be9cc)) by Marc Jovaní González
+- update (again) package-lock ([e8db964](https://github.com/drackp2m/playsetonline/commit/e8db9641553b33e17dd289df2f15064b84d1b594)) by Marc Jovaní González
+- update (again) package-lock ([#221](https://github.com/drackp2m/playsetonline/issues/221)) ([a813439](https://github.com/drackp2m/playsetonline/commit/a8134392d5e2cba02607b977db68b160651fda23)) by GitHub
+- update (again) package-lock ([#222](https://github.com/drackp2m/playsetonline/issues/222)) ([4e5fb5c](https://github.com/drackp2m/playsetonline/commit/4e5fb5c97f6949a1efe42dbaba3edd8d9a20d537)) by GitHub
+- update package-lock ([c84c10b](https://github.com/drackp2m/playsetonline/commit/c84c10b7b28f3804d59cbf1ce6b1da13fb4cc757)) by Marc Jovaní González
+
+**Full Changelog**: https://github.com/drackp2m/playsetonline/compare/v1.0.1...v1.1.0
+
 # v1.0.1 (2024-11-16)
 
 ## What's Changed
