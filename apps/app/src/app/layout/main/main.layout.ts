@@ -1,4 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { SwUpdate } from '@angular/service-worker';
@@ -55,8 +56,10 @@ export default class MainLayout implements OnInit {
 					this.getPings.set(data.data.getPings);
 				}
 			},
-			error: (error) => {
-				this.getPings.set(error.message);
+			error: (error: unknown) => {
+				const typedError = error as HttpErrorResponse;
+
+				console.error(typedError.message);
 			},
 		});
 	}
@@ -78,8 +81,6 @@ export default class MainLayout implements OnInit {
 		if (this.swUpdate.isEnabled) {
 			this.swUpdate.versionUpdates.subscribe({
 				next: (version) => {
-					console.log({ version });
-
 					switch (version.type) {
 						case 'VERSION_DETECTED':
 							console.log('New version detected. Downloading...');
@@ -99,10 +100,6 @@ export default class MainLayout implements OnInit {
 					}
 				},
 			});
-
-			// const haveUpdates = await this.swUpdate.checkForUpdate();
-
-			// console.log({ haveUpdates });
 		}
 	}
 }
