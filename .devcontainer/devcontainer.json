@@ -99,7 +99,8 @@
 				"streetsidesoftware.code-spell-checker",
 				"tomoki1207.selectline-statusbar",
 				"chamboug.js-auto-backticks",
-				"firefox-devtools.vscode-firefox-debug"
+				"firefox-devtools.vscode-firefox-debug",
+				"christian-kohler.path-intellisense"
 			]
 		}
 	}
