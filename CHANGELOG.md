@@ -1,3 +1,14 @@
+# v1.3.0 (2024-11-22)
+
+## What's Changed
+
+### ✨ Features
+
+- **app**: use splash screen waiting for user info and game ready ([02b0c20](https://github.com/drackp2m/playsetonline/commit/02b0c2042023c0781dfcb647e325627495b0a27b)) by Marc Jovaní González
+- **app**: use splash screen waiting for user info and game ready ([#225](https://github.com/drackp2m/playsetonline/issues/225)) ([b25e7a2](https://github.com/drackp2m/playsetonline/commit/b25e7a25bf41beab0f5c73be9bc9bd21eefd9f7d)) by GitHub
+
+**Full Changelog**: https://github.com/drackp2m/playsetonline/compare/v1.2.0...v1.3.0
+
 # v1.2.0 (2024-11-21)
 
 ## What's Changed
