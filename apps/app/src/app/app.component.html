@@ -1,0 +1,8 @@
+@if (loading()) {
+	<app-splash-screen />
+} @else {
+	<router-outlet />
+	<span id="app-version" class="text-sm align-self-center mb-md" [attr.data-text]="'v' + version">
+		v{{ version }}
+	</span>
+}

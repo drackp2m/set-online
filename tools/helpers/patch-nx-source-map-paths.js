@@ -1,4 +1,4 @@
-import { relative } from 'node:path';
+const path = require('path');
 
 /*
  * Temporary workaround for debugging Node applications being built with webpack and Nx.
@@ -6,7 +6,7 @@ import { relative } from 'node:path';
  */
 module.exports = function patchNxSourceMapPaths(config) {
 	config.output.devtoolModuleFilenameTemplate = function (info) {
-		const rel = relative(process.cwd(), info.absoluteResourcePath);
+		const rel = path.relative(process.cwd(), info.absoluteResourcePath);
 		return `webpack:///./${rel}`;
 	};
 

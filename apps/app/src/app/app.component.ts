@@ -1,55 +1,42 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, computed, effect, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { SendPingGQL } from '@playsetonline/apollo-definitions';
 
-import { pingValue } from './app.config';
+import { pingValue as pingValueConfig } from './app.config';
+import { SplashScreenComponent } from './component/splash-screen/splash-screen.component';
+import { GameOfflineStore } from './page/game/store/game-offline.store';
+import { UserStore } from './store/user.store';
 
 import { version } from '@package';
 
 @Component({
 	standalone: true,
 	selector: 'app-root',
-	template: `<router-outlet />
-		<span id="app-version" class="text-sm align-self-center mb-md" [attr.data-text]="'v' + version">
-			v{{ version }}
-		</span>`,
-	styles: `
-		:host {
-			display: flex;
-			flex-direction: column;
-
-			#app-version {
-				position: fixed;
-				bottom: 0;
-
-				position: fixed;
-				color: rgb(255 255 255 / 90%);
-
-				&::before {
-					content: attr(data-text);
-					position: absolute;
-					-webkit-text-stroke: 2px rgb(0 0 0 / 30%);
-					z-index: -1;
-				}
-			}
-		}
-	`,
-	imports: [RouterOutlet],
+	templateUrl: './app.component.html',
+	styleUrl: './app.component.scss',
+	imports: [RouterOutlet, SplashScreenComponent],
 	providers: [SendPingGQL],
 })
 export class AppComponent {
 	private readonly sendPing = inject(SendPingGQL);
+	private readonly userStore = inject(UserStore);
+	private readonly gameOfflineStore = inject(GameOfflineStore);
 
-	private readonly pingValue = pingValue;
+	readonly version = version;
+	readonly loading = computed(() => {
+		const userLoading = this.userStore.isLoading();
+		const gameBoardCards = this.gameOfflineStore.boardCards();
+		const gameSetCards = this.gameOfflineStore.setCards();
 
-	version = version;
-
-	title = 'app';
+		return userLoading || (gameBoardCards.length === 0 && gameSetCards.length === 0);
+	});
 
 	constructor() {
+		this.userStore.fetchData();
+
 		effect(() => {
-			const pingValue = this.pingValue();
+			const pingValue = pingValueConfig();
 
 			if (pingValue !== undefined) {
 				this.sendPing.mutate({ input: { pingValue } }).subscribe();
