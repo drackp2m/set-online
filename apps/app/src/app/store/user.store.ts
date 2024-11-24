@@ -1,5 +1,5 @@
-import { inject } from '@angular/core';
-import { patchState, signalStore, withHooks, withMethods, withState } from '@ngrx/signals';
+import { Injectable, inject } from '@angular/core';
+import { patchState, signalStore, withState } from '@ngrx/signals';
 import { firstValueFrom } from 'rxjs';
 
 import { GetUserInfoGQL, GetUserInfoQuery } from '@playsetonline/apollo-definitions';
@@ -42,30 +42,30 @@ const initialState: UserState = {
 	error: undefined,
 };
 
-// export type UserStore = InstanceType<typeof UserStore>;
-
-export const UserStore = signalStore(
-	{ providedIn: 'root' },
+@Injectable({
+	providedIn: 'root',
+})
+export class UserStore extends signalStore(
+	{
+		protectedState: false,
+	},
 	withState(initialState),
-	withMethods((store, getUserInfoGQL = inject(GetUserInfoGQL)) => ({
-		reset(): void {
-			patchState(store, initialState);
-		},
-		async fetchData(): Promise<void> {
-			patchState(store, { isLoading: true });
+) {
+	private readonly getUserInfoGQL = inject(GetUserInfoGQL);
 
-			try {
-				const { data } = await firstValueFrom(getUserInfoGQL.fetch());
+	reset(): void {
+		patchState(this, initialState);
+	}
 
-				patchState(store, { data: data.getUserInfo, isLoading: false, error: undefined });
-			} catch (error) {
-				patchState(store, { error: error as UserInfoError, isLoading: false });
-			}
-		},
-	})),
-	withHooks({
-		onInit(store): void {
-			store.fetchData();
-		},
-	}),
-);
+	async fetchData(): Promise<void> {
+		patchState(this, { isLoading: true });
+
+		try {
+			const { data } = await firstValueFrom(this.getUserInfoGQL.fetch());
+
+			patchState(this, { data: data.getUserInfo, isLoading: false, error: undefined });
+		} catch (error) {
+			patchState(this, { error: error as UserInfoError, isLoading: false });
+		}
+	}
+}

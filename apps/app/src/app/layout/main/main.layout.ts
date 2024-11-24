@@ -77,7 +77,7 @@ export default class MainLayout implements OnInit {
 			});
 	}
 
-	private async serviceWorkerCheckUpdates(): Promise<void> {
+	private serviceWorkerCheckUpdates() {
 		if (this.swUpdate.isEnabled) {
 			this.swUpdate.versionUpdates.subscribe({
 				next: (version) => {
