@@ -1,3 +1,17 @@
+# v1.3.1 (2024-11-24)
+
+## What's Changed
+
+### ♻️ Code Refactoring
+
+- **app**: convert userStore into Class ([8d0ef7a](https://github.com/drackp2m/playsetonline/commit/8d0ef7a2e528b30265c89d2270384967d8337ffe)) by Marc Jovaní González
+
+### 🐛 Bug Fixes
+
+- **app**: stop checking when appLoad is finished ([fc0d0bf](https://github.com/drackp2m/playsetonline/commit/fc0d0bff78798e5979fc02b92bd31fc7dfcc16b3)) by Marc Jovaní González
+
+**Full Changelog**: https://github.com/drackp2m/playsetonline/compare/v1.3.0...v1.3.1
+
 # v1.3.0 (2024-11-22)
 
 ## What's Changed
