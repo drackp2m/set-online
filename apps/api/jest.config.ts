@@ -12,7 +12,6 @@ const config: Config = {
 	globalSetup: '<rootDir>/global-setup.ts',
 	globalTeardown: '<rootDir>/global-teardown.ts',
 	maxWorkers: 4,
-	testPathIgnorePatterns: ['.int.spec.ts$'],
 	transform: {
 		// '^.+\\.(t|j)s$': ['@swc/jest', { ...swcConfig }],
 		'^.+\\.[tj]s$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.spec.json' }],

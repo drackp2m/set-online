@@ -4,8 +4,8 @@ import { mock } from 'jest-mock-extended';
 import { User } from '../user/user.entity';
 
 import { AuthController } from './auth.controller';
-import { LoginRequestDto } from './dto/login-request.dto';
-import { RegisterRequestDto } from './dto/register-request.dto';
+import { LoginRequestDto } from './dto/request/login-request.dto';
+import { RegisterRequestDto } from './dto/request/register-request.dto';
 import { LoginUseCase } from './use-case/login.use-case';
 import { LogoutUseCase } from './use-case/logout.use-case';
 import { RefreshSessionUseCase } from './use-case/refresh-session.use-case';

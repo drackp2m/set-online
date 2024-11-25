@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 
 import { ShuffleArrayUseCase } from '../../../shared/use-case/shuffle-array.use-case';
 import { Game } from '../game.entity';
-import { GameParticipant } from '../relations/game-participant.entity';
+import { GameParticipant } from '../relation/game-participant.entity';
 
 import { CreateGameUseCase } from './create-game.use-case';
 import { GenerateGameCardsUseCase } from './generate-game-cards.use-case';

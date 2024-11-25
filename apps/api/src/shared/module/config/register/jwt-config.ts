@@ -1,7 +1,7 @@
 import { registerAs } from '@nestjs/config';
 
 import { validate } from '../../../environment/env.validation';
-import { JwtConfig } from '../types/jwt-config.type';
+import { JwtConfig } from '../definition/jwt-config.type';
 
 const config = validate(process.env);
 

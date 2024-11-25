@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 
-import { ApiConfig } from './types/api-config.type';
-import { DatabaseConfig } from './types/database-config.type';
-import { JwtConfig } from './types/jwt-config.type';
-import { NodeCacheConfig } from './types/node-cache-config.type';
+import { ApiConfig } from './definition/api-config.type';
+import { DatabaseConfig } from './definition/database-config.type';
+import { JwtConfig } from './definition/jwt-config.type';
+import { NodeCacheConfig } from './definition/node-cache-config.type';
 
 @Injectable()
 export class ConfigurationService {

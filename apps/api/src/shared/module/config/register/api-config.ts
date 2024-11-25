@@ -1,7 +1,7 @@
 import { registerAs } from '@nestjs/config';
 
 import { validate } from '../../../environment/env.validation';
-import { ApiConfig } from '../types/api-config.type';
+import { ApiConfig } from '../definition/api-config.type';
 
 const config = validate(process.env);
 

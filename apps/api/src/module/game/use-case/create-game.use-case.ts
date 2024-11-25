@@ -6,8 +6,8 @@ import { EditableDate } from '../../../shared/util/editable-date';
 import { User } from '../../user/user.entity';
 import { Game } from '../game.entity';
 import { GameRepository } from '../game.repository';
-import { GameParticipant } from '../relations/game-participant.entity';
-import { GameParticipantRepository } from '../relations/game-participant.repository';
+import { GameParticipant } from '../relation/game-participant.entity';
+import { GameParticipantRepository } from '../relation/game-participant.repository';
 
 import { GenerateGameCardsUseCase } from './generate-game-cards.use-case';
 

@@ -7,7 +7,7 @@ import { User } from '../../user/user.entity';
 import { UserRepository } from '../../user/user.repository';
 import { JsonWebToken } from '../definition/json-web-token.interface';
 
-import { JwtStrategyService } from './jwt.strategy.service';
+import { JwtStrategyService } from './jwt-strategy.service';
 
 describe('JwtStrategyService', () => {
 	let service: JwtStrategyService;

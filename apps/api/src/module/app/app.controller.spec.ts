@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { mock } from 'jest-mock-extended';
 
 import { ConfigurationService } from '../../shared/module/config/configuration.service';
-import { PubSubModule } from '../../shared/module/pub-sub/pub-sub-module';
+import { PubSubModule } from '../../shared/module/pub-sub/pub-sub.module';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';

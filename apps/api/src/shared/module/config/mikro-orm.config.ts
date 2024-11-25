@@ -3,7 +3,7 @@ import { MikroOrmModuleSyncOptions } from '@mikro-orm/nestjs';
 import { PostgreSqlDriver } from '@mikro-orm/postgresql';
 
 import { MikroOrmNamingStrategy } from './mikro-orm.naming-strategy';
-import { databaseConfig } from './registers/database.config';
+import { databaseConfig } from './register/database-config';
 
 export default async (): Promise<MikroOrmModuleSyncOptions> => ({
 	driver: PostgreSqlDriver,

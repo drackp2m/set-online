@@ -5,10 +5,4 @@ export default [
 	{
 		ignores: ['!**/*'],
 	},
-	{
-		files: ['**/*.spec.ts'],
-		rules: {
-			'max-lines-per-function': 'off',
-		},
-	},
 ];

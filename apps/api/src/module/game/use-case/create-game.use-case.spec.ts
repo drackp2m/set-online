@@ -13,8 +13,8 @@ import { UserFaker } from '../../user/factory/user.faker';
 import { GameFaker } from '../factory/game.faker';
 import { Game } from '../game.entity';
 import { GameRepository } from '../game.repository';
-import { GameParticipant } from '../relations/game-participant.entity';
-import { GameParticipantRepository } from '../relations/game-participant.repository';
+import { GameParticipant } from '../relation/game-participant.entity';
+import { GameParticipantRepository } from '../relation/game-participant.repository';
 
 import { CreateGameUseCase } from './create-game.use-case';
 import { GenerateGameCardsUseCase } from './generate-game-cards.use-case';

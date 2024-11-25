@@ -4,7 +4,7 @@ import { INestApplication, Logger, NestApplicationOptions, ValidationPipe } from
 import { GlobalPrefixOptions } from '@nestjs/common/interfaces';
 
 import { ConfigurationService } from '../module/config/configuration.service';
-import { ApiConfig } from '../module/config/types/api-config.type';
+import { ApiConfig } from '../module/config/definition/api-config.type';
 
 import { HttpExceptionFilter } from './exception-filter';
 
