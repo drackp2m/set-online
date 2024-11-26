@@ -17,7 +17,8 @@ services:
     environment:
       PGDATA: /var/lib/postgresql/data/pgdata
       POSTGRES_PASSWORD: ${DB_PASS}
-      POSTGRES_DATABASES: ${DB_NAME},${DB_NAME_TEST}
+      DB_USER: ${DB_USER}
+      DB_NAMES: ${DB_NAME},${DB_NAME_TEST}
       TZ: UTC
       PGTZ: UTC
     restart: unless-stopped

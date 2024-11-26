@@ -3,9 +3,6 @@
 set -e
 set -u
 
-set -e
-set -u
-
 function user_exists() {
 		local user=$1
 
@@ -37,13 +34,13 @@ function create_user_and_database() {
 		echo "Creating '$database' database"
 		echo ""
 
-		if user_exists "$database"; then
-				echo "Role '$database' already exists. Skipping..."
+		if user_exists "$DB_USER"; then
+				echo "Role '$DB_USER' already exists. Skipping..."
 		else
-				echo "Role '${database}' does not exist"
+				echo "Role '${DB_USER}' does not exist"
 
 				psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" <<-EOSQL
-					CREATE USER $database WITH PASSWORD '$POSTGRES_PASSWORD';
+					CREATE USER $DB_USER WITH PASSWORD '$POSTGRES_PASSWORD';
 				EOSQL
 		fi
 
@@ -58,16 +55,16 @@ function create_user_and_database() {
 		fi
 
 		psql -v ON_ERROR_STOP=1 -U "$POSTGRES_USER" <<-EOSQL
-			GRANT SET ON PARAMETER session_replication_role TO $database;
-			ALTER DATABASE $database OWNER TO $database;
+			GRANT SET ON PARAMETER session_replication_role TO $DB_USER;
+			ALTER DATABASE $database OWNER TO $DB_USER;
 		EOSQL
 
 		echo "Successful database creation '$database'"
 		echo ""
 }
 
-if [ -n "$POSTGRES_DATABASES" ]; then
-	for names in $(echo $POSTGRES_DATABASES | tr ',' ' '); do
-		create_user_and_database $names
+if [ -n "$DB_NAMES" ]; then
+	for database in $(echo $DB_NAMES | tr ',' ' '); do
+		create_user_and_database $database
 	done
 fi
