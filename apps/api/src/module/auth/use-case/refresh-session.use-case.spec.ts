@@ -6,7 +6,7 @@ import { mock } from 'jest-mock-extended';
 
 import { UnauthorizedException } from '../../../shared/exception/unauthorized-exception.exception';
 import { ConfigurationService } from '../../../shared/module/config/configuration.service';
-import { JwtFactory } from '../../../shared/module/config/factories/jwt.factory';
+import { JwtFactory } from '../../../shared/module/config/factory/jwt.factory';
 
 import { CheckJwtTokenUseCase } from './check-jwt-token.use-case';
 import { CreateJwtAccessTokenUseCase } from './create-jwt-access-token.use-case';

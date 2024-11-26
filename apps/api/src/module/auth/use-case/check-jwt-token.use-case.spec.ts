@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { mock } from 'jest-mock-extended';
 
 import { ConfigurationService } from '../../../shared/module/config/configuration.service';
-import { JwtFactory } from '../../../shared/module/config/factories/jwt.factory';
+import { JwtFactory } from '../../../shared/module/config/factory/jwt.factory';
 import { EditableDate } from '../../../shared/util/editable-date';
 
 import { CheckJwtTokenUseCase } from './check-jwt-token.use-case';

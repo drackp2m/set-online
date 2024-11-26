@@ -6,7 +6,7 @@ import { User } from '../user/user.entity';
 
 import { GameStatus } from './definition/game-status.enum';
 import { GameRepository } from './game.repository';
-import { GameParticipant } from './relations/game-participant.entity';
+import { GameParticipant } from './relation/game-participant.entity';
 
 @Entity({ repository: () => GameRepository })
 @ObjectType({ description: 'game' })

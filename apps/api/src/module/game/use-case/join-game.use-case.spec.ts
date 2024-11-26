@@ -12,8 +12,8 @@ import { GameStatus } from '../definition/game-status.enum';
 import { GameFaker } from '../factory/game.faker';
 import { Game } from '../game.entity';
 import { GameRepository } from '../game.repository';
-import { GameParticipant } from '../relations/game-participant.entity';
-import { GameParticipantRepository } from '../relations/game-participant.repository';
+import { GameParticipant } from '../relation/game-participant.entity';
+import { GameParticipantRepository } from '../relation/game-participant.repository';
 
 import { JoinGameUseCase } from './join-game.use-case';
 

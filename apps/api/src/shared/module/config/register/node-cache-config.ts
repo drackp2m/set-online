@@ -1,7 +1,7 @@
 import { registerAs } from '@nestjs/config';
 
 import { validate } from '../../../environment/env.validation';
-import { NodeCacheConfig } from '../types/node-cache-config.type';
+import { NodeCacheConfig } from '../definition/node-cache-config.type';
 
 const config = validate(process.env);
 

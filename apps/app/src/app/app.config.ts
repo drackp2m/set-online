@@ -51,20 +51,13 @@ const apolloConfig = (): ApolloClientOptions<unknown> => {
 		createClient({
 			url: `${environment.wsUrl}/graphql`,
 			connectionAckWaitTimeout: 1000,
-			keepAlive: 5000,
+			keepAlive: 2000,
 			on: {
-				connected: (_x, _y, _z) => {
-					// console.log({ _x, _y, _z });
-				},
 				ping: (_a, _b) => {
 					pingTimestamp.set(new Date().getTime());
-
-					// console.log({ _a, _b });
 				},
 				pong: (_c, _d) => {
 					pongTimestamp.set(new Date().getTime());
-
-					// console.log({ _c, _d });
 				},
 			},
 		}),

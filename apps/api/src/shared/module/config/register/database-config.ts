@@ -16,7 +16,7 @@ export const databaseConfig = registerAs(
 		port: config.DB_PORT,
 		user: config.DB_USER,
 		password: config.DB_PASS,
-		dbName: config.DB_NAME,
+		dbName: config.NODE_ENV === 'test' ? config.DB_NAME_TEST : config.DB_NAME,
 		...driverOptions,
 	}),
 );

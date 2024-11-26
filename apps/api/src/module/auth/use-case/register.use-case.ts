@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { PreconditionFailedException } from '../../../shared/exception/precondition-failed.exception';
 import { User } from '../../user/user.entity';
 import { UserRepository } from '../../user/user.repository';
-import { RegisterRequestDto } from '../dto/register-request.dto';
+import { RegisterRequestDto } from '../dto/request/register-request.dto';
 
 import { HashPasswordUseCase } from './hash-password.use-case';
 

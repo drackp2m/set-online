@@ -3,7 +3,7 @@ import { Injectable, Scope } from '@nestjs/common';
 import { UnauthorizedException } from '../../../shared/exception/unauthorized-exception.exception';
 import { UserRepository } from '../../user/user.repository';
 import { JwtCookie } from '../definition/jwt-cookie.enum';
-import { LoginRequestDto } from '../dto/login-request.dto';
+import { LoginRequestDto } from '../dto/request/login-request.dto';
 
 import { CheckPasswordUseCase } from './check-password.use-case';
 import { CreateJwtAccessTokenUseCase } from './create-jwt-access-token.use-case';

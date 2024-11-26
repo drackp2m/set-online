@@ -54,7 +54,7 @@ export default [
 	},
 	{
 		files: ['**/*.ts', '**/*.js', '**/*.mjs'],
-		ignores: ['**/*.spec.ts'],
+		ignores: ['**/*.spec.ts', '**/*.test.ts'],
 		rules: {
 			'max-lines': [
 				'warn',

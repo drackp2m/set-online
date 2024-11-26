@@ -6,8 +6,8 @@ import { User } from '../../user/user.entity';
 import { GameStatus } from '../definition/game-status.enum';
 import { Game } from '../game.entity';
 import { GameRepository } from '../game.repository';
-import { GameParticipant } from '../relations/game-participant.entity';
-import { GameParticipantRepository } from '../relations/game-participant.repository';
+import { GameParticipant } from '../relation/game-participant.entity';
+import { GameParticipantRepository } from '../relation/game-participant.repository';
 
 @Injectable()
 export class JoinGameUseCase {

@@ -7,7 +7,7 @@ import { GenerateUuidUseCase } from '../../../shared/use-case/generate-uuid.use-
 import { UserFaker } from '../../user/factory/user.faker';
 import { User } from '../../user/user.entity';
 import { UserRepository } from '../../user/user.repository';
-import { RegisterRequestDto } from '../dto/register-request.dto';
+import { RegisterRequestDto } from '../dto/request/register-request.dto';
 
 import { HashPasswordUseCase } from './hash-password.use-case';
 import { RegisterUseCase } from './register.use-case';
