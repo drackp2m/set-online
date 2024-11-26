@@ -37,21 +37,19 @@ export class GameOfflineStore extends signalStore(
 	constructor() {
 		super();
 
-		this.indexedDBService
-			.getItem<GameOfflineStoreProps>(LocalStorageKey.GameOffline)
-			.then((data) => {
-				if (data) {
-					patchState(this, data);
-				} else {
-					this.newGame();
-				}
-			});
+		this.indexedDBService.get(LocalStorageKey.GameOffline).then((data) => {
+			if (data) {
+				patchState(this, data);
+			} else {
+				this.newGame();
+			}
+		});
 	}
 
 	reset(): void {
 		patchState(this, initialState);
 
-		this.indexedDBService.clearStore();
+		this.indexedDBService.clear();
 	}
 
 	newGame(): void {
@@ -138,6 +136,6 @@ export class GameOfflineStore extends signalStore(
 				.map(([key, value]) => [key, value()]),
 		);
 
-		this.indexedDBService.setItem(LocalStorageKey.GameOffline, data);
+		this.indexedDBService.set(LocalStorageKey.GameOffline, data);
 	}
 }
