@@ -14,7 +14,7 @@ export default async () => {
 
 	const nxTaskTarget = process.env.NX_TASK_TARGET_TARGET;
 
-	if (nxTaskTarget && ['test', 'integrationTest'].includes(nxTaskTarget)) {
+	if (nxTaskTarget && ['integrationTest'].includes(nxTaskTarget)) {
 		console.log('Checking for pending DB migrations...\n');
 
 		const config = await databaseConfig();
