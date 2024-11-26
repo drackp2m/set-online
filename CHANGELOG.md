@@ -1,3 +1,28 @@
+# v1.4.0 (2024-11-26)
+
+## What's Changed
+
+### ✨ Features
+
+- **app**: create generic Indexed DB repository over idb node lib ([bab7a15](https://github.com/drackp2m/playsetonline/commit/bab7a155d9091dcab3f7c3f3fee98c8509d257f7)) by Marc Jovaní González
+- **app**: create generic Indexed DB repository over idb node lib ([#229](https://github.com/drackp2m/playsetonline/issues/229)) ([acb302f](https://github.com/drackp2m/playsetonline/commit/acb302f99b127396710a3901baa117c9625493a3)) by GitHub
+
+### 🧪 Tests
+
+- **api**: separate unit and integration tests, file naming refactor ([61344a3](https://github.com/drackp2m/playsetonline/commit/61344a31bc6f0786926e64732e02cf9ecd9d92fd)) by Marc Jovaní González
+
+### 💻 Continuous Integration
+
+- **api**: dev and test pg databases with same user, run migrations before tests ([1e2f324](https://github.com/drackp2m/playsetonline/commit/1e2f3249895f3c968053da852fe9ca3e3f2fc620)) by Marc Jovaní González
+- **api**: remove integration tests from default api tests ([7fef883](https://github.com/drackp2m/playsetonline/commit/7fef883a3de2081d47efe4b029124350813e7217)) by Marc Jovaní González
+- **api**: remove integration tests from default api tests ([#228](https://github.com/drackp2m/playsetonline/issues/228)) ([6a64832](https://github.com/drackp2m/playsetonline/commit/6a648321a893625ffba3a767b041a807b8f796e6)) by GitHub
+
+### 🎒 Chores
+
+- **api**: ignore env definition for eslint ([7b781da](https://github.com/drackp2m/playsetonline/commit/7b781da0bda80ffa013d3b1377c6d42909593a84)) by Marc Jovaní González
+
+**Full Changelog**: https://github.com/drackp2m/playsetonline/compare/v1.3.1...v1.4.0
+
 # v1.3.1 (2024-11-24)
 
 ## What's Changed
