@@ -3,6 +3,7 @@ import {
 	ApplicationConfig,
 	computed,
 	inject,
+	isDevMode,
 	provideExperimentalCheckNoChangesForDebug,
 	provideExperimentalZonelessChangeDetection,
 	signal,
@@ -101,7 +102,7 @@ export const appConfig: ApplicationConfig = {
 		provideHttpClient(withInterceptorsFromDi()),
 		provideRouter(APP_ROUTES, withHashLocation()),
 		provideServiceWorker('ngsw-worker.js', {
-			enabled: true, // !isDevMode(),
+			enabled: !isDevMode(),
 			registrationStrategy: 'registerWhenStable:5000',
 			scope: '/',
 		}),

@@ -27,7 +27,7 @@ export class PingResolver {
 			this.pubSub.publish(this.SEND_PING_TOPIC, pingsFromCache);
 		});
 
-		this.intervalUseCase.startInterval(5, this.SEND_PING_TOPIC);
+		this.intervalUseCase.startInterval(2, this.SEND_PING_TOPIC);
 	}
 
 	@ProtectTo()
