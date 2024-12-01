@@ -31,7 +31,6 @@ export class KeyValueIndexedDBRepository extends GenericRepository<KeyValueStore
 		if ('databases' in indexedDB) {
 			const databases = await indexedDB.databases();
 			databases.forEach((database): Promise<void> | void => {
-				console.log(database.name);
 				if (database.name && this.deprecatedDatabaseNames.includes(database.name)) {
 					const deletePromise = deleteDB(database.name, {
 						blocked() {
