@@ -14,11 +14,11 @@ interface KeyValueStoreSchema extends DBSchema {
 @Injectable({
 	providedIn: 'root',
 })
-export class KeyValueIndexedDBRepository extends GenericRepository<KeyValueStoreSchema> {
+export class KeyValueRepository extends GenericRepository<KeyValueStoreSchema> {
 	private readonly deprecatedDatabaseNames = ['PlaySetOnline'];
 
 	constructor() {
-		super('play_set_online', 'key_value', 1, (db, oldVersion) => {
+		super('key_value', 1, (db, oldVersion) => {
 			if (oldVersion < 1) {
 				db.createObjectStore('key_value');
 			}

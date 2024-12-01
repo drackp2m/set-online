@@ -9,10 +9,10 @@ import {
 } from 'idb';
 
 export class GenericRepository<T extends DBSchema> {
+	private dbName = 'play_set_online';
 	private dbPromise: Promise<IDBPDatabase<T>>;
 
 	constructor(
-		private dbName: string,
 		private storeName: StoreNames<T>,
 		private dbVersion: number,
 		private upgradeCallback: (

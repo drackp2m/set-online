@@ -9,7 +9,7 @@ import { ConfigurationService } from '../../shared/module/config/configuration.s
 export class AppService {
 	constructor(private readonly configService: ConfigurationService) {}
 
-	@Cron('* */5 * * * *')
+	@Cron('*/5 * * * *')
 	async handleCron() {
 		const apiConfig = this.configService.api;
 		const showPort = apiConfig.environment !== 'production' && apiConfig.port;

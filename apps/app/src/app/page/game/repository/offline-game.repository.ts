@@ -23,9 +23,9 @@ interface OfflineGameSchema extends DBSchema {
 @Injectable({
 	providedIn: 'root',
 })
-export class IndexedDBService extends GenericRepository<OfflineGameSchema> {
+export class OfflineGameRepository extends GenericRepository<OfflineGameSchema> {
 	constructor() {
-		super('play_set_online', 'game', 1, (db) => {
+		super('game', 1, (db) => {
 			if (!db.objectStoreNames.contains('game')) {
 				db.createObjectStore('game');
 			}

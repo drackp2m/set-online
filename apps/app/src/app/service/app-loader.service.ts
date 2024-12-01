@@ -1,7 +1,7 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 
 import { GameOfflineStore } from '../page/game/store/game-offline.store';
-import { KeyValueIndexedDBRepository } from '../repository/key-value-indexed-db.repository';
+import { KeyValueRepository } from '../repository/key-value.repository';
 import { UserStore } from '../store/user.store';
 
 @Injectable({
@@ -10,7 +10,7 @@ import { UserStore } from '../store/user.store';
 export class AppLoaderService {
 	private readonly userStore = inject(UserStore);
 	private readonly gameOfflineStore = inject(GameOfflineStore);
-	private readonly keyValueIndexedDBRepository = inject(KeyValueIndexedDBRepository);
+	private readonly keyValueIndexedDBRepository = inject(KeyValueRepository);
 
 	private stopCheck = false;
 

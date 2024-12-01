@@ -3,7 +3,7 @@ import { patchState, signalStore, withState } from '@ngrx/signals';
 
 import { CardInterface } from '../../../definition/card.interface';
 import { LocalStorageKey } from '../../../repository/definition/indexed-db-key.enum';
-import { KeyValueIndexedDBRepository } from '../../../repository/key-value-indexed-db.repository';
+import { KeyValueRepository } from '../../../repository/key-value.repository';
 import { GameService } from '../service/game.service';
 
 type GameOfflineStoreProps = {
@@ -32,7 +32,7 @@ export class GameOfflineStore extends signalStore(
 	withState(initialState),
 ) {
 	private readonly gameService = inject(GameService);
-	private readonly indexedDBService = inject(KeyValueIndexedDBRepository);
+	private readonly indexedDBService = inject(KeyValueRepository);
 
 	constructor() {
 		super();
