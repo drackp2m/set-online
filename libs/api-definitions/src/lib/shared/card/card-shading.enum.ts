@@ -1,5 +1,5 @@
 export enum CardShading {
-	solid = 1,
-	striped = 2,
-	outlined = 3,
+	SOLID = 1,
+	STRIPED = 2,
+	OUTLINED = 3,
 }

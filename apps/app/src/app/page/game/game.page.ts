@@ -150,15 +150,15 @@ export class GamePage {
 			shapes: ['image'],
 			shapeOptions: {
 				image: [
-					this.getConfettiShapeConfig('oval', 'red'),
-					this.getConfettiShapeConfig('oval', 'purple'),
-					this.getConfettiShapeConfig('oval', 'green'),
-					this.getConfettiShapeConfig('squiggle', 'red'),
-					this.getConfettiShapeConfig('squiggle', 'purple'),
-					this.getConfettiShapeConfig('squiggle', 'green'),
-					this.getConfettiShapeConfig('diamond', 'red'),
-					this.getConfettiShapeConfig('diamond', 'purple'),
-					this.getConfettiShapeConfig('diamond', 'green'),
+					this.getConfettiShapeConfig(CardShape.OVAL, CardColor.RED),
+					this.getConfettiShapeConfig(CardShape.OVAL, CardColor.PURPLE),
+					this.getConfettiShapeConfig(CardShape.OVAL, CardColor.GREEN),
+					this.getConfettiShapeConfig(CardShape.SQUIGGLE, CardColor.RED),
+					this.getConfettiShapeConfig(CardShape.SQUIGGLE, CardColor.PURPLE),
+					this.getConfettiShapeConfig(CardShape.SQUIGGLE, CardColor.GREEN),
+					this.getConfettiShapeConfig(CardShape.DIAMOND, CardColor.RED),
+					this.getConfettiShapeConfig(CardShape.DIAMOND, CardColor.PURPLE),
+					this.getConfettiShapeConfig(CardShape.DIAMOND, CardColor.GREEN),
 				],
 			},
 			count: 500, // number of confetti particles; default: 50
@@ -174,20 +174,20 @@ export class GamePage {
 		});
 	}
 
-	private getConfettiShapeConfig(shape: keyof typeof CardShape, color: keyof typeof CardColor) {
+	private getConfettiShapeConfig(shape: CardShape, color: CardColor) {
 		let width;
 		let height;
 
 		switch (shape) {
-			case 'oval':
+			case CardShape.OVAL:
 				width = 54;
 				height = 111;
 				break;
-			case 'diamond':
+			case CardShape.DIAMOND:
 				width = 57;
 				height = 116;
 				break;
-			case 'squiggle':
+			case CardShape.SQUIGGLE:
 				width = 52;
 				height = 105;
 				break;

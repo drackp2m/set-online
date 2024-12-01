@@ -1,3 +1,3 @@
 export enum LocalStorageKey {
-	GameOffline,
+	GAME_OFFLINE = 'game_offline',
 }

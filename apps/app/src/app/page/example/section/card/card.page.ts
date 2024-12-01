@@ -13,8 +13,8 @@ import ExampleMenuComponent from '../../component/menu/example-menu.component';
 	imports: [ExampleMenuComponent, CardShapeComponent, CardComponent],
 })
 export class CardPage {
-	shapes: CardShape[] = [CardShape.diamond, CardShape.oval, CardShape.squiggle];
-	colors: CardColor[] = [CardColor.green, CardColor.purple, CardColor.red];
-	shadings: CardShading[] = [CardShading.outlined, CardShading.solid, CardShading.striped];
+	shapes: CardShape[] = [CardShape.DIAMOND, CardShape.OVAL, CardShape.SQUIGGLE];
+	colors: CardColor[] = [CardColor.GREEN, CardColor.PURPLE, CardColor.RED];
+	shadings: CardShading[] = [CardShading.OUTLINED, CardShading.SOLID, CardShading.STRIPED];
 	counts: number[] = [1, 2, 3];
 }

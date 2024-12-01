@@ -20,9 +20,7 @@ export class KeyValueIndexedDBRepository extends GenericRepository<KeyValueStore
 	constructor() {
 		super('play_set_online', 'key_value', 1, (db, oldVersion) => {
 			if (oldVersion < 1) {
-				if (!db.objectStoreNames.contains('key_value')) {
-					db.createObjectStore('key_value');
-				}
+				db.createObjectStore('key_value');
 			}
 		});
 	}

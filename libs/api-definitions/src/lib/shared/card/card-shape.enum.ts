@@ -1,5 +1,5 @@
 export enum CardShape {
-	oval = 1,
-	squiggle = 2,
-	diamond = 3,
+	OVAL = 1,
+	SQUIGGLE = 2,
+	DIAMOND = 3,
 }

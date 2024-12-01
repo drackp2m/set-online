@@ -38,7 +38,7 @@ export class GameOfflineStore extends signalStore(
 		super();
 
 		this.indexedDBService
-			.get(LocalStorageKey.GameOffline)
+			.get(LocalStorageKey.GAME_OFFLINE)
 			.then((data) => {
 				if (data) {
 					patchState(this, data);
@@ -142,6 +142,6 @@ export class GameOfflineStore extends signalStore(
 				.map(([key, value]) => [key, value()]),
 		);
 
-		this.indexedDBService.set(LocalStorageKey.GameOffline, data);
+		this.indexedDBService.set(LocalStorageKey.GAME_OFFLINE, data);
 	}
 }

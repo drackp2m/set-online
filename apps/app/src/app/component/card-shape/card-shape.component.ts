@@ -10,13 +10,13 @@ import { CardColor, CardShading, CardShape } from '@playsetonline/api-definition
 })
 export class CardShapeComponent {
 	shape = input.required<string, CardShape>({
-		transform: (value) => CardShape[value],
+		transform: (value) => CardShape[value].toLowerCase(),
 	});
 	color = input.required<string, CardColor>({
-		transform: (value) => CardColor[value],
+		transform: (value) => CardColor[value].toLowerCase(),
 	});
 	shading = input.required<string, CardShading>({
-		transform: (value) => CardShading[value],
+		transform: (value) => CardShading[value].toLowerCase(),
 	});
 
 	horizontal = input(false, {
