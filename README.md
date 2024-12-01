@@ -36,6 +36,12 @@ At this point you should be able to navigate to:
 - 👹 Apollo Studio on https://localhost:3000/graphql
 - 🧜🏻‍♀️ Frontend on https://localhost:4200
 
+## Certificates
+
+This project has been designed to work with self-signed certificates in a development environment.
+
+To create these certificates execute the command `./utils/generate-ssl.sh`. Now, restart the Docker container (or the application launch command).
+
 ## Migrations
 
 Using the mikro-orm migration system, three `npm` commands are available:
