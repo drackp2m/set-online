@@ -12,7 +12,7 @@ export class KeyValueRepository extends GenericRepository<KeyValueSchema> {
 	private readonly deprecatedDatabaseNames = ['PlaySetOnline'];
 
 	constructor() {
-		super('key_value', 1, (db, oldVersion) => {
+		super(1, (db, oldVersion) => {
 			if (oldVersion < 1) {
 				db.createObjectStore('key_value');
 			}

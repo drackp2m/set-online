@@ -9,9 +9,9 @@ import { OfflineGameSchema } from './definition/offline-game-schema.interface';
 })
 export class OfflineGameRepository extends GenericRepository<OfflineGameSchema> {
 	constructor() {
-		super('game', 1, (db) => {
-			if (!db.objectStoreNames.contains('game')) {
-				db.createObjectStore('game');
+		super(1, (db, oldVersion) => {
+			if (oldVersion < 1) {
+				db.createObjectStore('offline_game');
 			}
 		});
 	}

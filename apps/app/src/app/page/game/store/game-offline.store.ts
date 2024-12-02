@@ -38,7 +38,7 @@ export class GameOfflineStore extends signalStore(
 		super();
 
 		this.indexedDBService
-			.get(KeyValueRepositoryKeys.GAME_OFFLINE)
+			.get('key_value', KeyValueRepositoryKeys.GAME_OFFLINE)
 			.then((data) => {
 				if (data) {
 					patchState(this, data);
@@ -55,7 +55,7 @@ export class GameOfflineStore extends signalStore(
 	reset(): void {
 		patchState(this, initialState);
 
-		this.indexedDBService.clear();
+		this.indexedDBService.clear('key_value');
 	}
 
 	newGame(): void {
@@ -142,6 +142,6 @@ export class GameOfflineStore extends signalStore(
 				.map(([key, value]) => [key, value()]),
 		);
 
-		this.indexedDBService.set(KeyValueRepositoryKeys.GAME_OFFLINE, data);
+		this.indexedDBService.set('key_value', KeyValueRepositoryKeys.GAME_OFFLINE, data);
 	}
 }
