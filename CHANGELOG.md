@@ -1,3 +1,25 @@
+# v1.4.1 (2024-12-02)
+
+## What's Changed
+
+### ♻️ Code Refactoring
+
+- **api,app**: prepare project to create self-signed ssl certificates ([627506f](https://github.com/drackp2m/playsetonline/commit/627506fb565ad36d3f2aca2cbbd0d8123e3a5f04)) by Marc Jovaní González
+- **app**: card enums to uppercase ([fe1cabc](https://github.com/drackp2m/playsetonline/commit/fe1cabc553fbaf2221cc6d219ee66875df3804a3)) by Marc Jovaní González
+- **app**: move idb repository definitions to separate files ([d323359](https://github.com/drackp2m/playsetonline/commit/d323359153c6f1c957eb91a85bd3fb0005dcd382)) by Marc Jovaní González
+- **app**: no need to pass the database name to the generic repository ([06d6ef6](https://github.com/drackp2m/playsetonline/commit/06d6ef6d2875d1635971259dca8fa21d26206591)) by Marc Jovaní González
+
+### 🐛 Bug Fixes
+
+- **api**: backend cron now runs every five minutes and call to graphql endpoint ([ec925fb](https://github.com/drackp2m/playsetonline/commit/ec925fb3eec9bd462478339d3ee71693461a6d8f)) by Marc Jovaní González
+- **app**: app loader wait for deprectaed databases deletion ([8d12898](https://github.com/drackp2m/playsetonline/commit/8d128987b1da2e3e36e94a85505b75880360be65)) by Marc Jovaní González
+
+### 🎒 Chores
+
+- upgrade NX to 20.1.4 ([2bfc4fc](https://github.com/drackp2m/playsetonline/commit/2bfc4fc7e048798ccb5666f5d98f9b306c85bfee)) by Marc Jovaní González
+
+**Full Changelog**: https://github.com/drackp2m/playsetonline/compare/v1.4.0...v1.4.1
+
 # v1.4.0 (2024-11-26)
 
 ## What's Changed
