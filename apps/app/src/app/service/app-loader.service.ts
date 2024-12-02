@@ -1,7 +1,7 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 
 import { GameOfflineStore } from '../page/game/store/game-offline.store';
-import { KeyValueRepository } from '../repository/key-value.repository';
+import { KeyValueRepository } from '../repository/key-value/key-value.repository';
 import { UserStore } from '../store/user.store';
 
 @Injectable({

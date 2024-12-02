@@ -1,20 +1,14 @@
 import { Injectable } from '@angular/core';
-import { DBSchema, deleteDB } from 'idb';
+import { deleteDB } from 'idb';
 
-import { LocalStorageKey } from './definition/indexed-db-key.enum';
-import { GenericRepository } from './generic.repository';
+import { GenericRepository } from '../generic.repository';
 
-interface KeyValueStoreSchema extends DBSchema {
-	key_value: {
-		key: LocalStorageKey;
-		value: unknown;
-	};
-}
+import { KeyValueSchema } from './definition/key-value-schema.interface';
 
 @Injectable({
 	providedIn: 'root',
 })
-export class KeyValueRepository extends GenericRepository<KeyValueStoreSchema> {
+export class KeyValueRepository extends GenericRepository<KeyValueSchema> {
 	private readonly deprecatedDatabaseNames = ['PlaySetOnline'];
 
 	constructor() {

@@ -2,8 +2,8 @@ import { Injectable, inject } from '@angular/core';
 import { patchState, signalStore, withState } from '@ngrx/signals';
 
 import { CardInterface } from '../../../definition/card.interface';
-import { LocalStorageKey } from '../../../repository/definition/indexed-db-key.enum';
-import { KeyValueRepository } from '../../../repository/key-value.repository';
+import { KeyValueRepositoryKeys } from '../../../repository/key-value/definition/key-value-repository-keys.enum';
+import { KeyValueRepository } from '../../../repository/key-value/key-value.repository';
 import { GameService } from '../service/game.service';
 
 type GameOfflineStoreProps = {
@@ -38,7 +38,7 @@ export class GameOfflineStore extends signalStore(
 		super();
 
 		this.indexedDBService
-			.get(LocalStorageKey.GAME_OFFLINE)
+			.get(KeyValueRepositoryKeys.GAME_OFFLINE)
 			.then((data) => {
 				if (data) {
 					patchState(this, data);
@@ -142,6 +142,6 @@ export class GameOfflineStore extends signalStore(
 				.map(([key, value]) => [key, value()]),
 		);
 
-		this.indexedDBService.set(LocalStorageKey.GAME_OFFLINE, data);
+		this.indexedDBService.set(KeyValueRepositoryKeys.GAME_OFFLINE, data);
 	}
 }
