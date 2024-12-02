@@ -12,7 +12,6 @@ import { CardShapeComponent } from '../card-shape/card-shape.component';
 	imports: [CardShapeComponent],
 })
 export class CardComponent {
-	private readonly hello = 22;
 	shape = input.required<CardShape>();
 	color = input.required<CardColor>();
 	shading = input.required<CardShading>();

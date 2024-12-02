@@ -9,7 +9,7 @@ import rxjs from 'eslint-plugin-rxjs-updated';
 import unusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 
-import eslintErrorsToWarnings from './tools/helpers/eslint-errors-to-warnings.mjs';
+import eslintErrorsToWarnings from './utils/eslint-errors-to-warnings.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

@@ -9,10 +9,10 @@ import {
 } from 'idb';
 
 export class GenericRepository<T extends DBSchema> {
+	private dbName = 'play_set_online';
 	private dbPromise: Promise<IDBPDatabase<T>>;
 
 	constructor(
-		private dbName: string,
 		private storeName: StoreNames<T>,
 		private dbVersion: number,
 		private upgradeCallback: (
@@ -43,7 +43,21 @@ export class GenericRepository<T extends DBSchema> {
 
 	private initDB(): Promise<IDBPDatabase<T>> {
 		return openDB<T>(this.dbName, this.dbVersion, {
-			upgrade: this.upgradeCallback,
+			upgrade: (db, oldVersion, newVersion, transaction) => {
+				this.upgradeCallback(db, oldVersion, newVersion, transaction);
+				if (!db.objectStoreNames.contains(this.storeName)) {
+					db.createObjectStore(this.storeName);
+				}
+			},
+			blocked() {
+				console.warn('Database upgrade blocked');
+			},
+			blocking() {
+				console.warn('Database blocking');
+			},
+			terminated() {
+				console.warn('Database connection terminated');
+			},
 		});
 	}
 }

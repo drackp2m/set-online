@@ -1,5 +1,5 @@
 const { composePlugins, withNx } = require('@nx/webpack');
-const patchNxSourceMapPaths = require('../../tools/helpers/patch-nx-source-map-paths');
+const patchNxSourceMapPaths = require('../../utils/patch-nx-source-map-paths');
 
 // Nx plugins for webpack.
 module.exports = composePlugins(withNx(), (config) => {

@@ -1,6 +1,7 @@
-import { Injectable, computed, inject } from '@angular/core';
+import { Injectable, computed, inject, signal } from '@angular/core';
 
 import { GameOfflineStore } from '../page/game/store/game-offline.store';
+import { KeyValueRepository } from '../repository/key-value/key-value.repository';
 import { UserStore } from '../store/user.store';
 
 @Injectable({
@@ -9,6 +10,7 @@ import { UserStore } from '../store/user.store';
 export class AppLoaderService {
 	private readonly userStore = inject(UserStore);
 	private readonly gameOfflineStore = inject(GameOfflineStore);
+	private readonly keyValueIndexedDBRepository = inject(KeyValueRepository);
 
 	private stopCheck = false;
 
@@ -16,8 +18,18 @@ export class AppLoaderService {
 		return this.checkLoadFinish();
 	});
 
+	readonly removeDeprecatedDatabase = signal<boolean>(false);
+
+	constructor() {
+		this.keyValueIndexedDBRepository.removeDeprecatedDatabase().then(() => {
+			this.removeDeprecatedDatabase.set(true);
+		});
+	}
+
 	private checkLoadFinish(): boolean {
-		const loadFinish = this.stopCheck || (this.userLoaded() && this.isGameLoaded());
+		const loadFinish =
+			this.stopCheck ||
+			(this.userLoaded() && this.isGameLoaded() && this.isRemoveDatabaseLoading());
 
 		if (loadFinish) {
 			this.stopCheck = true;
@@ -37,5 +49,11 @@ export class AppLoaderService {
 		const gameSetCards = this.gameOfflineStore.setCards();
 
 		return gameBoardCards.length !== 0 || gameSetCards.length !== 0;
+	}
+
+	private isRemoveDatabaseLoading(): boolean {
+		const isRemoveDatabaseLoading = this.removeDeprecatedDatabase();
+
+		return isRemoveDatabaseLoading === true;
 	}
 }
