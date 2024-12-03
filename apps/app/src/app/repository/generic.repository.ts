@@ -1,4 +1,12 @@
-import { DBSchema, IDBPDatabase, IDBPTransaction, StoreNames, StoreValue, openDB } from 'idb';
+import {
+	DBSchema,
+	IDBPDatabase,
+	IDBPTransaction,
+	StoreKey,
+	StoreNames,
+	StoreValue,
+	openDB,
+} from 'idb';
 
 export class GenericRepository<T extends DBSchema> {
 	private dbName = 'play_set_online';
@@ -34,8 +42,8 @@ export class GenericRepository<T extends DBSchema> {
 
 	async set<K extends StoreNames<T>>(
 		storeName: K,
-		key: StoreValue<T, K>['key'],
-		value: StoreValue<T, K>['value'],
+		key: StoreKey<T, K>,
+		value: StoreValue<T, K>,
 	): Promise<void> {
 		await this.withTransaction([storeName], 'readwrite', async (tx) => {
 			await tx.objectStore(storeName).put(value, key);
@@ -44,14 +52,14 @@ export class GenericRepository<T extends DBSchema> {
 
 	async get<K extends StoreNames<T>>(
 		storeName: K,
-		key: StoreValue<T, K>['key'],
-	): Promise<StoreValue<T, K>['value'] | undefined> {
+		key: StoreKey<T, K>,
+	): Promise<StoreValue<T, K> | undefined> {
 		return this.withTransaction([storeName], 'readonly', async (tx) => {
 			return tx.objectStore(storeName).get(key);
 		});
 	}
 
-	async delete<K extends StoreNames<T>>(storeName: K, key: StoreValue<T, K>['key']): Promise<void> {
+	async delete<K extends StoreNames<T>>(storeName: K, key: StoreValue<T, K>): Promise<void> {
 		await this.withTransaction([storeName], 'readwrite', async (tx) => {
 			await tx.objectStore(storeName).delete(key);
 		});
