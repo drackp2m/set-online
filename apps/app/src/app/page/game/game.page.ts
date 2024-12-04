@@ -193,8 +193,11 @@ export class GamePage {
 				break;
 		}
 
+		const shapeName = this.getEnumKeyByValue(CardShape, shape)?.toLocaleLowerCase();
+		const cardColor = this.getEnumKeyByValue(CardColor, color)?.toLocaleLowerCase();
+
 		return {
-			src: `assets/icons/${shape}-solid-${color}.png`,
+			src: `assets/icons/${shapeName}-solid-${cardColor}.png`,
 			width,
 			height,
 			particles: {
@@ -203,5 +206,12 @@ export class GamePage {
 				},
 			},
 		};
+	}
+
+	private getEnumKeyByValue<T extends { [key: string]: string | number }>(
+		enumType: T,
+		value: T[keyof T],
+	): keyof T | undefined {
+		return Object.keys(enumType).find((key) => enumType[key] === value);
 	}
 }
