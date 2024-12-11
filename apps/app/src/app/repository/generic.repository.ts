@@ -2,29 +2,28 @@ import {
 	DBSchema,
 	IDBPDatabase,
 	IDBPTransaction,
+	IndexKey,
+	IndexNames,
 	StoreKey,
 	StoreNames,
 	StoreValue,
 	openDB,
 } from 'idb';
 
+import { MigrationHandler } from './migration-handler';
+
 export class GenericRepository<T extends DBSchema> {
 	private dbName = 'play_set_online';
 	private dbPromise: Promise<IDBPDatabase<T>>;
 	private currentTransaction: IDBPTransaction<T, StoreNames<T>[], 'readwrite' | 'readonly'> | null =
 		null;
+	protected migrationHandler = new MigrationHandler<T>();
 
-	constructor(
-		private dbVersion: number,
-		private upgradeCallback: (
-			db: IDBPDatabase<T>,
-			oldVersion: number,
-			newVersion: number | null,
-			transaction: IDBPTransaction<T, StoreNames<T>[], 'versionchange'>,
-		) => void,
-	) {
-		this.dbPromise = openDB<T>(this.dbName, this.dbVersion, {
-			upgrade: this.upgradeCallback,
+	constructor() {
+		this.dbPromise = openDB<T>(this.dbName, this.migrationHandler.getLatestVersion(), {
+			upgrade: (db, oldVersion, newVersion, transaction) => {
+				this.migrationHandler.applyMigrations(db, oldVersion, newVersion, transaction);
+			},
 		});
 	}
 
@@ -44,9 +43,11 @@ export class GenericRepository<T extends DBSchema> {
 		storeName: K,
 		key: StoreKey<T, K>,
 		value: StoreValue<T, K>,
-	): Promise<void> {
-		await this.withTransaction([storeName], 'readwrite', async (tx) => {
+	): Promise<StoreValue<T, K>> {
+		return this.withTransaction([storeName], 'readwrite', async (tx) => {
 			await tx.objectStore(storeName).put(value, key);
+
+			return value;
 		});
 	}
 
@@ -56,6 +57,16 @@ export class GenericRepository<T extends DBSchema> {
 	): Promise<StoreValue<T, K> | undefined> {
 		return this.withTransaction([storeName], 'readonly', async (tx) => {
 			return tx.objectStore(storeName).get(key);
+		});
+	}
+
+	async getByIndex<K extends StoreNames<T>>(
+		storeName: K,
+		indexName: IndexNames<T, K>,
+		indexValue: IDBKeyRange | IndexKey<T, K, IndexNames<T, K>>,
+	): Promise<StoreValue<T, K>[]> {
+		return this.withTransaction([storeName], 'readonly', async (tx) => {
+			return tx.objectStore(storeName).index(indexName).getAll(indexValue);
 		});
 	}
 

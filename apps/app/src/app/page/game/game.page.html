@@ -5,14 +5,14 @@
 >
 	<div class="flex-row justify-between">
 		<div class="flex-col gap-sm">
-			<a [routerLink]="'/'">Sets found: {{ setCards().length / 3 }}</a>
-			<button (click)="cheatGame()">Wrong sets: {{ wrongSetCards().length / 3 }}</button>
-			<a [routerLink]="'/game'">Card in deck: {{ remainingCardsCount() }}</a>
+			<a [routerLink]="'/'">Sets found: {{ validSets().length }}</a>
+			<button (click)="cheatGame()">Wrong sets: {{ invalidSets().length }}</button>
+			<a [routerLink]="'/game'">Card in deck: {{ cardsInDeck() }}</a>
 		</div>
 
 		<div class="flex-col gap-sm">
 			<button class="p-sm surface-vivid round-md text-center" (click)="addCardsToBoard()">
-				Add cards
+				Add cards {{ boardCards().length + validSets().length * 3 + cardsInDeck() }}
 			</button>
 
 			<button class="p-sm surface-vivid round-md" (click)="highlightSet()">Highlight set</button>
@@ -36,7 +36,7 @@
 		}
 	</section>
 
-	@if (remainingCardsCount() === 0 && boardSet().length === 0) {
+	@if (gameCompleted() === true) {
 		<app-you-won (playAgain)="newGame()"></app-you-won>
 	}
 </main>

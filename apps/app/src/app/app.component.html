@@ -1,6 +1,11 @@
 @if (loadFinish() === false) {
 	<app-splash-screen />
 } @else {
+	<!-- <ul>
+		@for (message of messages(); track $index) {
+			<li>{{ message }}</li>
+		}
+	</ul> -->
 	<router-outlet />
 	<span id="app-version" class="text-sm align-self-center mb-md" [attr.data-text]="'v' + version">
 		v{{ version }}

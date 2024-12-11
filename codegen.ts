@@ -17,11 +17,11 @@ const config: CodegenConfig = {
 				addExplicitOverride: true,
 				scalars: {
 					DateTime: 'Date',
-				}
+				},
 			},
-      // hooks: {
-      //   afterOneFileWrite: ['node --run eslint libs/api-definitions/src/lib/apollo/operations.ts']
-      // }
+			// hooks: {
+			//   afterOneFileWrite: ['node --run eslint libs/api-definitions/src/lib/apollo/operations.ts']
+			// }
 		},
 	},
 };

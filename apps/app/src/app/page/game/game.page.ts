@@ -7,9 +7,17 @@ import { confetti } from '@tsparticles/confetti';
 import { CardColor, CardShape } from '@playsetonline/api-definitions';
 
 import { CardComponent } from '../../component/card/card.component';
-import { CardInterface } from '../../definition/card.interface';
+import { Card } from '../../definition/card.interface';
 
 import { YouWonComponent } from './component/you-won/you-won.component';
+import {
+	AddCardsToBoardException,
+	addCardsToBoardErrorMessage,
+} from './error/add-cards-to-board.error';
+import { OfflineGameEventType } from './repository/offline-game/definition/offline-game-event-type.enum';
+import { OfflineGameEvent } from './repository/offline-game/definition/offline-game-event.interface';
+import { OfflineGameStatus } from './repository/offline-game/definition/offline-game-status.enum';
+import { OfflineGameRepository } from './repository/offline-game/offline-game.repository';
 import { GameOfflineStore } from './store/game-offline.store';
 
 @Component({
@@ -21,19 +29,20 @@ import { GameOfflineStore } from './store/game-offline.store';
 export class GamePage {
 	private readonly gameOfflineStore = inject(GameOfflineStore);
 	private readonly activatedRoute = inject(ActivatedRoute);
+	private readonly offlineGameRepository = inject(OfflineGameRepository);
 
 	private highlightInterval?: number;
 
 	readonly boardCards = this.gameOfflineStore.boardCards;
-	readonly setCards = this.gameOfflineStore.setCards;
-	readonly remainingCardsCount = computed(() => {
-		const boardCards = this.boardCards();
-		const sets = this.setCards();
-
-		return 81 - boardCards.length - sets.length;
-	});
+	readonly validSets = this.gameOfflineStore.validSets;
+	readonly invalidSets = this.gameOfflineStore.invalidSets;
+	readonly cardsInDeck = this.gameOfflineStore.cardsInDeck;
 	readonly selectedCards = this.gameOfflineStore.selectedCards;
-	readonly wrongSetCards = this.gameOfflineStore.wrongSetCards;
+	readonly gameCompleted = computed(() => {
+		const game = this.gameOfflineStore.game();
+
+		return (game?.status ?? OfflineGameStatus.COMPLETED) === OfflineGameStatus.COMPLETED;
+	});
 
 	readonly boardSet = this.gameOfflineStore.boardSet;
 	readonly showSets = signal<number>(0);
@@ -43,22 +52,13 @@ export class GamePage {
 	readonly avoidStatusBar = computed(() => this.activatedRouteData()?.['avoidStatusBar']);
 
 	constructor() {
-		effect(
-			() => {
-				this.gameOfflineStore.boardCards();
+		effect(() => {
+			const game = this.gameOfflineStore.game();
 
-				const remainingCardsCount = this.remainingCardsCount();
-				const boardSet = this.boardSet();
-
-				clearInterval(this.highlightInterval);
-				this.showSets.set(0);
-
-				if (remainingCardsCount === 0 && boardSet.length === 0) {
-					this.startConfetti();
-				}
-			},
-			{ allowSignalWrites: true },
-		);
+			if (game === null || game.status === OfflineGameStatus.COMPLETED) {
+				this.startConfetti();
+			}
+		});
 	}
 
 	newGame(): void {
@@ -88,15 +88,15 @@ export class GamePage {
 		}
 	}
 
-	selectCard(card: CardInterface): void {
+	selectCard(card: Card): void {
 		this.gameOfflineStore.selectCard(card);
 	}
 
 	highlightSet(): void {
+		// FixMe => translate this logic to the store, and prevent highlightSet where set are selected
+		const game = this.gameOfflineStore.game();
 		const boardSet = this.boardSet();
 		const showSets = this.showSets();
-
-		this.gameOfflineStore.addFakeWrongSet();
 
 		if (showSets !== 0) {
 			return;
@@ -106,6 +106,18 @@ export class GamePage {
 			this.showMessages('There are no sets on the board.');
 
 			return;
+		}
+
+		if (game !== null) {
+			const uuid = crypto.randomUUID();
+			const event: OfflineGameEvent = {
+				uuid,
+				game_uuid: game.uuid,
+				type: OfflineGameEventType.ASK_FOR_HELP,
+				created_at: new Date(),
+			};
+
+			this.offlineGameRepository.set('offline_game_event', uuid, event);
 		}
 
 		this.showSets.set(6);
@@ -122,19 +134,15 @@ export class GamePage {
 	}
 
 	addCardsToBoard(): void {
-		const boardSet = this.boardSet();
-		const boardCards = this.boardCards();
-		const remainingCardsCount = this.remainingCardsCount();
+		this.gameOfflineStore.addCardsToBoard().catch((error) => {
+			if (error instanceof AddCardsToBoardException) {
+				const errorMessage = addCardsToBoardErrorMessage.get(error.typedError);
 
-		if (remainingCardsCount === 0) {
-			this.showMessages('There are no more cards in the deck.');
-		} else if (boardCards.length >= 15) {
-			this.showMessages('You can only add extra cards once per game!');
-		} else if (boardSet.length !== 0) {
-			this.showMessages('Nope, there are still sets on the table, look for them!');
-		} else {
-			this.gameOfflineStore.addCardsToBoard();
-		}
+				if (errorMessage !== undefined) {
+					this.showMessages(errorMessage);
+				}
+			}
+		});
 	}
 
 	private showMessages(text: string): void {
