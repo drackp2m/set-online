@@ -10,7 +10,6 @@
 			"!{projectRoot}/jest.config.[jt]s",
 			"!{projectRoot}/src/test-setup.[jt]s",
 			"!{projectRoot}/test-setup.[jt]s",
-
 			"!{projectRoot}/cypress/**/*",
 			"!{projectRoot}/**/*.cy.[jt]s?(x)",
 			"!{projectRoot}/cypress.config.[jt]s"

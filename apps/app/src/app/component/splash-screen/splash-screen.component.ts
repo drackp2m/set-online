@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
 @Component({
-	standalone: true,
 	selector: 'app-splash-screen',
 	template: `
 		<div class="splash-screen">

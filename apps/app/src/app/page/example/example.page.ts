@@ -17,7 +17,6 @@ import { ApiClient } from '../../service/api-client.service';
 import ExampleMenuComponent from './component/menu/example-menu.component';
 
 @Component({
-	standalone: true,
 	templateUrl: './example.page.html',
 	styleUrl: './example.page.scss',
 	imports: [JsonPipe, ExampleMenuComponent, ReactiveFormsModule, GlitchSvgComponent],
@@ -49,8 +48,10 @@ export class ExamplePage {
 			next: (data) => {
 				this.data.set(`Now: ${data.data.getUsers.length} users.`);
 			},
-			error: (error) => {
-				this.data.set(error.message);
+			error: (error: unknown) => {
+				if (error instanceof Error) {
+					this.data.set(error.message);
+				}
 			},
 		});
 	}
@@ -62,8 +63,10 @@ export class ExamplePage {
 					this.getManySubscription.set(data.data.getManySubscription);
 				}
 			},
-			error: (error) => {
-				this.getManySubscription.set(error.message);
+			error: (error: unknown) => {
+				if (error instanceof Error) {
+					this.getManySubscription.set(error.message);
+				}
 			},
 		});
 
@@ -73,8 +76,11 @@ export class ExamplePage {
 					this.getPings.set(data.data.getPings);
 				}
 			},
-			error: (error) => {
-				this.getPings.set(error.message);
+			error: (error: unknown) => {
+				console.log({ error });
+				// if (error instanceof Error) {
+				// 	this.getPings.set(error.message);
+				// }
 			},
 		});
 	}

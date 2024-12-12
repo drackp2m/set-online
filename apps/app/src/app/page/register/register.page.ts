@@ -10,7 +10,6 @@ import { AuthStore } from '../../store/auth.store';
 import { UserStore } from '../../store/user.store';
 
 @Component({
-	standalone: true,
 	templateUrl: './register.page.html',
 	imports: [ReactiveFormsModule, JsonPipe],
 	providers: [ApiClient, HttpClient, GetUserInfoGQL],
@@ -27,7 +26,7 @@ export class RegisterPage {
 
 	loading = signal(false);
 	user: WritableSignal<User | null> = signal(null);
-	error = signal(undefined);
+	error = signal<string | undefined>(undefined);
 
 	onSubmit() {
 		const controls = this.form.controls;
@@ -47,9 +46,11 @@ export class RegisterPage {
 
 				this.login(username, password);
 			},
-			error: ({ error }) => {
-				this.loading.set(false);
-				this.error.set(error.message);
+			error: (error: unknown) => {
+				if (error instanceof Error) {
+					this.loading.set(false);
+					this.error.set(error.message);
+				}
 			},
 		});
 	}
@@ -61,8 +62,10 @@ export class RegisterPage {
 				this.authStore.markTokensAs('valid');
 				this.userStore.fetchData();
 			},
-			error: ({ error }) => {
-				this.error.set(error.message);
+			error: (error: unknown) => {
+				if (error instanceof Error) {
+					this.error.set(error.message);
+				}
 			},
 		});
 	}

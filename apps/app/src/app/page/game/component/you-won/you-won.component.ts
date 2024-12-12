@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-	standalone: true,
 	selector: 'app-you-won',
 	template: `
 		<div class="overlay flex-col gap-xxl">

@@ -18,7 +18,6 @@ import { AuthStore } from '../../store/auth.store';
 import { UserStore } from '../../store/user.store';
 
 @Component({
-	standalone: true,
 	templateUrl: './main.layout.html',
 	styleUrl: './main.layout.scss',
 	imports: [

@@ -1,24 +1,27 @@
+/* eslint-disable max-lines */
 import { Injectable } from '@angular/core';
 
 import { CardColor, CardShading, CardShape } from '@playsetonline/api-definitions';
 
-import { CardInterface } from '../../../definition/card.interface';
+import { Card } from '../../../definition/card.interface';
+import { AddCardsToBoardError, AddCardsToBoardException } from '../error/add-cards-to-board.error';
+import { OfflineGameSet } from '../repository/offline-game/definition/offline-game-set.interface';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class GameService {
-	getNewCards(currentCards: CardInterface[], quantity: number): CardInterface[] {
-		const cards: CardInterface[] = [];
+	getNewCards(revealedCards: Card[], quantity: number): Card[] {
+		const cardsToReturn: Card[] = [];
 
 		for (let i = 0; i < quantity; i++) {
-			cards.push(this.getValidCard([...currentCards, ...cards]));
+			cardsToReturn.push(this.getValidCard([...revealedCards, ...cardsToReturn]));
 		}
 
-		return cards;
+		return cardsToReturn;
 	}
 
-	selectCard(card: CardInterface, selectedCards: CardInterface[]): CardInterface[] {
+	toggleCardSelection(card: Card, selectedCards: Card[]): Card[] {
 		if (selectedCards.includes(card)) {
 			return selectedCards.filter((c) => c !== card);
 		} else {
@@ -26,35 +29,40 @@ export class GameService {
 		}
 	}
 
-	checkSet(selectedCards: CardInterface[]): boolean {
+	checkSet(selectedCards: Card[]): boolean {
 		const [firstCard, secondCard, thirdCard] = selectedCards;
 		const allCardsAreDefined =
 			firstCard !== undefined && secondCard !== undefined && thirdCard !== undefined;
 
-		return allCardsAreDefined && this.isSet(firstCard, secondCard, thirdCard);
+		const result = allCardsAreDefined && this.isSet(firstCard, secondCard, thirdCard);
+
+		return result;
 	}
 
-	// FixMe: replace with fillBoardGaps (nulls)
+	// FixMe: replace with fillBoardGaps (nulls) on big board (more than 12 cards)
 	getUpdatedBoardCards(
-		boardCards: CardInterface[],
-		setCards: CardInterface[],
-		selectedCards: CardInterface[],
-	): CardInterface[] {
-		setCards = [...setCards, ...selectedCards];
+		boardCards: Card[],
+		setCards: OfflineGameSet[],
+		selectedCards: Card[],
+	): Card[] {
+		const flatSetCards = setCards
+			.filter((set) => set.valid === true)
+			.map((set) => set.cards)
+			.flat();
 
-		const removeCards = boardCards.length > 12 || setCards.length + boardCards.length > 81;
+		const removeCards = boardCards.length > 12 || flatSetCards.length + boardCards.length === 81;
 
 		let updatedBoardCards = boardCards;
 
 		selectedCards.forEach((card) => {
-			const newCard = removeCards ? null : this.getValidCard([...updatedBoardCards, ...setCards]);
+			const newCard = removeCards ? null : this.getValidCard(updatedBoardCards);
 			updatedBoardCards = this.replaceCard(updatedBoardCards, card, newCard);
 		});
 
 		return updatedBoardCards;
 	}
 
-	searchSetOnBoard(boardCards: CardInterface[]): CardInterface[] {
+	searchSetOnBoard(boardCards: Card[]): Card[] {
 		for (let i = 0; i < boardCards.length - 2; i++) {
 			for (let j = i + 1; j < boardCards.length - 1; j++) {
 				for (let k = j + 1; k < boardCards.length; k++) {
@@ -75,33 +83,45 @@ export class GameService {
 		return [];
 	}
 
-	private replaceCard(
-		boardCards: CardInterface[],
-		currentCard: CardInterface,
-		newCard: CardInterface | null,
-	): CardInterface[] {
-		return boardCards
-			.map((card) => (card.id === currentCard.id ? newCard : card))
-			.filter((c) => c !== null) as CardInterface[];
+	canAddCardsToBoard(
+		boardHasSet: boolean,
+		boardCardsCount: number,
+		remainingCardsCount: number,
+	): boolean {
+		if (remainingCardsCount === 0) {
+			throw new AddCardsToBoardException(AddCardsToBoardError.DECK_EMPTY);
+		} else if (boardCardsCount >= 15) {
+			throw new AddCardsToBoardException(AddCardsToBoardError.ALREADY_ADDED);
+		} else if (boardHasSet === true) {
+			throw new AddCardsToBoardException(AddCardsToBoardError.HAS_SET);
+		} else {
+			return true;
+		}
 	}
 
-	private isSet(first: CardInterface, second: CardInterface, third: CardInterface): boolean {
+	private replaceCard(boardCards: Card[], currentCard: Card, newCard: Card | null): Card[] {
+		return boardCards
+			.map((card) => (card.id === currentCard.id ? newCard : card))
+			.filter((c) => c !== null) as Card[];
+	}
+
+	private isSet(first: Card, second: Card, third: Card): boolean {
 		return (
-			this.isSameOrDifferent<CardShape>(first.shape, second.shape, third.shape) &&
-			this.isSameOrDifferent<CardColor>(first.color, second.color, third.color) &&
-			this.isSameOrDifferent<CardShading>(first.shading, second.shading, third.shading) &&
-			this.isSameOrDifferent<number>(first.number, second.number, third.number)
+			this.isSameOrDifferent(first.shape, second.shape, third.shape) &&
+			this.isSameOrDifferent(first.color, second.color, third.color) &&
+			this.isSameOrDifferent(first.shading, second.shading, third.shading) &&
+			this.isSameOrDifferent(first.number, second.number, third.number)
 		);
 	}
 
-	private isSameOrDifferent<T>(first: T, second: T, third: T): boolean {
+	private isSameOrDifferent(first: unknown, second: unknown, third: unknown): boolean {
 		return (
 			(first === second && second === third) ||
 			(first !== second && second !== third && third !== first)
 		);
 	}
 
-	private getValidCard(cardsToAvoid: CardInterface[]): CardInterface {
+	private getValidCard(cardsToAvoid: Card[]): Card {
 		let card = this.generateCard();
 
 		while (cardsToAvoid.find((c) => c.id === card.id)) {
@@ -111,12 +131,12 @@ export class GameService {
 		return card;
 	}
 
-	private generateCard(): CardInterface {
+	private generateCard(): Card {
 		const shape = this.randomEnum(CardShape);
 		const color = this.randomEnum(CardColor);
 		const shading = this.randomEnum(CardShading);
 		const number = this.getRandomNumber();
-		const id = `${CardShape[shape]}${CardColor[color]}${CardShading[shading]}${number}`;
+		const id = `a${shape}b${color}c${shading}d${number}`;
 
 		return { id, shape, color, shading, number };
 	}
@@ -174,6 +194,14 @@ export class GameService {
 		return isBasicEnum ? enumKeys.slice(enumKeys.length / 2) : enumKeys;
 	}
 
+	// FixMe => move this to lib
+	private getEnumValues<T extends object>(enumInstance: T): Array<T[keyof T]> {
+		const enumValues = Object.values(enumInstance) as Array<T[keyof T]>;
+
+		return enumValues;
+	}
+
+	// FixMe => move this to lib
 	private getRandomNumberInRange(min: number, max: number): number | undefined {
 		const crypto = window.crypto;
 		const array = new Uint32Array(1);

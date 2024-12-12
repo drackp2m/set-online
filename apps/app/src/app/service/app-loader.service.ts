@@ -1,7 +1,7 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 
 import { GameOfflineStore } from '../page/game/store/game-offline.store';
-import { KeyValueRepository } from '../repository/key-value/key-value.repository';
+import { MigrationHandler } from '../repository/migration-handler';
 import { UserStore } from '../store/user.store';
 
 @Injectable({
@@ -10,7 +10,7 @@ import { UserStore } from '../store/user.store';
 export class AppLoaderService {
 	private readonly userStore = inject(UserStore);
 	private readonly gameOfflineStore = inject(GameOfflineStore);
-	private readonly keyValueIndexedDBRepository = inject(KeyValueRepository);
+	private readonly migrationHandler = inject(MigrationHandler);
 
 	private stopCheck = false;
 
@@ -21,7 +21,7 @@ export class AppLoaderService {
 	readonly removeDeprecatedDatabase = signal<boolean>(false);
 
 	constructor() {
-		this.keyValueIndexedDBRepository.removeDeprecatedDatabase().then(() => {
+		this.migrationHandler.removeDeprecatedDatabase().then(() => {
 			this.removeDeprecatedDatabase.set(true);
 		});
 	}
@@ -45,8 +45,12 @@ export class AppLoaderService {
 	}
 
 	private isGameLoaded(): boolean {
+		const gameLoading = this.gameOfflineStore.loading();
+
+		return gameLoading === false;
+
 		const gameBoardCards = this.gameOfflineStore.boardCards();
-		const gameSetCards = this.gameOfflineStore.setCards();
+		const gameSetCards = this.gameOfflineStore.validSets();
 
 		return gameBoardCards.length !== 0 || gameSetCards.length !== 0;
 	}

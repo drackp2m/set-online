@@ -41,7 +41,7 @@ export class AuthInterceptor implements HttpInterceptor {
 			switchMap((event) => {
 				return this.handleErrorOrEvent(req, next, event);
 			}),
-			catchError((error: HttpEvent<unknown>) => {
+			catchError((error: unknown) => {
 				return this.handleErrorOrEvent(req, next, error);
 			}),
 		);

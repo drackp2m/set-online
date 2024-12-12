@@ -3,7 +3,6 @@ import { Component, computed, input } from '@angular/core';
 import { CardColor, CardShading, CardShape } from '@playsetonline/api-definitions';
 
 @Component({
-	standalone: true,
 	selector: 'app-card-shape',
 	templateUrl: './card-shape.component.html',
 	styleUrl: './card-shape.component.scss',

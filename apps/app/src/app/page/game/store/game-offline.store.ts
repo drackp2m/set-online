@@ -1,76 +1,101 @@
-import { Injectable, inject } from '@angular/core';
+/* eslint-disable max-lines */
+import { Injectable, computed, inject } from '@angular/core';
 import { patchState, signalStore, withState } from '@ngrx/signals';
 
-import { CardInterface } from '../../../definition/card.interface';
-import { KeyValueRepositoryKeys } from '../../../repository/key-value/definition/key-value-repository-keys.enum';
-import { KeyValueRepository } from '../../../repository/key-value/key-value.repository';
+import { Card } from '../../../definition/card.interface';
+import { AddCardsToBoardException } from '../error/add-cards-to-board.error';
+import { OfflineGameEventType } from '../repository/offline-game/definition/offline-game-event-type.enum';
+import { OfflineGameEvent } from '../repository/offline-game/definition/offline-game-event.interface';
+import { OfflineGameSet } from '../repository/offline-game/definition/offline-game-set.interface';
+import { OfflineGameStatus } from '../repository/offline-game/definition/offline-game-status.enum';
+import { OfflineGame } from '../repository/offline-game/definition/offline-game.interface';
+import { OfflineGameRepository } from '../repository/offline-game/offline-game.repository';
 import { GameService } from '../service/game.service';
 
 type GameOfflineStoreProps = {
-	boardCards: CardInterface[];
-	selectedCards: CardInterface[];
-	setCards: CardInterface[];
-	wrongSetCards: (CardInterface | null)[];
-	boardSet: CardInterface[];
+	game: OfflineGame | null;
+	selectedCards: Card[];
+	sets: OfflineGameSet[];
+	boardSet: Card[];
+	loading: boolean;
 };
 
 const initialState: GameOfflineStoreProps = {
-	boardCards: [],
+	game: null,
 	selectedCards: [],
-	setCards: [],
-	wrongSetCards: [],
+	sets: [],
 	boardSet: [],
+	loading: false,
 };
 
 @Injectable({
 	providedIn: 'root',
 })
 export class GameOfflineStore extends signalStore(
-	{
-		protectedState: false,
-	},
+	{ protectedState: false },
 	withState(initialState),
 ) {
 	private readonly gameService = inject(GameService);
-	private readonly indexedDBService = inject(KeyValueRepository);
+	private readonly offlineGameRepository = inject(OfflineGameRepository);
+
+	boardCards = computed(() => {
+		const game = this.game();
+
+		return game?.board_cards ?? [];
+	});
+
+	validSets = computed(() => {
+		return this.sets().filter((set) => set.valid === true);
+	});
+
+	invalidSets = computed(() => {
+		return this.sets().filter((set) => set.valid === false);
+	});
+
+	cardsInDeck = computed(() => {
+		const boardCards = this.boardCards();
+		const validSets = this.validSets();
+
+		return 81 - boardCards.length - validSets.length * 3;
+	});
 
 	constructor() {
 		super();
 
-		this.indexedDBService
-			.get(KeyValueRepositoryKeys.GAME_OFFLINE)
-			.then((data) => {
-				if (data) {
-					patchState(this, data);
-				} else {
-					this.newGame();
-				}
-			})
-			.catch((error) => {
-				console.log(error);
-				this.newGame();
-			});
+		patchState(this, { loading: true });
+
+		this.offlineGameRepository.getInProgressGame().then((getInProgressGame) => {
+			if (getInProgressGame !== undefined) {
+				const [game, sets] = getInProgressGame;
+
+				patchState(this, { game, sets });
+
+				this.searchSetOnBoard();
+			}
+
+			patchState(this, { loading: false });
+		});
 	}
 
-	reset(): void {
-		patchState(this, initialState);
+	async newGame(): Promise<void> {
+		const boardCards = this.gameService.getNewCards([], 12);
 
-		this.indexedDBService.clear();
-	}
+		const game = await this.offlineGameRepository.setNewGame(boardCards);
 
-	newGame(): void {
-		const boardCards = this.gameService.getNewCards(this.boardCards(), 12);
-
-		patchState(this, { ...initialState, boardCards });
+		patchState(this, { ...initialState, game });
 
 		this.searchSetOnBoard();
-
-		this.saveStateOnIndexedDB();
 	}
 
-	selectCard(card: CardInterface): void {
-		let selectedCards = this.selectedCards();
-		selectedCards = this.gameService.selectCard(card, selectedCards);
+	async selectCard(card: Card): Promise<void> {
+		const game = this.game();
+
+		if (game === null) {
+			return;
+		}
+
+		const currentSelectedCards = this.selectedCards();
+		const selectedCards = this.gameService.toggleCardSelection(card, currentSelectedCards);
 
 		if (selectedCards.length !== 3) {
 			patchState(this, { selectedCards });
@@ -80,68 +105,123 @@ export class GameOfflineStore extends signalStore(
 			const isSet = this.gameService.checkSet(selectedCards);
 
 			if (isSet) {
-				const boardCards = this.boardCards();
-				const setCards = this.setCards();
+				const boardCards = game.board_cards;
+				const sets = this.validSets();
 				const updatedBoardCards = this.gameService.getUpdatedBoardCards(
 					boardCards,
-					setCards,
+					sets,
 					selectedCards,
 				);
 
-				patchState(this, {
-					boardCards: updatedBoardCards,
-					setCards: [...setCards, ...selectedCards],
-				});
+				game.board_cards = updatedBoardCards;
+				game.updated_at = new Date();
+
+				await this.offlineGameRepository.set('offline_game', game.uuid, game);
+
+				patchState(this, { game: { ...game } });
 
 				this.searchSetOnBoard();
+			}
 
-				this.saveStateOnIndexedDB();
-			} else {
-				const wrongSets = this.wrongSetCards();
+			const selectedSet = await this.offlineGameRepository.setSelectedSet(
+				game.uuid,
+				selectedCards,
+				isSet,
+			);
 
-				patchState(this, { wrongSetCards: [...wrongSets, ...selectedCards] });
+			const sets = this.sets();
 
-				this.saveStateOnIndexedDB();
+			patchState(this, {
+				sets: [...sets, selectedSet],
+			});
+
+			const boardSet = this.boardSet();
+			const cardsInDeck = this.cardsInDeck();
+
+			if (cardsInDeck === 0 && boardSet.length === 0) {
+				game.status = OfflineGameStatus.COMPLETED;
+
+				this.offlineGameRepository.set('offline_game', game.uuid, game);
+
+				patchState(this, { game: { ...game } });
 			}
 		}
 	}
 
-	addFakeWrongSet(): void {
-		const wrongSetCards = this.wrongSetCards();
+	async addCardsToBoard(): Promise<void> {
+		const game = this.game();
 
-		patchState(this, { wrongSetCards: [...wrongSetCards, null, null, null] });
+		if (game === null) {
+			return;
+		}
 
-		this.saveStateOnIndexedDB();
-	}
+		const boardSet = this.boardSet();
+		const sets = this.sets();
 
-	addCardsToBoard(): void {
-		const boardCards = this.boardCards();
+		const boardCards = game.board_cards;
+		const setCards = sets.map((set) => set.cards).flat();
+		const boardHasSet = boardSet.length > 0;
+		const remainingCardsCount = 81 - boardCards.length - setCards.length;
 
-		const newCards = this.gameService.getNewCards(boardCards, 3);
+		const revealedCards = [...boardCards, ...setCards];
 
-		patchState(this, { boardCards: [...boardCards, ...newCards] });
+		const uuid = crypto.randomUUID();
+		const created_at = new Date();
 
-		this.searchSetOnBoard();
+		try {
+			this.gameService.canAddCardsToBoard(boardHasSet, boardCards.length, remainingCardsCount);
 
-		this.saveStateOnIndexedDB();
+			const newCards = this.gameService.getNewCards(revealedCards, 3);
+
+			game.board_cards = [...boardCards, ...newCards];
+			game.updated_at = new Date();
+
+			const event: OfflineGameEvent = {
+				uuid,
+				game_uuid: game.uuid,
+				type: OfflineGameEventType.ADD_CARDS,
+				details: { cards: newCards, error: null },
+				created_at,
+			};
+
+			await this.offlineGameRepository.beginTransaction(['offline_game', 'offline_game_event']);
+
+			this.offlineGameRepository.set('offline_game', game.uuid, game);
+
+			this.offlineGameRepository.set('offline_game_event', uuid, event);
+
+			await this.offlineGameRepository.commitTransaction();
+
+			patchState(this, { game: { ...game } });
+
+			this.searchSetOnBoard();
+		} catch (error) {
+			if (error instanceof AddCardsToBoardException) {
+				const event: OfflineGameEvent = {
+					uuid,
+					game_uuid: game.uuid,
+					type: OfflineGameEventType.ADD_CARDS,
+					details: { cards: [], error: error.typedError },
+					created_at,
+				};
+
+				this.offlineGameRepository.set('offline_game_event', uuid, event);
+
+				throw error;
+			}
+		}
 	}
 
 	private searchSetOnBoard(): void {
-		const boardCards = this.boardCards();
+		const game = this.game();
+
+		if (game === null) {
+			return;
+		}
+
+		const boardCards = game.board_cards;
 		const boardSet = this.gameService.searchSetOnBoard(boardCards);
 
 		patchState(this, { boardSet });
-
-		this.saveStateOnIndexedDB();
-	}
-
-	private saveStateOnIndexedDB(): void {
-		const data = Object.fromEntries(
-			Object.entries(this)
-				.filter((prop) => Object.keys(initialState).includes(prop[0]))
-				.map(([key, value]) => [key, value()]),
-		);
-
-		this.indexedDBService.set(KeyValueRepositoryKeys.GAME_OFFLINE, data);
 	}
 }
