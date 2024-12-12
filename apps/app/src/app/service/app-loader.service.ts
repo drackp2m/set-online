@@ -29,7 +29,7 @@ export class AppLoaderService {
 	private checkLoadFinish(): boolean {
 		const loadFinish =
 			this.stopCheck ||
-			(this.userLoaded() && this.isGameLoaded() && this.isRemoveDatabaseLoading());
+			(this.userLoaded() && this.isGameLoaded() && this.isRemoveDatabaseFinish());
 
 		if (loadFinish) {
 			this.stopCheck = true;
@@ -45,19 +45,14 @@ export class AppLoaderService {
 	}
 
 	private isGameLoaded(): boolean {
-		const gameLoading = this.gameOfflineStore.loading();
+		const gameLoading = this.gameOfflineStore.isLoading();
 
 		return gameLoading === false;
-
-		const gameBoardCards = this.gameOfflineStore.boardCards();
-		const gameSetCards = this.gameOfflineStore.validSets();
-
-		return gameBoardCards.length !== 0 || gameSetCards.length !== 0;
 	}
 
-	private isRemoveDatabaseLoading(): boolean {
-		const isRemoveDatabaseLoading = this.removeDeprecatedDatabase();
+	private isRemoveDatabaseFinish(): boolean {
+		const removeDeprecatedDatabase = this.removeDeprecatedDatabase();
 
-		return isRemoveDatabaseLoading === true;
+		return removeDeprecatedDatabase === true;
 	}
 }

@@ -17,7 +17,7 @@ type GameOfflineStoreProps = {
 	selectedCards: Card[];
 	sets: OfflineGameSet[];
 	boardSet: Card[];
-	loading: boolean;
+	isLoading: boolean;
 };
 
 const initialState: GameOfflineStoreProps = {
@@ -25,7 +25,7 @@ const initialState: GameOfflineStoreProps = {
 	selectedCards: [],
 	sets: [],
 	boardSet: [],
-	loading: false,
+	isLoading: false,
 };
 
 @Injectable({
@@ -62,7 +62,7 @@ export class GameOfflineStore extends signalStore(
 	constructor() {
 		super();
 
-		patchState(this, { loading: true });
+		patchState(this, { isLoading: true });
 
 		this.offlineGameRepository.getInProgressGame().then((getInProgressGame) => {
 			if (getInProgressGame !== undefined) {
@@ -73,7 +73,7 @@ export class GameOfflineStore extends signalStore(
 				this.searchSetOnBoard();
 			}
 
-			patchState(this, { loading: false });
+			patchState(this, { isLoading: false });
 		});
 	}
 

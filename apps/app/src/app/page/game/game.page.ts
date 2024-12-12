@@ -204,7 +204,7 @@ export class GamePage {
 		const cardColor = this.getEnumKeyByValue(CardColor, color)?.toLocaleLowerCase();
 
 		return {
-			src: `assets/icons/${shapeName}-solid-${cardColor}.png`,
+			src: `icons/${shapeName}-solid-${cardColor}.png`,
 			width,
 			height,
 			particles: {

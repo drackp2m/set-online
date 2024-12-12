@@ -1,31 +1,25 @@
 {
-	"compileOnSave": false,
-	"compilerOptions": {
-		"baseUrl": ".",
-		"rootDir": ".",
-		"sourceMap": true,
-		"declaration": false,
-		"moduleResolution": "Node",
-		"emitDecoratorMetadata": true,
-		"experimentalDecorators": true,
-		"importHelpers": true,
-		"target": "ES2015",
-		"module": "ESNext",
-		"lib": ["ES2020", "DOM"],
-		"strict": true,
-		"noUncheckedIndexedAccess": true,
-		"noImplicitReturns": true,
-		"noFallthroughCasesInSwitch": true,
-		"forceConsistentCasingInFileNames": true,
-		"noUnusedParameters": true,
-		"skipLibCheck": true,
-		"skipDefaultLibCheck": true,
-		"paths": {
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
 			"@package": ["package.json"],
-			"@playsetonline/api-definitions": ["libs/api-definitions/src/index.ts"],
-			"@playsetonline/api-sdk": ["libs/api-sdk/src/index.ts"],
+      "@playsetonline/api-sdk": ["libs/api-sdk/src/index.ts"],
+      "@playsetonline/api-definitions": ["libs/api-definitions/src/index.ts"],
 			"@playsetonline/apollo-definitions": ["libs/api-definitions/src/lib/apollo/operations.ts"]
-		}
-	},
-	"exclude": ["node_modules", "tmp"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
 }

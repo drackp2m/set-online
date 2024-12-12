@@ -45,6 +45,6 @@ export class CardShapeComponent {
 	});
 
 	private getUrl(iconName: string): string {
-		return `url(assets/icons/${iconName}.svg) no-repeat center`;
+		return `url(icons/${iconName}.svg) no-repeat center`;
 	}
 }

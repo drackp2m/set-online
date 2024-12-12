@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-describe('GET /api/app/hello', () => {
-	it('should return a message', async () => {
-		const res = await axios.get(`/api/app/hello`);
+describe('GET /api', () => {
+  it('should return a message', async () => {
+    const res = await axios.get(`/api`);
 
-		expect(res.status).toBe(200);
-		expect(res.data).toStrictEqual({ message: 'Welcome to Play Set Online!' });
-	});
+    expect(res.status).toBe(200);
+    expect(res.data).toEqual({ message: 'Hello API' });
+  });
 });
