@@ -1,3 +1,23 @@
+# v1.5.0 (2024-12-12)
+
+## What's Changed
+
+### ✨ Features
+
+- **app**: make generic repository compatible with transactions between stores ([6934859](https://github.com/drackp2m/playsetonline/commit/693485941b62fd043a37e0a0e2fac9c323f20829)) by Marc Jovaní González
+- **app**: store all games, sets and events on indexedDB ([ade1f53](https://github.com/drackp2m/playsetonline/commit/ade1f53897afda4daaaf7ee134368d15a91cf789)) by Marc Jovaní González
+
+### 🐛 Bug Fixes
+
+- **app**: get confetti shapes correctly ([1876f2c](https://github.com/drackp2m/playsetonline/commit/1876f2ca002874d101e3157f523b3e80d518a506)) by Marc Jovaní González
+- **app**: improve types from set, get and delete generic repository methods ([eb982d1](https://github.com/drackp2m/playsetonline/commit/eb982d1850ac3cbbacbc14a85d6324e2ae83afaa)) by Marc Jovaní González
+
+### 🎒 Chores
+
+- upgrade to nx 20.2.2 ([f385807](https://github.com/drackp2m/playsetonline/commit/f385807f20ac1a8e593d792b497e8bf5af0f6306)) by Marc Jovaní González
+
+**Full Changelog**: https://github.com/drackp2m/playsetonline/compare/v1.4.1...v1.5.0
+
 # v1.4.1 (2024-12-02)
 
 ## What's Changed
