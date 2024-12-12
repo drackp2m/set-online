@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import ExampleMenuComponent from '../../component/menu/example-menu.component';
 
 @Component({
-	standalone: true,
 	imports: [ExampleMenuComponent],
 	styles: `
 		main {

@@ -7,7 +7,6 @@ import { CardShapeComponent } from '../../../../component/card-shape/card-shape.
 import ExampleMenuComponent from '../../component/menu/example-menu.component';
 
 @Component({
-	standalone: true,
 	templateUrl: './card.page.html',
 	styleUrl: './card.page.scss',
 	imports: [ExampleMenuComponent, CardShapeComponent, CardComponent],

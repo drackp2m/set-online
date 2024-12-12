@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component, OnInit, WritableSignal, inject, signal } from '@angular/core';
 
 import {
@@ -9,10 +8,8 @@ import {
 } from '@playsetonline/apollo-definitions';
 
 @Component({
-	standalone: true,
 	templateUrl: './online.page.html',
 	styleUrl: './online.page.scss',
-	imports: [NgFor],
 	providers: [NewGameGQL, ListGamesGQL, JoinGameGQL],
 })
 export class OnlinePage implements OnInit {
@@ -62,10 +59,11 @@ export class OnlinePage implements OnInit {
 					return games;
 				});
 			},
-			error: (error) => {
-				const details = error.graphQLErrors[0].extensions.details;
+			error: (error: unknown) => {
+				console.log({ error });
+				// const details = error.graphQLErrors[0].extensions.details;
 
-				this.error.set(JSON.stringify(details));
+				// this.error.set(JSON.stringify(details));
 			},
 		});
 	}
@@ -83,10 +81,13 @@ export class OnlinePage implements OnInit {
 					});
 				}
 			},
-			error: (error) => {
-				const details = error.graphQLErrors[0].extensions.details;
+			error: (error: unknown) => {
+				console.log(error);
+				// if (error instanceof GraphQLError) {
+				// 	const details = error.graphQLErrors[0].extensions.details;
 
-				this.error.set(JSON.stringify(details));
+				// 	this.error.set(JSON.stringify(details));
+				// }
 			},
 		});
 	}

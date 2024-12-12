@@ -21,7 +21,6 @@ import { OfflineGameRepository } from './repository/offline-game/offline-game.re
 import { GameOfflineStore } from './store/game-offline.store';
 
 @Component({
-	standalone: true,
 	templateUrl: './game.page.html',
 	styleUrl: './game.page.scss',
 	imports: [CardComponent, YouWonComponent, RouterLink],

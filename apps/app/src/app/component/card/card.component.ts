@@ -5,7 +5,6 @@ import { CardColor, CardShading, CardShape } from '@playsetonline/api-definition
 import { CardShapeComponent } from '../card-shape/card-shape.component';
 
 @Component({
-	standalone: true,
 	selector: 'app-card',
 	templateUrl: './card.component.html',
 	styleUrl: './card.component.scss',

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
 @Component({
-	standalone: true,
 	selector: 'app-media-debug',
 	template: `<ul class="flex-row gap-sm lg:gap-md">
 		<li class="round-sm p-xs px-sm surface-radiant color-vivid xs-e:hide">xs</li>

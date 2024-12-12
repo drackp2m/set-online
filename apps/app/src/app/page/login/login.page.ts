@@ -10,7 +10,6 @@ import { AuthStore } from '../../store/auth.store';
 import { UserStore } from '../../store/user.store';
 
 @Component({
-	standalone: true,
 	templateUrl: './login.page.html',
 	imports: [ReactiveFormsModule, JsonPipe],
 	providers: [GetUsersGQL],
@@ -29,7 +28,7 @@ export class LoginPage implements OnInit {
 
 	loading = signal(false);
 	usernames: WritableSignal<string[] | undefined> = signal(undefined);
-	error = signal(undefined);
+	error = signal<string | undefined>(undefined);
 
 	ngOnInit(): void {
 		this.getUsersGQL.fetch().subscribe({
@@ -59,9 +58,11 @@ export class LoginPage implements OnInit {
 					this.authStore.markTokensAs('valid');
 					this.userStore.fetchData();
 				},
-				error: ({ error }) => {
-					this.loading.set(false);
-					this.error.set(error.message);
+				error: (error: unknown) => {
+					if (error instanceof Error) {
+						this.loading.set(false);
+						this.error.set(error.message);
+					}
 				},
 			});
 	}

@@ -12,7 +12,6 @@ import { UserStore } from './store/user.store';
 import { version } from '@package';
 
 @Component({
-	standalone: true,
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.scss',
