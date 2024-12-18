@@ -14,15 +14,14 @@ describe('DateFaker', () => {
 	});
 
 	it('should be defined', () => {
-		// console.log(process.env.NODE_ENV);
 		expect(util).toBeDefined();
 	});
 
 	describe('createdAt', () => {
-		it('should return a valid date', () => {
+		it('should return null when nothing is passed', () => {
 			const result = util.createdAt();
 
-			expect(result).toBeInstanceOf(Date);
+			expect(result).toStrictEqual(null);
 		});
 
 		it('should return null when invalid `since` date is passed', () => {
@@ -69,10 +68,10 @@ describe('DateFaker', () => {
 	});
 
 	describe('expiresOn', () => {
-		it('should return a valid Date', () => {
+		it('should return null when nothing is passed', () => {
 			const result = util.expiresOn();
 
-			expect(result).toBeInstanceOf(Date);
+			expect(result).toStrictEqual(null);
 		});
 
 		it('should return null when invalid `until` date is passed', () => {

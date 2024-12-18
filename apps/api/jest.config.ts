@@ -1,7 +1,6 @@
 export default {
   displayName: 'api',
   preset: '../../jest.preset.js',
-	coverageProvider: 'v8',
   testEnvironment: 'node',
 	globalSetup: '<rootDir>/global-setup.ts',
 	globalTeardown: '<rootDir>/global-teardown.ts',

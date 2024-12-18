@@ -22,7 +22,7 @@ export class DateFaker {
 		const twoYearsAgo = this.twoYearsAgo();
 		const sinceAsDate = since !== undefined && new Date(since);
 
-		if (this.checkValidDate(sinceAsDate) === false) {
+		if (sinceAsDate === false || this.checkValidDate(sinceAsDate) === false) {
 			this.logger.error('DateFaker.createdAt(); `since` is not a valid Date');
 
 			return null;
@@ -52,13 +52,13 @@ export class DateFaker {
 		const untilLimit = this.manipulatedDate(limitOptions);
 		const untilAsDate = until !== undefined && new Date(until);
 
-		if (this.checkValidDate(untilAsDate) === false) {
-			this.logger.error('DateFaker.createdAt(); `until` is not a valid Date');
+		if (untilAsDate === false || this.checkValidDate(untilAsDate) === false) {
+			this.logger.error('DateFaker.expiresOn(); `until` is not a valid Date');
 
 			return null;
 		} else if (untilAsDate < this.now) {
 			this.logger.error(
-				`DateFaker.createdAt(); \`until\` must be greater or equal that ${this.now.toLocaleString()}`,
+				`DateFaker.expiresOn(); \`until\` must be greater or equal that ${this.now.toLocaleString()}`,
 			);
 
 			return null;
